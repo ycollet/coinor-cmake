@@ -60,5 +60,12 @@ Some limitations: only the library of these projects are compiled. The Clp, Cbc 
 The next project to be added will be Ipopt.
 - Allow compilation of executables
 - Fine tune check of headers and add missing check from original configure.ac files
-- Use CTest to launch non regression tests for each packages
-- Use External_Project to compile Thirdparty libraries of each project.
+- Use CTest to launch non regression tests for each packages:
+  - download data sets if user enable tests: Data-1.0.7.tgz  miplib3-1.2.6.tgz  Netlib-1.2.6.tgz  Sample-1.2.9.tgz  Stochastic-1.1.5.tgz
+  - use add_test to test various combination of flags
+
+- Use External_Project to compile Thirdparty libraries of each project:
+  - a first version has been submitted but need to be tested.
+  - use clapack under windows to avoid fortran compiler dependencies
+  - see if metis compiles out of the box under windows, add a CMakeLists.txt file for metis ?
+  - disable mumps compilation if a fortran compiler is not available (Windows / Linux)
