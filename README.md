@@ -22,3 +22,37 @@ How to use these cmake files ?
 - In Cbc-2.8.9/buil, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: make
 - Install the libraries: sudo make install
+
+To compile using llvm:
+
+LLVM / Clang doesn't support OpenMP yet. So, be careful with the OpenMP option (like with Symphony).
+
+To use clang c++-analyzer, follow these steps (from http://garykramlich.blogspot.fr/2011/10/using-scan-build-from-clang-with-cmake.html):
+
+$ cmake -DCMAKE_C_COMPILER=/usr/share/clang/scan-build/ccc-analyzer -DCMAKE_CXX_COMPILER=/usr/share/clang/scan-build/c++-analyzer ..
+$ scan-build make
+
+To use a custom version of clang:
+
+$ scan-build --use-analyzer=/opt/llvm-devel/bin/clang make
+
+When you're build is finished you will see two lines, like the ones shown below.
+
+scan-build: 6 bugs found.
+scan-build: Run 'scan-view /tmp/scan-build-2011-10-19-1' to examine bug reports.
+
+As you can see, it found 6 bugs in my code.  To view the bugs, the easiest way is to run:
+$ scan-view /tmp/scan-build-2011-10-19-1
+
+Under Fedora, these tools are installed here:
+$ /usr/libexec/clang-analyzer/scan-build/c++-analyzer
+$ /usr/libexec/clang-analyzer/scan-build/ccc-analyzer
+$ /usr/libexec/clang-analyzer/scan-build/scan-build
+
+$ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/usr/bin/clang -DCMAKE_CXX_FLAGS="-fsanitize=memory" ..
+$ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -DCMAKE_C_COMPILER=/usr/bin/clang \ 
+                                                                     -DCMAKE_CXX_FLAGS="-fsanitize=address,memory" -DCMAKE_C_FLAGS="-fsanitize=address,memory" ..
+All the sanitize options for clang are detailled here: http://clang.llvm.org/docs/UsersManual.html#controlling-code-generation
+
+To compile using intel compiler:
+$ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/opt/intel/bin/icpc -DCMAKE_C_COMPILER=/opt/intel/bin/icc .. 
