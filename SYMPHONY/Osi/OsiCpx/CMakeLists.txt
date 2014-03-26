@@ -16,7 +16,11 @@ if (NOT COIN_CPLEX_DIR STREQUAL "None")
   include_directories(${COIN_CPLEX_DIR}/include)
 endif ()
 
-add_library(libOsiCpx STATIC ${Osi_DIR}/src/OsiCpx/OsiCpxSolverInterface.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiCpx SHARED ${Osi_DIR}/src/OsiCpx/OsiCpxSolverInterface.cpp)
+else ()
+  add_library(libOsiCpx STATIC ${Osi_DIR}/src/OsiCpx/OsiCpxSolverInterface.cpp)
+endif ()
 
 install(TARGETS libOsiCpx
         DESTINATION lib)

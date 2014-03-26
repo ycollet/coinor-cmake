@@ -16,7 +16,11 @@ if (NOT COIN_GLPK_DIR STREQUAL "None")
   include_directories(${COIN_GLPK_DIR}/include)
 endif ()
 
-add_library(libOsiGlpk STATIC ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiGlpk SHARED ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
+else ()
+  add_library(libOsiGlpk STATIC ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
+endif ()
 
 install(TARGETS libOsiGlpk
         DESTINATION lib)

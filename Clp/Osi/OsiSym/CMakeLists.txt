@@ -22,7 +22,11 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
 
-add_library(libOsiSym STATIC ${OsiSym_DIR}/OsiSymSolverInterface.cpp ${OsiSym_DIR}/SymWarmStart.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiSym SHARED ${OsiSym_DIR}/OsiSymSolverInterface.cpp ${OsiSym_DIR}/SymWarmStart.cpp)
+else ()
+  add_library(libOsiSym STATIC ${OsiSym_DIR}/OsiSymSolverInterface.cpp ${OsiSym_DIR}/SymWarmStart.cpp)
+endif ()
 
 install(TARGETS libOsiSym 
         DESTINATION lib)

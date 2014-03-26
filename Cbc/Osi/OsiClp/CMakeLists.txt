@@ -17,7 +17,11 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
 
-add_library(libOsiClp STATIC ${Clp_DIR}/src/OsiClp/OsiClpSolverInterface.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiClp SHARED ${Clp_DIR}/src/OsiClp/OsiClpSolverInterface.cpp)
+else ()
+  add_library(libOsiClp STATIC ${Clp_DIR}/src/OsiClp/OsiClpSolverInterface.cpp)
+endif ()
 
 install(TARGETS libOsiClp 
         DESTINATION lib)

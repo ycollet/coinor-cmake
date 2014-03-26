@@ -17,6 +17,7 @@ set(COIN_THREADS_INC_PATH "None" CACHE STRING "The path to the PThreads header f
 set(COIN_THREADS_LIB_PATH "None" CACHE STRING "The path to the PThreads library files")
 
 # Compilation options
+option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
 option(COIN_COMPILE_STATIC           "Activate the static linking" OFF)
 option(COIN_COMPILE_COVERAGE         "Activate the code coverage compilation" OFF)
 option(COIN_COMPILE_PROFILE          "Activate the code profiling compilation" OFF)

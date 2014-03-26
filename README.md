@@ -10,9 +10,6 @@ Up to now, only the following projects are supported:
 - CoinUtils
 - SYMPHONY
 
-Some limitations: only the library of these projects are compiled. The Clp, Cbc and SYMPHONY executable are not yet compiled.
-The next project to be added will be Ipopt.
-
 How to use these cmake files ?
 
 - Clone the repository
@@ -56,3 +53,12 @@ All the sanitize options for clang are detailled here: http://clang.llvm.org/doc
 
 To compile using intel compiler:
 $ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/opt/intel/bin/icpc -DCMAKE_C_COMPILER=/opt/intel/bin/icc .. 
+
+To do:
+
+Some limitations: only the library of these projects are compiled. The Clp, Cbc and SYMPHONY executable are not yet compiled.
+The next project to be added will be Ipopt.
+- Allow compilation of executables
+- Fine tune check of headers and add missing check from original configure.ac files
+- Use CTest to launch non regression tests for each packages
+- Use External_Project to compile Thirdparty libraries of each project.

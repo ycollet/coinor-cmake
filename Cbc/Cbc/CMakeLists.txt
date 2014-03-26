@@ -216,7 +216,11 @@ else ()
   add_definitions(-DUSE_CBCCONFIG -DCOIN_NO_CLP_MESSAGE)
 endif ()
 
-add_library(libCbc STATIC ${Cbc_SRC_LIST})
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libCbc SHARED ${Cbc_SRC_LIST})
+else ()
+  add_library(libCbc STATIC ${Cbc_SRC_LIST})
+endif ()
 
 install(TARGETS libCbc 
         DESTINATION lib)

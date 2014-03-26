@@ -132,7 +132,11 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
 
-add_library(libCgl STATIC ${Cgl_SRC_LIST})
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libCgl SHARED ${Cgl_SRC_LIST})
+else ()
+  add_library(libCgl STATIC ${Cgl_SRC_LIST})
+endif ()
 
 install(TARGETS libCgl 
         DESTINATION lib)

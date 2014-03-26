@@ -136,7 +136,11 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
 
-add_library(libCoinUtils STATIC ${CoinUtils_SRC_LIST})
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libCoinUtils SHARED ${CoinUtils_SRC_LIST})
+else ()
+  add_library(libCoinUtils STATIC ${CoinUtils_SRC_LIST})
+endif ()
 
 #${CoinUtils_DIR}/test/CoinDenseVectorTest.cpp
 #${CoinUtils_DIR}/test/CoinErrorTest.cpp

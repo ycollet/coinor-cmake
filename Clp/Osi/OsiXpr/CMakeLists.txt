@@ -16,7 +16,11 @@ if (NOT COIN_XPRESS_DIR STREQUAL "None")
   include_directories(${COIN_XPRESS_DIR}/include)
 endif ()
 
-add_library(libOsiXpr STATIC ${Osi_DIR}/src/OsiXpr/OsiXprSolverInterface.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiXpr SHARED ${Osi_DIR}/src/OsiXpr/OsiXprSolverInterface.cpp)
+else ()
+  add_library(libOsiXpr STATIC ${Osi_DIR}/src/OsiXpr/OsiXprSolverInterface.cpp)
+endif ()
 
 install(TARGETS libOsiXpr 
         DESTINATION lib)

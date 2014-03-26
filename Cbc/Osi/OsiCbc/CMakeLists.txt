@@ -19,7 +19,11 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
 
-add_library(libOsiCbc STATIC ${Cbc_DIR}/src/OsiCbc/OsiCbcSolverInterface.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiCbc SHARED ${Cbc_DIR}/src/OsiCbc/OsiCbcSolverInterface.cpp)
+else ()
+  add_library(libOsiCbc STATIC ${Cbc_DIR}/src/OsiCbc/OsiCbcSolverInterface.cpp)
+endif ()
 
 install(TARGETS libOsiCbc 
         DESTINATION lib)

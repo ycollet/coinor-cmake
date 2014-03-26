@@ -16,7 +16,11 @@ if (NOT COIN_MOSEK_DIR STREQUAL "None")
   include_directories(${COIN_MOSEK_DIR}/include)
 endif ()
 
-add_library(libOsiMsk STATIC ${Osi_DIR}/src/OsiMsk/OsiMskSolverInterface.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiMsk SHARED ${Osi_DIR}/src/OsiMsk/OsiMskSolverInterface.cpp)
+else ()
+  add_library(libOsiMsk STATIC ${Osi_DIR}/src/OsiMsk/OsiMskSolverInterface.cpp)
+endif ()
 
 install(TARGETS libOsiMsk
         DESTINATION lib)

@@ -16,8 +16,11 @@ if (NOT COIN_GUROBI_DIR STREQUAL "None")
   include_directories(${COIN_GUROBI_DIR}/include)
 endif ()
 
-
-add_library(libOsiGrb STATIC ${Osi_DIR}/src/OsiGrb/OsiGrbSolverInterface.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiGrb SHARED ${Osi_DIR}/src/OsiGrb/OsiGrbSolverInterface.cpp)
+else ()
+  add_library(libOsiGrb STATIC ${Osi_DIR}/src/OsiGrb/OsiGrbSolverInterface.cpp)
+endif ()
 
 install(TARGETS libOsiGrb
         DESTINATION lib)

@@ -236,7 +236,12 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
 
-add_library(libClp STATIC ${Clp_SRC_LIST})
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libClp SHARED ${Clp_SRC_LIST})
+else ()
+  add_library(libClp STATIC ${Clp_SRC_LIST})
+endif ()
+
 if (COIN_HAS_AMD)
   target_link_libraries(libClp ${COIN_HAS_AMD_LIBRARY_PATH})
 endif ()

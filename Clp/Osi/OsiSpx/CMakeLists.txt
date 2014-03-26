@@ -16,7 +16,11 @@ if (NOT COIN_SOPLEX_DIR STREQUAL "None")
   include_directories(${COIN_SOPLEX_DIR}/include)
 endif ()
 
-add_library(libOsiSpx STATIC ${Osi_DIR}/src/OsiSpx/OsiSpxSolverInterface.cpp)
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libOsiSpx SHARED ${Osi_DIR}/src/OsiSpx/OsiSpxSolverInterface.cpp)
+else ()
+  add_library(libOsiSpx STATIC ${Osi_DIR}/src/OsiSpx/OsiSpxSolverInterface.cpp)
+endif ()
 
 install(TARGETS libOsiSpx
         DESTINATION lib)
