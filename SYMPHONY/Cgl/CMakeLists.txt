@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Cgl)
 
+option(CGL_ENABLE_EXAMPLES "Enable the building of examples" OFF)
 set(CGL_VERSION_MAJOR   "0"  CACHE STRING "The CGL major version number")
 set(CGL_VERSION_MINOR   "58" CACHE STRING "The CGL minor version number")
 set(CGL_VERSION_RELEASE "6"  CACHE STRING "The CGL patch version number")
@@ -99,24 +100,24 @@ set(Cgl_SRC_LIST_Headers ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerR
                          ${Cgl_DIR}/src/CglParam.hpp
                          ${Cgl_DIR}/src/CglTreeInfo.hpp)
 
-# ${Cgl_DIR}/test/unitTest.cpp
-# ${Cgl_DIR}/examples/cgl1.cpp
-# ${Cgl_DIR}/examples/cgl_data_test.cpp
-
 include_directories(${Cgl_DIR}/src)
 include_directories(${Cgl_DIR}/src/CglClique)
 include_directories(${Cgl_DIR}/src/CglDuplicateRow)
 include_directories(${Cgl_DIR}/src/CglFlowCover)
 include_directories(${Cgl_DIR}/src/CglGomory)
 include_directories(${Cgl_DIR}/src/CglKnapsackCover)
+include_directories(${Cgl_DIR}/src/CglLandP)
 include_directories(${Cgl_DIR}/src/CglMixedIntegerRounding)
 include_directories(${Cgl_DIR}/src/CglMixedIntegerRounding2)
 include_directories(${Cgl_DIR}/src/CglOddHole)
 include_directories(${Cgl_DIR}/src/CglPreProcess)
 include_directories(${Cgl_DIR}/src/CglProbing)
 include_directories(${Cgl_DIR}/src/CglRedSplit)
+include_directories(${Cgl_DIR}/src/CglRedSplit2)
 include_directories(${Cgl_DIR}/src/CglResidualCapacity)
-include_directories(${Cgl_DIR}/src/CglProbing)
+include_directories(${Cgl_DIR}/src/CglSimpleRounding)
+include_directories(${Cgl_DIR}/src/CglTwomir)
+include_directories(${Cgl_DIR}/src/CglZeroHalf)
 
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)
@@ -137,6 +138,17 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libCgl STATIC ${Cgl_SRC_LIST})
 endif ()
+
+if (CGL_ENABLE_EXAMPLES)
+  add_executable(cgl1 ${Cgl_DIR}/examples/cgl1.cpp)
+  target_link_libraries(cgl1 libCgl)
+  
+  add_executable(cgl_data_test ${Cgl_DIR}/examples/cgl_data_test.cpp)
+  target_link_libraries(cgl_data_test libCgl)
+endif ()
+
+add_executable(unitTest ${Cgl_DIR}/test/unitTest.cpp)
+target_link_libraries(unitTest libCgl)
 
 install(TARGETS libCgl 
         DESTINATION lib)
