@@ -41,6 +41,11 @@ set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE STRING "The CoinUtils Path")
 # Use fast code
 option(COIN_USE_FAST_CODE "Use fast code for CoinUtils" OFF)
 
+# Set paths for binary and library generation inside the build directory:
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 # Name of package
 set(PACKAGE "CoinUtils")
 # Define to the address where bug reports for this package should be sent.

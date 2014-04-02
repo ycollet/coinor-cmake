@@ -67,6 +67,11 @@ set(COIN_OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if
 # Use fast code
 option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
 
+# Set paths for binary and library generation inside the build directory:
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 # Various definitions
 # Set to 1 if the CoinUtils package is available
 set(COIN_HAS_COINUTILS 1)

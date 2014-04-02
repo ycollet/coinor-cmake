@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Clp)
 
+option(CLP_BUILD_EXAMPLES "Enable the building of examples" OFF)
 set(CLP_VERSION_MAJOR   "1"  CACHE STRING "The CLP major version number")
 set(CLP_VERSION_MINOR   "15" CACHE STRING "The CLP minor version number")
 set(CLP_VERSION_RELEASE "6"  CACHE STRING "The CLP patch version number")
@@ -228,9 +229,10 @@ endif ()
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)
+include_directories(${Clp_DIR}/src/OsiClp)
 
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
 include_directories(${CMAKE_BINARY_DIR}/Clp/include)
+include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -258,38 +260,110 @@ if (COIN_HAS_WSMP)
   target_link_libraries(libClp ${COIN_HAS_WSMP_LIBRARY_PATH})
 endif ()
 
-#${Clp_DIR}/examples/addBits.cpp
-#${Clp_DIR}/examples/addColumns.cpp
-#${Clp_DIR}/examples/addRows.cpp
-#${Clp_DIR}/examples/decomp2.cpp
-#${Clp_DIR}/examples/decomp3.cpp
-#${Clp_DIR}/examples/decompose.cpp
-#${Clp_DIR}/examples/defaults.cpp
-#${Clp_DIR}/examples/driver2.cpp
-#${Clp_DIR}/examples/driver.cpp
-#${Clp_DIR}/examples/dualCuts.cpp
-#${Clp_DIR}/examples/ekk.cpp
-#${Clp_DIR}/examples/ekk_interface.cpp
-#${Clp_DIR}/examples/hello.cpp
-#${Clp_DIR}/examples/makeDual.cpp
-#${Clp_DIR}/examples/minimum.cpp
-#${Clp_DIR}/examples/modify.cpp
-#${Clp_DIR}/examples/myPdco.cpp
-#${Clp_DIR}/examples/network.cpp
-#${Clp_DIR}/examples/pdco.cpp
-#${Clp_DIR}/examples/piece.cpp
-#${Clp_DIR}/examples/rowColumn.cpp
-#${Clp_DIR}/examples/sprint2.cpp
-#${Clp_DIR}/examples/sprint.cpp
-#${Clp_DIR}/examples/testBarrier.cpp
-#${Clp_DIR}/examples/testBasis.cpp
-#${Clp_DIR}/examples/testGub2.cpp
-#${Clp_DIR}/examples/testGub.cpp
-#${Clp_DIR}/examples/testQP.cpp
-#${Clp_DIR}/examples/useVolume.cpp
-#${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp
-#${Clp_DIR}/test/osiUnitTest.cpp
-#${Clp_DIR}/src/unitTest.cpp)
+if (CLP_BUILD_EXAMPLES)
+  #
+  # Build Examples
+  #
+  add_executable(addBits     ${Clp_DIR}/examples/addBits.cpp)
+  target_link_libraries(addBits libClp libCoinUtils lapack)
+  
+  add_executable(addColumns  ${Clp_DIR}/examples/addColumns.cpp)
+  target_link_libraries(addColumns libClp libCoinUtils lapack)
+  
+  add_executable(addRows     ${Clp_DIR}/examples/addRows.cpp)
+  target_link_libraries(addRows libClp libCoinUtils lapack)
+  
+  add_executable(decomp2     ${Clp_DIR}/examples/decomp2.cpp)
+  target_link_libraries(decomp2 libClp libCoinUtils lapack)
+  
+  add_executable(decomp3     ${Clp_DIR}/examples/decomp3.cpp)
+  target_link_libraries(decomp3 libClp libCoinUtils lapack)
+  
+  add_executable(decompose   ${Clp_DIR}/examples/decompose.cpp)
+  target_link_libraries(decompose libClp libCoinUtils lapack)
+  
+  add_executable(default     ${Clp_DIR}/examples/defaults.cpp)
+  target_link_libraries(default libClp libCoinUtils lapack)
+  
+  add_executable(driver2     ${Clp_DIR}/examples/driver2.cpp)
+  target_link_libraries(driver2 libClp libCoinUtils lapack)
+  
+  add_executable(driver      ${Clp_DIR}/examples/driver.cpp)
+  target_link_libraries(driver libClp libCoinUtils lapack)
+  
+  add_executable(dualCuts    ${Clp_DIR}/examples/dualCuts.cpp)
+  target_link_libraries(dualCuts libClp libCoinUtils lapack)
+
+  # Needs ekk_api_c.h ...
+  #add_executable(ekk         ${Clp_DIR}/examples/ekk.cpp)
+  #target_link_libraries(ekk libClp libCoinUtils lapack)
+  
+  #add_executable(ekk_interface ${Clp_DIR}/examples/ekk_interface.cpp)
+  #target_link_libraries(ekk_interface libClp libCoinUtils lapack)
+  
+  add_executable(hello       ${Clp_DIR}/examples/hello.cpp)
+  target_link_libraries(hello libClp libCoinUtils lapack)
+  
+  add_executable(makeDual    ${Clp_DIR}/examples/makeDual.cpp)
+  target_link_libraries(makeDual libClp libCoinUtils lapack)
+  
+  add_executable(minimum     ${Clp_DIR}/examples/minimum.cpp)
+  target_link_libraries(minimum libClp libCoinUtils lapack)
+  
+  add_executable(modify      ${Clp_DIR}/examples/modify.cpp)
+  target_link_libraries(modify libClp libCoinUtils lapack)
+  
+  add_executable(network     ${Clp_DIR}/examples/network.cpp)
+  target_link_libraries(network libClp libCoinUtils lapack)
+  
+  add_executable(pdco        ${Clp_DIR}/examples/pdco.cpp ${Clp_DIR}/examples/myPdco.cpp)
+  target_link_libraries(pdco libClp libCoinUtils lapack)
+  
+  add_executable(piece       ${Clp_DIR}/examples/piece.cpp)
+  target_link_libraries(piece libClp libCoinUtils lapack)
+  
+  add_executable(rowColumn   ${Clp_DIR}/examples/rowColumn.cpp)
+  target_link_libraries(rowColumn libClp libCoinUtils lapack)
+  
+  add_executable(sprint2     ${Clp_DIR}/examples/sprint2.cpp)
+  target_link_libraries(sprint2 libClp libCoinUtils lapack)
+  
+  add_executable(sprint      ${Clp_DIR}/examples/sprint.cpp)
+  target_link_libraries(sprint libClp libCoinUtils lapack)
+  
+  add_executable(testBarrier ${Clp_DIR}/examples/testBarrier.cpp)
+  target_link_libraries(testBarrier libClp libCoinUtils lapack)
+  
+  add_executable(testBasis   ${Clp_DIR}/examples/testBasis.cpp)
+  target_link_libraries(testBasis libClp libCoinUtils lapack)
+  
+  add_executable(testGub2    ${Clp_DIR}/examples/testGub2.cpp)
+  target_link_libraries(testGub2 libClp libCoinUtils lapack)
+  
+  add_executable(testGub     ${Clp_DIR}/examples/testGub.cpp)
+  target_link_libraries(testGub libClp libCoinUtils lapack)
+  
+  # Compilation error
+  #add_executable(testQP      ${Clp_DIR}/examples/testQP.cpp)
+  #target_link_libraries(testQP libClp libCoinUtils lapack)
+
+  # Need VOL
+  #add_executable(useVolume   ${Clp_DIR}/examples/useVolume.cpp)
+  #target_link_libraries(useVolume libClp libCoinUtils lapack)
+  
+  # Need OSI to compile
+  #add_executable(OsiClpSolverInterfaceTest ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp)
+  #target_link_libraries(OsiClpSolverInterfaceTest libCoinUtils libClp lapack)
+  
+  #add_executable(osiUnitTest ${Clp_DIR}/test/osiUnitTest.cpp)
+  #target_link_libraries(osiUnitTest libClp libCoinUtils lapack)
+endif ()
+
+add_executable(clp ${Clp_MAIN_SRC_LIST})
+target_link_libraries(clp libClp libCoinUtils lapack)
+
+install(TARGETS clp
+        DESTINATION bin)
 
 install(TARGETS libClp 
         DESTINATION lib)
