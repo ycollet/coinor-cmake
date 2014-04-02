@@ -58,7 +58,8 @@ To do:
 
 Some limitations: only the library of these projects are compiled. The Clp, Cbc and SYMPHONY executable are not yet compiled.
 The next project to be added will be Ipopt.
-- Allow compilation of executables
+- Allow compilation of executables (SYMPHONY remaining)
+- Check for Lapack and pthreads (for Cbc)
 - Fine tune check of headers and add missing check from original configure.ac files
 - Use CTest to launch non regression tests for each packages:
   - download data sets if user enable tests: Data-1.0.7.tgz  miplib3-1.2.6.tgz  Netlib-1.2.6.tgz  Sample-1.2.9.tgz  Stochastic-1.1.5.tgz
