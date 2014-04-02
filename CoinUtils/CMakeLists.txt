@@ -139,6 +139,7 @@ endif ()
 
 set(BuildTools_DIR ${Coin_DIR}/BuildTools)
 set(CoinUtils_DIR ${Coin_DIR}/CoinUtils)
+set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
 
 include(CheckIncludeFile)
 
