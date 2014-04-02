@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(CoinUtils)
 
+option(COINUTILS_ENABLE_UNITTEST "Enable building the unit test executable" OFF)
 set(COINUTILS_VERSION_MAJOR   "2"  CACHE STRING "The COINUTILS major version number")
 set(COINUTILS_VERSION_MINOR   "9"  CACHE STRING "The COINUTILS minor version number")
 set(COINUTILS_VERSION_RELEASE "11" CACHE STRING "The COINUTILS patch version number")
@@ -129,6 +130,18 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinWarmStartDual.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp)
 
+set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinDenseVectorTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinErrorTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinIndexedVectorTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinMessageHandlerTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinModelTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinMpsIOTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinPackedMatrixTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinPackedVectorTest.cpp
+                           ${CoinUtilsTest_DIR}/CoinShallowPackedVectorTest.cpp
+                           ${CoinUtilsTest_DIR}/unitTest.cpp)
+
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
 
@@ -142,16 +155,10 @@ else ()
   add_library(libCoinUtils STATIC ${CoinUtils_SRC_LIST})
 endif ()
 
-#${CoinUtils_DIR}/test/CoinDenseVectorTest.cpp
-#${CoinUtils_DIR}/test/CoinErrorTest.cpp
-#${CoinUtils_DIR}/test/CoinIndexedVectorTest.cpp
-#${CoinUtils_DIR}/test/CoinMessageHandlerTest.cpp
-#${CoinUtils_DIR}/test/CoinModelTest.cpp
-#${CoinUtils_DIR}/test/CoinMpsIOTest.cpp
-#${CoinUtils_DIR}/test/CoinPackedMatrixTest.cpp
-#${CoinUtils_DIR}/test/CoinPackedVectorTest.cpp
-#${CoinUtils_DIR}/test/CoinShallowPackedVectorTest.cpp
-#${CoinUtils_DIR}/test/unitTest.cpp)
+if (COINUTILS_ENABLE_UNITTEST)
+  add_executable(unitTest ${CoinUtilsTest_SRC_LIST})
+  target_link_libraries(unitTest libCoinUtils)
+endif()
 
 install(TARGETS libCoinUtils 
         DESTINATION lib)
