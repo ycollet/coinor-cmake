@@ -10,11 +10,12 @@ include_directories(${Clp_DIR}/src/OsiClp)
 include_directories(${Osi_DIR}/src)
 include_directories(${Osi_DIR}/src/Osi)
 
-include_directories(${CMAKE_BINARY_DIR}/Osi/include)
-include_directories(${CMAKE_BINARY_DIR}/Clp/include)
-include_directories(${CMAKE_BINARY_DIR}/Cbc/include)
-include_directories(${CMAKE_BINARY_DIR}/Symphony/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Symphony/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+endmacro()
 
 include_directories(${SYMPHONY_DIR}/include)
 
@@ -27,6 +28,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiSym STATIC ${OsiSym_DIR}/OsiSymSolverInterface.cpp ${OsiSym_DIR}/SymWarmStart.cpp)
 endif ()
+set_include_directories(libOsiSym)
 
 install(TARGETS libOsiSym 
         DESTINATION lib)

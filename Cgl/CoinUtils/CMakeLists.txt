@@ -143,7 +143,6 @@ set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
                            ${CoinUtilsTest_DIR}/unitTest.cpp)
 
 include_directories(${CoinUtils_DIR}/src)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -154,10 +153,12 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libCoinUtils STATIC ${CoinUtils_SRC_LIST})
 endif ()
+target_include_directories(libCoinUtils BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
 
 if (COINUTILS_ENABLE_UNITTEST)
   add_executable(unitTest ${CoinUtilsTest_SRC_LIST})
   target_link_libraries(unitTest libCoinUtils)
+  target_include_directories(unitTest BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
 endif()
 
 install(TARGETS libCoinUtils 

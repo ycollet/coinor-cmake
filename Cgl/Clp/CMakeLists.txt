@@ -231,9 +231,6 @@ include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)
 include_directories(${Clp_DIR}/src/OsiClp)
 
-include_directories(${CMAKE_BINARY_DIR}/Clp/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
-
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
@@ -259,6 +256,8 @@ endif ()
 if (COIN_HAS_WSMP)
   target_link_libraries(libClp ${COIN_HAS_WSMP_LIBRARY_PATH})
 endif ()
+target_include_directories(libClp PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
+target_include_directories(libClp PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
 
 if (CLP_BUILD_EXAMPLES)
   #
@@ -361,6 +360,8 @@ endif ()
 
 add_executable(clp ${Clp_MAIN_SRC_LIST})
 target_link_libraries(clp libClp libCoinUtils lapack)
+target_include_directories(clp BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+target_include_directories(clp BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
 
 install(TARGETS clp
         DESTINATION bin)

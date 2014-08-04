@@ -958,18 +958,15 @@ include_directories(${SYMPHONY_DIR}/Cgl/src/CglTwomir)
 
 include_directories(${SYMPHONY_DIR}/Osi/src/Osi)
 
-include_directories(${CMAKE_BINARY_DIR}/SYMPHONY/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
-include_directories(${CMAKE_BINARY_DIR}/Cgl/include)
-include_directories(${CMAKE_BINARY_DIR}/Clp/include)
-
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
 subdirs(Clp)
 subdirs(Cgl)
 subdirs(CoinUtils)
-subdirs(Osi/Osi)
+subdirs(Osi/Osi) # YC
+
+subdirs(Osi/OsiClp) 
 
 if (USE_OSI_Clp)
   subdirs(Osi/OsiClp) 
@@ -999,6 +996,14 @@ else ()
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long -Wno-unknown-pragmas -Wno-write-strings -Wno-sign-compare -Wno-cast-qual") #-pedantic-errors
 endif ()
 
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cgl/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/SYMPHONY/include)
+endmacro()
+
+set_source_files_properties(${MAIN_SRC} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${ALL_SYM_MASTER} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${ALL_LP} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${ALL_CG} PROPERTIES LANGUAGE CXX)
@@ -1018,6 +1023,40 @@ else ()
   add_library(libSym_cp STATIC ${ALL_CP})
   add_library(libSym_tm STATIC ${ALL_TM})
 endif ()
+
+set_include_directories(libSym)
+set_include_directories(libSym_lp)
+set_include_directories(libSym_cg)
+set_include_directories(libSym_cp)
+set_include_directories(libSym_tm)
+
+add_executable(symphony ${MAIN_SRC})
+#symphony_CPPFLAGS = $(SYMCPPFLAGS)
+target_link_libraries(symphony libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(symphony)
+
+add_executable(symphony_lp ${MAIN_SRC})
+#symphony_CPPFLAGS = $(PCPPFLAGS)
+target_link_libraries(symphony_lp libSym_lp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(symphony_lp)
+
+add_executable(symphony_cg ${MAIN_SRC})
+#symphony_CPPFLAGS = $(PCPPFLAGS)
+target_link_libraries(symphony_cg libSym_cg libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(symphony_cg)
+
+add_executable(symphony_cp ${MAIN_SRC})
+#symphony_CPPFLAGS = $(PCPPFLAGS)
+target_link_libraries(symphony_cp libSym_cp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(symphony_cp)
+
+add_executable(symphony_tm ${MAIN_SRC})
+#symphony_CPPFLAGS = $(PCPPFLAGS)
+target_link_libraries(symphony_tm libSym_tm libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(symphony_tm)
+
+install(TARGETS symphony symphony_lp symphony_cg symphony_cp symphony_tm
+        DESTINATION bin)
 
 install(TARGETS libSym libSym_lp libSym_cg libSym_cp libSym_tm
         DESTINATION lib)

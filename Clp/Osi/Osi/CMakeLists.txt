@@ -43,8 +43,10 @@ set(Osi_SRC_LIST_Headers ${Osi_DIR}/src/Osi/OsiAuxInfo.hpp
 include_directories(${Osi_DIR}/src)
 include_directories(${CoinUtils_DIR}/src)
 
-include_directories(${CMAKE_BINARY_DIR}/Osi/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+endmacro()
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -55,6 +57,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsi STATIC ${Osi_SRC_LIST})
 endif ()
+set_include_directories(libOsi)
 
 #${Osi_DIR}/src/OsiCommonTest/OsiColCutTest.cpp
 #${Osi_DIR}/src/OsiCommonTest/OsiCutsTest.cpp

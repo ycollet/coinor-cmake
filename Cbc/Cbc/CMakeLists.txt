@@ -213,10 +213,12 @@ include_directories(${Clp_DIR}/src/OsiClp)
 include_directories(${Osi_DIR}/src)
 include_directories(${Osi_DIR}/src/Osi)
 
-include_directories(${CMAKE_BINARY_DIR}/Cbc/include)
-include_directories(${CMAKE_BINARY_DIR}/Cgl/include)
-include_directories(${CMAKE_BINARY_DIR}/Clp/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cgl/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cbc/include)
+endmacro()
 
 if (WIN32)
   add_definitions(-DUSE_CBCCONFIG -DCOIN_NO_CLP_MESSAGE -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -229,6 +231,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libCbc STATIC ${Cbc_SRC_LIST})
 endif ()
+set_include_directories(libCbc)
 
 add_executable(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
 target_link_libraries(allCuts libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -331,6 +334,7 @@ target_link_libraries(sample4 libCbc libCgl libOsiClp libOsi libClp libCoinUtils
 if (COIN_HAS_CLP)
   add_executable(cbc ${Cbc_DIR}/src/CoinSolve.cpp)
   target_link_libraries(cbc libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(cbc)
   
   install(TARGETS cbc
           DESTINATION bin)
@@ -350,6 +354,7 @@ if (CBC_BUILD_CBC_GENERIC)
 			     ${Cbc_DIR}/src/CbcGenSolution.cpp
 			     ${Cbc_DIR}/src/CbcGenSolvers.cpp)
   target_link_libraries(cbc-generic libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(cbc-generic)
   
   install(TARGETS cbc-generic
           DESTINATION bin)

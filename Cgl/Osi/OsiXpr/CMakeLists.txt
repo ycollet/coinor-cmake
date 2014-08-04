@@ -9,8 +9,10 @@ include_directories(${Osi_DIR}/src/Osi)
 include_directories(${Osi_DIR}/src/OsiXpr)
 include_directories(${MY_XPRESS_DIR}/include)
 
-include_directories(${CMAKE_BINARY_DIR}/Osi/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+endmacro()
 
 if (NOT COIN_XPRESS_DIR STREQUAL "None")
   include_directories(${COIN_XPRESS_DIR}/include)
@@ -21,6 +23,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiXpr STATIC ${Osi_DIR}/src/OsiXpr/OsiXprSolverInterface.cpp)
 endif ()
+set_include_directories(libOsiXpr)
 
 install(TARGETS libOsiXpr 
         DESTINATION lib)

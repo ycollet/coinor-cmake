@@ -125,9 +125,11 @@ include_directories(${Clp_DIR}/src/OsiClp)
 include_directories(${Osi_DIR}/src)
 include_directories(${Osi_DIR}/src/Osi)
 
-include_directories(${CMAKE_BINARY_DIR}/Cgl/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
-include_directories(${CMAKE_BINARY_DIR}/Clp/include)
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cgl/include)
+endmacro()
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -138,6 +140,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libCgl STATIC ${Cgl_SRC_LIST})
 endif ()
+set_include_directories(libCgl)
 
 if (CGL_ENABLE_EXAMPLES)
   add_executable(cgl1 ${Cgl_DIR}/examples/cgl1.cpp)
@@ -149,6 +152,7 @@ endif ()
 
 add_executable(unitTest ${Cgl_DIR}/test/unitTest.cpp)
 target_link_libraries(unitTest libCgl)
+set_include_directories(unitTest)
 
 install(TARGETS libCgl 
         DESTINATION lib)

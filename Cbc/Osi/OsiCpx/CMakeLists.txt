@@ -9,8 +9,10 @@ include_directories(${Osi_DIR}/src/Osi)
 include_directories(${Osi_DIR}/src/OsiCpx)
 include_directories(${MY_CPLEX_DIR}/include)
 
-include_directories(${CMAKE_BINARY_DIR}/Osi/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+endmacro()
 
 if (NOT COIN_CPLEX_DIR STREQUAL "None")
   include_directories(${COIN_CPLEX_DIR}/include)
@@ -21,6 +23,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiCpx STATIC ${Osi_DIR}/src/OsiCpx/OsiCpxSolverInterface.cpp)
 endif ()
+set_include_directories(libOsiCpx)
 
 install(TARGETS libOsiCpx
         DESTINATION lib)

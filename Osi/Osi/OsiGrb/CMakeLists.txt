@@ -9,8 +9,10 @@ include_directories(${Osi_DIR}/src/Osi)
 include_directories(${Osi_DIR}/src/OsiGrb)
 include_directories(${MY_GUROBI_DIR}/include)
 
-include_directories(${CMAKE_BINARY_DIR}/Osi/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+endmacro()
 
 if (NOT COIN_GUROBI_DIR STREQUAL "None")
   include_directories(${COIN_GUROBI_DIR}/include)
@@ -21,6 +23,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiGrb STATIC ${Osi_DIR}/src/OsiGrb/OsiGrbSolverInterface.cpp)
 endif ()
+set_include_directories(libOsiGrb)
 
 install(TARGETS libOsiGrb
         DESTINATION lib)

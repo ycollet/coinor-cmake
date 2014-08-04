@@ -9,9 +9,11 @@ include_directories(${Clp_DIR}/src/OsiClp)
 include_directories(${Osi_DIR}/src)
 include_directories(${Osi_DIR}/src/Osi)
 
-include_directories(${CMAKE_BINARY_DIR}/Osi/include)
-include_directories(${CMAKE_BINARY_DIR}/Clp/include)
-include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+endmacro()
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -22,6 +24,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiClp STATIC ${Clp_DIR}/src/OsiClp/OsiClpSolverInterface.cpp)
 endif ()
+set_include_directories(libOsiClp)
 
 install(TARGETS libOsiClp 
         DESTINATION lib)
