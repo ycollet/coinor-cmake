@@ -54,6 +54,11 @@ All the sanitize options for clang are detailled here: http://clang.llvm.org/doc
 To compile using intel compiler:
 $ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/opt/intel/bin/icpc -DCMAKE_C_COMPILER=/opt/intel/bin/icc .. 
 
+You can some basic tests for cbc, clp and symphony:
+$ ctest -R exmip1 # To run all tests containing exmip1 in their names
+$ ctest -L MPS # To run all tests which have the MPS label (available labels are MPS, LP, LONG)
+$ ctest -LE LONG # To run all tests which doesn't have the LONG label
+
 To do:
 
 Some limitations: only the library of these projects are compiled. The Clp, Cbc and SYMPHONY executable are not yet compiled.

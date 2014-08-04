@@ -132,6 +132,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+Enable_Testing()
+
 # Various definitions
 # Set to 1 if the CoinUtils package is available
 set(COIN_HAS_COINUTILS 1)
@@ -768,6 +770,19 @@ set(PROCCOMM_SRC  ${SYMPHONY_DIR}/SYMPHONY/src/Common/proccomm.c)
 set(PACKCUT_SRC   ${SYMPHONY_DIR}/SYMPHONY/src/Common/pack_cut.c)
 set(PACKARRAY_SRC ${SYMPHONY_DIR}/SYMPHONY/src/Common/pack_array.c)
 
+set(EXAMPLES_SRC ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c
+		 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c
+		 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c
+		 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c
+		 ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c
+		 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c
+		 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c
+		 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
+
+set(OSISYM_SRC ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/OsiSymSolverInterface.cpp
+               ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/SymWarmStart.cpp)
+
 set(BB_SRC ${MASTER_SRC}
            ${DG_SRC}
            ${TM_SRC}
@@ -1003,6 +1018,7 @@ include_directories(${SYMPHONY_DIR}/Cgl/src/CglRedSplit)
 include_directories(${SYMPHONY_DIR}/Cgl/src/CglTwomir)
 
 include_directories(${SYMPHONY_DIR}/Osi/src/Osi)
+include_directories(${SYMPHONY_DIR}/SYMPHONY/src/OsiSym)
 
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
@@ -1047,6 +1063,7 @@ macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/SYMPHONY/include)
 endmacro()
 
+set_source_files_properties(${EXAMPLES_SRC} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${MAIN_SRC} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${ALL_SYM_MASTER} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${ALL_LP} PROPERTIES LANGUAGE CXX)
@@ -1060,12 +1077,14 @@ if (ENABLE_SHARED_LIBRARIES)
   add_library(libSym_cg SHARED ${ALL_CG})
   add_library(libSym_cp SHARED ${ALL_CP})
   add_library(libSym_tm SHARED ${ALL_TM})
+  add_library(libOsiSym SHARED ${OSISYM_SRC})
 else ()
   add_library(libSym    STATIC ${ALL_SYM_MASTER})
   add_library(libSym_lp STATIC ${ALL_LP})
   add_library(libSym_cg STATIC ${ALL_CG})
   add_library(libSym_cp STATIC ${ALL_CP})
   add_library(libSym_tm STATIC ${ALL_TM})
+  add_library(libOsiSym STATIC ${OSISYM_SRC})
 endif ()
 
 set_include_directories(libSym)
@@ -1073,6 +1092,7 @@ set_include_directories(libSym_lp)
 set_include_directories(libSym_cg)
 set_include_directories(libSym_cp)
 set_include_directories(libSym_tm)
+set_include_directories(libOsiSym)
 
 add_executable(symphony ${MAIN_SRC})
 #symphony_CPPFLAGS = $(SYMCPPFLAGS)
@@ -1099,6 +1119,43 @@ add_executable(symphony_tm ${MAIN_SRC})
 target_link_libraries(symphony_tm libSym_tm libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
 set_include_directories(symphony_tm)
 
+add_executable(bicriteria ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c)
+target_link_libraries(bicriteria libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(bicriteria)
+
+add_executable(milp ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c)
+target_link_libraries(milp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(milp)
+
+add_executable(milp2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c)
+target_link_libraries(milp2 libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(milp2)
+
+add_executable(milpOsi ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c)
+target_link_libraries(milpOsi libOsiSym libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(milpOsi)
+
+#ERROR: Missing include files in milpOsi2
+#add_executable(milpOsi2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c)
+#target_link_libraries(milpOsi2 libOsiSym libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+#set_include_directories(milpOsi2)
+
+add_executable(sensitivity ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c)
+target_link_libraries(sensitivity libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(sensitivity)
+
+add_executable(warm_start1 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c)
+target_link_libraries(warm_start1 libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(warm_start1)
+
+add_executable(warm_start2 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c)
+target_link_libraries(warm_start2 libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(warm_start2)
+
+add_executable(warm_start3 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
+target_link_libraries(warm_start3 libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+set_include_directories(warm_start3)
+
 install(TARGETS symphony symphony_lp symphony_cg symphony_cp symphony_tm
         DESTINATION bin)
 
@@ -1107,3 +1164,144 @@ install(TARGETS libSym libSym_lp libSym_cg libSym_cp libSym_tm
 
 install(FILES ${Symphony_SRC_LIST_Headers} 
         DESTINATION include/coin)
+
+# Perform some tests
+
+# Create a directory to store results from tests
+if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)
+  make_directory(${CMAKE_BINARY_DIR}/tests)
+endif()
+
+# With MPS files
+
+add_test(NAME afiro_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps -o ${CMAKE_BINARY_DIR}/tests/afiro.out)
+set_tests_properties(afiro_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(afiro_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME conic_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -o ${CMAKE_BINARY_DIR}/tests/conic.out)
+set_tests_properties(conic_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(conic_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME exmip1_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.mps -o ${CMAKE_BINARY_DIR}/tests/exmip1.out)
+set_tests_properties(exmip1_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(exmip1_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME galenet_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/galenet.mps -o ${CMAKE_BINARY_DIR}/tests/galenet.out)
+set_tests_properties(galenet_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(galenet_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME nw460_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/nw460.mps -o ${CMAKE_BINARY_DIR}/tests/nw460.out)
+set_tests_properties(nw460_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(nw460_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME p0548_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/p0548.mps -o ${CMAKE_BINARY_DIR}/tests/p0548.out)
+set_tests_properties(p0548_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(p0548_mps PROPERTIES LABEL "MPS")
+
+add_test(NAME scOneInt_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/scOneInt.mps -o ${CMAKE_BINARY_DIR}/tests/scOneInt.out)
+set_tests_properties(scOneInt_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(scOneInt_mps PROPERTIES TIMEOUT "MPS")
+
+add_test(NAME tp3_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/tp3.mps -o ${CMAKE_BINARY_DIR}/tests/tp3.out)
+set_tests_properties(tp3_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(tp3_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME wedding_16_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/wedding_16.mps -o ${CMAKE_BINARY_DIR}/tests/wedding_16.out)
+set_tests_properties(wedding_16_mps PROPERTIES TIMEOUT 3000)
+set_tests_properties(wedding_16_mps PROPERTIES LABELS "MPS;LONG")
+
+add_test(NAME atm_5_10_1_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/atm_5_10_1.mps -o ${CMAKE_BINARY_DIR}/tests/atm_5_10_1.out)
+set_tests_properties(atm_5_10_1_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(atm_5_10_1_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME e226_mps
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/e226.mps -o ${CMAKE_BINARY_DIR}/tests/e226.out)
+set_tests_properties(e226_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(e226_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME finnis_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/finnis.mps -o ${CMAKE_BINARY_DIR}/tests/finnis.out)
+set_tests_properties(finnis_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(finnis_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME hello_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/hello.mps -o ${CMAKE_BINARY_DIR}/tests/hello.out)
+set_tests_properties(hello_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(hello_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME p0033_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps -o ${CMAKE_BINARY_DIR}/tests/p0033.out)
+set_tests_properties(p0033_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(p0033_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME pack1_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/pack1.mps -o ${CMAKE_BINARY_DIR}/tests/pack1.out)
+set_tests_properties(pack1_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(pack1_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME share2qp_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/share2qp.mps -o ${CMAKE_BINARY_DIR}/tests/share2qp.out)
+set_tests_properties(share2qp_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(share2qp_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME tp4_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/tp4.mps -o ${CMAKE_BINARY_DIR}/tests/tp4.out)
+set_tests_properties(tp4_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(tp4_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME brandy_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/brandy.mps -o ${CMAKE_BINARY_DIR}/tests/brandy.out)
+set_tests_properties(brandy_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(brandy_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME exmip1.5_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.5.mps -o ${CMAKE_BINARY_DIR}/tests/exmip1.5.out)
+set_tests_properties(exmip1.5_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(exmip1.5_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME galenetbnds_mps 
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/galenetbnds.mps -o ${CMAKE_BINARY_DIR}/tests/galenetbnds.out)
+set_tests_properties(galenetbnds_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(galenetbnds_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME lseu_mps
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/lseu.mps -o ${CMAKE_BINARY_DIR}/tests/lseu.out)
+set_tests_properties(lseu_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(lseu_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME p0201_mps
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/p0201.mps -o ${CMAKE_BINARY_DIR}/tests/p0201.out)
+set_tests_properties(p0201_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(p0201_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME retail3_mps
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/retail3.mps -o ${CMAKE_BINARY_DIR}/tests/retail3.out)
+set_tests_properties(retail3_mps PROPERTIES TIMEOUT 3000)
+set_tests_properties(retail3_mps PROPERTIES LABELS "MPS;LONG")
+
+add_test(NAME spec_sections_mps
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/spec_sections.mps -o ${CMAKE_BINARY_DIR}/tests/spec_sections.out)
+set_tests_properties(spec_sections_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(spec_sections_mps PROPERTIES LABELS "MPS")
+
+add_test(NAME tp5_mps
+         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/tp5.mps -o ${CMAKE_BINARY_DIR}/tests/tp5.out)
+set_tests_properties(tp5_mps PROPERTIES TIMEOUT 30)
+set_tests_properties(tp5_mps PROPERTIES LABELS "MPS")
+
+# With LP files
+
+add_test(NAME exmip1_lp 
+         COMMAND $<TARGET_FILE:symphony> -L ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.lp -o ${CMAKE_BINARY_DIR}/tests/exmip1_lp.out)
+set_tests_properties(exmip1_lp PROPERTIES TIMEOUT 30)
+set_tests_properties(exmip1_lp PROPERTIES LABELS "LP")
