@@ -144,10 +144,12 @@ set_include_directories(libCgl)
 
 if (CGL_ENABLE_EXAMPLES)
   add_executable(cgl1 ${Cgl_DIR}/examples/cgl1.cpp)
-  target_link_libraries(cgl1 libCgl)
+  target_link_libraries(cgl1 libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(cgl1)
   
   add_executable(cgl_data_test ${Cgl_DIR}/examples/cgl_data_test.cpp)
-  target_link_libraries(cgl_data_test libCgl)
+  target_link_libraries(cgl_data_test libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(cgl_data_test)
 endif ()
 
 add_executable(unitTest ${Cgl_DIR}/test/unitTest.cpp)
