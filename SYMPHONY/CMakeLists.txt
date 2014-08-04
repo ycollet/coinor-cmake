@@ -19,6 +19,7 @@ set(SYMPHONY_VERSION "${SYMPHONY_VERSION_MAJOR}.${SYMPHONY_VERSION_MINOR}.${SYMP
 set(SYMPHONY_SVN_REV "${SYMPHONY_VERSION_RELEASE}")
 
 # External solvers
+option(USE_OSI_Clp    "Use Xpress solver" ON)
 option(USE_OSI_XPRESS "Use Xpress solver" OFF)
 option(USE_OSI_CPLEX  "Use Cplex solver"  OFF)
 option(USE_OSI_GPLK   "Use GLPK solver"   OFF)
@@ -114,6 +115,10 @@ option(COIN_HAS_ABC "Use the Aboca solver" OFF)
 set(COIN_ABC_LEVEL      "0" CACHE STRING "Use the Aboca solver (1, 2, 3, 4) - 0, Aboca solver is not used")
 set(COIN_CLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Clp (0 if no test)")
 set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if no output)")
+
+# Cgl options
+set(COIN_CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
+set(COIN_CGL_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Cgl (0 if no output)")
 
 # Osi options
 set(COIN_OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
@@ -240,11 +245,19 @@ if (UNIX)
   endif ()
   
   if (COIN_COMPILE_LTO)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -flto")
+    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lto")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lto")
+    endif ()
+    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -flto")
+    endif ()
   elseif (COIN_COMPILE_WHOPR)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fwhopr")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fwhopr")
+    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fwhopr")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fwhopr")
+    endif ()
   endif ()
 elseif (WIN32)
   if (MSVC)
@@ -253,6 +266,16 @@ elseif (WIN32)
       set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} /GL ")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG ")
     endif ()
+  endif ()
+endif ()
+
+#-----------------------------------------------------------------------------
+# Manage threads include dir under Windows
+#-----------------------------------------------------------------------------
+
+if (WIN32)
+  if (NOT COIN_THREADS_INC_PATH STREQUAL "None")
+    include_directories(${COIN_THREADS_INC_PATH})
   endif ()
 endif ()
 
@@ -289,8 +312,11 @@ endif ()
 # End detect fortran mangling
 
 if (NOT WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -fPIC ")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -fPIC ")
+  # Try to locate unitizalized variables
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
 endif ()
 
 set(BuildTools_DIR ${Coin_DIR}/BuildTools)
@@ -368,6 +394,7 @@ elseif (SIZEOF_INT EQUAL "8")
   set(COIN_UINT64_T "unsigned int")
 endif ()
 
+# With the trunk version of Cbc, Threads and Cilk are allowed
 if (COIN_HAS_ABC AND (COINUTILS_USE_THREADS OR CBC_USE_THREAD))
   message(FATAL_ERROR "Error: Threads and Cilk (ABC) are incompatible")
 endif ()
@@ -382,6 +409,10 @@ if (WIN32)
   #define __BIG_ENDIAN    4321
   # Under Windows __BYTE_ORDER is not defined and endian.h doesn't exist
   add_definitions(-D__BYTE_ORDER=1234)
+endif ()
+
+if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+  add_definitions(-DINTEL_COMPILER)
 endif ()
 
 if (COIN_HAS_ABC)
@@ -479,7 +510,21 @@ endif ()
 # FC_DUMMY_MAIN_EQ_F77
 
 if (COIN_USE_FAST_CODE)
-  add_definitions(-DCOIN_FAST_CODE=1 -DCLP_FAST_CODE=1)
+  add_definitions(-DCOIN_FAST_CODE -DCLP_FAST_CODE -DUSE_MEMCPY -DCOIN_USE_RESTRICT -DCOIN_NOTEST_DUPLICATE)
+  
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fomit-frame-pointer ")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fomit-frame-pointer ")
+  
+  if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-math-errno -fp-trap=none ")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-math-errno -fp-trap=none ")
+  endif ()
+
+  if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math -fno-math-errno -fno-trapping-math ")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffast-math -fno-math-errno -fno-trapping-math ")
+  endif ()
+  
 endif ()
 
 if (COINUTILS_USE_THREADS)
@@ -519,7 +564,8 @@ if (USE_DYLP)
   set(COIN_HAS_DYLP 1)
 endif ()
 
-#set(COIN_HAS_CLP 1) # Set this to 1 if clp is compiled
+set(COIN_HAS_CGL 1) # Set this to 1 if cgl is compiled
+set(COIN_HAS_CLP 1) # Set this to 1 if clp is compiled
 #set(COIN_HAS_DEPEND 1) # Set this to 1 if coin has dependencies
 #set(COIN_HAS_MUMPS 1) # Set this to 1 if Mumps dependencies is available
 #set(COIN_HAS_ASL 1) # Set this to 1 if the Asl dependencies is available
@@ -964,9 +1010,7 @@ include_directories(Osi/src/OsiCommonTest)
 subdirs(Clp)
 subdirs(Cgl)
 subdirs(CoinUtils)
-subdirs(Osi/Osi) # YC
-
-subdirs(Osi/OsiClp) 
+subdirs(Osi/Osi)
 
 if (USE_OSI_Clp)
   subdirs(Osi/OsiClp) 

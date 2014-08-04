@@ -233,103 +233,131 @@ else ()
 endif ()
 set_include_directories(libCbc)
 
-add_executable(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
-target_link_libraries(allCuts libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(driver ${Cbc_DIR}/examples/driver.cpp)
-target_link_libraries(driver libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(longthin ${Cbc_DIR}/examples/longthin.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver2.cpp)
-target_link_libraries(longthin libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(qmip2 ${Cbc_DIR}/examples/qmip2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp)
-target_link_libraries(qmip2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(sample5 ${Cbc_DIR}/examples/sample5.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(sample5 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(barrier ${Cbc_DIR}/examples/barrier.cpp)
-target_link_libraries(barrier libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-# No main 
-#add_executable(CbcSolverLongThin ${Cbc_DIR}/examples/CbcSolverLongThin.cpp ${Cbc_DIR}/examples/CbcBranchFollow2.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-#target_link_libraries(CbcSolverLongThin libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(fast0507b ${Cbc_DIR}/examples/fast0507b.cpp ${Cbc_DIR}/examples/CbcBranchFollow2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver2.cpp ${Cbc_DIR}/examples/CbcSolver3.cpp)
-target_link_libraries(fast0507b libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(lotsize ${Cbc_DIR}/examples/lotsize.cpp)
-target_link_libraries(lotsize libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(qmip ${Cbc_DIR}/examples/qmip.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/ClpQuadInterface.cpp)
-target_link_libraries(qmip libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(simpleBAB ${Cbc_DIR}/examples/simpleBAB.cpp)
-target_link_libraries(simpleBAB libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(fast0507 ${Cbc_DIR}/examples/fast0507.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver3.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp)
-target_link_libraries(fast0507 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(minimum ${Cbc_DIR}/examples/minimum.cpp)
-target_link_libraries(minimum libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(repeat ${Cbc_DIR}/examples/repeat.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(repeat libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(sos ${Cbc_DIR}/examples/sos.cpp)
-target_link_libraries(sos libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(crew ${Cbc_DIR}/examples/crew.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(crew libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(gear ${Cbc_DIR}/examples/gear.cpp ${Cbc_DIR}/examples/CbcBranchLink.cpp)
-target_link_libraries(gear libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(modify ${Cbc_DIR}/examples/modify.cpp)
-target_link_libraries(modify libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(sample1 ${Cbc_DIR}/examples/sample1.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(sample1 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(sudoku ${Cbc_DIR}/examples/sudoku.cpp)
-target_link_libraries(sudoku libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(driver2 ${Cbc_DIR}/examples/driver2.cpp)
-target_link_libraries(driver2 libCbc libOsiCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(hotstart ${Cbc_DIR}/examples/hotstart.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(hotstart libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(nway ${Cbc_DIR}/examples/nway.cpp)
-target_link_libraries(nway libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(sample2 ${Cbc_DIR}/examples/sample2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(sample2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(driver3 ${Cbc_DIR}/examples/driver3.cpp)
-target_link_libraries(driver3 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(interrupt ${Cbc_DIR}/examples/interrupt.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(interrupt libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(parallel2 ${Cbc_DIR}/examples/parallel2.cpp)
-target_link_libraries(parallel2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack pthread)
-
-add_executable(sample3 ${Cbc_DIR}/examples/sample3.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(sample3 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(driver4 ${Cbc_DIR}/examples/driver4.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(driver4 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(link ${Cbc_DIR}/examples/link.cpp ${Cbc_DIR}/examples/CbcBranchLink.cpp)
-target_link_libraries(link libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
-add_executable(parallel ${Cbc_DIR}/examples/parallel.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(parallel libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack pthread)
-
-add_executable(sample4 ${Cbc_DIR}/examples/sample4.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-target_link_libraries(sample4 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-
+if (CBC_ENABLE_EXAMPLES)
+  add_executable(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
+  target_link_libraries(allCuts libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(allCuts)
+  
+  add_executable(driver ${Cbc_DIR}/examples/driver.cpp)
+  target_link_libraries(driver libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(driver)
+  
+  add_executable(longthin ${Cbc_DIR}/examples/longthin.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver2.cpp)
+  target_link_libraries(longthin libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(longthin)
+  
+  add_executable(qmip2 ${Cbc_DIR}/examples/qmip2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp)
+  target_link_libraries(qmip2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(qmip2)
+  
+  add_executable(sample5 ${Cbc_DIR}/examples/sample5.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(sample5 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(sample5)
+  
+  add_executable(barrier ${Cbc_DIR}/examples/barrier.cpp)
+  target_link_libraries(barrier libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(barrier)
+  
+  add_executable(fast0507b ${Cbc_DIR}/examples/fast0507b.cpp ${Cbc_DIR}/examples/CbcBranchFollow2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver2.cpp ${Cbc_DIR}/examples/CbcSolver3.cpp)
+  target_link_libraries(fast0507b libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(fast0507b)
+  
+  add_executable(lotsize ${Cbc_DIR}/examples/lotsize.cpp)
+  target_link_libraries(lotsize libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(lotsize)
+  
+  add_executable(qmip ${Cbc_DIR}/examples/qmip.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/ClpQuadInterface.cpp)
+  target_link_libraries(qmip libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(qmip)
+  
+  add_executable(simpleBAB ${Cbc_DIR}/examples/simpleBAB.cpp)
+  target_link_libraries(simpleBAB libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(simpleBAB)
+  
+  add_executable(fast0507 ${Cbc_DIR}/examples/fast0507.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver3.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp)
+  target_link_libraries(fast0507 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(fast0507)
+  
+  add_executable(minimum ${Cbc_DIR}/examples/minimum.cpp)
+  target_link_libraries(minimum libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(minimum)
+  
+  add_executable(repeat ${Cbc_DIR}/examples/repeat.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(repeat libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(repeat)
+  
+  add_executable(sos ${Cbc_DIR}/examples/sos.cpp)
+  target_link_libraries(sos libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(sos)
+  
+  add_executable(crew ${Cbc_DIR}/examples/crew.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(crew libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(crew)
+  
+  add_executable(gear ${Cbc_DIR}/examples/gear.cpp ${Cbc_DIR}/examples/CbcBranchLink.cpp)
+  target_link_libraries(gear libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(gear)
+  
+  add_executable(modify ${Cbc_DIR}/examples/modify.cpp)
+  target_link_libraries(modify libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(modify)
+  
+  add_executable(sample1 ${Cbc_DIR}/examples/sample1.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(sample1 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(sample1)
+  
+  add_executable(sudoku ${Cbc_DIR}/examples/sudoku.cpp)
+  target_link_libraries(sudoku libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(sudoku)
+  
+  add_executable(driver2 ${Cbc_DIR}/examples/driver2.cpp)
+  target_link_libraries(driver2 libCbc libOsiCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(driver2)
+  
+  add_executable(hotstart ${Cbc_DIR}/examples/hotstart.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(hotstart libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(hotstart)
+  
+  add_executable(nway ${Cbc_DIR}/examples/nway.cpp)
+  target_link_libraries(nway libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(nway)
+  
+  add_executable(sample2 ${Cbc_DIR}/examples/sample2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(sample2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(sample2)
+  
+  add_executable(driver3 ${Cbc_DIR}/examples/driver3.cpp)
+  target_link_libraries(driver3 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(driver3)
+  
+  add_executable(interrupt ${Cbc_DIR}/examples/interrupt.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(interrupt libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(interrupt)
+  
+  add_executable(parallel2 ${Cbc_DIR}/examples/parallel2.cpp)
+  target_link_libraries(parallel2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack pthread)
+  set_include_directories(parallel2)
+  
+  add_executable(sample3 ${Cbc_DIR}/examples/sample3.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(sample3 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(sample3)
+  
+  add_executable(driver4 ${Cbc_DIR}/examples/driver4.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(driver4 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(driver4)
+  
+  add_executable(link ${Cbc_DIR}/examples/link.cpp ${Cbc_DIR}/examples/CbcBranchLink.cpp)
+  target_link_libraries(link libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(link)
+  
+  add_executable(parallel ${Cbc_DIR}/examples/parallel.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(parallel libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack pthread)
+  set_include_directories(parallel)
+  
+  add_executable(sample4 ${Cbc_DIR}/examples/sample4.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+  target_link_libraries(sample4 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(sample4)
+endif()
 
 if (COIN_HAS_CLP)
   add_executable(cbc ${Cbc_DIR}/src/CoinSolve.cpp)
