@@ -578,6 +578,8 @@ include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
 subdirs(CoinUtils)
+subdirs(ThirdParty)
+
 subdirs(Osi/Osi)
 
 subdirs(Clp)

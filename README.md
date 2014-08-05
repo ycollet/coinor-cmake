@@ -61,16 +61,17 @@ $ ctest -LE LONG # To run all tests which doesn't have the LONG label
 
 To do:
 
-Some limitations: only the library of these projects are compiled. The Clp, Cbc and SYMPHONY executable are not yet compiled.
+Some limitations:
 The next project to be added will be Ipopt.
-- Check for Lapack and pthreads (for Cbc)
+- Check for Lapack and pthreads (for Cbc / CoinUtils)
+- Check for zlib (COIN_HAS_ZLIB)
+- Check for bzlib (COIN_HAS_BZLIB)
 - Fine tune check of headers and add missing check from original configure.ac files
-- Use CTest to launch non regression tests for each packages:
-  - download data sets if user enable tests: Data-1.0.7.tgz  miplib3-1.2.6.tgz  Netlib-1.2.6.tgz  Sample-1.2.9.tgz  Stochastic-1.1.5.tgz
-  - use add_test to test various combination of flags
+- use add_test to test various combination of flags
 
 - Use External_Project to compile Thirdparty libraries of each project:
   - a first version has been submitted but need to be tested.
   - use clapack under windows to avoid fortran compiler dependencies
+  - use downloaded zlib under windows and linux if required (tested on linux for now)
   - see if metis compiles out of the box under windows, add a CMakeLists.txt file for metis ?
   - disable mumps compilation if a fortran compiler is not available (Windows / Linux)

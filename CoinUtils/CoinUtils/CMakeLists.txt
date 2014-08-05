@@ -9,6 +9,11 @@ set(COINUTILS_VERSION_RELEASE "11" CACHE STRING "The COINUTILS patch version num
 set(COINUTILS_VERSION "${COINUTILS_VERSION_MAJOR}.${COINUTILS_VERSION_MINOR}.${COINUTILS_VERSION_RELEASE}")
 set(COINUTILS_SVN_REV "${COINUTILS_VERSION_RELEASE}")
 
+option(COINUTILS_HAS_ZLIB "CoinUtils uses the Zlib library" OFF)
+set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "None" CACHE STRING "The Zlib library include Path")
+set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "None" CACHE STRING "The Zlib library absolute library Path")
+set(ZLIB_NAME "z" CACHE STRING "The Zlib library name")
+
 add_definitions(-DCOINUTILS_BUILD)
 
 configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/include/config_coinutils.h.in ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h)
@@ -147,6 +152,18 @@ include_directories(${CoinUtils_DIR}/src)
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
+if (COINUTILS_HAS_ZLIB)
+  add_definitions(-DCOIN_HAS_ZLIB)
+endif ()
+
+if (COINUTILS_HAS_ZLIB)
+  if (NOT "${COINUTILS_HAS_ZLIB_INCLUDE_PATH}" STREQUAL "None")
+    include_directories(${COINUTILS_HAS_ZLIB_INCLUDE_PATH})
+  endif ()
+  if (NOT "${COINUTILS_HAS_ZLIB_LIBRARY_PATH}" STREQUAL "None")
+    link_directories(${COINUTILS_HAS_ZLIB_LIBRARY_PATH})
+  endif ()
+endif ()
 
 if (ENABLE_SHARED_LIBRARIES)
   add_library(libCoinUtils SHARED ${CoinUtils_SRC_LIST})
@@ -159,6 +176,9 @@ if (COINUTILS_ENABLE_UNITTEST)
   add_executable(unitTest ${CoinUtilsTest_SRC_LIST})
   target_link_libraries(unitTest libCoinUtils)
   target_include_directories(unitTest BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  if (COINUTILS_HAS_ZLIB)
+    target_link_libraries(unitTest ${ZLIB_NAME})
+  endif ()
 endif()
 
 install(TARGETS libCoinUtils 

@@ -1023,9 +1023,11 @@ include_directories(${SYMPHONY_DIR}/SYMPHONY/src/OsiSym)
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
-subdirs(Clp)
-subdirs(Cgl)
 subdirs(CoinUtils)
+subdirs(ThirdParty)
+
+subdirs(Cgl)
+subdirs(Clp)
 subdirs(Osi/Osi)
 
 if (USE_OSI_Clp)
