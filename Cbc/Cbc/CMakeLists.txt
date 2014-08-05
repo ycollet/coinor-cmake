@@ -241,12 +241,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(allCuts ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_allCuts
+           COMMAND $<TARGET_FILE:allCuts> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_allCuts PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(driver ${Cbc_DIR}/examples/driver.cpp)
   target_link_libraries(driver libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(driver)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_driver
+           COMMAND $<TARGET_FILE:driver> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_driver PROPERTIES TIMEOUT 30)
+  
   
   add_executable(longthin ${Cbc_DIR}/examples/longthin.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver2.cpp)
   target_link_libraries(longthin libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -255,12 +265,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(longthin ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_longthin
+           COMMAND $<TARGET_FILE:longthin> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_longthin PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(qmip2 ${Cbc_DIR}/examples/qmip2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp)
   target_link_libraries(qmip2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(qmip2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(qmip2 ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_qmip2
+           COMMAND $<TARGET_FILE:qmip2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_qmip2 PROPERTIES TIMEOUT 30)
+  
   
   add_executable(sample5 ${Cbc_DIR}/examples/sample5.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(sample5 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -269,12 +289,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(sample5 ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_sample5
+           COMMAND $<TARGET_FILE:sample5> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_sample5 PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(barrier ${Cbc_DIR}/examples/barrier.cpp)
   target_link_libraries(barrier libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(barrier)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(barrier ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_barrier
+           COMMAND $<TARGET_FILE:barrier> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_barrier PROPERTIES TIMEOUT 30)
+  
   
   add_executable(fast0507b ${Cbc_DIR}/examples/fast0507b.cpp ${Cbc_DIR}/examples/CbcBranchFollow2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver2.cpp ${Cbc_DIR}/examples/CbcSolver3.cpp)
   target_link_libraries(fast0507b libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -283,12 +313,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(fast0507b ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_fast0507b
+           COMMAND $<TARGET_FILE:fast0507b> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_fast0507b PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(lotsize ${Cbc_DIR}/examples/lotsize.cpp)
   target_link_libraries(lotsize libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(lotsize)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(lotsize ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_lotsize
+           COMMAND $<TARGET_FILE:lotsize> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_lotsize PROPERTIES TIMEOUT 30)
+  
   
   add_executable(qmip ${Cbc_DIR}/examples/qmip.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/ClpQuadInterface.cpp)
   target_link_libraries(qmip libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -297,12 +337,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(qmip ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_qmip
+           COMMAND $<TARGET_FILE:qmip> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_qmip PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(simpleBAB ${Cbc_DIR}/examples/simpleBAB.cpp)
   target_link_libraries(simpleBAB libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(simpleBAB)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(simpleBAB ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_simpleBAB
+           COMMAND $<TARGET_FILE:simpleBAB> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_simpleBAB PROPERTIES TIMEOUT 30)
+  
   
   add_executable(fast0507 ${Cbc_DIR}/examples/fast0507.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp ${Cbc_DIR}/examples/CbcSolver3.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp)
   target_link_libraries(fast0507 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -311,12 +361,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(fast0507 ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_fast0507
+           COMMAND $<TARGET_FILE:fast0507> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_fast0507 PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(minimum ${Cbc_DIR}/examples/minimum.cpp)
   target_link_libraries(minimum libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(minimum)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(minimum ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_minimum
+           COMMAND $<TARGET_FILE:minimum> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_minimum PROPERTIES TIMEOUT 30)
+  
   
   add_executable(repeat ${Cbc_DIR}/examples/repeat.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(repeat libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -325,12 +385,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(repeat ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_repeat
+           COMMAND $<TARGET_FILE:repeat> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_repeat PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(sos ${Cbc_DIR}/examples/sos.cpp)
   target_link_libraries(sos libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(sos)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sos ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_sos
+           COMMAND $<TARGET_FILE:sos> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_sos PROPERTIES TIMEOUT 30)
+  
   
   add_executable(crew ${Cbc_DIR}/examples/crew.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(crew libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -339,12 +409,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(crew ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_crew
+           COMMAND $<TARGET_FILE:crew> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_crew PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(gear ${Cbc_DIR}/examples/gear.cpp ${Cbc_DIR}/examples/CbcBranchLink.cpp)
   target_link_libraries(gear libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(gear)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(gear ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_gear
+           COMMAND $<TARGET_FILE:gear> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_gear PROPERTIES TIMEOUT 30)
+  
   
   add_executable(modify ${Cbc_DIR}/examples/modify.cpp)
   target_link_libraries(modify libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -353,12 +433,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(modify ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_modify
+           COMMAND $<TARGET_FILE:modify> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_modify PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(sample1 ${Cbc_DIR}/examples/sample1.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(sample1 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(sample1)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sample1 ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_sample1
+           COMMAND $<TARGET_FILE:sample1> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_sample1 PROPERTIES TIMEOUT 30)
+  
   
   add_executable(sudoku ${Cbc_DIR}/examples/sudoku.cpp)
   target_link_libraries(sudoku libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -367,12 +457,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(sudoku ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_sudoku
+           COMMAND $<TARGET_FILE:sudoku> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_sudoku PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(driver2 ${Cbc_DIR}/examples/driver2.cpp)
   target_link_libraries(driver2 libCbc libOsiCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(driver2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver2 ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_driver2
+           COMMAND $<TARGET_FILE:driver2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_driver2 PROPERTIES TIMEOUT 30)
+  
   
   add_executable(hotstart ${Cbc_DIR}/examples/hotstart.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(hotstart libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -381,12 +481,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(hotstart ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_hotstart
+           COMMAND $<TARGET_FILE:hotstart> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_hotstart PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(nway ${Cbc_DIR}/examples/nway.cpp)
   target_link_libraries(nway libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(nway)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(nway ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_nway
+           COMMAND $<TARGET_FILE:nway> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_nway PROPERTIES TIMEOUT 30)
+  
   
   add_executable(sample2 ${Cbc_DIR}/examples/sample2.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(sample2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -395,12 +505,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(sample2 ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_sample2
+           COMMAND $<TARGET_FILE:sample2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_sample2 PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(driver3 ${Cbc_DIR}/examples/driver3.cpp)
   target_link_libraries(driver3 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(driver3)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver3 ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_driver3
+           COMMAND $<TARGET_FILE:driver3> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_driver3 PROPERTIES TIMEOUT 30)
+  
   
   add_executable(interrupt ${Cbc_DIR}/examples/interrupt.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(interrupt libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -409,12 +529,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(interrupt ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_interrupt
+           COMMAND $<TARGET_FILE:interrupt> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_interrupt PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(parallel2 ${Cbc_DIR}/examples/parallel2.cpp)
   target_link_libraries(parallel2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack pthread)
   set_include_directories(parallel2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(parallel2 ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_parallel2
+           COMMAND $<TARGET_FILE:parallel2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_parallel2 PROPERTIES TIMEOUT 30)
+  
   
   add_executable(sample3 ${Cbc_DIR}/examples/sample3.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(sample3 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -423,12 +553,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(sample3 ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_sample3
+           COMMAND $<TARGET_FILE:sample3> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_sample3 PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(driver4 ${Cbc_DIR}/examples/driver4.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(driver4 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(driver4)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver4 ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_driver4
+           COMMAND $<TARGET_FILE:driver4> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_driver4 PROPERTIES TIMEOUT 30)
+  
   
   add_executable(link ${Cbc_DIR}/examples/link.cpp ${Cbc_DIR}/examples/CbcBranchLink.cpp)
   target_link_libraries(link libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -437,6 +577,11 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(link ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_link
+           COMMAND $<TARGET_FILE:link> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_link PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(parallel ${Cbc_DIR}/examples/parallel.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(parallel libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack pthread)
   set_include_directories(parallel)
@@ -444,12 +589,22 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(parallel ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME cbc_example_parallel
+           COMMAND $<TARGET_FILE:parallel> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_parallel PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(sample4 ${Cbc_DIR}/examples/sample4.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   target_link_libraries(sample4 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
   set_include_directories(sample4)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sample4 ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME cbc_example_sample4
+           COMMAND $<TARGET_FILE:sample4> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(cbc_example_sample4 PROPERTIES TIMEOUT 30)
+  
 endif()
 
 if (COIN_HAS_CLP)

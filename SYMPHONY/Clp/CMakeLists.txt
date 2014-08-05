@@ -274,12 +274,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(addBits ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_addBits
+           COMMAND $<TARGET_FILE:addBits> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_addBits PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(addColumns  ${Clp_DIR}/examples/addColumns.cpp)
   target_link_libraries(addColumns libClp libCoinUtils lapack)
   set_include_directories(addColumns)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(addColumns ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_addColumns
+           COMMAND $<TARGET_FILE:addColumns> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_addColumns PROPERTIES TIMEOUT 30)
+  
   
   add_executable(addRows     ${Clp_DIR}/examples/addRows.cpp)
   target_link_libraries(addRows libClp libCoinUtils lapack)
@@ -288,12 +298,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(addRows ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_addRows
+           COMMAND $<TARGET_FILE:addRows> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_addRows PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(decomp2     ${Clp_DIR}/examples/decomp2.cpp)
   target_link_libraries(decomp2 libClp libCoinUtils lapack)
   set_include_directories(decomp2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(addBits ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_decomp2
+           COMMAND $<TARGET_FILE:decomp2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_decomp2 PROPERTIES TIMEOUT 30)
+  
   
   add_executable(decomp3     ${Clp_DIR}/examples/decomp3.cpp)
   target_link_libraries(decomp3 libClp libCoinUtils lapack)
@@ -302,12 +322,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(decomp3 ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_decomp3
+           COMMAND $<TARGET_FILE:decomp3> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_decomp3 PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(decompose   ${Clp_DIR}/examples/decompose.cpp)
   target_link_libraries(decompose libClp libCoinUtils lapack)
   set_include_directories(decompose)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(decompose ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_decompose
+           COMMAND $<TARGET_FILE:decompose> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_decompose PROPERTIES TIMEOUT 30)
+  
   
   add_executable(default     ${Clp_DIR}/examples/defaults.cpp)
   target_link_libraries(default libClp libCoinUtils lapack)
@@ -316,12 +346,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(default ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_default
+           COMMAND $<TARGET_FILE:default> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_default PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(driver2     ${Clp_DIR}/examples/driver2.cpp)
   target_link_libraries(driver2 libClp libCoinUtils lapack)
   set_include_directories(driver2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver2 ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_driver2
+           COMMAND $<TARGET_FILE:driver2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_driver2 PROPERTIES TIMEOUT 30)
+  
   
   add_executable(driver      ${Clp_DIR}/examples/driver.cpp)
   target_link_libraries(driver libClp libCoinUtils lapack)
@@ -330,12 +370,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(driver ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_driver
+           COMMAND $<TARGET_FILE:driver> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_driver PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(dualCuts    ${Clp_DIR}/examples/dualCuts.cpp)
   target_link_libraries(dualCuts libClp libCoinUtils lapack)
   set_include_directories(dualCuts)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(dualCuts ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_dualCuts
+           COMMAND $<TARGET_FILE:dualCuts> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_dualCuts PROPERTIES TIMEOUT 30)
+  
 
   # Needs ekk_api_c.h ...
   #add_executable(ekk         ${Clp_DIR}/examples/ekk.cpp)
@@ -351,12 +401,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(hello ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_hello
+           COMMAND $<TARGET_FILE:hello> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_hello PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(makeDual    ${Clp_DIR}/examples/makeDual.cpp)
   target_link_libraries(makeDual libClp libCoinUtils lapack)
   set_include_directories(makeDual)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(makeDual ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_makeDual
+           COMMAND $<TARGET_FILE:makeDual> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_makeDual PROPERTIES TIMEOUT 30)
+  
   
   add_executable(minimum     ${Clp_DIR}/examples/minimum.cpp)
   target_link_libraries(minimum libClp libCoinUtils lapack)
@@ -365,12 +425,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(minimum ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_minimum
+           COMMAND $<TARGET_FILE:minimum> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_minimum PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(modify      ${Clp_DIR}/examples/modify.cpp)
   target_link_libraries(modify libClp libCoinUtils lapack)
   set_include_directories(modify)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(modify ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_modify
+           COMMAND $<TARGET_FILE:modify> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_modify PROPERTIES TIMEOUT 30)
+  
   
   add_executable(network     ${Clp_DIR}/examples/network.cpp)
   target_link_libraries(network libClp libCoinUtils lapack)
@@ -379,12 +449,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(network ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_network
+           COMMAND $<TARGET_FILE:network> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_network PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(pdco        ${Clp_DIR}/examples/pdco.cpp ${Clp_DIR}/examples/myPdco.cpp)
   target_link_libraries(pdco libClp libCoinUtils lapack)
   set_include_directories(pdco)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(pdco ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_pdco
+           COMMAND $<TARGET_FILE:pdco> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_pdco PROPERTIES TIMEOUT 30)
+  
   
   add_executable(piece       ${Clp_DIR}/examples/piece.cpp)
   target_link_libraries(piece libClp libCoinUtils lapack)
@@ -393,12 +473,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(piece ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_piece
+           COMMAND $<TARGET_FILE:piece> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_piece PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(rowColumn   ${Clp_DIR}/examples/rowColumn.cpp)
   target_link_libraries(rowColumn libClp libCoinUtils lapack)
   set_include_directories(rowColumn)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(rowColumn ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_rowColumn
+           COMMAND $<TARGET_FILE:rowColumn> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_rowColumn PROPERTIES TIMEOUT 30)
+  
   
   add_executable(sprint2     ${Clp_DIR}/examples/sprint2.cpp)
   target_link_libraries(sprint2 libClp libCoinUtils lapack)
@@ -407,12 +497,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(sprint2 ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_sprint2
+           COMMAND $<TARGET_FILE:sprint2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_sprint2 PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(sprint      ${Clp_DIR}/examples/sprint.cpp)
   target_link_libraries(sprint libClp libCoinUtils lapack)
   set_include_directories(sprint)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sprint ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_sprint
+           COMMAND $<TARGET_FILE:sprint> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_sprint PROPERTIES TIMEOUT 30)
+  
   
   add_executable(testBarrier ${Clp_DIR}/examples/testBarrier.cpp)
   target_link_libraries(testBarrier libClp libCoinUtils lapack)
@@ -421,12 +521,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(testBarrier ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_testBarrier
+           COMMAND $<TARGET_FILE:testBarrier> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_testBarrier PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(testBasis   ${Clp_DIR}/examples/testBasis.cpp)
   target_link_libraries(testBasis libClp libCoinUtils lapack)
   set_include_directories(testBasis)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(testBasis ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_testBasis
+           COMMAND $<TARGET_FILE:testBasis> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_testBasis PROPERTIES TIMEOUT 30)
+  
   
   add_executable(testGub2    ${Clp_DIR}/examples/testGub2.cpp)
   target_link_libraries(testGub2 libClp libCoinUtils lapack)
@@ -435,12 +545,22 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(testGub2 ${ZLIB_NAME})
   endif ()
   
+  add_test(NAME clp_example_testGub2
+           COMMAND $<TARGET_FILE:testGub2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_testGub2 PROPERTIES TIMEOUT 30)
+  
+  
   add_executable(testGub     ${Clp_DIR}/examples/testGub.cpp)
   target_link_libraries(testGub libClp libCoinUtils lapack)
   set_include_directories(testGub)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(testGub ${ZLIB_NAME})
   endif ()
+  
+  add_test(NAME clp_example_testGub
+           COMMAND $<TARGET_FILE:testGub> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_testGub PROPERTIES TIMEOUT 30)
+  
   
   # Compilation error
   #add_executable(testQP      ${Clp_DIR}/examples/testQP.cpp)
@@ -449,6 +569,11 @@ if (CLP_BUILD_EXAMPLES)
   #if (COINUTILS_HAS_ZLIB)
   #  target_link_libraries(testQP ${ZLIB_NAME})
   #endif ()
+  #
+  #add_test(NAME clp_example_testQP
+  #         COMMAND $<TARGET_FILE:testQP> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  #set_tests_properties(clp_example_testQP PROPERTIES TIMEOUT 30)
+  #
 
   # Need VOL
   #add_executable(useVolume   ${Clp_DIR}/examples/useVolume.cpp)
@@ -457,6 +582,11 @@ if (CLP_BUILD_EXAMPLES)
   #if (COINUTILS_HAS_ZLIB)
   #  target_link_libraries(useVolume ${ZLIB_NAME})
   #endif ()
+  #
+  #add_test(NAME clp_example_useVolume
+  #         COMMAND $<TARGET_FILE:useVolume> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  #set_tests_properties(clp_example_useVolume PROPERTIES TIMEOUT 30)
+  #
   
   # Need OSI to compile
   #add_executable(OsiClpSolverInterfaceTest ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp)
@@ -465,6 +595,11 @@ if (CLP_BUILD_EXAMPLES)
   #if (COINUTILS_HAS_ZLIB)
   #  target_link_libraries(OsiClpSolverInterfaceTest ${ZLIB_NAME})
   #endif ()
+  #
+  #add_test(NAME clp_example_OsiClpSolverInterfaceTest
+  #         COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  #set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES TIMEOUT 30)
+  #
   
   #add_executable(osiUnitTest ${Clp_DIR}/test/osiUnitTest.cpp)
   #target_link_libraries(osiUnitTest libClp libCoinUtils lapack)
@@ -472,6 +607,11 @@ if (CLP_BUILD_EXAMPLES)
   #if (COINUTILS_HAS_ZLIB)
   #  target_link_libraries(osiUnitTest ${ZLIB_NAME})
   #endif ()
+  #
+  #add_test(NAME clp_example_osiUnitTest
+  #         COMMAND $<TARGET_FILE:osiUnitTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  #set_tests_properties(clp_example_osiUnitTest PROPERTIES TIMEOUT 30)
+  #
 endif ()
 
 add_executable(clp ${Clp_MAIN_SRC_LIST})
