@@ -73,5 +73,5 @@ The next project to be added will be Ipopt.
   - a first version has been submitted but need to be tested.
   - use clapack under windows to avoid fortran compiler dependencies
   - use downloaded zlib under windows and linux if required (tested on linux for now)
-  - see if metis compiles out of the box under windows, add a CMakeLists.txt file for metis ?
   - disable mumps compilation if a fortran compiler is not available (Windows / Linux)
+  - download and compile metis with mumps.

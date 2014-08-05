@@ -11,7 +11,6 @@ option(COIN_ENABLE_DOWNLOAD_LAPACK          "Enable the download / compilation o
 option(COIN_ENABLE_DOWNLOAD_GLPK            "Enable the download / compilation of GLPK" OFF)
 option(COIN_ENABLE_DOWNLOAD_MUMPS           "Enable the download / compilation of Mumps" OFF)
 option(COIN_ENABLE_DOWNLOAD_ASL             "Enable the download / compilation of Ampl Solver Library" OFF)
-option(COIN_ENABLE_DOWNLOAD_METIS           "Enable the download / compilation of Metis" OFF)
 option(COIN_ENABLE_DOWNLOAD_DATA_TEST       "Enable the download / run of Data tests" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB            "Enable the download / compilation of Zlib" OFF)
 
@@ -163,25 +162,6 @@ endif ()
 
 # #################################################
 # <=== PThreads compilation
-# #################################################
-
-# #################################################
-# ===> Metis compilation
-# #################################################
-
-if (COIN_ENABLE_DOWNLOAD_METIS)
-  ExternalProject_Add(EP_Metis
-                      PREFIX ${EP_InstallDir}/Metis
-                      URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-4.0.3.tar.gz
-                      CONFIGURE_COMMAND ""
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis make
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy  ${EP_InstallDir}/Metis/src/EP_Metis/libmetis.a ${CMAKE_BINARY_DIR}/Dependencies/install/lib/
-                                     && ${CMAKE_COMMAND} -E copy  ${EP_InstallDir}/Metis/src/EP_Metis/Lib/*.h    ${CMAKE_BINARY_DIR}/Dependencies/install/include/
-                      )
-endif ()
-
-# #################################################
-# <=== Metis compilation
 # #################################################
 
 # #################################################
@@ -1655,9 +1635,6 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_ASL)
     add_dependencies(${_target} EP_ASL)
   endif ()
-  if (COIN_ENABLE_DOWNLOAD_METIS)
-    add_dependencies(${_target} EP_Metis)
-  endif ()
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     add_dependencies(${_target} EP_Zlib)
   endif ()
@@ -1680,9 +1657,6 @@ macro(add_executable _target)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_ASL)
     add_dependencies(${_target} EP_ASL)
-  endif ()
-  if (COIN_ENABLE_DOWNLOAD_METIS)
-    add_dependencies(${_target} EP_Metis)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     add_dependencies(${_target} EP_Zlib)
