@@ -395,4 +395,5 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf)
 endif(DOXYGEN AND ENABLE_DOXYGEN)
 
+subdirs(ThirdParty)
 subdirs(CoinUtils)
