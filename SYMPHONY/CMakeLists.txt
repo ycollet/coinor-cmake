@@ -1134,7 +1134,7 @@ add_executable(symphony_tm ${MAIN_SRC})
 target_link_libraries(symphony_tm libSym_tm libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
 set_include_directories(symphony_tm)
 if (COINUTILS_HAS_ZLIB)
-  target_link_libraries(symphony_ym ${ZLIB_NAME})
+  target_link_libraries(symphony_tm ${ZLIB_NAME})
 endif ()
 
 if (SYM_ENABLE_EXAMPLES)
@@ -1157,7 +1157,7 @@ if (SYM_ENABLE_EXAMPLES)
     target_link_libraries(milp ${ZLIB_NAME})
   endif ()
   
-  add_test(NAME symphony_example_milp)
+  add_test(NAME symphony_example_milp
            COMMAND $<TARGET_FILE:milp> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_milp PROPERTIES TIMEOUT 30)
   
@@ -1245,6 +1245,7 @@ if (SYM_ENABLE_EXAMPLES)
   add_test(NAME symphony_example_warm_start3
            COMMAND $<TARGET_FILE:warm_start3> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_warm_start3 PROPERTIES TIMEOUT 30)
+  set_tests_properties(symphony_example_warm_start3 PROPERTIES LABELS "LONG")
   
 endif ()
 
