@@ -32,6 +32,27 @@ if (NOT EXISTS ${CMAKE_BINARY_DIR}/Dependencies/include)
 endif ()
 
 # #################################################
+# ===>    Macros
+# #################################################
+
+# add_regex: allow to concat several regex into one for using it with cmake
+macro(add_regex VARIABLE REGEX)
+  set(${VARIABLE} "${${VARIABLE}}${REGEX}.*")
+endmacro()
+
+# Example of use:
+#
+# set(TEST_REGEX "")
+# add_regex(TEST_REGEX "INFO  : Overall capacity cost : 7.54846e[+]09" )
+# add_regex(TEST_REGEX "INFO  : Overall simulation cost : 3.40945e[+]09")
+# add_regex(TEST_REGEX "INFO  : Overall reward : -1.09579e[+]10" )
+# set_tests_properties(Test_Name PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}" )
+
+# #################################################
+# <===    Macros
+# #################################################
+
+# #################################################
 # ===>    Lapack
 # #################################################
 
@@ -455,12 +476,19 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
              COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/p0033.mps -solution ${CMAKE_BINARY_DIR}/tests/sample_p0033.out -solve)
     set_tests_properties(sample_p0033_mps_cbc_standard PROPERTIES TIMEOUT 30)
     set_tests_properties(sample_p0033_mps_cbc_standard PROPERTIES LABELS "MPS")
-  
+    
+    # Netlib tests.
+    # Optimal values for objective function can be found at: http://www.netlib.org/lp/data/readme
+    
     add_test(NAME netlib_fit2d_mps_cbc_standard 
              COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit2d.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/netlib_fit2d.out -solve)
     set_tests_properties(netlib_fit2d_mps_cbc_standard PROPERTIES TIMEOUT 30)
     set_tests_properties(netlib_fit2d_mps_cbc_standard PROPERTIES LABELS "MPS")
-  
+    
+    set(TEST_REGEX "")
+    add_regex(TEST_REGEX "-6.8464293294E+04")
+    set_tests_properties(netlib_fit2d_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+    
     add_test(NAME netlib_forplan_mps_cbc_standard 
              COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/forplan.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/netlib_forplan.out -solve)
     set_tests_properties(netlib_forplan_mps_cbc_standard PROPERTIES TIMEOUT 30)
@@ -1148,11 +1176,18 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
     set_tests_properties(sample_p0033_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
     set_tests_properties(sample_p0033_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
   
+    # Netlib tests.
+    # Optimal values for objective function can be found at: http://www.netlib.org/lp/data/readme
+    
     add_test(NAME netlib_fit2d_mps_cbc-generic_standard 
              COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit2d.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/netlib_fit2d.out -solve)
     set_tests_properties(netlib_fit2d_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
     set_tests_properties(netlib_fit2d_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
   
+    set(TEST_REGEX "")
+    add_regex(TEST_REGEX "-6.8464293294E+04")
+    set_tests_properties(netlib_fit2d_mps_cbc_standard-generic PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+    
     add_test(NAME netlib_forplan_mps_cbc-generic_standard 
              COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/forplan.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/netlib_forplan.out -solve)
     set_tests_properties(netlib_forplan_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
