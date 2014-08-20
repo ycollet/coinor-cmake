@@ -1,3 +1,7 @@
+#
+# Infeas tests
+#
+
 add_test(NAME infeas_chemcom_mps_clp_standard 
          COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/chemcom.mps -solution ${CMAKE_BINARY_DIR}/tests/infeas_chemcom.out -solve)
 set_tests_properties(infeas_chemcom_mps_clp_standard PROPERTIES TIMEOUT 30)
@@ -143,10 +147,18 @@ add_test(NAME infeas_gosh_mps_clp_standard
 set_tests_properties(infeas_gosh_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_gosh_mps_clp_standard PROPERTIES LABELS "MPS")
 
+#
+# Big test
+#
+
 add_test(NAME big_mkc7_mps_clp_standard 
          COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Big/mkc7.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/big_mkc7.out -solve)
 set_tests_properties(big_mkc7_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(big_mkc7_mps_clp_standard PROPERTIES LABELS "MPS;LONG")
+
+#
+# Sample tests
+#
 
 add_test(NAME sample_scOneInt_mps_clp_standard 
          COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/scOneInt.mps -solution ${CMAKE_BINARY_DIR}/tests/sample_scOneInt.out -solve)
@@ -237,7 +249,10 @@ add_test(NAME sample_p0033_mps_clp_standard
 set_tests_properties(sample_p0033_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_p0033_mps_clp_standard PROPERTIES LABELS "MPS")
 
-# Netlib tests.
+#
+# Netlib tests
+#
+
 # Optimal values for objective function can be found at: http://www.netlib.org/lp/data/readme
 
 add_test(NAME netlib_fit2d_mps_clp_standard 

@@ -1,4 +1,8 @@
 if (COIN_HAS_CLP)
+  #
+  # Infeas tests
+  #
+  
   add_test(NAME infeas_chemcom_mps_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/chemcom.mps -solution ${CMAKE_BINARY_DIR}/tests/infeas_chemcom.out -solve)
   set_tests_properties(infeas_chemcom_mps_cbc_standard PROPERTIES TIMEOUT 30)
@@ -144,10 +148,18 @@ if (COIN_HAS_CLP)
   set_tests_properties(infeas_gosh_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(infeas_gosh_mps_cbc_standard PROPERTIES LABELS "MPS")
   
+  #
+  # Big test
+  #
+  
   add_test(NAME big_mkc7_mps_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Big/mkc7.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/big_mkc7.out -solve)
   set_tests_properties(big_mkc7_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(big_mkc7_mps_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  
+  #
+  # Sample tests
+  #
   
   add_test(NAME sample_scOneInt_mps_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/scOneInt.mps -solution ${CMAKE_BINARY_DIR}/tests/sample_scOneInt.out -solve)
@@ -233,8 +245,11 @@ if (COIN_HAS_CLP)
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/p0033.mps -solution ${CMAKE_BINARY_DIR}/tests/sample_p0033.out -solve)
   set_tests_properties(sample_p0033_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(sample_p0033_mps_cbc_standard PROPERTIES LABELS "MPS")
+
+  #
+  # Netlib tests
+  #
   
-  # Netlib tests.
   # Optimal values for objective function can be found at: http://www.netlib.org/lp/data/readme
   
   add_test(NAME netlib_fit2d_mps_cbc_standard 
@@ -965,7 +980,10 @@ if (COIN_HAS_CLP)
   add_regex(TEST_REGEX "-8.9664482186e[+]05")
   set_tests_properties(netlib_israel_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
-  # miplib3
+  #
+  # miplib3 tests
+  #
+  
   add_test(NAME miplib3_10teams_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_10teams.out -solve)
   set_tests_properties(miplib3_10teams_cbc_standard PROPERTIES TIMEOUT 30)
@@ -1293,6 +1311,10 @@ if (COIN_HAS_CLP)
 endif ()
 
 if (CBC_BUILD_CBC_GENERIC) 
+  #
+  # Infeas tests
+  #
+  
   add_test(NAME infeas_chemcom_mps_cbc-generic_standard 
            COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/chemcom.mps -solution ${CMAKE_BINARY_DIR}/tests/infeas_chemcom.out -solve)
   set_tests_properties(infeas_chemcom_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
@@ -1438,10 +1460,18 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(infeas_gosh_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(infeas_gosh_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
   
+  #
+  # Big test
+  #
+  
   add_test(NAME big_mkc7_mps_cbc-generic_standard 
            COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Big/mkc7.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/big_mkc7.out -solve)
   set_tests_properties(big_mkc7_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(big_mkc7_mps_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  
+  #
+  # Sample tests
+  #
   
   add_test(NAME sample_scOneInt_mps_cbc-generic_standard 
            COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/scOneInt.mps -solution ${CMAKE_BINARY_DIR}/tests/sample_scOneInt.out -solve)
@@ -1527,8 +1557,11 @@ if (CBC_BUILD_CBC_GENERIC)
            COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/p0033.mps -solution ${CMAKE_BINARY_DIR}/tests/sample_p0033.out -solve)
   set_tests_properties(sample_p0033_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(sample_p0033_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
+
+  #
+  # Netlib tests
+  #
   
-  # Netlib tests.
   # Optimal values for objective function can be found at: http://www.netlib.org/lp/data/readme
   
   add_test(NAME netlib_fit2d_mps_cbc-generic_standard 
@@ -2258,8 +2291,11 @@ if (CBC_BUILD_CBC_GENERIC)
   set(TEST_REGEX "")
   add_regex(TEST_REGEX "-8.9664482186e[+]05")
   set_tests_properties(netlib_israel_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
-
-  # miplib3
+  
+  #
+  # miplib3 tests
+  #
+  
   add_test(NAME miplib3_10teams_cbc-generic_standard 
            COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_10teams.out -solve)
   set_tests_properties(miplib3_10teams_cbc-generic_standard PROPERTIES TIMEOUT 30)
