@@ -108,9 +108,9 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   			URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
 			CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Bzlib/src/EP_Bzlib nmake -f makefile.msc
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/libbz2.lib ${EP_InstallDir}/lib &&
-			                  ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib.h ${EP_InstallDir}/include &&
-			                  ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/libbz2.lib ${EP_InstallDir}/lib &&
+			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib.h ${EP_InstallDir}/include &&
+			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
                         )
   else ()
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz.a" CACHE STRING "The Bzlib library name" FORCE)
@@ -120,9 +120,9 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   			URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
 			CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Bzlib/src/EP_Bzlib make
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/libbz2.a ${EP_InstallDir}/lib &&
-			                  ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib.h ${EP_InstallDir}/include &&
-			                  ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/libbz2.a ${EP_InstallDir}/lib &&
+			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib.h ${EP_InstallDir}/include &&
+			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
                         )
   endif()
 endif()

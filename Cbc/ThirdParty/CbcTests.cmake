@@ -1305,7 +1305,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(miplib3_vpm1_cbc_standard PROPERTIES LABELS "MPS")
 
   add_test(NAME miplib3_vpm2_cbc_standard 
-           COMMAND $<TARGET_FILE:symphon> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2.out -solve)
+           COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2.out -solve)
   set_tests_properties(miplib3_vpm2_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_vpm2_cbc_standard PROPERTIES LABELS "MPS")
 endif ()
@@ -2617,7 +2617,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(miplib3_vpm1_cbc-generic_standard PROPERTIES LABELS "MPS")
 
   add_test(NAME miplib3_vpm2_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:symphon> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2.out -solve)
+           COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2.out -solve)
   set_tests_properties(miplib3_vpm2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_vpm2_cbc-generic_standard PROPERTIES LABELS "MPS")
 endif ()
