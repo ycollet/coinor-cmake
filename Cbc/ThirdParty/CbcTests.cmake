@@ -1064,8 +1064,8 @@ if (COIN_HAS_CLP)
 
   add_test(NAME miplib3_fast0507_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507.out -solve)
-  set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES TIMEOUT 300)
-  set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES LABELS "MPS")
+  set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES TIMEOUT 3000)
+  set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES LABELS "MPS;LONG")
 
   add_test(NAME miplib3_fiber_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fiber.out -solve)
@@ -2384,8 +2384,8 @@ if (CBC_BUILD_CBC_GENERIC)
 
   add_test(NAME miplib3_fast0507_cbc-generic_standard 
            COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507.out -solve)
-  set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES TIMEOUT 30)
-  set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES TIMEOUT 3000)
+  set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
 
   add_test(NAME miplib3_fiber_cbc-generic_standard 
            COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fiber.out -solve)

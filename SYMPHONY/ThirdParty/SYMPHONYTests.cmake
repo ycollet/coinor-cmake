@@ -1063,8 +1063,8 @@ set_tests_properties(miplib3_enigma_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME miplib3_fast0507_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507.out -solve)
-set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES TIMEOUT 300)
-set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES LABELS "MPS")
+set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
 add_test(NAME miplib3_fiber_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fiber.out -solve)
