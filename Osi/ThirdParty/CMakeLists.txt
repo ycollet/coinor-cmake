@@ -9,6 +9,8 @@ project(Osi_Thirdparty)
 option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
 option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
+option(COIN_ENABLE_DOWNLOAD_ZLIB            "Enable the download / compilation of Zlib" OFF)
+option(COIN_ENABLE_DOWNLOAD_BZLIB           "Enable the download / compilation of Bzlib" OFF)
 
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
@@ -53,6 +55,80 @@ endif()
 
 # #################################################
 # <===    Lapack
+# #################################################
+
+# #################################################
+# ===>    Zlib
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_ZLIB)
+  set(ZLIB_VERSION "1.2.8")
+
+  if (WIN32)
+    set(ZLIB_NAME "${EP_InstallDir}/lib/libz.lib" CACHE STRING "The Zlib library name" FORCE)
+    
+    ExternalProject_Add(EP_Zlib
+                        PREFIX ${EP_InstallDir}/Zlib
+  			URL http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
+			CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Zlib/src/EP_Zlib/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build nmake
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build nmake install
+                        )
+  else ()
+    set(ZLIB_NAME "${EP_InstallDir}/lib/libz.a" CACHE STRING "The Zlib library name" FORCE)
+    
+    ExternalProject_Add(EP_Zlib
+                        PREFIX ${EP_InstallDir}/Zlib
+  			URL http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
+			CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Zlib/src/EP_Zlib/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build make
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build make install
+                        )
+  endif()
+endif()
+
+# #################################################
+# <===    Zlib
+# #################################################
+
+# #################################################
+# ===>    Bzlib
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_BZLIB)
+  set(BZLIB_VERSION "1.0.6")
+
+  if (WIN32)
+    set(ZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The Bzlib library name" FORCE)
+    
+    ExternalProject_Add(EP_Bzlib
+                        PREFIX ${EP_InstallDir}/Bzlib
+  			URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
+			CONFIGURE_COMMAND ""
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Bzlib/src/EP_Bzlib nmake -f makefile.msc
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/libbz2.lib ${EP_InstallDir}/lib &&
+			                  ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib.h ${EP_InstallDir}/include &&
+			                  ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
+                        )
+  else ()
+    set(BZLIB_NAME "${EP_InstallDir}/lib/libbz.a" CACHE STRING "The Bzlib library name" FORCE)
+    
+    ExternalProject_Add(EP_Bzlib
+                        PREFIX ${EP_InstallDir}/Bzlib
+  			URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
+			CONFIGURE_COMMAND ""
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Bzlib/src/EP_Bzlib make
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/libbz2.a ${EP_InstallDir}/lib &&
+			                  ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib.h ${EP_InstallDir}/include &&
+			                  ${CMAKE_COMMAND} -E copyr ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
+                        )
+  endif()
+endif()
+
+# #################################################
+# <===    Bzlib
 # #################################################
 
 # #################################################
