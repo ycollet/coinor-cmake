@@ -257,7 +257,7 @@ set_tests_properties(netlib_fit2d_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fit2d_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 set(TEST_REGEX "")
-add_regex(TEST_REGEX "Solution Cost: -68464.29329(4)?*")
+add_regex(TEST_REGEX "Solution Cost: -68464.29329(4)?")
 set_tests_properties(netlib_fit2d_mps_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME netlib_forplan_mps_symphony_standard 
@@ -1018,7 +1018,7 @@ set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME miplib3_bell5_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_symphony.out)
-set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME miplib3_blend2_symphony_standard 
@@ -1028,7 +1028,7 @@ set_tests_properties(miplib3_blend2_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME miplib3_cap6000_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_symphony.out)
-set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME miplib3_dano3mip_symphony_standard 
@@ -1048,8 +1048,8 @@ set_tests_properties(miplib3_dcmulti_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME miplib3_dsbmip_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_symphony.out)
-set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES LABELS "MPS")
+set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
 add_test(NAME miplib3_egout_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_egout_symphony.out)
@@ -1238,13 +1238,13 @@ set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
 add_test(NAME miplib3_pp08aCUTS_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_symphony.out)
-set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES TIMEOUT 300)
-set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES LABELS "MPS")
+set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
 add_test(NAME miplib3_pp08a_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_symphony.out)
-set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES TIMEOUT 300)
-set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES LABELS "MPS")
+set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
 add_test(NAME miplib3_qiu_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_symphony.out)
@@ -1253,7 +1253,7 @@ set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
 add_test(NAME miplib3_qnet1_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_symphony.out)
-set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME miplib3_qnet1_o_symphony_standard 
