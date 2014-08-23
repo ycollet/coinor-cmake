@@ -1188,8 +1188,8 @@ set_tests_properties(miplib3_mod010_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME miplib3_mod011_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_symphony.out)
-set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES TIMEOUT 300)
-set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES LABELS "MPS")
+set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
 add_test(NAME miplib3_modglob_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_symphony.out)
