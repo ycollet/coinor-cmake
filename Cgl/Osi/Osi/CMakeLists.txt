@@ -57,6 +57,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsi STATIC ${Osi_SRC_LIST})
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsi PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsi)
 
 #${Osi_DIR}/src/OsiCommonTest/OsiColCutTest.cpp

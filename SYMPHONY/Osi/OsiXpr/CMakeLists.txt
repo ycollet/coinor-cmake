@@ -23,6 +23,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiXpr STATIC ${Osi_DIR}/src/OsiXpr/OsiXprSolverInterface.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiXpr PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiXpr)
 
 install(TARGETS libOsiXpr 

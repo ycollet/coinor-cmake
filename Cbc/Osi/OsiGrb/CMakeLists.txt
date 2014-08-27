@@ -23,6 +23,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiGrb STATIC ${Osi_DIR}/src/OsiGrb/OsiGrbSolverInterface.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiGrb PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiGrb)
 
 install(TARGETS libOsiGrb

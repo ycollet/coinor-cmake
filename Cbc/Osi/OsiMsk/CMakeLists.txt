@@ -23,6 +23,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiMsk STATIC ${Osi_DIR}/src/OsiMsk/OsiMskSolverInterface.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiMsk PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiMsk)
 
 install(TARGETS libOsiMsk

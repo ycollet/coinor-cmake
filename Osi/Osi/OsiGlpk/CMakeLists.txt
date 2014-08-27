@@ -23,6 +23,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiGlpk STATIC ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiGlpk PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiGlpk)
 
 install(TARGETS libOsiGlpk

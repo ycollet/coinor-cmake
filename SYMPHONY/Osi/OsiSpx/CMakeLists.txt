@@ -23,6 +23,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiSpx STATIC ${Osi_DIR}/src/OsiSpx/OsiSpxSolverInterface.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiSpx PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiSpx)
 
 install(TARGETS libOsiSpx

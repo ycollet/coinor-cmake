@@ -26,6 +26,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiCbc STATIC ${Cbc_DIR}/src/OsiCbc/OsiCbcSolverInterface.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiCbc PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiCbc)
 
 install(TARGETS libOsiCbc 

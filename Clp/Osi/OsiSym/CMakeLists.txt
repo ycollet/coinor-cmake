@@ -28,6 +28,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiSym STATIC ${OsiSym_DIR}/OsiSymSolverInterface.cpp ${OsiSym_DIR}/SymWarmStart.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiSym PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiSym)
 
 install(TARGETS libOsiSym 

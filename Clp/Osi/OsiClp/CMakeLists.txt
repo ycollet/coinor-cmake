@@ -24,6 +24,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiClp STATIC ${Clp_DIR}/src/OsiClp/OsiClpSolverInterface.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiClp PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiClp)
 
 install(TARGETS libOsiClp 

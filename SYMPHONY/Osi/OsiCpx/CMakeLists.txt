@@ -23,6 +23,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libOsiCpx STATIC ${Osi_DIR}/src/OsiCpx/OsiCpxSolverInterface.cpp)
 endif ()
+if (NOT WIN32)
+  set_target_properties(libOsiCpx PROPERTIES PREFIX "")
+endif ()
 set_include_directories(libOsiCpx)
 
 install(TARGETS libOsiCpx
