@@ -981,3 +981,527 @@ set_tests_properties(netlib_israel_mps_clp_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
 add_regex(TEST_REGEX "Optimal objective -896644.821(86)?")
 set_tests_properties(netlib_israel_mps_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+#
+# miplib3 tests
+#
+
+add_test(NAME miplib3_10teams_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_clp.out -solve)
+set_tests_properties(miplib3_10teams_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_10teams_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 917")
+set_tests_properties(miplib3_10teams_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_air03_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air03_clp.out -solve)
+set_tests_properties(miplib3_air03_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_air03_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 338864.25")
+set_tests_properties(miplib3_air03_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_air04_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air04_clp.out -solve)
+set_tests_properties(miplib3_air04_clp_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_air04_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 55535.436")
+set_tests_properties(miplib3_air04_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_air05_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air05_clp.out -solve)
+set_tests_properties(miplib3_air05_clp_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_air05_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 25877.609")
+set_tests_properties(miplib3_air05_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_arki001_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_clp.out -solve)
+set_tests_properties(miplib3_arki001_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_arki001_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 7579599.80787")
+set_tests_properties(miplib3_arki001_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_bell3a_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_clp.out -solve)
+set_tests_properties(miplib3_bell3a_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_bell3a_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 862578.64")
+set_tests_properties(miplib3_bell3a_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_bell5_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_clp.out -solve)
+set_tests_properties(miplib3_bell5_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_bell5_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 8608417.95")
+set_tests_properties(miplib3_bell5_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_blend2_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_clp.out -solve)
+set_tests_properties(miplib3_blend2_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_blend2_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 6.9156751140")
+set_tests_properties(miplib3_blend2_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_cap6000_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_clp.out -solve)
+set_tests_properties(miplib3_cap6000_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_cap6000_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -2451537.325")
+set_tests_properties(miplib3_cap6000_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_dano3mip_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_clp.out -solve)
+set_tests_properties(miplib3_dano3mip_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_dano3mip_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 576.23162474")
+set_tests_properties(miplib3_dano3mip_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_danoint_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_clp.out -solve)
+set_tests_properties(miplib3_danoint_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_danoint_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 62.637280418")
+set_tests_properties(miplib3_danoint_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_dcmulti_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_clp.out -solve)
+set_tests_properties(miplib3_dcmulti_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_dcmulti_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 183975.5397")
+set_tests_properties(miplib3_dcmulti_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_dsbmip_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_clp.out -solve)
+set_tests_properties(miplib3_dsbmip_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_dsbmip_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -305.19817501")
+set_tests_properties(miplib3_dsbmip_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_egout_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_egout_clp.out -solve)
+set_tests_properties(miplib3_egout_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_egout_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 149.589")
+set_tests_properties(miplib3_egout_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_enigma_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_clp.out -solve)
+set_tests_properties(miplib3_enigma_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_enigma_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 0.0")
+set_tests_properties(miplib3_enigma_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_fast0507_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_clp.out -solve)
+set_tests_properties(miplib3_fast0507_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_fast0507_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 172.14556668")
+set_tests_properties(miplib3_fast0507_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_fiber_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_clp.out -solve)
+set_tests_properties(miplib3_fiber_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_fiber_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 156082.51759")
+set_tests_properties(miplib3_fiber_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_fixnet6_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_clp.out -solve)
+set_tests_properties(miplib3_fixnet6_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_fixnet6_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1200.88")
+set_tests_properties(miplib3_fixnet6_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_flugpl_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_clp.out -solve)
+set_tests_properties(miplib3_flugpl_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_flugpl_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1167185.73")
+set_tests_properties(miplib3_flugpl_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_gen_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gen_clp.out -solve)
+set_tests_properties(miplib3_gen_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_gen_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 112130.0")
+set_tests_properties(miplib3_gen_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_gesa2_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_clp.out -solve)
+set_tests_properties(miplib3_gesa2_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_gesa2_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 25476489.678")
+set_tests_properties(miplib3_gesa2_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_gesa2_o_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_clp.out -solve)
+set_tests_properties(miplib3_gesa2_o_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_gesa2_o_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 25476489.678")
+set_tests_properties(miplib3_gesa2_o_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_gesa3_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_clp.out -solve)
+set_tests_properties(miplib3_gesa3_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_gesa3_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 27833632.451")
+set_tests_properties(miplib3_gesa3_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_gesa3_o_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_clp.out -solve)
+set_tests_properties(miplib3_gesa3_o_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_gesa3_o_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 27833632.451")
+set_tests_properties(miplib3_gesa3_o_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_gt2_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_clp.out -solve)
+set_tests_properties(miplib3_gt2_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_gt2_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 13460.233074")
+set_tests_properties(miplib3_gt2_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_harp2_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_clp.out -solve)
+set_tests_properties(miplib3_harp2_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_harp2_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -74353341.502")
+set_tests_properties(miplib3_harp2_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_khb05250_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_clp.out -solve)
+set_tests_properties(miplib3_khb05250_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_khb05250_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 95919464.0")
+set_tests_properties(miplib3_khb05250_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_l152lav_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_clp.out -solve)
+set_tests_properties(miplib3_l152lav_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_l152lav_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 4656.36")
+set_tests_properties(miplib3_l152lav_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_lseu_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_clp.out -solve)
+set_tests_properties(miplib3_lseu_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_lseu_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 834.68")
+set_tests_properties(miplib3_lseu_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_markshare1_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_clp.out -solve)
+set_tests_properties(miplib3_markshare1_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_markshare1_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 0")
+set_tests_properties(miplib3_markshare1_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_markshare2_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_clp.out -solve)
+set_tests_properties(miplib3_markshare2_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_markshare2_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 0")
+set_tests_properties(miplib3_markshare2_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_mas74_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_clp.out -solve)
+set_tests_properties(miplib3_mas74_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_mas74_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 10482.795280")
+set_tests_properties(miplib3_mas74_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_mas76_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_clp.out -solve)
+set_tests_properties(miplib3_mas76_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_mas76_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 38893.903641")
+set_tests_properties(miplib3_mas76_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_misc03_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_clp.out -solve)
+set_tests_properties(miplib3_misc03_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_misc03_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1910.0")
+set_tests_properties(miplib3_misc03_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_misc06_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_clp.out -solve)
+set_tests_properties(miplib3_misc06_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_misc06_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 12841.69")
+set_tests_properties(miplib3_misc06_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_misc07_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_clp.out -solve)
+set_tests_properties(miplib3_misc07_clp_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_misc07_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1415.0")
+set_tests_properties(miplib3_misc07_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_mitre_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_clp.out -solve)
+set_tests_properties(miplib3_mitre_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_mitre_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 114740.51848")
+set_tests_properties(miplib3_mitre_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_mkc_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_clp.out -solve)
+set_tests_properties(miplib3_mkc_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_mkc_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -611.85000000")
+set_tests_properties(miplib3_mkc_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_mod008_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_clp.out -solve)
+set_tests_properties(miplib3_mod008_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_mod008_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 290.93")
+set_tests_properties(miplib3_mod008_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_mod010_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_clp.out -solve)
+set_tests_properties(miplib3_mod010_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_mod010_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 6532.08")
+set_tests_properties(miplib3_mod010_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_mod011_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_clp.out -solve)
+set_tests_properties(miplib3_mod011_clp_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_mod011_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -62121982.552")
+set_tests_properties(miplib3_mod011_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_modglob_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_clp.out -solve)
+set_tests_properties(miplib3_modglob_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_modglob_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 20430947.0")
+set_tests_properties(miplib3_modglob_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_noswot_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_clp.out -solve)
+set_tests_properties(miplib3_noswot_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_noswot_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -43.0")
+set_tests_properties(miplib3_noswot_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_nw04_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_clp.out -solve)
+set_tests_properties(miplib3_nw04_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_nw04_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 16310.66667")
+set_tests_properties(miplib3_nw04_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_p0033_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_clp.out -solve)
+set_tests_properties(miplib3_p0033_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_p0033_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 2520.57")
+set_tests_properties(miplib3_p0033_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_p0201_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_clp.out -solve)
+set_tests_properties(miplib3_p0201_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_p0201_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 6875.0")
+set_tests_properties(miplib3_p0201_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_p0282_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_clp.out -solve)
+set_tests_properties(miplib3_p0282_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_p0282_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 176867.50")
+set_tests_properties(miplib3_p0282_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_p0548_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_clp.out -solve)
+set_tests_properties(miplib3_p0548_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_p0548_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 315.29")
+set_tests_properties(miplib3_p0548_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_p2756_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_clp.out -solve)
+set_tests_properties(miplib3_p2756_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_p2756_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 2688.75")
+set_tests_properties(miplib3_p2756_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_pk1_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_clp.out -solve)
+set_tests_properties(miplib3_pk1_clp_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_pk1_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 0.0")
+set_tests_properties(miplib3_pk1_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_pp08aCUTS_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_clp.out -solve)
+set_tests_properties(miplib3_pp08aCUTS_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_pp08aCUTS_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 5480.6061563")
+set_tests_properties(miplib3_pp08aCUTS_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_pp08a_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_clp.out -solve)
+set_tests_properties(miplib3_pp08a_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_pp08a_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 2748.3452381")
+set_tests_properties(miplib3_pp08a_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_qiu_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_clp.out -solve)
+set_tests_properties(miplib3_qiu_clp_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_qiu_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -931.638857")
+set_tests_properties(miplib3_qiu_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_qnet1_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_clp.out -solve)
+set_tests_properties(miplib3_qnet1_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_qnet1_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 14274.102667")
+set_tests_properties(miplib3_qnet1_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_qnet1_o_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_clp.out -solve)
+set_tests_properties(miplib3_qnet1_o_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_qnet1_o_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 12095.571667")
+set_tests_properties(miplib3_qnet1_o_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_rentacar_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_clp.out -solve)
+set_tests_properties(miplib3_rentacar_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_rentacar_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 28806137.644")
+set_tests_properties(miplib3_rentacar_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_rgn_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_clp.out -solve)
+set_tests_properties(miplib3_rgn_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_rgn_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 48.7999")
+set_tests_properties(miplib3_rgn_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_rout_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rout_clp.out -solve)
+set_tests_properties(miplib3_rout_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_rout_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 981.86428571")
+set_tests_properties(miplib3_rout_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_set1ch_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_clp.out -solve)
+set_tests_properties(miplib3_set1ch_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_set1ch_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 32007.73")
+set_tests_properties(miplib3_set1ch_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_seymour_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_clp.out -solve)
+set_tests_properties(miplib3_seymour_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_seymour_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 403.84647413")
+set_tests_properties(miplib3_seymour_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_stein27_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_clp.out -solve)
+set_tests_properties(miplib3_stein27_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_stein27_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 13.0")
+set_tests_properties(miplib3_stein27_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_stein45_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_clp.out -solve)
+set_tests_properties(miplib3_stein45_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_stein45_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 22.0")
+set_tests_properties(miplib3_stein45_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_swath_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_swath_clp.out -solve)
+set_tests_properties(miplib3_swath_clp_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_swath_clp_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 334.4968581")
+set_tests_properties(miplib3_swath_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_vpm1_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_clp.out -solve)
+set_tests_properties(miplib3_vpm1_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_vpm1_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 15.4167")
+set_tests_properties(miplib3_vpm1_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+add_test(NAME miplib3_vpm2_clp_standard 
+         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_clp.out -solve)
+set_tests_properties(miplib3_vpm2_clp_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_vpm2_clp_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 9.8892645972")
+set_tests_properties(miplib3_vpm2_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
