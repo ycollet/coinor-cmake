@@ -65,6 +65,7 @@ set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcHeuristicDiveLineSearch.cpp
                  ${Cbc_DIR}/src/CbcHeuristicDivePseudoCost.cpp
                  ${Cbc_DIR}/src/CbcHeuristicDiveVectorLength.cpp
+                 ${Cbc_DIR}/src/CbcHeuristicDW.cpp
                  ${Cbc_DIR}/src/CbcHeuristicFPump.cpp
                  ${Cbc_DIR}/src/CbcHeuristicGreedy.cpp
                  ${Cbc_DIR}/src/CbcHeuristicLocal.cpp
@@ -144,6 +145,7 @@ set(Cbc_SRC_LIST_Headers ${Cbc_DIR}/src/Cbc_C_Interface.h
                          ${Cbc_DIR}/src/CbcHeuristicDiveLineSearch.hpp
                          ${Cbc_DIR}/src/CbcHeuristicDivePseudoCost.hpp
                          ${Cbc_DIR}/src/CbcHeuristicDiveVectorLength.hpp
+                         ${Cbc_DIR}/src/CbcHeuristicDW.hpp
                          ${Cbc_DIR}/src/CbcHeuristicFPump.hpp
                          ${Cbc_DIR}/src/CbcHeuristicGreedy.hpp
                          ${Cbc_DIR}/src/CbcHeuristicLocal.hpp
@@ -243,6 +245,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(allCuts ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(allCuts ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_allCuts
            COMMAND $<TARGET_FILE:allCuts> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -254,6 +259,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(driver)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(driver ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_driver
@@ -267,6 +275,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(longthin ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(longthin ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_longthin
            COMMAND $<TARGET_FILE:longthin> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -278,6 +289,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(qmip2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(qmip2 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(qmip2 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_qmip2
@@ -291,6 +305,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sample5 ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sample5 ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_sample5
            COMMAND $<TARGET_FILE:sample5> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -302,6 +319,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(barrier)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(barrier ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(barrier ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_barrier
@@ -315,6 +335,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(fast0507b ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(fast0507b ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_fast0507b
            COMMAND $<TARGET_FILE:fast0507b> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -326,6 +349,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(lotsize)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(lotsize ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(lotsize ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_lotsize
@@ -339,6 +365,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(qmip ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(qmip ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_qmip
            COMMAND $<TARGET_FILE:qmip> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -350,6 +379,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(simpleBAB)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(simpleBAB ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(simpleBAB ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_simpleBAB
@@ -363,6 +395,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(fast0507 ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(fast0507 ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_fast0507
            COMMAND $<TARGET_FILE:fast0507> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -374,6 +409,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(minimum)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(minimum ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(minimum ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_minimum
@@ -387,6 +425,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(repeat ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(repeat ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_repeat
            COMMAND $<TARGET_FILE:repeat> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -398,6 +439,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(sos)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sos ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sos ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_sos
@@ -411,6 +455,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(crew ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(crew ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_crew
            COMMAND $<TARGET_FILE:crew> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -422,6 +469,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(gear)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(gear ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(gear ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_gear
@@ -435,6 +485,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(modify ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(modify ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_modify
            COMMAND $<TARGET_FILE:modify> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -446,6 +499,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(sample1)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sample1 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sample1 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_sample1
@@ -459,6 +515,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sudoku ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sudoku ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_sudoku
            COMMAND $<TARGET_FILE:sudoku> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -470,6 +529,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(driver2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver2 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(driver2 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_driver2
@@ -483,6 +545,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(hotstart ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(hotstart ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_hotstart
            COMMAND $<TARGET_FILE:hotstart> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -494,6 +559,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(nway)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(nway ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(nway ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_nway
@@ -507,6 +575,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sample2 ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sample2 ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_sample2
            COMMAND $<TARGET_FILE:sample2> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -518,6 +589,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(driver3)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver3 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(driver2 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_driver3
@@ -531,6 +605,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(interrupt ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(interrupt ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_interrupt
            COMMAND $<TARGET_FILE:interrupt> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -542,6 +619,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(parallel2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(parallel2 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(parallel2 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_parallel2
@@ -555,6 +635,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sample3 ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sample3 ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_sample3
            COMMAND $<TARGET_FILE:sample3> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -566,6 +649,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(driver4)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver4 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(driver4 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_driver4
@@ -579,6 +665,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(link ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(link ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_link
            COMMAND $<TARGET_FILE:link> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -591,6 +680,9 @@ if (CBC_ENABLE_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(parallel ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(parallel ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME cbc_example_parallel
            COMMAND $<TARGET_FILE:parallel> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -602,6 +694,9 @@ if (CBC_ENABLE_EXAMPLES)
   set_include_directories(sample4)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sample4 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sample4 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_sample4
@@ -616,6 +711,9 @@ if (COIN_HAS_CLP)
   set_include_directories(cbc)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(cbc ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(cbc ${BZLIB_NAME})
   endif ()
   
   install(TARGETS cbc
@@ -639,6 +737,9 @@ if (CBC_BUILD_CBC_GENERIC)
   set_include_directories(cbc-generic)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(cbc-generic ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(cbc-generic ${BZLIB_NAME})
   endif ()
   
   install(TARGETS cbc-generic

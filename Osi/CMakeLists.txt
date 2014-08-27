@@ -497,6 +497,14 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
 endif(DOXYGEN AND ENABLE_DOXYGEN)
 
 subdirs(ThirdParty)
+
+if (COIN_ENABLE_DOWNLOAD_ZLIB
+  set(COINUTILS_HAS_ZLIB ON)
+endif ()
+if (COIN_ENABLE_DOWNLOAD_BZLIB
+  set(COINUTILS_HAS_BZLIB ON)
+endif ()
+
 subdirs(CoinUtils)
 
 subdirs(Osi/Osi)

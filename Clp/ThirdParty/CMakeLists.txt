@@ -88,7 +88,6 @@ endif()
 if (COIN_ENABLE_DOWNLOAD_ZLIB)
   set(ZLIB_VERSION "1.2.8")
   
-  set(COINUTILS_HAS_ZLIB ON CACHE BOOL "CoinUtils uses the Zlib library")
   set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Zlib library include Path")
   set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Zlib library library Path")
   
@@ -128,7 +127,6 @@ endif()
 if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(BZLIB_VERSION "1.0.6")
 
-  set(COINUTILS_HAS_BZLIB ON CACHE BOOL "CoinUtils uses the Bzlib library")
   set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Bzlib library include Path")
   set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Bzlib library library Path")
   
@@ -145,7 +143,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
 			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
                         )
   else ()
-    set(BZLIB_NAME "${EP_InstallDir}/lib/libbz.a" CACHE STRING "The Bzlib library name" FORCE)
+    set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.a" CACHE STRING "The Bzlib library name" FORCE)
     
     ExternalProject_Add(EP_Bzlib
                         PREFIX ${EP_InstallDir}/Bzlib

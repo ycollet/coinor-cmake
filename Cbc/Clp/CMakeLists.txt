@@ -65,6 +65,13 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/Idiot.cpp
                  ${Clp_DIR}/src/IdiSolve.cpp)
 
+set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
+                       ${Clp_DIR}/src/CbcOrClpParam.cpp
+		       ${Clp_DIR}/src/Clp_ampl.cpp
+		       ${Clp_DIR}/src/MyEventHandler.cpp
+		       ${Clp_DIR}/src/MyMessageHandler.cpp
+		       ${Clp_DIR}/src/unitTest.cpp)
+
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
                    ${Clp_DIR}/src/AbcDualRowDantzig.cpp
@@ -127,11 +134,7 @@ if (COIN_HAS_WSMP)
                    ${Clp_DIR}/src/ClpCholeskyWssmpKKT.cpp)
 endif ()
 
-set(Clp_MAIN_SRC_LIST ${Clp_DIR}/src/ClpMain.cpp
-                      ${Clp_DIR}/src/CbcOrClpParam.cpp
-                      ${Clp_DIR}/src/MyEventHandler.cpp
-                      ${Clp_DIR}/src/MyMessageHandler.cpp
-                      ${Clp_DIR}/src/unitTest.cpp)
+set(Clp_MAIN_SRC_LIST ${Clp_DIR}/src/ClpMain.cpp)
 
 set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/ClpCholeskyBase.hpp
@@ -174,7 +177,6 @@ set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/ClpSimplexPrimal.hpp
                          ${Clp_DIR}/src/ClpSolve.hpp
                          ${Clp_DIR}/src/CbcOrClpParam.hpp
-                         ${Clp_DIR}/src/CbcOrClpParam.cpp
                          ${Clp_DIR}/src/Idiot.hpp)
 
 if (COIN_HAS_ABC)
@@ -266,6 +268,16 @@ if (COIN_HAS_WSMP)
 endif ()
 set_include_directories(libClp)
 
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libClpSolver SHARED ${ClpSolver_SRC_LIST})
+else ()
+  add_library(libClpSolver STATIC ${ClpSolver_SRC_LIST})
+endif ()
+if (NOT WIN32)
+  set_target_properties(libClpSolver PROPERTIES PREFIX "")
+endif ()
+set_include_directories(libClpSolver)
+
 if (CLP_BUILD_EXAMPLES)
   #
   # Build Examples
@@ -275,6 +287,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(addBits)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(addBits ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(addBits ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_addBits
@@ -288,6 +303,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(addColumns ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(addColumns ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_addColumns
            COMMAND $<TARGET_FILE:addColumns> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -300,6 +318,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(addRows ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(addRows ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_addRows
            COMMAND $<TARGET_FILE:addRows> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -310,7 +331,10 @@ if (CLP_BUILD_EXAMPLES)
   target_link_libraries(decomp2 libClp libCoinUtils lapack)
   set_include_directories(decomp2)
   if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(addBits ${ZLIB_NAME})
+    target_link_libraries(decomp2 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(decomp2 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_decomp2
@@ -324,6 +348,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(decomp3 ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(decomp3 ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_decomp3
            COMMAND $<TARGET_FILE:decomp3> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -335,6 +362,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(decompose)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(decompose ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(decompose ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_decompose
@@ -348,6 +378,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(default ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(default ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_default
            COMMAND $<TARGET_FILE:default> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -359,6 +392,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(driver2)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver2 ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(driver2 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_driver2
@@ -372,6 +408,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(driver ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(driver ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_driver
            COMMAND $<TARGET_FILE:driver> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -383,6 +422,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(dualCuts)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(dualCuts ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(dualCuts ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_dualCuts
@@ -403,6 +445,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(hello ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(hello ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_hello
            COMMAND $<TARGET_FILE:hello> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -414,6 +459,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(makeDual)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(makeDual ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(makeDual ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_makeDual
@@ -427,6 +475,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(minimum ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(minimum ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_minimum
            COMMAND $<TARGET_FILE:minimum> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -438,6 +489,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(modify)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(modify ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(modify ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_modify
@@ -451,6 +505,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(network ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(network ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_network
            COMMAND $<TARGET_FILE:network> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -462,6 +519,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(pdco)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(pdco ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(pdco ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_pdco
@@ -475,6 +535,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(piece ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(piece ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_piece
            COMMAND $<TARGET_FILE:piece> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -486,6 +549,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(rowColumn)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(rowColumn ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(rowColumn ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_rowColumn
@@ -499,6 +565,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sprint2 ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sprint2 ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_sprint2
            COMMAND $<TARGET_FILE:sprint2> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -510,6 +579,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(sprint)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(sprint ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(sprint ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_sprint
@@ -523,6 +595,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(testBarrier ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(testBarrier ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_testBarrier
            COMMAND $<TARGET_FILE:testBarrier> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -534,6 +609,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(testBasis)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(testBasis ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(testBasis ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_testBasis
@@ -547,6 +625,9 @@ if (CLP_BUILD_EXAMPLES)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(testGub2 ${ZLIB_NAME})
   endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(testGub2 ${BZLIB_NAME})
+  endif ()
   
   add_test(NAME clp_example_testGub2
            COMMAND $<TARGET_FILE:testGub2> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -558,6 +639,9 @@ if (CLP_BUILD_EXAMPLES)
   set_include_directories(testGub)
   if (COINUTILS_HAS_ZLIB)
     target_link_libraries(testGub ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(testGub ${BZLIB_NAME})
   endif ()
   
   add_test(NAME clp_example_testGub
@@ -572,6 +656,9 @@ if (CLP_BUILD_EXAMPLES)
   #if (COINUTILS_HAS_ZLIB)
   #  target_link_libraries(testQP ${ZLIB_NAME})
   #endif ()
+  #if (COINUTILS_HAS_BZLIB)
+  #  target_link_libraries(testQP ${BZLIB_NAME})
+  #endif ()
   #
   #add_test(NAME clp_example_testQP
   #         COMMAND $<TARGET_FILE:testQP> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -584,6 +671,9 @@ if (CLP_BUILD_EXAMPLES)
   #set_include_directories(useVolume)
   #if (COINUTILS_HAS_ZLIB)
   #  target_link_libraries(useVolume ${ZLIB_NAME})
+  #endif ()
+  #if (COINUTILS_HAS_BZLIB)
+  #  target_link_libraries(useVolume ${BZLIB_NAME})
   #endif ()
   #
   #add_test(NAME clp_example_useVolume
@@ -598,6 +688,9 @@ if (CLP_BUILD_EXAMPLES)
   #if (COINUTILS_HAS_ZLIB)
   #  target_link_libraries(OsiClpSolverInterfaceTest ${ZLIB_NAME})
   #endif ()
+  #if (COINUTILS_HAS_BZLIB)
+  #  target_link_libraries(OsiClpSolverInterfaceTest ${BZLIB_NAME})
+  #endif ()
   #
   #add_test(NAME clp_example_OsiClpSolverInterfaceTest
   #         COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -610,6 +703,9 @@ if (CLP_BUILD_EXAMPLES)
   #if (COINUTILS_HAS_ZLIB)
   #  target_link_libraries(osiUnitTest ${ZLIB_NAME})
   #endif ()
+  #if (COINUTILS_HAS_BZLIB)
+  #  target_link_libraries(osiUnitTest ${BZLIB_NAME})
+  #endif ()
   #
   #add_test(NAME clp_example_osiUnitTest
   #         COMMAND $<TARGET_FILE:osiUnitTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -618,10 +714,13 @@ if (CLP_BUILD_EXAMPLES)
 endif ()
 
 add_executable(clp ${Clp_MAIN_SRC_LIST})
-target_link_libraries(clp libClp libCoinUtils lapack)
+target_link_libraries(clp libClp libClpSolver libCoinUtils lapack)
 set_include_directories(clp)
 if (COINUTILS_HAS_ZLIB)
   target_link_libraries(clp ${ZLIB_NAME})
+endif ()
+if (COINUTILS_HAS_BZLIB)
+  target_link_libraries(clp ${BZLIB_NAME})
 endif ()
 
 install(TARGETS clp

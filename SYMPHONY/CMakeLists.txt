@@ -748,8 +748,16 @@ include_directories(${SYMPHONY_DIR}/SYMPHONY/src/OsiSym)
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
-subdirs(CoinUtils)
 subdirs(ThirdParty)
+
+if (COIN_ENABLE_DOWNLOAD_ZLIB
+  set(COINUTILS_HAS_ZLIB ON)
+endif ()
+if (COIN_ENABLE_DOWNLOAD_BZLIB
+  set(COINUTILS_HAS_BZLIB ON)
+endif ()
+
+subdirs(CoinUtils)
 
 subdirs(Cgl)
 subdirs(Clp)
