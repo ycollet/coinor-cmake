@@ -987,326 +987,521 @@ set_tests_properties(netlib_israel_mps_symphony_standard PROPERTIES PASS_REGULAR
 #
 
 add_test(NAME miplib3_10teams_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_symphony.out -solve)
 set_tests_properties(miplib3_10teams_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_10teams_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 924")
+set_tests_properties(miplib3_10teams_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_air03_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_air03_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air03_symphony.out -solve)
 set_tests_properties(miplib3_air03_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_air03_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 340160")
+set_tests_properties(miplib3_air03_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_air04_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_air04_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air04_symphony.out -solve)
 set_tests_properties(miplib3_air04_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_air04_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 56137")
+set_tests_properties(miplib3_air04_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_air05_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_air05_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air05_symphony.out -solve)
 set_tests_properties(miplib3_air05_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_air05_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 26374")
+set_tests_properties(miplib3_air05_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_arki001_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_symphony.out -solve)
 set_tests_properties(miplib3_arki001_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_arki001_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 7580813.0459") # Not optimal - has stated in the miplib3 report
+set_tests_properties(miplib3_arki001_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_bell3a_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_symphony.out)
-set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_symphony.out -solve)
+set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 878430.32")
+set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_bell5_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_symphony.out)
-set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_symphony.out -solve)
+set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 8966406.49")
+set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_blend2_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_symphony.out -solve)
 set_tests_properties(miplib3_blend2_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_blend2_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 7.598985")
+set_tests_properties(miplib3_blend2_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_cap6000_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_symphony.out)
-set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_symphony.out -solve)
+set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -2451377")
+set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_dano3mip_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_symphony.out -solve)
 set_tests_properties(miplib3_dano3mip_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_dano3mip_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 728.1111") # not optimal - has stated in the miplib3 report
+set_tests_properties(miplib3_dano3mip_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_danoint_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_symphony.out -solve)
 set_tests_properties(miplib3_danoint_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_danoint_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 65.67")
+set_tests_properties(miplib3_danoint_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_dcmulti_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_symphony.out -solve)
 set_tests_properties(miplib3_dcmulti_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_dcmulti_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 188182")
+set_tests_properties(miplib3_dcmulti_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_dsbmip_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_symphony.out)
-set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES LABELS "MPS;LONG")
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_symphony.out -solve)
+set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -305.19817501")
+set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_egout_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_egout_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_egout_symphony.out -solve)
 set_tests_properties(miplib3_egout_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_egout_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 568.101")
+set_tests_properties(miplib3_egout_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_enigma_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_symphony.out -solve)
 set_tests_properties(miplib3_enigma_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_enigma_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 0.0")
+set_tests_properties(miplib3_enigma_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_fast0507_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_symphony.out -solve)
 set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 174")
+set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_fiber_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_symphony.out -solve)
 set_tests_properties(miplib3_fiber_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_fiber_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 405935.18000")
+set_tests_properties(miplib3_fiber_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_fixnet6_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_symphony.out -solve)
 set_tests_properties(miplib3_fixnet6_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_fixnet6_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 3983")
+set_tests_properties(miplib3_fixnet6_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_flugpl_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_symphony.out -solve)
 set_tests_properties(miplib3_flugpl_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_flugpl_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1201500")
+set_tests_properties(miplib3_flugpl_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_gen_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_gen_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gen_symphony.out -solve)
 set_tests_properties(miplib3_gen_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gen_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 112313")
+set_tests_properties(miplib3_gen_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_gesa2_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_symphony.out)
-set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_symphony.out -solve)
+set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 25779856.372")
+set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_gesa2_o_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_symphony.out)
-set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_symphony.out -solve)
+set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 25779856.372")
+set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_gesa3_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_symphony.out -solve)
 set_tests_properties(miplib3_gesa3_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa3_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 27991042.648")
+set_tests_properties(miplib3_gesa3_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_gesa3_o_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_symphony.out -solve)
 set_tests_properties(miplib3_gesa3_o_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa3_o_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 27991042.648")
+set_tests_properties(miplib3_gesa3_o_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_gt2_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_symphony.out -solve)
 set_tests_properties(miplib3_gt2_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gt2_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 21166.000")
+set_tests_properties(miplib3_gt2_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_harp2_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_symphony.out -solve)
 set_tests_properties(miplib3_harp2_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_harp2_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -73899798.00")
+set_tests_properties(miplib3_harp2_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_khb05250_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_symphony.out -solve)
 set_tests_properties(miplib3_khb05250_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_khb05250_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 106940226")
+set_tests_properties(miplib3_khb05250_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_l152lav_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_symphony.out -solve)
 set_tests_properties(miplib3_l152lav_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_l152lav_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 4722")
+set_tests_properties(miplib3_l152lav_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_lseu_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_symphony.out -solve)
 set_tests_properties(miplib3_lseu_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_lseu_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1120")
+set_tests_properties(miplib3_lseu_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_markshare1_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_symphony.out -solve)
 set_tests_properties(miplib3_markshare1_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_markshare1_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1")
+set_tests_properties(miplib3_markshare1_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_markshare2_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_symphony.out -solve)
 set_tests_properties(miplib3_markshare2_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_markshare2_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1")
+set_tests_properties(miplib3_markshare2_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_mas74_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_symphony.out -solve)
 set_tests_properties(miplib3_mas74_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_mas74_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 11801.1857")
+set_tests_properties(miplib3_mas74_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_mas76_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_symphony.out)
-set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES LABELS "MPS;LONG")
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_symphony.out -solve)
+set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 4005.1")
+set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_misc03_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_symphony.out -solve)
 set_tests_properties(miplib3_misc03_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_misc03_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 3360")
+set_tests_properties(miplib3_misc03_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_misc06_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_symphony.out -solve)
 set_tests_properties(miplib3_misc06_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_misc06_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 12850.8607")
+set_tests_properties(miplib3_misc06_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_misc07_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_symphony.out -solve)
 set_tests_properties(miplib3_misc07_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_misc07_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 2810")
+set_tests_properties(miplib3_misc07_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_mitre_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_symphony.out -solve)
 set_tests_properties(miplib3_mitre_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mitre_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 115155")
+set_tests_properties(miplib3_mitre_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_mkc_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_symphony.out -solve)
 set_tests_properties(miplib3_mkc_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_mkc_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -553.75") # not optimal - has stated in the miplib3 report
+set_tests_properties(miplib3_mkc_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_mod008_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_symphony.out -solve)
 set_tests_properties(miplib3_mod008_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mod008_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 307")
+set_tests_properties(miplib3_mod008_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_mod010_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_symphony.out -solve)
 set_tests_properties(miplib3_mod010_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mod010_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 6548")
+set_tests_properties(miplib3_mod010_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_mod011_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_symphony.out)
-set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES LABELS "MPS;LONG")
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_symphony.out -solve)
+set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -54558535")
+set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_modglob_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_symphony.out)
-set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES LABELS "MPS;LONG")
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_symphony.out -solve)
+set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 20740508")
+set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_noswot_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_symphony.out -solve)
 set_tests_properties(miplib3_noswot_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_noswot_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -43")
+set_tests_properties(miplib3_noswot_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_nw04_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_symphony.out)
-set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_symphony.out -solve)
+set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 16862")
+set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_p0033_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_symphony.out -solve)
 set_tests_properties(miplib3_p0033_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0033_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 3089")
+set_tests_properties(miplib3_p0033_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_p0201_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_symphony.out -solve)
 set_tests_properties(miplib3_p0201_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0201_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 7615")
+set_tests_properties(miplib3_p0201_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_p0282_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_symphony.out -solve)
 set_tests_properties(miplib3_p0282_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0282_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 258411")
+set_tests_properties(miplib3_p0282_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_p0548_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_symphony.out -solve)
 set_tests_properties(miplib3_p0548_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0548_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 8691")
+set_tests_properties(miplib3_p0548_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_p2756_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_symphony.out -solve)
 set_tests_properties(miplib3_p2756_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p2756_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 3124")
+set_tests_properties(miplib3_p2756_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_pk1_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_symphony.out)
-set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES LABELS "MPS;LONG")
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_symphony.out -solve)
+set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 11.0")
+set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_pp08aCUTS_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_symphony.out)
-set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES LABELS "MPS;LONG")
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_symphony.out -solve)
+set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 7350.0")
+set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_pp08a_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_symphony.out)
-set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES LABELS "MPS;LONG")
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_symphony.out -solve)
+set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 7350.0")
+set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_qiu_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_symphony.out)
-set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES LABELS "MPS;LONG")
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_symphony.out -solve)
+set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective -132.873137")
+set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_qnet1_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_symphony.out)
-set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_symphony.out -solve)
+set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 16029.692681")
+set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_qnet1_o_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_symphony.out -solve)
 set_tests_properties(miplib3_qnet1_o_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_qnet1_o_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 16029.692681")
+set_tests_properties(miplib3_qnet1_o_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_rentacar_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_symphony.out -solve)
 set_tests_properties(miplib3_rentacar_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_rentacar_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 30356761")
+set_tests_properties(miplib3_rentacar_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_rgn_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_symphony.out -solve)
 set_tests_properties(miplib3_rgn_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_rgn_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 82.1999")
+set_tests_properties(miplib3_rgn_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_rout_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_rout_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rout_symphony.out -solve)
 set_tests_properties(miplib3_rout_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_rout_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 1077.56")
+set_tests_properties(miplib3_rout_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_set1ch_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_symphony.out -solve)
 set_tests_properties(miplib3_set1ch_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_set1ch_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 54537.75")
+set_tests_properties(miplib3_set1ch_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_seymour_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_symphony.out -solve)
 set_tests_properties(miplib3_seymour_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_seymour_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 423") # not optimal - has stated in the miplib3 report
+set_tests_properties(miplib3_seymour_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_stein27_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_symphony.out -solve)
 set_tests_properties(miplib3_stein27_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_stein27_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 18")
+set_tests_properties(miplib3_stein27_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_stein45_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_symphony.out)
-set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_symphony.out -solve)
+set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 30")
+set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_swath_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_swath_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_swath_symphony.out -solve)
 set_tests_properties(miplib3_swath_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_swath_symphony_standard PROPERTIES LABELS "MPS;LONG")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 497.603") # not optimal - has stated in the miplib3 report
+set_tests_properties(miplib3_swath_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_vpm1_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_symphony.out)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_symphony.out -solve)
 set_tests_properties(miplib3_vpm1_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_vpm1_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 20")
+set_tests_properties(miplib3_vpm1_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_vpm2_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -o ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_symphony.out)
-set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES TIMEOUT 300)
+         COMMAND $<TARGET_FILE:symphony> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_symphony.out -solve)
+set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES LABELS "MPS")
+set(TEST_REGEX "")
+add_regex(TEST_REGEX "Optimal objective 13.75")
+set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")

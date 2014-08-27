@@ -991,326 +991,521 @@ if (COIN_HAS_CLP)
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_cbc.out -solve)
   set_tests_properties(miplib3_10teams_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_10teams_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 924")
+  set_tests_properties(miplib3_10teams_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_air03_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air03_cbc.out -solve)
   set_tests_properties(miplib3_air03_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_air03_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 340160")
+  set_tests_properties(miplib3_air03_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_air04_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air04_cbc.out -solve)
   set_tests_properties(miplib3_air04_cbc_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_air04_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 56137")
+  set_tests_properties(miplib3_air04_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_air05_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air05_cbc.out -solve)
   set_tests_properties(miplib3_air05_cbc_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_air05_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 26374")
+  set_tests_properties(miplib3_air05_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_arki001_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_cbc.out -solve)
   set_tests_properties(miplib3_arki001_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_arki001_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7580813.0459") # Not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_arki001_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_bell3a_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_cbc.out -solve)
   set_tests_properties(miplib3_bell3a_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_bell3a_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 878430.32")
+  set_tests_properties(miplib3_bell3a_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_bell5_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_cbc.out -solve)
   set_tests_properties(miplib3_bell5_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_bell5_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 8966406.49")
+  set_tests_properties(miplib3_bell5_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_blend2_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_cbc.out -solve)
   set_tests_properties(miplib3_blend2_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_blend2_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7.598985")
+  set_tests_properties(miplib3_blend2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_cap6000_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_cbc.out -solve)
   set_tests_properties(miplib3_cap6000_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_cap6000_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -2451377")
+  set_tests_properties(miplib3_cap6000_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_dano3mip_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_cbc.out -solve)
   set_tests_properties(miplib3_dano3mip_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_dano3mip_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 728.1111") # not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_dano3mip_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_danoint_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_cbc.out -solve)
   set_tests_properties(miplib3_danoint_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_danoint_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 65.67")
+  set_tests_properties(miplib3_danoint_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_dcmulti_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_cbc.out -solve)
   set_tests_properties(miplib3_dcmulti_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_dcmulti_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 188182")
+  set_tests_properties(miplib3_dcmulti_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_dsbmip_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_cbc.out -solve)
   set_tests_properties(miplib3_dsbmip_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_dsbmip_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -305.19817501")
+  set_tests_properties(miplib3_dsbmip_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_egout_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_egout_cbc.out -solve)
   set_tests_properties(miplib3_egout_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_egout_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 568.101")
+  set_tests_properties(miplib3_egout_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_enigma_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_cbc.out -solve)
   set_tests_properties(miplib3_enigma_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_enigma_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 0.0")
+  set_tests_properties(miplib3_enigma_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_fast0507_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_cbc.out -solve)
   set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 174")
+  set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_fiber_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_cbc.out -solve)
   set_tests_properties(miplib3_fiber_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_fiber_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 405935.18000")
+  set_tests_properties(miplib3_fiber_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_fixnet6_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_cbc.out -solve)
   set_tests_properties(miplib3_fixnet6_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_fixnet6_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 3983")
+  set_tests_properties(miplib3_fixnet6_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_flugpl_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_cbc.out -solve)
   set_tests_properties(miplib3_flugpl_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_flugpl_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1201500")
+  set_tests_properties(miplib3_flugpl_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gen_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gen_cbc.out -solve)
   set_tests_properties(miplib3_gen_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gen_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 112313")
+  set_tests_properties(miplib3_gen_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gesa2_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_cbc.out -solve)
   set_tests_properties(miplib3_gesa2_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa2_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 25779856.372")
+  set_tests_properties(miplib3_gesa2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gesa2_o_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_cbc.out -solve)
   set_tests_properties(miplib3_gesa2_o_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa2_o_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 25779856.372")
+  set_tests_properties(miplib3_gesa2_o_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gesa3_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_cbc.out -solve)
   set_tests_properties(miplib3_gesa3_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa3_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 27991042.648")
+  set_tests_properties(miplib3_gesa3_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gesa3_o_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_cbc.out -solve)
   set_tests_properties(miplib3_gesa3_o_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa3_o_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 27991042.648")
+  set_tests_properties(miplib3_gesa3_o_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gt2_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_cbc.out -solve)
   set_tests_properties(miplib3_gt2_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gt2_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 21166.000")
+  set_tests_properties(miplib3_gt2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_harp2_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_cbc.out -solve)
   set_tests_properties(miplib3_harp2_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_harp2_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -73899798.00")
+  set_tests_properties(miplib3_harp2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_khb05250_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_cbc.out -solve)
   set_tests_properties(miplib3_khb05250_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_khb05250_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 106940226")
+  set_tests_properties(miplib3_khb05250_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_l152lav_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_cbc.out -solve)
   set_tests_properties(miplib3_l152lav_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_l152lav_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 4722")
+  set_tests_properties(miplib3_l152lav_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_lseu_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_cbc.out -solve)
   set_tests_properties(miplib3_lseu_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_lseu_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1120")
+  set_tests_properties(miplib3_lseu_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_markshare1_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_cbc.out -solve)
   set_tests_properties(miplib3_markshare1_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_markshare1_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1")
+  set_tests_properties(miplib3_markshare1_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_markshare2_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_cbc.out -solve)
   set_tests_properties(miplib3_markshare2_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_markshare2_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1")
+  set_tests_properties(miplib3_markshare2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mas74_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_cbc.out -solve)
   set_tests_properties(miplib3_mas74_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_mas74_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 11801.1857")
+  set_tests_properties(miplib3_mas74_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mas76_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_cbc.out -solve)
   set_tests_properties(miplib3_mas76_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mas76_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 4005.1")
+  set_tests_properties(miplib3_mas76_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_misc03_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_cbc.out -solve)
   set_tests_properties(miplib3_misc03_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_misc03_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 3360")
+  set_tests_properties(miplib3_misc03_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_misc06_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_cbc.out -solve)
   set_tests_properties(miplib3_misc06_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_misc06_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 12850.8607")
+  set_tests_properties(miplib3_misc06_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_misc07_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_cbc.out -solve)
   set_tests_properties(miplib3_misc07_cbc_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_misc07_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 2810")
+  set_tests_properties(miplib3_misc07_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mitre_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_cbc.out -solve)
   set_tests_properties(miplib3_mitre_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mitre_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 115155")
+  set_tests_properties(miplib3_mitre_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mkc_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_cbc.out -solve)
   set_tests_properties(miplib3_mkc_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_mkc_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -553.75") # not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_mkc_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mod008_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_cbc.out -solve)
   set_tests_properties(miplib3_mod008_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mod008_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 307")
+  set_tests_properties(miplib3_mod008_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mod010_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_cbc.out -solve)
   set_tests_properties(miplib3_mod010_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mod010_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 6548")
+  set_tests_properties(miplib3_mod010_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mod011_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_cbc.out -solve)
   set_tests_properties(miplib3_mod011_cbc_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_mod011_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -54558535")
+  set_tests_properties(miplib3_mod011_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_modglob_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_cbc.out -solve)
   set_tests_properties(miplib3_modglob_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_modglob_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 20740508")
+  set_tests_properties(miplib3_modglob_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_noswot_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_cbc.out -solve)
   set_tests_properties(miplib3_noswot_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_noswot_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -43")
+  set_tests_properties(miplib3_noswot_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_nw04_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_cbc.out -solve)
   set_tests_properties(miplib3_nw04_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_nw04_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 16862")
+  set_tests_properties(miplib3_nw04_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p0033_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_cbc.out -solve)
   set_tests_properties(miplib3_p0033_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0033_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 3089")
+  set_tests_properties(miplib3_p0033_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p0201_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_cbc.out -solve)
   set_tests_properties(miplib3_p0201_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0201_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7615")
+  set_tests_properties(miplib3_p0201_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p0282_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_cbc.out -solve)
   set_tests_properties(miplib3_p0282_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0282_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 258411")
+  set_tests_properties(miplib3_p0282_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p0548_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_cbc.out -solve)
   set_tests_properties(miplib3_p0548_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0548_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 8691")
+  set_tests_properties(miplib3_p0548_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p2756_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_cbc.out -solve)
   set_tests_properties(miplib3_p2756_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p2756_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 3124")
+  set_tests_properties(miplib3_p2756_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_pk1_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_cbc.out -solve)
   set_tests_properties(miplib3_pk1_cbc_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_pk1_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 11.0")
+  set_tests_properties(miplib3_pk1_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_pp08aCUTS_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_cbc.out -solve)
   set_tests_properties(miplib3_pp08aCUTS_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_pp08aCUTS_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7350.0")
+  set_tests_properties(miplib3_pp08aCUTS_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_pp08a_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_cbc.out -solve)
   set_tests_properties(miplib3_pp08a_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_pp08a_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7350.0")
+  set_tests_properties(miplib3_pp08a_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_qiu_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_cbc.out -solve)
   set_tests_properties(miplib3_qiu_cbc_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_qiu_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -132.873137")
+  set_tests_properties(miplib3_qiu_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_qnet1_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_cbc.out -solve)
   set_tests_properties(miplib3_qnet1_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_qnet1_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 16029.692681")
+  set_tests_properties(miplib3_qnet1_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_qnet1_o_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_cbc.out -solve)
   set_tests_properties(miplib3_qnet1_o_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_qnet1_o_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 16029.692681")
+  set_tests_properties(miplib3_qnet1_o_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_rentacar_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_cbc.out -solve)
   set_tests_properties(miplib3_rentacar_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_rentacar_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 30356761")
+  set_tests_properties(miplib3_rentacar_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_rgn_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_cbc.out -solve)
   set_tests_properties(miplib3_rgn_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_rgn_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 82.1999")
+  set_tests_properties(miplib3_rgn_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_rout_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rout_cbc.out -solve)
   set_tests_properties(miplib3_rout_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_rout_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1077.56")
+  set_tests_properties(miplib3_rout_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_set1ch_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_cbc.out -solve)
   set_tests_properties(miplib3_set1ch_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_set1ch_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 54537.75")
+  set_tests_properties(miplib3_set1ch_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_seymour_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_cbc.out -solve)
   set_tests_properties(miplib3_seymour_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_seymour_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 423") # not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_seymour_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_stein27_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_cbc.out -solve)
   set_tests_properties(miplib3_stein27_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_stein27_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 18")
+  set_tests_properties(miplib3_stein27_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_stein45_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_cbc.out -solve)
   set_tests_properties(miplib3_stein45_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_stein45_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 30")
+  set_tests_properties(miplib3_stein45_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_swath_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_swath_cbc.out -solve)
   set_tests_properties(miplib3_swath_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_swath_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 497.603") # not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_swath_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_vpm1_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_cbc.out -solve)
   set_tests_properties(miplib3_vpm1_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_vpm1_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 20")
+  set_tests_properties(miplib3_vpm1_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_vpm2_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_cbc.out -solve)
   set_tests_properties(miplib3_vpm2_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_vpm2_cbc_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 13.75")
+  set_tests_properties(miplib3_vpm2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 endif ()
 
 if (CBC_BUILD_CBC_GENERIC) 
@@ -2297,338 +2492,528 @@ if (CBC_BUILD_CBC_GENERIC)
   set(TEST_REGEX "")
   add_regex(TEST_REGEX "Optimal objective -896644.821(86)?")
   set_tests_properties(netlib_israel_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
-
-
-
-
-  set_tests_properties(netlib_israel_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   
   #
   # miplib3 tests
   #
   
   add_test(NAME miplib3_10teams_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_cbc-generic.out -solve)
   set_tests_properties(miplib3_10teams_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_10teams_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 924")
+  set_tests_properties(miplib3_10teams_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_air03_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air03_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air03_cbc-generic.out -solve)
   set_tests_properties(miplib3_air03_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_air03_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 340160")
+  set_tests_properties(miplib3_air03_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_air04_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air04_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air04_cbc-generic.out -solve)
   set_tests_properties(miplib3_air04_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_air04_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 56137")
+  set_tests_properties(miplib3_air04_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_air05_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air05_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_air05_cbc-generic.out -solve)
   set_tests_properties(miplib3_air05_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_air05_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 26374")
+  set_tests_properties(miplib3_air05_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_arki001_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_cbc-generic.out -solve)
   set_tests_properties(miplib3_arki001_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_arki001_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7580813.0459") # Not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_arki001_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_bell3a_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_cbc-generic.out -solve)
   set_tests_properties(miplib3_bell3a_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_bell3a_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 878430.32")
+  set_tests_properties(miplib3_bell3a_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_bell5_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_cbc-generic.out -solve)
   set_tests_properties(miplib3_bell5_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_bell5_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 8966406.49")
+  set_tests_properties(miplib3_bell5_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_blend2_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_cbc-generic.out -solve)
   set_tests_properties(miplib3_blend2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_blend2_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7.598985")
+  set_tests_properties(miplib3_blend2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_cap6000_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_cbc-generic.out -solve)
   set_tests_properties(miplib3_cap6000_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_cap6000_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -2451377")
+  set_tests_properties(miplib3_cap6000_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_dano3mip_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_cbc-generic.out -solve)
   set_tests_properties(miplib3_dano3mip_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_dano3mip_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 728.1111") # not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_dano3mip_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_danoint_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_cbc-generic.out -solve)
   set_tests_properties(miplib3_danoint_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_danoint_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 65.67")
+  set_tests_properties(miplib3_danoint_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_dcmulti_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_cbc-generic.out -solve)
   set_tests_properties(miplib3_dcmulti_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_dcmulti_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 188182")
+  set_tests_properties(miplib3_dcmulti_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_dsbmip_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_cbc-generic.out -solve)
   set_tests_properties(miplib3_dsbmip_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_dsbmip_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -305.19817501")
+  set_tests_properties(miplib3_dsbmip_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_egout_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_egout_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_egout_cbc-generic.out -solve)
   set_tests_properties(miplib3_egout_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_egout_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 568.101")
+  set_tests_properties(miplib3_egout_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_enigma_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_cbc-generic.out -solve)
   set_tests_properties(miplib3_enigma_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_enigma_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 0.0")
+  set_tests_properties(miplib3_enigma_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_fast0507_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_cbc-generic.out -solve)
   set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 174")
+  set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_fiber_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_cbc-generic.out -solve)
   set_tests_properties(miplib3_fiber_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_fiber_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 405935.18000")
+  set_tests_properties(miplib3_fiber_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_fixnet6_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_cbc-generic.out -solve)
   set_tests_properties(miplib3_fixnet6_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_fixnet6_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 3983")
+  set_tests_properties(miplib3_fixnet6_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_flugpl_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_cbc-generic.out -solve)
   set_tests_properties(miplib3_flugpl_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_flugpl_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1201500")
+  set_tests_properties(miplib3_flugpl_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gen_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gen_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gen_cbc-generic.out -solve)
   set_tests_properties(miplib3_gen_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gen_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 112313")
+  set_tests_properties(miplib3_gen_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gesa2_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_cbc-generic.out -solve)
   set_tests_properties(miplib3_gesa2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa2_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 25779856.372")
+  set_tests_properties(miplib3_gesa2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gesa2_o_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_cbc-generic.out -solve)
   set_tests_properties(miplib3_gesa2_o_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa2_o_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 25779856.372")
+  set_tests_properties(miplib3_gesa2_o_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gesa3_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_cbc-generic.out -solve)
   set_tests_properties(miplib3_gesa3_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa3_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 27991042.648")
+  set_tests_properties(miplib3_gesa3_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gesa3_o_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_cbc-generic.out -solve)
   set_tests_properties(miplib3_gesa3_o_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa3_o_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 27991042.648")
+  set_tests_properties(miplib3_gesa3_o_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_gt2_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_cbc-generic.out -solve)
   set_tests_properties(miplib3_gt2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gt2_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 21166.000")
+  set_tests_properties(miplib3_gt2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_harp2_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_cbc-generic.out -solve)
   set_tests_properties(miplib3_harp2_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_harp2_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -73899798.00")
+  set_tests_properties(miplib3_harp2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_khb05250_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_cbc-generic.out -solve)
   set_tests_properties(miplib3_khb05250_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_khb05250_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 106940226")
+  set_tests_properties(miplib3_khb05250_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_l152lav_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_cbc-generic.out -solve)
   set_tests_properties(miplib3_l152lav_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_l152lav_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 4722")
+  set_tests_properties(miplib3_l152lav_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_lseu_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_cbc-generic.out -solve)
   set_tests_properties(miplib3_lseu_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_lseu_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1120")
+  set_tests_properties(miplib3_lseu_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_markshare1_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_cbc-generic.out -solve)
   set_tests_properties(miplib3_markshare1_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_markshare1_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1")
+  set_tests_properties(miplib3_markshare1_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_markshare2_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_cbc-generic.out -solve)
   set_tests_properties(miplib3_markshare2_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_markshare2_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1")
+  set_tests_properties(miplib3_markshare2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mas74_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_cbc-generic.out -solve)
   set_tests_properties(miplib3_mas74_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_mas74_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 11801.1857")
+  set_tests_properties(miplib3_mas74_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mas76_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_cbc-generic.out -solve)
   set_tests_properties(miplib3_mas76_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mas76_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 4005.1")
+  set_tests_properties(miplib3_mas76_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_misc03_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_cbc-generic.out -solve)
   set_tests_properties(miplib3_misc03_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_misc03_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 3360")
+  set_tests_properties(miplib3_misc03_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_misc06_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_cbc-generic.out -solve)
   set_tests_properties(miplib3_misc06_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_misc06_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 12850.8607")
+  set_tests_properties(miplib3_misc06_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_misc07_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_cbc-generic.out -solve)
   set_tests_properties(miplib3_misc07_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_misc07_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 2810")
+  set_tests_properties(miplib3_misc07_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mitre_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_cbc-generic.out -solve)
   set_tests_properties(miplib3_mitre_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mitre_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 115155")
+  set_tests_properties(miplib3_mitre_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mkc_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_cbc-generic.out -solve)
   set_tests_properties(miplib3_mkc_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_mkc_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -553.75") # not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_mkc_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mod008_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_cbc-generic.out -solve)
   set_tests_properties(miplib3_mod008_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mod008_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 307")
+  set_tests_properties(miplib3_mod008_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mod010_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_cbc-generic.out -solve)
   set_tests_properties(miplib3_mod010_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mod010_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 6548")
+  set_tests_properties(miplib3_mod010_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_mod011_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_cbc-generic.out -solve)
   set_tests_properties(miplib3_mod011_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_mod011_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -54558535")
+  set_tests_properties(miplib3_mod011_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_modglob_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_cbc-generic.out -solve)
   set_tests_properties(miplib3_modglob_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_modglob_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 20740508")
+  set_tests_properties(miplib3_modglob_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_noswot_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_cbc-generic.out -solve)
   set_tests_properties(miplib3_noswot_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_noswot_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -43")
+  set_tests_properties(miplib3_noswot_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_nw04_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_cbc-generic.out -solve)
   set_tests_properties(miplib3_nw04_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_nw04_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 16862")
+  set_tests_properties(miplib3_nw04_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p0033_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_cbc-generic.out -solve)
   set_tests_properties(miplib3_p0033_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0033_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 3089")
+  set_tests_properties(miplib3_p0033_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p0201_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_cbc-generic.out -solve)
   set_tests_properties(miplib3_p0201_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0201_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7615")
+  set_tests_properties(miplib3_p0201_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p0282_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_cbc-generic.out -solve)
   set_tests_properties(miplib3_p0282_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0282_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 258411")
+  set_tests_properties(miplib3_p0282_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p0548_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_cbc-generic.out -solve)
   set_tests_properties(miplib3_p0548_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0548_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 8691")
+  set_tests_properties(miplib3_p0548_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_p2756_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_cbc-generic.out -solve)
   set_tests_properties(miplib3_p2756_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p2756_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 3124")
+  set_tests_properties(miplib3_p2756_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_pk1_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_cbc-generic.out -solve)
   set_tests_properties(miplib3_pk1_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_pk1_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 11.0")
+  set_tests_properties(miplib3_pk1_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_pp08aCUTS_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_cbc-generic.out -solve)
   set_tests_properties(miplib3_pp08aCUTS_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_pp08aCUTS_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7350.0")
+  set_tests_properties(miplib3_pp08aCUTS_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_pp08a_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_cbc-generic.out -solve)
   set_tests_properties(miplib3_pp08a_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_pp08a_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 7350.0")
+  set_tests_properties(miplib3_pp08a_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_qiu_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_cbc-generic.out -solve)
   set_tests_properties(miplib3_qiu_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_qiu_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective -132.873137")
+  set_tests_properties(miplib3_qiu_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_qnet1_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_cbc-generic.out -solve)
   set_tests_properties(miplib3_qnet1_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_qnet1_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 16029.692681")
+  set_tests_properties(miplib3_qnet1_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_qnet1_o_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_cbc-generic.out -solve)
   set_tests_properties(miplib3_qnet1_o_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_qnet1_o_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 16029.692681")
+  set_tests_properties(miplib3_qnet1_o_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_rentacar_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_cbc-generic.out -solve)
   set_tests_properties(miplib3_rentacar_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_rentacar_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 30356761")
+  set_tests_properties(miplib3_rentacar_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_rgn_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_cbc-generic.out -solve)
   set_tests_properties(miplib3_rgn_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_rgn_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 82.1999")
+  set_tests_properties(miplib3_rgn_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_rout_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rout_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_rout_cbc-generic.out -solve)
   set_tests_properties(miplib3_rout_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_rout_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 1077.56")
+  set_tests_properties(miplib3_rout_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_set1ch_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_cbc-generic.out -solve)
   set_tests_properties(miplib3_set1ch_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_set1ch_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 54537.75")
+  set_tests_properties(miplib3_set1ch_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_seymour_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_cbc-generic.out -solve)
   set_tests_properties(miplib3_seymour_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_seymour_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 423") # not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_seymour_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_stein27_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_cbc-generic.out -solve)
   set_tests_properties(miplib3_stein27_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_stein27_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 18")
+  set_tests_properties(miplib3_stein27_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_stein45_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_cbc-generic.out -solve)
   set_tests_properties(miplib3_stein45_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_stein45_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 30")
+  set_tests_properties(miplib3_stein45_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_swath_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_swath_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_swath_cbc-generic.out -solve)
   set_tests_properties(miplib3_swath_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_swath_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 497.603") # not optimal - has stated in the miplib3 report
+  set_tests_properties(miplib3_swath_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_vpm1_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_cbc-generic.out -solve)
   set_tests_properties(miplib3_vpm1_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_vpm1_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 20")
+  set_tests_properties(miplib3_vpm1_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   add_test(NAME miplib3_vpm2_cbc-generic_standard 
-           COMMAND $<TARGET_FILE:cbc> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_cbc.out -solve)
+           COMMAND $<TARGET_FILE:cbc-generic> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -solution ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_cbc-generic.out -solve)
   set_tests_properties(miplib3_vpm2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_vpm2_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set(TEST_REGEX "")
+  add_regex(TEST_REGEX "Optimal objective 13.75")
+  set_tests_properties(miplib3_vpm2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 endif ()
