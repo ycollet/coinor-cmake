@@ -591,7 +591,7 @@ if (CBC_ENABLE_EXAMPLES)
     target_link_libraries(driver3 ${ZLIB_NAME})
   endif ()
   if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(driver2 ${BZLIB_NAME})
+    target_link_libraries(driver3 ${BZLIB_NAME})
   endif ()
   
   add_test(NAME cbc_example_driver3
@@ -612,21 +612,6 @@ if (CBC_ENABLE_EXAMPLES)
   add_test(NAME cbc_example_interrupt
            COMMAND $<TARGET_FILE:interrupt> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_interrupt PROPERTIES TIMEOUT 30)
-  
-  
-  add_executable(parallel2 ${Cbc_DIR}/examples/parallel2.cpp)
-  target_link_libraries(parallel2 libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack pthread)
-  set_include_directories(parallel2)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(parallel2 ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(parallel2 ${BZLIB_NAME})
-  endif ()
-  
-  add_test(NAME cbc_example_parallel2
-           COMMAND $<TARGET_FILE:parallel2> ${CMAKE_SOURCE_DIR}/Data/Sample)
-  set_tests_properties(cbc_example_parallel2 PROPERTIES TIMEOUT 30)
   
   
   add_executable(sample3 ${Cbc_DIR}/examples/sample3.cpp ${Cbc_DIR}/examples/CbcBranchUser.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
