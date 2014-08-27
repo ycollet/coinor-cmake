@@ -579,10 +579,10 @@ include_directories(Osi/src/OsiCommonTest)
 
 subdirs(ThirdParty)
 
-if (COIN_ENABLE_DOWNLOAD_ZLIB
+if (COIN_ENABLE_DOWNLOAD_ZLIB)
   set(COINUTILS_HAS_ZLIB ON)
 endif ()
-if (COIN_ENABLE_DOWNLOAD_BZLIB
+if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(COINUTILS_HAS_BZLIB ON)
 endif ()
 
