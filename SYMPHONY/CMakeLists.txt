@@ -748,8 +748,6 @@ include_directories(${SYMPHONY_DIR}/SYMPHONY/src/OsiSym)
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
-subdirs(SYMPHONY)
-
 subdirs(CoinUtils)
 subdirs(ThirdParty)
 
@@ -778,3 +776,5 @@ endif ()
 if (USE_OSI_SOPLEX)
   subdirs(Osi/OsiSpx) 
 endif ()
+
+subdirs(SYMPHONY)

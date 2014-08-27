@@ -17,14 +17,14 @@ include(ExternalProject)
 
 set(EP_InstallDir ${CMAKE_BINARY_DIR}/Dependencies)
 
-if (NOT EXISTS ${CMAKE_BINARY_DIR}/Dependencies)
-  make_directory(${CMAKE_BINARY_DIR}/Dependencies)
+if (NOT EXISTS ${EP_InstallDir})
+  make_directory(${EP_InstallDir})
 endif ()
-if (NOT EXISTS ${CMAKE_BINARY_DIR}/Dependencies/lib)
-  make_directory(${CMAKE_BINARY_DIR}/Dependencies/lib)
+if (NOT EXISTS ${EP_InstallDir}/lib)
+  make_directory(${EP_InstallDir}/lib)
 endif ()
-if (NOT EXISTS ${CMAKE_BINARY_DIR}/Dependencies/include)
-  make_directory(${CMAKE_BINARY_DIR}/Dependencies/include)
+if (NOT EXISTS ${EP_InstallDir}/include)
+  make_directory(${EP_InstallDir}/include)
 endif ()
 
 # #################################################
@@ -34,6 +34,10 @@ endif ()
 if (COIN_ENABLE_DOWNLOAD_ZLIB)
   set(ZLIB_VERSION "1.2.8")
 
+  set(COINUTILS_HAS_ZLIB ON CACHE BOOL "CoinUtils uses the Zlib library")
+  set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Zlib library include Path")
+  set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Zlib library library Path")
+  
   if (WIN32)
     set(ZLIB_NAME "${EP_InstallDir}/lib/libz.lib" CACHE STRING "The Zlib library name" FORCE)
     
@@ -70,8 +74,12 @@ endif()
 if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(BZLIB_VERSION "1.0.6")
 
+  set(COINUTILS_HAS_BZLIB ON CACHE BOOL "CoinUtils uses the Bzlib library")
+  set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Bzlib library include Path")
+  set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Bzlib library library Path")
+  
   if (WIN32)
-    set(ZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The Bzlib library name" FORCE)
+    set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The Bzlib library name" FORCE)
     
     ExternalProject_Add(EP_Bzlib
                         PREFIX ${EP_InstallDir}/Bzlib
@@ -142,6 +150,9 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     add_dependencies(${_target} EP_Zlib)
   endif ()
+  if (COIN_ENABLE_DOWNLOAD_BZLIB)
+    add_dependencies(${_target} EP_BZlib)
+  endif ()
 endmacro()
 
 macro(add_executable _target)
@@ -152,6 +163,9 @@ macro(add_executable _target)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     add_dependencies(${_target} EP_Zlib)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_BZLIB)
+    add_dependencies(${_target} EP_BZlib)
   endif ()
 endmacro()
 

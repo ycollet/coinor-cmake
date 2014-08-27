@@ -599,8 +599,8 @@ endif(DOXYGEN AND ENABLE_DOXYGEN)
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
-subdirs(CoinUtils)
 subdirs(ThirdParty)
+subdirs(CoinUtils)
 
 subdirs(Osi/Osi)
 subdirs(Cgl)

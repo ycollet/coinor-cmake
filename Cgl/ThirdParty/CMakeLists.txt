@@ -1,14 +1,15 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(Osi_Thirdparty)
+project(Cgl_Thirdparty)
 
 # CMakeLists.txt designed for 
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
-option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
-option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
-option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
+option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32   "Enable the download / compilation of PThreads for Windows" OFF)
+option(COIN_ENABLE_DOWNLOAD_LAPACK          "Enable the download / compilation of Blas / Lapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_GLPK            "Enable the download / compilation of GLPK" OFF)
+option(COIN_ENABLE_DOWNLOAD_DATA_TEST       "Enable the download / run of Data tests" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB            "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB           "Enable the download / compilation of Bzlib" OFF)
 
@@ -28,6 +29,27 @@ endif ()
 if (NOT EXISTS ${EP_InstallDir}/include)
   make_directory(${EP_InstallDir}/include)
 endif ()
+
+# #################################################
+# ===>    Macros
+# #################################################
+
+# add_regex: allow to concat several regex into one for using it with cmake
+macro(add_regex VARIABLE REGEX)
+  set(${VARIABLE} "${${VARIABLE}}${REGEX}.*")
+endmacro()
+
+# Example of use:
+#
+# set(TEST_REGEX "")
+# add_regex(TEST_REGEX "INFO  : Overall capacity cost : 7.54846e[+]09")
+# add_regex(TEST_REGEX "INFO  : Overall simulation cost : 3.40945e[+]09")
+# add_regex(TEST_REGEX "INFO  : Overall reward : -1.09579e[+]10")
+# set_tests_properties(Test_Name PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+# #################################################
+# <===    Macros
+# #################################################
 
 # #################################################
 # ===>    Lapack
@@ -63,7 +85,7 @@ endif()
 
 if (COIN_ENABLE_DOWNLOAD_ZLIB)
   set(ZLIB_VERSION "1.2.8")
-
+  
   set(COINUTILS_HAS_ZLIB ON CACHE BOOL "CoinUtils uses the Zlib library")
   set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Zlib library include Path")
   set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Zlib library library Path")
@@ -206,6 +228,29 @@ endif ()
 
 # #################################################
 # <=== PThreads compilation
+# #################################################
+
+# #################################################
+# ===> Tests
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
+  set(DATA_TEST_VERSION "1.0.7")
+  
+  ExternalProject_Add(EP_DATA_TEST
+                      PREFIX ${EP_InstallDir}/DATA_TEST
+		      URL http://www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz
+                      PATCH_COMMAND     ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ""
+                      )
+  
+  include(ClpTests.cmake)
+endif()
+
+# #################################################
+# <=== Tests
 # #################################################
 
 # #################################################
