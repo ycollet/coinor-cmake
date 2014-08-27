@@ -98,6 +98,8 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+Enable_Testing()
+
 # Various definitions
 # Set to 1 if the CoinUtils package is available
 set(COIN_HAS_COINUTILS 1)
