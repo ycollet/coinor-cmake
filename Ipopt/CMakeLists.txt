@@ -1,0 +1,474 @@
+cmake_minimum_required(VERSION 2.8)
+
+project(IpOpt)
+
+#undef BUILD_INEXACT - Define to 1 if the inexact linear solver option is included
+#undef COIN_HAS_ASL
+#undef COIN_HAS_BLAS
+#undef COIN_HAS_HSL
+#undef COIN_HAS_LAPACK
+#undef COIN_HAS_MUMPS
+#undef HAVE_PARDISO
+
+#undef HAVE_MPI_INITIALIZED - Define to 1 if you have the `MPI_Initialized' function.
+#undef HAVE_PARDISO_MKL - Define to 1 if you are using Pardiso from MKL
+#undef HAVE_PARDISO_OLDINTERFACE - Define to 1 if you are not using at least a 4.0 version of Pardiso
+#undef HAVE_PARDISO_PARALLEL - Define to 1 if you are using the parallel version of Pardiso
+#undef HAVE_LINEARSOLVERLOADER - Define to 1 if the linear solver loader should be compiled to allow dynamic loading of shared libraries with linear solvers
+#undef HAVE_WSMP - Define to 1 if WSMP is available
+#undef SHAREDLIBEXT - Set to extension for shared libraries in quotes.
+
+#COINHSL_HAS_MA57
+#COINHSL_HAS_MA28
+#COINHSL_HAS_MA86
+#COINHSL_HAS_METIS
+#COINHSL_HAS_MC19
+#COINHSL_HAS_MA77
+#COINHSL_HSL2013
+#COINHSL_HAS_MC68
+#COINHSL_HAS_MA97
+#COINHSL_HAS_MA27
+
+#------------------------------------------------------------
+# Detect 64 bits
+#------------------------------------------------------------
+
+if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+  set( HAVE_64_BIT 0 )
+else( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+  set( HAVE_64_BIT 1 )
+endif( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+
+option(IPOPT_ENABLE_AMPL    "Enable Ampl interface" OFF)
+option(IPOPT_ENABLE_PARDISO "Enable Pardiso solver" OFF)
+option(IPOPT_ENABLE_HSL     "Enable HSL interface"  OFF)
+option(IPOPT_ENABLE_WSMP    "Enable WSMP solver"    OFF)
+option(IPOPT_ENABLE_MUMPS   "Enable Mumps solver"   OFF)
+
+# Compilation options
+option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
+option(COIN_COMPILE_STATIC           "Activate the static linking" OFF)
+option(COIN_COMPILE_COVERAGE         "Activate the code coverage compilation" OFF)
+option(COIN_COMPILE_PROFILE          "Activate the code profiling compilation" OFF)
+option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation for valgrind" OFF)
+option(COIN_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
+option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
+option(COIN_USE_FAST_CODE            "Use intensive optimization flags" OFF)
+
+set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
+set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
+
+option(IPOPT_HAS_MUMPS "IpOpt uses the MUMPS linear solver" OFF)
+set(IPOPT_HAS_MUMPS_INCLUDE_PATH "None" CACHE STRING "The MUMPS linear solver include Path")
+set(IPOPT_HAS_MUMPS_LIBRARY_PATH "None" CACHE STRING "The MUMPS linear solver absolute library Path")
+
+option(IPOPT_HAS_WSMP "IpOpt uses the WSMP linear solver" OFF)
+set(IPOPT_HAS_WSMP_INCLUDE_PATH "None" CACHE STRING "The WSMP linear solver include Path")
+set(IPOPT_HAS_WSMP_LIBRARY_PATH "None" CACHE STRING "The WSMP linear solver absolute library Path")
+
+# Set paths for binary and library generation inside the build directory:
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+Enable_Testing()
+
+# Various definitions
+
+# Name of package
+set(PACKAGE "IpOpt")
+# Define to the address where bug reports for this package should be sent.
+set(PACKAGE_BUGREPORT "bugs@coin-or.org")
+# Define to the full name of this package.
+set(PACKAGE_NAME "IpOpt")
+# Define to the full name and version of this package.
+set(PACKAGE_STRING "IpOpt")
+# Define to the one symbol short name of this package.
+set(PACKAGE_TARNAME "ipopt")
+# Define to the version of this package.
+set(PACKAGE_VERSION "3.11.9")
+
+if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../ipopt_binary" 
+      CACHE PATH "IpOpt install prefix" FORCE)
+endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+
+# Check some directories
+
+#if ((NOT COIN_HAS_MUMPS_INCLUDE_PATH STREQUAL "None") AND (NOT EXISTS ${COIN_HAS_MUMPS_INCLUDE_PATH}))
+#  message(FATAL_ERROR "Error: COIN_HAS_MUMPS_INCLUDE_PATH = ${COIN_HAS_MUMPS_INCLUDE_PATH} which is not an existing directory")
+#endif ()
+#if ((NOT COIN_HAS_MUMPS_LIBRARY_PATH STREQUAL "None") AND (NOT EXISTS ${COIN_HAS_MUMPS_LIBRARY_PATH}))
+#  message(FATAL_ERROR "Error: COIN_HAS_MUMPS_LIBRARY_PATH = ${COIN_HAS_MUMPS_LIBRARY_PATH} which is not an existing directory")
+#endif ()
+#if ((NOT COIN_HAS_WSMP_INCLUDE_PATH STREQUAL "None") AND (NOT EXISTS ${COIN_HAS_WSMP_INCLUDE_PATH}))
+#  message(FATAL_ERROR "Error: COIN_HAS_WSMP_INCLUDE_PATH = ${COIN_HAS_WSMP_INCLUDE_PATH} which is not an existing directory")
+#endif ()
+#if ((NOT COIN_HAS_WSMP_LIBRARY_PATH STREQUAL "None") AND (NOT EXISTS ${COIN_HAS_WSMP_LIBRARY_PATH}))
+#  message(FATAL_ERROR "Error: COIN_HAS_WSMP_LIBRARY_PATH = ${COIN_HAS_WSMP_LIBRARY_PATH} which is not an existing directory")
+#endif ()
+
+#-----------------------------------------------------------------------------
+# Manage compilation options
+#-----------------------------------------------------------------------------
+
+if (UNIX)
+  if (COIN_COMPILE_STATIC)
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -z muldefs")
+  elseif (COIN_COMPILE_COVERAGE)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} --coverage -fno-inline")
+  elseif (COIN_COMPILE_PROFILE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pg")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
+  elseif (COIN_COMPILE_PROFILE_VALGRIND)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -p")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -p")
+  else ()
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z muldefs")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC")
+  endif ()
+  
+  if (COIN_COMPILE_LTO)
+    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lto")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lto")
+    endif ()
+    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -flto")
+    endif ()
+  elseif (COIN_COMPILE_WHOPR)
+    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fwhopr")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fwhopr")
+    endif ()
+  endif ()
+elseif (WIN32)
+  if (MSVC)
+    if (COIN_COMPILE_LTO OR COIN_COMPILE_WHOPR)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL ")
+      set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} /GL ")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG ")
+    endif ()
+  endif ()
+endif ()
+
+#-----------------------------------------------------------------------------
+# Manage threads include dir under Windows
+#-----------------------------------------------------------------------------
+
+if (WIN32)
+  if (NOT COIN_THREADS_INC_PATH STREQUAL "None")
+    include_directories(${COIN_THREADS_INC_PATH})
+  endif ()
+endif ()
+
+# Define FORTRAN_INTEGER_TYPE for Ipopt.
+set(FORTRAN_INTEGER_TYPE int)
+
+#-----------------------------------------------------------------------------
+# Detect name mangling convention used between Fortran and C
+#-----------------------------------------------------------------------------
+
+if (NOT WIN32)
+  #enable_language(Fortran)
+  #
+  #include(FortranCInterface)
+  #
+  #FortranCInterface_HEADER(${CMAKE_BINARY_DIR}/F77Mangle.h
+  #                         MACRO_NAMESPACE "F77_"
+  #               SYMBOL_NAMESPACE "F77_"
+  #               SYMBOLS mysub mymod:my_sub
+  #              )
+  #
+  #file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
+  #string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
+  #set(F77_FUNC "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
+  #
+  #file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
+  #string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
+  #set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
+  
+  set(F77_FUNC "F77_FUNC(name,NAME) name##_")
+  set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
+else ()
+  set(F77_FUNC "F77_FUNC(name,NAME) name##_")
+  set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
+endif ()
+
+# End detect fortran mangling
+
+if (NOT WIN32)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -fPIC ")
+  # Try to locate unitizalized variables
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
+endif ()
+
+include(CheckIncludeFile)
+
+check_include_file("assert.h"    HAVE_ASSERT_H)
+check_include_file("cassert"     HAVE_CASSERT)
+check_include_file("cctype"      HAVE_CCTYPE)
+check_include_file("cfloat"      HAVE_CFLOAT)
+check_include_file("cieeefp"     HAVE_CIEEEFP)
+check_include_file("cmath"       HAVE_CMATH)
+check_include_file("cstdarg"     HAVE_CSTDARG)
+check_include_file("cstddef"     HAVE_CSTDDEF)
+check_include_file("cstdio"      HAVE_CSTDIO)
+check_include_file("cstlib"      HAVE_CSTLIB)
+check_include_file("cstring"     HAVE_CSTRING)
+check_include_file("ctime"       HAVE_CTIME)
+check_include_file("ctype.h"     HAVE_CTYPE_H)
+check_include_file("dlfcn.h"     HAVE_DLFCN_H)
+check_include_file("float.h"     HAVE_FLOAT_H)
+check_include_file("ieeefp.h"    HAVE_IEEEFP_H)
+check_include_file("inttypes.h"  HAVE_INTTYPES_H)
+check_include_file("math.h"      HAVE_MATH_H)
+check_include_file("stdarg.h"    HAVE_STDARG_H)
+check_include_file("stddef.h"    HAVE_STDDEF_H)
+check_include_file("stdint.h"    HAVE_STDINT_H)
+check_include_file("stdio.h"     HAVE_STDIO_H)
+check_include_file("stdlib.h"    HAVE_STDLIB_H)
+check_include_file("strings.h"   HAVE_STRINGS_H)
+check_include_file("string.h"    HAVE_STRING_H)
+check_include_file("sys/stat.h"  HAVE_SYS_STAT_H)
+check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
+check_include_file("time.h"      HAVE_TIME_H)
+check_include_file("unistd.h"    HAVE_UNISTD_H)
+check_include_file("windows.h"   HAVE_WINDOWS_H)
+
+#include(CheckCXXCompilerFlag)
+#
+#check_cxx_compiler_flag(-std=c++11 HAVE_STD_CPP11_FLAG)
+#if (HAVE_STD_CPP11_FLAG)
+#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+#else ()
+#  check_cxx_compiler_flag(-std=c++0x HAVE_STD_CPP0X_FLAG)
+#  if (HAVE_STD_CPP0X_FLAG)
+#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+#  endif ()
+#endif ()
+
+#check_cxx_compiler_flag(-Qunused-arguments HAVE_QUNUSED_ARGUMENTS)
+#if (HAVE_QUNUSED_ARGUMENTS)
+#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Qunused-arguments")
+#endif ()
+
+include(CheckTypeSize)
+
+CHECK_TYPE_SIZE("int *"     SIZEOF_INT_P)
+
+include(CheckSymbolExists)
+
+if (HAVE_ASSERT_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "assert.h")
+endif ()
+if (HAVE_CASSERT)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cassert")
+endif ()
+if (HAVE_CCTYPE)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cctype")
+endif ()
+if (HAVE_CFLOAT)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cfloat")
+endif ()
+if (HAVE_CIEEEFP)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cieeefp")
+endif ()
+if (HAVE_CMATH)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cmath")
+endif ()
+if (HAVE_CSTDARG)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstdarg")
+endif ()
+if (HAVE_CSTDDEF)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstddef")
+endif ()
+if (HAVE_CSTDIO)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstdio")
+endif ()
+if (HAVE_CSTLIB)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstdlib")
+endif ()
+if (HAVE_CSTRING)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstring")
+endif ()
+if (HAVE_CTIME)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "ctime")
+endif ()
+if (HAVE_CTYPE_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "ctype.h")
+endif ()
+if (HAVE_DLFCN_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "dlfcn.h")
+endif ()
+if (HAVE_FLOAT_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "float.h")
+endif ()
+if (HAVE_IEEEFP_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "ieeefp.h")
+endif ()
+if (HAVE_INTTYPES_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "inttypes.h")
+endif ()
+if (HAVE_MATH_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "math.h")
+endif ()
+if (HAVE_STDARG_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stdarg.h")
+endif ()
+if (HAVE_STDDEF_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stddef.h")
+endif ()
+if (HAVE_STDINT_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stdint.h")
+endif ()
+if (HAVE_STDIO_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stdio.h")
+endif ()
+if (HAVE_STDLIB_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stdlib.h")
+endif ()
+if (HAVE_STRINGS_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "strings.h")
+endif ()
+if (HAVE_STRING_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "string.h")
+endif ()
+if (HAVE_SYS_STAT_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "sys/stat.h")
+endif ()
+if (HAVE_SYS_TYPES_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "sys/types.h")
+endif ()
+if (HAVE_TIME_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "time.h")
+endif ()
+if (HAVE_UNISTD_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "unistd.h")
+endif ()
+if (HAVE_WINDOWS_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "windows.h")
+endif ()
+
+CHECK_SYMBOL_EXISTS(isfinite ${TEST_INCLUDE_LIST} COIN_C_FINITE_R)
+if (COIN_C_FINITE_R)
+  set(COIN_C_FINITE isfinite)
+endif ()
+CHECK_SYMBOL_EXISTS(finite ${TEST_INCLUDE_LIST} COIN_C_FINITE_R)
+if (COIN_C_FINITE_R)
+  set(COIN_C_FINITE finite)
+endif ()
+CHECK_SYMBOL_EXISTS(_finite ${TEST_INCLUDE_LIST} COIN_C_FINITE_R)
+if (COIN_C_FINITE_R)
+  set(COIN_C_FINITE _finite)
+endif ()
+
+CHECK_SYMBOL_EXISTS(dran48     ${TEST_INCLUDE_LIST} HAVE_DRAND48)
+CHECK_SYMBOL_EXISTS(rand       ${TEST_INCLUDE_LIST} HAVE_RAND)
+CHECK_SYMBOL_EXISTS(snprint    ${TEST_INCLUDE_LIST} HAVE_SNPRINTF)
+CHECK_SYMBOL_EXISTS(std::rand  ${TEST_INCLUDE_LIST} HAVE_STD__RAND)
+CHECK_SYMBOL_EXISTS(va_copy    ${TEST_INCLUDE_LIST} HAVE_VA_COPY)
+CHECK_SYMBOL_EXISTS(vsnprintf  ${TEST_INCLUDE_LIST} HAVE_VSNPRINTF)
+CHECK_SYMBOL_EXISTS(_snprintf  ${TEST_INCLUDE_LIST} HAVE__SNPRINTF)
+CHECK_SYMBOL_EXISTS(_vsnprintf ${TEST_INCLUDE_LIST} HAVE__VSNPRINTF)
+
+# Define to dummy `main' function (if any) required to link to the Fortran libraries.
+# F77_DUMMY_MAIN
+
+# Define to a macro mangling the given C identifier (in lower and upper
+# case), which must not contain underscores, for linking with Fortran.
+# F77_FUNC
+
+# As F77_FUNC, but for C identifiers containing underscores.
+# F77_FUNC_
+
+# Define if F77 and FC dummy `main' functions are identical.
+# FC_DUMMY_MAIN_EQ_F77
+
+if (COIN_USE_FAST_CODE)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fomit-frame-pointer ")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fomit-frame-pointer ")
+  
+  if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-math-errno -fp-trap=none ")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-math-errno -fp-trap=none ")
+  endif ()
+
+  if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffast-math -fno-math-errno -fno-trapping-math ")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffast-math -fno-math-errno -fno-trapping-math ")
+  endif ()
+  
+endif ()
+
+add_definitions(-DHAVE_CONFIG_H)
+
+#-----------------------------------------------
+# A trick to switch to 32 compilation when in
+# a 64 bits mode
+#-----------------------------------------------
+
+#if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
+#  if (CMAKE_CL_64)
+#    # The following line calls the build configuration for x86 VS2010 compiler
+#    # call "\"%VS100COMNTOOLS%../../VC/vcvarsall.bat\"" x86
+#    add_custom_command(
+#      OUTPUT "${octFileName}"
+#      COMMAND call "\"%VS100COMNTOOLS%../../VC/vcvarsall.bat\"" x86
+#      COMMAND ${CMAKE_COMMAND} ARGS -E chdir ${OCTAVE_PATH} ${MKOCTFILE_EXECUTABLE} -I${OCTAVE_QT_QTNETWORK_INCLUDE_DIR}
+#                               -I${OCTAVE_QT_QTCORE_INCLUDE_DIR} -I${OCTAVE_QT_INCLUDE_DIR} ${RPATH_COMMAND}
+#                   -L${OCTAVE_QT_LIBRARY_DIR} -lQtCore${QT_LIBRARY_POSTFIX} -lQtNetwork${QT_LIBRARY_POSTFIX} -o "${octFileName}" "${srcFileName}"
+#      DEPENDS "${srcFileName}"
+#      COMMENT "Generating ${octFileName}"
+#      )
+#endif ()
+
+#-----------------------------------------------
+# Doxygen documentation
+#-----------------------------------------------
+
+set(doc_dir doc)
+find_package(Doxygen)
+
+if(DOXYGEN AND ENABLE_DOXYGEN)
+  configure_file(${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
+
+  add_custom_target(docs 
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
+endif(DOXYGEN AND ENABLE_DOXYGEN)
+
+#subdirs(ThirdParty)
+subdirs(Ipopt)
