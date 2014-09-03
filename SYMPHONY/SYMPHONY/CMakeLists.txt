@@ -74,14 +74,6 @@ if (USE_CL)
                                 {SYMPHONY_DIR}/SYMPHONY/include/sym_win32_time.h)
 endif ()
 
-if (USE_OPENMP)
-  find_package(OpenMP)
-  if (OPENMP_FOUND)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   ${OpenMP_C_FLAGS}")
-  endif()
-endif()
-
 set(SYM_MASTER_SRC ${SYMPHONY_DIR}/SYMPHONY/src/Master/master.c 
                    ${SYMPHONY_DIR}/SYMPHONY/src/Master/master_wrapper.c
                    ${SYMPHONY_DIR}/SYMPHONY/src/Master/master_io.c
@@ -303,32 +295,16 @@ endmacro()
 set_source_files_properties(${EXAMPLES_SRC} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${MAIN_SRC} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${ALL_SYM_MASTER} PROPERTIES LANGUAGE CXX)
-set_source_files_properties(${ALL_LP} PROPERTIES LANGUAGE CXX)
-set_source_files_properties(${ALL_CG} PROPERTIES LANGUAGE CXX)
-set_source_files_properties(${ALL_CP} PROPERTIES LANGUAGE CXX)
-set_source_files_properties(${ALL_TM} PROPERTIES LANGUAGE CXX)
 
 if (ENABLE_SHARED_LIBRARIES)
   add_library(libSym    SHARED ${ALL_SYM_MASTER})
-  add_library(libSym_lp SHARED ${ALL_LP})
-  add_library(libSym_cg SHARED ${ALL_CG})
-  add_library(libSym_cp SHARED ${ALL_CP})
-  add_library(libSym_tm SHARED ${ALL_TM})
   add_library(libOsiSym SHARED ${OSISYM_SRC})
 else ()
   add_library(libSym    STATIC ${ALL_SYM_MASTER})
-  add_library(libSym_lp STATIC ${ALL_LP})
-  add_library(libSym_cg STATIC ${ALL_CG})
-  add_library(libSym_cp STATIC ${ALL_CP})
-  add_library(libSym_tm STATIC ${ALL_TM})
   add_library(libOsiSym STATIC ${OSISYM_SRC})
 endif ()
 
 set_include_directories(libSym)
-set_include_directories(libSym_lp)
-set_include_directories(libSym_cg)
-set_include_directories(libSym_cp)
-set_include_directories(libSym_tm)
 set_include_directories(libOsiSym)
 
 add_executable(symphony ${MAIN_SRC})
@@ -345,60 +321,132 @@ if (USE_OPENMP AND UNIX)
   target_link_libraries(symphony gomp)
 endif ()
 
-add_executable(symphony_lp ${MAIN_SRC})
-#symphony_CPPFLAGS = $(PCPPFLAGS)
-target_link_libraries(symphony_lp libSym_lp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-set_include_directories(symphony_lp)
-if (COINUTILS_HAS_ZLIB)
-  target_link_libraries(symphony_lp ${ZLIB_NAME})
-endif ()
-if (COINUTILS_HAS_BZLIB)
-  target_link_libraries(symphony_lp ${BZLIB_NAME})
-endif ()
-if (USE_OPENMP AND UNIX)
-  target_link_libraries(symphony_lp gomp)
+if (NOT SYM_COMPILE_IN_LP)
+  set_source_files_properties(${ALL_LP} PROPERTIES LANGUAGE CXX)
+  
+  if (ENABLE_SHARED_LIBRARIES)
+    add_library(libSym_lp SHARED ${ALL_LP})
+  else ()
+    add_library(libSym_lp STATIC ${ALL_LP})
+  endif ()
+  
+  set_include_directories(libSym_lp)
+
+  add_executable(symphony_lp ${MAIN_SRC})
+  #symphony_CPPFLAGS = $(PCPPFLAGS)
+  target_link_libraries(symphony_lp libSym_lp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(symphony_lp)
+  if (COINUTILS_HAS_ZLIB)
+    target_link_libraries(symphony_lp ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(symphony_lp ${BZLIB_NAME})
+  endif ()
+  if (USE_OPENMP AND UNIX)
+    target_link_libraries(symphony_lp gomp)
+  endif ()
+
+  install(TARGETS symphony_lp
+          DESTINATION bin)
+
+  install(TARGETS libSym_lp
+          DESTINATION lib)
 endif ()
 
-add_executable(symphony_cg ${MAIN_SRC})
-#symphony_CPPFLAGS = $(PCPPFLAGS)
-target_link_libraries(symphony_cg libSym_cg libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-set_include_directories(symphony_cg)
-if (COINUTILS_HAS_ZLIB)
-  target_link_libraries(symphony_cg ${ZLIB_NAME})
-endif ()
-if (COINUTILS_HAS_BZLIB)
-  target_link_libraries(symphony_cg ${BZLIB_NAME})
-endif ()
-if (USE_OPENMP AND UNIX)
-  target_link_libraries(symphony_cg gomp)
+if (NOT SYM_COMPILE_IN_CG)
+  set_source_files_properties(${ALL_CG} PROPERTIES LANGUAGE CXX)
+  
+  if (ENABLE_SHARED_LIBRARIES)
+    add_library(libSym_cg SHARED ${ALL_CG})
+  else ()
+    add_library(libSym_cg STATIC ${ALL_CG})
+  endif ()
+  
+  set_include_directories(libSym_cg)
+
+  add_executable(symphony_cg ${MAIN_SRC})
+  #symphony_CPPFLAGS = $(PCPPFLAGS)
+  target_link_libraries(symphony_cg libSym_cg libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(symphony_cg)
+  if (COINUTILS_HAS_ZLIB)
+    target_link_libraries(symphony_cg ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(symphony_cg ${BZLIB_NAME})
+  endif ()
+  if (USE_OPENMP AND UNIX)
+    target_link_libraries(symphony_cg gomp)
+  endif ()
+
+  install(TARGETS symphony_cg
+          DESTINATION bin)
+
+  install(TARGETS libSym_cg
+          DESTINATION lib)
 endif ()
 
-add_executable(symphony_cp ${MAIN_SRC})
-#symphony_CPPFLAGS = $(PCPPFLAGS)
-target_link_libraries(symphony_cp libSym_cp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-set_include_directories(symphony_cp)
-if (COINUTILS_HAS_ZLIB)
-  target_link_libraries(symphony_cp ${ZLIB_NAME})
-endif ()
-if (COINUTILS_HAS_BZLIB)
-  target_link_libraries(symphony_cp ${BZLIB_NAME})
-endif ()
-if (USE_OPENMP AND UNIX)
-  target_link_libraries(symphony_cp gomp)
+if (NOT SYM_COMPILE_IN_CP)
+  set_source_files_properties(${ALL_CP} PROPERTIES LANGUAGE CXX)
+  
+  if (ENABLE_SHARED_LIBRARIES)
+    add_library(libSym_cp SHARED ${ALL_CP})
+  else ()
+    add_library(libSym_cp STATIC ${ALL_CP})
+  endif ()
+  
+  set_include_directories(libSym_cp)
+
+  add_executable(symphony_cp ${MAIN_SRC})
+  #symphony_CPPFLAGS = $(PCPPFLAGS)
+  target_link_libraries(symphony_cp libSym_cp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(symphony_cp)
+  if (COINUTILS_HAS_ZLIB)
+    target_link_libraries(symphony_cp ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(symphony_cp ${BZLIB_NAME})
+  endif ()
+  if (USE_OPENMP AND UNIX)
+    target_link_libraries(symphony_cp gomp)
+  endif ()
+
+  install(TARGETS symphony_cp
+          DESTINATION bin)
+
+  install(TARGETS libSym_cp
+          DESTINATION lib)
 endif ()
 
-add_executable(symphony_tm ${MAIN_SRC})
-#symphony_CPPFLAGS = $(PCPPFLAGS)
-target_link_libraries(symphony_tm libSym_tm libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-set_include_directories(symphony_tm)
-if (COINUTILS_HAS_ZLIB)
-  target_link_libraries(symphony_tm ${ZLIB_NAME})
-endif ()
-if (COINUTILS_HAS_BZLIB)
-  target_link_libraries(symphony_tm ${BZLIB_NAME})
-endif ()
-if (USE_OPENMP AND UNIX)
-  target_link_libraries(symphony_tm gomp)
+if (NOT SYM_COMPILE_IN_TM)
+  set_source_files_properties(${ALL_TM} PROPERTIES LANGUAGE CXX)
+  
+  if (ENABLE_SHARED_LIBRARIES)
+    add_library(libSym_tm SHARED ${ALL_TM})
+  else ()
+    add_library(libSym_tm STATIC ${ALL_TM})
+  endif ()
+  
+  set_include_directories(libSym_tm)
+
+  add_executable(symphony_tm ${MAIN_SRC})
+  #symphony_CPPFLAGS = $(PCPPFLAGS)
+  target_link_libraries(symphony_tm libSym_tm libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+  set_include_directories(symphony_tm)
+  if (COINUTILS_HAS_ZLIB)
+    target_link_libraries(symphony_tm ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB)
+    target_link_libraries(symphony_tm ${BZLIB_NAME})
+  endif ()
+  if (USE_OPENMP AND UNIX)
+    target_link_libraries(symphony_tm gomp)
+  endif ()
+
+  install(TARGETS symphony_tm
+          DESTINATION bin)
+
+  install(TARGETS libSym_tm
+          DESTINATION lib)
 endif ()
 
 if (SYMPHONY_BUILD_EXAMPLES)
@@ -418,6 +466,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_bicriteria
            COMMAND $<TARGET_FILE:bicriteria> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_bicriteria PROPERTIES TIMEOUT 30)
+  
   
   add_executable(milp ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c)
   target_link_libraries(milp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
@@ -563,13 +612,15 @@ if (SYMPHONY_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:warm_start3> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_warm_start3 PROPERTIES TIMEOUT 30)
   set_tests_properties(symphony_example_warm_start3 PROPERTIES LABELS "LONG")
-  
 endif ()
 
-install(TARGETS symphony symphony_lp symphony_cg symphony_cp symphony_tm
+install(TARGETS symphony
         DESTINATION bin)
 
-install(TARGETS libSym libSym_lp libSym_cg libSym_cp libSym_tm
+install(TARGETS libSym
+        DESTINATION lib)
+
+install(TARGETS libOsiSym
         DESTINATION lib)
 
 install(FILES ${Symphony_SRC_LIST_Headers} 
