@@ -18,17 +18,6 @@ project(IpOpt)
 #undef HAVE_WSMP - Define to 1 if WSMP is available
 #undef SHAREDLIBEXT - Set to extension for shared libraries in quotes.
 
-#COINHSL_HAS_MA57
-#COINHSL_HAS_MA28
-#COINHSL_HAS_MA86
-#COINHSL_HAS_METIS
-#COINHSL_HAS_MC19
-#COINHSL_HAS_MA77
-#COINHSL_HSL2013
-#COINHSL_HAS_MC68
-#COINHSL_HAS_MA97
-#COINHSL_HAS_MA27
-
 #------------------------------------------------------------
 # Detect 64 bits
 #------------------------------------------------------------
@@ -163,6 +152,12 @@ if (WIN32)
   endif ()
 endif ()
 
+# Check for a fortran compiler
+include(CMakeDetermineFortranCompiler)
+if (NOT CMAKE_Fortran_COMPILER)
+  message(STATUS "WARNING: fortran compiler not found. Disabling f77/f95 bindings")
+endif ()
+
 # Define FORTRAN_INTEGER_TYPE for Ipopt.
 set(FORTRAN_INTEGER_TYPE int)
 
@@ -170,24 +165,23 @@ set(FORTRAN_INTEGER_TYPE int)
 # Detect name mangling convention used between Fortran and C
 #-----------------------------------------------------------------------------
 
-if (NOT WIN32)
-  #enable_language(Fortran)
-  #
-  #include(FortranCInterface)
-  #
-  #FortranCInterface_HEADER(${CMAKE_BINARY_DIR}/F77Mangle.h
-  #                         MACRO_NAMESPACE "F77_"
-  #               SYMBOL_NAMESPACE "F77_"
-  #               SYMBOLS mysub mymod:my_sub
-  #              )
-  #
-  #file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
-  #string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
-  #set(F77_FUNC "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
-  #
-  #file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
-  #string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
-  #set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
+if (CMAKE_Fortran_COMPILER)
+  enable_language(Fortran)
+  
+  include(FortranCInterface)
+  
+  FortranCInterface_HEADER(${CMAKE_BINARY_DIR}/F77Mangle.h
+                           MACRO_NAMESPACE "F77_"
+			   SYMBOL_NAMESPACE "F77_"
+			   SYMBOLS mysub mymod:my_sub)
+  
+  file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
+  string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
+  set(F77_FUNC "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
+  
+  file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
+  string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
+  set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
   
   set(F77_FUNC "F77_FUNC(name,NAME) name##_")
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
@@ -195,8 +189,6 @@ else ()
   set(F77_FUNC "F77_FUNC(name,NAME) name##_")
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
 endif ()
-
-# End detect fortran mangling
 
 if (NOT WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
@@ -261,6 +253,7 @@ include(CheckTypeSize)
 CHECK_TYPE_SIZE("int *"     SIZEOF_INT_P)
 
 include(CheckSymbolExists)
+include(CheckFunctionExists)
 
 if (HAVE_ASSERT_H)
   set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
@@ -396,14 +389,14 @@ if (COIN_C_FINITE_R)
   set(COIN_C_FINITE _finite)
 endif ()
 
-CHECK_SYMBOL_EXISTS(dran48     ${TEST_INCLUDE_LIST} HAVE_DRAND48)
-CHECK_SYMBOL_EXISTS(rand       ${TEST_INCLUDE_LIST} HAVE_RAND)
-CHECK_SYMBOL_EXISTS(snprint    ${TEST_INCLUDE_LIST} HAVE_SNPRINTF)
-CHECK_SYMBOL_EXISTS(std::rand  ${TEST_INCLUDE_LIST} HAVE_STD__RAND)
-CHECK_SYMBOL_EXISTS(va_copy    ${TEST_INCLUDE_LIST} HAVE_VA_COPY)
-CHECK_SYMBOL_EXISTS(vsnprintf  ${TEST_INCLUDE_LIST} HAVE_VSNPRINTF)
-CHECK_SYMBOL_EXISTS(_snprintf  ${TEST_INCLUDE_LIST} HAVE__SNPRINTF)
-CHECK_SYMBOL_EXISTS(_vsnprintf ${TEST_INCLUDE_LIST} HAVE__VSNPRINTF)
+CHECK_FUNCTION_EXISTS(dran48     HAVE_DRAND48)
+CHECK_FUNCTION_EXISTS(rand       HAVE_RAND)
+CHECK_FUNCTION_EXISTS(snprintf   HAVE_SNPRINTF)
+CHECK_FUNCTION_EXISTS(std::rand  HAVE_STD__RAND)
+CHECK_FUNCTION_EXISTS(va_copy    HAVE_VA_COPY)
+CHECK_FUNCTION_EXISTS(vsnprintf  HAVE_VSNPRINTF)
+CHECK_FUNCTION_EXISTS(_snprintf  HAVE__SNPRINTF)
+CHECK_FUNCTION_EXISTS(_vsnprintf HAVE__VSNPRINTF)
 
 # Define to dummy `main' function (if any) required to link to the Fortran libraries.
 # F77_DUMMY_MAIN
@@ -471,4 +464,42 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
 endif(DOXYGEN AND ENABLE_DOXYGEN)
 
 #subdirs(ThirdParty)
+
+#
+# HSL Management
+#
+
+#add_definitions(-DHAVE_LINEARSOLVERLOADER)
+
+if (COINHSL_HAS_MA57)
+  add_definitions(-DCOINHSL_HAS_MA57)
+endif ()
+if (COINHSL_HAS_MA28)
+  add_definitions(-DCOINHSL_HAS_MA28)
+endif ()
+if (COINHSL_HAS_MA86)
+  add_definitions(-DCOINHSL_HAS_MA86)
+endif ()
+if (COINHSL_HAS_METIS)
+  add_definitions(-DCOINHSL_HAS_METIS)
+endif ()
+if (COINHSL_HAS_MC19)
+  add_definitions(-DCOINHSL_HAS_MC19)
+endif ()
+if (COINHSL_HAS_MA77)
+  add_definitions(-DCOINHSL_HAS_MA77)
+endif ()
+if (COINHSL_HSL2013)
+  add_definitions(-DCOINHSL_HSL2013)
+endif ()
+if (COINHSL_HAS_MC68)
+  add_definitions(-DCOINHSL_HAS_MC68)
+endif ()
+if (COINHSL_HAS_MA97)
+  add_definitions(-DCOINHSL_HAS_MA97)
+endif ()
+if (COINHSL_HAS_MA27)
+  add_definitions(-DCOINHSL_HAS_MA27)
+endif ()
+
 subdirs(Ipopt)
