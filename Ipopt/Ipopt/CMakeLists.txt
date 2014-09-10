@@ -23,6 +23,7 @@ set (IPOPT_SRC_ALGORITHM_LIST ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpAdaptive
 			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpEquilibrationScaling.cpp
 			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpExactHessianUpdater.cpp
 			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpFilterLSAcceptor.cpp
+			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpFilter.cpp
 			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpGenAugSystemSolver.cpp
 			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpGradientScaling.cpp
 			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpIpoptAlg.cpp
@@ -189,9 +190,9 @@ set (IPOPT_SRC_LIST ${IPOPT_SRC_ALGORITHM_LIST}
 		    ${IPOPT_SRC_LINALG_TMATRICES})
 
 if (IPOPT_ENABLE_AMPL)
-  #set (IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
-  #                    ${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/ampl_ipopt.cpp
-  #                    ${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/AmplTNLP.cpp)
+  set (IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
+                      ${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/ampl_ipopt.cpp
+                      ${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/AmplTNLP.cpp)
 endif ()
 
 include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm)
@@ -220,52 +221,62 @@ if (NOT WIN32)
 endif ()
 
 if (IPOPT_ENABLE_EXAMPLES)
-  #if (IPOPT_ENABLE_HSL AND IPOPT_ENABLE_PARDISO)
-    set(ScalableProblems_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek1.cpp
-                              ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek2.cpp
-   			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek3.cpp
- 			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek4.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek5.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek6.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek7.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3Dsin.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D_27.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlDiri.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumA.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumB.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlNeum.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/RegisteredTNLP.cpp
-			      ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/solve_problem.cpp)
+  set(ScalableProblems_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek1.cpp
+                            ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek2.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek3.cpp
+ 			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek4.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek5.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek6.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek7.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3Dsin.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D_27.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlDiri.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumA.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumB.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlNeum.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/RegisteredTNLP.cpp
+			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/solve_problem.cpp)
     
-    add_executable(solve_problem ${ScalableProblems_SRCS})
-    target_link_libraries(solve_problem libIpopt lapack blas dl)
-    include_directories(${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems)
-  #endif ()
+  add_executable(solve_problem ${ScalableProblems_SRCS})
+  target_link_libraries(solve_problem libIpopt)
+  target_link_libraries(solve_problem lapack blas)
+  if (BUILD_LINEARSOLVERLOADER AND UNIX)
+    target_link_libraries(solve_problem dl)
+  endif ()
+  include_directories(${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems)
   
-  if (IPOPT_ENABLE_HSL AND IPOPT_ENABLE_PARDISO)
-    set(Cpp_example_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/Cpp_example/cpp_example.cpp
-                         ${CMAKE_SOURCE_DIR}/Ipopt/examples/Cpp_example/MyNLP.cpp)
+  set(Cpp_example_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/Cpp_example/cpp_example.cpp
+                       ${CMAKE_SOURCE_DIR}/Ipopt/examples/Cpp_example/MyNLP.cpp)
   
-    add_executable(cpp_example ${Cpp_example_SRCS})
-    target_link_libraries(cpp_example libIpopt lapack blas)
+  add_executable(cpp_example ${Cpp_example_SRCS})
+  target_link_libraries(cpp_example libIpopt)
+  target_link_libraries(cpp_example lapack blas)
+  if (BUILD_LINEARSOLVERLOADER AND UNIX)
+    target_link_libraries(cpp_example dl)
   endif ()
   
   set(hs071_c_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_c/hs071_c.c)
-
-  if (IPOPT_ENABLE_HSL AND IPOPT_ENABLE_PARDISO)
-    add_executable(hs071_c ${hs071_c_SRCS})
-    target_link_libraries(hs071_c libIpopt lapack blas)
   
-    set(hs071_cpp_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_main.cpp
-                       ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_nlp.cpp)
-  
-    add_executable(hs071_cpp ${hs071_cpp_SRCS})
-    target_link_libraries(hs071_cpp libIpopt)
+  add_executable(hs071_c ${hs071_c_SRCS})
+  target_link_libraries(hs071_c libIpopt)
+  target_link_libraries(hs071_c lapack blas)
+  if (BUILD_LINEARSOLVERLOADER AND UNIX)
+    target_link_libraries(hs071_c dl)
   endif ()
   
-  if (CMAKE_Fortran_COMPILER AND IPOPT_ENABLE_HSL AND IPOPT_ENABLE_PARDISO)
+  set(hs071_cpp_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_main.cpp
+                     ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_nlp.cpp)
+  
+  add_executable(hs071_cpp ${hs071_cpp_SRCS})
+  target_link_libraries(hs071_cpp libIpopt)
+  target_link_libraries(hs071_cpp lapack blas)
+  if (BUILD_LINEARSOLVERLOADER AND UNIX)
+    target_link_libraries(hs071_cpp dl)
+  endif ()
+  
+  if (CMAKE_Fortran_COMPILER)
     if (HAVE_64_BIT)
       set(BIT32FCOMMENT "C")
       set(BIT64FCOMMENT "")
@@ -273,10 +284,60 @@ if (IPOPT_ENABLE_EXAMPLES)
       set(BIT32FCOMMENT "")
       set(BIT64FCOMMENT "C")
     endif ()
+    
     configure_file(${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_f/hs071_f.f.in ${CMAKE_BINARY_DIR}/hs071_f.f)
     set(hs071_f_SRCS ${CMAKE_BINARY_DIR}/hs071_f.f)
     
     add_executable(hs071_f ${hs071_f_SRCS})
-    target_link_libraries(hs071_f libIpopt lapack blas)
+    target_link_libraries(hs071_f libIpopt)
+    target_link_libraries(hs071_f lapack blas)
+    if (BUILD_LINEARSOLVERLOADER AND UNIX)
+      target_link_libraries(hs071_f dl)
+    endif ()
+    if ("${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU")
+      target_link_libraries(hs071_f gfortran)
+    endif ()
   endif ()
 endif ()
+
+# Tests from solve_problem
+#LukVlE1
+#LukVlE2
+#LukVlE3
+#LukVlE4
+#LukVlE5
+#LukVlE6
+#LukVlE7
+#LukVlI1
+#LukVlI2
+#LukVlI3
+#LukVlI4
+#LukVlI5
+#LukVlI6
+#LukVlI7
+#MBndryCntrl1
+#MBndryCntrl2
+#MBndryCntrl3
+#MBndryCntrl4
+#MBndryCntrl5
+#MBndryCntrl6
+#MBndryCntrl7
+#MBndryCntrl8
+#MBndryCntrl_3D
+#MBndryCntrl_3D_27
+#MBndryCntrl_3D_27BT
+#MBndryCntrl_3Dsin
+#MDistCntrl1
+#MDistCntrl2
+#MDistCntrl3
+#MDistCntrl3a
+#MDistCntrl4
+#MDistCntrl4a
+#MDistCntrl5
+#MDistCntrl5a
+#MDistCntrl6
+#MDistCntrl6a
+#MPara5_1
+#MPara5_2_1
+#MPara5_2_2
+#MPara5_2_3

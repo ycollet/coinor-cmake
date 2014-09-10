@@ -34,6 +34,8 @@ option(IPOPT_ENABLE_HSL     "Enable HSL interface"  OFF)
 option(IPOPT_ENABLE_WSMP    "Enable WSMP solver"    OFF)
 option(IPOPT_ENABLE_MUMPS   "Enable Mumps solver"   OFF)
 
+option(IPOPT_ENABLE_LINEARSOLVERLOADER "Build the dynamic linear solver loader" OFF)
+
 # Compilation options
 option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
 option(COIN_COMPILE_STATIC           "Activate the static linking" OFF)
@@ -60,6 +62,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+                      ${CMAKE_SOURCE_DIR}/cmake)
+
 Enable_Testing()
 
 # Various definitions
@@ -84,18 +89,18 @@ endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 # Check some directories
 
-#if ((NOT COIN_HAS_MUMPS_INCLUDE_PATH STREQUAL "None") AND (NOT EXISTS ${COIN_HAS_MUMPS_INCLUDE_PATH}))
-#  message(FATAL_ERROR "Error: COIN_HAS_MUMPS_INCLUDE_PATH = ${COIN_HAS_MUMPS_INCLUDE_PATH} which is not an existing directory")
-#endif ()
-#if ((NOT COIN_HAS_MUMPS_LIBRARY_PATH STREQUAL "None") AND (NOT EXISTS ${COIN_HAS_MUMPS_LIBRARY_PATH}))
-#  message(FATAL_ERROR "Error: COIN_HAS_MUMPS_LIBRARY_PATH = ${COIN_HAS_MUMPS_LIBRARY_PATH} which is not an existing directory")
-#endif ()
-#if ((NOT COIN_HAS_WSMP_INCLUDE_PATH STREQUAL "None") AND (NOT EXISTS ${COIN_HAS_WSMP_INCLUDE_PATH}))
-#  message(FATAL_ERROR "Error: COIN_HAS_WSMP_INCLUDE_PATH = ${COIN_HAS_WSMP_INCLUDE_PATH} which is not an existing directory")
-#endif ()
-#if ((NOT COIN_HAS_WSMP_LIBRARY_PATH STREQUAL "None") AND (NOT EXISTS ${COIN_HAS_WSMP_LIBRARY_PATH}))
-#  message(FATAL_ERROR "Error: COIN_HAS_WSMP_LIBRARY_PATH = ${COIN_HAS_WSMP_LIBRARY_PATH} which is not an existing directory")
-#endif ()
+if ((NOT IPOPT_HAS_MUMPS_INCLUDE_PATH STREQUAL "None") AND (NOT EXISTS ${IPOPT_HAS_MUMPS_INCLUDE_PATH}))
+  message(FATAL_ERROR "Error: IPOPT_HAS_MUMPS_INCLUDE_PATH = ${IPOPT_HAS_MUMPS_INCLUDE_PATH} which is not an existing directory")
+endif ()
+if ((NOT IPOPT_HAS_MUMPS_LIBRARY_PATH STREQUAL "None") AND (NOT EXISTS ${IPOPT_HAS_MUMPS_LIBRARY_PATH}))
+  message(FATAL_ERROR "Error: IPOPT_HAS_MUMPS_LIBRARY_PATH = ${IPOPT_HAS_MUMPS_LIBRARY_PATH} which is not an existing directory")
+endif ()
+if ((NOT IPOPT_HAS_WSMP_INCLUDE_PATH STREQUAL "None") AND (NOT EXISTS ${IPOPT_HAS_WSMP_INCLUDE_PATH}))
+  message(FATAL_ERROR "Error: IPOPT_HAS_WSMP_INCLUDE_PATH = ${IPOPT_HAS_WSMP_INCLUDE_PATH} which is not an existing directory")
+endif ()
+if ((NOT IPOPT_HAS_WSMP_LIBRARY_PATH STREQUAL "None") AND (NOT EXISTS ${IPOPT_HAS_WSMP_LIBRARY_PATH}))
+  message(FATAL_ERROR "Error: IPOPT_HAS_WSMP_LIBRARY_PATH = ${IPOPT_HAS_WSMP_LIBRARY_PATH} which is not an existing directory")
+endif ()
 
 #-----------------------------------------------------------------------------
 # Manage compilation options
@@ -194,7 +199,7 @@ if (NOT WIN32)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -fPIC ")
   # Try to locate unitizalized variables
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wuninitialized ")
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
 endif ()
 
@@ -250,7 +255,7 @@ check_include_file("windows.h"   HAVE_WINDOWS_H)
 
 include(CheckTypeSize)
 
-CHECK_TYPE_SIZE("int *"     SIZEOF_INT_P)
+CHECK_TYPE_SIZE("int *" SIZEOF_INT_P)
 
 include(CheckSymbolExists)
 include(CheckFunctionExists)
@@ -500,6 +505,15 @@ if (COINHSL_HAS_MA97)
 endif ()
 if (COINHSL_HAS_MA27)
   add_definitions(-DCOINHSL_HAS_MA27)
+endif ()
+if (IPOPT_ENABLE_LINEARSOLVERLOADER)
+  find_package(DL REQUIRED)
+  
+  set(BUILD_LINEARSOLVERLOADER ON)
+  set(BUILD_PARDISOLOADER      ON)
+else ()
+  set(BUILD_LINEARSOLVERLOADER OFF)
+  set(BUILD_PARDISOLOADER      OFF)
 endif ()
 
 subdirs(Ipopt)
