@@ -508,6 +508,10 @@ endif ()
 if (COINHSL_HAS_MA27)
   add_definitions(-DCOINHSL_HAS_MA27)
 endif ()
+if (COIN_ENABLE_DOWNLOAD_METIS) # METIS found
+  add_definitions(-DCOINHSL_HAS_METIS)
+endif ()
+
 if (IPOPT_ENABLE_LINEARSOLVERLOADER)
   find_package(DL REQUIRED)
   
