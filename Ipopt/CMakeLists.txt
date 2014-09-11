@@ -468,7 +468,9 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
 endif(DOXYGEN AND ENABLE_DOXYGEN)
 
-#subdirs(ThirdParty)
+subdirs(ThirdParty)
+
+include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
 
 #
 # HSL Management
@@ -515,5 +517,8 @@ else ()
   set(BUILD_LINEARSOLVERLOADER OFF)
   set(BUILD_PARDISOLOADER      OFF)
 endif ()
+if (IPOPT_ENABLE_MUMPS)
+  add_definitions(-DCOINHSL_HAS_MUMPS)
+endif()
 
 subdirs(Ipopt)

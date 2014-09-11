@@ -74,7 +74,7 @@ else (WIN32)
                mkl_blacs_openmpi_lp64)
 endif (WIN32)
 
-include(UseAtlas)
+#include(UseAtlas)
 
 if (NOT MKL_FOUND)
   message(STATUS "Searching for BLAS and LAPACK")
@@ -280,11 +280,11 @@ else (WIN32)
   set_property(TARGET libzmumps PROPERTY COMPILE_FLAGS "-DMUMPS_ARITH=MUMPS_ARITH_z")
 endif (WIN32)
 
-# To allow the link of examples on the cluster
-if (NOT WIN32)
-  set(LINK_LIBS ${LINK_LIBS}
-                ifcore)
-endif (NOT WIN32)
+## To allow the link of examples on the cluster
+#if (NOT WIN32)
+#  set(LINK_LIBS ${LINK_LIBS}
+#                ifcore)
+# endif (NOT WIN32)
 
 add_executable(ssimple_test examples/ssimpletest.F)
 target_link_libraries(ssimple_test libsmumps libmumps_common libpord ${LINK_LIBS})
@@ -309,3 +309,20 @@ if (WIN32)
   # Under Linux, this line makes the link phase hangs because of multiply defined main symbol
   set_target_properties(c_example PROPERTIES LINKER_LANGUAGE Fortran)
 endif (WIN32)
+
+if (USE_MUMPS_LIBSEQ)
+  install(TARGETS libseq 
+          DESTINATION lib)
+	
+  install(FILES libseq/elapse.h libseq/mpi.h libseq/mpif.h
+          DESTINATION include)
+  
+endif (USE_MUMPS_LIBSEQ)
+
+install(DIRECTORY include/
+        DESTINATION include/
+        PATTERN "*.h")
+
+install(TARGETS libpord libmumps_common libcmumps libdmumps libsmumps libzmumps
+        DESTINATION lib)
+
