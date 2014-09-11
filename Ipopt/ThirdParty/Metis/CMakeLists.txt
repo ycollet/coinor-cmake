@@ -66,8 +66,68 @@ add_library(metis ${METIS_SRCS})
 
 set_target_properties(metis PROPERTIES DEBUG_POSTFIX -d)
 
-#set_property(TARGET metis
-#             PROPERTY COMPILE_DEFINITIONS __VC__)
+add_executable(pmetis Programs/pmetis.c Programs/io.c)
+target_link_libraries(pmetis metis)
+if (UNIX)
+  target_link_libraries(pmetis m)
+endif ()
+
+add_executable(kmetis Programs/kmetis.c Programs/io.c)
+target_link_libraries(kmetis metis)
+if (UNIX)
+  target_link_libraries(kmetis m)
+endif ()
+
+add_executable(oemetis Programs/oemetis.c Programs/io.c Programs/smbfactor.c)
+target_link_libraries(oemetis metis)
+if (UNIX)
+  target_link_libraries(oemetis m)
+endif ()
+
+add_executable(onmetis Programs/onmetis.c Programs/io.c Programs/smbfactor.c)
+target_link_libraries(onmetis metis)
+if (UNIX)
+  target_link_libraries(onmetis m)
+endif ()
+
+add_executable(mesh2dual Programs/mesh2dual.c Programs/io.c)
+target_link_libraries(mesh2dual metis)
+if (UNIX)
+  target_link_libraries(mesh2dual m)
+endif ()
+
+add_executable(mesh2nodal Programs/mesh2nodal.c Programs/io.c)
+target_link_libraries(mesh2nodal metis)
+if (UNIX)
+  target_link_libraries(mesh2nodal m)
+endif ()
+
+add_executable(partdmesh Programs/partdmesh.c Programs/io.c)
+target_link_libraries(partdmesh metis)
+if (UNIX)
+  target_link_libraries(partdmesh m)
+endif ()
+
+add_executable(partnmesh Programs/partnmesh.c Programs/io.c)
+target_link_libraries(partnmesh metis)
+if (UNIX)
+  target_link_libraries(partnmesh m)
+endif ()
+
+add_executable(graphchk Programs/graphchk.c Programs/io.c)
+target_link_libraries(graphchk metis)
+if (UNIX)
+  target_link_libraries(graphchk m)
+endif ()
+
+add_executable(mtest Test/mtest.c Programs/io.c)
+target_link_libraries(mtest metis)
+if (UNIX)
+  target_link_libraries(mtest m)
+endif ()
 
 install(TARGETS metis 
+        DESTINATION lib)
+
+install(TARGETS pmetis kmetis oemetis onmetis mesh2dual mesh2nodal partdmesh partnmesh graphchk
         DESTINATION bin)
