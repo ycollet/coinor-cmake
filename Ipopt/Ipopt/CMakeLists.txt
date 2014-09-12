@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Ipopt)
 
-option(IPOPT_ENABLE_EXAMPLES "Enable the building of examples" OFF)
 set(IPOPT_VERSION_MAJOR   "3"  CACHE STRING "The IpOpt major version number")
 set(IPOPT_VERSION_MINOR   "11" CACHE STRING "The IpOpt minor version number")
 set(IPOPT_VERSION_RELEASE "9"  CACHE STRING "The IpOpt patch version number")
@@ -60,20 +59,20 @@ set (IPOPT_SRC_ALGORITHM_LIST ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpAdaptive
 			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpUserScaling.cpp
 			      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/IpWarmStartIterateInitializer.cpp)
 
-set (IPOPT_SRC_ALOGITHM_INEXACT_LIST ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactAlgBuilder.cpp
-                                     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactCq.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactData.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactDoglegNormal.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactLSAcceptor.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactNewtonNormal.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactNormalTerminationTester.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactPDSolver.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactPDTerminationTester.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactRegOp.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactSearchDirCalc.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactTSymScalingMethod.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpIterativePardisoSolverInterface.cpp
-				     ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpIterativeSolverTerminationTester.cpp)
+set (IPOPT_SRC_ALGORITHM_INEXACT_LIST ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactAlgBuilder.cpp
+                                      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactCq.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactData.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactDoglegNormal.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactLSAcceptor.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactNewtonNormal.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactNormalTerminationTester.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactPDSolver.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactPDTerminationTester.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactRegOp.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactSearchDirCalc.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactTSymScalingMethod.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpIterativeSolverTerminationTester.cpp
+				      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpIterativePardisoSolverInterface.cpp)
 
 set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpLinearSolversRegOp.cpp
                                             ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpSlackBasedTSymScalingMethod.cpp
@@ -93,7 +92,7 @@ if (BUILD_LINEARSOLVERLOADER AND CMAKE_Fortran_COMPILER)
                                               ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.cpp
 					      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa28Partition.F)
 else ()
-  if (IPOPT_ENABLE_PARDISO)
+  if (IPOPT_HAS_PARDISO)
     set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
                                                 ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.cpp)
   endif ()
@@ -103,13 +102,13 @@ else ()
   endif ()
 endif ()
 
-if (IPOPT_ENABLE_WSMP)
+if (IPOPT_HAS_WSMP)
   set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
                                               ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpWsmpSolverInterface.cpp
 					      ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpIterativeWsmpSolverInterface.cpp)
 endif ()
 
-if (IPOPT_ENABLE_MUMPS)
+if (IPOPT_HAS_MUMPS)
   set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
                                               ${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMumpsSolverInterface.cpp)
 endif ()
@@ -178,7 +177,6 @@ set (IPOPT_SRC_LINALG_TMATRICES ${CMAKE_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices/I
 				${CMAKE_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices/IpTripletHelper.cpp)
 
 set (IPOPT_SRC_LIST ${IPOPT_SRC_ALGORITHM_LIST}
-                    ${IPOPT_SRC_ALOGITHM_INEXACT_LIST}
 		    ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
 		    ${IPOPT_SRC_APPS_CUTERINTERFACE_LIST}
 		    ${IPOPT_SRC_APPS_AMPLSOLVER_LIST}
@@ -187,13 +185,18 @@ set (IPOPT_SRC_LIST ${IPOPT_SRC_ALGORITHM_LIST}
 		    ${IPOPT_SRC_COMMON_LIST}
 		    ${IPOPT_SRC_INTERFACES_LIST}
 		    ${IPOPT_SRC_LINALG_LIST}
-		    ${IPOPT_SRC_LINALG_TMATRICES})
+		    ${IPOPT_SRC_LINALG_TMATRICES}
+                    ${IPOPT_SRC_ALGORITHM_INEXACT_LIST})
 
-if (IPOPT_ENABLE_AMPL)
+if (IPOPT_HAS_AMPL)
   set (IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
                       ${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/ampl_ipopt.cpp
                       ${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/AmplTNLP.cpp)
 endif ()
+
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Ipopt/include)
+endmacro()
 
 include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm)
 include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers)
@@ -205,7 +208,6 @@ include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Common)
 include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/LinAlg)
 include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver)
 include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices)
-include_directories(${CMAKE_BINARY_DIR}/Ipopt/include)
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -219,6 +221,7 @@ endif ()
 if (NOT WIN32)
   set_target_properties(libIpopt PROPERTIES PREFIX "")
 endif ()
+set_include_directories(libIpopt)
 
 if (IPOPT_ENABLE_EXAMPLES)
   set(ScalableProblems_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek1.cpp
@@ -246,7 +249,8 @@ if (IPOPT_ENABLE_EXAMPLES)
     target_link_libraries(solve_problem dl)
   endif ()
   include_directories(${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems)
-  
+  set_include_directories(solve_problem)
+
   set(Cpp_example_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/Cpp_example/cpp_example.cpp
                        ${CMAKE_SOURCE_DIR}/Ipopt/examples/Cpp_example/MyNLP.cpp)
   
@@ -256,7 +260,8 @@ if (IPOPT_ENABLE_EXAMPLES)
   if (BUILD_LINEARSOLVERLOADER AND UNIX)
     target_link_libraries(cpp_example dl)
   endif ()
-  
+  set_include_directories(cpp_example)
+
   set(hs071_c_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_c/hs071_c.c)
   
   add_executable(hs071_c ${hs071_c_SRCS})
@@ -265,7 +270,8 @@ if (IPOPT_ENABLE_EXAMPLES)
   if (BUILD_LINEARSOLVERLOADER AND UNIX)
     target_link_libraries(hs071_c dl)
   endif ()
-  
+  set_include_directories(hs071_c)
+
   set(hs071_cpp_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_main.cpp
                      ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_nlp.cpp)
   
@@ -275,7 +281,8 @@ if (IPOPT_ENABLE_EXAMPLES)
   if (BUILD_LINEARSOLVERLOADER AND UNIX)
     target_link_libraries(hs071_cpp dl)
   endif ()
-  
+  set_include_directories(hs071_cpp)
+
   if (CMAKE_Fortran_COMPILER)
     if (HAVE_64_BIT)
       set(BIT32FCOMMENT "C")
@@ -297,6 +304,7 @@ if (IPOPT_ENABLE_EXAMPLES)
     if ("${CMAKE_Fortran_COMPILER_ID}" MATCHES "GNU")
       target_link_libraries(hs071_f gfortran)
     endif ()
+    set_include_directories(hs071_f)
   endif ()
 endif ()
 
