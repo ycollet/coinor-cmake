@@ -19,7 +19,7 @@ set(COIN_THREADS_LIB_PATH "None" CACHE STRING "The path to the PThreads library 
 # External solvers
 option(USE_OSI_XPRESS "Use Xpress solver" OFF)
 option(USE_OSI_CPLEX  "Use Cplex solver"  OFF)
-option(USE_OSI_GPLK   "Use GLPK solver"   OFF)
+option(USE_OSI_GLPK   "Use GLPK solver"   OFF)
 option(USE_OSI_GUROBI "Use GUROBI solver" OFF)
 option(USE_OSI_MOSEK  "Use Mosek solver"  OFF)
 option(USE_OSI_SOPLEX "Use Soplex solver" OFF)
