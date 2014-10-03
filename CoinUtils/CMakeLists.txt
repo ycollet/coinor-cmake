@@ -46,6 +46,9 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
+                      ${CMAKE_SOURCE_DIR}/cmake)
+
 # Name of package
 set(PACKAGE "CoinUtils")
 # Define to the address where bug reports for this package should be sent.
@@ -163,8 +166,8 @@ if (NOT WIN32)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
 endif ()
 
-set(BuildTools_DIR ${Coin_DIR}/BuildTools)
-set(CoinUtils_DIR ${Coin_DIR}/CoinUtils)
+set(BuildTools_DIR    ${Coin_DIR}/BuildTools)
+set(CoinUtils_DIR     ${Coin_DIR}/CoinUtils)
 set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
 
 include(CheckIncludeFile)

@@ -9,6 +9,8 @@ include_directories(${Osi_DIR}/src/Osi)
 include_directories(${Osi_DIR}/src/OsiGlpk)
 include_directories(${MY_GLPK_DIR}/include)
 
+find_package(Glpk)
+
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
@@ -18,10 +20,16 @@ if (NOT COIN_GLPK_DIR STREQUAL "None")
   include_directories(${COIN_GLPK_DIR}/include)
 endif ()
 
+set(OsiGlpk_SRCS ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
+if ("${GLPK_VERSION}" VERSION_GREATER "4.48")
+  set(OsiGlpk_SRCS ${OsiGlpk_SRCS}
+                   ${Osi_DIR}/src/OsiGlpk/lpx.c)
+endif ()
+
 if (ENABLE_SHARED_LIBRARIES)
-  add_library(libOsiGlpk SHARED ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
+  add_library(libOsiGlpk SHARED ${OsiGlpk_SRCS})
 else ()
-  add_library(libOsiGlpk STATIC ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
+  add_library(libOsiGlpk STATIC ${OsiGlpk_SRCS})
 endif ()
 if (NOT WIN32)
   set_target_properties(libOsiGlpk PROPERTIES PREFIX "")
