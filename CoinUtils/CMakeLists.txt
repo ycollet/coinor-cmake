@@ -49,6 +49,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       ${CMAKE_SOURCE_DIR}/cmake)
 
+include(coin-macros)
+
 # Name of package
 set(PACKAGE "CoinUtils")
 # Define to the address where bug reports for this package should be sent.

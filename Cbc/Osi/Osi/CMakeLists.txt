@@ -26,6 +26,15 @@ set(Osi_SRC_LIST ${Osi_DIR}/src/Osi/OsiAuxInfo.cpp
                  ${Osi_DIR}/src/Osi/OsiSolverBranch.cpp
                  ${Osi_DIR}/src/Osi/OsiSolverInterface.cpp)
 
+set(OsiCommonTests_SRC_LIST ${Osi_DIR}/src/OsiCommonTest/OsiUnitTestUtils.cpp
+                            ${Osi_DIR}/src/OsiCommonTest/OsiColCutTest.cpp
+			    ${Osi_DIR}/src/OsiCommonTest/OsiCutsTest.cpp
+			    ${Osi_DIR}/src/OsiCommonTest/OsiNetlibTest.cpp
+			    ${Osi_DIR}/src/OsiCommonTest/OsiRowCutDebuggerTest.cpp
+			    ${Osi_DIR}/src/OsiCommonTest/OsiRowCutTest.cpp
+			    ${Osi_DIR}/src/OsiCommonTest/OsiSimplexAPITest.cpp
+			    ${Osi_DIR}/src/OsiCommonTest/OsiSolverInterfaceTest.cpp)
+
 set(Osi_SRC_LIST_Headers ${Osi_DIR}/src/Osi/OsiAuxInfo.hpp
                          ${Osi_DIR}/src/Osi/OsiBranchingObject.hpp
                          ${Osi_DIR}/src/Osi/OsiChooseVariable.hpp
@@ -54,24 +63,19 @@ endif ()
 
 if (ENABLE_SHARED_LIBRARIES)
   add_library(libOsi SHARED ${Osi_SRC_LIST})
+  add_library(libOsiCommonTests SHARED ${OsiCommonTests_SRC_LIST})
 else ()
   add_library(libOsi STATIC ${Osi_SRC_LIST})
+  add_library(libOsiCommonTests STATIC ${OsiCommonTests_SRC_LIST})
 endif ()
 if (NOT WIN32)
   set_target_properties(libOsi PROPERTIES PREFIX "")
+  set_target_properties(libOsiCommonTests PROPERTIES PREFIX "")
 endif ()
 set_include_directories(libOsi)
+set_include_directories(libOsiCommonTests)
 
-#${Osi_DIR}/src/OsiCommonTest/OsiColCutTest.cpp
-#${Osi_DIR}/src/OsiCommonTest/OsiCutsTest.cpp
-#${Osi_DIR}/src/OsiCommonTest/OsiNetlibTest.cpp
-#${Osi_DIR}/src/OsiCommonTest/OsiRowCutDebuggerTest.cpp
-#${Osi_DIR}/src/OsiCommonTest/OsiRowCutTest.cpp
-#${Osi_DIR}/src/OsiCommonTest/OsiSimplexAPITest.cpp
-#${Osi_DIR}/src/OsiCommonTest/OsiSolverInterfaceTest.cpp
-#${Osi_DIR}/src/OsiCommonTest/OsiUnitTestUtils.cpp)
-
-install(TARGETS libOsi 
+install(TARGETS libOsi libOsiCommonTests 
         DESTINATION lib)
 
 install(FILES ${Osi_SRC_LIST_Headers} 

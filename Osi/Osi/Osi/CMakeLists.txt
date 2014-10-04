@@ -24,7 +24,8 @@ set(Osi_SRC_LIST ${Osi_DIR}/src/Osi/OsiAuxInfo.cpp
                  ${Osi_DIR}/src/Osi/OsiRowCut.cpp
                  ${Osi_DIR}/src/Osi/OsiRowCutDebugger.cpp
                  ${Osi_DIR}/src/Osi/OsiSolverBranch.cpp
-                 ${Osi_DIR}/src/Osi/OsiSolverInterface.cpp)
+                 ${Osi_DIR}/src/Osi/OsiSolverInterface.cpp
+	         ${Osi_DIR}/src/OsiCommonTest/OsiUnitTestUtils.cpp)
 
 set(Osi_SRC_LIST_Headers ${Osi_DIR}/src/Osi/OsiAuxInfo.hpp
                          ${Osi_DIR}/src/Osi/OsiBranchingObject.hpp
@@ -69,7 +70,6 @@ set_include_directories(libOsi)
 #${Osi_DIR}/src/OsiCommonTest/OsiRowCutTest.cpp
 #${Osi_DIR}/src/OsiCommonTest/OsiSimplexAPITest.cpp
 #${Osi_DIR}/src/OsiCommonTest/OsiSolverInterfaceTest.cpp
-#${Osi_DIR}/src/OsiCommonTest/OsiUnitTestUtils.cpp)
 
 install(TARGETS libOsi 
         DESTINATION lib)

@@ -65,6 +65,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       ${CMAKE_SOURCE_DIR}/cmake)
 
+include(coin-macros)
+
 Enable_Testing()
 
 # Various definitions
@@ -89,34 +91,10 @@ endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 # Check some directories
 
-if (NOT "${IPOPT_HAS_MUMPS_INCLUDE_PATH}" STREQUAL "None")
-  if (NOT EXISTS "${IPOPT_HAS_MUMPS_INCLUDE_PATH}")
-    message(FATAL_ERROR "Error: IPOPT_HAS_MUMPS_INCLUDE_PATH = ${IPOPT_HAS_MUMPS_INCLUDE_PATH} which is not an existing directory")
-  else ()
-    include_directories(${IPOPT_HAS_MUMPS_INCLUDE_PATH})
-  endif ()
-endif ()
-if (NOT "${IPOPT_HAS_MUMPS_LIBRARY_PATH}" STREQUAL "None")
-  if (NOT EXISTS "${IPOPT_HAS_MUMPS_LIBRARY_PATH}")
-    message(FATAL_ERROR "Error: IPOPT_HAS_MUMPS_LIBRARY_PATH = ${IPOPT_HAS_MUMPS_LIBRARY_PATH} which is not an existing directory")
-  else ()
-    link_directories(${IPOPT_HAS_MUMPS_LIBRARY_PATH})
-  endif ()
-endif ()
-if (NOT "${IPOPT_HAS_WSMP_INCLUDE_PATH}" STREQUAL "None")
-  if (NOT EXISTS "${IPOPT_HAS_WSMP_INCLUDE_PATH}")
-    message(FATAL_ERROR "Error: IPOPT_HAS_WSMP_INCLUDE_PATH = ${IPOPT_HAS_WSMP_INCLUDE_PATH} which is not an existing directory")
-  else ()
-    include_directories(${IPOPT_HAS_WSMP_INCLUDE_PATH})
-  endif ()
-endif ()
-if (NOT "${IPOPT_HAS_WSMP_LIBRARY_PATH}" STREQUAL "None")
-  if (NOT EXISTS "${IPOPT_HAS_WSMP_LIBRARY_PATH}")
-    message(FATAL_ERROR "Error: IPOPT_HAS_WSMP_LIBRARY_PATH = ${IPOPT_HAS_WSMP_LIBRARY_PATH} which is not an existing directory")
-  else ()
-    link_directories(${IPOPT_HAS_WSMP_LIBRARY_PATH})
-  endif ()
-endif ()
+coin_check_and_add_include_path(COIN_HAS_MUMPS_INCLUDE_PATH)
+coin_check_and_add_library_path(COIN_HAS_MUMPS_LIBRARY_PATH)
+coin_check_and_add_include_path(COIN_HAS_WSMP_INCLUDE_PATH)
+coin_check_and_add_library_path(COIN_HAS_WSMP_LIBRARY_PATH)
 
 #-----------------------------------------------------------------------------
 # Manage compilation options
