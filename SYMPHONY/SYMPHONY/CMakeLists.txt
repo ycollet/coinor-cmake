@@ -450,72 +450,43 @@ if (NOT SYM_COMPILE_IN_TM)
 endif ()
 
 if (SYMPHONY_BUILD_EXAMPLES)
-  add_executable(bicriteria ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c)
-  target_link_libraries(bicriteria libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  set_include_directories(bicriteria)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(bicriteria ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(bicriteria ${BZLIB_NAME})
-  endif ()
-  if (USE_OPENMP AND UNIX)
-    target_link_libraries(bicriteria gomp)
-  endif ()
+  macro(add_example Name)
+    add_executable(${Name} ${ARGN})
+    target_link_libraries(${Name} libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+    set_include_directories(${Name})
+    if (COINUTILS_HAS_ZLIB)
+      target_link_libraries(${Name} ${ZLIB_NAME})
+    endif ()
+    if (COINUTILS_HAS_BZLIB)
+      target_link_libraries(${Name} ${BZLIB_NAME})
+    endif ()
+    if (USE_OPENMP AND UNIX)
+      target_link_libraries(${Name} gomp)
+    endif ()
+  endmacro ()
+  
+  add_example(bicriteria ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c)
 
   add_test(NAME symphony_example_bicriteria
            COMMAND $<TARGET_FILE:bicriteria> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_bicriteria PROPERTIES TIMEOUT 30)
   
   
-  add_executable(milp ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c)
-  target_link_libraries(milp libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  set_include_directories(milp)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(milp ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(milp ${BZLIB_NAME})
-  endif ()
-  if (USE_OPENMP AND UNIX)
-    target_link_libraries(milp gomp)
-  endif ()
+  add_example(milp ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c)
   
   add_test(NAME symphony_example_milp
            COMMAND $<TARGET_FILE:milp> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_milp PROPERTIES TIMEOUT 30)
   
   
-  add_executable(milp2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c)
-  target_link_libraries(milp2 libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  set_include_directories(milp2)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(milp2 ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(milp2 ${BZLIB_NAME})
-  endif ()
-  if (USE_OPENMP AND UNIX)
-    target_link_libraries(milp2 gomp)
-  endif ()
+  add_example(milp2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c)
   
   add_test(NAME symphony_example_milp2
            COMMAND $<TARGET_FILE:milp2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_milp2 PROPERTIES TIMEOUT 30)
   
   
-  add_executable(milpOsi ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c)
-  target_link_libraries(milpOsi libOsiSym libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  set_include_directories(milpOsi)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(milpOsi ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(milpOsi ${BZLIB_NAME})
-  endif ()
-  if (USE_OPENMP AND UNIX)
-    target_link_libraries(milpOsi gomp)
-  endif ()
+  add_example(milpOsi ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c)
   
   add_test(NAME symphony_example_milpOsi
            COMMAND $<TARGET_FILE:milpOsi> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -523,90 +494,35 @@ if (SYMPHONY_BUILD_EXAMPLES)
   
   
   #ERROR: Missing include files in milpOsi2
-  #add_executable(milpOsi2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c)
-  #target_link_libraries(milpOsi2 libOsiSym libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  #set_include_directories(milpOsi2)
-  #if (COINUTILS_HAS_ZLIB)
-  #  target_link_libraries(milpOsi2 ${ZLIB_NAME})
-  #endif ()
-  #if (COINUTILS_HAS_BZLIB)
-  #  target_link_libraries(milpOsi2 ${BZLIB_NAME})
-  #endif ()
-  #if (USE_OPENMP AND UNIX)
-  #  target_link_libraries(milpOsi2 gomp)
-  #endif ()
+  #add_example(milpOsi2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c)
   #
   #add_test(NAME symphony_example_milpOsi2
   #         COMMAND $<TARGET_FILE:milpOsi2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   #set_tests_properties(symphony_example_milpOsi2 PROPERTIES TIMEOUT 30)
   #
   
-  add_executable(sensitivity ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c)
-  target_link_libraries(sensitivity libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  set_include_directories(sensitivity)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(sensitivity ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(sensitivity ${BZLIB_NAME})
-  endif ()
-  if (USE_OPENMP AND UNIX)
-    target_link_libraries(sensitivity gomp)
-  endif ()
+  add_example(sensitivity ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c)
   
   add_test(NAME symphony_example_sensitivity
            COMMAND $<TARGET_FILE:sensitivity> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_sensitivity PROPERTIES TIMEOUT 30)
   
   
-  add_executable(warm_start1 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c)
-  target_link_libraries(warm_start1 libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  set_include_directories(warm_start1)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(warm_start1 ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(warm_start1 ${BZLIB_NAME})
-  endif ()
-  if (USE_OPENMP AND UNIX)
-    target_link_libraries(warm_start1 gomp)
-  endif ()
+  add_example(warm_start1 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c)
   
   add_test(NAME symphony_example_warm_start1
            COMMAND $<TARGET_FILE:warm_start1> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_warm_start1 PROPERTIES TIMEOUT 30)
   
   
-  add_executable(warm_start2 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c)
-  target_link_libraries(warm_start2 libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  set_include_directories(warm_start2)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(warm_start2 ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(warm_start2 ${BZLIB_NAME})
-  endif ()
-  if (USE_OPENMP AND UNIX)
-    target_link_libraries(warm_start2 gomp)
-  endif ()
+  add_example(warm_start2 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c)
   
   add_test(NAME symphony_example_warm_start2
            COMMAND $<TARGET_FILE:warm_start2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_warm_start2 PROPERTIES TIMEOUT 30)
   
   
-  add_executable(warm_start3 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
-  target_link_libraries(warm_start3 libSym libCgl libOsiClp libOsi libClp libCoinUtils lapack)
-  set_include_directories(warm_start3)
-  if (COINUTILS_HAS_ZLIB)
-    target_link_libraries(warm_start3 ${ZLIB_NAME})
-  endif ()
-  if (COINUTILS_HAS_BZLIB)
-    target_link_libraries(warm_start3 ${BZLIB_NAME})
-  endif ()
-  if (USE_OPENMP AND UNIX)
-    target_link_libraries(warm_start3 gomp)
-  endif ()
+  add_example(warm_start3 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
   
   add_test(NAME symphony_example_warm_start3
            COMMAND $<TARGET_FILE:warm_start3> ${CMAKE_SOURCE_DIR}/Data/Sample)
