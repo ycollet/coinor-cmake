@@ -320,6 +320,9 @@ endif ()
 if (USE_OPENMP AND UNIX)
   target_link_libraries(symphony gomp)
 endif ()
+if (COINUTILS_USE_THREADS)
+  target_link_libraries(symphony pthread)
+endif ()
 
 if (NOT SYM_COMPILE_IN_LP)
   set_source_files_properties(${ALL_LP} PROPERTIES LANGUAGE CXX)
@@ -344,6 +347,9 @@ if (NOT SYM_COMPILE_IN_LP)
   endif ()
   if (USE_OPENMP AND UNIX)
     target_link_libraries(symphony_lp gomp)
+  endif ()
+  if (COINUTILS_USE_THREADS)
+    target_link_libraries(symphony_lp pthread)
   endif ()
 
   install(TARGETS symphony_lp
@@ -377,6 +383,9 @@ if (NOT SYM_COMPILE_IN_CG)
   if (USE_OPENMP AND UNIX)
     target_link_libraries(symphony_cg gomp)
   endif ()
+  if (COINUTILS_USE_THREADS)
+    target_link_libraries(symphony_cg pthread)
+  endif ()
 
   install(TARGETS symphony_cg
           DESTINATION bin)
@@ -408,6 +417,9 @@ if (NOT SYM_COMPILE_IN_CP)
   endif ()
   if (USE_OPENMP AND UNIX)
     target_link_libraries(symphony_cp gomp)
+  endif ()
+  if (COINUTILS_USE_THREADS)
+    target_link_libraries(symphony_cp pthread)
   endif ()
 
   install(TARGETS symphony_cp
@@ -441,7 +453,10 @@ if (NOT SYM_COMPILE_IN_TM)
   if (USE_OPENMP AND UNIX)
     target_link_libraries(symphony_tm gomp)
   endif ()
-
+  if (COINUTILS_USE_THREADS)
+    target_link_libraries(symphony_tm pthread)
+  endif ()
+  
   install(TARGETS symphony_tm
           DESTINATION bin)
 
@@ -462,6 +477,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
     endif ()
     if (USE_OPENMP AND UNIX)
       target_link_libraries(${Name} gomp)
+    endif ()
+    if (COINUTILS_USE_THREADS)
+      target_link_libraries(${Name} pthread)
     endif ()
   endmacro ()
   
