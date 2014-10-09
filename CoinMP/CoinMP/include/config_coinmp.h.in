@@ -1,0 +1,13 @@
+/* src/config_cbc.h.in. */
+
+/* Version number of project */
+#define COINMP_VERSION "@COINMP_VERSION@"
+
+/* Major Version number of project */
+#define COINMP_VERSION_MAJOR "@COINMP_VERSION_MAJOR@"
+
+/* Minor Version number of project */
+#define COINMP_VERSION_MINOR "@COINMP_VERSION_MINOR@"
+
+/* Release Version number of project */
+#define COINMP_VERSION_RELEASE "@COINMP_VERSION_RELEASE@"
