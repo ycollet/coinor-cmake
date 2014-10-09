@@ -252,7 +252,7 @@ if (CBC_ENABLE_EXAMPLES)
       target_link_libraries(${Name} ${BZLIB_NAME})
     endif ()
     if (COIN_HAS_GLPK)
-      target_link_libraries(${Name} glpk)
+      target_link_libraries(${Name} libOsiGlpk glpk)
     endif ()
     if (COIN_HAS_AMD)
       target_link_libraries(${Name} amd)
@@ -492,13 +492,14 @@ if (CBC_ENABLE_EXAMPLES)
   set_tests_properties(cbc_example_link PROPERTIES TIMEOUT 30)
   
   
-  add_example(parallel ${Cbc_DIR}/examples/parallel.cpp
-                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
-  
-  add_test(NAME cbc_example_parallel
-           COMMAND $<TARGET_FILE:parallel> ${CMAKE_SOURCE_DIR}/Data/Sample)
-  set_tests_properties(cbc_example_parallel PROPERTIES TIMEOUT 30)
-  
+  if (CBC_USE_THREADS)
+    add_example(parallel ${Cbc_DIR}/examples/parallel.cpp
+                         ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+    
+    add_test(NAME cbc_example_parallel
+             COMMAND $<TARGET_FILE:parallel> ${CMAKE_SOURCE_DIR}/Data/Sample)
+    set_tests_properties(cbc_example_parallel PROPERTIES TIMEOUT 30)
+  endif ()
   
   add_example(sample4 ${Cbc_DIR}/examples/sample4.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
@@ -520,7 +521,7 @@ if (COIN_HAS_CLP)
     target_link_libraries(cbc ${BZLIB_NAME})
   endif ()
   if (COIN_HAS_GLPK)
-    target_link_libraries(cbc glpk)
+    target_link_libraries(cbc libOsiGlpk glpk)
   endif ()
   if (COIN_HAS_AMD)
     target_link_libraries(cbc amd)
@@ -558,7 +559,7 @@ if (CBC_BUILD_CBC_GENERIC)
     target_link_libraries(cbc-generic ${BZLIB_NAME})
   endif ()
   if (COIN_HAS_GLPK)
-    target_link_libraries(cbc-generic glpk)
+    target_link_libraries(cbc-generic libOsiGlpk glpk)
   endif ()
   if (COIN_HAS_AMD)
     target_link_libraries(cbc-generic amd)
