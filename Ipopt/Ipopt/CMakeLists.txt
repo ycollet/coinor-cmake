@@ -223,7 +223,7 @@ if (NOT WIN32)
 endif ()
 set_include_directories(libIpopt)
 
-if (IPOPT_ENABLE_EXAMPLES)
+if (IPOPT_BUILD_EXAMPLES)
   set(ScalableProblems_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek1.cpp
                             ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek2.cpp
 			    ${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek3.cpp

@@ -34,7 +34,7 @@ option(IPOPT_HAS_HSL     "Enable HSL interface"  OFF)
 option(IPOPT_HAS_WSMP    "Enable WSMP solver"    OFF)
 option(IPOPT_HAS_MUMPS   "Enable Mumps solver"   OFF)
 
-option(IPOPT_ENABLE_EXAMPLES           "Enable the building of examples" OFF)
+option(IPOPT_BUILD_EXAMPLES            "Enable the building of examples" OFF)
 option(IPOPT_ENABLE_LINEARSOLVERLOADER "Build the dynamic linear solver loader" ON)
 option(IPOPT_ENABLE_INEXACT            "Build the inexact solver" ON)
 

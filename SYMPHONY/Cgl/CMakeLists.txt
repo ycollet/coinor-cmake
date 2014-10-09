@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Cgl)
 
-option(CGL_ENABLE_EXAMPLES "Enable the building of examples" OFF)
+option(CGL_BUILD_EXAMPLES "Enable the building of examples" OFF)
 set(CGL_VERSION_MAJOR   "0"  CACHE STRING "The CGL major version number")
 set(CGL_VERSION_MINOR   "58" CACHE STRING "The CGL minor version number")
 set(CGL_VERSION_RELEASE "6"  CACHE STRING "The CGL patch version number")
@@ -145,7 +145,7 @@ if (NOT WIN32)
 endif ()
 set_include_directories(libCgl)
 
-if (CGL_ENABLE_EXAMPLES)
+if (CGL_BUILD_EXAMPLES)
   macro(add_example Name Srcs)
     add_executable(${Name} ${Srcs})
     target_link_libraries(${Name} libCgl libOsi libOsiClp libClp libCoinUtils lapack)
