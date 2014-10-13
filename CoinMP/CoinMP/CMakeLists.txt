@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 2.8)
 
 project(CoinMP)
 
-set(COINMP_VERSION_MAJOR   "1"  CACHE STRING "The CoinMP major version number")
-set(COINMP_VERSION_MINOR   "15" CACHE STRING "The CoinMP minor version number")
-set(COINMP_VERSION_RELEASE "6"  CACHE STRING "The CoinMP patch version number")
+option(COINMP_BUILD_EXAMPLES "Enable the building of examples" OFF)
+set(COINMP_VERSION_MAJOR   "1" CACHE STRING "The CoinMP major version number")
+set(COINMP_VERSION_MINOR   "7" CACHE STRING "The CoinMP minor version number")
+set(COINMP_VERSION_RELEASE "6" CACHE STRING "The CoinMP patch version number")
 set(COINMP_VERSION "${COINMP_VERSION_MAJOR}.${COINMP_VERSION_MINOR}.${COINMP_VERSION_RELEASE}")
 set(COINMP_SVN_REV "${COINMP_VERSION_RELEASE}")
 
@@ -76,6 +77,38 @@ if (NOT WIN32)
 endif ()
 
 set_include_directories(libCoinMP)
+
+if (COINMP_BUILD_EXAMPLES)
+  macro(add_example Name)
+    add_executable(${Name} ${ARGN})
+    target_link_libraries(${Name} libCoinMP libCbc libCgl libOsiClp libOsi libClp libCoinUtils lapack)
+    set_include_directories(${Name})
+    if (COINUTILS_HAS_ZLIB)
+      target_link_libraries(${Name} ${ZLIB_NAME})
+    endif ()
+    if (COINUTILS_HAS_BZLIB)
+      target_link_libraries(${Name} ${BZLIB_NAME})
+    endif ()
+    if (COIN_HAS_GLPK)
+      target_link_libraries(${Name} libOsiGlpk glpk)
+    endif ()
+    if (COIN_HAS_AMD)
+      target_link_libraries(${Name} amd)
+    endif ()
+    if (COIN_HAS_CHOLMOD)
+      target_link_libraries(${Name} cholmod)
+    endif () 
+    if (CBC_USE_THREADS OR COINUTILS_USE_THREADS)
+      target_link_libraries(${Name} pthread)
+    endif ()
+  endmacro()
+  
+  add_example(example ${CoinMP_DIR}/examples/example.c)
+  
+  add_test(NAME coinmp_example
+           COMMAND $<TARGET_FILE:example> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(coinmp_example PROPERTIES TIMEOUT 30)
+endif()
 
 install(TARGETS libCoinMP
         DESTINATION lib)
