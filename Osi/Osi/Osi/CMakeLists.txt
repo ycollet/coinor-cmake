@@ -42,6 +42,7 @@ set(Osi_SRC_LIST_Headers ${Osi_DIR}/src/Osi/OsiAuxInfo.hpp
                          ${Osi_DIR}/src/Osi/OsiSolverParameters.hpp)
 
 include_directories(${Osi_DIR}/src)
+include_directories(${Osi_DIR}/src/Osi)
 include_directories(${CoinUtils_DIR}/src)
 
 macro(set_include_directories TARGET)
