@@ -212,6 +212,22 @@ endif ()
 
 add_definitions(-DCOIN_HAS_CLP)
 
+if (COIN_HAS_AMD AND (NOT "${COIN_HAS_AMD_INCLUDE_PATH}" STREQUAL "None"))
+  include_directories(${COIN_HAS_AMD_INCLUDE_PATH})
+endif ()
+if (COIN_HAS_CHOLMOD AND (NOT "${COIN_HAS_CHOLMOD_INCLUDE_PATH}" STREQUAL "None"))
+  include_directories(${COIN_HAS_CHOLMOD_INCLUDE_PATH})
+endif ()
+if (COIN_HAS_GLPK AND (NOT "${COIN_HAS_GLPK_INCLUDE_PATH}" STREQUAL "None"))
+  include_directories(${COIN_HAS_GLPK_INCLUDE_PATH})
+endif ()
+if (COIN_HAS_MUMPS AND (NOT "${COIN_HAS_MUMPS_INCLUDE_PATH}" STREQUAL "None"))
+  include_directories(${COIN_HAS_MUMPS_INCLUDE_PATH})
+endif ()
+if (COIN_HAS_WSMP AND (NOT "${COIN_HAS_WSMP_INCLUDE_PATH}" STREQUAL "None"))
+  include_directories(${COIN_HAS_WSMP_INCLUDE_PATH})
+endif ()
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)
@@ -235,6 +251,21 @@ if (NOT WIN32)
   set_target_properties(libClp PROPERTIES PREFIX "")
 endif ()
 
+if (COIN_HAS_AMD AND (NOT "${COIN_HAS_AMD_LIBRARY_PATH}" STREQUAL "None"))
+  link_directories(${COIN_HAS_AMD_LIBRARY_PATH})
+endif ()
+if (COIN_HAS_CHOLMOD AND (NOT "${COIN_HAS_CHOLMOD_LIBRARY_PATH}" STREQUAL "None"))
+  link_directories(${COIN_HAS_CHOLMOD_LIBRARY_PATH})
+endif ()
+if (COIN_HAS_GLPK AND (NOT "${COIN_HAS_GLPK_LIBRARY_PATH}" STREQUAL "None"))
+  link_directories(${COIN_HAS_GLPK_LIBRARY_PATH})
+endif ()
+if (COIN_HAS_MUMPS AND (NOT "${COIN_HAS_MUMPS_LIBRARY_PATH}" STREQUAL "None"))
+  link_directories(${COIN_HAS_MUMPS_LIBRARY_PATH})
+endif ()
+if (COIN_HAS_WSMP AND (NOT "${COIN_HAS_WSMP_LIBRARY_PATH}" STREQUAL "None"))
+  link_directories(${COIN_HAS_WSMP_LIBRARY_PATH})
+endif ()
 set_include_directories(libClp)
 
 if (ENABLE_SHARED_LIBRARIES)
@@ -248,8 +279,11 @@ endif ()
 set_include_directories(libClpSolver)
 
 if (CLP_BUILD_EXAMPLES)
-  macro(add_example Name Srcs)
-    add_executable(${Name} ${Srcs})
+  #
+  # Build Examples
+  #
+  macro(add_example Name)
+    add_executable(${Name} ${ARGN})
     target_link_libraries(${Name} libClp libCoinUtils lapack)
     set_include_directories(${Name})
     if (COINUTILS_HAS_ZLIB)
@@ -257,6 +291,9 @@ if (CLP_BUILD_EXAMPLES)
     endif ()
     if (COINUTILS_HAS_BZLIB)
       target_link_libraries(${Name} ${BZLIB_NAME})
+    endif ()
+    if (COINUTILS_HAS_THREADS)
+      target_link_libraries(${Name} pthread)
     endif ()
     if (COIN_HAS_GLPK)
       target_link_libraries(${Name} glpk)
@@ -267,10 +304,13 @@ if (CLP_BUILD_EXAMPLES)
     if (COIN_HAS_CHOLDMOD)
       target_link_libraries(${Name} cholmod)
     endif ()
+    if (USE_OPENMP AND UNIX)
+      target_link_libraries(${Name} gomp)
+    endif ()
     if (COINUTILS_USE_THREADS)
       target_link_libraries(${Name} pthread)
     endif ()
-  endmacro()
+  endmacro ()
   
   add_example(addBits ${Clp_DIR}/examples/addBits.cpp)
   
@@ -321,17 +361,17 @@ if (CLP_BUILD_EXAMPLES)
   set_tests_properties(clp_example_default PROPERTIES TIMEOUT 30)
   
   
-  add_example(clp_driver2 ${Clp_DIR}/examples/driver2.cpp)
+  add_example(driver2 ${Clp_DIR}/examples/driver2.cpp)
   
   add_test(NAME clp_example_driver2
-           COMMAND $<TARGET_FILE:clp_driver2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:driver2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_driver2 PROPERTIES TIMEOUT 30)
   
   
-  add_example(clp_driver ${Clp_DIR}/examples/driver.cpp)
+  add_example(driver ${Clp_DIR}/examples/driver.cpp)
   
   add_test(NAME clp_example_driver
-           COMMAND $<TARGET_FILE:clp_driver> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:driver> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_driver PROPERTIES TIMEOUT 30)
   
   
@@ -344,10 +384,8 @@ if (CLP_BUILD_EXAMPLES)
 
   # Needs ekk_api_c.h ...
   #add_example(ekk ${Clp_DIR}/examples/ekk.cpp)
-  #target_link_libraries(ekk libClp libCoinUtils lapack)
   
   #add_example(ekk_interface ${Clp_DIR}/examples/ekk_interface.cpp)
-  #target_link_libraries(ekk_interface libClp libCoinUtils lapack)
   
   add_example(hello ${Clp_DIR}/examples/hello.cpp)
   
@@ -363,17 +401,17 @@ if (CLP_BUILD_EXAMPLES)
   set_tests_properties(clp_example_makeDual PROPERTIES TIMEOUT 30)
   
   
-  add_example(clp_minimum ${Clp_DIR}/examples/minimum.cpp)
+  add_example(minimum ${Clp_DIR}/examples/minimum.cpp)
   
   add_test(NAME clp_example_minimum
-           COMMAND $<TARGET_FILE:clp_minimum> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:minimum> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_minimum PROPERTIES TIMEOUT 30)
   
   
-  add_example(clp_modify ${Clp_DIR}/examples/modify.cpp)
+  add_example(modify ${Clp_DIR}/examples/modify.cpp)
   
   add_test(NAME clp_example_modify
-           COMMAND $<TARGET_FILE:clp_modify> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:modify> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_modify PROPERTIES TIMEOUT 30)
   
   
@@ -455,6 +493,7 @@ if (CLP_BUILD_EXAMPLES)
   #         COMMAND $<TARGET_FILE:testQP> ${CMAKE_SOURCE_DIR}/Data/Sample)
   #set_tests_properties(clp_example_testQP PROPERTIES TIMEOUT 30)
   #
+
   # Need VOL
   #add_example(useVolume ${Clp_DIR}/examples/useVolume.cpp)
   #
@@ -463,14 +502,20 @@ if (CLP_BUILD_EXAMPLES)
   #set_tests_properties(clp_example_useVolume PROPERTIES TIMEOUT 30)
   #
   
-  # Link error
-  #add_example(OsiClpSolverInterfaceTest ${Clp_DIR}/test/osiUnitTest.cpp 
-  #                                      ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp)
-  #target_link_libraries(OsiClpSolverInterfaceTest libCgl libOsiCommonTests libOsi libOsiClp libClp libCoinUtils)
+  # Need OSI to compile
+  #add_example(OsiClpSolverInterfaceTest ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp)
   #
   #add_test(NAME clp_example_OsiClpSolverInterfaceTest
   #         COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
   #set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES TIMEOUT 30)
+  #
+  
+  #add_example(osiUnitTest ${Clp_DIR}/test/osiUnitTest.cpp)
+  #
+  #add_test(NAME clp_example_osiUnitTest
+  #         COMMAND $<TARGET_FILE:osiUnitTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  #set_tests_properties(clp_example_osiUnitTest PROPERTIES TIMEOUT 30)
+  #
 endif ()
 
 add_executable(clp ${Clp_MAIN_SRC_LIST})
@@ -482,6 +527,9 @@ endif ()
 if (COINUTILS_HAS_BZLIB)
   target_link_libraries(clp ${BZLIB_NAME})
 endif ()
+if (COINUTILS_HAS_THREADS)
+  target_link_libraries(clp pthread)
+endif ()
 if (COIN_HAS_GLPK)
   target_link_libraries(clp glpk)
 endif ()
@@ -490,9 +538,6 @@ if (COIN_HAS_AMD)
 endif ()
 if (COIN_HAS_CHOLDMOD)
   target_link_libraries(clp cholmod)
-endif ()
-if (COINUTILS_USE_THREADS)
-  target_link_libraries(clp pthread)
 endif ()
 
 install(TARGETS clp
