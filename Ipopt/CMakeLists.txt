@@ -91,10 +91,10 @@ endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 # Check some directories
 
-coin_check_and_add_include_path(COIN_HAS_MUMPS_INCLUDE_PATH)
-coin_check_and_add_library_path(COIN_HAS_MUMPS_LIBRARY_PATH)
-coin_check_and_add_include_path(COIN_HAS_WSMP_INCLUDE_PATH)
-coin_check_and_add_library_path(COIN_HAS_WSMP_LIBRARY_PATH)
+coin_check_and_add_include_path(IPOPT_HAS_MUMPS_INCLUDE_PATH)
+coin_check_and_add_library_path(IPOPT_HAS_MUMPS_LIBRARY_PATH)
+coin_check_and_add_include_path(IPOPT_HAS_WSMP_INCLUDE_PATH)
+coin_check_and_add_library_path(IPOPT_HAS_WSMP_LIBRARY_PATH)
 
 #-----------------------------------------------------------------------------
 # Manage compilation options
