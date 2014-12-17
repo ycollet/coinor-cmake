@@ -41,6 +41,7 @@ option(COIN_COMPILE_PROFILE          "Activate the code profiling compilation" O
 option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation for valgrind" OFF)
 option(COIN_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
 option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
+option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 
 # CoinUtils options
 option(COINUTILS_USE_THREADS "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
@@ -242,12 +243,12 @@ endif ()
 
 # End detect fortran mangling
 
-if (NOT WIN32)
+if (NOT WIN32 AND COIN_COMPILE_WARNINGS)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -fPIC ")
+  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wno-deprecated -fPIC ")
   # Try to locate unitizalized variables
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wuninitialized ")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
+  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
 endif ()
 
 set(BuildTools_DIR ${Coin_DIR}/BuildTools)

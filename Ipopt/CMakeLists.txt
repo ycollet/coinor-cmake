@@ -47,6 +47,7 @@ option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation fo
 option(COIN_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
 option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
 option(COIN_USE_FAST_CODE            "Use intensive optimization flags" OFF)
+option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 
 set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
@@ -189,12 +190,14 @@ else ()
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
 endif ()
 
-if (NOT WIN32)
+# End detect fortran mangling
+
+if (NOT WIN32 AND COIN_COMPILE_WARNINGS)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated -fPIC ")
+  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wno-deprecated -fPIC ")
   # Try to locate unitizalized variables
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wuninitialized ")
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
+  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
 endif ()
 
 include(CheckIncludeFile)
