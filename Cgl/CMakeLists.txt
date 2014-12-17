@@ -330,7 +330,7 @@ elseif (SIZEOF_INT EQUAL "8")
 endif ()
 
 # With the trunk version of Cbc, Threads and Cilk are allowed
-if (COIN_HAS_ABC AND (COINUTILS_USE_THREADS OR CBC_USE_THREAD))
+if (COIN_HAS_ABC AND (COINUTILS_USE_THREADS OR CBC_USE_THREADS))
   message(FATAL_ERROR "Error: Threads and Cilk (ABC) are incompatible")
 endif ()
 
