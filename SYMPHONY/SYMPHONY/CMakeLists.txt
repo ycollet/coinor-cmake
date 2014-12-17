@@ -505,7 +505,8 @@ if (SYMPHONY_BUILD_EXAMPLES)
   
   
   add_example(milpOsi ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c)
-  
+  target_link_libraries(milpOsi libOsiSym libOsi libCgl libCoinUtils z bz2 libSym libCgl libCoinUtils libClp libOsiClp libCoinUtils libOsi)
+   
   add_test(NAME symphony_example_milpOsi
            COMMAND $<TARGET_FILE:milpOsi> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_milpOsi PROPERTIES TIMEOUT 30)
