@@ -7,6 +7,7 @@ Up to now, only the following projects are supported:
 - Cbc
 - Clp
 - Cgl
+- CoinMP
 - CoinUtils
 - SYMPHONY
 
