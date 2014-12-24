@@ -41,13 +41,31 @@ set(Osi_SRC_LIST_Headers ${Osi_DIR}/src/Osi/OsiAuxInfo.hpp
                          ${Osi_DIR}/src/Osi/OsiSolverInterface.hpp
                          ${Osi_DIR}/src/Osi/OsiSolverParameters.hpp)
 
+include_directories(${BuildTools_DIR}/headers)
 include_directories(${Osi_DIR}/src)
 include_directories(${Osi_DIR}/src/Osi)
-include_directories(${CoinUtils_DIR}/src)
+
+if (USE_COINOR_BIN)
+  include_directories(${COINOR_DIR}/include)
+  
+  add_library(libCoinUtils STATIC IMPORTED)
+
+  if (WIN32)
+    set_property(TARGET libCoinUtils PROPERTY IMPORTED_LOCATION ${COINOR_DIR}/lib/libCoinUtils.lib)
+  else ()
+    set_property(TARGET libCoinUtils PROPERTY IMPORTED_LOCATION ${COINOR_DIR}/lib/libCoinUtils.a)
+  endif ()
+else ()
+  include_directories(${CoinUtils_DIR}/src)
+endif ()
 
 macro(set_include_directories TARGET)
-  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
-  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+  if (USE_COINOR_BIN)
+    target_include_directories(${TARGET} BEFORE PRIVATE ${COINOR_DIR}/include)
+  else ()
+    target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+    target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+  endif ()
 endmacro()
 
 if (WIN32)

@@ -40,6 +40,10 @@ set(COIN_SOPLEX_DIR "None" CACHE STRING "The Soplex solver Path")
 set(COIN_VOL_DIR    "None" CACHE STRING "The Vol solver Path")
 set(COIN_DYLP_DIR   "None" CACHE STRING "The DyLP solver Path")
 
+# Compile only the main part and use an external directory to link / use includes
+option(USE_COINOR_BIN "Use and external directory where the headers / libraries used are stored" OFF)
+set(COINOR_DIR "None" CACHE STRING "The Path where all the used CoinOR libraries are stored")
+
 # Compilation options
 option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
 option(COIN_COMPILE_STATIC           "Activate the static linking" OFF)
@@ -155,6 +159,9 @@ coin_check_and_add_include_library_path(COIN_MOSEK_DIR)
 coin_check_and_add_include_library_path(COIN_SOPLEX_DIR)
 coin_check_and_add_include_library_path(COIN_VOL_DIR)
 coin_check_and_add_include_library_path(COIN_DYLP_DIR)
+if (USE_COINOR_BIN)
+  coin_check_and_add_include_library_path(COINOR_DIR)
+endif ()
 
 coin_check_and_add_include_path(COIN_HAS_AMD_INCLUDE_PATH)
 coin_check_and_add_library_path(COIN_HAS_AMD_LIBRARY_PATH)
@@ -575,22 +582,24 @@ endif(DOXYGEN AND ENABLE_DOXYGEN)
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
-subdirs(ThirdParty)
-
-if (COIN_ENABLE_DOWNLOAD_ZLIB)
-  set(COINUTILS_HAS_ZLIB ON)
+if (NOT USE_COINOR_BIN)
+  subdirs(ThirdParty)
+  
+  if (COIN_ENABLE_DOWNLOAD_ZLIB)
+    set(COINUTILS_HAS_ZLIB ON)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_BZLIB)
+    set(COINUTILS_HAS_BZLIB ON)
+  endif ()
+  
+  subdirs(CoinUtils)
+  
+  subdirs(Osi/Osi)
+  subdirs(Cgl)
+  
+  subdirs(Osi/OsiClp) 
+  subdirs(Clp)
 endif ()
-if (COIN_ENABLE_DOWNLOAD_BZLIB)
-  set(COINUTILS_HAS_BZLIB ON)
-endif ()
-
-subdirs(CoinUtils)
-
-subdirs(Osi/Osi)
-subdirs(Cgl)
-
-subdirs(Osi/OsiClp) 
-subdirs(Clp)
 
 subdirs(Osi/OsiCbc)
 subdirs(Cbc)
