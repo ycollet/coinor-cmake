@@ -574,10 +574,11 @@ add_test(NAME afiro_mps
 set_tests_properties(afiro_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(afiro_mps PROPERTIES LABELS "MPS")
 
-add_test(NAME conic_mps 
-         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -o ${CMAKE_BINARY_DIR}/tests/conic.out)
-set_tests_properties(conic_mps PROPERTIES TIMEOUT 30)
-set_tests_properties(conic_mps PROPERTIES LABELS "MPS")
+# This test seems to be specific for Ipopt
+#add_test(NAME conic_mps 
+#         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -o ${CMAKE_BINARY_DIR}/tests/conic.out)
+#set_tests_properties(conic_mps PROPERTIES TIMEOUT 30)
+#set_tests_properties(conic_mps PROPERTIES LABELS "MPS")
 
 add_test(NAME exmip1_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.mps -o ${CMAKE_BINARY_DIR}/tests/exmip1.out)

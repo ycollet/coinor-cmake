@@ -638,10 +638,11 @@ if (COIN_HAS_CLP)
   set_tests_properties(afiro_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(afiro_mps_cbc_standard PROPERTIES LABELS "MPS")
   
-  add_test(NAME conic_mps_cbc_standard 
-           COMMAND $<TARGET_FILE:cbc> ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -solution ${CMAKE_BINARY_DIR}/tests/conic.out -solve)
-  set_tests_properties(conic_mps_cbc_standard PROPERTIES TIMEOUT 3000)
-  set_tests_properties(conic_mps_cbc_standard PROPERTIES LABELS "MPS;LONG")
+  # This test seems to be specific for Ipopt
+  #add_test(NAME conic_mps_cbc_standard 
+  #         COMMAND $<TARGET_FILE:cbc> ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -solution ${CMAKE_BINARY_DIR}/tests/conic.out -solve)
+  #set_tests_properties(conic_mps_cbc_standard PROPERTIES TIMEOUT 3000)
+  #set_tests_properties(conic_mps_cbc_standard PROPERTIES LABELS "MPS;LONG")
   
   add_test(NAME exmip1_mps_cbc_standard 
            COMMAND $<TARGET_FILE:cbc> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.mps -solution ${CMAKE_BINARY_DIR}/tests/exmip1.out -solve)
@@ -774,10 +775,11 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(afiro_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(afiro_mps_cbc_generic PROPERTIES LABELS "MPS")
   
-  add_test(NAME conic_mps_cbc_generic 
-           COMMAND $<TARGET_FILE:cbc-generic> ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -solution ${CMAKE_BINARY_DIR}/tests/conic.out -solve)
-  set_tests_properties(conic_mps_cbc_generic PROPERTIES TIMEOUT 30)
-  set_tests_properties(conic_mps_cbc_generic PROPERTIES LABELS "MPS")
+  # This test seems to be specific for Ipopt
+  #add_test(NAME conic_mps_cbc_generic 
+  #         COMMAND $<TARGET_FILE:cbc-generic> ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -solution ${CMAKE_BINARY_DIR}/tests/conic.out -solve)
+  #set_tests_properties(conic_mps_cbc_generic PROPERTIES TIMEOUT 30)
+  #set_tests_properties(conic_mps_cbc_generic PROPERTIES LABELS "MPS")
   
   add_test(NAME exmip1_mps_cbc_generic 
            COMMAND $<TARGET_FILE:cbc-generic> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.mps -solution ${CMAKE_BINARY_DIR}/tests/exmip1.out -solve)
