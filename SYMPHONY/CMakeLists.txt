@@ -41,7 +41,7 @@ set(COIN_DYLP_DIR   "None" CACHE STRING "The DyLP solver Path")
 option(USE_COINOR_BIN "Use and external directory where the headers / libraries used are stored" OFF)
 set(COINOR_DIR "None" CACHE STRING "The Path where all the used CoinOR libraries are stored")
 
-option(SYM_BUILD_EXAMPLES "Enable the building of examples" OFF)
+option(SYMPHONY_BUILD_EXAMPLES "Enable the building of examples" OFF)
 option(COIN_HAS_READLINE  "Readline support" OFF)
 option(CLP_LP_SOLVER  "Clp LP solver support" ON)
 option(GLPK_LP_SOLVER "Glpk LP solver support" OFF)
