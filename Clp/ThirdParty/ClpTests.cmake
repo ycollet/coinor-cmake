@@ -5,7 +5,7 @@
 add_test(NAME infeas_chemcom_mps_clp_standard 
          COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/chemcom.mps -solution ${CMAKE_BINARY_DIR}/tests/infeas_chemcom_clp.out -solve)
 if (WIN32)
-  set_tests_properties(infeas_chemcom_mps_cbc_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+  set_tests_properties(infeas_chemcom_mps_clp_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
 endif ()
 set_tests_properties(infeas_chemcom_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_chemcom_mps_clp_standard PROPERTIES LABELS "MPS")
@@ -21,7 +21,7 @@ set_tests_properties(infeas_pilot4i_mps_clp_standard PROPERTIES LABELS "MPS")
 add_test(NAME infeas_reactor_mps_clp_standard 
          COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/reactor.mps -solution ${CMAKE_BINARY_DIR}/tests/infeas_reactor_clp.out -solve)
 if (WIN32)
-  set_tests_properties(infeas_chemcom_mps_cbc_standard infeas_reactor_mps_clp_standard ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+  set_tests_properties(infeas_reactor_mps_clp_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
 endif ()
 set_tests_properties(infeas_reactor_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_reactor_mps_clp_standard PROPERTIES LABELS "MPS")
