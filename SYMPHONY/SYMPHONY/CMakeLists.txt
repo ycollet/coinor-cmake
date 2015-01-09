@@ -487,6 +487,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_bicriteria
            COMMAND $<TARGET_FILE:bicriteria> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_bicriteria PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_bicriteria PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
   
   
   add_example(milp ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c)
@@ -494,6 +497,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_milp
            COMMAND $<TARGET_FILE:milp> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_milp PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_milp PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
   
   
   add_example(milp2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c)
@@ -501,6 +507,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_milp2
            COMMAND $<TARGET_FILE:milp2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_milp2 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_milp2 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
   
   
   add_example(milpOsi ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c)
@@ -509,6 +518,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_milpOsi
            COMMAND $<TARGET_FILE:milpOsi> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_milpOsi PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_milpOsi PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
   
   
   #ERROR: Missing include files in milpOsi2
@@ -517,6 +529,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   #add_test(NAME symphony_example_milpOsi2
   #         COMMAND $<TARGET_FILE:milpOsi2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   #set_tests_properties(symphony_example_milpOsi2 PROPERTIES TIMEOUT 30)
+  #if (WIN32)
+  #  set_tests_properties(symphony_example_milpOsi2 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  #endif ()
   #
   
   add_example(sensitivity ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c)
@@ -524,6 +539,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_sensitivity
            COMMAND $<TARGET_FILE:sensitivity> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_sensitivity PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_sensitivity PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
   
   
   add_example(warm_start1 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c)
@@ -531,6 +549,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_warm_start1
            COMMAND $<TARGET_FILE:warm_start1> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_warm_start1 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_warm_start1 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
   
   
   add_example(warm_start2 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c)
@@ -538,6 +559,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_warm_start2
            COMMAND $<TARGET_FILE:warm_start2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_warm_start2 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_warm_start2 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
   
   
   add_example(warm_start3 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
@@ -545,6 +569,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_test(NAME symphony_example_warm_start3
            COMMAND $<TARGET_FILE:warm_start3> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(symphony_example_warm_start3 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_warm_start3 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
   set_tests_properties(symphony_example_warm_start3 PROPERTIES LABELS "LONG")
 endif ()
 
@@ -573,127 +600,202 @@ add_test(NAME afiro_mps
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps -o ${CMAKE_BINARY_DIR}/tests/afiro.out)
 set_tests_properties(afiro_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(afiro_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(afiro_mps  PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 # This test seems to be specific for Ipopt
 #add_test(NAME conic_mps 
 #         COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -o ${CMAKE_BINARY_DIR}/tests/conic.out)
 #set_tests_properties(conic_mps PROPERTIES TIMEOUT 30)
 #set_tests_properties(conic_mps PROPERTIES LABELS "MPS")
+#if (WIN32)
+#  set_tests_properties(conic_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+#endif ()
 
 add_test(NAME exmip1_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.mps -o ${CMAKE_BINARY_DIR}/tests/exmip1.out)
 set_tests_properties(exmip1_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(exmip1_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(exmip1_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME galenet_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/galenet.mps -o ${CMAKE_BINARY_DIR}/tests/galenet.out)
 set_tests_properties(galenet_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(galenet_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(galenet_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME nw460_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/nw460.mps -o ${CMAKE_BINARY_DIR}/tests/nw460.out)
 set_tests_properties(nw460_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(nw460_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(nw460_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME p0548_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/p0548.mps -o ${CMAKE_BINARY_DIR}/tests/p0548.out)
 set_tests_properties(p0548_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(p0548_mps PROPERTIES LABEL "MPS")
+if (WIN32)
+  set_tests_properties(p0548_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME scOneInt_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/scOneInt.mps -o ${CMAKE_BINARY_DIR}/tests/scOneInt.out)
 set_tests_properties(scOneInt_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(scOneInt_mps PROPERTIES TIMEOUT "MPS")
+if (WIN32)
+  set_tests_properties(scOneInt_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME tp3_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/tp3.mps -o ${CMAKE_BINARY_DIR}/tests/tp3.out)
 set_tests_properties(tp3_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(tp3_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(tp3_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME wedding_16_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/wedding_16.mps -o ${CMAKE_BINARY_DIR}/tests/wedding_16.out)
 set_tests_properties(wedding_16_mps PROPERTIES TIMEOUT 3000)
 set_tests_properties(wedding_16_mps PROPERTIES LABELS "MPS;LONG")
+if (WIN32)
+  set_tests_properties(wedding_16_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME atm_5_10_1_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/atm_5_10_1.mps -o ${CMAKE_BINARY_DIR}/tests/atm_5_10_1.out)
 set_tests_properties(atm_5_10_1_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(atm_5_10_1_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(atm_5_10_1_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME e226_mps
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/e226.mps -o ${CMAKE_BINARY_DIR}/tests/e226.out)
 set_tests_properties(e226_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(e226_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(e226_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME finnis_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/finnis.mps -o ${CMAKE_BINARY_DIR}/tests/finnis.out)
 set_tests_properties(finnis_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(finnis_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(finnis_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME hello_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/hello.mps -o ${CMAKE_BINARY_DIR}/tests/hello.out)
 set_tests_properties(hello_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(hello_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(hello_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME p0033_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps -o ${CMAKE_BINARY_DIR}/tests/p0033.out)
 set_tests_properties(p0033_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(p0033_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(p0033_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME pack1_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/pack1.mps -o ${CMAKE_BINARY_DIR}/tests/pack1.out)
 set_tests_properties(pack1_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(pack1_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(pack1_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME share2qp_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/share2qp.mps -o ${CMAKE_BINARY_DIR}/tests/share2qp.out)
 set_tests_properties(share2qp_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(share2qp_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(share2qp_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME tp4_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/tp4.mps -o ${CMAKE_BINARY_DIR}/tests/tp4.out)
 set_tests_properties(tp4_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(tp4_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(tp4_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME brandy_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/brandy.mps -o ${CMAKE_BINARY_DIR}/tests/brandy.out)
 set_tests_properties(brandy_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(brandy_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(brandy_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME exmip1.5_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.5.mps -o ${CMAKE_BINARY_DIR}/tests/exmip1.5.out)
 set_tests_properties(exmip1.5_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(exmip1.5_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(5_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME galenetbnds_mps 
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/galenetbnds.mps -o ${CMAKE_BINARY_DIR}/tests/galenetbnds.out)
 set_tests_properties(galenetbnds_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(galenetbnds_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(galenetbnds_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME lseu_mps
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/lseu.mps -o ${CMAKE_BINARY_DIR}/tests/lseu.out)
 set_tests_properties(lseu_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(lseu_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(lseu_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME p0201_mps
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/p0201.mps -o ${CMAKE_BINARY_DIR}/tests/p0201.out)
 set_tests_properties(p0201_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(p0201_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(p0201_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME retail3_mps
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/retail3.mps -o ${CMAKE_BINARY_DIR}/tests/retail3.out)
 set_tests_properties(retail3_mps PROPERTIES TIMEOUT 3000)
 set_tests_properties(retail3_mps PROPERTIES LABELS "MPS;LONG")
+if (WIN32)
+  set_tests_properties(retail3_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME spec_sections_mps
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/spec_sections.mps -o ${CMAKE_BINARY_DIR}/tests/spec_sections.out)
 set_tests_properties(spec_sections_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(spec_sections_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(spec_sections_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME tp5_mps
          COMMAND $<TARGET_FILE:symphony> -F ${CMAKE_SOURCE_DIR}/Data/Sample/tp5.mps -o ${CMAKE_BINARY_DIR}/tests/tp5.out)
 set_tests_properties(tp5_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(tp5_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(tp5_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 # With LP files
 
@@ -701,5 +803,8 @@ add_test(NAME exmip1_lp
          COMMAND $<TARGET_FILE:symphony> -L ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.lp -o ${CMAKE_BINARY_DIR}/tests/exmip1_lp.out)
 set_tests_properties(exmip1_lp PROPERTIES TIMEOUT 30)
 set_tests_properties(exmip1_lp PROPERTIES LABELS "LP")
+if (WIN32)
+  set_tests_properties(exmip1_lp PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 

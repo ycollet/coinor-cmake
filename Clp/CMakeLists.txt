@@ -610,127 +610,202 @@ add_test(NAME afiro_mps
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps -solution ${CMAKE_BINARY_DIR}/tests/afiro.out -solve)
 set_tests_properties(afiro_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(afiro_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(afiro_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 # This test seems to be specific for Ipopt
 #add_test(NAME conic_mps 
 #         COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/conic.mps -solution ${CMAKE_BINARY_DIR}/tests/conic.out -solve)
 #set_tests_properties(conic_mps PROPERTIES TIMEOUT 3000)
 #set_tests_properties(conic_mps PROPERTIES LABELS "MPS;LONG")
+#if (WIN32)
+#  set_tests_properties(conic_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+#endif ()
 
 add_test(NAME exmip1_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.mps -solution ${CMAKE_BINARY_DIR}/tests/exmip1.out -solve)
 set_tests_properties(exmip1_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(exmip1_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(exmip1_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME galenet_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/galenet.mps -solution ${CMAKE_BINARY_DIR}/tests/galenet.out -solve)
 set_tests_properties(galenet_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(galenet_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(galenet_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME nw460_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/nw460.mps -solution ${CMAKE_BINARY_DIR}/tests/nw460.out -solve)
 set_tests_properties(nw460_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(nw460_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(nw460_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME p0548_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/p0548.mps -solution ${CMAKE_BINARY_DIR}/tests/p0548.out -solve)
 set_tests_properties(p0548_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(p0548_mps PROPERTIES LABEL "MPS")
+if (WIN32)
+  set_tests_properties(p0548_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME scOneInt_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/scOneInt.mps -solution ${CMAKE_BINARY_DIR}/tests/scOneInt.out -solve)
 set_tests_properties(scOneInt_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(scOneInt_mps PROPERTIES TIMEOUT "MPS")
+if (WIN32)
+  set_tests_properties(scOneInt_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME tp3_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/tp3.mps -solution ${CMAKE_BINARY_DIR}/tests/tp3.out -solve)
 set_tests_properties(tp3_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(tp3_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(tp3_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME wedding_16_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/wedding_16.mps -solution ${CMAKE_BINARY_DIR}/tests/wedding_16.out -solve)
 set_tests_properties(wedding_16_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(wedding_16_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(wedding_16_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME atm_5_10_1_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/atm_5_10_1.mps -solution ${CMAKE_BINARY_DIR}/tests/atm_5_10_1.out -solve)
 set_tests_properties(atm_5_10_1_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(atm_5_10_1_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(atm_5_10_1_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME e226_mps
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/e226.mps -solution ${CMAKE_BINARY_DIR}/tests/e226.out -solve)
 set_tests_properties(e226_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(e226_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(e226_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME finnis_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/finnis.mps -solution ${CMAKE_BINARY_DIR}/tests/finnis.out -solve)
 set_tests_properties(finnis_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(finnis_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(finnis_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME hello_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/hello.mps -solution ${CMAKE_BINARY_DIR}/tests/hello.out -solve)
 set_tests_properties(hello_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(hello_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(hello_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME p0033_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps -solution ${CMAKE_BINARY_DIR}/tests/p0033.out -solve)
 set_tests_properties(p0033_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(p0033_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(p0033_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME pack1_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/pack1.mps -solution ${CMAKE_BINARY_DIR}/tests/pack1.out -solve)
 set_tests_properties(pack1_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(pack1_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(pack1_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME share2qp_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/share2qp.mps -solution ${CMAKE_BINARY_DIR}/tests/share2qp.out -solve)
 set_tests_properties(share2qp_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(share2qp_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(share2qp_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME tp4_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/tp4.mps -solution ${CMAKE_BINARY_DIR}/tests/tp4.out -solve)
 set_tests_properties(tp4_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(tp4_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(tp4_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME brandy_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/brandy.mps -solution ${CMAKE_BINARY_DIR}/tests/brandy.out -solve)
 set_tests_properties(brandy_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(brandy_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(brandy_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME exmip1.5_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.5.mps -solution ${CMAKE_BINARY_DIR}/tests/exmip1.5.out -solve)
 set_tests_properties(exmip1.5_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(exmip1.5_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(exmip1.5_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME galenetbnds_mps 
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/galenetbnds.mps -solution ${CMAKE_BINARY_DIR}/tests/galenetbnds.out -solve)
 set_tests_properties(galenetbnds_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(galenetbnds_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(galenetbnds_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME lseu_mps
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/lseu.mps -solution ${CMAKE_BINARY_DIR}/tests/lseu.out -solve)
 set_tests_properties(lseu_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(lseu_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(lseu_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME p0201_mps
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/p0201.mps -solution ${CMAKE_BINARY_DIR}/tests/p0201.out -solve)
 set_tests_properties(p0201_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(p0201_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(p0201_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME retail3_mps
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/retail3.mps -solution ${CMAKE_BINARY_DIR}/tests/retail3.out -solve)
 set_tests_properties(retail3_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(retail3_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(retail3_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME spec_sections_mps
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/spec_sections.mps -solution ${CMAKE_BINARY_DIR}/tests/spec_sections.out -solve)
 set_tests_properties(spec_sections_mps PROPERTIES TIMEOUT 3000)
 set_tests_properties(spec_sections_mps PROPERTIES LABELS "MPS;LONG")
+if (WIN32)
+  set_tests_properties(spec_sections_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 add_test(NAME tp5_mps
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/tp5.mps -solution ${CMAKE_BINARY_DIR}/tests/tp5.out -solve)
 set_tests_properties(tp5_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(tp5_mps PROPERTIES LABELS "MPS")
+if (WIN32)
+  set_tests_properties(tp5_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
 
 # With LP files
 
@@ -738,3 +813,6 @@ add_test(NAME exmip1_lp
          COMMAND $<TARGET_FILE:clp> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.lp -solution ${CMAKE_BINARY_DIR}/tests/exmip1_lp.out -solve)
 set_tests_properties(exmip1_lp PROPERTIES TIMEOUT 30)
 set_tests_properties(exmip1_lp PROPERTIES LABELS "LP")
+if (WIN32)
+  set_tests_properties(exmip1_lp PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+endif ()
