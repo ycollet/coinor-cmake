@@ -6,14 +6,14 @@ project(Symphony_Thirdparty)
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
-option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32   "Enable the download / compilation of PThreads for Windows" OFF)
-option(COIN_ENABLE_DOWNLOAD_LAPACK          "Enable the download / compilation of Blas / Lapack" OFF)
-option(COIN_ENABLE_DOWNLOAD_GLPK            "Enable the download / compilation of GLPK" OFF)
-option(COIN_ENABLE_DOWNLOAD_MUMPS           "Enable the download / compilation of Mumps" OFF)
-option(COIN_ENABLE_DOWNLOAD_ASL             "Enable the download / compilation of Ampl Solver Library" OFF)
-option(COIN_ENABLE_DOWNLOAD_DATA_TEST       "Enable the download / run of Data tests" OFF)
-option(COIN_ENABLE_DOWNLOAD_ZLIB            "Enable the download / compilation of Zlib" OFF)
-option(COIN_ENABLE_DOWNLOAD_BZLIB           "Enable the download / compilation of Bzlib" OFF)
+option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
+option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
+option(COIN_ENABLE_DOWNLOAD_MUMPS         "Enable the download / compilation of Mumps" OFF)
+option(COIN_ENABLE_DOWNLOAD_ASL           "Enable the download / compilation of Ampl Solver Library" OFF)
+option(COIN_ENABLE_DOWNLOAD_DATA_TEST     "Enable the download / run of Data tests" OFF)
+option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
+option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of Bzlib" OFF)
 
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
@@ -88,17 +88,17 @@ endif()
 if (COIN_ENABLE_DOWNLOAD_ZLIB)
   set(ZLIB_VERSION "1.2.8")
 
-  set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Zlib library include Path")
-  set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Zlib library library Path")
+  set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Zlib library include Path" FORCE)
+  set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Zlib library library Path" FORCE)
   
   if (WIN32)
-    set(ZLIB_NAME "${EP_InstallDir}/lib/libz.lib" CACHE STRING "The Zlib library name" FORCE)
+    set(ZLIB_NAME "${EP_InstallDir}/lib/zlib.lib" CACHE STRING "The Zlib library name" FORCE)
 
     ExternalProject_Add(EP_Zlib
                         PREFIX ${EP_InstallDir}/Zlib
   			URL http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
 			CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Zlib/src/EP_Zlib/build
-                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} ..
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -G "NMake Makefiles" ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build nmake
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build nmake install
                         )
@@ -127,8 +127,8 @@ endif()
 if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(BZLIB_VERSION "1.0.6")
 
-  set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Bzlib library include Path")
-  set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Bzlib library library Path")
+  set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Bzlib library include Path" FORCE)
+  set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Bzlib library library Path" FORCE)
   
   if (WIN32)
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The Bzlib library name" FORCE)

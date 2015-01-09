@@ -65,12 +65,12 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/Idiot.cpp
                  ${Clp_DIR}/src/IdiSolve.cpp)
 
-set(ClpSolver_SRC_LIST ${Clp_DIR}/src/CbcOrClpParam.cpp
+set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
+                       ${Clp_DIR}/src/CbcOrClpParam.cpp
+		       ${Clp_DIR}/src/Clp_ampl.cpp
 		       ${Clp_DIR}/src/MyEventHandler.cpp
 		       ${Clp_DIR}/src/MyMessageHandler.cpp
 		       ${Clp_DIR}/src/unitTest.cpp)
-#                       ${Clp_DIR}/src/ClpSolver.cpp
-#                       ${Clp_DIR}/src/Clp_ampl.cpp
 
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
@@ -284,8 +284,11 @@ if (CLP_BUILD_EXAMPLES)
   #
   macro(add_example Name)
     add_executable(${Name} ${ARGN})
-    target_link_libraries(${Name} libClp libCoinUtils lapack)
+    target_link_libraries(${Name} libClp libCoinUtils)
     set_include_directories(${Name})
+    if (COINUTILS_HAS_LAPACK)
+      target_link_libraries(${Name} lapack)
+    endif ()
     if (COINUTILS_HAS_ZLIB)
       target_link_libraries(${Name} ${ZLIB_NAME})
     endif ()
@@ -519,8 +522,11 @@ if (CLP_BUILD_EXAMPLES)
 endif ()
 
 add_executable(clp ${Clp_MAIN_SRC_LIST})
-target_link_libraries(clp libClp libClpSolver libCoinUtils lapack)
+target_link_libraries(clp libClp libClpSolver libCoinUtils)
 set_include_directories(clp)
+if (COINUTILS_HAS_LAPACK)
+  target_link_libraries(clp lapack)
+endif ()
 if (COINUTILS_HAS_ZLIB)
   target_link_libraries(clp ${ZLIB_NAME})
 endif ()

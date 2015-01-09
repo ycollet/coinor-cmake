@@ -4,146 +4,233 @@
 
 add_test(NAME infeas_chemcom_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/chemcom.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_chemcom_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_chemcom_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_chemcom_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_chemcom_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_pilot4i_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/pilot4i.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_pilot4i_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_pilot4i_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_pilot4i_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_pilot4i_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_reactor_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/reactor.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_reactor_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_chemcom_mps_symphony_standard infeas_reactor_mps_symphony_standard ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_reactor_mps_symphony_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(infeas_reactor_mps_symphony_standard PROPERTIES LABELS "MPS")
+set_tests_properties(infeas_reactor_mps_symphony_standard infeas_reactor_mps_symphony_standard LABELS "MPS")
 
 add_test(NAME infeas_bgetam_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/bgetam.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_bgetam_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_bgetam_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_bgetam_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_bgetam_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_refinery_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/refinery.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_refinery_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_refinery_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_refinery_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_refinery_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_cplex2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/cplex2.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_cplex2_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_cplex2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_cplex2_mps_symphony_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(infeas_cplex2_mps_symphony_standard PROPERTIES LABELS "MPS")
+set_tests_properties(infeas_cplex2_mps_symphony_standard infeas_cplex2_mps_symphony_standard LABELS "MPS")
 
 add_test(NAME infeas_forest6_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/forest6.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_forest6_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_forest6_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_forest6_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_forest6_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_cplex1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/cplex1.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_cplex1_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_cplex1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_cplex1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_cplex1_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_box1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/box1.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_box1_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_box1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_box1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_box1_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_itest6_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/itest6.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_itest6_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_itest6_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_itest6_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_itest6_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_bgindy_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/bgindy.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_bgindy_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_bgindy_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_bgindy_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_bgindy_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_klein2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/klein2.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_klein2_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_klein2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_klein2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_klein2_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_ceria3d_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/ceria3d.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_ceria3d_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_ceria3d_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_ceria3d_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_ceria3d_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_ex72a_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/ex72a.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_ex72a_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_ex72a_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_ex72a_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_ex72a_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_greenbea_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/greenbea.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_greenbea_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_greenbea_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_greenbea_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_greenbea_mps_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
 add_test(NAME infeas_klein3_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/klein3.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_klein3_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_klein3_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_klein3_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_klein3_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_itest2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/itest2.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_itest2_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_itest2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_itest2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_itest2_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_ex73a_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/ex73a.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_ex73a_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_ex73a_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_ex73a_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_ex73a_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_klein1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/klein1.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_klein1_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_klein1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_klein1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_klein1_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_woodinfe_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/woodinfe.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_woodinfe_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_woodinfe_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_woodinfe_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_woodinfe_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_bgprtr_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/bgprtr.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_bgprtr_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_bgprtr_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_bgprtr_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_bgprtr_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_galenet_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/galenet.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_galenet_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_galenet_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_galenet_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_galenet_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_gran_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/gran.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_gran_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_gran_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_gran_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_gran_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_mondou2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/mondou2.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_mondou2_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_mondou2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_mondou2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_mondou2_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_qual_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/qual.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_qual_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_qual_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_qual_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_qual_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_vol1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/vol1.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_vol1_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_vol1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_vol1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_vol1_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_pang_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/pang.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_pang_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_pang_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_pang_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_pang_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_bgdbg1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/bgdbg1.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_bgdbg1_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_bgdbg1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_bgdbg1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_bgdbg1_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME infeas_gosh_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Infeas/gosh.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/infeas_gosh_symphony.out)
+if (WIN32)
+  set_tests_properties(infeas_gosh_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(infeas_gosh_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(infeas_gosh_mps_symphony_standard PROPERTIES LABELS "MPS")
 
@@ -153,6 +240,9 @@ set_tests_properties(infeas_gosh_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME big_mkc7_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Big/mkc7.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/big_mkc7_symphony.out)
+if (WIN32)
+  set_tests_properties(big_mkc7_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(big_mkc7_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(big_mkc7_mps_symphony_standard PROPERTIES LABELS "MPS;LONG")
 
@@ -162,86 +252,137 @@ set_tests_properties(big_mkc7_mps_symphony_standard PROPERTIES LABELS "MPS;LONG"
 
 add_test(NAME sample_scOneInt_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/scOneInt.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_scOneInt_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_scOneInt_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_scOneInt_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_scOneInt_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_p0201_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/p0201.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_p0201_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_p0201_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_p0201_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_p0201_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_p0548_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/p0548.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_p0548_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_p0548_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_p0548_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_p0548_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_hello_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/hello.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_hello_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_hello_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_hello_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_hello_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_e226_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/e226.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_e226_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_e226_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_e226_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_e226_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_tp3_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/tp3.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_tp3_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_tp3_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_tp3_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_tp3_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_tp4_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/tp4.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_tp4_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_tp4_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_tp4_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_tp4_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_finnis_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/finnis.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_finnis_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_finnis_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_finnis_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_finnis_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_5_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/exmip1.5.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_5_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_5_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_5_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_5_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_exmip1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/exmip1.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_exmip1_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_exmip1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_exmip1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_exmip1_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_share2qp_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/share2qp.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_share2qp_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_share2qp_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_share2qp_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_share2qp_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_afiro_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/afiro.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_afiro_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_afiro_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_afiro_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_afiro_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_nw460_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/nw460.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_nw460_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_nw460_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_nw460_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_nw460_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_brandy_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/brandy.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_brandy_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_brandy_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_brandy_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_brandy_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_tp5_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/tp5.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_tp5_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_tp5_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_tp5_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_tp5_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_pack1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/pack1.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_pack1_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_pack1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_pack1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_pack1_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME sample_p0033_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Sample/p0033.mps -p 0 -o ${CMAKE_BINARY_DIR}/tests/sample_p0033_symphony.out)
+if (WIN32)
+  set_tests_properties(sample_p0033_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(sample_p0033_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(sample_p0033_mps_symphony_standard PROPERTIES LABELS "MPS")
 
@@ -253,6 +394,9 @@ set_tests_properties(sample_p0033_mps_symphony_standard PROPERTIES LABELS "MPS")
 
 add_test(NAME netlib_fit2d_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit2d.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_fit2d_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_fit2d_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_fit2d_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fit2d_mps_symphony_standard PROPERTIES LABELS "MPS")
 
@@ -262,6 +406,9 @@ set_tests_properties(netlib_fit2d_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_forplan_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/forplan.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_forplan_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_forplan_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_forplan_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_forplan_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -270,6 +417,9 @@ set_tests_properties(netlib_forplan_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_ship08s_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship08s.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_ship08s_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_ship08s_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_ship08s_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship08s_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -278,6 +428,9 @@ set_tests_properties(netlib_ship08s_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_fit1d_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit1d.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_fit1d_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_fit1d_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_fit1d_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fit1d_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -286,6 +439,9 @@ set_tests_properties(netlib_fit1d_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_brandy_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/brandy.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_brandy_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_brandy_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_brandy_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_brandy_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -294,6 +450,9 @@ set_tests_properties(netlib_brandy_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_scfxm1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scfxm1.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scfxm1_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scfxm1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scfxm1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scfxm1_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -302,6 +461,9 @@ set_tests_properties(netlib_scfxm1_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_grow22_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/grow22.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_grow22_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_grow22_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_grow22_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_grow22_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -310,6 +472,9 @@ set_tests_properties(netlib_grow22_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_bandm_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bandm.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_bandm_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_bandm_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_bandm_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_bandm_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -318,6 +483,9 @@ set_tests_properties(netlib_bandm_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_fit1p_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit1p.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_fit1p_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_fit1p_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_fit1p_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fit1p_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -326,6 +494,9 @@ set_tests_properties(netlib_fit1p_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_standata_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/standata.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_standata_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_standata_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_standata_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_standata_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -334,6 +505,9 @@ set_tests_properties(netlib_standata_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_pilot4_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilot4.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_pilot4_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_pilot4_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_pilot4_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_pilot4_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -342,6 +516,9 @@ set_tests_properties(netlib_pilot4_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_stocfor2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/stocfor2.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_stocfor2_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_stocfor2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_stocfor2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_stocfor2_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -350,6 +527,9 @@ set_tests_properties(netlib_stocfor2_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_sctap1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sctap1.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_sctap1_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_sctap1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_sctap1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sctap1_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -358,6 +538,9 @@ set_tests_properties(netlib_sctap1_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_scrs8_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scrs8.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scrs8_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scrs8_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scrs8_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scrs8_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -366,6 +549,9 @@ set_tests_properties(netlib_scrs8_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_sctap2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sctap2.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_sctap2_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_sctap2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_sctap2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sctap2_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -374,6 +560,9 @@ set_tests_properties(netlib_sctap2_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_pilot87_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilot87.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_pilot87_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_pilot87_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_pilot87_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_pilot87_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -382,6 +571,9 @@ set_tests_properties(netlib_pilot87_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_greenbea_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/greenbea.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_greenbea_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_greenbea_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_greenbea_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_greenbea_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -390,6 +582,9 @@ set_tests_properties(netlib_greenbea_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_woodw_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/woodw.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_woodw_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_woodw_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_woodw_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_woodw_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -398,6 +593,9 @@ set_tests_properties(netlib_woodw_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_recipe_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/recipe.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_recipe_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_recipe_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_recipe_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_recipe_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -406,6 +604,9 @@ set_tests_properties(netlib_recipe_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_share1b_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/share1b.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_share1b_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_share1b_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_share1b_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_share1b_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -414,6 +615,9 @@ set_tests_properties(netlib_share1b_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_tuff_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/tuff.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_tuff_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_tuff_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_tuff_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_tuff_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -422,6 +626,9 @@ set_tests_properties(netlib_tuff_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_share2b_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/share2b.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_share2b_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_share2b_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_share2b_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_share2b_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -430,6 +637,9 @@ set_tests_properties(netlib_share2b_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_bore3d_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bore3d.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_bore3d_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_bore3d_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_bore3d_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_bore3d_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -438,6 +648,9 @@ set_tests_properties(netlib_bore3d_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_d2q06c_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/d2q06c.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_d2q06c_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_d2q06c_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_d2q06c_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_d2q06c_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -446,6 +659,9 @@ set_tests_properties(netlib_d2q06c_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_sc50b_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc50b.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_sc50b_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_sc50b_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_sc50b_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sc50b_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -454,6 +670,9 @@ set_tests_properties(netlib_sc50b_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_pilot_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilot.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_pilot_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_pilot_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_pilot_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_pilot_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -462,6 +681,9 @@ set_tests_properties(netlib_pilot_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_bnl1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bnl1.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_bnl1_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_bnl1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_bnl1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_bnl1_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -470,6 +692,9 @@ set_tests_properties(netlib_bnl1_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_ship04l_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship04l.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_ship04l_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_ship04l_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_ship04l_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship04l_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -478,6 +703,9 @@ set_tests_properties(netlib_ship04l_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_sc105_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc105.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_sc105_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_sc105_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_sc105_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sc105_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -486,6 +714,9 @@ set_tests_properties(netlib_sc105_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_boeing2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/boeing2.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_boeing2_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_boeing2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_boeing2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_boeing2_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -494,6 +725,9 @@ set_tests_properties(netlib_boeing2_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_nesm_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/nesm.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_nesm_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_nesm_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_nesm_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_nesm_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -502,6 +736,9 @@ set_tests_properties(netlib_nesm_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_sc205_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc205.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_sc205_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_sc205_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_sc205_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sc205_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -510,6 +747,9 @@ set_tests_properties(netlib_sc205_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_finnis_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/finnis.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_finnis_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_finnis_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_finnis_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_finnis_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -518,6 +758,9 @@ set_tests_properties(netlib_finnis_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_degen2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/degen2.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_degen2_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_degen2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_degen2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_degen2_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -526,6 +769,9 @@ set_tests_properties(netlib_degen2_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_maros-r7_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/maros-r7.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_maros-r7_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_maros PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_maros-r7_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_maros-r7_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -534,6 +780,9 @@ set_tests_properties(netlib_maros-r7_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_ship04s_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship04s.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_ship04s_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_ship04s_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_ship04s_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship04s_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -542,6 +791,9 @@ set_tests_properties(netlib_ship04s_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_wood1p_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/wood1p.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_wood1p_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_wood1p_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_wood1p_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_wood1p_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -550,6 +802,9 @@ set_tests_properties(netlib_wood1p_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_lotfi_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/lotfi.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_lotfi_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_lotfi_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_lotfi_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_lotfi_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -558,6 +813,9 @@ set_tests_properties(netlib_lotfi_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_gfrd_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/gfrd-pnc.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_pnc_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_gfrd_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_gfrd_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_gfrd_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -566,6 +824,9 @@ set_tests_properties(netlib_gfrd_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_etamacro_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/etamacro.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_etamacro_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_etamacro_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_etamacro_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_etamacro_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -574,6 +835,9 @@ set_tests_properties(netlib_etamacro_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_grow7_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/grow7.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_grow7_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_grow7_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_grow7_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_grow7_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -582,6 +846,9 @@ set_tests_properties(netlib_grow7_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_dfl001_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/dfl001.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_dfl001_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_dfl001_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_dfl001_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_dfl001_mps_symphony_standard PROPERTIES LABELS "MPS")
 # (there's a ** in the readme file in the netlib website)
@@ -591,6 +858,9 @@ set_tests_properties(netlib_dfl001_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_agg_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_agg_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_agg_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_agg_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_agg_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -599,6 +869,9 @@ set_tests_properties(netlib_agg_mps_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME netlib_standgub_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/standgub.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_standgub_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_standgub_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_standgub_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_standgub_mps_symphony_standard PROPERTIES LABELS "MPS")
 # Nothing in the readme - Symphony value
@@ -608,6 +881,9 @@ set_tests_properties(netlib_standgub_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_ship12l_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship12l.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_ship12l_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_ship12l_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_ship12l_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship12l_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -616,6 +892,9 @@ set_tests_properties(netlib_ship12l_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_standmps_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/standmps.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_standmps_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_standmps_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_standmps_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_standmps_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -624,6 +903,9 @@ set_tests_properties(netlib_standmps_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_scagr25_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scagr25.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scagr25_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scagr25_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scagr25_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scagr25_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -632,6 +914,9 @@ set_tests_properties(netlib_scagr25_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_capri_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/capri.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_capri_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_capri_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_capri_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_capri_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -640,6 +925,9 @@ set_tests_properties(netlib_capri_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_cycle_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/cycle.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_cycle_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_cycle_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_cycle_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_cycle_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -648,6 +936,9 @@ set_tests_properties(netlib_cycle_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_greenbeb_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/greenbeb.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_greenbeb_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_greenbeb_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_greenbeb_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_greenbeb_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -656,6 +947,9 @@ set_tests_properties(netlib_greenbeb_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_agg2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg2.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_agg2_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_agg2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_agg2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_agg2_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -664,6 +958,9 @@ set_tests_properties(netlib_agg2_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_stair_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/stair.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_stair_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_stair_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_stair_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_stair_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -672,6 +969,9 @@ set_tests_properties(netlib_stair_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_shell_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/shell.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_shell_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_shell_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_shell_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_shell_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -680,6 +980,9 @@ set_tests_properties(netlib_shell_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_sierra_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sierra.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_sierra_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_sierra_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_sierra_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sierra_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -688,6 +991,9 @@ set_tests_properties(netlib_sierra_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_afiro_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/afiro.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_afiro_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_afiro_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_afiro_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_afiro_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -696,6 +1002,9 @@ set_tests_properties(netlib_afiro_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_scsd1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd1.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scsd1_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scsd1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scsd1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scsd1_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -704,6 +1013,9 @@ set_tests_properties(netlib_scsd1_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_scsd8_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd8.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scsd8_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scsd8_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scsd8_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scsd8_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -712,6 +1024,9 @@ set_tests_properties(netlib_scsd8_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_ship08l_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship08l.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_ship08l_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_ship08l_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_ship08l_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship08l_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -720,6 +1035,9 @@ set_tests_properties(netlib_ship08l_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_25fv47_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/25fv47.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_25fv47_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_25fv47_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_25fv47_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_25fv47_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -728,6 +1046,9 @@ set_tests_properties(netlib_25fv47_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_czprob_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/czprob.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_czprob_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_czprob_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_czprob_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_czprob_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -736,6 +1057,9 @@ set_tests_properties(netlib_czprob_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_adlittle_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/adlittle.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_adlittle_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_adlittle_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_adlittle_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_adlittle_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -744,6 +1068,9 @@ set_tests_properties(netlib_adlittle_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_d6cube_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/d6cube.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_d6cube_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_d6cube_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_d6cube_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_d6cube_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -752,6 +1079,9 @@ set_tests_properties(netlib_d6cube_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_scorpion_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scorpion.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scorpion_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scorpion_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scorpion_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scorpion_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -760,6 +1090,9 @@ set_tests_properties(netlib_scorpion_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_sctap3_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sctap3.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_sctap3_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_sctap3_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_sctap3_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sctap3_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -768,6 +1101,9 @@ set_tests_properties(netlib_sctap3_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_seba_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/seba.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_seba_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_seba_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_seba_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_seba_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -776,6 +1112,9 @@ set_tests_properties(netlib_seba_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_modszk1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/modszk1.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_modszk1_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_modszk1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_modszk1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_modszk1_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -784,6 +1123,9 @@ set_tests_properties(netlib_modszk1_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_pilotnov_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilotnov.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_pilotnov_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_pilotnov_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_pilotnov_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_pilotnov_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -792,6 +1134,9 @@ set_tests_properties(netlib_pilotnov_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_beaconfd_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/beaconfd.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_beaconfd_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_beaconfd_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_beaconfd_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_beaconfd_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -800,6 +1145,9 @@ set_tests_properties(netlib_beaconfd_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_e226_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/e226.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_e226_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_e226_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_e226_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_e226_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -808,6 +1156,9 @@ set_tests_properties(netlib_e226_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_degen3_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/degen3.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_degen3_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_degen3_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_degen3_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_degen3_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -816,6 +1167,9 @@ set_tests_properties(netlib_degen3_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_scfxm2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scfxm2.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scfxm2_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scfxm2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scfxm2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scfxm2_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -824,6 +1178,9 @@ set_tests_properties(netlib_scfxm2_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_fffff800_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fffff800.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_fffff800_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_fffff800_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_fffff800_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fffff800_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -832,6 +1189,9 @@ set_tests_properties(netlib_fffff800_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_kb2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/kb2.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_kb2_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_kb2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_kb2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_kb2_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -840,6 +1200,9 @@ set_tests_properties(netlib_kb2_mps_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME netlib_ganges_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ganges.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_ganges_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_ganges_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_ganges_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ganges_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -848,6 +1211,9 @@ set_tests_properties(netlib_ganges_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_stocfor1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/stocfor1.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_stocfor1_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_stocfor1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_stocfor1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_stocfor1_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -856,6 +1222,9 @@ set_tests_properties(netlib_stocfor1_mps_symphony_standard PROPERTIES PASS_REGUL
 
 add_test(NAME netlib_scsd6_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd6.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scsd6_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scsd6_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scsd6_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scsd6_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -864,6 +1233,9 @@ set_tests_properties(netlib_scsd6_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_80bau3b_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/80bau3b.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_80bau3b_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_80bau3b_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_80bau3b_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_80bau3b_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -872,6 +1244,9 @@ set_tests_properties(netlib_80bau3b_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_ship12s_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship12s.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_ship12s_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_ship12s_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_ship12s_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship12s_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -880,6 +1255,9 @@ set_tests_properties(netlib_ship12s_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_agg3_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg3.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_agg3_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_agg3_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_agg3_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_agg3_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -888,6 +1266,9 @@ set_tests_properties(netlib_agg3_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_maros_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/maros.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_maros_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_maros_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_maros_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_maros_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -896,6 +1277,9 @@ set_tests_properties(netlib_maros_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_perold_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/perold.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_perold_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_perold_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_perold_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_perold_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -904,6 +1288,9 @@ set_tests_properties(netlib_perold_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_scagr7_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scagr7.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scagr7_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scagr7_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scagr7_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scagr7_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -912,6 +1299,9 @@ set_tests_properties(netlib_scagr7_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_scfxm3_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scfxm3.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_scfxm3_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_scfxm3_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_scfxm3_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scfxm3_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -920,6 +1310,9 @@ set_tests_properties(netlib_scfxm3_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_grow15_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/grow15.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_grow15_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_grow15_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_grow15_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_grow15_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -928,6 +1321,9 @@ set_tests_properties(netlib_grow15_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME netlib_fit2p_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit2p.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_fit2p_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_fit2p_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_fit2p_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fit2p_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -936,6 +1332,9 @@ set_tests_properties(netlib_fit2p_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_boeing1_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/boeing1.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_boeing1_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_boeing1_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_boeing1_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_boeing1_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -944,6 +1343,9 @@ set_tests_properties(netlib_boeing1_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_sc50a_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc50a.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_sc50a_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_sc50a_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_sc50a_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sc50a_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -952,6 +1354,9 @@ set_tests_properties(netlib_sc50a_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_vtpbase_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/vtpbase.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_vtpbase_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_vtpbase_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_vtpbase_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_vtpbase_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -960,6 +1365,9 @@ set_tests_properties(netlib_vtpbase_mps_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME netlib_blend_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/blend.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_blend_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_blend_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_blend_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_blend_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -968,6 +1376,9 @@ set_tests_properties(netlib_blend_mps_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME netlib_bnl2_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bnl2.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_bnl2_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_bnl2_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_bnl2_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_bnl2_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -976,6 +1387,9 @@ set_tests_properties(netlib_bnl2_mps_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME netlib_israel_mps_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/israel.mps.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/netlib_israel_symphony.out)
+if (WIN32)
+  set_tests_properties(netlib_israel_mps_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(netlib_israel_mps_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_israel_mps_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -988,6 +1402,9 @@ set_tests_properties(netlib_israel_mps_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME miplib3_10teams_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/10teams.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_10teams_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_10teams_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_10teams_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -996,6 +1413,9 @@ set_tests_properties(miplib3_10teams_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_air03_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_air03_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_air03_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_air03_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_air03_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1004,6 +1424,9 @@ set_tests_properties(miplib3_air03_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_air04_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_air04_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_air04_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_air04_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_air04_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1012,6 +1435,9 @@ set_tests_properties(miplib3_air04_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_air05_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_air05_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_air05_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_air05_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_air05_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1020,6 +1446,9 @@ set_tests_properties(miplib3_air05_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_arki001_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_arki001_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_arki001_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_arki001_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1028,6 +1457,9 @@ set_tests_properties(miplib3_arki001_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_bell3a_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1036,6 +1468,9 @@ set_tests_properties(miplib3_bell3a_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_bell5_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1044,6 +1479,9 @@ set_tests_properties(miplib3_bell5_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_blend2_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_blend2_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_blend2_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_blend2_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1052,6 +1490,9 @@ set_tests_properties(miplib3_blend2_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_cap6000_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1060,6 +1501,9 @@ set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_dano3mip_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_dano3mip_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_dano3mip_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_dano3mip_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1068,6 +1512,9 @@ set_tests_properties(miplib3_dano3mip_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME miplib3_danoint_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_danoint_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_danoint_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_danoint_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1076,6 +1523,9 @@ set_tests_properties(miplib3_danoint_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_dcmulti_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_dcmulti_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_dcmulti_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_dcmulti_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1084,6 +1534,9 @@ set_tests_properties(miplib3_dcmulti_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_dsbmip_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1092,6 +1545,9 @@ set_tests_properties(miplib3_dsbmip_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_egout_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_egout_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_egout_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_egout_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_egout_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1100,6 +1556,9 @@ set_tests_properties(miplib3_egout_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_enigma_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_enigma_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_enigma_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_enigma_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1108,6 +1567,9 @@ set_tests_properties(miplib3_enigma_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_fast0507_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1116,6 +1578,9 @@ set_tests_properties(miplib3_fast0507_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME miplib3_fiber_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_fiber_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_fiber_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_fiber_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1124,6 +1589,9 @@ set_tests_properties(miplib3_fiber_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_fixnet6_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_fixnet6_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_fixnet6_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_fixnet6_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1132,6 +1600,9 @@ set_tests_properties(miplib3_fixnet6_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_flugpl_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_flugpl_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_flugpl_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_flugpl_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1140,6 +1611,9 @@ set_tests_properties(miplib3_flugpl_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_gen_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_gen_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_gen_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_gen_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gen_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1148,6 +1622,9 @@ set_tests_properties(miplib3_gen_symphony_standard PROPERTIES PASS_REGULAR_EXPRE
 
 add_test(NAME miplib3_gesa2_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1156,6 +1633,9 @@ set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_gesa2_o_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1164,6 +1644,9 @@ set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_gesa3_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_gesa3_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_gesa3_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa3_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1172,6 +1655,9 @@ set_tests_properties(miplib3_gesa3_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_gesa3_o_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_gesa3_o_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_gesa3_o_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa3_o_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1180,6 +1666,9 @@ set_tests_properties(miplib3_gesa3_o_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_gt2_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_gt2_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_gt2_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gt2_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1188,6 +1677,9 @@ set_tests_properties(miplib3_gt2_symphony_standard PROPERTIES PASS_REGULAR_EXPRE
 
 add_test(NAME miplib3_harp2_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_harp2_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_harp2_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_harp2_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1196,6 +1688,9 @@ set_tests_properties(miplib3_harp2_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_khb05250_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_khb05250_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_khb05250_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_khb05250_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1204,6 +1699,9 @@ set_tests_properties(miplib3_khb05250_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME miplib3_l152lav_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_l152lav_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_l152lav_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_l152lav_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1212,6 +1710,9 @@ set_tests_properties(miplib3_l152lav_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_lseu_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_lseu_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_lseu_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_lseu_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1219,7 +1720,10 @@ add_regex(TEST_REGEX "Solution Cost: 1120")
 set_tests_properties(miplib3_lseu_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_markshare1_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_symphony.out -solve)
+         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_symphony.out -solveif (WIN32)
+  set_tests_properties(miplib3_markshare1_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
+)
 set_tests_properties(miplib3_markshare1_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_markshare1_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1227,7 +1731,10 @@ add_regex(TEST_REGEX "Solution Cost: 1")
 set_tests_properties(miplib3_markshare1_symphony_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
 add_test(NAME miplib3_markshare2_symphony_standard 
-         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_symphony.out -solve)
+         COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_symphony.out -solveif (WIN32)
+  set_tests_properties(miplib3_markshare2_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
+)
 set_tests_properties(miplib3_markshare2_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_markshare2_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1236,6 +1743,9 @@ set_tests_properties(miplib3_markshare2_symphony_standard PROPERTIES PASS_REGULA
 
 add_test(NAME miplib3_mas74_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_mas74_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_mas74_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_mas74_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1244,6 +1754,9 @@ set_tests_properties(miplib3_mas74_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_mas76_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1252,6 +1765,9 @@ set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_misc03_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_misc03_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_misc03_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_misc03_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1260,6 +1776,9 @@ set_tests_properties(miplib3_misc03_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_misc06_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_misc06_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_misc06_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_misc06_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1268,6 +1787,9 @@ set_tests_properties(miplib3_misc06_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_misc07_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_misc07_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_misc07_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_misc07_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1276,6 +1798,9 @@ set_tests_properties(miplib3_misc07_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_mitre_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_mitre_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_mitre_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mitre_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1284,6 +1809,9 @@ set_tests_properties(miplib3_mitre_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_mkc_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_mkc_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_mkc_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_mkc_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1292,6 +1820,9 @@ set_tests_properties(miplib3_mkc_symphony_standard PROPERTIES PASS_REGULAR_EXPRE
 
 add_test(NAME miplib3_mod008_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_mod008_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_mod008_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mod008_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1300,6 +1831,9 @@ set_tests_properties(miplib3_mod008_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_mod010_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_mod010_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_mod010_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mod010_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1308,6 +1842,9 @@ set_tests_properties(miplib3_mod010_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_mod011_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1316,6 +1853,9 @@ set_tests_properties(miplib3_mod011_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_modglob_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1324,6 +1864,9 @@ set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_noswot_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_noswot_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_noswot_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_noswot_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1332,6 +1875,9 @@ set_tests_properties(miplib3_noswot_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_nw04_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1340,6 +1886,9 @@ set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES PASS_REGULAR_EXPR
 
 add_test(NAME miplib3_p0033_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_p0033_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_p0033_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0033_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1348,6 +1897,9 @@ set_tests_properties(miplib3_p0033_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_p0201_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_p0201_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_p0201_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0201_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1356,6 +1908,9 @@ set_tests_properties(miplib3_p0201_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_p0282_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_p0282_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_p0282_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0282_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1364,6 +1919,9 @@ set_tests_properties(miplib3_p0282_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_p0548_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_p0548_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_p0548_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0548_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1372,6 +1930,9 @@ set_tests_properties(miplib3_p0548_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_p2756_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_p2756_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_p2756_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p2756_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1380,6 +1941,9 @@ set_tests_properties(miplib3_p2756_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_pk1_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1388,6 +1952,9 @@ set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES PASS_REGULAR_EXPRE
 
 add_test(NAME miplib3_pp08aCUTS_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1396,6 +1963,9 @@ set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES PASS_REGULAR
 
 add_test(NAME miplib3_pp08a_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1404,6 +1974,9 @@ set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_qiu_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1412,6 +1985,9 @@ set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES PASS_REGULAR_EXPRE
 
 add_test(NAME miplib3_qnet1_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1420,6 +1996,9 @@ set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_qnet1_o_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_qnet1_o_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_qnet1_o_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_qnet1_o_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1428,6 +2007,9 @@ set_tests_properties(miplib3_qnet1_o_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_rentacar_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_rentacar_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_rentacar_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_rentacar_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1436,6 +2018,9 @@ set_tests_properties(miplib3_rentacar_symphony_standard PROPERTIES PASS_REGULAR_
 
 add_test(NAME miplib3_rgn_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_rgn_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_rgn_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_rgn_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1444,6 +2029,9 @@ set_tests_properties(miplib3_rgn_symphony_standard PROPERTIES PASS_REGULAR_EXPRE
 
 add_test(NAME miplib3_rout_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_rout_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_rout_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_rout_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_rout_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1452,6 +2040,9 @@ set_tests_properties(miplib3_rout_symphony_standard PROPERTIES PASS_REGULAR_EXPR
 
 add_test(NAME miplib3_set1ch_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_set1ch_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_set1ch_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_set1ch_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1460,6 +2051,9 @@ set_tests_properties(miplib3_set1ch_symphony_standard PROPERTIES PASS_REGULAR_EX
 
 add_test(NAME miplib3_seymour_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_seymour_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_seymour_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_seymour_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1468,6 +2062,9 @@ set_tests_properties(miplib3_seymour_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_stein27_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_stein27_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_stein27_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_stein27_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1476,6 +2073,9 @@ set_tests_properties(miplib3_stein27_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_stein45_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1484,6 +2084,9 @@ set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES PASS_REGULAR_E
 
 add_test(NAME miplib3_swath_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_swath_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_swath_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_swath_symphony_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_swath_symphony_standard PROPERTIES LABELS "MPS;LONG")
 set(TEST_REGEX "")
@@ -1492,6 +2095,9 @@ set_tests_properties(miplib3_swath_symphony_standard PROPERTIES PASS_REGULAR_EXP
 
 add_test(NAME miplib3_vpm1_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_vpm1_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_vpm1_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_vpm1_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
@@ -1500,6 +2106,9 @@ set_tests_properties(miplib3_vpm1_symphony_standard PROPERTIES PASS_REGULAR_EXPR
 
 add_test(NAME miplib3_vpm2_symphony_standard 
          COMMAND $<TARGET_FILE:symphony> -F ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz -p 0 -o ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_symphony.out -solve)
+if (WIN32)
+  set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES ENVIRONMENT "${CMAKE_BINARY_DIR}/Dependencies/install/lib\\;${CMAKE_BINARY_DIR}/Dependencies/install/bin\\;")
+endif ()
 set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES LABELS "MPS")
 set(TEST_REGEX "")
