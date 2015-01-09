@@ -746,7 +746,7 @@ add_test(NAME exmip1.5_mps
 set_tests_properties(exmip1.5_mps PROPERTIES TIMEOUT 30)
 set_tests_properties(exmip1.5_mps PROPERTIES LABELS "MPS")
 if (WIN32)
-  set_tests_properties(5_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  set_tests_properties(exmip1.5_mps PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
 endif ()
 
 add_test(NAME galenetbnds_mps 
