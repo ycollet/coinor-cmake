@@ -471,8 +471,8 @@ if (CLP_BUILD_EXAMPLES)
   endif ()
   
   
-  add_example(pdco ${Clp_DIR}/examples/pdco.cpp
-                   ${Clp_DIR}/examples/myPdco.cpp)
+  add_example(pdco ${Clp_DIR}/examples/pdco.cpp)
+                   i#${Clp_DIR}/examples/myPdco.cpp)
   
   add_test(NAME clp_example_pdco
            COMMAND $<TARGET_FILE:pdco> ${CMAKE_SOURCE_DIR}/Data/Sample)
