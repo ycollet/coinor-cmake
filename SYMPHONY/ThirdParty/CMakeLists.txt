@@ -212,6 +212,9 @@ endif()
 
 if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
   if (WIN32)
+    set(COIN_THREADS_INC_PATH "${EP_InstallDir}/include" CACHE STRING "The PThreads library include Path" FORCE)
+    set(COIN_THREADS_LIB_PATH "${EP_InstallDir}/lib" CACHE STRING "The PThreads library library Path" FORCE)
+    
     ExternalProject_Add(EP_PThreads
                         PREFIX ${EP_InstallDir}/PThreads
                         URL ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
