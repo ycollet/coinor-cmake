@@ -173,6 +173,8 @@ if (NOT "${Coin_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}")
   endif ()
 endif ()
 
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+
 #-----------------------------------------------------------------------------
 # Manage compilation options
 #-----------------------------------------------------------------------------
@@ -344,9 +346,9 @@ elseif (SIZEOF_INT EQUAL "8")
 endif ()
 
 # With the trunk version of Cbc, Threads and Cilk are allowed
-if (COIN_HAS_ABC AND (COINUTILS_USE_THREADS OR CBC_USE_THREADS))
-  message(FATAL_ERROR "Error: Threads and Cilk (ABC) are incompatible")
-endif ()
+#if (COIN_HAS_ABC AND (COINUTILS_USE_THREADS OR CBC_USE_THREADS))
+#  message(FATAL_ERROR "Error: Threads and Cilk (ABC) are incompatible")
+#endif ()
 
 if ((COIN_ABC_LEVEL LESS 0) OR (COIN_ABC_LEVEL GREATER 4))
   message(FATAL_ERROR "Error: COIN_ABC_LEVEL must be between 0 and 4")

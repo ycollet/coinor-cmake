@@ -97,6 +97,8 @@ coin_check_and_add_library_path(IPOPT_HAS_MUMPS_LIBRARY_PATH)
 coin_check_and_add_include_path(IPOPT_HAS_WSMP_INCLUDE_PATH)
 coin_check_and_add_library_path(IPOPT_HAS_WSMP_LIBRARY_PATH)
 
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+
 #-----------------------------------------------------------------------------
 # Manage compilation options
 #-----------------------------------------------------------------------------

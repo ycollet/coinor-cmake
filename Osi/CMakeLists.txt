@@ -146,6 +146,8 @@ if (NOT "${Coin_DIR}" STREQUAL "${CMAKE_SOURCE_DIR}")
   endif ()
 endif ()
 
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+
 #-----------------------------------------------------------------------------
 # Manage compilation options
 #-----------------------------------------------------------------------------

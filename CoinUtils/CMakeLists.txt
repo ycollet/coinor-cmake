@@ -74,6 +74,8 @@ if ((NOT Coin_DIR STREQUAL "${CMAKE_SOURCE_DIR}") AND (NOT EXISTS ${Coin_DIR}))
   message(FATAL_ERROR "Error: Coin_DIR = ${Coin_DIR} which is not an existing directory")
 endif ()
 
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+
 #-----------------------------------------------------------------------------
 # Manage compilation options
 #-----------------------------------------------------------------------------
