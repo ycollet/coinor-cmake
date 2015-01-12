@@ -792,7 +792,7 @@ if (COIN_HAS_CLP AND NOT USE_COINOR_BIN)
   set_tests_properties(exmip1.5_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(exmip1.5_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(exmip1 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(exmip1.5_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
   endif ()
   
   add_test(NAME galenetbnds_mps_cbc_standard 

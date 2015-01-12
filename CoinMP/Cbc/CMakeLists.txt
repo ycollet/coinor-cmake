@@ -65,7 +65,6 @@ set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcHeuristicDiveLineSearch.cpp
                  ${Cbc_DIR}/src/CbcHeuristicDivePseudoCost.cpp
                  ${Cbc_DIR}/src/CbcHeuristicDiveVectorLength.cpp
-                 ${Cbc_DIR}/src/CbcHeuristicDW.cpp
                  ${Cbc_DIR}/src/CbcHeuristicFPump.cpp
                  ${Cbc_DIR}/src/CbcHeuristicGreedy.cpp
                  ${Cbc_DIR}/src/CbcHeuristicLocal.cpp
@@ -101,6 +100,7 @@ set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcTree.cpp
                  ${Cbc_DIR}/src/CbcTreeLocal.cpp
 	         ${Cbc_DIR}/src/unitTestClp.cpp)
+               #${Cbc_DIR}/src/CbcHeuristicDW.cpp
 
 set(Cbc_SRC_LIST_Headers ${Cbc_DIR}/src/Cbc_C_Interface.h
                          ${Cbc_DIR}/src/CbcBranchActual.hpp
