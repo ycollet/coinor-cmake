@@ -41,6 +41,9 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
     endif()
   endif ()
   
+  set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+  set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+
   ExternalProject_Add(EP_Lapack
                       PREFIX ${EP_InstallDir}/Lapack
 		      URL http://www.coin-or.org/BuildTools/Lapack/lapack-3.4.2.tgz
