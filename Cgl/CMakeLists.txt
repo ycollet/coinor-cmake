@@ -67,11 +67,11 @@ set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of 
 set(COIN_COINUTILS_VERBOSITY "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
 
 # Clp options
-option(COIN_HAS_AMD "Clp uses the AMD linear solver" OFF)
+option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
 set(COIN_HAS_AMD_INCLUDE_PATH "None" CACHE STRING "The AMD linear solver include Path")
 set(COIN_HAS_AMD_LIBRARY_PATH "None" CACHE STRING "The AMD linear solver absolute library Path")
 
-option(COIN_HAS_CHOLMOD "Clp use the CholMod linear solver" OFF)
+option(COIN_ENABLE_CHOLMOD "Clp use the CholMod linear solver" OFF)
 set(COIN_HAS_CHOLMOD_INCLUDE_PATH "None" CACHE STRING "The CholMod linear solver include Path")
 set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None" CACHE STRING "The CholMod linear solver absolute library Path")
 
@@ -145,29 +145,34 @@ endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
 # Check for AMD and CHOLMOD
 
-find_package(AMD)
-if (AMD_FOUND)
-  set(COIN_HAS_AMD_INCLUDE_PATH "${AMD_INCLUDE_DIRS}")
-  set(COIN_HAS_AMD_LIBRARY_PATH "None")
-  set(COIN_HAS_AMD ON)
+if (COIN_ENABLE_AMD)
+  find_package(AMD)
+  if (AMD_FOUND)
+    set(COIN_HAS_AMD_INCLUDE_PATH "${AMD_INCLUDE_DIRS}")
+    set(COIN_HAS_AMD_LIBRARY_PATH "None")
+    set(COIN_HAS_AMD ON)
+  endif ()
+  
+  if (COIN_HAS_AMD)
+    add_definitions(-DCOIN_HAS_AMD)
+  endif ()
 endif ()
 
-if (COIN_HAS_AMD)
-  add_definitions(-DCOIN_HAS_AMD)
+if (COIN_ENABLE_CHOLMOD)
+  find_package(CHOLMOD)
+  if (CHOLMOD_FOUND)
+    set(COIN_HAS_CHOLMOD_INCLUDE_PATH "${CHOLMOD_INCLUDE_DIRS}")
+    set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None")
+    set(COIN_HAS_CHOLMOD ON)
+  endif ()
+  
+  if (COIN_HAS_CHOLMOD)
+    add_definitions(-DCOIN_HAS_CHOLMOD)
+  endif ()
 endif ()
 
-find_package(CHOLMOD)
-if (CHOLMOD_FOUND)
-  set(COIN_HAS_CHOLMOD_INCLUDE_PATH "${CHOLMOD_INCLUDE_DIRS}")
-  set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None")
-  set(COIN_HAS_CHOLMOD ON)
-endif ()
-
-if (COIN_HAS_CHOLMOD)
-  add_definitions(-DCOIN_HAS_CHOLMOD)
-endif ()
-
-if ((COIN_HAS_CHOLMOD AND NOT COIN_HAS_AMD) OR (NOT COIN_HAS_CHOLMOD AND COIN_HAS_AMD))
+if (((COIN_HAS_CHOLMOD AND NOT COIN_HAS_AMD) OR (NOT COIN_HAS_CHOLMOD AND COIN_HAS_AMD)) OR
+    ((COIN_ENABLE_CHOLMOD AND NOT COIN_ENABLE_AMD) OR (NOT COIN_ENABLE_CHOLMOD AND COIN_ENABLE_AMD)))
   message(FATAL_ERROR "CHOLMOD and AMD must be both activated or both desactivated")
 endif ()
 
