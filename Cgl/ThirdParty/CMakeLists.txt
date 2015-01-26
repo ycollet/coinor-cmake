@@ -11,7 +11,7 @@ option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
 option(COIN_ENABLE_DOWNLOAD_DATA_TEST     "Enable the download / run of Data tests" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
-option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of Bzlib" OFF)
+option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
 
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
@@ -29,6 +29,9 @@ endif ()
 if (NOT EXISTS ${EP_InstallDir}/include)
   make_directory(${EP_InstallDir}/include)
 endif ()
+
+include_directories(${EP_InstallDir}/include)
+link_directories(${EP_InstallDir}/lib)
 
 # #################################################
 # ===>    Macros
@@ -76,6 +79,17 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
                                      && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/lib/libblas.a   ${EP_InstallDir}/lib
                                      && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/lib/libtmglib.a ${EP_InstallDir}/lib
                       )
+else ()
+  find_package(LAPACK)
+  find_package(BLAS)
+  
+  if (LAPACK_FOUND AND BLAS_FOUND)
+    set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+    set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+  else ()
+    set(COIN_HAS_LAPACK OFF CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+    set(COIN_HAS_BLAS   OFF CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+  endif ()
 endif()
 
 # #################################################
@@ -115,6 +129,21 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build make install
                         )
   endif()
+else()
+  find_package(ZLIB)
+  
+  if (ZLIB_FOUND)
+    include_directories(${ZLIB_INCLUDE_DIRS})
+    set(ZLIB_NAME "${ZLIB_LIBRARIES}" CACHE STRING "The Zlib library name" FORCE)
+    set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "${ZLIB_INCLUDE_DIRS}" CACHE STRING "The Zlib library include Path" FORCE)
+    set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "None" CACHE STRING "The Zlib library library Path" FORCE)
+    set(COINUTILS_HAS_ZLIB ON CACHE BOOL "Activate Zlib for CoinUtils" FORCE)
+  else ()
+    set(ZLIB_NAME "" CACHE STRING "The Zlib library name" FORCE)
+    set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "None" CACHE STRING "The Zlib library include Path" FORCE)
+    set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "None" CACHE STRING "The Zlib library library Path" FORCE)
+    set(COINUTILS_HAS_ZLIB OFF CACHE BOOL "Activate Zlib for CoinUtils" FORCE)
+  endif ()
 endif()
 
 # #################################################
@@ -122,44 +151,59 @@ endif()
 # #################################################
 
 # #################################################
-# ===>    Bzlib
+# ===>    BZlib
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(BZLIB_VERSION "1.0.6")
 
-  set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Bzlib library include Path" FORCE)
-  set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The Bzlib library library Path" FORCE)
+  set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The BZlib library include Path" FORCE)
+  set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib" CACHE STRING "The BZlib library library Path" FORCE)
   
   if (WIN32)
-    set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The Bzlib library name" FORCE)
+    set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The BZlib library name" FORCE)
     
-    ExternalProject_Add(EP_Bzlib
-                        PREFIX ${EP_InstallDir}/Bzlib
+    ExternalProject_Add(EP_BZlib
+                        PREFIX ${EP_InstallDir}/BZlib
   			URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
 			CONFIGURE_COMMAND ""
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Bzlib/src/EP_Bzlib nmake -f makefile.msc
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/libbz2.lib ${EP_InstallDir}/lib &&
-			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib.h ${EP_InstallDir}/include &&
-			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib/src/EP_BZlib nmake -f makefile.msc
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/libbz2.lib ${EP_InstallDir}/lib &&
+			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib.h ${EP_InstallDir}/include &&
+			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib_private.h ${EP_InstallDir}/include
                         )
   else ()
-    set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.a" CACHE STRING "The Bzlib library name" FORCE)
+    set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.a" CACHE STRING "The BZlib library name" FORCE)
     
-    ExternalProject_Add(EP_Bzlib
-                        PREFIX ${EP_InstallDir}/Bzlib
+    ExternalProject_Add(EP_BZlib
+                        PREFIX ${EP_InstallDir}/BZlib
   			URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
 			CONFIGURE_COMMAND ""
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Bzlib/src/EP_Bzlib make
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/libbz2.a ${EP_InstallDir}/lib &&
-			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib.h ${EP_InstallDir}/include &&
-			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Bzlib/src/EP_Bzlib/bzlib_private.h ${EP_InstallDir}/include
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib/src/EP_BZlib make
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/libbz2.a ${EP_InstallDir}/lib &&
+			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib.h ${EP_InstallDir}/include &&
+			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib_private.h ${EP_InstallDir}/include
                         )
   endif()
+else()
+  find_package(BZip2)
+  
+  if (BZIP2_FOUND)
+    include_directories(${BZIP2_INCLUDE_DIR})
+    set(BZLIB_NAME "${BZIP2_LIBRARIES}" CACHE STRING "The BZlib library name" FORCE)
+    set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${BZIP2_INCLUDE_DIR}" CACHE STRING "The BZlib library include Path" FORCE)
+    set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "None" CACHE STRING "The BZlib library library Path" FORCE)
+    set(COINUTILS_HAS_BZLIB ON CACHE BOOL "Activate BZlib for CoinUtils" FORCE)
+  else ()
+    set(BZLIB_NAME "" CACHE STRING "The BZlib library name" FORCE)
+    set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "None" CACHE STRING "The BZlib library include Path" FORCE)
+    set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "None" CACHE STRING "The BZlib library library Path" FORCE)
+    set(COINUTILS_HAS_BZLIB OFF CACHE BOOL "Activate BZlib for CoinUtils" FORCE)
+  endif ()
 endif()
 
 # #################################################
-# <===    Bzlib
+# <===    BZlib
 # #################################################
 
 # #################################################
