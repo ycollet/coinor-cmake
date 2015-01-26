@@ -66,11 +66,11 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/IdiSolve.cpp)
 
 set(ClpSolver_SRC_LIST ${Clp_DIR}/src/CbcOrClpParam.cpp
+                       ${Clp_DIR}/src/ClpSolver.cpp
+		       ${Clp_DIR}/src/Clp_ampl.cpp
 		       ${Clp_DIR}/src/MyEventHandler.cpp
 		       ${Clp_DIR}/src/MyMessageHandler.cpp
 		       ${Clp_DIR}/src/unitTest.cpp)
-# ${Clp_DIR}/src/ClpSolver.cpp
-# ${Clp_DIR}/src/Clp_ampl.cpp
                        
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
