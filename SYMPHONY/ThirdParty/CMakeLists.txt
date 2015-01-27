@@ -6,6 +6,14 @@ project(Symphony_Thirdparty)
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
+option(COIN_USE_DOWNLOAD_PTHREAD_WIN32 "Enable the use of the thirdparty PThreads for Windows" OFF)
+option(COIN_USE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
+option(COIN_USE_DOWNLOAD_GLPK          "Enable the use of the thirdparty GLPK" OFF)
+option(COIN_USE_DOWNLOAD_MUMPS         "Enable the use of the thirdparty Mumps" OFF)
+option(COIN_USE_DOWNLOAD_ASL           "Enable the use of the thirdparty Ampl Solver Library" OFF)
+option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" OFF)
+option(COIN_USE_DOWNLOAD_BZLIB         "Enable the use of the thirdparty BZlib" OFF)
+
 option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
 option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)

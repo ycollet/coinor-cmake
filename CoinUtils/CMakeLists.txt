@@ -30,11 +30,13 @@ option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 option(COINUTILS_USE_THREADS "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
 option(COINUTILS_USE_MEMPOOL_OVERRIDE_NEW "enables the CoinUtils mempool to override global new/delete" OFF)
 option(COINUTILS_USE_MEMPOOL_MAXPOOLED "Specify the default maximum memory allocation size that is served by the memory pool. If negative (or 'no') then the memory pool is disabled completely. Otherwise its value can be overridden at runtime using the COINUTILS_MEMPOOL_MAXPOOLED environment variable." OFF)
+option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
+option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
 option(COIN_HAS_LAPACK "Enable the Lapack support of CoinUtils" OFF)
-option(COIN_HAS_BLAS "Enable the Blas support of CoinUtils" OFF)
+option(COIN_HAS_BLAS   "Enable the Blas support of CoinUtils" OFF)
 
 set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
-set(COIN_COINUTILS_VERBOSITY "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
+set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
 
 # Set paths of source
 set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE STRING "The CoinUtils Path")
