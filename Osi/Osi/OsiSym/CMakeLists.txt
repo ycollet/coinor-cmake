@@ -17,7 +17,7 @@ macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
 endmacro()
 
-include_directories(${SYMPHONY_DIR}/include)
+include_directories(${COIN_SYMPHONY_DIR}/include)
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
