@@ -510,9 +510,9 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Osi/doxydoc/doxygen.conf)
 endif(DOXYGEN AND ENABLE_DOXYGEN)
 
+subdirs(ThirdParty)
+
 if (NOT USE_COINOR_BIN)
-  subdirs(ThirdParty)
-  
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     set(COINUTILS_HAS_ZLIB ON)
   endif ()

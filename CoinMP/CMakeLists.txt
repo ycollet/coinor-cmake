@@ -625,9 +625,9 @@ endif(DOXYGEN AND ENABLE_DOXYGEN)
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
+subdirs(ThirdParty)
+
 if (NOT USE_COINOR_BIN)
-  subdirs(ThirdParty)
-  
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     set(COINUTILS_HAS_ZLIB ON)
   endif ()
@@ -637,14 +637,14 @@ if (NOT USE_COINOR_BIN)
   
   subdirs(CoinUtils)
   
-  subdirs(Osi/Osi)
   subdirs(Cgl)
+  subdirs(Osi/Osi)
   
-  subdirs(Osi/OsiClp) 
   subdirs(Clp)
+  subdirs(Osi/OsiClp) 
   
-  subdirs(Osi/OsiCbc)
   subdirs(Cbc)
+  subdirs(Osi/OsiCbc)
 else ()
   include_directories(${COINOR_DIR}/include/coin)
 endif ()

@@ -6,9 +6,37 @@ project(CoinUtils_Thirdparty)
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
-option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32   "Enable the download / compilation of PThreads for Windows" OFF)
-option(COIN_ENABLE_DOWNLOAD_ZLIB            "Enable the download / compilation of Zlib" OFF)
-option(COIN_ENABLE_DOWNLOAD_BZLIB           "Enable the download / compilation of BZlib" OFF)
+option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
+option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
+option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
+
+option(COIN_USE_DOWNLOAD_ZLIB  "Enable the use of the thirdparty Zlib" OFF)
+option(COIN_USE_DOWNLOAD_BZLIB "Enable the use of the thirdparty BZlib" OFF)
+  
+if (WIN32)
+  set(ZLIB_NAME "zlib.lib" CACHE FILEPATH "The Zlib library name" FORCE)
+  set(BZLIB_NAME "libbz2.lib" CACHE FILEPATH "The BZlib library name" FORCE)
+else ()
+  set(ZLIB_NAME "libz.a" CACHE FILEPATH "The Zlib library name" FORCE)
+  set(BZLIB_NAME "libbz2.a" CACHE FILEPATH "The BZlib library name" FORCE)
+endif ()
+
+if (COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_BZLIB)
+  return()
+endif ()
+
+option(COIN_ENABLE_FIND_ZLIB  "Enable the detection of Zlib" OFF)
+option(COIN_ENABLE_FIND_BZLIB "Enable the detection of BZlib" OFF)
+
+if (COIN_ENABLE_FIND_ZLIB AND COIN_DOWNLOAD_ZLIB)
+  message(STATUS "Warning: COIN_ENABLE_FIND_ZLIB and COIN_ENABLE_DOWNLOAD_ZLIB are activated. Desactivate COIN_ENABLE_DOWNLOAD_ZLIB")
+  set(COIN_ENABLE_DOWNLOAD_ZLIB FALSE)
+endif ()
+
+if (COIN_ENABLE_FIND_BZLIB AND COIN_DOWNLOAD_BZLIB)
+  message(STATUS "Warning: COIN_ENABLE_FIND_BZLIB and COIN_ENABLE_DOWNLOAD_BZLIB are activated. Desactivate COIN_ENABLE_DOWNLOAD_BZLIB")
+  set(COIN_ENABLE_DOWNLOAD_BZLIB FALSE)
+endif ()
 
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
@@ -59,8 +87,10 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build make
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build make install
                         )
-  endif()
-else()
+  endif ()
+endif ()
+
+if (COIN_ENABLE_FIND_ZLIB)
   find_package(ZLIB)
   
   if (ZLIB_FOUND)
@@ -115,8 +145,10 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
 			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib.h ${EP_InstallDir}/include &&
 			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib_private.h ${EP_InstallDir}/include
                         )
-  endif()
-else()
+  endif ()
+endif ()
+
+if (COIN_ENABLE_FIND_BZLIB)
   find_package(BZip2)
   
   if (BZIP2_FOUND)
