@@ -58,7 +58,7 @@ if (COIN_ENABLE_FIND_BZLIB AND COIN_DOWNLOAD_BZLIB)
   message(STATUS "Warning: COIN_ENABLE_FIND_BZLIB and COIN_ENABLE_DOWNLOAD_BZLIB are activated. Desactivate COIN_ENABLE_DOWNLOAD_BZLIB")
   set(COIN_ENABLE_DOWNLOAD_BZLIB FALSE)
 endif ()
-B
+
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 

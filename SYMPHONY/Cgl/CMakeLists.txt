@@ -237,3 +237,6 @@ install(FILES ${Cgl_SRC_LIST_Headers}
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h
         DESTINATION include/coin
         RENAME CglConfig.h)
+
+install(FILES ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h
+        DESTINATION include/coin)

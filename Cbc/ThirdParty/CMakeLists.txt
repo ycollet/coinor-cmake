@@ -6,8 +6,6 @@ project(Cbc_Thirdparty)
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
-set(EP_InstallDir ${CMAKE_BINARY_DIR}/Dependencies)
-
 option(COIN_USE_DOWNLOAD_PTHREAD_WIN32 "Enable the use of the thirdparty PThreads for Windows" OFF)
 option(COIN_USE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
 option(COIN_USE_DOWNLOAD_GLPK          "Enable the use of the thirdparty GLPK" OFF)
@@ -63,6 +61,8 @@ endif ()
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 
 include(ExternalProject)
+
+set(EP_InstallDir ${CMAKE_BINARY_DIR}/Dependencies)
 
 if (NOT EXISTS ${EP_InstallDir})
   make_directory(${EP_InstallDir})

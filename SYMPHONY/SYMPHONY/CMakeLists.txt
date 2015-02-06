@@ -221,6 +221,10 @@ set(EXAMPLES_SRC ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c
 set(OSISYM_SRC ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/OsiSymSolverInterface.cpp
                ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/SymWarmStart.cpp)
 
+set(OSISYM_Headers ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/OsiSymSolverInterface.hpp
+                   ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/OsiSymSolverParameters.hpp
+                   ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/SymWarmStart.hpp)
+
 set(BB_SRC ${MASTER_SRC}
            ${DG_SRC}
            ${TM_SRC}
@@ -374,7 +378,7 @@ macro(add_example Name)
   if (USE_OPENMP AND UNIX)
     target_link_libraries(${Name} gomp)
   endif ()
-  if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32)
+  if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_HAS_ABC)
     if (NOT WIN32)
       target_link_libraries(${Name} pthread)
     else ()
@@ -505,7 +509,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
     if (USE_OPENMP AND UNIX)
       target_link_libraries(${Name} gomp)
     endif ()
-    if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32)
+    if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_HAS_ABC)
       if (NOT WIN32)
 	target_link_libraries(${Name} pthread)
       else ()
@@ -617,6 +621,9 @@ install(TARGETS libOsiSym
         DESTINATION lib)
 
 install(FILES ${Symphony_SRC_LIST_Headers} 
+        DESTINATION include/coin)
+
+install(FILES ${OSISYM_Headers} 
         DESTINATION include/coin)
 
 # Perform some tests

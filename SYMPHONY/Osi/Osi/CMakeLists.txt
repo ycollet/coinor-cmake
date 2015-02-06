@@ -80,3 +80,6 @@ install(FILES ${Osi_SRC_LIST_Headers}
 install(FILES ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h
         DESTINATION include/coin
         RENAME OsiConfig.h)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h
+        DESTINATION include/coin)

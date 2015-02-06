@@ -80,7 +80,8 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartBasis.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartVector.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartDual.cpp
-                       ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.cpp)
+                       ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.cpp
+                       ${CoinUtils_DIR}/src/CoinRational.cpp)
 
 set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinAlloc.hpp
@@ -139,7 +140,8 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinWarmStartBasis.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartVector.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartDual.hpp
-                     ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp)
+                     ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp
+                     ${CoinUtils_DIR}/src/CoinRational.hpp)
 
 set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
                            ${CoinUtilsTest_DIR}/CoinDenseVectorTest.cpp
@@ -208,3 +210,6 @@ install(FILES ${Coin_SRC_Headers}
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h
         DESTINATION include/coin
         RENAME CoinUtilsConfig.h)
+
+install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h
+        DESTINATION include/coin)
