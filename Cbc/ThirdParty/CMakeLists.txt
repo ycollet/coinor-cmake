@@ -13,7 +13,7 @@ option(COIN_USE_DOWNLOAD_MUMPS         "Enable the use of the thirdparty Mumps" 
 option(COIN_USE_DOWNLOAD_ASL           "Enable the use of the thirdparty Ampl Solver Library" OFF)
 option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" OFF)
 option(COIN_USE_DOWNLOAD_BZLIB         "Enable the use of the thirdparty BZlib" OFF)
-  
+
 if (WIN32)
   set(ZLIB_NAME "zlib.lib" CACHE FILEPATH "The Zlib library name" FORCE)
   set(BZLIB_NAME "libbz2.lib" CACHE FILEPATH "The BZlib library name" FORCE)
@@ -177,7 +177,7 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
   endif ()
 endif ()
 
-if (COIN_ENABLE_DOWNLOAD_ZLIB)
+if (COIN_ENABLE_FIND_ZLIB)
   find_package(ZLIB)
   
   if (ZLIB_FOUND)
