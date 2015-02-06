@@ -58,6 +58,9 @@ if (NOT EXISTS ${EP_InstallDir}/include)
   make_directory(${EP_InstallDir}/include)
 endif ()
 
+include_directories(${EP_InstallDir}/include)
+link_directories(${EP_InstallDir}/lib)
+
 # #################################################
 # ===>    Zlib
 # #################################################

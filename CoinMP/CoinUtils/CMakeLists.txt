@@ -74,6 +74,7 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinPresolveTripleton.cpp
                        ${CoinUtils_DIR}/src/CoinPresolveUseless.cpp
                        ${CoinUtils_DIR}/src/CoinPresolveZeros.cpp
+                       ${CoinUtils_DIR}/src/CoinRational.cpp
                        ${CoinUtils_DIR}/src/CoinSearchTree.cpp
                        ${CoinUtils_DIR}/src/CoinShallowPackedVector.cpp
                        ${CoinUtils_DIR}/src/CoinSnapshot.cpp
@@ -126,6 +127,7 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinPresolveTripleton.hpp
                      ${CoinUtils_DIR}/src/CoinPresolveUseless.hpp
                      ${CoinUtils_DIR}/src/CoinPresolveZeros.hpp
+                     ${CoinUtils_DIR}/src/CoinRational.hpp
                      ${CoinUtils_DIR}/src/CoinSearchTree.hpp
                      ${CoinUtils_DIR}/src/CoinShallowPackedVector.hpp
                      ${CoinUtils_DIR}/src/CoinSignal.hpp
