@@ -730,6 +730,8 @@ endif ()
 #add_definitions(-D_OPENMP)
 add_definitions(-DHAS_RANDOM -DHAS_SRANDOM -D__NONE__)
 
+subdirs(ThirdParty)
+
 include_directories(${SYMPHONY_DIR}/SYMPHONY/include)
 include_directories(${SYMPHONY_DIR}/CoinUtils/src)
 
@@ -763,8 +765,6 @@ include_directories(${SYMPHONY_DIR}/SYMPHONY/src/OsiSym)
 
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
-
-subdirs(ThirdParty)
 
 if (NOT USE_COINOR_BIN)
   if (COIN_ENABLE_DOWNLOAD_ZLIB)

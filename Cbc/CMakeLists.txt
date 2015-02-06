@@ -617,10 +617,10 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Osi/Osi/doxydoc/doxygen.conf)
 endif(DOXYGEN AND ENABLE_DOXYGEN)
 
+subdirs(ThirdParty)
+
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
-
-subdirs(ThirdParty)
 
 if (NOT USE_COINOR_BIN)
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
