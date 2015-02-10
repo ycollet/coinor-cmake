@@ -149,8 +149,11 @@ endif ()
 #-----------------------------------------------------------------------------
 
 if (WIN32)
-  if (NOT COIN_THREADS_INC_PATH STREQUAL "None")
-    include_directories(${COIN_THREADS_INC_PATH})
+  if (NOT "${COIN_THREADS_INC_PATH}" STREQUAL "None")
+    link_directories(${COIN_THREADS_INC_PATH})
+  endif ()
+  if (NOT "${COIN_THREADS_LIB_PATH}" STREQUAL "None")
+    include_directories(${COIN_THREADS_LIB_PATH})
   endif ()
 endif ()
 

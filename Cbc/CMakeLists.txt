@@ -218,6 +218,10 @@ endif ()
 
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
 
+if (NOT "${COINOR_DIR}" STREQUAL "None")
+  link_directories(${COINOR_DIR})
+endif ()
+
 #-----------------------------------------------------------------------------
 # Manage compilation options
 #-----------------------------------------------------------------------------
@@ -268,8 +272,11 @@ endif ()
 #-----------------------------------------------------------------------------
 
 if (WIN32)
-  if (NOT COIN_THREADS_INC_PATH STREQUAL "None")
-    include_directories(${COIN_THREADS_INC_PATH})
+  if (NOT "${COIN_THREADS_INC_PATH}" STREQUAL "None")
+    link_directories(${COIN_THREADS_INC_PATH})
+  endif ()
+  if (NOT "${COIN_THREADS_LIB_PATH}" STREQUAL "None")
+    include_directories(${COIN_THREADS_LIB_PATH})
   endif ()
 endif ()
 
