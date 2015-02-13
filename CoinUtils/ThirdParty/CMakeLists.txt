@@ -7,11 +7,13 @@ project(CoinUtils_Thirdparty)
 # Thirdparty dependencies
 
 option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
+option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
 
-option(COIN_USE_DOWNLOAD_ZLIB  "Enable the use of the thirdparty Zlib" OFF)
-option(COIN_USE_DOWNLOAD_BZLIB "Enable the use of the thirdparty BZlib" OFF)
+option(COIN_USE_DOWNLOAD_LAPACK "Enable the use of the thirdparty Blas / Lapack" OFF)
+option(COIN_USE_DOWNLOAD_ZLIB   "Enable the use of the thirdparty Zlib" OFF)
+option(COIN_USE_DOWNLOAD_BZLIB  "Enable the use of the thirdparty BZlib" OFF)
   
 if (WIN32)
   set(ZLIB_NAME "zlib.lib" CACHE FILEPATH "The Zlib library name" FORCE)
@@ -21,12 +23,19 @@ else ()
   set(BZLIB_NAME "libbz2.a" CACHE FILEPATH "The BZlib library name" FORCE)
 endif ()
 
-if (COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_BZLIB)
+if (COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_BZLIB OR
+    COIN_USE_DOWNLOAD_LAPACK)
   return()
 endif ()
 
-option(COIN_ENABLE_FIND_ZLIB  "Enable the detection of Zlib" OFF)
-option(COIN_ENABLE_FIND_BZLIB "Enable the detection of BZlib" OFF)
+option(COIN_ENABLE_FIND_LAPACK "Enable the detection of Blas / Lapack" OFF)
+option(COIN_ENABLE_FIND_ZLIB   "Enable the detection of Zlib" OFF)
+option(COIN_ENABLE_FIND_BZLIB  "Enable the detection of BZlib" OFF)
+
+if (COIN_ENABLE_FIND_LAPACK AND COIN_DOWNLOAD_LAPACK)
+  message(STATUS "Warning: COIN_ENABLE_FIND_LAPACK and COIN_ENABLE_DOWNLOAD_LAPACK are activated. Desactivate COIN_ENABLE_DOWNLOAD_LAPACK")
+  set(COIN_ENABLE_DOWNLOAD_LAPACK FALSE)
+endif ()
 
 if (COIN_ENABLE_FIND_ZLIB AND COIN_DOWNLOAD_ZLIB)
   message(STATUS "Warning: COIN_ENABLE_FIND_ZLIB and COIN_ENABLE_DOWNLOAD_ZLIB are activated. Desactivate COIN_ENABLE_DOWNLOAD_ZLIB")
@@ -60,6 +69,50 @@ endif ()
 
 include_directories(${EP_InstallDir}/include)
 link_directories(${EP_InstallDir}/lib)
+
+# #################################################
+# ===>    Lapack
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_LAPACK)
+  if (UNIX)
+    if (NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
+      set(LAPACK_C_FLAGS "-fPIC")
+      set(LAPACK_LINKER_FLAGS "-fPIC")
+    endif()
+  endif ()
+  
+  set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+  set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+
+  ExternalProject_Add(EP_Lapack
+                      PREFIX ${EP_InstallDir}/Lapack
+		      URL http://www.coin-or.org/BuildTools/Lapack/lapack-3.4.2.tgz
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build make
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/lib/liblapack.a ${EP_InstallDir}/lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/lib/libblas.a   ${EP_InstallDir}/lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/lib/libtmglib.a ${EP_InstallDir}/lib
+                      )
+endif ()
+
+if (COIN_ENABLE_FIND_LAPACK)
+  find_package(LAPACK)
+  find_package(BLAS)
+  
+  if (LAPACK_FOUND AND BLAS_FOUND)
+    set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+    set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+  else ()
+    set(COIN_HAS_LAPACK OFF CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+    set(COIN_HAS_BLAS   OFF CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+  endif ()
+endif ()
+
+# #################################################
+# <===    Lapack
+# #################################################
 
 # #################################################
 # ===>    Zlib
@@ -216,6 +269,9 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     add_dependencies(${_target} EP_PThreads)
   endif ()
+  if (COIN_ENABLE_DOWNLOAD_LAPACK)
+    add_dependencies(${_target} EP_Lapack)
+  endif ()
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     add_dependencies(${_target} EP_Zlib)
   endif ()
@@ -229,6 +285,9 @@ macro(add_executable _target)
   
   if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     add_dependencies(${_target} EP_PThreads)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_LAPACK)
+    add_dependencies(${_target} EP_Lapack)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     add_dependencies(${_target} EP_Zlib)
