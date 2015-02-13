@@ -18,16 +18,6 @@ project(IpOpt)
 #undef HAVE_WSMP - Define to 1 if WSMP is available
 #undef SHAREDLIBEXT - Set to extension for shared libraries in quotes.
 
-#------------------------------------------------------------
-# Detect 64 bits
-#------------------------------------------------------------
-
-if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-  set( HAVE_64_BIT 0 )
-else( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-  set( HAVE_64_BIT 1 )
-endif( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-
 option(IPOPT_HAS_AMPL    "Enable Ampl interface" OFF)
 option(IPOPT_HAS_PARDISO "Enable Pardiso solver" OFF)
 option(IPOPT_HAS_HSL     "Enable HSL interface"  OFF)
@@ -49,14 +39,35 @@ option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (u
 option(COIN_USE_FAST_CODE            "Use intensive optimization flags" OFF)
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 
+mark_as_advanced(ENABLE_SHARED_LIBRARIES
+                 COIN_COMPILE_STATIC
+		 COIN_COMPILE_COVERAGE
+		 COIN_COMPILE_PROFILE
+		 COIN_COMPILE_PROFILE_VALGRIND
+		 COIN_COMPILE_LTO
+		 COIN_COMPILE_WHOPR
+		 COIN_USE_FAST_CODE
+		 COIN_COMPILE_WARNINGS)
+
 set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
 
-set(IPOPT_HAS_MUMPS_INCLUDE_PATH "None" CACHE STRING "The MUMPS linear solver include Path")
-set(IPOPT_HAS_MUMPS_LIBRARY_PATH "None" CACHE STRING "The MUMPS linear solver absolute library Path")
+option(COIN_HAS_MUMPS "Ipopt uses the MUMPS linear solver" OFF)
+set(IPOPT_HAS_MUMPS_INCLUDE_PATH "None" CACHE PATH "The MUMPS linear solver include Path")
+set(IPOPT_HAS_MUMPS_LIBRARY_PATH "None" CACHE PATH "The MUMPS linear solver absolute library Path")
 
-set(IPOPT_HAS_WSMP_INCLUDE_PATH "None" CACHE STRING "The WSMP linear solver include Path")
-set(IPOPT_HAS_WSMP_LIBRARY_PATH "None" CACHE STRING "The WSMP linear solver absolute library Path")
+option(COIN_HAS_WSMP "Ipopt uses the WSMP linear solver" OFF)
+set(IPOPT_HAS_WSMP_INCLUDE_PATH "None" CACHE PATH "The WSMP linear solver include Path")
+set(IPOPT_HAS_WSMP_LIBRARY_PATH "None" CACHE PATH "The WSMP linear solver absolute library Path")
+
+mark_as_advanced(COIN_HAS_MUMPS
+		 COIN_HAS_MUMPS_INCLUDE_PATH
+		 COIN_HAS_MUMPS_LIBRARY_PATH
+		 COIN_HAS_WSMP
+		 COIN_HAS_WSMP_INCLUDE_PATH
+		 COIN_HAS_WSMP_LIBRARY_PATH
+		 COIN_IPOPT_CHECKLEVEL
+		 COIN_IPOPT_VERBOSITY)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -70,20 +81,30 @@ include(coin-macros)
 
 Enable_Testing()
 
+#------------------------------------------------------------
+# Detect 64 bits
+#------------------------------------------------------------
+
+if (CMAKE_SIZEOF_VOID_P EQUAL 4)
+  set(HAVE_64_BIT 0)
+else ()
+  set(HAVE_64_BIT 1)
+endif ()
+
 # Various definitions
 
 # Name of package
-set(PACKAGE "IpOpt")
+set(PACKAGE           "IpOpt")
 # Define to the address where bug reports for this package should be sent.
 set(PACKAGE_BUGREPORT "bugs@coin-or.org")
 # Define to the full name of this package.
-set(PACKAGE_NAME "IpOpt")
+set(PACKAGE_NAME      "IpOpt")
 # Define to the full name and version of this package.
-set(PACKAGE_STRING "IpOpt")
+set(PACKAGE_STRING    "IpOpt")
 # Define to the one symbol short name of this package.
-set(PACKAGE_TARNAME "ipopt")
+set(PACKAGE_TARNAME   "ipopt")
 # Define to the version of this package.
-set(PACKAGE_VERSION "3.11.9")
+set(PACKAGE_VERSION   "3.11.9")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../ipopt_binary" 

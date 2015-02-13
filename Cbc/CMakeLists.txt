@@ -2,19 +2,12 @@ cmake_minimum_required(VERSION 2.8)
 
 project(Cbc)
 
-#------------------------------------------------------------
-# Detect 64 bits
-#------------------------------------------------------------
-
-if( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-  set( HAVE_64_BIT 0 )
-else( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-  set( HAVE_64_BIT 1 )
-endif( CMAKE_SIZEOF_VOID_P EQUAL 4 )
-
 # Threads path
-set(COIN_THREADS_INC_PATH "None" CACHE STRING "The path to the PThreads header files")
-set(COIN_THREADS_LIB_PATH "None" CACHE STRING "The path to the PThreads library files")
+set(COIN_THREADS_INC_PATH "None" CACHE PATH "The path to the PThreads header files")
+set(COIN_THREADS_LIB_PATH "None" CACHE PATH "The path to the PThreads library files")
+
+mark_as_advanced(COIN_THREADS_INC_PATH
+                 COIN_THREADS_LIB_PATH)
 
 # External solvers
 option(USE_OSI_XPRESS "Use Xpress solver" OFF)
@@ -32,18 +25,21 @@ option(COMPILE_OSI_GLPK   "Compile the OSI GLPK solver"   OFF)
 option(COMPILE_OSI_GUROBI "Compile the OSI GUROBI solver" OFF)
 option(COMPILE_OSI_MOSEK  "Compile the OSI Mosek solver"  OFF)
 option(COMPILE_OSI_SOPLEX "Compile the OSI Soplex solver" OFF)
-set(COIN_XPRESS_DIR   "None" CACHE STRING "The Xpress solver Path")
-set(COIN_CPLEX_DIR    "None" CACHE STRING "The Cplex solver Path")
-set(COIN_GUROBI_DIR   "None" CACHE STRING "The GUROBI solver Path")
-set(COIN_MOSEK_DIR    "None" CACHE STRING "The Mosek solver Path")
-set(COIN_SOPLEX_DIR   "None" CACHE STRING "The Soplex solver Path")
-set(COIN_SYMPHONY_DIR "None" CACHE STRING "The Symphony solver Path")
-set(COIN_VOL_DIR      "None" CACHE STRING "The Vol solver Path")
-set(COIN_DYLP_DIR     "None" CACHE STRING "The DyLP solver Path")
+set(COIN_XPRESS_DIR   "None" CACHE PATH "The Xpress solver Path")
+set(COIN_CPLEX_DIR    "None" CACHE PATH "The Cplex solver Path")
+set(COIN_GUROBI_DIR   "None" CACHE PATH "The GUROBI solver Path")
+set(COIN_MOSEK_DIR    "None" CACHE PATH "The Mosek solver Path")
+set(COIN_SOPLEX_DIR   "None" CACHE PATH "The Soplex solver Path")
+set(COIN_SYMPHONY_DIR "None" CACHE PATH "The Symphony solver Path")
+set(COIN_VOL_DIR      "None" CACHE PATH "The Vol solver Path")
+set(COIN_DYLP_DIR     "None" CACHE PATH "The DyLP solver Path")
 
 # Compile only the main part and use an external directory to link / use includes
 option(USE_COINOR_BIN "Use and external directory where the headers / libraries used are stored" OFF)
-set(COINOR_DIR "None" CACHE STRING "The Path where all the used CoinOR libraries are stored")
+set(COINOR_DIR "None" CACHE PATH "The Path where all the used CoinOR libraries are stored")
+
+mark_as_advanced(USE_COINOR_BIN
+                 COINOR_DIR)
 
 # Compilation options
 option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
@@ -56,45 +52,85 @@ option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (u
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 
 # Set paths of source
-set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE STRING "The Cbc Path")
+set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Cbc Path")
+
+mark_as_advanced(ENABLE_SHARED_LIBRARIES
+                 COIN_COMPILE_STATIC
+		 COIN_COMPILE_COVERAGE
+		 COIN_COMPILE_PROFILE
+		 COIN_COMPILE_PROFILE_VALGRIND
+		 COIN_COMPILE_LTO
+		 COIN_COMPILE_WHOPR
+		 COIN_COMPILE_WARNINGS
+		 Coin_DIR)
 
 # CoinUtils options
-option(COINUTILS_USE_THREADS "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
+option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
 option(COINUTILS_USE_MEMPOOL_OVERRIDE_NEW "enables the CoinUtils mempool to override global new/delete" OFF)
-option(COINUTILS_USE_MEMPOOL_MAXPOOLED "Specify the default maximum memory allocation size that is served by the memory pool. If negative (or 'no') then the memory pool is disabled completely. Otherwise its value can be overridden at runtime using the COINUTILS_MEMPOOL_MAXPOOLED environment variable." OFF)
+option(COINUTILS_USE_MEMPOOL_MAXPOOLED    "Specify the default maximum memory allocation size that is served by the memory pool. If negative (or 'no') then the memory pool is disabled completely. Otherwise its value can be overridden at runtime using the COINUTILS_MEMPOOL_MAXPOOLED environment variable." OFF)
 option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
 option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
-option(COIN_HAS_LAPACK "Enable the Lapack support of CoinUtils" OFF)
-option(COIN_HAS_BLAS   "Enable the Blas support of CoinUtils" OFF)
+option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
+option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
 
 set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
-set(COIN_COINUTILS_VERBOSITY "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
+set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
+
+mark_as_advanced(COINUTILS_USE_THREADS
+                 COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
+		 COINUTILS_USE_MEMPOOL_MAXPOOLED
+		 COINUTILS_HAS_ZLIB
+		 COINUTILS_HAS_BZLIB
+		 COIN_HAS_LAPACK
+		 COIN_HAS_BLAS
+		 COIN_COINUTILS_CHECKLEVEL
+		 COIN_COINUTILS_VERBOSITY)
 
 # Clp options
 option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
-set(COIN_HAS_AMD_INCLUDE_PATH "None" CACHE STRING "The AMD linear solver include Path")
-set(COIN_HAS_AMD_LIBRARY_PATH "None" CACHE STRING "The AMD linear solver absolute library Path")
+set(COIN_HAS_AMD_INCLUDE_PATH "None" CACHE PATH "The AMD linear solver include Path")
+set(COIN_HAS_AMD_LIBRARY_PATH "None" CACHE PATH "The AMD linear solver absolute library Path")
 
 option(COIN_ENABLE_CHOLMOD "Clp use the CholMod linear solver" OFF)
-set(COIN_HAS_CHOLMOD_INCLUDE_PATH "None" CACHE STRING "The CholMod linear solver include Path")
-set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None" CACHE STRING "The CholMod linear solver absolute library Path")
+set(COIN_HAS_CHOLMOD_INCLUDE_PATH "None" CACHE PATH "The CholMod linear solver include Path")
+set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None" CACHE PATH "The CholMod linear solver absolute library Path")
 
 option(COIN_HAS_GLPK "Clp uses GLPK" OFF)
-set(COIN_HAS_GLPK_INCLUDE_PATH "None" CACHE STRING "The GLPK linear solver include Path")
-set(COIN_HAS_GLPK_LIBRARY_PATH "None" CACHE STRING "The GLPK linear solver absolute library Path")
+set(COIN_HAS_GLPK_INCLUDE_PATH "None" CACHE PATH "The GLPK linear solver include Path")
+set(COIN_HAS_GLPK_LIBRARY_PATH "None" CACHE PATH "The GLPK linear solver absolute library Path")
 
 option(COIN_HAS_MUMPS "Clp uses the MUMPS linear solver" OFF)
-set(COIN_HAS_MUMPS_INCLUDE_PATH "None" CACHE STRING "The MUMPS linear solver include Path")
-set(COIN_HAS_MUMPS_LIBRARY_PATH "None" CACHE STRING "The MUMPS linear solver absolute library Path")
+set(COIN_HAS_MUMPS_INCLUDE_PATH "None" CACHE PATH "The MUMPS linear solver include Path")
+set(COIN_HAS_MUMPS_LIBRARY_PATH "None" CACHE PATH "The MUMPS linear solver absolute library Path")
 
 option(COIN_HAS_WSMP "Clp uses the WSMP linear solver" OFF)
-set(COIN_HAS_WSMP_INCLUDE_PATH "None" CACHE STRING "The WSMP linear solver include Path")
-set(COIN_HAS_WSMP_LIBRARY_PATH "None" CACHE STRING "The WSMP linear solver absolute library Path")
+set(COIN_HAS_WSMP_INCLUDE_PATH "None" CACHE PATH "The WSMP linear solver include Path")
+set(COIN_HAS_WSMP_LIBRARY_PATH "None" CACHE PATH "The WSMP linear solver absolute library Path")
 
 option(COIN_HAS_ABC "Use the Aboca solver" OFF)
 set(COIN_ABC_LEVEL      "0" CACHE STRING "Use the Aboca solver (1, 2, 3, 4) - 0, Aboca solver is not used")
 set(COIN_CLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Clp (0 if no test)")
 set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if no output)")
+
+mark_as_advanced(COIN_ENABLE_AMD
+                 COIN_HAS_AMD_INCLUDE_PATH
+		 COIN_HAS_AMD_LIBRARY_PATH
+		 COIN_ENABLE_CHOLMOD
+		 COIN_HAS_CHOLMOD_INCLUDE_PATH
+		 COIN_HAS_CHOLMOD_LIBRARY_PATH
+		 COIN_HAS_GLPK
+		 COIN_HAS_GLPK_INCLUDE_PATH
+		 COIN_HAS_GLPK_LIBRARY_PATH
+		 COIN_HAS_MUMPS
+		 COIN_HAS_MUMPS_INCLUDE_PATH
+		 COIN_HAS_MUMPS_LIBRARY_PATH
+		 COIN_HAS_WSMP
+		 COIN_HAS_WSMP_INCLUDE_PATH
+		 COIN_HAS_WSMP_LIBRARY_PATH
+		 COIN_HAS_ABC
+		 COIN_ABC_LEVEL
+		 COIN_CLP_CHECKLEVEL
+		 COIN_CLP_VERBOSITY)
 
 # Cgl options
 set(COIN_CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
@@ -113,6 +149,16 @@ set(COIN_OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if
 # Use fast code
 option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
 
+mark_as_advanced(COIN_CGL_CHECKLEVEL
+                 COIN_CGL_VERBOSITY
+		 CBC_USE_THREADS
+		 CBC_DEFAULT_SOLVER
+		 COIN_CBC_CHECKLEVEL
+		 COIN_CBC_VERBOSITY
+		 COIN_OSI_CHECKLEVEL
+		 COIN_OSI_VERBOSITY
+		 COIN_USE_FAST_CODE)
+
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -125,28 +171,38 @@ include(coin-macros)
 
 Enable_Testing()
 
+#------------------------------------------------------------
+# Detect 64 bits
+#------------------------------------------------------------
+
+if (CMAKE_SIZEOF_VOID_P EQUAL 4)
+  set(HAVE_64_BIT 0)
+else ()
+  set(HAVE_64_BIT 1)
+endif ()
+
 # Various definitions
 # Set to 1 if the CoinUtils package is available
 set(COIN_HAS_COINUTILS 1)
 # Set to 1 if the Osi package is available
-set(COIN_HAS_OSI 1)
+set(COIN_HAS_OSI       1)
 # Set to 1 if the OsiTests package is available
-set(COIN_HAS_OSITESTS 1)
+set(COIN_HAS_OSITESTS  1)
 # Set to 1 if the Sample package is available
-set(COIN_HAS_SAMPLE 1)
+set(COIN_HAS_SAMPLE    1)
 
 # Name of package
-set(PACKAGE "Cbc")
+set(PACKAGE           "Cbc")
 # Define to the address where bug reports for this package should be sent.
 set(PACKAGE_BUGREPORT "bugs@coin-or.org")
 # Define to the full name of this package.
-set(PACKAGE_NAME "Cbc")
+set(PACKAGE_NAME      "Cbc")
 # Define to the full name and version of this package.
-set(PACKAGE_STRING "Cbc")
+set(PACKAGE_STRING    "Cbc")
 # Define to the one symbol short name of this package.
-set(PACKAGE_TARNAME "cbc")
+set(PACKAGE_TARNAME   "cbc")
 # Define to the version of this package.
-set(PACKAGE_VERSION "2.8.9")
+set(PACKAGE_VERSION   "2.8.9")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../cbc_binary" 
