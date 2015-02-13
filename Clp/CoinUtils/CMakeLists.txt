@@ -18,6 +18,20 @@ set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "None" CACHE STRING "The BZlib library incl
 set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "None" CACHE STRING "The BZlib library absolute library Path")
 set(BZLIB_NAME "bz2" CACHE STRING "The BZlib library name")
 
+mark_as_advanced(COINUTILS_VERSION_MAJOR
+                 COINUTILS_VERSION_MINOR
+		 COINUTILS_VERSION_RELEASE
+		 COINUTILS_VERSION
+		 COINUTILS_SVN_REV
+		 COINUTILS_HAS_ZLIB
+		 COINUTILS_HAS_ZLIB_INCLUDE_PATH
+		 COINUTILS_HAS_ZLIB_LIBRARY_PATH
+		 ZLIB_NAME
+		 COINUTILS_HAS_BZLIB
+		 COINUTILS_HAS_BZLIB_INCLUDE_PATH
+		 COINUTILS_HAS_BZLIB_LIBRARY_PATH
+		 BZLIB_NAME)
+
 include(coin-macros)
 
 add_definitions(-DCOINUTILS_BUILD)
@@ -80,7 +94,8 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartBasis.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartVector.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartDual.cpp
-                       ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.cpp)
+                       ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.cpp
+                       ${CoinUtils_DIR}/src/CoinRational.cpp)
 
 set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinAlloc.hpp
@@ -139,7 +154,8 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinWarmStartBasis.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartVector.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartDual.hpp
-                     ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp)
+                     ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp
+                     ${CoinUtils_DIR}/src/CoinRational.hpp)
 
 set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
                            ${CoinUtilsTest_DIR}/CoinDenseVectorTest.cpp
@@ -208,3 +224,6 @@ install(FILES ${Coin_SRC_Headers}
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h
         DESTINATION include/coin
         RENAME CoinUtilsConfig.h)
+
+install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h
+        DESTINATION include/coin)

@@ -23,6 +23,9 @@ else ()
   set(BZLIB_NAME "libbz2.a" CACHE FILEPATH "The BZlib library name" FORCE)
 endif ()
 
+mark_as_advanced(ZLIB_NAME
+                 BZLIB_NAME)
+
 if (COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_BZLIB OR
     COIN_USE_DOWNLOAD_LAPACK)
   return()

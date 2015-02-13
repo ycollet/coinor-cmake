@@ -8,6 +8,12 @@ set(OSI_VERSION_RELEASE "6"   CACHE STRING "The OSI patch version number")
 set(OSI_VERSION "${OSI_VERSION_MAJOR}.${OSI_VERSION_MINOR}.${OSI_VERSION_RELEASE}")
 set(OSI_SVN_REV "${OSI_VERSION_RELEASE}")
 
+mark_as_advanced(OSI_VERSION_MAJOR
+                 OSI_VERSION_MINOR
+		 OSI_VERSION_RELEASE
+		 OSI_VERSION
+		 OSI_SVN_REV)
+
 add_definitions(-DOSI_BUILD)
 
 configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/include/config_osi.h.in ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h)
@@ -84,3 +90,6 @@ install(FILES ${Osi_SRC_LIST_Headers}
 install(FILES ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h
         DESTINATION include/coin
         RENAME OsiConfig.h)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h
+        DESTINATION include/coin)

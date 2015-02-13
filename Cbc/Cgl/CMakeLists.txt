@@ -9,6 +9,12 @@ set(CGL_VERSION_RELEASE "6"  CACHE STRING "The CGL patch version number")
 set(CGL_VERSION "${CGL_VERSION_MAJOR}.${CGL_VERSION_MINOR}.${CGL_VERSION_RELEASE}")
 set(CGL_SVN_REV "${CGL_VERSION_RELEASE}")
 
+mark_as_advanced(CGL_VERSION_MAJOR
+                 CGL_VERSION_MINOR
+		 CGL_VERSION_RELEASE
+		 CGL_VERSION
+		 CGL_SVN_REV)
+
 add_definitions(-DCGL_BUILD)
 
 configure_file(${CMAKE_SOURCE_DIR}/Cgl/include/config_cgl.h.in ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h)

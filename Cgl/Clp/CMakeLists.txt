@@ -9,6 +9,12 @@ set(CLP_VERSION_RELEASE "6"  CACHE STRING "The CLP patch version number")
 set(CLP_VERSION "${CLP_VERSION_MAJOR}.${CLP_VERSION_MINOR}.${CLP_VERSION_RELEASE}")
 set(CLP_SVN_REV "${CLP_VERSION_RELEASE}")
 
+mark_as_advanced(CLP_VERSION_MAJOR
+                 CLP_VERSION_MINOR
+		 CLP_VERSION_RELEASE
+		 CLP_VERSION
+		 CLP_SVN_REV)
+
 add_definitions(-DCLP_BUILD)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
@@ -65,9 +71,8 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/Idiot.cpp
                  ${Clp_DIR}/src/IdiSolve.cpp)
 
-set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
-                       ${Clp_DIR}/src/CbcOrClpParam.cpp
-		       ${Clp_DIR}/src/Clp_ampl.cpp
+set(ClpSolver_SRC_LIST ${Clp_DIR}/src/CbcOrClpParam.cpp
+                       ${Clp_DIR}/src/ClpSolver.cpp
 		       ${Clp_DIR}/src/MyEventHandler.cpp
 		       ${Clp_DIR}/src/MyMessageHandler.cpp
 		       ${Clp_DIR}/src/unitTest.cpp)
@@ -284,7 +289,7 @@ if (CLP_BUILD_EXAMPLES)
   #
   macro(add_example Name)
     add_executable(${Name} ${ARGN})
-    if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32)
+    if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_HAS_ABC)
       if (NOT WIN32)
 	target_link_libraries(${Name} pthread)
       else ()
@@ -636,7 +641,7 @@ endif ()
 if (COINUTILS_HAS_BZLIB OR COIN_USE_DOWNLOAD_BZLIB)
   target_link_libraries(clp ${BZLIB_NAME})
 endif ()
-if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32)
+if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_HAS_ABC)
   if (NOT WIN32)
     target_link_libraries(clp pthread)
   else ()
@@ -665,3 +670,6 @@ install(FILES ${Clp_SRC_LIST_Headers}
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
         DESTINATION include/coin
         RENAME ClpConfig.h)
+
+install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
+        DESTINATION include/coin)

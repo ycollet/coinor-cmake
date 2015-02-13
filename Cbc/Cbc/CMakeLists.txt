@@ -10,6 +10,12 @@ set(CBC_VERSION_RELEASE "9" CACHE STRING "The CBC patch version number")
 set(CBC_VERSION "${CBC_VERSION_MAJOR}.${CBC_VERSION_MINOR}.${CBC_VERSION_RELEASE}")
 set(CBC_SVN_REV "${CBC_VERSION_RELEASE}")
 
+mark_as_advanced(CBC_VERSION_MAJOR
+                 CBC_VERSION_MINOR
+		 CBC_VERSION_RELEASE
+		 CBC_VERSION
+		 CBC_SVN_REV)
+
 add_definitions(-DCBC_BUILD)
 
 configure_file(${CMAKE_SOURCE_DIR}/Cbc/include/config.h.in     ${CMAKE_BINARY_DIR}/Cbc/include/config.h)
