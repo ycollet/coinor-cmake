@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(Symphony_Thirdparty)
-
 # CMakeLists.txt designed for 
 # downloading/configuring/building/installing
 # Thirdparty dependencies

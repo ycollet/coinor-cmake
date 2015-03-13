@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(Clp)
-
 option(CLP_BUILD_EXAMPLES "Enable the building of examples" OFF)
 set(CLP_VERSION_MAJOR   "1"  CACHE STRING "The CLP major version number")
 set(CLP_VERSION_MINOR   "15" CACHE STRING "The CLP minor version number")

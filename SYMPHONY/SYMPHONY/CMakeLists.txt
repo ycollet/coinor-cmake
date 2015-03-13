@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(Symphony)
-
 option(SYMPHONY_BUILD_EXAMPLES "Enable the building of examples" OFF)
 set(SYMPHONY_VERSION_MAJOR   "5" CACHE STRING "The Symphony major version number")
 set(SYMPHONY_VERSION_MINOR   "5" CACHE STRING "The Symphony minor version number")

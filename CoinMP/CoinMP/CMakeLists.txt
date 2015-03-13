@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(CoinMP)
-
 option(COINMP_BUILD_EXAMPLES "Enable the building of examples" OFF)
 set(COINMP_VERSION_MAJOR   "1" CACHE STRING "The CoinMP major version number")
 set(COINMP_VERSION_MINOR   "7" CACHE STRING "The CoinMP minor version number")

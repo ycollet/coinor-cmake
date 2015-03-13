@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(Cgl)
-
 option(CGL_BUILD_EXAMPLES "Enable the building of examples" OFF)
 set(CGL_VERSION_MAJOR   "0"  CACHE STRING "The CGL major version number")
 set(CGL_VERSION_MINOR   "58" CACHE STRING "The CGL minor version number")

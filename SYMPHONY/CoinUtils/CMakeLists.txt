@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(CoinUtils)
-
 option(COINUTILS_ENABLE_UNITTEST "Enable building the unit test executable" OFF)
 set(COINUTILS_VERSION_MAJOR   "2"  CACHE STRING "The COINUTILS major version number")
 set(COINUTILS_VERSION_MINOR   "9"  CACHE STRING "The COINUTILS minor version number")

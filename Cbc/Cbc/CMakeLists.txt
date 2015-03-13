@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(Cbc)
-
 option(CBC_BUILD_CBC_GENERIC "Build the generic version of Cbc" OFF)
 option(CBC_BUILD_EXAMPLES    "Enable the building of examples" OFF)
 set(CBC_VERSION_MAJOR   "2" CACHE STRING "The CBC major version number")

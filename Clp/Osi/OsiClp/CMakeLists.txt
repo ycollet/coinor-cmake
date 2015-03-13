@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(OsiClp)
-
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)

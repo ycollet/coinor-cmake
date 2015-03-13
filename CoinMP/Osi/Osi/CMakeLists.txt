@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(Osi)
-
 set(OSI_VERSION_MAJOR   "0"   CACHE STRING "The OSI major version number")
 set(OSI_VERSION_MINOR   "106" CACHE STRING "The OSI minor version number")
 set(OSI_VERSION_RELEASE "6"   CACHE STRING "The OSI patch version number")
