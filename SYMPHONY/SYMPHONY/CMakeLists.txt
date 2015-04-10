@@ -1,4 +1,6 @@
-option(SYMPHONY_BUILD_EXAMPLES "Enable the building of examples" OFF)
+option(SYMPHONY_BUILD_EXAMPLES     "Enable the building of examples" OFF)
+option(SYMPHONY_BUILD_APPLICATIONS "Enable the building of applications" OFF)
+
 set(SYMPHONY_VERSION_MAJOR   "5" CACHE STRING "The Symphony major version number")
 set(SYMPHONY_VERSION_MINOR   "5" CACHE STRING "The Symphony minor version number")
 set(SYMPHONY_VERSION_RELEASE "7" CACHE STRING "The Symphony patch version number")
@@ -842,4 +844,198 @@ if (WIN32)
   set_tests_properties(exmip1_lp PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
 endif ()
 
+# Build Applications
 
+if (SYMPHONY_BUILD_APPLICATIONS)
+  # CNRP
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/include/)
+  
+  set(CNRP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Common/cnrp_macros.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Common/compute_cost.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Common/network.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutGen/biconnected.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutGen/cnrp_cg.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutGen/shrink.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutGen/tsp.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutPool/cnrp_cp.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/DrawGraph/cnrp_dg.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/DrawGraph/cnrp_dg_functions.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/DrawGraph/cnrp_dg_network.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/LP/cnrp_lp_branch.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/LP/cnrp_lp.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/cnrp_io.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/cnrp_main.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/cnrp_master.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/cnrp_master_functions.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/small_graph.c)
+  
+  set_source_files_properties(${CNRP_SRCS} PROPERTIES LANGUAGE CXX)
+  # Concorde required ?          
+  #add_example(CNRP ${CNRP_SRCS})
+  
+  # MATCH
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/include/)
+  
+  set(MATCH_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/CutGen/user_cg.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/CutPool/user_cp.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/DrawGraph/user_dg.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/LP/user_lp_branch.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/LP/user_lp.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/Master/user_main.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/Master/user_master.c)
+  
+  set_source_files_properties(${MATCH_SRCS} PROPERTIES LANGUAGE CXX)
+  add_example(MATCH ${MATCH_SRCS})
+  
+  # MCKP
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MCKP/include/)
+  
+  set(MCKP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/MCKP/mckp_main.c)
+  
+  set_source_files_properties(${MCKP_SRCS} PROPERTIES LANGUAGE CXX)
+  add_example(MCKP ${MCKP_SRCS})
+  
+  # MISOCO
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/include/)
+  
+  set(MISOCO_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/CutGen/user_cg.c
+                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/CutPool/user_cp.c
+                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/DrawGraph/user_dg.c
+                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/LP/user_lp_branch.c
+                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/LP/user_lp.c
+                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/Master/user_main.c
+                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/Master/user_master.c)
+  
+  set_source_files_properties(${MISOCO_SRCS} PROPERTIES LANGUAGE CXX)
+  #add_example(MISOCO ${MISOCO_SRCS})
+  
+  # MPP
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/include/)
+  
+  set(MPP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/CutGen/mpp_cg.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/CutPool/mpp_cp.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/DrawGraph/mpp_dg.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/LP/mpp_lp_branch.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/LP/mpp_lp.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/Master/mpp_main.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/Master/mpp_master.c)
+  
+  set_source_files_properties(${MPP_SRCS} PROPERTIES LANGUAGE CXX)
+  add_example(MPP ${MPP_SRCS})
+  
+  # SPP
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/include/)
+  
+  set(SPP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/Common/spp_common.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/CutGen/spp_cg.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/CutPool/spp_cp.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/DrawGraph/spp_dg.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/LP/spp_lp_branch.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/LP/spp_lp.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/Master/spp_main.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/Master/spp_master.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/Master/spp_master_functions.c)
+  
+  set_source_files_properties(${SPP_SRCS} PROPERTIES LANGUAGE CXX)
+  add_example(SPP ${SPP_SRCS})
+  
+  # SPP+CUTS
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/include/)
+  
+  set(SPP_CUTS_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Common/spp_common.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/CutGen/spp_cg.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/CutGen/spp_cg_clique.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/CutGen/spp_cg_functions.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/CutPool/spp_cp.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/DrawGraph/spp_dg.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/LP/spp_lp_branch.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/LP/spp_lp.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/LP/spp_lp_branch.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/LP/spp_lp_functions.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Master/spp_main.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Master/spp_master.c
+                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Master/spp_master_functions.c)
+  
+  set_source_files_properties(${SPP_CUTS_SRCS} PROPERTIES LANGUAGE CXX)
+  #add_example(SPP_CUTS ${SPP_CUTS_SRCS})
+  
+  # USER
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/USER/include/)
+  
+  set(USER_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/CutGen/user_cg.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/CutPool/user_cp.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/DrawGraph/user_dg.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/LP/user_lp_branch.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/LP/user_lp.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/Master/user_main.c
+                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/Master/user_master.c)
+  
+  set_source_files_properties(${USER_SRCS} PROPERTIES LANGUAGE CXX)
+  #add_example(USER ${USER_SRCS})
+  
+  # VRP
+  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/include/)
+  
+  set(VRP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/compute_cost.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/network.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/vrp_macros.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/biconnected.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/shrink.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/tsp.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/vrp_cg.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/Decomp/decomp_lower_bound.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/Decomp/decomp_user.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/Decomp/ind_sort.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/Decomp/my_decomp_user.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/MinCut/capforest.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/MinCut/min_cut.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutPool/vrp_cp.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/DrawGraph/vrp_dg.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/DrawGraph/vrp_dg_functions.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/DrawGraph/vrp_dg_network.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/binomial.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/exchange2.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/exchange.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/farnear_ins.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/farthest_ins.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/heur_main.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/heur_routines.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/ins_routines2.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/ins_routines.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/mst.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/mst_ins_rout.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/near_cluster.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/nearest_ins.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/qsort.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings2.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings3.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings_rout2.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings_rout3.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings_rout.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/s_path.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/sp.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/sweep.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/tsp_fi.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/tsp_fini.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/tsp_ins_rout.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/tsp_ni.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/LP/vrp_lp_branch.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/LP/vrp_lp.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/small_graph.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/vrp_io.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/vrp_main.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/vrp_master.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/vrp_master_functions.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/cluster_heur.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/collect_solutions.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/exchange_heur.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/lower_bound.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/receive_rout.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/route_heur.c
+               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/start_heurs.c)
+  
+  set_source_files_properties(${VRP_SRCS} PROPERTIES LANGUAGE CXX)
+  # Concorde required ?         
+  #add_example(VRP ${VRP_SRCS})
+endif ()
