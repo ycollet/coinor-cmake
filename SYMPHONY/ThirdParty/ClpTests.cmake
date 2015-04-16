@@ -1,3 +1,5 @@
+include(coin-macros)
+
 #
 # Infeas tests
 #
@@ -392,17 +394,16 @@ set_tests_properties(sample_p0033_mps_clp_standard PROPERTIES LABELS "MPS")
 
 # Optimal values for objective function can be found at: http://www.netlib.org/lp/data/readme
 
-add_test(NAME netlib_fit2d_mps_clp_standard 
-         COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit2d.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/netlib_fit2d_clp.out -solve)
-if (WIN32)
-  set_tests_properties(netlib_fit2d_mps_clp_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
-endif ()
+add_coin_test(netlib_fit2d_mps_clp_standard clp
+             ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit2d.mps.gz
+             ${CMAKE_BINARY_DIR}/tests/netlib_fit2d_clp.out
+             ${CMAKE_BINARY_DIR}/tests/netlib_fit2d_clp.log)
+
 set_tests_properties(netlib_fit2d_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fit2d_mps_clp_standard PROPERTIES LABELS "MPS")
 
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -68464.29329(4)?")
-set_tests_properties(netlib_fit2d_mps_clp_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+create_log_analysis(netlib_fit2d_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_fit2d_clp.log "Optimal objective <number>" -68464.293294 1e-6)
+set_tests_properties(netlib_fit2d_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_test(NAME netlib_forplan_mps_clp_standard 
          COMMAND $<TARGET_FILE:clp> ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/forplan.mps.gz -solution ${CMAKE_BINARY_DIR}/tests/netlib_forplan_clp.out -solve)

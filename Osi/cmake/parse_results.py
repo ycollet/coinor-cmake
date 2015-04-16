@@ -22,7 +22,7 @@ else:
     sys.exit(1)
 
 # Internal variables
-number_re = '([-+]+\d+\.*\d*)'
+number_re = '([-+]?\d+\.*\d*)'
 
 # Generate the regular expression
 pattern = pattern.replace('<number>', number_re)
@@ -34,11 +34,17 @@ with open(filename, 'r') as f:
 
 # Iterate each line
 for line in lines:
-    # Regex applied to each line 
+    # Regex applied to each line
     match = re.findall(pattern, line)
     if match:
-        result = abs(float(match[0]) - ref_value) / abs(ref_value) < rel_level
+        result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) < rel_level
         if (not result):
             print "FAILED"
+            sys.exit(-1)
         else:
             print "PASSED"
+            sys.exit()
+
+print "NOT FOUND"
+sys.exit(-1)
+
