@@ -11,6 +11,7 @@ option(COIN_USE_DOWNLOAD_MUMPS         "Enable the use of the thirdparty Mumps" 
 option(COIN_USE_DOWNLOAD_ASL           "Enable the use of the thirdparty Ampl Solver Library" OFF)
 option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" OFF)
 option(COIN_USE_DOWNLOAD_BZLIB         "Enable the use of the thirdparty BZlib" OFF)
+option(COIN_USE_DOWNLOAD_CONCORDE      "Enable the use of the thirdparty Concorde" OFF)
   
 if (WIN32)
   set(ZLIB_NAME "zlib.lib" CACHE FILEPATH "The Zlib library name" FORCE)
@@ -26,7 +27,7 @@ mark_as_advanced(ZLIB_NAME
 if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR
     COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR
     COIN_USE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ZLIB OR
-    COIN_USE_DOWNLOAD_BZLIB)
+    COIN_USE_DOWNLOAD_BZLIB OR COIN_USE_DOWNLOAD_CONCORDE)
   return()
 endif ()
 
@@ -38,6 +39,7 @@ option(COIN_ENABLE_DOWNLOAD_ASL           "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_DATA_TEST     "Enable the download / run of Data tests" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
+option(COIN_ENABLE_DOWNLOAD_CONCORDE      "Enable the download / compilation of Concorde" OFF)
 
 option(COIN_ENABLE_FIND_LAPACK "Enable the detection of Blas / Lapack" OFF)
 option(COIN_ENABLE_FIND_ZLIB   "Enable the detection of Zlib" OFF)
@@ -392,6 +394,42 @@ endif ()
 
 # #################################################
 # <=== Tests
+# #################################################
+
+# #################################################
+# ===>   Concorde 
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_CONCORDE AND UNIX)
+  #set(CONCORDE_URL "http://www.math.uwaterloo.ca/tsp/concorde/downloads/codes/src/co031219.tgz")
+  #set(CONCORDE_URL "http://www.math.uwaterloo.ca/tsp/concorde/downloads/codes/src/co991215.tgz")
+  set(CONCORDE_URL "http://www.math.uwaterloo.ca/tsp/concorde/downloads/codes/src/970827/cc970827.tgz")
+
+  if (OFF)
+    ExternalProject_Add(EP_Concorde
+                        PREFIX ${EP_InstallDir}/Concorde
+                        URL ${CONCORDE_URL}
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Concorde/src/EP_Concorde ./configure --prefix=${EP_InstallDir}
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Concorde/src/EP_Concorde make
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy  ${EP_InstallDir}/Concorde/src/EP_Concorde/concorde.h ${EP_InstallDir}/include
+                                       && ${CMAKE_COMMAND} -E copy  ${EP_InstallDir}/Concorde/src/EP_Concorde/concorde.a ${EP_InstallDir}/lib
+                       )
+  endif ()
+
+  if (ON)
+    ExternalProject_Add(EP_Concorde
+                        PREFIX ${EP_InstallDir}/Concorde
+                        URL ${CONCORDE_URL}
+                        CONFIGURE_COMMAND ""
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Concorde/src/EP_Concorde make
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy  ${EP_InstallDir}/Concorde/src/EP_Concorde/concorde.h ${EP_InstallDir}/include
+                                       && ${CMAKE_COMMAND} -E copy  ${EP_InstallDir}/Concorde/src/EP_Concorde/concorde.a ${EP_InstallDir}/lib
+                       )
+  endif ()
+endif()
+
+# #################################################
+# <===    glpk
 # #################################################
 
 # #################################################

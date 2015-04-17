@@ -870,8 +870,11 @@ if (SYMPHONY_BUILD_APPLICATIONS)
                 ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/small_graph.c)
   
   set_source_files_properties(${CNRP_SRCS} PROPERTIES LANGUAGE CXX)
-  # Concorde required ?          
+  # Concorde required
+  # Compilation error
   #add_example(CNRP ${CNRP_SRCS})
+  #target_include_directories(CNRP BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Dependencies/include)
+  #target_link_libraries(CNRP concorde)
   
   # MATCH
   include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/include/)
@@ -907,8 +910,9 @@ if (SYMPHONY_BUILD_APPLICATIONS)
                   ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/Master/user_master.c)
   
   set_source_files_properties(${MISOCO_SRCS} PROPERTIES LANGUAGE CXX)
+  # Compilation error            
   #add_example(MISOCO ${MISOCO_SRCS})
-  
+
   # MPP
   include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/include/)
   
@@ -957,6 +961,7 @@ if (SYMPHONY_BUILD_APPLICATIONS)
                     ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Master/spp_master_functions.c)
   
   set_source_files_properties(${SPP_CUTS_SRCS} PROPERTIES LANGUAGE CXX)
+  # Compilation error              
   #add_example(SPP_CUTS ${SPP_CUTS_SRCS})
   
   # USER
@@ -971,11 +976,10 @@ if (SYMPHONY_BUILD_APPLICATIONS)
                 ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/Master/user_master.c)
   
   set_source_files_properties(${USER_SRCS} PROPERTIES LANGUAGE CXX)
+  # Compilation error          
   #add_example(USER ${USER_SRCS})
   
   # VRP
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/include/)
-  
   set(VRP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/compute_cost.c
                ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/network.c
                ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/vrp_macros.c
@@ -1036,6 +1040,10 @@ if (SYMPHONY_BUILD_APPLICATIONS)
                ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/start_heurs.c)
   
   set_source_files_properties(${VRP_SRCS} PROPERTIES LANGUAGE CXX)
-  # Concorde required ?         
+  # Concorde required
+  # Compilation error
   #add_example(VRP ${VRP_SRCS})
+  #target_include_directories(VRP BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Dependencies/include)
+  #target_include_directories(VRP BEFORE PRIVATE ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/include)
+  #target_link_libraries(VRP concorde)
 endif ()
