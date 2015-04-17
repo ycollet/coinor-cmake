@@ -50,7 +50,7 @@ endif ()
 
 macro(add_coin_test Name SolverName FileData FileOut FileLog)
   file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-      "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${SolverName} ${FileData} -solution ${FileOut} -solve\n"
+      "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${SolverName} ${FileData} \$ENV{COIN_EXE_OPTIONS} -solution ${FileOut} -solve\n"
       "                OUTPUT_FILE ${FileLog})\n")
   
   add_test(NAME ${Name}
