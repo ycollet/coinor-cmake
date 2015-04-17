@@ -557,7 +557,7 @@ set_tests_properties(netlib_sctap2_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sctap2_mps_cbc_standard PROPERTIES LABELS "MPS")
 
 create_log_analysis(netlib_sctap2_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sctap2_cbc.log "Optimal objective <number>" 1724.8071429 1e-6)
-set_tests_properties(netlib_sctap2_mps_cbc_standard_01_Analysis PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+set_tests_properties(netlib_sctap2_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_pilot87_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilot87.mps.gz
@@ -610,9 +610,9 @@ add_coin_test(netlib_share1b_mps_cbc_standard cbc
 
 set_tests_properties(netlib_share1b_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_share1b_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -76589.3185(79)?")
-set_tests_properties(netlib_share1b_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_share1b_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_share1b_cbc.log "Optimal objective <number>" -76589.318579 1e-6)
+set_tests_properties(netlib_share1b_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_tuff_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/tuff.mps.gz
@@ -621,9 +621,9 @@ add_coin_test(netlib_tuff_mps_cbc_standard cbc
 
 set_tests_properties(netlib_tuff_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_tuff_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 0.292147765(09)?")
-set_tests_properties(netlib_tuff_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_tuff_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_tuff_cbc.log "Optimal objective <number>" 0.29214776509 1e-6)
+set_tests_properties(netlib_tuff_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_share2b_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/share2b.mps.gz
@@ -632,9 +632,9 @@ add_coin_test(netlib_share2b_mps_cbc_standard cbc
 
 set_tests_properties(netlib_share2b_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_share2b_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -415.7322407(4)?")
-set_tests_properties(netlib_share2b_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_share2b_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_share2b_cbc.log "Optimal objective <number>" -415.73224074 1e-6)
+set_tests_properties(netlib_share2b_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_bore3d_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bore3d.mps.gz
@@ -643,9 +643,9 @@ add_coin_test(netlib_bore3d_mps_cbc_standard cbc
 
 set_tests_properties(netlib_bore3d_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_bore3d_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1373.080394(2)?")
-set_tests_properties(netlib_bore3d_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_bore3d_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_bore3d_cbc.log "Optimal objective <number>" 1373.0803942 1e-6)
+set_tests_properties(netlib_bore3d_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_d2q06c_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/d2q06c.mps.gz
@@ -654,9 +654,9 @@ add_coin_test(netlib_d2q06c_mps_cbc_standard cbc
 
 set_tests_properties(netlib_d2q06c_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_d2q06c_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 122784.236(15)?")
-set_tests_properties(netlib_d2q06c_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_d2q06c_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_d2q06c_cbc.log "Optimal objective <number>" 122784.23615 1e-6)
+set_tests_properties(netlib_d2q06c_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_sc50b_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc50b.mps.gz
@@ -665,9 +665,9 @@ add_coin_test(netlib_sc50b_mps_cbc_standard cbc
 
 set_tests_properties(netlib_sc50b_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sc50b_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -70")
-set_tests_properties(netlib_sc50b_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_sc50b_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sc50b_cbc.log "Optimal objective <number>" -70 1e-6)
+set_tests_properties(netlib_sc50b_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_pilot_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilot.mps.gz
@@ -676,9 +676,9 @@ add_coin_test(netlib_pilot_mps_cbc_standard cbc
 
 set_tests_properties(netlib_pilot_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_pilot_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -557.4043(0007)?")
-set_tests_properties(netlib_pilot_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_pilot_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_pilot_cbc.log "Optimal objective <number>" -557.40430007 1e-6)
+set_tests_properties(netlib_pilot_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_bnl1_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bnl1.mps.gz
@@ -687,9 +687,9 @@ add_coin_test(netlib_bnl1_mps_cbc_standard cbc
 
 set_tests_properties(netlib_bnl1_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_bnl1_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1977.6292(856)?")
-set_tests_properties(netlib_bnl1_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_bnl1_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_bnl1_cbc.log "Optimal objective <number>" 1977.6292856 1e-6)
+set_tests_properties(netlib_bnl1_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_ship04l_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship04l.mps.gz
@@ -698,9 +698,9 @@ add_coin_test(netlib_ship04l_mps_cbc_standard cbc
 
 set_tests_properties(netlib_ship04l_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship04l_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1793324.538(0)?")
-set_tests_properties(netlib_ship04l_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_ship04l_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship04l_cbc.log "Optimal objective <number>" 1793324.5380 1e-6)
+set_tests_properties(netlib_ship04l_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_sc105_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc105.mps.gz
@@ -709,9 +709,9 @@ add_coin_test(netlib_sc105_mps_cbc_standard cbc
 
 set_tests_properties(netlib_sc105_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sc105_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -52.20206121(2)?")
-set_tests_properties(netlib_sc105_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_sc105_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sc105_cbc.log "Optimal objective <number>" -52.202061212 1e-6)
+set_tests_properties(netlib_sc105_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_boeing2_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/boeing2.mps.gz
@@ -720,9 +720,9 @@ add_coin_test(netlib_boeing2_mps_cbc_standard cbc
 
 set_tests_properties(netlib_boeing2_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_boeing2_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -315.018728(02)?")
-set_tests_properties(netlib_boeing2_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_boeing2_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_boeing2_cbc.log "Optimal objective <number>" -315.01872802 1e-6)
+set_tests_properties(netlib_boeing2_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_nesm_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/nesm.mps.gz
@@ -731,9 +731,9 @@ add_coin_test(netlib_nesm_mps_cbc_standard cbc
 
 set_tests_properties(netlib_nesm_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_nesm_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 14076073.0(35)?")
-set_tests_properties(netlib_nesm_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_nesm_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_nesm_cbc.log "Optimal objective <number>" 14076073.035 1e-6)
+set_tests_properties(netlib_nesm_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_sc205_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc205.mps.gz
@@ -742,9 +742,9 @@ add_coin_test(netlib_sc205_mps_cbc_standard cbc
 
 set_tests_properties(netlib_sc205_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sc205_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -52.202061(212)?")
-set_tests_properties(netlib_sc205_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_sc205_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sc205_cbc.log "Optimal objective <number>" -52.202061212 1e-6)
+set_tests_properties(netlib_sc205_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_finnis_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/finnis.mps.gz
@@ -753,9 +753,9 @@ add_coin_test(netlib_finnis_mps_cbc_standard cbc
 
 set_tests_properties(netlib_finnis_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_finnis_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 172790.9(6547)?")
-set_tests_properties(netlib_finnis_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_finnis_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_finnis_cbc.log "Optimal objective <number>" 172790.96547 1e-6)
+set_tests_properties(netlib_finnis_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_degen2_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/degen2.mps.gz
@@ -764,9 +764,9 @@ add_coin_test(netlib_degen2_mps_cbc_standard cbc
 
 set_tests_properties(netlib_degen2_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_degen2_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -1435.178(0000)?")
-set_tests_properties(netlib_degen2_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_degen2_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_degen2_cbc.log "Optimal objective <number>" -1435.1780000 1e-6)
+set_tests_properties(netlib_degen2_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_maros-r7_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/maros-r7.mps
@@ -775,9 +775,9 @@ add_coin_test(netlib_maros-r7_mps_cbc_standard cbc
 
 set_tests_properties(netlib_maros-r7_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_maros-r7_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1497185.166(5)?")
-set_tests_properties(netlib_maros-r7_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_maros-r7_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_maros-r7_cbc.log "Optimal objective <number>" 1497185.1665 1e-6)
+set_tests_properties(netlib_maros-r7_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_ship04s_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship04s.mps.gz
@@ -786,9 +786,9 @@ add_coin_test(netlib_ship04s_mps_cbc_standard cbc
 
 set_tests_properties(netlib_ship04s_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship04s_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1798714.7(004)?")
-set_tests_properties(netlib_ship04s_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_ship04s_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship04s_cbc.log "Optimal objective <number>" 1798714.7004 1e-6)
+set_tests_properties(netlib_ship04s_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_wood1p_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/wood1p.mps.gz
@@ -797,9 +797,9 @@ add_coin_test(netlib_wood1p_mps_cbc_standard cbc
 
 set_tests_properties(netlib_wood1p_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_wood1p_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1.44290241(16)?")
-set_tests_properties(netlib_wood1p_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_wood1p_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_wood1p_cbc.log "Optimal objective <number>" 1.4429024116 1e-6)
+set_tests_properties(netlib_wood1p_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_lotfi_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/lotfi.mps.gz
@@ -808,20 +808,20 @@ add_coin_test(netlib_lotfi_mps_cbc_standard cbc
 
 set_tests_properties(netlib_lotfi_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_lotfi_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -25.26470606(2)?")
-set_tests_properties(netlib_lotfi_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
-add_coin_test(netlib_gfrd_mps_cbc_standard cbc
+create_log_analysis(netlib_lotfi_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_lotfi_cbc.log "Optimal objective <number>" -25.264706062 1e-6)
+set_tests_properties(netlib_lotfi_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
+
+add_coin_test(netlib_gfrd-pnc_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/gfrd-pnc.mps
               ${CMAKE_BINARY_DIR}/tests/netlib_gfrd-pnc_cbc.out
               ${CMAKE_BINARY_DIR}/tests/netlib_gfrd-pnc_cbc.log)
 
-set_tests_properties(netlib_gfrd_mps_cbc_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(netlib_gfrd_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 6902235.9(995)?")
-set_tests_properties(netlib_gfrd_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+set_tests_properties(netlib_gfrd-pnc_mps_cbc_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(netlib_gfrd-pnc_mps_cbc_standard PROPERTIES LABELS "MPS")
+
+create_log_analysis(netlib_gfrd-pnc_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_gfrd-pnc_cbc.log "Optimal objective <number>" 6902235.9995 1e-6)
+set_tests_properties(netlib_gfrd-pnc_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_etamacro_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/etamacro.mps.gz
@@ -830,9 +830,9 @@ add_coin_test(netlib_etamacro_mps_cbc_standard cbc
 
 set_tests_properties(netlib_etamacro_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_etamacro_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -755.7152(1774)?")
-set_tests_properties(netlib_etamacro_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_etamacro_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_etamacro_cbc.log "Optimal objective <number>" -755.71521774 1e-6)
+set_tests_properties(netlib_etamacro_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_grow7_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/grow7.mps.gz
@@ -841,9 +841,9 @@ add_coin_test(netlib_grow7_mps_cbc_standard cbc
 
 set_tests_properties(netlib_grow7_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_grow7_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -47787811.81(5)?")
-set_tests_properties(netlib_grow7_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_grow7_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_grow7_cbc.log "Optimal objective <number>" -47787811.815 1e-6)
+set_tests_properties(netlib_grow7_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_dfl001_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/dfl001.mps.gz
@@ -851,11 +851,11 @@ add_coin_test(netlib_dfl001_mps_cbc_standard cbc
               ${CMAKE_BINARY_DIR}/tests/netlib_dfl001_cbc.log)
 
 set_tests_properties(netlib_dfl001_mps_cbc_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(netlib_dfl001_mps_cbc_standard PROPERTIES LABELS "MPS")
+set_tests_properties(netlib_dfl001_mps_cbc_standard PROPERTIES LABELS "MPS;WARNING")
 # (there's a ** in the readme file in the netlib website)
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 112664396.0(5)?") # Cbc value
-set_tests_properties(netlib_dfl001_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_dfl001_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_dfl001_cbc.log "Optimal objective <number>" 112664396.05 1e-6)
+set_tests_properties(netlib_dfl001_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;WARNING")
 
 add_coin_test(netlib_agg_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg.mps.gz
@@ -864,9 +864,9 @@ add_coin_test(netlib_agg_mps_cbc_standard cbc
 
 set_tests_properties(netlib_agg_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_agg_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -35991767.2(87)?")
-set_tests_properties(netlib_agg_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_agg_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_agg_cbc.log "Optimal objective <number>" -35991767.287 1e-6)
+set_tests_properties(netlib_agg_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_standgub_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/standgub.mps.gz
@@ -874,11 +874,11 @@ add_coin_test(netlib_standgub_mps_cbc_standard cbc
               ${CMAKE_BINARY_DIR}/tests/netlib_standgub_cbc.log)
 
 set_tests_properties(netlib_standgub_mps_cbc_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(netlib_standgub_mps_cbc_standard PROPERTIES LABELS "MPS")
+set_tests_properties(netlib_standgub_mps_cbc_standard PROPERTIES LABELS "MPS;WARNING")
 # Nothing in the readme - Cbc value
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "1257.6995")
-set_tests_properties(netlib_standgub_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_standgub_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_standgub_cbc.log "Optimal objective <number>" 1257.6995 1e-6)
+set_tests_properties(netlib_standgub_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;WARNING")
 
 add_coin_test(netlib_ship12l_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship12l.mps.gz
@@ -887,9 +887,9 @@ add_coin_test(netlib_ship12l_mps_cbc_standard cbc
 
 set_tests_properties(netlib_ship12l_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship12l_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1470187.919(3)?")
-set_tests_properties(netlib_ship12l_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_ship12l_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship12l_cbc.log "Optimal objective <number>" 1470187.9193 1e-6)
+set_tests_properties(netlib_ship12l_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_standmps_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/standmps.mps.gz
@@ -898,9 +898,9 @@ add_coin_test(netlib_standmps_mps_cbc_standard cbc
 
 set_tests_properties(netlib_standmps_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_standmps_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1406.0175(000)?")
-set_tests_properties(netlib_standmps_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_standmps_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_standmps_cbc.log "Optimal objective <number>" 1406.0175000 1e-6)
+set_tests_properties(netlib_standmps_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_scagr25_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scagr25.mps.gz
@@ -909,9 +909,9 @@ add_coin_test(netlib_scagr25_mps_cbc_standard cbc
 
 set_tests_properties(netlib_scagr25_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scagr25_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -14753433.06(1)?")
-set_tests_properties(netlib_scagr25_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_scagr25_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scagr25_cbc.log "Optimal objective <number>" -14753433.061 1e-6)
+set_tests_properties(netlib_scagr25_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_capri_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/capri.mps.gz
@@ -920,9 +920,9 @@ add_coin_test(netlib_capri_mps_cbc_standard cbc
 
 set_tests_properties(netlib_capri_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_capri_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 2690.01291(38)?")
-set_tests_properties(netlib_capri_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_capri_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_capri_cbc.log "Optimal objective <number>" 2690.0129138 1e-6)
+set_tests_properties(netlib_capri_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_cycle_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/cycle.mps.gz
@@ -931,9 +931,9 @@ add_coin_test(netlib_cycle_mps_cbc_standard cbc
 
 set_tests_properties(netlib_cycle_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_cycle_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -5.22639302(49)?")
-set_tests_properties(netlib_cycle_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_cycle_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_cycle_cbc.log "Optimal objective <number>" -5.2263930249 1e-6)
+set_tests_properties(netlib_cycle_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_greenbeb_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/greenbeb.mps.gz
@@ -942,9 +942,9 @@ add_coin_test(netlib_greenbeb_mps_cbc_standard cbc
 
 set_tests_properties(netlib_greenbeb_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_greenbeb_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -4302147.6065")
-set_tests_properties(netlib_greenbeb_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_greenbeb_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_greenbeb_cbc.log "Optimal objective <number>" -4302147.6065 1e-6)
+set_tests_properties(netlib_greenbeb_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_agg2_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg2.mps.gz
@@ -953,9 +953,9 @@ add_coin_test(netlib_agg2_mps_cbc_standard cbc
 
 set_tests_properties(netlib_agg2_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_agg2_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -20239252.3(56)?")
-set_tests_properties(netlib_agg2_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_agg2_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_agg2_cbc.log "Optimal objective <number>" -20239252.356 1e-6)
+set_tests_properties(netlib_agg2_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_stair_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/stair.mps.gz
@@ -964,9 +964,9 @@ add_coin_test(netlib_stair_mps_cbc_standard cbc
 
 set_tests_properties(netlib_stair_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_stair_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -251.266951(19)?")
-set_tests_properties(netlib_stair_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_stair_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_stair_cbc.log "Optimal objective <number>" -251.26695119 1e-6)
+set_tests_properties(netlib_stair_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_shell_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/shell.mps.gz
@@ -975,9 +975,9 @@ add_coin_test(netlib_shell_mps_cbc_standard cbc
 
 set_tests_properties(netlib_shell_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_shell_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1208825346(.0)?")
-set_tests_properties(netlib_shell_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_shell_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_shell_cbc.log "Optimal objective <number>" 1208825346.0 1e-6)
+set_tests_properties(netlib_shell_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_sierra_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sierra.mps.gz
@@ -986,9 +986,9 @@ add_coin_test(netlib_sierra_mps_cbc_standard cbc
 
 set_tests_properties(netlib_sierra_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sierra_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 15394362.18(4)?")
-set_tests_properties(netlib_sierra_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_sierra_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sierra_cbc.log "Optimal objective <number>" 15394362.184 1e-6)
+set_tests_properties(netlib_sierra_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_afiro_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/afiro.mps.gz
@@ -997,9 +997,9 @@ add_coin_test(netlib_afiro_mps_cbc_standard cbc
 
 set_tests_properties(netlib_afiro_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_afiro_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -464.753142(86)?")
-set_tests_properties(netlib_afiro_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_afiro_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_afiro_cbc.log "Optimal objective <number>" -464.75314286 1e-6)
+set_tests_properties(netlib_afiro_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_scsd1_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd1.mps.gz
@@ -1008,9 +1008,9 @@ add_coin_test(netlib_scsd1_mps_cbc_standard cbc
 
 set_tests_properties(netlib_scsd1_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scsd1_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 8.666666674(3)?")
-set_tests_properties(netlib_scsd1_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_scsd1_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scsd1_cbc.log "Optimal objective <number>" 8.6666666743 1e-6)
+set_tests_properties(netlib_scsd1_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_scsd8_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd8.mps.gz
@@ -1019,9 +1019,9 @@ add_coin_test(netlib_scsd8_mps_cbc_standard cbc
 
 set_tests_properties(netlib_scsd8_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scsd8_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 904.9999999(3)?")
-set_tests_properties(netlib_scsd8_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_scsd8_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scsd8_cbc.log "Optimal objective <number>" 904.99999993 1e-6)
+set_tests_properties(netlib_scsd8_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_ship08l_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship08l.mps.gz
@@ -1030,9 +1030,9 @@ add_coin_test(netlib_ship08l_mps_cbc_standard cbc
 
 set_tests_properties(netlib_ship08l_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship08l_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1909055.211(4)?")
-set_tests_properties(netlib_ship08l_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_ship08l_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship08l_cbc.log "Optimal objective <number>" 1909055.2114 1e-6)
+set_tests_properties(netlib_ship08l_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_25fv47_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/25fv47.mps.gz
@@ -1041,9 +1041,9 @@ add_coin_test(netlib_25fv47_mps_cbc_standard cbc
 
 set_tests_properties(netlib_25fv47_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_25fv47_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 5501.845888(3)?")
-set_tests_properties(netlib_25fv47_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_25fv47_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_25fv47_cbc.log "Optimal objective <number>" 5501.8458883 1e-6)
+set_tests_properties(netlib_25fv47_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_czprob_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/czprob.mps.gz
@@ -1052,9 +1052,9 @@ add_coin_test(netlib_czprob_mps_cbc_standard cbc
 
 set_tests_properties(netlib_czprob_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_czprob_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 2185196.69(89)?")
-set_tests_properties(netlib_czprob_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_czprob_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_czprob_cbc.log "Optimal objective <number>" 2185196.6989 1e-6)
+set_tests_properties(netlib_czprob_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_adlittle_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/adlittle.mps.gz
@@ -1063,9 +1063,9 @@ add_coin_test(netlib_adlittle_mps_cbc_standard cbc
 
 set_tests_properties(netlib_adlittle_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_adlittle_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 225494.963(16)?")
-set_tests_properties(netlib_adlittle_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_adlittle_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_adlittle_cbc.log "Optimal objective <number>" 225494.96316 1e-6)
+set_tests_properties(netlib_adlittle_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_d6cube_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/d6cube.mps.gz
@@ -1074,9 +1074,9 @@ add_coin_test(netlib_d6cube_mps_cbc_standard cbc
 
 set_tests_properties(netlib_d6cube_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_d6cube_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 315.491666(67)?")
-set_tests_properties(netlib_d6cube_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_d6cube_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_d6cube_cbc.log "Optimal objective <number>" 315.49166667 1e-6)
+set_tests_properties(netlib_d6cube_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_scorpion_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scorpion.mps.gz
@@ -1085,9 +1085,9 @@ add_coin_test(netlib_scorpion_mps_cbc_standard cbc
 
 set_tests_properties(netlib_scorpion_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scorpion_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1878.12482(27)?")
-set_tests_properties(netlib_scorpion_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_scorpion_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scorpion_cbc.log "Optimal objective <number>" 1878.1248227 1e-6)
+set_tests_properties(netlib_scorpion_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_sctap3_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sctap3.mps.gz
@@ -1096,9 +1096,9 @@ add_coin_test(netlib_sctap3_mps_cbc_standard cbc
 
 set_tests_properties(netlib_sctap3_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sctap3_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1424(.0)?")
-set_tests_properties(netlib_sctap3_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_sctap3_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sctap3_cbc.log "Optimal objective <number>" 1424.0 1e-6)
+set_tests_properties(netlib_sctap3_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_seba_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/seba.mps.gz
@@ -1107,9 +1107,9 @@ add_coin_test(netlib_seba_mps_cbc_standard cbc
 
 set_tests_properties(netlib_seba_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_seba_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 15711.6")
-set_tests_properties(netlib_seba_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_seba_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_seba_cbc.log "Optimal objective <number>" 15711.6 1e-6)
+set_tests_properties(netlib_seba_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_modszk1_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/modszk1.mps.gz
@@ -1118,9 +1118,9 @@ add_coin_test(netlib_modszk1_mps_cbc_standard cbc
 
 set_tests_properties(netlib_modszk1_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_modszk1_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 320.619729(06)?")
-set_tests_properties(netlib_modszk1_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_modszk1_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_modszk1_cbc.log "Optimal objective <number>" 320.61972906 1e-6)
+set_tests_properties(netlib_modszk1_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_pilotnov_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilotnov.mps.gz
@@ -1129,9 +1129,9 @@ add_coin_test(netlib_pilotnov_mps_cbc_standard cbc
 
 set_tests_properties(netlib_pilotnov_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_pilotnov_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -4497.276188(2)?")
-set_tests_properties(netlib_pilotnov_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_pilotnov_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_pilotnov_cbc.log "Optimal objective <number>" -4497.2761882 1e-6)
+set_tests_properties(netlib_pilotnov_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_beaconfd_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/beaconfd.mps.gz
@@ -1140,9 +1140,9 @@ add_coin_test(netlib_beaconfd_mps_cbc_standard cbc
 
 set_tests_properties(netlib_beaconfd_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_beaconfd_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 33592.4858(07)?")
-set_tests_properties(netlib_beaconfd_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_beaconfd_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_beaconfd_cbc.log "Optimal objective <number>" 33592.485807 1e-6)
+set_tests_properties(netlib_beaconfd_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_e226_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/e226.mps.gz
@@ -1151,9 +1151,9 @@ add_coin_test(netlib_e226_mps_cbc_standard cbc
 
 set_tests_properties(netlib_e226_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_e226_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -18.751929(066)?")
-set_tests_properties(netlib_e226_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_e226_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_e226_cbc.log "Optimal objective <number>" -18.751929066 1e-6)
+set_tests_properties(netlib_e226_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_degen3_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/degen3.mps.gz
@@ -1162,9 +1162,9 @@ add_coin_test(netlib_degen3_mps_cbc_standard cbc
 
 set_tests_properties(netlib_degen3_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_degen3_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -987.294(00000)?")
-set_tests_properties(netlib_degen3_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_degen3_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_degen3_cbc.log "Optimal objective <number>" -987.29400000 1e-6)
+set_tests_properties(netlib_degen3_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_scfxm2_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scfxm2.mps.gz
@@ -1173,9 +1173,9 @@ add_coin_test(netlib_scfxm2_mps_cbc_standard cbc
 
 set_tests_properties(netlib_scfxm2_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scfxm2_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 36660.26156(5)?")
-set_tests_properties(netlib_scfxm2_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_scfxm2_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scfxm2_cbc.log "Optimal objective <number>" 36660.261565 1e-6)
+set_tests_properties(netlib_scfxm2_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_fffff800_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fffff800.mps.gz
@@ -1184,9 +1184,9 @@ add_coin_test(netlib_fffff800_mps_cbc_standard cbc
 
 set_tests_properties(netlib_fffff800_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fffff800_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 555679.611(65)?")
-set_tests_properties(netlib_fffff800_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_fffff800_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_fffff800_cbc.log "Optimal objective <number>" 555679.61165 1e-6)
+set_tests_properties(netlib_fffff800_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_kb2_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/kb2.mps.gz
@@ -1195,9 +1195,9 @@ add_coin_test(netlib_kb2_mps_cbc_standard cbc
 
 set_tests_properties(netlib_kb2_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_kb2_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -1749.9001(299)?")
-set_tests_properties(netlib_kb2_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_kb2_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_kb2_cbc.log "Optimal objective <number>" -1749.9001299 1e-6)
+set_tests_properties(netlib_kb2_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_ganges_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ganges.mps.gz
@@ -1206,9 +1206,9 @@ add_coin_test(netlib_ganges_mps_cbc_standard cbc
 
 set_tests_properties(netlib_ganges_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ganges_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -109586.363(56)?")
-set_tests_properties(netlib_ganges_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_ganges_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ganges_cbc.log "Optimal objective <number>" -109586.36356 1e-6)
+set_tests_properties(netlib_ganges_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_stocfor1_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/stocfor1.mps.gz
@@ -1217,9 +1217,9 @@ add_coin_test(netlib_stocfor1_mps_cbc_standard cbc
 
 set_tests_properties(netlib_stocfor1_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_stocfor1_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -41131.9762(19)?")
-set_tests_properties(netlib_stocfor1_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_stocfor1_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_stocfor1_cbc.log "Optimal objective <number>" -41131.976219 1e-6)
+set_tests_properties(netlib_stocfor1_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_scsd6_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd6.mps.gz
@@ -1228,9 +1228,9 @@ add_coin_test(netlib_scsd6_mps_cbc_standard cbc
 
 set_tests_properties(netlib_scsd6_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scsd6_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 50.5000000(78)?")
-set_tests_properties(netlib_scsd6_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_scsd6_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scsd6_cbc.log "Optimal objective <number>" 50.500000078 1e-6)
+set_tests_properties(netlib_scsd6_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_80bau3b_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/80bau3b.mps.gz
@@ -1239,9 +1239,9 @@ add_coin_test(netlib_80bau3b_mps_cbc_standard cbc
 
 set_tests_properties(netlib_80bau3b_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_80bau3b_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 987232.160(72)?")
-set_tests_properties(netlib_80bau3b_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_80bau3b_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_80bau3b_cbc.log "Optimal objective <number>" 987232.16072 1e-6)
+set_tests_properties(netlib_80bau3b_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_ship12s_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship12s.mps.gz
@@ -1250,9 +1250,9 @@ add_coin_test(netlib_ship12s_mps_cbc_standard cbc
 
 set_tests_properties(netlib_ship12s_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_ship12s_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1489236.134(4)?")
-set_tests_properties(netlib_ship12s_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_ship12s_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship12s_cbc.log "Optimal objective <number>" 1489236.1344 1e-6)
+set_tests_properties(netlib_ship12s_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_agg3_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg3.mps.gz
@@ -1261,9 +1261,9 @@ add_coin_test(netlib_agg3_mps_cbc_standard cbc
 
 set_tests_properties(netlib_agg3_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_agg3_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 10312115.9(35)?")
-set_tests_properties(netlib_agg3_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_agg3_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_agg3_cbc.log "Optimal objective <number>" 10312115.935 1e-6)
+set_tests_properties(netlib_agg3_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_maros_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/maros.mps.gz
@@ -1272,9 +1272,9 @@ add_coin_test(netlib_maros_mps_cbc_standard cbc
 
 set_tests_properties(netlib_maros_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_maros_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -58063.7437(01)?")
-set_tests_properties(netlib_maros_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_maros_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_maros_cbc.log "Optimal objective <number>" -58063.743701 1e-6)
+set_tests_properties(netlib_maros_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_perold_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/perold.mps.gz
@@ -1283,9 +1283,9 @@ add_coin_test(netlib_perold_mps_cbc_standard cbc
 
 set_tests_properties(netlib_perold_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_perold_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -9380.758(0773)?")
-set_tests_properties(netlib_perold_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_perold_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_perold_cbc.log "Optimal objective <number>" -9380.7580773 1e-6)
+set_tests_properties(netlib_perold_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_scagr7_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scagr7.mps.gz
@@ -1294,9 +1294,9 @@ add_coin_test(netlib_scagr7_mps_cbc_standard cbc
 
 set_tests_properties(netlib_scagr7_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scagr7_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -2331389.25(48)?")
-set_tests_properties(netlib_scagr7_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_scagr7_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scagr7_cbc.log "Optimal objective <number>" -2331389.2548 1e-6)
+set_tests_properties(netlib_scagr7_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_scfxm3_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scfxm3.mps.gz
@@ -1305,9 +1305,9 @@ add_coin_test(netlib_scfxm3_mps_cbc_standard cbc
 
 set_tests_properties(netlib_scfxm3_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_scfxm3_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 54901.25455(0)?")
-set_tests_properties(netlib_scfxm3_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_scfxm3_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scfxm3_cbc.log "Optimal objective <number>" 54901.254550 1e-6)
+set_tests_properties(netlib_scfxm3_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_grow15_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/grow15.mps.gz
@@ -1316,9 +1316,9 @@ add_coin_test(netlib_grow15_mps_cbc_standard cbc
 
 set_tests_properties(netlib_grow15_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_grow15_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -106870941(.29)?")
-set_tests_properties(netlib_grow15_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_grow15_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_grow15_cbc.log "Optimal objective <number>" -106870941.29 1e-6)
+set_tests_properties(netlib_grow15_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_fit2p_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit2p.mps.gz
@@ -1327,9 +1327,9 @@ add_coin_test(netlib_fit2p_mps_cbc_standard cbc
 
 set_tests_properties(netlib_fit2p_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_fit2p_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 68464.2932(32)?")
-set_tests_properties(netlib_fit2p_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_fit2p_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_fit2p_cbc.log "Optimal objective <number>" 68464.293232 1e-6)
+set_tests_properties(netlib_fit2p_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_boeing1_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/boeing1.mps.gz
@@ -1338,9 +1338,9 @@ add_coin_test(netlib_boeing1_mps_cbc_standard cbc
 
 set_tests_properties(netlib_boeing1_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_boeing1_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -335.2135675(1)?")
-set_tests_properties(netlib_boeing1_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_boeing1_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_boeing1_cbc.log "Optimal objective <number>" -335.21356751 1e-6)
+set_tests_properties(netlib_boeing1_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_sc50a_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc50a.mps.gz
@@ -1349,9 +1349,9 @@ add_coin_test(netlib_sc50a_mps_cbc_standard cbc
 
 set_tests_properties(netlib_sc50a_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_sc50a_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -64.5750770(59)?")
-set_tests_properties(netlib_sc50a_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_sc50a_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sc50a_cbc.log "Optimal objective <number>" -64.575077059 1e-6)
+set_tests_properties(netlib_sc50a_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_vtpbase_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/vtpbase.mps.gz
@@ -1360,9 +1360,9 @@ add_coin_test(netlib_vtpbase_mps_cbc_standard cbc
 
 set_tests_properties(netlib_vtpbase_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_vtpbase_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 129831.462(46)?")
-set_tests_properties(netlib_vtpbase_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_vtpbase_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_vtpbase_cbc.log "Optimal objective <number>" 129831.46246 1e-6)
+set_tests_properties(netlib_vtpbase_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_blend_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/blend.mps.gz
@@ -1371,9 +1371,9 @@ add_coin_test(netlib_blend_mps_cbc_standard cbc
 
 set_tests_properties(netlib_blend_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_blend_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -30.8121498(46)?")
-set_tests_properties(netlib_blend_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_blend_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_blend_cbc.log "Optimal objective <number>" -30.812149846 1e-6)
+set_tests_properties(netlib_blend_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_bnl2_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bnl2.mps.gz
@@ -1382,9 +1382,9 @@ add_coin_test(netlib_bnl2_mps_cbc_standard cbc
 
 set_tests_properties(netlib_bnl2_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_bnl2_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1811.23654(04)?")
-set_tests_properties(netlib_bnl2_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_bnl2_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_bnl2_cbc.log "Optimal objective <number>" 1811.2365404 1e-6)
+set_tests_properties(netlib_bnl2_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(netlib_israel_mps_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/israel.mps.gz
@@ -1393,9 +1393,9 @@ add_coin_test(netlib_israel_mps_cbc_standard cbc
 
 set_tests_properties(netlib_israel_mps_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_israel_mps_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -896644.821(86)?")
-set_tests_properties(netlib_israel_mps_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(netlib_israel_mps_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_israel_cbc.log "Optimal objective <number>" -896644.82186 1e-6)
+set_tests_properties(netlib_israel_mps_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 #
 # miplib3 tests
@@ -1408,9 +1408,9 @@ add_coin_test(miplib3_10teams_cbc_standard cbc
 
 set_tests_properties(miplib3_10teams_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_10teams_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 924")
-set_tests_properties(miplib3_10teams_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_10teams_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_cbc.log "Optimal objective <number>" 924 1e-6)
+set_tests_properties(miplib3_10teams_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_air03_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz
@@ -1419,9 +1419,9 @@ add_coin_test(miplib3_air03_cbc_standard cbc
 
 set_tests_properties(miplib3_air03_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_air03_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 340160")
-set_tests_properties(miplib3_air03_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_air03_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_air03_cbc.log "Optimal objective <number>" 340160 1e-6)
+set_tests_properties(miplib3_air03_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_air04_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz
@@ -1430,9 +1430,9 @@ add_coin_test(miplib3_air04_cbc_standard cbc
 
 set_tests_properties(miplib3_air04_cbc_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_air04_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 56137")
-set_tests_properties(miplib3_air04_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_air04_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_air04_cbc.log "Optimal objective <number>" 56137 1e-6)
+set_tests_properties(miplib3_air04_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_air05_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz
@@ -1441,9 +1441,9 @@ add_coin_test(miplib3_air05_cbc_standard cbc
 
 set_tests_properties(miplib3_air05_cbc_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_air05_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 26374")
-set_tests_properties(miplib3_air05_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_air05_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_air05_cbc.log "Optimal objective <number>" 26374 1e-6)
+set_tests_properties(miplib3_air05_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_arki001_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz
@@ -1451,10 +1451,11 @@ add_coin_test(miplib3_arki001_cbc_standard cbc
               ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_cbc.log)
 
 set_tests_properties(miplib3_arki001_cbc_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_arki001_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 7580813.0459") # Not optimal - has stated in the miplib3 report
-set_tests_properties(miplib3_arki001_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+set_tests_properties(miplib3_arki001_cbc_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+
+# Not optimal - has stated in the miplib3 report
+create_log_analysis(miplib3_arki001_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_cbc.log "Optimal objective <number>" 7580813.0459 1e-6)
+set_tests_properties(miplib3_arki001_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
 
 add_coin_test(miplib3_bell3a_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz
@@ -1463,9 +1464,9 @@ add_coin_test(miplib3_bell3a_cbc_standard cbc
 
 set_tests_properties(miplib3_bell3a_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_bell3a_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 878430.32")
-set_tests_properties(miplib3_bell3a_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_bell3a_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_cbc.log "Optimal objective <number>" 878430.32 1e-6)
+set_tests_properties(miplib3_bell3a_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_bell5_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz
@@ -1474,9 +1475,9 @@ add_coin_test(miplib3_bell5_cbc_standard cbc
 
 set_tests_properties(miplib3_bell5_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_bell5_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 8966406.49")
-set_tests_properties(miplib3_bell5_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_bell5_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_cbc.log "Optimal objective <number>" 8966406.49 1e-6)
+set_tests_properties(miplib3_bell5_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_blend2_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz
@@ -1485,9 +1486,9 @@ add_coin_test(miplib3_blend2_cbc_standard cbc
 
 set_tests_properties(miplib3_blend2_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_blend2_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 7.598985")
-set_tests_properties(miplib3_blend2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_blend2_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_cbc.log "Optimal objective <number>" 7.598985 1e-6)
+set_tests_properties(miplib3_blend2_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_cap6000_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz
@@ -1496,9 +1497,9 @@ add_coin_test(miplib3_cap6000_cbc_standard cbc
 
 set_tests_properties(miplib3_cap6000_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_cap6000_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -2451377")
-set_tests_properties(miplib3_cap6000_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_cap6000_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_cbc.log "Optimal objective <number>" -2451377 1e-6)
+set_tests_properties(miplib3_cap6000_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_dano3mip_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz
@@ -1506,10 +1507,11 @@ add_coin_test(miplib3_dano3mip_cbc_standard cbc
               ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_cbc.log)
 
 set_tests_properties(miplib3_dano3mip_cbc_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_dano3mip_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 728.1111") # not optimal - has stated in the miplib3 report
-set_tests_properties(miplib3_dano3mip_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+set_tests_properties(miplib3_dano3mip_cbc_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+
+# not optimal - has stated in the miplib3 report
+create_log_analysis(miplib3_dano3mip_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_cbc.log "Optimal objective <number>" 728.1111 1e-6)
+set_tests_properties(miplib3_dano3mip_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
 
 add_coin_test(miplib3_danoint_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz
@@ -1518,9 +1520,9 @@ add_coin_test(miplib3_danoint_cbc_standard cbc
 
 set_tests_properties(miplib3_danoint_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_danoint_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 65.67")
-set_tests_properties(miplib3_danoint_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_danoint_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_cbc.log "Optimal objective <number>" 65.67 1e-6)
+set_tests_properties(miplib3_danoint_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_dcmulti_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz
@@ -1529,9 +1531,9 @@ add_coin_test(miplib3_dcmulti_cbc_standard cbc
 
 set_tests_properties(miplib3_dcmulti_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_dcmulti_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 188182")
-set_tests_properties(miplib3_dcmulti_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_dcmulti_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_cbc.log "Optimal objective <number>" 188182 1e-6)
+set_tests_properties(miplib3_dcmulti_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_dsbmip_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz
@@ -1540,9 +1542,9 @@ add_coin_test(miplib3_dsbmip_cbc_standard cbc
 
 set_tests_properties(miplib3_dsbmip_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_dsbmip_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -305.19817501")
-set_tests_properties(miplib3_dsbmip_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_dsbmip_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_cbc.log "Optimal objective <number>" -305.19817501 1e-6)
+set_tests_properties(miplib3_dsbmip_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_egout_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz
@@ -1551,9 +1553,9 @@ add_coin_test(miplib3_egout_cbc_standard cbc
 
 set_tests_properties(miplib3_egout_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_egout_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 568.101")
-set_tests_properties(miplib3_egout_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_egout_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_egout_cbc.log "Optimal objective <number>" 568.101 1e-6)
+set_tests_properties(miplib3_egout_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_enigma_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz
@@ -1562,9 +1564,9 @@ add_coin_test(miplib3_enigma_cbc_standard cbc
 
 set_tests_properties(miplib3_enigma_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_enigma_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 0.0")
-set_tests_properties(miplib3_enigma_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_enigma_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_cbc.log "Optimal objective <number>" 0.0 1e-6)
+set_tests_properties(miplib3_enigma_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_fast0507_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz
@@ -1573,9 +1575,9 @@ add_coin_test(miplib3_fast0507_cbc_standard cbc
 
 set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 174")
-set_tests_properties(miplib3_fast0507_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_fast0507_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_cbc.log "Optimal objective <number>" 174 1e-6)
+set_tests_properties(miplib3_fast0507_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_fiber_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz
@@ -1584,9 +1586,9 @@ add_coin_test(miplib3_fiber_cbc_standard cbc
 
 set_tests_properties(miplib3_fiber_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_fiber_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 405935.18000")
-set_tests_properties(miplib3_fiber_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_fiber_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_cbc.log "Optimal objective <number>" 405935.18000 1e-6)
+set_tests_properties(miplib3_fiber_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_fixnet6_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz
@@ -1595,9 +1597,9 @@ add_coin_test(miplib3_fixnet6_cbc_standard cbc
 
 set_tests_properties(miplib3_fixnet6_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_fixnet6_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 3983")
-set_tests_properties(miplib3_fixnet6_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_fixnet6_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_cbc.log "Optimal objective <number>" 3983 1e-6)
+set_tests_properties(miplib3_fixnet6_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_flugpl_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz
@@ -1606,9 +1608,9 @@ add_coin_test(miplib3_flugpl_cbc_standard cbc
 
 set_tests_properties(miplib3_flugpl_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_flugpl_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1201500")
-set_tests_properties(miplib3_flugpl_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_flugpl_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_cbc.log "Optimal objective <number>" 1201500 1e-6)
+set_tests_properties(miplib3_flugpl_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_gen_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz
@@ -1617,9 +1619,9 @@ add_coin_test(miplib3_gen_cbc_standard cbc
 
 set_tests_properties(miplib3_gen_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gen_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 112313")
-set_tests_properties(miplib3_gen_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_gen_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gen_cbc.log "Optimal objective <number>" 112313 1e-6)
+set_tests_properties(miplib3_gen_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_gesa2_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz
@@ -1628,9 +1630,9 @@ add_coin_test(miplib3_gesa2_cbc_standard cbc
 
 set_tests_properties(miplib3_gesa2_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa2_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 25779856.372")
-set_tests_properties(miplib3_gesa2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_gesa2_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_cbc.log "Optimal objective <number>" 25779856.372 1e-6)
+set_tests_properties(miplib3_gesa2_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_gesa2_o_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz
@@ -1639,9 +1641,9 @@ add_coin_test(miplib3_gesa2_o_cbc_standard cbc
 
 set_tests_properties(miplib3_gesa2_o_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa2_o_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 25779856.372")
-set_tests_properties(miplib3_gesa2_o_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_gesa2_o_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_cbc.log "Optimal objective <number>" 25779856.372 1e-6)
+set_tests_properties(miplib3_gesa2_o_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_gesa3_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz
@@ -1650,9 +1652,9 @@ add_coin_test(miplib3_gesa3_cbc_standard cbc
 
 set_tests_properties(miplib3_gesa3_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa3_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 27991042.648")
-set_tests_properties(miplib3_gesa3_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_gesa3_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_cbc.log "Optimal objective <number>" 27991042.648 1e-6)
+set_tests_properties(miplib3_gesa3_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_gesa3_o_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz
@@ -1661,9 +1663,9 @@ add_coin_test(miplib3_gesa3_o_cbc_standard cbc
 
 set_tests_properties(miplib3_gesa3_o_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gesa3_o_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 27991042.648")
-set_tests_properties(miplib3_gesa3_o_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_gesa3_o_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_cbc.log "Optimal objective <number>" 27991042.648 1e-6)
+set_tests_properties(miplib3_gesa3_o_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_gt2_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz
@@ -1672,9 +1674,9 @@ add_coin_test(miplib3_gt2_cbc_standard cbc
 
 set_tests_properties(miplib3_gt2_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_gt2_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 21166.000")
-set_tests_properties(miplib3_gt2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_gt2_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_cbc.log "Optimal objective <number>" 21166.000 1e-6)
+set_tests_properties(miplib3_gt2_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_harp2_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz
@@ -1683,9 +1685,9 @@ add_coin_test(miplib3_harp2_cbc_standard cbc
 
 set_tests_properties(miplib3_harp2_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_harp2_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -73899798.00")
-set_tests_properties(miplib3_harp2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_harp2_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_cbc.log "Optimal objective <number>" -73899798.00 1e-6)
+set_tests_properties(miplib3_harp2_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_khb05250_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz
@@ -1694,9 +1696,9 @@ add_coin_test(miplib3_khb05250_cbc_standard cbc
 
 set_tests_properties(miplib3_khb05250_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_khb05250_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 106940226")
-set_tests_properties(miplib3_khb05250_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_khb05250_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_cbc.log "Optimal objective <number>" 106940226 1e-6)
+set_tests_properties(miplib3_khb05250_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_l152lav_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz
@@ -1705,9 +1707,9 @@ add_coin_test(miplib3_l152lav_cbc_standard cbc
 
 set_tests_properties(miplib3_l152lav_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_l152lav_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 4722")
-set_tests_properties(miplib3_l152lav_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_l152lav_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_cbc.log "Optimal objective <number>" 4722 1e-6)
+set_tests_properties(miplib3_l152lav_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_lseu_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz
@@ -1716,9 +1718,9 @@ add_coin_test(miplib3_lseu_cbc_standard cbc
 
 set_tests_properties(miplib3_lseu_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_lseu_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1120")
-set_tests_properties(miplib3_lseu_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_lseu_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_cbc.log "Optimal objective <number>" 1120 1e-6)
+set_tests_properties(miplib3_lseu_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_markshare1_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz
@@ -1727,9 +1729,9 @@ add_coin_test(miplib3_markshare1_cbc_standard cbc
 
 set_tests_properties(miplib3_markshare1_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_markshare1_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1")
-set_tests_properties(miplib3_markshare1_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_markshare1_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_cbc.log "Optimal objective <number>" 1 1e-6)
+set_tests_properties(miplib3_markshare1_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_markshare2_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz
@@ -1738,9 +1740,9 @@ add_coin_test(miplib3_markshare2_cbc_standard cbc
 
 set_tests_properties(miplib3_markshare2_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_markshare2_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1")
-set_tests_properties(miplib3_markshare2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_markshare2_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_cbc.log "Optimal objective <number>" 1 1e-6)
+set_tests_properties(miplib3_markshare2_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_mas74_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz
@@ -1749,9 +1751,9 @@ add_coin_test(miplib3_mas74_cbc_standard cbc
 
 set_tests_properties(miplib3_mas74_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_mas74_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 11801.1857")
-set_tests_properties(miplib3_mas74_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_mas74_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_cbc.log "Optimal objective <number>" 11801.1857 1e-6)
+set_tests_properties(miplib3_mas74_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_mas76_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz
@@ -1760,9 +1762,9 @@ add_coin_test(miplib3_mas76_cbc_standard cbc
 
 set_tests_properties(miplib3_mas76_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mas76_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 4005.1")
-set_tests_properties(miplib3_mas76_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_mas76_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_cbc.log "Optimal objective <number>" 4005.1 1e-6)
+set_tests_properties(miplib3_mas76_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_misc03_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz
@@ -1771,9 +1773,9 @@ add_coin_test(miplib3_misc03_cbc_standard cbc
 
 set_tests_properties(miplib3_misc03_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_misc03_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 3360")
-set_tests_properties(miplib3_misc03_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_misc03_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_cbc.log "Optimal objective <number>" 3360 1e-6)
+set_tests_properties(miplib3_misc03_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_misc06_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz
@@ -1782,9 +1784,9 @@ add_coin_test(miplib3_misc06_cbc_standard cbc
 
 set_tests_properties(miplib3_misc06_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_misc06_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 12850.8607")
-set_tests_properties(miplib3_misc06_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_misc06_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_cbc.log "Optimal objective <number>" 12850.8607 1e-6)
+set_tests_properties(miplib3_misc06_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_misc07_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz
@@ -1793,9 +1795,9 @@ add_coin_test(miplib3_misc07_cbc_standard cbc
 
 set_tests_properties(miplib3_misc07_cbc_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_misc07_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 2810")
-set_tests_properties(miplib3_misc07_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_misc07_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_cbc.log "Optimal objective <number>" 2810 1e-6)
+set_tests_properties(miplib3_misc07_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_mitre_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz
@@ -1804,9 +1806,9 @@ add_coin_test(miplib3_mitre_cbc_standard cbc
 
 set_tests_properties(miplib3_mitre_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mitre_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 115155")
-set_tests_properties(miplib3_mitre_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_mitre_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_cbc.log "Optimal objective <number>" 115155 1e-6)
+set_tests_properties(miplib3_mitre_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_mkc_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz
@@ -1814,10 +1816,11 @@ add_coin_test(miplib3_mkc_cbc_standard cbc
               ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_cbc.log)
 
 set_tests_properties(miplib3_mkc_cbc_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_mkc_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -553.75") # not optimal - has stated in the miplib3 report
-set_tests_properties(miplib3_mkc_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+set_tests_properties(miplib3_mkc_cbc_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+
+# not optimal - has stated in the miplib3 report
+create_log_analysis(miplib3_mkc_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_cbc.log "Optimal objective <number>" -553.75 1e-6)
+set_tests_properties(miplib3_mkc_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
 
 add_coin_test(miplib3_mod008_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz
@@ -1826,9 +1829,9 @@ add_coin_test(miplib3_mod008_cbc_standard cbc
 
 set_tests_properties(miplib3_mod008_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mod008_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 307")
-set_tests_properties(miplib3_mod008_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_mod008_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_cbc.log "Optimal objective <number>" 307 1e-6)
+set_tests_properties(miplib3_mod008_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_mod010_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz
@@ -1837,9 +1840,9 @@ add_coin_test(miplib3_mod010_cbc_standard cbc
 
 set_tests_properties(miplib3_mod010_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_mod010_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 6548")
-set_tests_properties(miplib3_mod010_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_mod010_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_cbc.log "Optimal objective <number>" 6548 1e-6)
+set_tests_properties(miplib3_mod010_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_mod011_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz
@@ -1848,9 +1851,9 @@ add_coin_test(miplib3_mod011_cbc_standard cbc
 
 set_tests_properties(miplib3_mod011_cbc_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_mod011_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -54558535")
-set_tests_properties(miplib3_mod011_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_mod011_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_cbc.log "Optimal objective <number>" -54558535 1e-6)
+set_tests_properties(miplib3_mod011_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_modglob_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz
@@ -1859,9 +1862,9 @@ add_coin_test(miplib3_modglob_cbc_standard cbc
 
 set_tests_properties(miplib3_modglob_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_modglob_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 20740508")
-set_tests_properties(miplib3_modglob_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_modglob_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_cbc.log "Optimal objective <number>" 20740508 1e-6)
+set_tests_properties(miplib3_modglob_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_noswot_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz
@@ -1870,9 +1873,9 @@ add_coin_test(miplib3_noswot_cbc_standard cbc
 
 set_tests_properties(miplib3_noswot_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_noswot_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -43")
-set_tests_properties(miplib3_noswot_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_noswot_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_cbc.log "Optimal objective <number>" -43 1e-6)
+set_tests_properties(miplib3_noswot_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_nw04_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz
@@ -1881,9 +1884,9 @@ add_coin_test(miplib3_nw04_cbc_standard cbc
 
 set_tests_properties(miplib3_nw04_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_nw04_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 16862")
-set_tests_properties(miplib3_nw04_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_nw04_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_cbc.log "Optimal objective <number>" 16862 1e-6)
+set_tests_properties(miplib3_nw04_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_p0033_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz
@@ -1892,9 +1895,9 @@ add_coin_test(miplib3_p0033_cbc_standard cbc
 
 set_tests_properties(miplib3_p0033_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0033_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 3089")
-set_tests_properties(miplib3_p0033_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_p0033_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_cbc.log "Optimal objective <number>" 3089 1e-6)
+set_tests_properties(miplib3_p0033_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_p0201_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz
@@ -1903,9 +1906,9 @@ add_coin_test(miplib3_p0201_cbc_standard cbc
 
 set_tests_properties(miplib3_p0201_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0201_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 7615")
-set_tests_properties(miplib3_p0201_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_p0201_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_cbc.log "Optimal objective <number>" 7615 1e-6)
+set_tests_properties(miplib3_p0201_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_p0282_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz
@@ -1914,9 +1917,9 @@ add_coin_test(miplib3_p0282_cbc_standard cbc
 
 set_tests_properties(miplib3_p0282_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0282_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 258411")
-set_tests_properties(miplib3_p0282_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_p0282_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_cbc.log "Optimal objective <number>" 258411 1e-6)
+set_tests_properties(miplib3_p0282_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_p0548_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz
@@ -1925,9 +1928,9 @@ add_coin_test(miplib3_p0548_cbc_standard cbc
 
 set_tests_properties(miplib3_p0548_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p0548_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 8691")
-set_tests_properties(miplib3_p0548_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_p0548_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_cbc.log "Optimal objective <number>" 8691 1e-6)
+set_tests_properties(miplib3_p0548_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_p2756_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz
@@ -1936,9 +1939,9 @@ add_coin_test(miplib3_p2756_cbc_standard cbc
 
 set_tests_properties(miplib3_p2756_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_p2756_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 3124")
-set_tests_properties(miplib3_p2756_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_p2756_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_cbc.log "Optimal objective <number>" 3124 1e-6)
+set_tests_properties(miplib3_p2756_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_pk1_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz
@@ -1947,9 +1950,9 @@ add_coin_test(miplib3_pk1_cbc_standard cbc
 
 set_tests_properties(miplib3_pk1_cbc_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_pk1_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 11.0")
-set_tests_properties(miplib3_pk1_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_pk1_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_cbc.log "Optimal objective <number>" 11.0 1e-6)
+set_tests_properties(miplib3_pk1_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_pp08aCUTS_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz
@@ -1958,9 +1961,9 @@ add_coin_test(miplib3_pp08aCUTS_cbc_standard cbc
 
 set_tests_properties(miplib3_pp08aCUTS_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_pp08aCUTS_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 7350.0")
-set_tests_properties(miplib3_pp08aCUTS_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_pp08aCUTS_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_cbc.log "Optimal objective <number>" 7350.0 1e-6)
+set_tests_properties(miplib3_pp08aCUTS_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_pp08a_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz
@@ -1969,9 +1972,9 @@ add_coin_test(miplib3_pp08a_cbc_standard cbc
 
 set_tests_properties(miplib3_pp08a_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_pp08a_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 7350.0")
-set_tests_properties(miplib3_pp08a_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_pp08a_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_cbc.log "Optimal objective <number>" 7350.0 1e-6)
+set_tests_properties(miplib3_pp08a_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_qiu_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz
@@ -1980,9 +1983,9 @@ add_coin_test(miplib3_qiu_cbc_standard cbc
 
 set_tests_properties(miplib3_qiu_cbc_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_qiu_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective -132.873137")
-set_tests_properties(miplib3_qiu_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_qiu_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_cbc.log "Optimal objective <number>" -132.873137 1e-6)
+set_tests_properties(miplib3_qiu_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_qnet1_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz
@@ -1991,9 +1994,9 @@ add_coin_test(miplib3_qnet1_cbc_standard cbc
 
 set_tests_properties(miplib3_qnet1_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_qnet1_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 16029.692681")
-set_tests_properties(miplib3_qnet1_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_qnet1_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_cbc.log "Optimal objective <number>" 16029.692681 1e-6)
+set_tests_properties(miplib3_qnet1_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_qnet1_o_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz
@@ -2002,9 +2005,9 @@ add_coin_test(miplib3_qnet1_o_cbc_standard cbc
 
 set_tests_properties(miplib3_qnet1_o_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_qnet1_o_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 16029.692681")
-set_tests_properties(miplib3_qnet1_o_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_qnet1_o_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_cbc.log "Optimal objective <number>" 16029.692681 1e-6)
+set_tests_properties(miplib3_qnet1_o_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_rentacar_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz
@@ -2013,9 +2016,9 @@ add_coin_test(miplib3_rentacar_cbc_standard cbc
 
 set_tests_properties(miplib3_rentacar_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_rentacar_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 30356761")
-set_tests_properties(miplib3_rentacar_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_rentacar_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_cbc.log "Optimal objective <number>" 30356761 1e-6)
+set_tests_properties(miplib3_rentacar_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_rgn_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz
@@ -2024,9 +2027,9 @@ add_coin_test(miplib3_rgn_cbc_standard cbc
 
 set_tests_properties(miplib3_rgn_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_rgn_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 82.1999")
-set_tests_properties(miplib3_rgn_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_rgn_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_cbc.log "Optimal objective <number>" 82.1999 1e-6)
+set_tests_properties(miplib3_rgn_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_rout_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz
@@ -2035,9 +2038,9 @@ add_coin_test(miplib3_rout_cbc_standard cbc
 
 set_tests_properties(miplib3_rout_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_rout_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 1077.56")
-set_tests_properties(miplib3_rout_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_rout_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_rout_cbc.log "Optimal objective <number>" 1077.56 1e-6)
+set_tests_properties(miplib3_rout_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_set1ch_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz
@@ -2046,9 +2049,9 @@ add_coin_test(miplib3_set1ch_cbc_standard cbc
 
 set_tests_properties(miplib3_set1ch_cbc_standard PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_set1ch_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 54537.75")
-set_tests_properties(miplib3_set1ch_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_set1ch_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_cbc.log "Optimal objective <number>" 54537.75 1e-6)
+set_tests_properties(miplib3_set1ch_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
 
 add_coin_test(miplib3_seymour_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz
@@ -2056,10 +2059,11 @@ add_coin_test(miplib3_seymour_cbc_standard cbc
               ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_cbc.log)
 
 set_tests_properties(miplib3_seymour_cbc_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_seymour_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 423") # not optimal - has stated in the miplib3 report
-set_tests_properties(miplib3_seymour_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+set_tests_properties(miplib3_seymour_cbc_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+
+# not optimal - has stated in the miplib3 report
+create_log_analysis(miplib3_seymour_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_cbc.log "Optimal objective <number>" 423 1e-6)
+set_tests_properties(miplib3_seymour_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
 
 add_coin_test(miplib3_stein27_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz
@@ -2068,9 +2072,9 @@ add_coin_test(miplib3_stein27_cbc_standard cbc
 
 set_tests_properties(miplib3_stein27_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_stein27_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 18")
-set_tests_properties(miplib3_stein27_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_stein27_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_cbc.log "Optimal objective <number>" 18 1e-6)
+set_tests_properties(miplib3_stein27_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_stein45_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz
@@ -2079,9 +2083,9 @@ add_coin_test(miplib3_stein45_cbc_standard cbc
 
 set_tests_properties(miplib3_stein45_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_stein45_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 30")
-set_tests_properties(miplib3_stein45_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_stein45_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_cbc.log "Optimal objective <number>" 30 1e-6)
+set_tests_properties(miplib3_stein45_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_swath_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz
@@ -2089,10 +2093,11 @@ add_coin_test(miplib3_swath_cbc_standard cbc
               ${CMAKE_BINARY_DIR}/tests/miplib3_swath_cbc.log)
 
 set_tests_properties(miplib3_swath_cbc_standard PROPERTIES TIMEOUT 3000)
-set_tests_properties(miplib3_swath_cbc_standard PROPERTIES LABELS "MPS;LONG")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 497.603") # not optimal - has stated in the miplib3 report
-set_tests_properties(miplib3_swath_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+set_tests_properties(miplib3_swath_cbc_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+
+# not optimal - has stated in the miplib3 report
+create_log_analysis(miplib3_swath_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_swath_cbc.log "Optimal objective <number>" 497.603 1e-6)
+set_tests_properties(miplib3_swath_cbc_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
 
 add_coin_test(miplib3_vpm1_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz
@@ -2101,9 +2106,9 @@ add_coin_test(miplib3_vpm1_cbc_standard cbc
 
 set_tests_properties(miplib3_vpm1_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_vpm1_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 20")
-set_tests_properties(miplib3_vpm1_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_vpm1_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_cbc.log "Optimal objective <number>" 20 1e-6)
+set_tests_properties(miplib3_vpm1_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_vpm2_cbc_standard cbc
               ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz
@@ -2112,9 +2117,10 @@ add_coin_test(miplib3_vpm2_cbc_standard cbc
 
 set_tests_properties(miplib3_vpm2_cbc_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib3_vpm2_cbc_standard PROPERTIES LABELS "MPS")
-set(TEST_REGEX "")
-add_regex(TEST_REGEX "Optimal objective 13.75")
-set_tests_properties(miplib3_vpm2_cbc_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+create_log_analysis(miplib3_vpm2_cbc_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_cbc.log "Optimal objective <number>" 13.75 1e-6)
+set_tests_properties(miplib3_vpm2_cbc_standard_01_Analysis PROPERTIES LABELS "MPS")
+
 
 if (CBC_BUILD_CBC_GENERIC) 
   #
@@ -2529,9 +2535,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_forplan_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_forplan_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -664.218(73953)?")
-  set_tests_properties(netlib_forplan_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_forplan_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_forplan_cbc-generic.log "Optimal objective <number>" -664.21873953 1e-6)
+  set_tests_properties(netlib_forplan_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_ship08s_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship08s.mps.gz
@@ -2540,9 +2546,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_ship08s_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_ship08s_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1920098.21(05)?")
-  set_tests_properties(netlib_ship08s_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_ship08s_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship08s_cbc-generic.log "Optimal objective <number>" 1920098.2105 1e-6)
+  set_tests_properties(netlib_ship08s_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_fit1d_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit1d.mps.gz
@@ -2551,9 +2557,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_fit1d_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_fit1d_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -9146.378092(4)?")
-  set_tests_properties(netlib_fit1d_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_fit1d_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_fit1d_cbc-generic.log "Optimal objective <number>" -9146.3780924 1e-6)
+  set_tests_properties(netlib_fit1d_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_brandy_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/brandy.mps.gz
@@ -2562,9 +2568,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_brandy_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_brandy_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1518.509896(5)?")
-  set_tests_properties(netlib_brandy_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_brandy_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_brandy_cbc-generic.log "Optimal objective <number>" 1518.5098965 1e-6)
+  set_tests_properties(netlib_brandy_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scfxm1_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scfxm1.mps.gz
@@ -2573,9 +2579,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scfxm1_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scfxm1_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 18416.7590(28)?")
-  set_tests_properties(netlib_scfxm1_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scfxm1_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scfxm1_cbc-generic.log "Optimal objective <number>" 18416.759028 1e-6)
+  set_tests_properties(netlib_scfxm1_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_grow22_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/grow22.mps.gz
@@ -2584,9 +2590,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_grow22_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_grow22_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -160834336(.48)?")
-  set_tests_properties(netlib_grow22_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_grow22_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_grow22_cbc-generic.log "Optimal objective <number>" -160834336.48 1e-6)
+  set_tests_properties(netlib_grow22_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_bandm_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bandm.mps.gz
@@ -2595,9 +2601,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_bandm_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_bandm_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -158.628018(45)?")
-  set_tests_properties(netlib_bandm_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_bandm_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_bandm_cbc-generic.log "Optimal objective <number>" -158.62801845 1e-6)
+  set_tests_properties(netlib_bandm_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_fit1p_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit1p.mps.gz
@@ -2606,9 +2612,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_fit1p_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_fit1p_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 9146.378092(4)?")
-  set_tests_properties(netlib_fit1p_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_fit1p_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_fit1p_cbc-generic.log "Optimal objective <number>" 9146.3780924 1e-6)
+  set_tests_properties(netlib_fit1p_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_standata_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/standata.mps.gz
@@ -2617,9 +2623,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_standata_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_standata_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1257.6995(000)?")
-  set_tests_properties(netlib_standata_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_standata_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_standata_cbc-generic.log "Optimal objective <number>" 1257.6995000 1e-6)
+  set_tests_properties(netlib_standata_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_pilot4_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilot4.mps.gz
@@ -2628,9 +2634,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_pilot4_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_pilot4_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -2581.13926(41)?")
-  set_tests_properties(netlib_pilot4_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_pilot4_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_pilot4_cbc-generic.log "Optimal objective <number>" -2581.1392641 1e-6)
+  set_tests_properties(netlib_pilot4_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_stocfor2_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/stocfor2.mps.gz
@@ -2639,9 +2645,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_stocfor2_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_stocfor2_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -39024.4085(38)?")
-  set_tests_properties(netlib_stocfor2_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_stocfor2_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_stocfor2_cbc-generic.log "Optimal objective <number>" -39024.408538 1e-6)
+  set_tests_properties(netlib_stocfor2_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_sctap1_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sctap1.mps.gz
@@ -2650,9 +2656,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_sctap1_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_sctap1_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1412.25(00000)?")
-  set_tests_properties(netlib_sctap1_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_sctap1_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sctap1_cbc-generic.log "Optimal objective <number>" 1412.2500000 1e-6)
+  set_tests_properties(netlib_sctap1_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scrs8_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scrs8.mps.gz
@@ -2661,9 +2667,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scrs8_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scrs8_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 904.29(998619)?")
-  set_tests_properties(netlib_scrs8_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scrs8_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scrs8_cbc-generic.log "Optimal objective <number>" 904.29998619 1e-6)
+  set_tests_properties(netlib_scrs8_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_sctap2_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sctap2.mps.gz
@@ -2672,9 +2678,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_sctap2_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_sctap2_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1724.80714(29)?")
-  set_tests_properties(netlib_sctap2_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_sctap2_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sctap2_cbc-generic.log "Optimal objective <number>" 1724.8071429 1e-6)
+  set_tests_properties(netlib_sctap2_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_pilot87_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilot87.mps.gz
@@ -2683,9 +2689,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_pilot87_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_pilot87_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 301.710(72827)?")
-  set_tests_properties(netlib_pilot87_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_pilot87_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_pilot87_cbc-generic.log "Optimal objective <number>" 301.71072827 1e-6)
+  set_tests_properties(netlib_pilot87_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_greenbea_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/greenbea.mps.gz
@@ -2694,9 +2700,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_greenbea_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_greenbea_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -72462405.9(08)?")
-  set_tests_properties(netlib_greenbea_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_greenbea_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_greenbea_cbc-generic.log "Optimal objective <number>" -72462405.908 1e-6)
+  set_tests_properties(netlib_greenbea_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_woodw_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/woodw.mps.gz
@@ -2705,9 +2711,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_woodw_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_woodw_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1.304476333(1)?")
-  set_tests_properties(netlib_woodw_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_woodw_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_woodw_cbc-generic.log "Optimal objective <number>" 1.3044763331 1e-6)
+  set_tests_properties(netlib_woodw_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_recipe_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/recipe.mps.gz
@@ -2716,9 +2722,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_recipe_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_recipe_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -266.616(00000)?")
-  set_tests_properties(netlib_recipe_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_recipe_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_recipe_cbc-generic.log "Optimal objective <number>" -266.61600000 1e-6)
+  set_tests_properties(netlib_recipe_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_share1b_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/share1b.mps.gz
@@ -2727,9 +2733,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_share1b_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_share1b_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -76589.3185(79)?")
-  set_tests_properties(netlib_share1b_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_share1b_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_share1b_cbc-generic.log "Optimal objective <number>" -76589.318579 1e-6)
+  set_tests_properties(netlib_share1b_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_tuff_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/tuff.mps.gz
@@ -2738,9 +2744,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_tuff_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_tuff_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 0.292147765(09)?")
-  set_tests_properties(netlib_tuff_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_tuff_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_tuff_cbc-generic.log "Optimal objective <number>" 0.29214776509 1e-6)
+  set_tests_properties(netlib_tuff_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_share2b_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/share2b.mps.gz
@@ -2749,9 +2755,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_share2b_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_share2b_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -415.7322407(4)?")
-  set_tests_properties(netlib_share2b_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_share2b_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_share2b_cbc-generic.log "Optimal objective <number>" -415.73224074 1e-6)
+  set_tests_properties(netlib_share2b_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_bore3d_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bore3d.mps.gz
@@ -2760,9 +2766,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_bore3d_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_bore3d_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1373.080394(2)?")
-  set_tests_properties(netlib_bore3d_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_bore3d_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_bore3d_cbc-generic.log "Optimal objective <number>" 1373.0803942 1e-6)
+  set_tests_properties(netlib_bore3d_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_d2q06c_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/d2q06c.mps.gz
@@ -2771,9 +2777,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_d2q06c_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_d2q06c_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 122784.236(15)?")
-  set_tests_properties(netlib_d2q06c_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_d2q06c_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_d2q06c_cbc-generic.log "Optimal objective <number>" 122784.23615 1e-6)
+  set_tests_properties(netlib_d2q06c_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_sc50b_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc50b.mps.gz
@@ -2782,9 +2788,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_sc50b_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_sc50b_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -70")
-  set_tests_properties(netlib_sc50b_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_sc50b_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sc50b_cbc-generic.log "Optimal objective <number>" -70 1e-6)
+  set_tests_properties(netlib_sc50b_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_pilot_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilot.mps.gz
@@ -2793,9 +2799,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_pilot_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_pilot_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -557.4043(0007)?")
-  set_tests_properties(netlib_pilot_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_pilot_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_pilot_cbc-generic.log "Optimal objective <number>" -557.40430007 1e-6)
+  set_tests_properties(netlib_pilot_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_bnl1_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bnl1.mps.gz
@@ -2804,9 +2810,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_bnl1_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_bnl1_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1977.6292(856)?")
-  set_tests_properties(netlib_bnl1_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_bnl1_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_bnl1_cbc-generic.log "Optimal objective <number>" 1977.6292856 1e-6)
+  set_tests_properties(netlib_bnl1_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_ship04l_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship04l.mps.gz
@@ -2815,9 +2821,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_ship04l_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_ship04l_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1793324.538(0)?")
-  set_tests_properties(netlib_ship04l_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_ship04l_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship04l_cbc-generic.log "Optimal objective <number>" 1793324.5380 1e-6)
+  set_tests_properties(netlib_ship04l_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_sc105_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc105.mps.gz
@@ -2826,9 +2832,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_sc105_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_sc105_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -52.20206121(2)?")
-  set_tests_properties(netlib_sc105_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_sc105_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sc105_cbc-generic.log "Optimal objective <number>" -52.202061212 1e-6)
+  set_tests_properties(netlib_sc105_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_boeing2_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/boeing2.mps.gz
@@ -2837,9 +2843,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_boeing2_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_boeing2_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -315.018728(02)?")
-  set_tests_properties(netlib_boeing2_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_boeing2_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_boeing2_cbc-generic.log "Optimal objective <number>" -315.01872802 1e-6)
+  set_tests_properties(netlib_boeing2_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_nesm_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/nesm.mps.gz
@@ -2848,9 +2854,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_nesm_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_nesm_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 14076073.0(35)?")
-  set_tests_properties(netlib_nesm_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_nesm_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_nesm_cbc-generic.log "Optimal objective <number>" 14076073.035 1e-6)
+  set_tests_properties(netlib_nesm_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_sc205_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc205.mps.gz
@@ -2859,9 +2865,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_sc205_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_sc205_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -52.202061(212)?")
-  set_tests_properties(netlib_sc205_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_sc205_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sc205_cbc-generic.log "Optimal objective <number>" -52.202061212 1e-6)
+  set_tests_properties(netlib_sc205_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_finnis_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/finnis.mps.gz
@@ -2870,9 +2876,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_finnis_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_finnis_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 172790.9(6547)?")
-  set_tests_properties(netlib_finnis_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_finnis_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_finnis_cbc-generic.log "Optimal objective <number>" 172790.96547 1e-6)
+  set_tests_properties(netlib_finnis_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_degen2_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/degen2.mps.gz
@@ -2881,20 +2887,20 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_degen2_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_degen2_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -1435.178(0000)?")
-  set_tests_properties(netlib_degen2_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_degen2_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_degen2_cbc-generic.log "Optimal objective <number>" -1435.1780000 1e-6)
+  set_tests_properties(netlib_degen2_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_maros-r7_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/maros-r7.mps
-                ${CMAKE_BINARY_DIR}/tests/netlib_maros-r7_cbc-generic.log
-                ${CMAKE_BINARY_DIR}/tests/netlib_maros-r7_cbc-generic.out)
+                ${CMAKE_BINARY_DIR}/tests/netlib_maros-r7_cbc-generic.out
+                ${CMAKE_BINARY_DIR}/tests/netlib_maros-r7_cbc-generic.log)
   
   set_tests_properties(netlib_maros-r7_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_maros-r7_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1497185.166(5)?")
-  set_tests_properties(netlib_maros-r7_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_maros-r7_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_maros-r7_cbc-generic.log "Optimal objective <number>" 1497185.1665 1e-6)
+  set_tests_properties(netlib_maros-r7_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_ship04s_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship04s.mps.gz
@@ -2903,9 +2909,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_ship04s_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_ship04s_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1798714.7(004)?")
-  set_tests_properties(netlib_ship04s_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_ship04s_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship04s_cbc-generic.log "Optimal objective <number>" 1798714.7004 1e-6)
+  set_tests_properties(netlib_ship04s_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_wood1p_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/wood1p.mps.gz
@@ -2914,9 +2920,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_wood1p_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_wood1p_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1.44290241(16)?")
-  set_tests_properties(netlib_wood1p_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_wood1p_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_wood1p_cbc-generic.log "Optimal objective <number>" 1.4429024116 1e-6)
+  set_tests_properties(netlib_wood1p_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_lotfi_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/lotfi.mps.gz
@@ -2925,20 +2931,20 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_lotfi_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_lotfi_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -25.26470606(2)?")
-  set_tests_properties(netlib_lotfi_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   
-  add_coin_test(netlib_gfrd_mps_cbc-generic_standard cbc-generic
+  create_log_analysis(netlib_lotfi_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_lotfi_cbc-generic.log "Optimal objective <number>" -25.264706062 1e-6)
+  set_tests_properties(netlib_lotfi_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
+  
+  add_coin_test(netlib_gfrd-pnc_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/gfrd-pnc.mps
                 ${CMAKE_BINARY_DIR}/tests/netlib_gfrd-pnc_cbc-generic.out
                 ${CMAKE_BINARY_DIR}/tests/netlib_gfrd-pnc_cbc-generic.log)
   
-  set_tests_properties(netlib_gfrd_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
-  set_tests_properties(netlib_gfrd_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 6902235.9(995)?")
-  set_tests_properties(netlib_gfrd_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(netlib_gfrd-pnc_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
+  set_tests_properties(netlib_gfrd-pnc_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
+  
+  create_log_analysis(netlib_gfrd-pnc_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_gfrd-pnc_cbc-generic.log "Optimal objective <number>" 6902235.9995 1e-6)
+  set_tests_properties(netlib_gfrd-pnc_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_etamacro_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/etamacro.mps.gz
@@ -2947,9 +2953,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_etamacro_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_etamacro_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -755.7152(1774)?")
-  set_tests_properties(netlib_etamacro_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_etamacro_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_etamacro_cbc-generic.log "Optimal objective <number>" -755.71521774 1e-6)
+  set_tests_properties(netlib_etamacro_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_grow7_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/grow7.mps.gz
@@ -2958,9 +2964,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_grow7_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_grow7_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -47787811.81(5)?")
-  set_tests_properties(netlib_grow7_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_grow7_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_grow7_cbc-generic.log "Optimal objective <number>" -47787811.815 1e-6)
+  set_tests_properties(netlib_grow7_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_dfl001_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/dfl001.mps.gz
@@ -2968,11 +2974,11 @@ if (CBC_BUILD_CBC_GENERIC)
                 ${CMAKE_BINARY_DIR}/tests/netlib_dfl001_cbc-generic.log)
   
   set_tests_properties(netlib_dfl001_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
-  set_tests_properties(netlib_dfl001_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set_tests_properties(netlib_dfl001_mps_cbc-generic_standard PROPERTIES LABELS "MPS;WARNING")
   # (there's a ** in the readme file in the netlib website)
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 112664396.0(5)?") # Cbc-Generic value
-  set_tests_properties(netlib_dfl001_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_dfl001_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_dfl001_cbc-generic.log "Optimal objective <number>" 112664396.05 1e-6)
+  set_tests_properties(netlib_dfl001_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;WARNING")
   
   add_coin_test(netlib_agg_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg.mps.gz
@@ -2981,9 +2987,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_agg_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_agg_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -35991767.2(87)?")
-  set_tests_properties(netlib_agg_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_agg_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_agg_cbc-generic.log "Optimal objective <number>" -35991767.287 1e-6)
+  set_tests_properties(netlib_agg_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_standgub_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/standgub.mps.gz
@@ -2991,11 +2997,11 @@ if (CBC_BUILD_CBC_GENERIC)
                 ${CMAKE_BINARY_DIR}/tests/netlib_standgub_cbc-generic.log)
   
   set_tests_properties(netlib_standgub_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
-  set_tests_properties(netlib_standgub_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
+  set_tests_properties(netlib_standgub_mps_cbc-generic_standard PROPERTIES LABELS "MPS;WARNING")
   # Nothing in the readme - Cbc-Generic value
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "1257.6995")
-  set_tests_properties(netlib_standgub_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_standgub_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_standgub_cbc-generic.log "Optimal objective <number>" 1257.6995 1e-6)
+  set_tests_properties(netlib_standgub_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;WARNING")
   
   add_coin_test(netlib_ship12l_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship12l.mps.gz
@@ -3004,9 +3010,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_ship12l_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_ship12l_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1470187.919(3)?")
-  set_tests_properties(netlib_ship12l_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_ship12l_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship12l_cbc-generic.log "Optimal objective <number>" 1470187.9193 1e-6)
+  set_tests_properties(netlib_ship12l_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_standmps_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/standmps.mps.gz
@@ -3015,9 +3021,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_standmps_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_standmps_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1406.0175(000)?")
-  set_tests_properties(netlib_standmps_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_standmps_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_standmps_cbc-generic.log "Optimal objective <number>" 1406.0175000 1e-6)
+  set_tests_properties(netlib_standmps_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scagr25_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scagr25.mps.gz
@@ -3026,9 +3032,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scagr25_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scagr25_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -14753433.06(1)?")
-  set_tests_properties(netlib_scagr25_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scagr25_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scagr25_cbc-generic.log "Optimal objective <number>" -14753433.061 1e-6)
+  set_tests_properties(netlib_scagr25_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_capri_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/capri.mps.gz
@@ -3037,9 +3043,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_capri_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_capri_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 2690.01291(38)?")
-  set_tests_properties(netlib_capri_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_capri_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_capri_cbc-generic.log "Optimal objective <number>" 2690.0129138 1e-6)
+  set_tests_properties(netlib_capri_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_cycle_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/cycle.mps.gz
@@ -3048,9 +3054,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_cycle_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_cycle_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -5.22639302(49)?")
-  set_tests_properties(netlib_cycle_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_cycle_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_cycle_cbc-generic.log "Optimal objective <number>" -5.2263930249 1e-6)
+  set_tests_properties(netlib_cycle_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_greenbeb_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/greenbeb.mps.gz
@@ -3059,9 +3065,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_greenbeb_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_greenbeb_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -4302147.6065")
-  set_tests_properties(netlib_greenbeb_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_greenbeb_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_greenbeb_cbc-generic.log "Optimal objective <number>" -4302147.6065 1e-6)
+  set_tests_properties(netlib_greenbeb_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_agg2_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg2.mps.gz
@@ -3070,9 +3076,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_agg2_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_agg2_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -20239252.3(56)?")
-  set_tests_properties(netlib_agg2_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_agg2_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_agg2_cbc-generic.log "Optimal objective <number>" -20239252.356 1e-6)
+  set_tests_properties(netlib_agg2_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_stair_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/stair.mps.gz
@@ -3081,9 +3087,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_stair_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_stair_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -251.266951(19)?")
-  set_tests_properties(netlib_stair_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_stair_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_stair_cbc-generic.log "Optimal objective <number>" -251.26695119 1e-6)
+  set_tests_properties(netlib_stair_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_shell_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/shell.mps.gz
@@ -3092,9 +3098,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_shell_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_shell_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1208825346(.0)?")
-  set_tests_properties(netlib_shell_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_shell_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_shell_cbc-generic.log "Optimal objective <number>" 1208825346.0 1e-6)
+  set_tests_properties(netlib_shell_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_sierra_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sierra.mps.gz
@@ -3103,9 +3109,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_sierra_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_sierra_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 15394362.18(4)?")
-  set_tests_properties(netlib_sierra_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_sierra_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sierra_cbc-generic.log "Optimal objective <number>" 15394362.184 1e-6)
+  set_tests_properties(netlib_sierra_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_afiro_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/afiro.mps.gz
@@ -3114,9 +3120,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_afiro_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_afiro_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -464.753142(86)?")
-  set_tests_properties(netlib_afiro_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_afiro_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_afiro_cbc-generic.log "Optimal objective <number>" -464.75314286 1e-6)
+  set_tests_properties(netlib_afiro_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scsd1_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd1.mps.gz
@@ -3125,9 +3131,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scsd1_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scsd1_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 8.666666674(3)?")
-  set_tests_properties(netlib_scsd1_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scsd1_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scsd1_cbc-generic.log "Optimal objective <number>" 8.6666666743 1e-6)
+  set_tests_properties(netlib_scsd1_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scsd8_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd8.mps.gz
@@ -3136,9 +3142,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scsd8_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scsd8_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 904.9999999(3)?")
-  set_tests_properties(netlib_scsd8_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scsd8_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scsd8_cbc-generic.log "Optimal objective <number>" 904.99999993 1e-6)
+  set_tests_properties(netlib_scsd8_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_ship08l_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship08l.mps.gz
@@ -3147,9 +3153,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_ship08l_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_ship08l_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1909055.211(4)?")
-  set_tests_properties(netlib_ship08l_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_ship08l_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship08l_cbc-generic.log "Optimal objective <number>" 1909055.2114 1e-6)
+  set_tests_properties(netlib_ship08l_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_25fv47_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/25fv47.mps.gz
@@ -3158,9 +3164,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_25fv47_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_25fv47_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 5501.845888(3)?")
-  set_tests_properties(netlib_25fv47_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_25fv47_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_25fv47_cbc-generic.log "Optimal objective <number>" 5501.8458883 1e-6)
+  set_tests_properties(netlib_25fv47_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_czprob_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/czprob.mps.gz
@@ -3169,9 +3175,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_czprob_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_czprob_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 2185196.69(89)?")
-  set_tests_properties(netlib_czprob_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_czprob_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_czprob_cbc-generic.log "Optimal objective <number>" 2185196.6989 1e-6)
+  set_tests_properties(netlib_czprob_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_adlittle_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/adlittle.mps.gz
@@ -3180,9 +3186,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_adlittle_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_adlittle_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 225494.963(16)?")
-  set_tests_properties(netlib_adlittle_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_adlittle_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_adlittle_cbc-generic.log "Optimal objective <number>" 225494.96316 1e-6)
+  set_tests_properties(netlib_adlittle_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_d6cube_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/d6cube.mps.gz
@@ -3191,9 +3197,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_d6cube_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_d6cube_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 315.491666(67)?")
-  set_tests_properties(netlib_d6cube_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_d6cube_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_d6cube_cbc-generic.log "Optimal objective <number>" 315.49166667 1e-6)
+  set_tests_properties(netlib_d6cube_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scorpion_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scorpion.mps.gz
@@ -3202,9 +3208,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scorpion_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scorpion_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1878.12482(27)?")
-  set_tests_properties(netlib_scorpion_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scorpion_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scorpion_cbc-generic.log "Optimal objective <number>" 1878.1248227 1e-6)
+  set_tests_properties(netlib_scorpion_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_sctap3_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sctap3.mps.gz
@@ -3213,9 +3219,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_sctap3_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_sctap3_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1424(.0)?")
-  set_tests_properties(netlib_sctap3_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_sctap3_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sctap3_cbc-generic.log "Optimal objective <number>" 1424.0 1e-6)
+  set_tests_properties(netlib_sctap3_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_seba_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/seba.mps.gz
@@ -3224,9 +3230,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_seba_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_seba_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 15711.6")
-  set_tests_properties(netlib_seba_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_seba_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_seba_cbc-generic.log "Optimal objective <number>" 15711.6 1e-6)
+  set_tests_properties(netlib_seba_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_modszk1_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/modszk1.mps.gz
@@ -3235,9 +3241,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_modszk1_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_modszk1_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 320.619729(06)?")
-  set_tests_properties(netlib_modszk1_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_modszk1_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_modszk1_cbc-generic.log "Optimal objective <number>" 320.61972906 1e-6)
+  set_tests_properties(netlib_modszk1_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_pilotnov_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/pilotnov.mps.gz
@@ -3246,9 +3252,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_pilotnov_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_pilotnov_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -4497.276188(2)?")
-  set_tests_properties(netlib_pilotnov_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_pilotnov_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_pilotnov_cbc-generic.log "Optimal objective <number>" -4497.2761882 1e-6)
+  set_tests_properties(netlib_pilotnov_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_beaconfd_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/beaconfd.mps.gz
@@ -3257,9 +3263,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_beaconfd_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_beaconfd_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 33592.4858(07)?")
-  set_tests_properties(netlib_beaconfd_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_beaconfd_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_beaconfd_cbc-generic.log "Optimal objective <number>" 33592.485807 1e-6)
+  set_tests_properties(netlib_beaconfd_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_e226_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/e226.mps.gz
@@ -3268,9 +3274,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_e226_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_e226_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -18.751929(066)?")
-  set_tests_properties(netlib_e226_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_e226_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_e226_cbc-generic.log "Optimal objective <number>" -18.751929066 1e-6)
+  set_tests_properties(netlib_e226_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_degen3_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/degen3.mps.gz
@@ -3279,9 +3285,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_degen3_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_degen3_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -987.294(00000)?")
-  set_tests_properties(netlib_degen3_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_degen3_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_degen3_cbc-generic.log "Optimal objective <number>" -987.29400000 1e-6)
+  set_tests_properties(netlib_degen3_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scfxm2_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scfxm2.mps.gz
@@ -3290,9 +3296,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scfxm2_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scfxm2_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 36660.26156(5)?")
-  set_tests_properties(netlib_scfxm2_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scfxm2_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scfxm2_cbc-generic.log "Optimal objective <number>" 36660.261565 1e-6)
+  set_tests_properties(netlib_scfxm2_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_fffff800_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fffff800.mps.gz
@@ -3301,9 +3307,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_fffff800_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_fffff800_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 555679.611(65)?")
-  set_tests_properties(netlib_fffff800_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_fffff800_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_fffff800_cbc-generic.log "Optimal objective <number>" 555679.61165 1e-6)
+  set_tests_properties(netlib_fffff800_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_kb2_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/kb2.mps.gz
@@ -3312,9 +3318,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_kb2_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_kb2_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -1749.9001(299)?")
-  set_tests_properties(netlib_kb2_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_kb2_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_kb2_cbc-generic.log "Optimal objective <number>" -1749.9001299 1e-6)
+  set_tests_properties(netlib_kb2_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_ganges_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ganges.mps.gz
@@ -3323,9 +3329,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_ganges_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_ganges_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -109586.363(56)?")
-  set_tests_properties(netlib_ganges_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_ganges_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ganges_cbc-generic.log "Optimal objective <number>" -109586.36356 1e-6)
+  set_tests_properties(netlib_ganges_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_stocfor1_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/stocfor1.mps.gz
@@ -3334,9 +3340,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_stocfor1_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_stocfor1_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -41131.9762(19)?")
-  set_tests_properties(netlib_stocfor1_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_stocfor1_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_stocfor1_cbc-generic.log "Optimal objective <number>" -41131.976219 1e-6)
+  set_tests_properties(netlib_stocfor1_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scsd6_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scsd6.mps.gz
@@ -3345,9 +3351,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scsd6_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scsd6_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 50.5000000(78)?")
-  set_tests_properties(netlib_scsd6_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scsd6_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scsd6_cbc-generic.log "Optimal objective <number>" 50.500000078 1e-6)
+  set_tests_properties(netlib_scsd6_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_80bau3b_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/80bau3b.mps.gz
@@ -3356,9 +3362,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_80bau3b_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_80bau3b_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 987232.160(72)?")
-  set_tests_properties(netlib_80bau3b_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_80bau3b_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_80bau3b_cbc-generic.log "Optimal objective <number>" 987232.16072 1e-6)
+  set_tests_properties(netlib_80bau3b_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_ship12s_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/ship12s.mps.gz
@@ -3367,9 +3373,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_ship12s_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_ship12s_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1489236.134(4)?")
-  set_tests_properties(netlib_ship12s_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_ship12s_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_ship12s_cbc-generic.log "Optimal objective <number>" 1489236.1344 1e-6)
+  set_tests_properties(netlib_ship12s_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_agg3_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/agg3.mps.gz
@@ -3378,9 +3384,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_agg3_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_agg3_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 10312115.9(35)?")
-  set_tests_properties(netlib_agg3_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_agg3_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_agg3_cbc-generic.log "Optimal objective <number>" 10312115.935 1e-6)
+  set_tests_properties(netlib_agg3_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_maros_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/maros.mps.gz
@@ -3389,9 +3395,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_maros_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_maros_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -58063.7437(01)?")
-  set_tests_properties(netlib_maros_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_maros_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_maros_cbc-generic.log "Optimal objective <number>" -58063.743701 1e-6)
+  set_tests_properties(netlib_maros_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_perold_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/perold.mps.gz
@@ -3400,9 +3406,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_perold_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_perold_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -9380.758(0773)?")
-  set_tests_properties(netlib_perold_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_perold_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_perold_cbc-generic.log "Optimal objective <number>" -9380.7580773 1e-6)
+  set_tests_properties(netlib_perold_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scagr7_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scagr7.mps.gz
@@ -3411,9 +3417,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scagr7_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scagr7_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -2331389.25(48)?")
-  set_tests_properties(netlib_scagr7_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scagr7_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scagr7_cbc-generic.log "Optimal objective <number>" -2331389.2548 1e-6)
+  set_tests_properties(netlib_scagr7_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_scfxm3_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/scfxm3.mps.gz
@@ -3422,9 +3428,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_scfxm3_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_scfxm3_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 54901.25455(0)?")
-  set_tests_properties(netlib_scfxm3_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_scfxm3_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_scfxm3_cbc-generic.log "Optimal objective <number>" 54901.254550 1e-6)
+  set_tests_properties(netlib_scfxm3_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_grow15_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/grow15.mps.gz
@@ -3433,9 +3439,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_grow15_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_grow15_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -106870941(.29)?")
-  set_tests_properties(netlib_grow15_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_grow15_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_grow15_cbc-generic.log "Optimal objective <number>" -106870941.29 1e-6)
+  set_tests_properties(netlib_grow15_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_fit2p_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/fit2p.mps.gz
@@ -3444,9 +3450,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_fit2p_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_fit2p_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 68464.2932(32)?")
-  set_tests_properties(netlib_fit2p_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_fit2p_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_fit2p_cbc-generic.log "Optimal objective <number>" 68464.293232 1e-6)
+  set_tests_properties(netlib_fit2p_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_boeing1_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/boeing1.mps.gz
@@ -3455,9 +3461,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_boeing1_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_boeing1_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -335.2135675(1)?")
-  set_tests_properties(netlib_boeing1_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_boeing1_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_boeing1_cbc-generic.log "Optimal objective <number>" -335.21356751 1e-6)
+  set_tests_properties(netlib_boeing1_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_sc50a_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/sc50a.mps.gz
@@ -3466,9 +3472,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_sc50a_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_sc50a_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -64.5750770(59)?")
-  set_tests_properties(netlib_sc50a_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_sc50a_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_sc50a_cbc-generic.log "Optimal objective <number>" -64.575077059 1e-6)
+  set_tests_properties(netlib_sc50a_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_vtpbase_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/vtpbase.mps.gz
@@ -3477,9 +3483,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_vtpbase_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_vtpbase_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 129831.462(46)?")
-  set_tests_properties(netlib_vtpbase_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_vtpbase_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_vtpbase_cbc-generic.log "Optimal objective <number>" 129831.46246 1e-6)
+  set_tests_properties(netlib_vtpbase_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_blend_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/blend.mps.gz
@@ -3488,9 +3494,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_blend_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_blend_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -30.8121498(46)?")
-  set_tests_properties(netlib_blend_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_blend_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_blend_cbc-generic.log "Optimal objective <number>" -30.812149846 1e-6)
+  set_tests_properties(netlib_blend_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_bnl2_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/bnl2.mps.gz
@@ -3499,9 +3505,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_bnl2_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_bnl2_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1811.23654(04)?")
-  set_tests_properties(netlib_bnl2_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_bnl2_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_bnl2_cbc-generic.log "Optimal objective <number>" 1811.2365404 1e-6)
+  set_tests_properties(netlib_bnl2_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(netlib_israel_mps_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/Netlib/israel.mps.gz
@@ -3510,9 +3516,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(netlib_israel_mps_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(netlib_israel_mps_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -896644.821(86)?")
-  set_tests_properties(netlib_israel_mps_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(netlib_israel_mps_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_israel_cbc-generic.log "Optimal objective <number>" -896644.82186 1e-6)
+  set_tests_properties(netlib_israel_mps_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   #
   # miplib3 tests
@@ -3525,9 +3531,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_10teams_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_10teams_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 924")
-  set_tests_properties(miplib3_10teams_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_10teams_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_10teams_cbc-generic.log "Optimal objective <number>" 924 1e-6)
+  set_tests_properties(miplib3_10teams_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_air03_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air03.gz
@@ -3536,9 +3542,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_air03_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_air03_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 340160")
-  set_tests_properties(miplib3_air03_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_air03_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_air03_cbc-generic.log "Optimal objective <number>" 340160 1e-6)
+  set_tests_properties(miplib3_air03_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_air04_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air04.gz
@@ -3547,9 +3553,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_air04_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_air04_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 56137")
-  set_tests_properties(miplib3_air04_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_air04_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_air04_cbc-generic.log "Optimal objective <number>" 56137 1e-6)
+  set_tests_properties(miplib3_air04_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_air05_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/air05.gz
@@ -3558,9 +3564,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_air05_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_air05_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 26374")
-  set_tests_properties(miplib3_air05_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_air05_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_air05_cbc-generic.log "Optimal objective <number>" 26374 1e-6)
+  set_tests_properties(miplib3_air05_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_arki001_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/arki001.gz
@@ -3568,10 +3574,11 @@ if (CBC_BUILD_CBC_GENERIC)
                 ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_cbc-generic.log)
   
   set_tests_properties(miplib3_arki001_cbc-generic_standard PROPERTIES TIMEOUT 3000)
-  set_tests_properties(miplib3_arki001_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 7580813.0459") # Not optimal - has stated in the miplib3 report
-  set_tests_properties(miplib3_arki001_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(miplib3_arki001_cbc-generic_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+  
+  # Not optimal - has stated in the miplib3 report
+  create_log_analysis(miplib3_arki001_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_arki001_cbc-generic.log "Optimal objective <number>" 7580813.0459 1e-6)
+  set_tests_properties(miplib3_arki001_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
   
   add_coin_test(miplib3_bell3a_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell3a.gz
@@ -3580,9 +3587,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_bell3a_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_bell3a_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 878430.32")
-  set_tests_properties(miplib3_bell3a_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_bell3a_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_bell3a_cbc-generic.log "Optimal objective <number>" 878430.32 1e-6)
+  set_tests_properties(miplib3_bell3a_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_bell5_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/bell5.gz
@@ -3591,9 +3598,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_bell5_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_bell5_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 8966406.49")
-  set_tests_properties(miplib3_bell5_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_bell5_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_bell5_cbc-generic.log "Optimal objective <number>" 8966406.49 1e-6)
+  set_tests_properties(miplib3_bell5_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_blend2_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/blend2.gz
@@ -3602,9 +3609,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_blend2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_blend2_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 7.598985")
-  set_tests_properties(miplib3_blend2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_blend2_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_blend2_cbc-generic.log "Optimal objective <number>" 7.598985 1e-6)
+  set_tests_properties(miplib3_blend2_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_cap6000_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/cap6000.gz
@@ -3613,9 +3620,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_cap6000_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_cap6000_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -2451377")
-  set_tests_properties(miplib3_cap6000_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_cap6000_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_cbc-generic.log "Optimal objective <number>" -2451377 1e-6)
+  set_tests_properties(miplib3_cap6000_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_dano3mip_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dano3mip.gz
@@ -3623,10 +3630,11 @@ if (CBC_BUILD_CBC_GENERIC)
                 ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_cbc-generic.log)
   
   set_tests_properties(miplib3_dano3mip_cbc-generic_standard PROPERTIES TIMEOUT 3000)
-  set_tests_properties(miplib3_dano3mip_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 728.1111") # not optimal - has stated in the miplib3 report
-  set_tests_properties(miplib3_dano3mip_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(miplib3_dano3mip_cbc-generic_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+  
+  # not optimal - has stated in the miplib3 report
+  create_log_analysis(miplib3_dano3mip_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_dano3mip_cbc-generic.log "Optimal objective <number>" 728.1111 1e-6)
+  set_tests_properties(miplib3_dano3mip_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
   
   add_coin_test(miplib3_danoint_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/danoint.gz
@@ -3635,9 +3643,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_danoint_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_danoint_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 65.67")
-  set_tests_properties(miplib3_danoint_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_danoint_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_danoint_cbc-generic.log "Optimal objective <number>" 65.67 1e-6)
+  set_tests_properties(miplib3_danoint_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_dcmulti_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dcmulti.gz
@@ -3646,9 +3654,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_dcmulti_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_dcmulti_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 188182")
-  set_tests_properties(miplib3_dcmulti_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_dcmulti_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_dcmulti_cbc-generic.log "Optimal objective <number>" 188182 1e-6)
+  set_tests_properties(miplib3_dcmulti_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_dsbmip_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/dsbmip.gz
@@ -3657,9 +3665,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_dsbmip_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_dsbmip_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -305.19817501")
-  set_tests_properties(miplib3_dsbmip_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_dsbmip_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_dsbmip_cbc-generic.log "Optimal objective <number>" -305.19817501 1e-6)
+  set_tests_properties(miplib3_dsbmip_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_egout_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/egout.gz
@@ -3668,9 +3676,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_egout_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_egout_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 568.101")
-  set_tests_properties(miplib3_egout_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_egout_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_egout_cbc-generic.log "Optimal objective <number>" 568.101 1e-6)
+  set_tests_properties(miplib3_egout_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_enigma_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/enigma.gz
@@ -3679,9 +3687,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_enigma_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_enigma_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 0.0")
-  set_tests_properties(miplib3_enigma_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_enigma_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_enigma_cbc-generic.log "Optimal objective <number>" 0.0 1e-6)
+  set_tests_properties(miplib3_enigma_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_fast0507_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fast0507.gz
@@ -3690,9 +3698,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 174")
-  set_tests_properties(miplib3_fast0507_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_fast0507_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_fast0507_cbc-generic.log "Optimal objective <number>" 174 1e-6)
+  set_tests_properties(miplib3_fast0507_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_fiber_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fiber.gz
@@ -3701,9 +3709,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_fiber_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_fiber_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 405935.18000")
-  set_tests_properties(miplib3_fiber_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_fiber_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_fiber_cbc-generic.log "Optimal objective <number>" 405935.18000 1e-6)
+  set_tests_properties(miplib3_fiber_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_fixnet6_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/fixnet6.gz
@@ -3712,9 +3720,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_fixnet6_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_fixnet6_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 3983")
-  set_tests_properties(miplib3_fixnet6_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_fixnet6_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_fixnet6_cbc-generic.log "Optimal objective <number>" 3983 1e-6)
+  set_tests_properties(miplib3_fixnet6_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_flugpl_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/flugpl.gz
@@ -3723,9 +3731,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_flugpl_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_flugpl_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1201500")
-  set_tests_properties(miplib3_flugpl_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_flugpl_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_flugpl_cbc-generic.log "Optimal objective <number>" 1201500 1e-6)
+  set_tests_properties(miplib3_flugpl_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_gen_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gen.gz
@@ -3734,9 +3742,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_gen_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gen_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 112313")
-  set_tests_properties(miplib3_gen_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_gen_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gen_cbc-generic.log "Optimal objective <number>" 112313 1e-6)
+  set_tests_properties(miplib3_gen_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_gesa2_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2.gz
@@ -3745,9 +3753,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_gesa2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa2_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 25779856.372")
-  set_tests_properties(miplib3_gesa2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_gesa2_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_cbc-generic.log "Optimal objective <number>" 25779856.372 1e-6)
+  set_tests_properties(miplib3_gesa2_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_gesa2_o_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa2_o.gz
@@ -3756,9 +3764,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_gesa2_o_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa2_o_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 25779856.372")
-  set_tests_properties(miplib3_gesa2_o_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_gesa2_o_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_cbc-generic.log "Optimal objective <number>" 25779856.372 1e-6)
+  set_tests_properties(miplib3_gesa2_o_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_gesa3_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3.gz
@@ -3767,9 +3775,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_gesa3_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa3_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 27991042.648")
-  set_tests_properties(miplib3_gesa3_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_gesa3_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_cbc-generic.log "Optimal objective <number>" 27991042.648 1e-6)
+  set_tests_properties(miplib3_gesa3_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_gesa3_o_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gesa3_o.gz
@@ -3778,9 +3786,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_gesa3_o_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gesa3_o_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 27991042.648")
-  set_tests_properties(miplib3_gesa3_o_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_gesa3_o_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa3_o_cbc-generic.log "Optimal objective <number>" 27991042.648 1e-6)
+  set_tests_properties(miplib3_gesa3_o_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_gt2_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/gt2.gz
@@ -3789,9 +3797,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_gt2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_gt2_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 21166.000")
-  set_tests_properties(miplib3_gt2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_gt2_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gt2_cbc-generic.log "Optimal objective <number>" 21166.000 1e-6)
+  set_tests_properties(miplib3_gt2_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_harp2_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/harp2.gz
@@ -3800,9 +3808,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_harp2_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_harp2_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -73899798.00")
-  set_tests_properties(miplib3_harp2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_harp2_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_harp2_cbc-generic.log "Optimal objective <number>" -73899798.00 1e-6)
+  set_tests_properties(miplib3_harp2_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_khb05250_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/khb05250.gz
@@ -3811,9 +3819,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_khb05250_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_khb05250_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 106940226")
-  set_tests_properties(miplib3_khb05250_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_khb05250_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_khb05250_cbc-generic.log "Optimal objective <number>" 106940226 1e-6)
+  set_tests_properties(miplib3_khb05250_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_l152lav_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/l152lav.gz
@@ -3822,9 +3830,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_l152lav_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_l152lav_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 4722")
-  set_tests_properties(miplib3_l152lav_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_l152lav_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_l152lav_cbc-generic.log "Optimal objective <number>" 4722 1e-6)
+  set_tests_properties(miplib3_l152lav_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_lseu_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/lseu.gz
@@ -3833,9 +3841,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_lseu_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_lseu_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1120")
-  set_tests_properties(miplib3_lseu_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_lseu_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_lseu_cbc-generic.log "Optimal objective <number>" 1120 1e-6)
+  set_tests_properties(miplib3_lseu_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_markshare1_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare1.gz
@@ -3844,9 +3852,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_markshare1_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_markshare1_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1")
-  set_tests_properties(miplib3_markshare1_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_markshare1_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_markshare1_cbc-generic.log "Optimal objective <number>" 1 1e-6)
+  set_tests_properties(miplib3_markshare1_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_markshare2_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/markshare2.gz
@@ -3855,9 +3863,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_markshare2_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_markshare2_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1")
-  set_tests_properties(miplib3_markshare2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_markshare2_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_markshare2_cbc-generic.log "Optimal objective <number>" 1 1e-6)
+  set_tests_properties(miplib3_markshare2_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_mas74_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas74.gz
@@ -3866,9 +3874,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_mas74_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_mas74_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 11801.1857")
-  set_tests_properties(miplib3_mas74_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_mas74_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mas74_cbc-generic.log "Optimal objective <number>" 11801.1857 1e-6)
+  set_tests_properties(miplib3_mas74_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_mas76_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mas76.gz
@@ -3877,9 +3885,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_mas76_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mas76_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 4005.1")
-  set_tests_properties(miplib3_mas76_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_mas76_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_cbc-generic.log "Optimal objective <number>" 4005.1 1e-6)
+  set_tests_properties(miplib3_mas76_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_misc03_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc03.gz
@@ -3888,9 +3896,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_misc03_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_misc03_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 3360")
-  set_tests_properties(miplib3_misc03_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_misc03_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_misc03_cbc-generic.log "Optimal objective <number>" 3360 1e-6)
+  set_tests_properties(miplib3_misc03_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_misc06_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc06.gz
@@ -3899,9 +3907,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_misc06_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_misc06_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 12850.8607")
-  set_tests_properties(miplib3_misc06_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_misc06_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_misc06_cbc-generic.log "Optimal objective <number>" 12850.8607 1e-6)
+  set_tests_properties(miplib3_misc06_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_misc07_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/misc07.gz
@@ -3910,9 +3918,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_misc07_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_misc07_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 2810")
-  set_tests_properties(miplib3_misc07_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_misc07_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_cbc-generic.log "Optimal objective <number>" 2810 1e-6)
+  set_tests_properties(miplib3_misc07_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_mitre_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mitre.gz
@@ -3921,9 +3929,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_mitre_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mitre_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 115155")
-  set_tests_properties(miplib3_mitre_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_mitre_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mitre_cbc-generic.log "Optimal objective <number>" 115155 1e-6)
+  set_tests_properties(miplib3_mitre_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_mkc_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mkc.gz
@@ -3931,10 +3939,11 @@ if (CBC_BUILD_CBC_GENERIC)
                 ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_cbc-generic.log)
   
   set_tests_properties(miplib3_mkc_cbc-generic_standard PROPERTIES TIMEOUT 3000)
-  set_tests_properties(miplib3_mkc_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -553.75") # not optimal - has stated in the miplib3 report
-  set_tests_properties(miplib3_mkc_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(miplib3_mkc_cbc-generic_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+  
+  # not optimal - has stated in the miplib3 report
+  create_log_analysis(miplib3_mkc_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mkc_cbc-generic.log "Optimal objective <number>" -553.75 1e-6)
+  set_tests_properties(miplib3_mkc_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
   
   add_coin_test(miplib3_mod008_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod008.gz
@@ -3943,9 +3952,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_mod008_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mod008_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 307")
-  set_tests_properties(miplib3_mod008_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_mod008_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mod008_cbc-generic.log "Optimal objective <number>" 307 1e-6)
+  set_tests_properties(miplib3_mod008_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_mod010_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod010.gz
@@ -3954,9 +3963,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_mod010_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_mod010_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 6548")
-  set_tests_properties(miplib3_mod010_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_mod010_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mod010_cbc-generic.log "Optimal objective <number>" 6548 1e-6)
+  set_tests_properties(miplib3_mod010_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_mod011_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/mod011.gz
@@ -3965,9 +3974,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_mod011_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_mod011_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -54558535")
-  set_tests_properties(miplib3_mod011_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_mod011_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mod011_cbc-generic.log "Optimal objective <number>" -54558535 1e-6)
+  set_tests_properties(miplib3_mod011_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_modglob_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/modglob.gz
@@ -3976,9 +3985,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_modglob_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_modglob_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 20740508")
-  set_tests_properties(miplib3_modglob_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_modglob_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_cbc-generic.log "Optimal objective <number>" 20740508 1e-6)
+  set_tests_properties(miplib3_modglob_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_noswot_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/noswot.gz
@@ -3987,9 +3996,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_noswot_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_noswot_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -43")
-  set_tests_properties(miplib3_noswot_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_noswot_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_noswot_cbc-generic.log "Optimal objective <number>" -43 1e-6)
+  set_tests_properties(miplib3_noswot_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_nw04_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/nw04.gz
@@ -3998,9 +4007,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_nw04_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_nw04_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 16862")
-  set_tests_properties(miplib3_nw04_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_nw04_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_cbc-generic.log "Optimal objective <number>" 16862 1e-6)
+  set_tests_properties(miplib3_nw04_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_p0033_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0033.gz
@@ -4009,9 +4018,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_p0033_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0033_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 3089")
-  set_tests_properties(miplib3_p0033_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_p0033_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p0033_cbc-generic.log "Optimal objective <number>" 3089 1e-6)
+  set_tests_properties(miplib3_p0033_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_p0201_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0201.gz
@@ -4020,9 +4029,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_p0201_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0201_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 7615")
-  set_tests_properties(miplib3_p0201_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_p0201_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p0201_cbc-generic.log "Optimal objective <number>" 7615 1e-6)
+  set_tests_properties(miplib3_p0201_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_p0282_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0282.gz
@@ -4031,9 +4040,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_p0282_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0282_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 258411")
-  set_tests_properties(miplib3_p0282_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_p0282_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p0282_cbc-generic.log "Optimal objective <number>" 258411 1e-6)
+  set_tests_properties(miplib3_p0282_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_p0548_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p0548.gz
@@ -4042,9 +4051,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_p0548_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p0548_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 8691")
-  set_tests_properties(miplib3_p0548_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_p0548_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p0548_cbc-generic.log "Optimal objective <number>" 8691 1e-6)
+  set_tests_properties(miplib3_p0548_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_p2756_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/p2756.gz
@@ -4053,9 +4062,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_p2756_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_p2756_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 3124")
-  set_tests_properties(miplib3_p2756_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_p2756_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_p2756_cbc-generic.log "Optimal objective <number>" 3124 1e-6)
+  set_tests_properties(miplib3_p2756_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_pk1_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pk1.gz
@@ -4064,9 +4073,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_pk1_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_pk1_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 11.0")
-  set_tests_properties(miplib3_pk1_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_pk1_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_cbc-generic.log "Optimal objective <number>" 11.0 1e-6)
+  set_tests_properties(miplib3_pk1_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_pp08aCUTS_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08aCUTS.gz
@@ -4075,9 +4084,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_pp08aCUTS_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_pp08aCUTS_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 7350.0")
-  set_tests_properties(miplib3_pp08aCUTS_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_pp08aCUTS_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_cbc-generic.log "Optimal objective <number>" 7350.0 1e-6)
+  set_tests_properties(miplib3_pp08aCUTS_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_pp08a_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/pp08a.gz
@@ -4086,9 +4095,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_pp08a_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_pp08a_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 7350.0")
-  set_tests_properties(miplib3_pp08a_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_pp08a_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_cbc-generic.log "Optimal objective <number>" 7350.0 1e-6)
+  set_tests_properties(miplib3_pp08a_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_qiu_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qiu.gz
@@ -4097,9 +4106,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_qiu_cbc-generic_standard PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_qiu_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective -132.873137")
-  set_tests_properties(miplib3_qiu_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_qiu_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_cbc-generic.log "Optimal objective <number>" -132.873137 1e-6)
+  set_tests_properties(miplib3_qiu_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_qnet1_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1.gz
@@ -4108,9 +4117,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_qnet1_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_qnet1_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 16029.692681")
-  set_tests_properties(miplib3_qnet1_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_qnet1_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_cbc-generic.log "Optimal objective <number>" 16029.692681 1e-6)
+  set_tests_properties(miplib3_qnet1_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_qnet1_o_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/qnet1_o.gz
@@ -4119,9 +4128,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_qnet1_o_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_qnet1_o_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 16029.692681")
-  set_tests_properties(miplib3_qnet1_o_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_qnet1_o_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_o_cbc-generic.log "Optimal objective <number>" 16029.692681 1e-6)
+  set_tests_properties(miplib3_qnet1_o_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_rentacar_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rentacar.gz
@@ -4130,9 +4139,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_rentacar_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_rentacar_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 30356761")
-  set_tests_properties(miplib3_rentacar_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_rentacar_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_rentacar_cbc-generic.log "Optimal objective <number>" 30356761 1e-6)
+  set_tests_properties(miplib3_rentacar_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_rgn_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz
@@ -4141,9 +4150,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_rgn_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_rgn_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 82.1999")
-  set_tests_properties(miplib3_rgn_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_rgn_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_rgn_cbc-generic.log "Optimal objective <number>" 82.1999 1e-6)
+  set_tests_properties(miplib3_rgn_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_rout_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/rout.gz
@@ -4152,9 +4161,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_rout_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_rout_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 1077.56")
-  set_tests_properties(miplib3_rout_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_rout_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_rout_cbc-generic.log "Optimal objective <number>" 1077.56 1e-6)
+  set_tests_properties(miplib3_rout_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_set1ch_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/set1ch.gz
@@ -4163,9 +4172,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_set1ch_cbc-generic_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(miplib3_set1ch_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 54537.75")
-  set_tests_properties(miplib3_set1ch_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_set1ch_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_set1ch_cbc-generic.log "Optimal objective <number>" 54537.75 1e-6)
+  set_tests_properties(miplib3_set1ch_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG")
   
   add_coin_test(miplib3_seymour_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/seymour.gz
@@ -4173,10 +4182,11 @@ if (CBC_BUILD_CBC_GENERIC)
                 ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_cbc-generic.log)
   
   set_tests_properties(miplib3_seymour_cbc-generic_standard PROPERTIES TIMEOUT 3000)
-  set_tests_properties(miplib3_seymour_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 423") # not optimal - has stated in the miplib3 report
-  set_tests_properties(miplib3_seymour_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(miplib3_seymour_cbc-generic_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+  
+  # not optimal - has stated in the miplib3 report
+  create_log_analysis(miplib3_seymour_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_seymour_cbc-generic.log "Optimal objective <number>" 423 1e-6)
+  set_tests_properties(miplib3_seymour_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
   
   add_coin_test(miplib3_stein27_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein27.gz
@@ -4185,9 +4195,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_stein27_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_stein27_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 18")
-  set_tests_properties(miplib3_stein27_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_stein27_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_stein27_cbc-generic.log "Optimal objective <number>" 18 1e-6)
+  set_tests_properties(miplib3_stein27_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_stein45_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/stein45.gz
@@ -4196,9 +4206,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_stein45_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_stein45_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 30")
-  set_tests_properties(miplib3_stein45_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_stein45_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_cbc-generic.log "Optimal objective <number>" 30 1e-6)
+  set_tests_properties(miplib3_stein45_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_swath_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/swath.gz
@@ -4206,10 +4216,11 @@ if (CBC_BUILD_CBC_GENERIC)
                 ${CMAKE_BINARY_DIR}/tests/miplib3_swath_cbc-generic.log)
   
   set_tests_properties(miplib3_swath_cbc-generic_standard PROPERTIES TIMEOUT 3000)
-  set_tests_properties(miplib3_swath_cbc-generic_standard PROPERTIES LABELS "MPS;LONG")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 497.603") # not optimal - has stated in the miplib3 report
-  set_tests_properties(miplib3_swath_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(miplib3_swath_cbc-generic_standard PROPERTIES LABELS "MPS;LONG;WARNING")
+  
+  # not optimal - has stated in the miplib3 report
+  create_log_analysis(miplib3_swath_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_swath_cbc-generic.log "Optimal objective <number>" 497.603 1e-6)
+  set_tests_properties(miplib3_swath_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS;LONG;WARNING")
   
   add_coin_test(miplib3_vpm1_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm1.gz
@@ -4218,9 +4229,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_vpm1_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_vpm1_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 20")
-  set_tests_properties(miplib3_vpm1_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_vpm1_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_vpm1_cbc-generic.log "Optimal objective <number>" 20 1e-6)
+  set_tests_properties(miplib3_vpm1_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
   
   add_coin_test(miplib3_vpm2_cbc-generic_standard cbc-generic
                 ${EP_InstallDir}/DATA_TEST/src/EP_DATA_TEST/miplib3/vpm2.gz
@@ -4229,7 +4240,7 @@ if (CBC_BUILD_CBC_GENERIC)
   
   set_tests_properties(miplib3_vpm2_cbc-generic_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(miplib3_vpm2_cbc-generic_standard PROPERTIES LABELS "MPS")
-  set(TEST_REGEX "")
-  add_regex(TEST_REGEX "Optimal objective 13.75")
-  set_tests_properties(miplib3_vpm2_cbc-generic_standard PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  
+  create_log_analysis(miplib3_vpm2_cbc-generic_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_cbc-generic.log "Optimal objective <number>" 13.75 1e-6)
+  set_tests_properties(miplib3_vpm2_cbc-generic_standard_01_Analysis PROPERTIES LABELS "MPS")
 endif ()
