@@ -854,7 +854,7 @@ set_tests_properties(netlib_dfl001_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(netlib_dfl001_mps_clp_standard PROPERTIES LABELS "MPS;WARNING")
 # (there's a ** in the readme file in the netlib website)
 
-create_log_analysis(netlib_dfl001_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_dfl001_clp.log "Optimal objective <number>" 112664396.05 1e-6)
+create_log_analysis(netlib_dfl001_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/netlib_dfl001_clp.log "Optimal objective <number>" 11266396.05 1e-6)
 set_tests_properties(netlib_dfl001_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;WARNING")
 
 add_coin_test(netlib_agg_mps_clp_standard clp
@@ -1796,7 +1796,7 @@ add_coin_test(miplib3_misc07_clp_standard clp
 set_tests_properties(miplib3_misc07_clp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_misc07_clp_standard PROPERTIES LABELS "MPS")
 
-create_log_analysis(miplib3_misc07_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_clp.log "Optimal objective <number>" 12850.8607 1e-6)
+create_log_analysis(miplib3_misc07_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_misc07_clp.log "Optimal objective <number>" 1415 1e-6)
 set_tests_properties(miplib3_misc07_clp_standard_01_Analysis PROPERTIES LABELS "MPS")
 
 add_coin_test(miplib3_mitre_clp_standard clp
