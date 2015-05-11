@@ -6,6 +6,7 @@ set(EP_InstallDir ${CMAKE_BINARY_DIR}/Dependencies)
 
 option(COIN_USE_DOWNLOAD_PTHREAD_WIN32 "Enable the use of the thirdparty PThreads for Windows" OFF)
 option(COIN_USE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
+option(COIN_USE_DOWNLOAD_CLAPACK       "Enable the use of the thirdparty CBlas / CLapack" OFF)
 option(COIN_USE_DOWNLOAD_GLPK          "Enable the use of the thirdparty GLPK" OFF)
 option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" OFF)
 option(COIN_USE_DOWNLOAD_BZLIB         "Enable the use of the thirdparty BZlib" OFF)
@@ -21,7 +22,7 @@ endif ()
 mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
 
-if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR
+if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWNLOAD_CLAPACK OR
     COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR
     COIN_USE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ZLIB OR
     COIN_USE_DOWNLOAD_BZLIB)
@@ -30,6 +31,7 @@ endif ()
 
 option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
 option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
 option(COIN_ENABLE_DOWNLOAD_DATA_TEST     "Enable the download / run of Data tests" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
@@ -39,8 +41,14 @@ option(COIN_ENABLE_FIND_LAPACK "Enable the detection of Blas / Lapack" OFF)
 option(COIN_ENABLE_FIND_ZLIB   "Enable the detection of Zlib" OFF)
 option(COIN_ENABLE_FIND_BZLIB  "Enable the detection of BZlib" OFF)
 
-if (COIN_ENABLE_FIND_LAPACK AND COIN_DOWNLOAD_LAPACK)
-  message(STATUS "Warning: COIN_ENABLE_FIND_LAPACK and COIN_ENABLE_DOWNLOAD_LAPACK are activated. Desactivate COIN_ENABLE_DOWNLOAD_LAPACK")
+if (COIN_ENABLE_FIND_LAPACK AND (COIN_DOWNLOAD_LAPACK OR COIN_DOWNLOAD_CLAPACK))
+  message(STATUS "Warning: COIN_ENABLE_FIND_LAPACK and COIN_ENABLE_DOWNLOAD_[C]LAPACK are activated. Desactivate COIN_ENABLE_DOWNLOAD_[C]LAPACK")
+  set(COIN_ENABLE_DOWNLOAD_LAPACK  FALSE)
+  set(COIN_ENABLE_DOWNLOAD_CLAPACK FALSE)
+endif ()
+
+if (COIN_DOWNLOAD_LAPACK AND COIN_DOWNLOAD_CLAPACK)
+  message(STATUS "Warning: COIN_ENABLE_DOWNLOAD_LAPACK and COIN_ENABLE_DOWNLOAD_CLAPACK are activated. I desactivate COIN_ENABLE_DOWNLOAD_LAPACK")
   set(COIN_ENABLE_DOWNLOAD_LAPACK FALSE)
 endif ()
 
@@ -96,6 +104,72 @@ endmacro()
 
 # #################################################
 # <===    Macros
+# #################################################
+
+# #################################################
+# ===>    CLapack
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_CLAPACK)
+  set(CLapack_version "3.2.1")
+  
+  if (UNIX)
+    if (NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
+      set(CLAPACK_C_FLAGS      "-fPIC")
+      set(CLAPACK_LINKER_FLAGS "-fPIC")
+    endif()
+    
+    if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+      if (RM_COMPILE_LTO)
+        set(CLAPACK_C_FLAGS      "${CLAPACK_C_FLAGS} -flto")
+        set(CLAPACK_LINKER_FLAGS "${CLAPACK_LINKER_FLAGS} -flto")
+      endif ()
+      if (RM_COMPILE_WHOPR)
+        set(CLAPACK_C_FLAGS      "${CLAPACK_C_FLAGS} -flto")
+        set(CLAPACK_LINKER_FLAGS "${CLAPACK_LINKER_FLAGS} -flto")
+      endif ()
+    endif ()
+  endif ()
+  
+  if (WIN32)
+    if (MSVC)
+      if (RM_COMPILE_LTO OR RM_COMPILE_WHOPR)
+        set(CLAPACK_C_FLAGS      "/GL")
+        set(CLAPACK_LINKER_FLAGS "/LTGC")
+      endif ()
+    endif ()
+  endif ()
+  
+  set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+  set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+  
+  if (WIN32)
+    ExternalProject_Add(EP_Lapack
+                        PREFIX            ${EP_InstallDir}/Lapack
+                        URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir}/install -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} ${EP_COMPILER} -G "NMake Makefiles" ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build nmake
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/SRC/lapack.lib ${EP_InstallDir}/install/lib
+                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/F2CLIBS/libf2c/libf2c.lib ${EP_InstallDir}/install/lib
+                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/BLAS/SRC/blas.lib ${EP_InstallDir}/install/lib
+                        )
+  elseif (UNIX)
+    ExternalProject_Add(EP_Lapack
+                        PREFIX            ${EP_InstallDir}/Lapack
+                        URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir}/install -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} ${EP_COMPILER} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build make
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/SRC/liblapack.a ${EP_InstallDir}/install/lib
+                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/F2CLIBS/libf2c/libf2c.a ${EP_InstallDir}/install/lib
+                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/BLAS/SRC/libblas.a ${EP_InstallDir}/install/lib
+                        )
+  endif ()
+endif()
+
+# #################################################
+# <===    CLapack
 # #################################################
 
 # #################################################
@@ -364,7 +438,7 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     add_dependencies(${_target} EP_PThreads)
   endif ()
-  if (COIN_ENABLE_DOWNLOAD_LAPACK)
+  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK)
     add_dependencies(${_target} EP_Lapack)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_GLPK)
@@ -384,7 +458,7 @@ macro(add_executable _target)
   if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     add_dependencies(${_target} EP_PThreads)
   endif ()
-  if (COIN_ENABLE_DOWNLOAD_LAPACK)
+  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK)
     add_dependencies(${_target} EP_Lapack)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_GLPK)
