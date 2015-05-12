@@ -8,6 +8,7 @@ option(COIN_USE_DOWNLOAD_PTHREAD_WIN32 "Enable the use of the thirdparty PThread
 option(COIN_USE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
 option(COIN_USE_DOWNLOAD_CLAPACK       "Enable the use of the thirdparty CBlas / CLapack" OFF)
 option(COIN_USE_DOWNLOAD_GLPK          "Enable the use of the thirdparty GLPK" OFF)
+option(COIN_USE_DOWNLOAD_ASL           "Enable the use of the thirdparty Ampl Solver Library" OFF)
 option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" OFF)
 option(COIN_USE_DOWNLOAD_BZLIB         "Enable the use of the thirdparty BZlib" OFF)
 
@@ -23,9 +24,8 @@ mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
 
 if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWNLOAD_CLAPACK OR
-    COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR
-    COIN_USE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ZLIB OR
-    COIN_USE_DOWNLOAD_BZLIB)
+    COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR COIN_USE_DOWNLOAD_ZLIB OR
+    COIN_USE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_BZLIB)
   return()
 endif ()
 
@@ -34,6 +34,7 @@ option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
 option(COIN_ENABLE_DOWNLOAD_DATA_TEST     "Enable the download / run of Data tests" OFF)
+option(COIN_ENABLE_DOWNLOAD_ASL           "Enable the download / compilation of Ampl Solver Library" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
 
@@ -402,6 +403,29 @@ endif ()
 # #################################################
 
 # #################################################
+# ===> ASL compilation
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_ASL)
+  set(coinasl "1.3.0")
+  set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
+  
+  ExternalProject_Add(EP_ASL
+                      PREFIX ${EP_InstallDir}/ASL
+		              URL https://github.com/ampl/mp/archive/${coinasl}.tar.gz
+                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/CMakeLists_ASL.txt ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/CMakeLists.txt
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build make
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build make install
+                      )
+endif()
+
+# #################################################
+# <=== ASL compilation
+# #################################################
+
+# #################################################
 # ===> Tests
 # #################################################
 
@@ -444,6 +468,9 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_GLPK)
     add_dependencies(${_target} EP_glpk)
   endif ()
+  if (COIN_ENABLE_DOWNLOAD_ASL)
+    add_dependencies(${_target} EP_ASL)
+  endif ()
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     add_dependencies(${_target} EP_Zlib)
   endif ()
@@ -463,6 +490,9 @@ macro(add_executable _target)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_GLPK)
     add_dependencies(${_target} EP_glpk)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_ASL)
+    add_dependencies(${_target} EP_ASL)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
     add_dependencies(${_target} EP_Zlib)

@@ -63,10 +63,14 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
 
 set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
                        ${Clp_DIR}/src/CbcOrClpParam.cpp
-		       ${Clp_DIR}/src/Clp_ampl.cpp
-		       ${Clp_DIR}/src/MyEventHandler.cpp
-		       ${Clp_DIR}/src/MyMessageHandler.cpp
-		       ${Clp_DIR}/src/unitTest.cpp)
+                       ${Clp_DIR}/src/MyEventHandler.cpp
+                       ${Clp_DIR}/src/MyMessageHandler.cpp
+                       ${Clp_DIR}/src/unitTest.cpp)
+
+if (COIN_HAS_ASL)
+  set(ClpSolver_SRC_LIST ${ClpSolver_SRC_LIST}
+                         ${Clp_DIR}/src/Clp_ampl.cpp)
+endif ()
 
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
@@ -228,6 +232,9 @@ include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)
 include_directories(${Clp_DIR}/src/OsiClp)
+if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
+  include_directories(${CMAKE_BINARY_DIR}/Dependencies/include/ampl)
+endif ()
 
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
@@ -321,6 +328,9 @@ if (CLP_BUILD_EXAMPLES)
     endif ()
     if (COIN_HAS_ABC)
       target_link_libraries(${Name} cilkrts)
+    endif ()  
+    if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
+      target_link_libraries(${Name} amplsolver dl)
     endif ()  
   endmacro ()
   
@@ -653,6 +663,9 @@ if (COIN_HAS_CHOLMOD)
 endif ()
 if (COIN_HAS_ABC)
   target_link_libraries(clp cilkrts)
+endif ()  
+if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
+  target_link_libraries(clp amplsolver dl)
 endif ()  
 
 install(TARGETS clp

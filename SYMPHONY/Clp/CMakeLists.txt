@@ -5,12 +5,6 @@ set(CLP_VERSION_RELEASE "6"  CACHE STRING "The CLP patch version number")
 set(CLP_VERSION "${CLP_VERSION_MAJOR}.${CLP_VERSION_MINOR}.${CLP_VERSION_RELEASE}")
 set(CLP_SVN_REV "${CLP_VERSION_RELEASE}")
 
-mark_as_advanced(CLP_VERSION_MAJOR
-                 CLP_VERSION_MINOR
-		 CLP_VERSION_RELEASE
-		 CLP_VERSION
-		 CLP_SVN_REV)
-
 add_definitions(-DCLP_BUILD)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
@@ -67,11 +61,16 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/Idiot.cpp
                  ${Clp_DIR}/src/IdiSolve.cpp)
 
-set(ClpSolver_SRC_LIST ${Clp_DIR}/src/CbcOrClpParam.cpp
-                       ${Clp_DIR}/src/ClpSolver.cpp
-		       ${Clp_DIR}/src/MyEventHandler.cpp
-		       ${Clp_DIR}/src/MyMessageHandler.cpp
-		       ${Clp_DIR}/src/unitTest.cpp)
+set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
+                       ${Clp_DIR}/src/CbcOrClpParam.cpp
+                       ${Clp_DIR}/src/MyEventHandler.cpp
+                       ${Clp_DIR}/src/MyMessageHandler.cpp
+                       ${Clp_DIR}/src/unitTest.cpp)
+
+if (COIN_HAS_ASL)
+  set(ClpSolver_SRC_LIST ${ClpSolver_SRC_LIST}
+                         ${Clp_DIR}/src/Clp_ampl.cpp)
+endif ()
 
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
@@ -233,6 +232,9 @@ include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)
 include_directories(${Clp_DIR}/src/OsiClp)
+if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
+  include_directories(${CMAKE_BINARY_DIR}/Dependencies/include/ampl)
+endif ()
 
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
@@ -285,7 +287,7 @@ if (CLP_BUILD_EXAMPLES)
   #
   macro(add_example Name)
     add_executable(${Name} ${ARGN})
-    if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_HAS_ABC)
+    if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32)
       if (NOT WIN32)
 	target_link_libraries(${Name} pthread)
       else ()
@@ -326,6 +328,9 @@ if (CLP_BUILD_EXAMPLES)
     endif ()
     if (COIN_HAS_ABC)
       target_link_libraries(${Name} cilkrts)
+    endif ()  
+    if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
+      target_link_libraries(${Name} amplsolver dl)
     endif ()  
   endmacro ()
   
@@ -640,7 +645,7 @@ endif ()
 if (COINUTILS_HAS_BZLIB OR COIN_USE_DOWNLOAD_BZLIB)
   target_link_libraries(clp ${BZLIB_NAME})
 endif ()
-if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_HAS_ABC)
+if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32)
   if (NOT WIN32)
     target_link_libraries(clp pthread)
   else ()
@@ -659,6 +664,9 @@ endif ()
 if (COIN_HAS_ABC)
   target_link_libraries(clp cilkrts)
 endif ()  
+if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
+  target_link_libraries(clp amplsolver dl)
+endif ()  
 
 install(TARGETS clp
         DESTINATION bin)
@@ -672,6 +680,3 @@ install(FILES ${Clp_SRC_LIST_Headers}
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
         DESTINATION include/coin
         RENAME ClpConfig.h)
-
-install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION include/coin)

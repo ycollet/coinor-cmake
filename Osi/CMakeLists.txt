@@ -506,7 +506,6 @@ endif ()
 
 #set(COIN_HAS_DEPEND 1) # Set this to 1 if coin has dependencies
 #set(COIN_HAS_MUMPS 1) # Set this to 1 if Mumps dependencies is available
-#set(COIN_HAS_ASL 1) # Set this to 1 if the Asl dependencies is available
 #set(COIN_HAS_NETLIB 1) # Set this to 1 if the NetLib dependencies is available
 #set(GLPK_HAS_INTOPT 1) # Set to 1 if GLPK has the advanced B&B solver lpx_intopt
 

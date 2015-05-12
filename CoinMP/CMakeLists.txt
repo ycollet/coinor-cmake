@@ -72,19 +72,21 @@ option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
 option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
 option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
 option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
+option(COIN_HAS_ASL        "Enable the ASL support" OFF)
 
 set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
 set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
 
 mark_as_advanced(COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
-		 COINUTILS_USE_MEMPOOL_MAXPOOLED
-		 COINUTILS_HAS_ZLIB
-		 COINUTILS_HAS_BZLIB
-		 COIN_HAS_LAPACK
-		 COIN_HAS_BLAS
-		 COIN_COINUTILS_CHECKLEVEL
-		 COIN_COINUTILS_VERBOSITY)
+                 COINUTILS_USE_MEMPOOL_MAXPOOLED
+                 COINUTILS_HAS_ZLIB
+                 COINUTILS_HAS_BZLIB
+                 COIN_HAS_LAPACK
+                 COIN_HAS_BLAS
+                 COIN_HAS_ASL
+                 COIN_COINUTILS_CHECKLEVEL
+                 COIN_COINUTILS_VERBOSITY)
 
 # CoinMP options
 set(COIN_COINMP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinMP (0 if no test)")
@@ -648,7 +650,6 @@ set(COIN_HAS_CGL 1) # Set this to 1 if cgl is compiled
 set(COIN_HAS_CLP 1) # Set this to 1 if clp is compiled
 #set(COIN_HAS_DEPEND 1) # Set this to 1 if coin has dependencies
 #set(COIN_HAS_MUMPS 1) # Set this to 1 if Mumps dependencies is available
-#set(COIN_HAS_ASL 1) # Set this to 1 if the Asl dependencies is available
 #set(COIN_HAS_NETLIB 1) # Set this to 1 if the NetLib dependencies is available
 #set(GLPK_HAS_INTOPT 1) # Set to 1 if GLPK has the advanced B&B solver lpx_intopt
 
