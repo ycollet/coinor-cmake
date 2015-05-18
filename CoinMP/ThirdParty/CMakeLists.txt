@@ -409,14 +409,17 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_MUMPS)
+  set(MUMPS_VERSION "4.10.0")
+  set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
+  
   ExternalProject_Add(EP_Mumps
                       PREFIX ${EP_InstallDir}/Mumps
-		      URL http://mumps.enseeiht.fr/MUMPS_4.10.0.tar.gz
+		              URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/CMakeLists_mumps.txt ${EP_InstallDir}/Mumps/src/EP_Mumps/CMakeLists.txt
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} ..
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Lapack/build make
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Lapack/build make install
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DUSE_MUMPS_LIBSEQ=ON ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make install
                       )
 endif()
 

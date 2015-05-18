@@ -8,18 +8,18 @@ set(CBC_SVN_REV "${CBC_VERSION_RELEASE}")
 
 mark_as_advanced(CBC_VERSION_MAJOR
                  CBC_VERSION_MINOR
-		 CBC_VERSION_RELEASE
-		 CBC_VERSION
-		 CBC_SVN_REV)
+                 CBC_VERSION_RELEASE
+                 CBC_VERSION
+                 CBC_SVN_REV)
 
 add_definitions(-DCBC_BUILD)
 
 configure_file(${CMAKE_SOURCE_DIR}/Cbc/include/config.h.in     ${CMAKE_BINARY_DIR}/Cbc/include/config.h)
 configure_file(${CMAKE_SOURCE_DIR}/Cbc/include/config_cbc.h.in ${CMAKE_BINARY_DIR}/Cbc/include/config_cbc.h)
 
-# ${Cbc_DIR}/src/CbcBranchBase.cpp must not be compiled yet (not in the Makefile.am in release 2.8.3)
 set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcBranchAllDifferent.cpp
+                 #${Cbc_DIR}/src/CbcBranchBase.cpp
                  ${Cbc_DIR}/src/CbcBranchCut.cpp
                  ${Cbc_DIR}/src/CbcBranchDecision.cpp
                  ${Cbc_DIR}/src/CbcBranchDefaultDecision.cpp
@@ -102,7 +102,7 @@ set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcThread.cpp
                  ${Cbc_DIR}/src/CbcTree.cpp
                  ${Cbc_DIR}/src/CbcTreeLocal.cpp
-	         ${Cbc_DIR}/src/unitTestClp.cpp)
+	             ${Cbc_DIR}/src/unitTestClp.cpp)
 
 set(Cbc_SRC_LIST_Headers ${Cbc_DIR}/src/Cbc_C_Interface.h
                          ${Cbc_DIR}/src/CbcBranchActual.hpp
@@ -355,6 +355,13 @@ if (CBC_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
       target_link_libraries(${Name} amplsolver dl)
     endif ()  
+    if (COIN_HAS_MUMPS)
+      if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
+        target_link_libraries(${Name} dmumps mumps_common seq blas lapack ifort pthread)
+      else ()
+        target_link_libraries(${Name} dmumps mumps_common seq blas lapack gfortran pthread)
+      endif ()
+    endif ()
   endmacro()
   
   add_example(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
@@ -736,6 +743,13 @@ if (COIN_HAS_CLP)
   if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
     target_link_libraries(cbc amplsolver dl)
   endif ()  
+  if (COIN_HAS_MUMPS)
+    if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
+      target_link_libraries(cbc dmumps mumps_common seq blas lapack ifort pthread)
+    else ()
+      target_link_libraries(cbc dmumps mumps_common seq blas lapack gfortran pthread)
+    endif ()
+  endif ()
   
   install(TARGETS cbc
           DESTINATION bin)
@@ -744,16 +758,16 @@ endif ()
 if (CBC_BUILD_CBC_GENERIC)
   add_executable(cbc-generic ${Cbc_DIR}/src/CbcGenBaB.cpp
                              ${Cbc_DIR}/src/CbcGenCbcParam.cpp
-			     ${Cbc_DIR}/src/CbcGenCbcParamUtils.cpp
-			     ${Cbc_DIR}/src/CbcGenCtlBlk.cpp
-			     ${Cbc_DIR}/src/CbcGeneric.cpp
-			     ${Cbc_DIR}/src/CbcGenMessages.cpp
-			     ${Cbc_DIR}/src/CbcGenOsiParam.cpp
-			     ${Cbc_DIR}/src/CbcGenOsiParamUtils.cpp
-			     ${Cbc_DIR}/src/CbcGenParam.cpp
-			     ${Cbc_DIR}/src/CbcGenParamUtils.cpp
-			     ${Cbc_DIR}/src/CbcGenSolution.cpp
-			     ${Cbc_DIR}/src/CbcGenSolvers.cpp)
+                             ${Cbc_DIR}/src/CbcGenCbcParamUtils.cpp
+                             ${Cbc_DIR}/src/CbcGenCtlBlk.cpp
+                             ${Cbc_DIR}/src/CbcGeneric.cpp
+                             ${Cbc_DIR}/src/CbcGenMessages.cpp
+                             ${Cbc_DIR}/src/CbcGenOsiParam.cpp
+                             ${Cbc_DIR}/src/CbcGenOsiParamUtils.cpp
+                             ${Cbc_DIR}/src/CbcGenParam.cpp
+                             ${Cbc_DIR}/src/CbcGenParamUtils.cpp
+                             ${Cbc_DIR}/src/CbcGenSolution.cpp
+                             ${Cbc_DIR}/src/CbcGenSolvers.cpp)
   
   target_link_libraries(cbc-generic libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
   set_include_directories(cbc-generic)
@@ -797,6 +811,13 @@ if (CBC_BUILD_CBC_GENERIC)
   if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
     target_link_libraries(cbc-generic amplsolver dl)
   endif ()  
+  if (COIN_HAS_MUMPS)
+    if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
+      target_link_libraries(cbc-generic dmumps mumps_common seq blas lapack ifort pthread)
+    else ()
+      target_link_libraries(cbc-generic dmumps mumps_common seq blas lapack gfortran pthread)
+    endif ()
+  endif ()
   
   install(TARGETS cbc-generic
           DESTINATION bin)

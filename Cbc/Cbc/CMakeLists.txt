@@ -355,6 +355,13 @@ if (CBC_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
       target_link_libraries(${Name} amplsolver dl)
     endif ()  
+    if (COIN_HAS_MUMPS)
+      if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
+        target_link_libraries(${Name} dmumps mumps_common seq blas lapack ifort pthread)
+      else ()
+        target_link_libraries(${Name} dmumps mumps_common seq blas lapack gfortran pthread)
+      endif ()
+    endif ()
   endmacro()
   
   add_example(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
@@ -736,6 +743,13 @@ if (COIN_HAS_CLP)
   if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
     target_link_libraries(cbc amplsolver dl)
   endif ()  
+  if (COIN_HAS_MUMPS)
+    if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
+      target_link_libraries(cbc dmumps mumps_common seq blas lapack ifort pthread)
+    else ()
+      target_link_libraries(cbc dmumps mumps_common seq blas lapack gfortran pthread)
+    endif ()
+  endif ()
   
   install(TARGETS cbc
           DESTINATION bin)
@@ -744,16 +758,16 @@ endif ()
 if (CBC_BUILD_CBC_GENERIC)
   add_executable(cbc-generic ${Cbc_DIR}/src/CbcGenBaB.cpp
                              ${Cbc_DIR}/src/CbcGenCbcParam.cpp
-			     ${Cbc_DIR}/src/CbcGenCbcParamUtils.cpp
-			     ${Cbc_DIR}/src/CbcGenCtlBlk.cpp
-			     ${Cbc_DIR}/src/CbcGeneric.cpp
-			     ${Cbc_DIR}/src/CbcGenMessages.cpp
-			     ${Cbc_DIR}/src/CbcGenOsiParam.cpp
-			     ${Cbc_DIR}/src/CbcGenOsiParamUtils.cpp
-			     ${Cbc_DIR}/src/CbcGenParam.cpp
-			     ${Cbc_DIR}/src/CbcGenParamUtils.cpp
-			     ${Cbc_DIR}/src/CbcGenSolution.cpp
-			     ${Cbc_DIR}/src/CbcGenSolvers.cpp)
+                             ${Cbc_DIR}/src/CbcGenCbcParamUtils.cpp
+                             ${Cbc_DIR}/src/CbcGenCtlBlk.cpp
+                             ${Cbc_DIR}/src/CbcGeneric.cpp
+                             ${Cbc_DIR}/src/CbcGenMessages.cpp
+                             ${Cbc_DIR}/src/CbcGenOsiParam.cpp
+                             ${Cbc_DIR}/src/CbcGenOsiParamUtils.cpp
+                             ${Cbc_DIR}/src/CbcGenParam.cpp
+                             ${Cbc_DIR}/src/CbcGenParamUtils.cpp
+                             ${Cbc_DIR}/src/CbcGenSolution.cpp
+                             ${Cbc_DIR}/src/CbcGenSolvers.cpp)
   
   target_link_libraries(cbc-generic libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
   set_include_directories(cbc-generic)
@@ -797,6 +811,13 @@ if (CBC_BUILD_CBC_GENERIC)
   if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
     target_link_libraries(cbc-generic amplsolver dl)
   endif ()  
+  if (COIN_HAS_MUMPS)
+    if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
+      target_link_libraries(cbc-generic dmumps mumps_common seq blas lapack ifort pthread)
+    else ()
+      target_link_libraries(cbc-generic dmumps mumps_common seq blas lapack gfortran pthread)
+    endif ()
+  endif ()
   
   install(TARGETS cbc-generic
           DESTINATION bin)

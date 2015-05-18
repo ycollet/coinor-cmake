@@ -676,6 +676,9 @@ endif(DOXYGEN AND ENABLE_DOXYGEN)
 
 subdirs(ThirdParty)
 
+include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 

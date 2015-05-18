@@ -822,6 +822,9 @@ add_definitions(-DHAS_RANDOM -DHAS_SRANDOM -D__NONE__)
 
 subdirs(ThirdParty)
 
+include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+
 include_directories(${SYMPHONY_DIR}/SYMPHONY/include)
 include_directories(${SYMPHONY_DIR}/CoinUtils/src)
 

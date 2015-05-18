@@ -438,6 +438,9 @@ endif(DOXYGEN AND ENABLE_DOXYGEN)
 
 subdirs(ThirdParty)
 
+include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+
 if (COIN_ENABLE_DOWNLOAD_ZLIB)
   set(COINUTILS_HAS_ZLIB ON)
 endif ()
