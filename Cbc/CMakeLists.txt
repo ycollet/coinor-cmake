@@ -219,10 +219,6 @@ if (COIN_ENABLE_AMD)
     set(COIN_HAS_AMD_LIBRARY_PATH "None")
     set(COIN_HAS_AMD ON)
   endif ()
-  
-  if (COIN_HAS_AMD)
-    add_definitions(-DCOIN_HAS_AMD)
-  endif ()
 endif ()
 
 if (COIN_ENABLE_CHOLMOD)
@@ -231,10 +227,6 @@ if (COIN_ENABLE_CHOLMOD)
     set(COIN_HAS_CHOLMOD_INCLUDE_PATH "${CHOLMOD_INCLUDE_DIRS}")
     set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None")
     set(COIN_HAS_CHOLMOD ON)
-  endif ()
-  
-  if (COIN_HAS_CHOLMOD)
-    add_definitions(-DCOIN_HAS_CHOLMOD)
   endif ()
 endif ()
 

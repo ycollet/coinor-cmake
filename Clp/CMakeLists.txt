@@ -135,23 +135,23 @@ set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if
 
 mark_as_advanced(COIN_ENABLE_AMD
                  COIN_HAS_AMD_INCLUDE_PATH
-		 COIN_HAS_AMD_LIBRARY_PATH
-		 COIN_ENABLE_CHOLMOD
-		 COIN_HAS_CHOLMOD_INCLUDE_PATH
-		 COIN_HAS_CHOLMOD_LIBRARY_PATH
-		 COIN_HAS_GLPK
-		 COIN_HAS_GLPK_INCLUDE_PATH
-		 COIN_HAS_GLPK_LIBRARY_PATH
-		 COIN_HAS_MUMPS
-		 COIN_HAS_MUMPS_INCLUDE_PATH
-		 COIN_HAS_MUMPS_LIBRARY_PATH
-		 COIN_HAS_WSMP
-		 COIN_HAS_WSMP_INCLUDE_PATH
-		 COIN_HAS_WSMP_LIBRARY_PATH
-		 COIN_HAS_ABC
-		 COIN_ABC_LEVEL
-		 COIN_CLP_CHECKLEVEL
-		 COIN_CLP_VERBOSITY)
+                 COIN_HAS_AMD_LIBRARY_PATH
+                 COIN_ENABLE_CHOLMOD
+                 COIN_HAS_CHOLMOD_INCLUDE_PATH
+                 COIN_HAS_CHOLMOD_LIBRARY_PATH
+                 COIN_HAS_GLPK
+                 COIN_HAS_GLPK_INCLUDE_PATH
+                 COIN_HAS_GLPK_LIBRARY_PATH
+                 COIN_HAS_MUMPS
+                 COIN_HAS_MUMPS_INCLUDE_PATH
+                 COIN_HAS_MUMPS_LIBRARY_PATH
+                 COIN_HAS_WSMP
+                 COIN_HAS_WSMP_INCLUDE_PATH
+                 COIN_HAS_WSMP_LIBRARY_PATH
+                 COIN_HAS_ABC
+                 COIN_ABC_LEVEL
+                 COIN_CLP_CHECKLEVEL
+                 COIN_CLP_VERBOSITY)
 
 # Osi options
 set(COIN_OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
@@ -223,10 +223,6 @@ if (COIN_ENABLE_AMD)
     set(COIN_HAS_AMD_LIBRARY_PATH "None")
     set(COIN_HAS_AMD ON)
   endif ()
-  
-  if (COIN_HAS_AMD)
-    add_definitions(-DCOIN_HAS_AMD)
-  endif ()
 endif ()
 
 if (COIN_ENABLE_CHOLMOD)
@@ -235,10 +231,6 @@ if (COIN_ENABLE_CHOLMOD)
     set(COIN_HAS_CHOLMOD_INCLUDE_PATH "${CHOLMOD_INCLUDE_DIRS}")
     set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None")
     set(COIN_HAS_CHOLMOD ON)
-  endif ()
-  
-  if (COIN_HAS_CHOLMOD)
-    add_definitions(-DCOIN_HAS_CHOLMOD)
   endif ()
 endif ()
 
