@@ -69,34 +69,34 @@ option(USE_CL                  "Use OpenCL" OFF)
 
 mark_as_advanced(COIN_HAS_READLINE
                  CLP_LP_SOLVER
-		 GLPK_LP_SOLVER
-		 OSL_LP_SOLVER
-		 CPLEX_LP_SOLVER
-		 SOPLEX_LP_SOLVER
-		 XPRESS_LP_SOLVER
-		 USE_CGL_CUTS
-		 USE_GMPL
-		 SENSITIVITY_ANALYSIS
-		 ROOT_NODE_ONLY
-		 COMPILE_FRAC_BRANCHING
-		 DO_TESTS
-		 TM_BASIS_TESTS
-		 TRACE_PATH
-		 CHECK_CUT_VALIDITY
-		 STATISTICS
-		 PSEUDO_COSTS
-		 DRAWGRAPH
-		 STATICEXE
-		 SIGHANDLER
-		 SYM_WITH_APPL
-		 SYM_COMPILE_IN_CG
-		 SYM_COMPILE_IN_CP
-		 SYM_COMPILE_IN_LP
-		 SYM_COMPILE_IN_TM
-		 SYM_COMPILE_IN_LP
-		 SYM_PARALLEL
-		 USE_OPENMP
-		 USE_CL)
+                 GLPK_LP_SOLVER
+                 OSL_LP_SOLVER
+                 CPLEX_LP_SOLVER
+                 SOPLEX_LP_SOLVER
+                 XPRESS_LP_SOLVER
+                 USE_CGL_CUTS
+                 USE_GMPL
+                 SENSITIVITY_ANALYSIS
+                 ROOT_NODE_ONLY
+                 COMPILE_FRAC_BRANCHING
+                 DO_TESTS
+                 TM_BASIS_TESTS
+                 TRACE_PATH
+                 CHECK_CUT_VALIDITY
+                 STATISTICS
+                 PSEUDO_COSTS
+                 DRAWGRAPH
+                 STATICEXE
+                 SIGHANDLER
+                 SYM_WITH_APPL
+                 SYM_COMPILE_IN_CG
+                 SYM_COMPILE_IN_CP
+                 SYM_COMPILE_IN_LP
+                 SYM_COMPILE_IN_TM
+                 SYM_COMPILE_IN_LP
+                 SYM_PARALLEL
+                 USE_OPENMP
+                 USE_CL)
 
 # Compilation options
 option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
@@ -113,13 +113,13 @@ set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Clp Path")
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
-		 COIN_COMPILE_COVERAGE
-		 COIN_COMPILE_PROFILE
-		 COIN_COMPILE_PROFILE_VALGRIND
-		 COIN_COMPILE_LTO
-		 COIN_COMPILE_WHOPR
-		 COIN_COMPILE_WARNINGS
-		 Coin_DIR)
+                 COIN_COMPILE_COVERAGE
+                 COIN_COMPILE_PROFILE
+                 COIN_COMPILE_PROFILE_VALGRIND
+                 COIN_COMPILE_LTO
+                 COIN_COMPILE_WHOPR
+                 COIN_COMPILE_WARNINGS
+                 Coin_DIR)
 
 # CoinUtils options
 option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
@@ -173,23 +173,23 @@ set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if
 
 mark_as_advanced(COIN_ENABLE_AMD
                  COIN_HAS_AMD_INCLUDE_PATH
-		 COIN_HAS_AMD_LIBRARY_PATH
-		 COIN_ENABLE_CHOLMOD
-		 COIN_HAS_CHOLMOD_INCLUDE_PATH
-		 COIN_HAS_CHOLMOD_LIBRARY_PATH
-		 COIN_HAS_GLPK
-		 COIN_HAS_GLPK_INCLUDE_PATH
-		 COIN_HAS_GLPK_LIBRARY_PATH
-		 COIN_HAS_MUMPS
-		 COIN_HAS_MUMPS_INCLUDE_PATH
-		 COIN_HAS_MUMPS_LIBRARY_PATH
-		 COIN_HAS_WSMP
-		 COIN_HAS_WSMP_INCLUDE_PATH
-		 COIN_HAS_WSMP_LIBRARY_PATH
-		 COIN_HAS_ABC
-		 COIN_ABC_LEVEL
-		 COIN_CLP_CHECKLEVEL
-		 COIN_CLP_VERBOSITY)
+                 COIN_HAS_AMD_LIBRARY_PATH
+                 COIN_ENABLE_CHOLMOD
+                 COIN_HAS_CHOLMOD_INCLUDE_PATH
+                 COIN_HAS_CHOLMOD_LIBRARY_PATH
+                 COIN_HAS_GLPK
+                 COIN_HAS_GLPK_INCLUDE_PATH
+                 COIN_HAS_GLPK_LIBRARY_PATH
+                 COIN_HAS_MUMPS
+                 COIN_HAS_MUMPS_INCLUDE_PATH
+                 COIN_HAS_MUMPS_LIBRARY_PATH
+                 COIN_HAS_WSMP
+                 COIN_HAS_WSMP_INCLUDE_PATH
+                 COIN_HAS_WSMP_LIBRARY_PATH
+                 COIN_HAS_ABC
+                 COIN_ABC_LEVEL
+                 COIN_CLP_CHECKLEVEL
+                 COIN_CLP_VERBOSITY)
 
 # Cgl options
 set(COIN_CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
@@ -204,9 +204,9 @@ option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
 
 mark_as_advanced(COIN_CGL_CHECKLEVEL
                  COIN_CGL_VERBOSITY
-		 COIN_OSI_CHECKLEVEL
-		 COIN_OSI_VERBOSITY
-		 COIN_USE_FAST_CODE)
+                 COIN_OSI_CHECKLEVEL
+                 COIN_OSI_VERBOSITY
+                 COIN_USE_FAST_CODE)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -251,7 +251,7 @@ set(PACKAGE_STRING    "Symphony")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "symphony")
 # Define to the version of this package.
-set(PACKAGE_VERSION   "5.5.7")
+set(PACKAGE_VERSION   "5.6.9")
 
 set(SYMPHONY_DIR ${CMAKE_SOURCE_DIR})
 
