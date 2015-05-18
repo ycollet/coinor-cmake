@@ -16,10 +16,20 @@ How to use these cmake files ?
 - Clone the repository
 - Copy all the files from Cbc-git to Cbc-2.8.9 (for example)
 - In Cbc-2.8.9 create a build directory (mkdir build)
-- In Cbc-2.8.9/build, launch cmake (cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.8.9 -DCMAKE_BUILD_TYPE=RELEASE ..)
+- In Cbc-2.8.9/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.8.9 -DCMAKE_BUILD_TYPE=RELEASE ..'
 - In Cbc-2.8.9/buil, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: make
 - Install the libraries: sudo make install
+
+Under Windows, with Visual Studio:
+
+- Clone the repository
+- Copy all the files from Cbc-git to Cbc-2.8.9 (for example)
+- In Cbc-2.8.9 create a build directory (mkdir build)
+- In Cbc-2.8.9/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.8.9 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
+- In Cbc-2.8.9/buil, launch 'cmake-gui .' to fine tune the configuration
+- Make the libraries: nmake
+- Install the libraries: nmake install
 
 To compile using llvm:
 
@@ -64,15 +74,9 @@ To do:
 
 Some limitations:
 The next project to be added will be Ipopt.
-- Check for Lapack and pthreads (for Cbc / CoinUtils)
-- Check for zlib (COIN_HAS_ZLIB)
-- Check for bzlib (COIN_HAS_BZLIB)
+
 - Fine tune check of headers and add missing check from original configure.ac files
 - use add_test to test various combination of flags
-
 - Use External_Project to compile Thirdparty libraries of each project:
-  - a first version has been submitted but need to be tested.
-  - use clapack under windows to avoid fortran compiler dependencies
-  - use downloaded zlib under windows and linux if required (tested on linux for now)
   - disable mumps compilation if a fortran compiler is not available (Windows / Linux)
   - download and compile metis with mumps.
