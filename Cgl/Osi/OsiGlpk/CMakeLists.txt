@@ -5,7 +5,9 @@ include_directories(${Osi_DIR}/src/Osi)
 include_directories(${Osi_DIR}/src/OsiGlpk)
 include_directories(${MY_GLPK_DIR}/include)
 
-find_package(Glpk)
+if (("${COIN_HAS_GLPK_INCLUDE_PATH}" STREQUAL "None") AND ("${COIN_HAS_GLPK_LIBRARY_PATH}" STREQUAL "None"))
+  find_package(Glpk)
+endif ()
 
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
@@ -17,7 +19,7 @@ if (NOT COIN_GLPK_DIR STREQUAL "None")
 endif ()
 
 set(OsiGlpk_SRCS ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
-if (GLPK_VERSION VERS_GREATER "4.48")
+if ("${GLPK_VERSION}" VERSION_GREATER "4.48")
   set(OsiGlpk_SRCS ${OsiGlpk_SRCS}
                    ${Osi_DIR}/src/OsiGlpk/lpx.c)
 endif ()
