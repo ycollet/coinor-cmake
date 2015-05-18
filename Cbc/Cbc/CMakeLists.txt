@@ -8,9 +8,9 @@ set(CBC_SVN_REV "${CBC_VERSION_RELEASE}")
 
 mark_as_advanced(CBC_VERSION_MAJOR
                  CBC_VERSION_MINOR
-		 CBC_VERSION_RELEASE
-		 CBC_VERSION
-		 CBC_SVN_REV)
+                 CBC_VERSION_RELEASE
+                 CBC_VERSION
+                 CBC_SVN_REV)
 
 add_definitions(-DCBC_BUILD)
 
@@ -19,7 +19,7 @@ configure_file(${CMAKE_SOURCE_DIR}/Cbc/include/config_cbc.h.in ${CMAKE_BINARY_DI
 
 set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcBranchAllDifferent.cpp
-                 ${Cbc_DIR}/src/CbcBranchBase.cpp
+                 #${Cbc_DIR}/src/CbcBranchBase.cpp
                  ${Cbc_DIR}/src/CbcBranchCut.cpp
                  ${Cbc_DIR}/src/CbcBranchDecision.cpp
                  ${Cbc_DIR}/src/CbcBranchDefaultDecision.cpp
