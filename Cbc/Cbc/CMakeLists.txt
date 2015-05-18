@@ -17,9 +17,9 @@ add_definitions(-DCBC_BUILD)
 configure_file(${CMAKE_SOURCE_DIR}/Cbc/include/config.h.in     ${CMAKE_BINARY_DIR}/Cbc/include/config.h)
 configure_file(${CMAKE_SOURCE_DIR}/Cbc/include/config_cbc.h.in ${CMAKE_BINARY_DIR}/Cbc/include/config_cbc.h)
 
-# ${Cbc_DIR}/src/CbcBranchBase.cpp must not be compiled yet (not in the Makefile.am in release 2.8.3)
 set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcBranchAllDifferent.cpp
+                 ${Cbc_DIR}/src/CbcBranchBase.cpp
                  ${Cbc_DIR}/src/CbcBranchCut.cpp
                  ${Cbc_DIR}/src/CbcBranchDecision.cpp
                  ${Cbc_DIR}/src/CbcBranchDefaultDecision.cpp
@@ -102,7 +102,7 @@ set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcThread.cpp
                  ${Cbc_DIR}/src/CbcTree.cpp
                  ${Cbc_DIR}/src/CbcTreeLocal.cpp
-	         ${Cbc_DIR}/src/unitTestClp.cpp)
+	             ${Cbc_DIR}/src/unitTestClp.cpp)
 
 set(Cbc_SRC_LIST_Headers ${Cbc_DIR}/src/Cbc_C_Interface.h
                          ${Cbc_DIR}/src/CbcBranchActual.hpp

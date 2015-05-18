@@ -55,13 +55,13 @@ set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Cbc Path")
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
-		 COIN_COMPILE_COVERAGE
-		 COIN_COMPILE_PROFILE
-		 COIN_COMPILE_PROFILE_VALGRIND
-		 COIN_COMPILE_LTO
-		 COIN_COMPILE_WHOPR
-		 COIN_COMPILE_WARNINGS
-		 Coin_DIR)
+                 COIN_COMPILE_COVERAGE
+                 COIN_COMPILE_PROFILE
+                 COIN_COMPILE_PROFILE_VALGRIND
+                 COIN_COMPILE_LTO
+                 COIN_COMPILE_WHOPR
+                 COIN_COMPILE_WARNINGS
+                 Coin_DIR)
 
 # CoinUtils options
 option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
@@ -115,23 +115,23 @@ set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if
 
 mark_as_advanced(COIN_ENABLE_AMD
                  COIN_HAS_AMD_INCLUDE_PATH
-		 COIN_HAS_AMD_LIBRARY_PATH
-		 COIN_ENABLE_CHOLMOD
-		 COIN_HAS_CHOLMOD_INCLUDE_PATH
-		 COIN_HAS_CHOLMOD_LIBRARY_PATH
-		 COIN_HAS_GLPK
-		 COIN_HAS_GLPK_INCLUDE_PATH
-		 COIN_HAS_GLPK_LIBRARY_PATH
-		 COIN_HAS_MUMPS
-		 COIN_HAS_MUMPS_INCLUDE_PATH
-		 COIN_HAS_MUMPS_LIBRARY_PATH
-		 COIN_HAS_WSMP
-		 COIN_HAS_WSMP_INCLUDE_PATH
-		 COIN_HAS_WSMP_LIBRARY_PATH
-		 COIN_HAS_ABC
-		 COIN_ABC_LEVEL
-		 COIN_CLP_CHECKLEVEL
-		 COIN_CLP_VERBOSITY)
+                 COIN_HAS_AMD_LIBRARY_PATH
+                 COIN_ENABLE_CHOLMOD
+                 COIN_HAS_CHOLMOD_INCLUDE_PATH
+                 COIN_HAS_CHOLMOD_LIBRARY_PATH
+                 COIN_HAS_GLPK
+                 COIN_HAS_GLPK_INCLUDE_PATH
+                 COIN_HAS_GLPK_LIBRARY_PATH
+                 COIN_HAS_MUMPS
+                 COIN_HAS_MUMPS_INCLUDE_PATH
+                 COIN_HAS_MUMPS_LIBRARY_PATH
+                 COIN_HAS_WSMP
+                 COIN_HAS_WSMP_INCLUDE_PATH
+                 COIN_HAS_WSMP_LIBRARY_PATH
+                 COIN_HAS_ABC
+                 COIN_ABC_LEVEL
+                 COIN_CLP_CHECKLEVEL
+                 COIN_CLP_VERBOSITY)
 
 # Cgl options
 set(COIN_CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
@@ -152,13 +152,13 @@ option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
 
 mark_as_advanced(COIN_CGL_CHECKLEVEL
                  COIN_CGL_VERBOSITY
-		 CBC_USE_THREADS
-		 CBC_DEFAULT_SOLVER
-		 COIN_CBC_CHECKLEVEL
-		 COIN_CBC_VERBOSITY
-		 COIN_OSI_CHECKLEVEL
-		 COIN_OSI_VERBOSITY
-		 COIN_USE_FAST_CODE)
+                 CBC_USE_THREADS
+                 CBC_DEFAULT_SOLVER
+                 COIN_CBC_CHECKLEVEL
+                 COIN_CBC_VERBOSITY
+                 COIN_OSI_CHECKLEVEL
+                 COIN_OSI_VERBOSITY
+                 COIN_USE_FAST_CODE)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -203,7 +203,7 @@ set(PACKAGE_STRING    "Cbc")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "cbc")
 # Define to the version of this package.
-set(PACKAGE_VERSION   "2.8.9")
+set(PACKAGE_VERSION   "2.9.4")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../cbc_binary" 
@@ -716,9 +716,6 @@ else ()
   include_directories(${COINOR_DIR}/include/coin)
 endif ()
 
-subdirs(Osi/OsiCbc)
-subdirs(Cbc)
-
 if (USE_OSI_XPRESS OR COMPILE_OSI_XPRESS)
   subdirs(Osi/OsiXpr) 
 endif ()
@@ -737,6 +734,9 @@ endif ()
 if (USE_OSI_SOPLEX OR COMPILE_OSI_SOPLEX)
   subdirs(Osi/OsiSpx) 
 endif ()
+
+subdirs(Osi/OsiCbc)
+subdirs(Cbc)
 
 # Perform some tests
 
