@@ -413,6 +413,10 @@ endif ()
 if (COIN_ENABLE_DOWNLOAD_METIS)
   set(METIS_VERSION "4.0.3")
   
+  if (NOT EXISTS ${EP_InstallDir}/include/metis)
+    make_directory(${EP_InstallDir}/include/metis)
+  endif ()
+  
   ExternalProject_Add(EP_Metis
                       PREFIX ${EP_InstallDir}/Metis
 		              URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
@@ -420,12 +424,12 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/ make
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/libmetis.a   ${EP_InstallDir}/lib
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/macros.h ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/struct.h ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/proto.h  ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/metis.h  ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/defs.h   ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/rename.h ${EP_InstallDir}/include
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/macros.h ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/struct.h ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/proto.h  ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/metis.h  ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/defs.h   ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/rename.h ${EP_InstallDir}/include/metis/
                       )
 endif()
 
@@ -442,7 +446,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
   
   if (COIN_ENABLE_DOWNLOAD_METIS)
-    set(MUMPS_METIS_INC_PATH "${EP_InstallDir}/include" CACHE PATH "The METIS library include Path" FORCE)
+    set(MUMPS_METIS_INC_PATH "${EP_InstallDir}/include/metis" CACHE PATH "The METIS library include Path" FORCE)
     set(MUMPS_METIS_LIB_PATH "${EP_InstallDir}/lib" CACHE PATH "The METIS library library Path" FORCE)
   else ()
     set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path" FORCE)

@@ -296,9 +296,9 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   			URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
 			CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib/src/EP_BZlib nmake -f makefile.msc
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/libbz2.lib ${EP_InstallDir}/lib &&
-			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib.h ${EP_InstallDir}/include &&
-			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib_private.h ${EP_InstallDir}/include
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/libbz2.lib      ${EP_InstallDir}/lib &&
+                                          ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib.h         ${EP_InstallDir}/include &&
+                                          ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib_private.h ${EP_InstallDir}/include
                         )
   else ()
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.a" CACHE STRING "The BZlib library name" FORCE)
@@ -308,9 +308,9 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   			URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
 			CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib/src/EP_BZlib make
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/libbz2.a ${EP_InstallDir}/lib &&
-			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib.h ${EP_InstallDir}/include &&
-			                  ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib_private.h ${EP_InstallDir}/include
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/libbz2.a        ${EP_InstallDir}/lib &&
+                                          ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib.h         ${EP_InstallDir}/include &&
+                                          ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib_private.h ${EP_InstallDir}/include
                         )
   endif ()
 endif ()
@@ -350,7 +350,7 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ./configure --prefix=${EP_InstallDir} --enable-static --disable-shared --with-pic
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk make
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk make install &&
-		                          ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glplpx.h ${EP_InstallDir}/include
+                                          ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glplpx.h ${EP_InstallDir}/include
                         )
   elseif (WIN32)
     if (CMAKE_SIZEOF_VOID_P EQUAL 4)
@@ -360,8 +360,8 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
                           CONFIGURE_COMMAND ""
                           BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk/w32 nmake -f Makefile_VC
                           INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/w32/glpk.lib ${EP_InstallDir}/lib &&
-			                    ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glpk.h   ${EP_InstallDir}/include &&
-			                    ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glplpx.h ${EP_InstallDir}/include
+                                            ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glpk.h   ${EP_InstallDir}/include &&
+                                            ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glplpx.h ${EP_InstallDir}/include
                           )
     else()
       ExternalProject_Add(EP_glpk
@@ -370,8 +370,8 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
                           CONFIGURE_COMMAND ""
                           BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk/w64 nmake -f Makefile_VC
                           INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/w64/glpk.lib ${EP_InstallDir}/lib &&
-			                    ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glpk.h   ${EP_InstallDir}/include &&
-			                    ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glplpx.h ${EP_InstallDir}/include
+                                            ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glpk.h   ${EP_InstallDir}/include &&
+                                            ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glplpx.h ${EP_InstallDir}/include
                           )
     endif()
   endif()
@@ -409,34 +409,15 @@ endif ()
 # #################################################
 
 # #################################################
-# ===> Mumps compilation
-# #################################################
-
-if (COIN_ENABLE_DOWNLOAD_MUMPS)
-  set(MUMPS_VERSION "4.10.0")
-  set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
-  
-  ExternalProject_Add(EP_Mumps
-                      PREFIX ${EP_InstallDir}/Mumps
-		              URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
-                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/CMakeLists_mumps.txt ${EP_InstallDir}/Mumps/src/EP_Mumps/CMakeLists.txt
-                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DUSE_MUMPS_LIBSEQ=ON ..
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make install
-                      )
-endif()
-
-# #################################################
-# <=== Mumps compilation
-# #################################################
-
-# #################################################
 # ===> Metis compilation
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_METIS)
   set(METIS_VERSION "4.0.3")
+  
+  if (NOT EXISTS ${EP_InstallDir}/include/metis)
+    make_directory(${EP_InstallDir}/include/metis)
+  endif ()
   
   ExternalProject_Add(EP_Metis
                       PREFIX ${EP_InstallDir}/Metis
@@ -445,17 +426,55 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/ make
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/libmetis.a   ${EP_InstallDir}/lib
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/macros.h ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/struct.h ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/proto.h  ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/metis.h  ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/defs.h   ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/rename.h ${EP_InstallDir}/include
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/macros.h ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/struct.h ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/proto.h  ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/metis.h  ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/defs.h   ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/rename.h ${EP_InstallDir}/include/metis/
                       )
 endif()
 
 # #################################################
 # <=== Metis compilation
+# #################################################
+
+# #################################################
+# ===> Mumps compilation
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_MUMPS)
+  set(MUMPS_VERSION "4.10.0")
+  set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
+  
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    set(MUMPS_METIS_INC_PATH "${EP_InstallDir}/include/metis" CACHE PATH "The METIS library include Path" FORCE)
+    set(MUMPS_METIS_LIB_PATH "${EP_InstallDir}/lib" CACHE PATH "The METIS library library Path" FORCE)
+  else ()
+    set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path" FORCE)
+    set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path" FORCE)
+  endif ()
+  
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    set(MUMPS_DEPENDS EP_Metis)
+  else ()
+    set(MUMPS_DEPENDS "")
+  endif ()
+  
+  ExternalProject_Add(EP_Mumps
+                      PREFIX ${EP_InstallDir}/Mumps
+                      DEPENDS ${MUMPS_DEPENDS}
+		              URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
+                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/CMakeLists_mumps.txt ${EP_InstallDir}/Mumps/src/EP_Mumps/CMakeLists.txt
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DMUMPS_USE_LIBSEQ=ON -DMUMPS_USE_METIS=${COIN_ENABLE_DOWNLOAD_METIS} -DMUMPS_METIS_INC_PATH:Path=${MUMPS_METIS_INC_PATH} -DMUMPS_METIS_LIB_PATH:Path=${MUMPS_METIS_LIB_PATH} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make install
+                      )
+endif()
+
+# #################################################
+# <=== Mumps compilation
 # #################################################
 
 # #################################################

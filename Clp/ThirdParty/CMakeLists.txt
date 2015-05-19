@@ -415,6 +415,10 @@ endif ()
 if (COIN_ENABLE_DOWNLOAD_METIS)
   set(METIS_VERSION "4.0.3")
   
+  if (NOT EXISTS ${EP_InstallDir}/include/metis)
+    make_directory(${EP_InstallDir}/include/metis)
+  endif ()
+  
   ExternalProject_Add(EP_Metis
                       PREFIX ${EP_InstallDir}/Metis
 		              URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
@@ -422,12 +426,12 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/ make
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/libmetis.a   ${EP_InstallDir}/lib
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/macros.h ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/struct.h ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/proto.h  ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/metis.h  ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/defs.h   ${EP_InstallDir}/include
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/rename.h ${EP_InstallDir}/include
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/macros.h ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/struct.h ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/proto.h  ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/metis.h  ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/defs.h   ${EP_InstallDir}/include/metis/
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/rename.h ${EP_InstallDir}/include/metis/
                       )
 endif()
 
@@ -443,12 +447,27 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
   set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
   
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    set(MUMPS_METIS_INC_PATH "${EP_InstallDir}/include/metis" CACHE PATH "The METIS library include Path" FORCE)
+    set(MUMPS_METIS_LIB_PATH "${EP_InstallDir}/lib" CACHE PATH "The METIS library library Path" FORCE)
+  else ()
+    set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path" FORCE)
+    set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path" FORCE)
+  endif ()
+  
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    set(MUMPS_DEPENDS EP_Metis)
+  else ()
+    set(MUMPS_DEPENDS "")
+  endif ()
+  
   ExternalProject_Add(EP_Mumps
                       PREFIX ${EP_InstallDir}/Mumps
+                      DEPENDS ${MUMPS_DEPENDS}
 		              URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/CMakeLists_mumps.txt ${EP_InstallDir}/Mumps/src/EP_Mumps/CMakeLists.txt
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DUSE_MUMPS_LIBSEQ=ON ..
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DMUMPS_USE_LIBSEQ=ON -DMUMPS_USE_METIS=${COIN_ENABLE_DOWNLOAD_METIS} -DMUMPS_METIS_INC_PATH:Path=${MUMPS_METIS_INC_PATH} -DMUMPS_METIS_LIB_PATH:Path=${MUMPS_METIS_LIB_PATH} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make install
                       )
