@@ -2,15 +2,19 @@ project (MUMPS C CXX Fortran)
 
 cmake_minimum_required (VERSION 2.8)
 
-option(PROJECT_REVISION "Set the project revision version (if you don't compile in a svn repo)" OFF)
-option(USE_MUMPS_LIBSEQ "Use the MUMPS sequential MPI stub" OFF)
+option(MUMPS_USE_LIBSEQ "Use the MUMPS sequential MPI stub" OFF)
+option(MUMPS_USE_METIS  "Use the Metis library" OFF)
+
+set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path")
+set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path")
 
 #------------------------------------------------------------
 # End of user config part
 #------------------------------------------------------------
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 #------------------------------------------------------------
 # Detect 64 bits
@@ -26,19 +30,34 @@ endif ()
 # MPI
 #------------------------------------------------------------
 
-if (NOT USE_MUMPS_LIBSEQ AND NOT MPI_FOUND)
+if (NOT MUMPS_USE_LIBSEQ AND NOT MPI_FOUND)
   # Use MPI_EXTRA_LIBNAMES to specify required libraries under MPI
   set(MPI_EXTRA_LIBNAMES fmpich mpich)
   find_package(MPI)
 endif ()
 
-if (NOT USE_MUMPS_LIBSEQ)
+if (NOT MUMPS_USE_LIBSEQ)
   if (WIN32)
     add_definitions("/Dpord")
     add_definitions("/DOMPI_IMPORTS /DOPAL_IMPORTS /DORTEIMPORTS")
   else ()
     add_definitions("-Dpord")
   endif ()
+endif ()
+
+#------------------------------------------------------------
+# METIS
+#------------------------------------------------------------
+
+if (MUMPS_USE_METIS)
+  add_definitions(-Dmetis)
+endif ()
+
+if (NOT "${MUMPS_METIS_INC_PATH}" STREQUAL "None")
+  include_directories(${MUMPS_METIS_INC_PATH})
+endif ()
+if (NOT "${MUMPS_METIS_LIB_PATH}" STREQUAL "None")
+  link_directories(${MUMPS_METIS_LIB_PATH})
 endif ()
 
 #------------------------------------------------------------
@@ -93,7 +112,7 @@ if (MPI_FOUND)
                    "${MPI_INCLUDE_PATH}")
 endif ()
 
-if (USE_MUMPS_LIBSEQ)
+if (MUMPS_USE_LIBSEQ)
   set(INCLUDE_DIRS ${INCLUDE_DIRS}
                    "${CMAKE_CURRENT_SOURCE_DIR}/libseq")
 endif ()
@@ -168,7 +187,7 @@ else ()
 endif ()
   
 if (WIN32)
-  if (USE_MUMPS_LIBSEQ)
+  if (MUMPS_USE_LIBSEQ)
     set(LINK_LIBS ${LINK_LIBS} 
                   libseq)
   else ()
@@ -188,7 +207,7 @@ else ()
                   iomp5)
   endif ()
   
-  if (USE_MUMPS_LIBSEQ)
+  if (MUMPS_USE_LIBSEQ)
     set(LINK_LIBS ${LINK_LIBS} 
                   libseq)
   else ()
@@ -211,7 +230,7 @@ else ()
   
 endif ()
 
-if (USE_MUMPS_LIBSEQ)
+if (MUMPS_USE_LIBSEQ)
   add_library(libseq STATIC ${MUMPS_LIBSEQ_SRCS})
   if (NOT WIN32)
     set_target_properties(libseq PROPERTIES PREFIX "")
@@ -285,8 +304,14 @@ endif ()
 set(LINK_LIBS ${LINK_LIBS}
               blas lapack)
 
+if (MUMPS_USE_METIS)
+  set(LINK_LIBS ${LINK_LIBS}
+                metis m)
+endif ()
+
 add_executable(ssimple_test examples/ssimpletest.F)
 target_link_libraries(ssimple_test libsmumps libmumps_common libpord ${LINK_LIBS})
+
 set_target_properties(ssimple_test PROPERTIES LINKER_LANGUAGE Fortran)
 
 add_executable(dsimple_test examples/dsimpletest.F)
@@ -310,7 +335,7 @@ if (WIN32)
 endif ()
 
 # Install rules
-if (USE_MUMPS_LIBSEQ)
+if (MUMPS_USE_LIBSEQ)
   install(TARGETS libseq DESTINATION lib)
 endif ()
 
@@ -321,7 +346,7 @@ install(TARGETS libdmumps DESTINATION lib)
 install(TARGETS libsmumps DESTINATION lib)
 install(TARGETS libzmumps DESTINATION lib)
 
-if (USE_MUMPS_LIBSEQ)
+if (MUMPS_USE_LIBSEQ)
   install(DIRECTORY libseq/
           DESTINATION include/
           PATTERN "*.h")

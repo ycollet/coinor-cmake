@@ -16,10 +16,10 @@ configure_file(${CMAKE_SOURCE_DIR}/CoinMP/include/config_coinmp.h.in ${CMAKE_BIN
 
 set(CoinMP_SRC_LIST ${CoinMP_DIR}/src/CoinMP.cpp
                     ${CoinMP_DIR}/src/CoinProblem.c
-		    ${CoinMP_DIR}/src/CoinResult.c
-		    ${CoinMP_DIR}/src/CoinSolver.c
-		    ${CoinMP_DIR}/src/CoinOption.c
-		    ${CoinMP_DIR}/src/CoinCbc.cpp)
+                    ${CoinMP_DIR}/src/CoinResult.c
+                    ${CoinMP_DIR}/src/CoinSolver.c
+                    ${CoinMP_DIR}/src/CoinOption.c
+                    ${CoinMP_DIR}/src/CoinCbc.cpp)
 
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinMP_DIR}/src)
@@ -133,6 +133,16 @@ if (COINMP_BUILD_EXAMPLES)
 	target_link_libraries(${Name} pthreadVC2)
       endif ()
     endif ()
+    if (COIN_HAS_MUMPS)
+      if ("${CMAKE_Fortran_COMPILER_ID}" STREQUAL "Intel")
+        target_link_libraries(${Name} dmumps mumps_common seq blas lapack ifort pthread)
+      else ()
+        target_link_libraries(${Name} dmumps mumps_common seq blas lapack gfortran pthread)
+      endif ()
+    endif ()
+    if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_DOWNLOAD_METIS)
+      target_link_libraries(${Name} metis m)
+    endif ()  
   endmacro()
   
   add_example(example ${CoinMP_DIR}/examples/example.c)

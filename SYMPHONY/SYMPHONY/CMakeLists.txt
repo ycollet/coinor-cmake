@@ -208,13 +208,13 @@ set(PACKARRAY_SRC ${SYMPHONY_DIR}/SYMPHONY/src/Common/pack_array.c)
 
 set(EXAMPLES_SRC ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c
                  ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c
-		 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c
-		 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c
-		 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c
-		 ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c
-		 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c
-		 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c
-		 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
+                 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c
+                 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
 
 set(OSISYM_SRC ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/OsiSymSolverInterface.cpp
                ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/SymWarmStart.cpp)
@@ -397,6 +397,9 @@ macro(add_example Name)
       target_link_libraries(${Name} dmumps mumps_common seq blas lapack gfortran pthread)
     endif ()
   endif ()  
+  if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_DOWNLOAD_METIS)
+    target_link_libraries(${Name} metis m)
+  endif ()  
 endmacro ()
 
 add_example(symphony ${MAIN_SRC})
@@ -537,6 +540,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
       else ()
         target_link_libraries(${Name} dmumps mumps_common seq blas lapack gfortran pthread)
       endif()
+    endif ()  
+    if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_DOWNLOAD_METIS)
+      target_link_libraries(${Name} metis m)
     endif ()  
   endmacro ()
   

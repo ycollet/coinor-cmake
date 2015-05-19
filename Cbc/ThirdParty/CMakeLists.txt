@@ -6,6 +6,7 @@ option(COIN_USE_DOWNLOAD_PTHREAD_WIN32 "Enable the use of the thirdparty PThread
 option(COIN_USE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
 option(COIN_USE_DOWNLOAD_CLAPACK       "Enable the use of the thirdparty CBlas / CLapack" OFF)
 option(COIN_USE_DOWNLOAD_GLPK          "Enable the use of the thirdparty GLPK" OFF)
+option(COIN_USE_DOWNLOAD_METIS         "Enable the use of the thirdparty METIS" OFF)
 option(COIN_USE_DOWNLOAD_MUMPS         "Enable the use of the thirdparty Mumps" OFF)
 option(COIN_USE_DOWNLOAD_ASL           "Enable the use of the thirdparty Ampl Solver Library" OFF)
 option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" OFF)
@@ -23,7 +24,7 @@ mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
 
 if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWNLOAD_CLAPACK OR
-    COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR
+    COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR COIN_USE_DOWNLOAD_METIS OR
     COIN_USE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ZLIB OR
     COIN_USE_DOWNLOAD_BZLIB)
   return()
@@ -33,6 +34,7 @@ option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
+option(COIN_ENABLE_DOWNLOAD_METIS         "Enable the download / compilation of METIS" OFF)
 option(COIN_ENABLE_DOWNLOAD_MUMPS         "Enable the download / compilation of Mumps" OFF)
 option(COIN_ENABLE_DOWNLOAD_ASL           "Enable the download / compilation of Ampl Solver Library" OFF)
 option(COIN_ENABLE_DOWNLOAD_DATA_TEST     "Enable the download / run of Data tests" OFF)
@@ -405,6 +407,33 @@ endif ()
 # #################################################
 
 # #################################################
+# ===> Metis compilation
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_METIS)
+  set(METIS_VERSION "4.0.3")
+  
+  ExternalProject_Add(EP_Metis
+                      PREFIX ${EP_InstallDir}/Metis
+		              URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                      PATCH_COMMAND     ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/ make
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/libmetis.a   ${EP_InstallDir}/lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/macros.h ${EP_InstallDir}/include
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/struct.h ${EP_InstallDir}/include
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/proto.h  ${EP_InstallDir}/include
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/metis.h  ${EP_InstallDir}/include
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/defs.h   ${EP_InstallDir}/include
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/rename.h ${EP_InstallDir}/include
+                      )
+endif()
+
+# #################################################
+# <=== Metis compilation
+# #################################################
+
+# #################################################
 # ===> Mumps compilation
 # #################################################
 
@@ -412,12 +441,27 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
   set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
   
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    set(MUMPS_METIS_INC_PATH "${EP_InstallDir}/include" CACHE PATH "The METIS library include Path" FORCE)
+    set(MUMPS_METIS_LIB_PATH "${EP_InstallDir}/lib" CACHE PATH "The METIS library library Path" FORCE)
+  else ()
+    set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path" FORCE)
+    set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path" FORCE)
+  endif ()
+  
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    set(MUMPS_DEPENDS EP_Metis)
+  else ()
+    set(MUMPS_DEPENDS "")
+  endif ()
+  
   ExternalProject_Add(EP_Mumps
                       PREFIX ${EP_InstallDir}/Mumps
+                      DEPENDS ${MUMPS_DEPENDS}
 		              URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/CMakeLists_mumps.txt ${EP_InstallDir}/Mumps/src/EP_Mumps/CMakeLists.txt
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DUSE_MUMPS_LIBSEQ=ON ..
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DMUMPS_USE_LIBSEQ=ON -DMUMPS_USE_METIS=${COIN_ENABLE_DOWNLOAD_METIS} -DMUMPS_METIS_INC_PATH:Path=${MUMPS_METIS_INC_PATH} -DMUMPS_METIS_LIB_PATH:Path=${MUMPS_METIS_LIB_PATH} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build make install
                       )
@@ -494,6 +538,9 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_GLPK)
     add_dependencies(${_target} EP_glpk)
   endif ()
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    add_dependencies(${_target} EP_Metis)
+  endif ()
   if (COIN_ENABLE_DOWNLOAD_MUMPS)
     add_dependencies(${_target} EP_Mumps)
   endif ()
@@ -519,6 +566,9 @@ macro(add_executable _target)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_GLPK)
     add_dependencies(${_target} EP_glpk)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    add_dependencies(${_target} EP_Metis)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_MUMPS)
     add_dependencies(${_target} EP_Mumps)
