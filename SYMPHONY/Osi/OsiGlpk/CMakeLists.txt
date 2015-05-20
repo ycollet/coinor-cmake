@@ -7,6 +7,8 @@ include_directories(${MY_GLPK_DIR}/include)
 
 if (("${COIN_HAS_GLPK_INCLUDE_PATH}" STREQUAL "None") AND ("${COIN_HAS_GLPK_LIBRARY_PATH}" STREQUAL "None"))
   find_package(Glpk)
+else()
+  set(GLPK_VERSION "4.52")
 endif ()
 
 macro(set_include_directories TARGET)
@@ -18,10 +20,16 @@ if (NOT COIN_GLPK_DIR STREQUAL "None")
   include_directories(${COIN_GLPK_DIR}/include)
 endif ()
 
-set(OsiGlpk_SRCS ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
+#set(OsiGlpk_SRCS ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.cpp)
+#if ("${GLPK_VERSION}" VERSION_GREATER "4.48")
+#  set(OsiGlpk_SRCS ${OsiGlpk_SRCS}
+#                   ${Osi_DIR}/src/OsiGlpk/lpx.c)
+#endif ()
+
+set(OsiGlpk_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/OsiGlpkSolverInterface.cpp)
 if ("${GLPK_VERSION}" VERSION_GREATER "4.48")
   set(OsiGlpk_SRCS ${OsiGlpk_SRCS}
-                   ${Osi_DIR}/src/OsiGlpk/lpx.c)
+                   ${CMAKE_CURRENT_SOURCE_DIR}/lpx.c)
 endif ()
 
 if (ENABLE_SHARED_LIBRARIES)
