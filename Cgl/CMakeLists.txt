@@ -709,3 +709,11 @@ endif ()
 if (USE_OSI_SOPLEX OR COMPILE_OSI_SOPLEX)
   subdirs(Osi/OsiSpx) 
 endif ()
+
+#
+# Packaging
+#
+
+set(CPACK_PACKAGE_RELOCATABLE TRUE)
+
+include(CPack)

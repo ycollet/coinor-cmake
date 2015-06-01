@@ -449,3 +449,11 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
 endif ()
 
 subdirs(CoinUtils)
+
+#
+# Packaging
+#
+
+set(CPACK_PACKAGE_RELOCATABLE TRUE)
+
+include(CPack)

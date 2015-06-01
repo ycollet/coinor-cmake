@@ -1185,3 +1185,11 @@ if (CBC_BUILD_CBC_GENERIC AND NOT USE_COINOR_DIR)
     set_tests_properties(exmip1_lp_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
   endif ()
 endif()
+
+#
+# Packaging
+#
+
+set(CPACK_PACKAGE_RELOCATABLE TRUE)
+
+include(CPack)

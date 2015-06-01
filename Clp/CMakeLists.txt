@@ -938,3 +938,11 @@ set_tests_properties(exmip1_lp PROPERTIES LABELS "LP")
 if (WIN32)
   set_tests_properties(exmip1_lp PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
 endif ()
+
+#
+# Packaging
+#
+
+set(CPACK_PACKAGE_RELOCATABLE TRUE)
+
+include(CPack)

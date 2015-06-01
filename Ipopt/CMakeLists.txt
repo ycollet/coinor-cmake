@@ -564,3 +564,11 @@ if (IPOPT_ENABLE_INEXACT)
 endif ()
 
 subdirs(Ipopt)
+
+#
+# Packaging
+#
+
+set(CPACK_PACKAGE_RELOCATABLE TRUE)
+
+include(CPack)
