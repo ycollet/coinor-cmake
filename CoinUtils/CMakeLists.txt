@@ -401,26 +401,6 @@ endif ()
 add_definitions(-DHAVE_CONFIG_H)
 
 #-----------------------------------------------
-# A trick to switch to 32 compilation when in
-# a 64 bits mode
-#-----------------------------------------------
-
-#if (${CMAKE_SYSTEM_NAME} MATCHES "Windows")
-#  if (CMAKE_CL_64)
-#    # The following line calls the build configuration for x86 VS2010 compiler
-#    # call "\"%VS100COMNTOOLS%../../VC/vcvarsall.bat\"" x86
-#    add_custom_command(
-#      OUTPUT "${octFileName}"
-#      COMMAND call "\"%VS100COMNTOOLS%../../VC/vcvarsall.bat\"" x86
-#      COMMAND ${CMAKE_COMMAND} ARGS -E chdir ${OCTAVE_PATH} ${MKOCTFILE_EXECUTABLE} -I${OCTAVE_QT_QTNETWORK_INCLUDE_DIR}
-#                               -I${OCTAVE_QT_QTCORE_INCLUDE_DIR} -I${OCTAVE_QT_INCLUDE_DIR} ${RPATH_COMMAND}
-#                   -L${OCTAVE_QT_LIBRARY_DIR} -lQtCore${QT_LIBRARY_POSTFIX} -lQtNetwork${QT_LIBRARY_POSTFIX} -o "${octFileName}" "${srcFileName}"
-#      DEPENDS "${srcFileName}"
-#      COMMENT "Generating ${octFileName}"
-#      )
-#endif ()
-
-#-----------------------------------------------
 # Doxygen documentation
 #-----------------------------------------------
 
@@ -455,7 +435,7 @@ subdirs(CoinUtils)
 #
 
 set(CPACK_PACKAGE_NAME      "${PACKAGE_NAME}")
-set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${PACKAGE_VERSION}-${CMAKE_SYSTEM}")
+set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}")
 
 message(STATUS "Package filename: ${CPACK_PACKAGE_FILE_NAME}")
 
