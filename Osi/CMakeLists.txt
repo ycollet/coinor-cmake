@@ -617,3 +617,4 @@ else (WIN32)
 endif ()
 
 include(CPack)
+include(CTest)
