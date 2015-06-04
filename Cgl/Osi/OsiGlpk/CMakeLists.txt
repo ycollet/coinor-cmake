@@ -32,6 +32,10 @@ if ("${GLPK_VERSION}" VERSION_GREATER "4.48")
                    ${CMAKE_CURRENT_SOURCE_DIR}/lpx.c)
 endif ()
 
+if (NOT WIN32)
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
+endif ()
+
 if (ENABLE_SHARED_LIBRARIES)
   add_library(libOsiGlpk SHARED ${OsiGlpk_SRCS})
 else ()
