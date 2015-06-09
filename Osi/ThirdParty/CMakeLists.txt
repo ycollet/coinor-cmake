@@ -401,7 +401,7 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
 		              GIT_REPOSITORY https://github.com/jlblancoc/suitesparse-metis-for-windows.git
                       PATCH_COMMAND     ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse//build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} ..
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse//build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
                       )
