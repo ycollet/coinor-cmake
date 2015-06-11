@@ -36,27 +36,15 @@ endif ()
 if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
 
-  if (WIN32)
-    ExternalProject_Add(EP_Mumps
-                        PREFIX ${EP_InstallDir}/Mumps
-  			URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
-			PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/Mumps/CMakeLists.txt ${EP_InstallDir}/Mumps/src/EP_Mumps
-			CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
-                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DPROJECT_REVISION=10 -DUSE_MUMPS_LIBSEQ=ON -G "NMake Makefiles" ..
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
-                        )
-  else ()
-    ExternalProject_Add(EP_Mumps
-                        PREFIX ${EP_InstallDir}/Mumps
-  			URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
-			PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Mumps/CMakeLists.txt ${EP_InstallDir}/Mumps/src/EP_Mumps
-			CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
-                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DPROJECT_REVISION=10 -DUSE_MUMPS_LIBSEQ=ON ..
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
-                        )
-  endif()
+  ExternalProject_Add(EP_Mumps
+                      PREFIX ${EP_InstallDir}/Mumps
+                      URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
+                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/Mumps/CMakeLists.txt ${EP_InstallDir}/Mumps/src/EP_Mumps
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DPROJECT_REVISION=10 -DUSE_MUMPS_LIBSEQ=ON -G ${CMAKE_GENERATOR} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM}
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
+                      )
 endif()
 
 # #################################################
@@ -73,19 +61,19 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
   if (WIN32)
     ExternalProject_Add(EP_Metis
                         PREFIX ${EP_InstallDir}/Metis
-  			URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
-			PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis/src/EP_Metis
-			CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis/src/EP_Metis/build
-                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -G "NMake Makefiles" ..
+                        URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis/src/EP_Metis
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis/src/EP_Metis/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -G ${CMAKE_GENERATOR} ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM}
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM} install
                         )
   else ()
     ExternalProject_Add(EP_Metis
                         PREFIX ${EP_InstallDir}/Metis
-  			URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
-			PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis/src/EP_Metis
-			CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis/src/EP_Metis/build
+                        URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis/src/EP_Metis
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis/src/EP_Metis/build
                                        && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM}
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM} install

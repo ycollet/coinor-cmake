@@ -56,13 +56,13 @@ set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE STRING "The Cbc Path")
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
-		 COIN_COMPILE_COVERAGE
-		 COIN_COMPILE_PROFILE
-		 COIN_COMPILE_PROFILE_VALGRIND
-		 COIN_COMPILE_LTO
-		 COIN_COMPILE_WHOPR
-		 COIN_COMPILE_WARNINGS
-		 Coin_DIR)
+                 COIN_COMPILE_COVERAGE
+                 COIN_COMPILE_PROFILE
+                 COIN_COMPILE_PROFILE_VALGRIND
+                 COIN_COMPILE_LTO
+                 COIN_COMPILE_WHOPR
+                 COIN_COMPILE_WARNINGS
+                 Coin_DIR)
 
 # CoinUtils options
 option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
@@ -160,13 +160,13 @@ option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
 
 mark_as_advanced(COIN_CGL_CHECKLEVEL
                  COIN_CGL_VERBOSITY
-		 CBC_USE_THREADS
-		 CBC_DEFAULT_SOLVER
-		 COIN_CBC_CHECKLEVEL
-		 COIN_CBC_VERBOSITY
-		 COIN_OSI_CHECKLEVEL
-		 COIN_OSI_VERBOSITY
-		 COIN_USE_FAST_CODE)
+                 CBC_USE_THREADS
+                 CBC_DEFAULT_SOLVER
+                 COIN_CBC_CHECKLEVEL
+                 COIN_CBC_VERBOSITY
+                 COIN_OSI_CHECKLEVEL
+                 COIN_OSI_VERBOSITY
+                 COIN_USE_FAST_CODE)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -199,6 +199,8 @@ set(COIN_HAS_OSI       1)
 set(COIN_HAS_OSITESTS  1)
 # Set to 1 if the Sample package is available
 set(COIN_HAS_SAMPLE    1)
+set(COIN_HAS_CGL       1) # Set this to 1 if cgl is compiled
+set(COIN_HAS_CLP       1) # Set this to 1 if clp is compiled
 
 # Name of package
 set(PACKAGE           "Cbc")
@@ -644,13 +646,6 @@ endif ()
 if (USE_DYLP)
   set(COIN_HAS_DYLP 1)
 endif ()
-
-set(COIN_HAS_CGL 1) # Set this to 1 if cgl is compiled
-set(COIN_HAS_CLP 1) # Set this to 1 if clp is compiled
-#set(COIN_HAS_DEPEND 1) # Set this to 1 if coin has dependencies
-#set(COIN_HAS_MUMPS 1) # Set this to 1 if Mumps dependencies is available
-#set(COIN_HAS_NETLIB 1) # Set this to 1 if the NetLib dependencies is available
-#set(GLPK_HAS_INTOPT 1) # Set to 1 if GLPK has the advanced B&B solver lpx_intopt
 
 add_definitions(-DHAVE_CONFIG_H)
 

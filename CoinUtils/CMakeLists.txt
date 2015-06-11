@@ -24,13 +24,13 @@ set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The CoinUtils Path")
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
-		 COIN_COMPILE_COVERAGE
-		 COIN_COMPILE_PROFILE
-		 COIN_COMPILE_PROFILE_VALGRIND
-		 COIN_COMPILE_LTO
-		 COIN_COMPILE_WHOPR
-		 COIN_COMPILE_WARNINGS
-		 Coin_DIR)
+                 COIN_COMPILE_COVERAGE
+                 COIN_COMPILE_PROFILE
+                 COIN_COMPILE_PROFILE_VALGRIND
+                 COIN_COMPILE_LTO
+                 COIN_COMPILE_WHOPR
+                 COIN_COMPILE_WARNINGS
+                 Coin_DIR)
 
 # CoinUtils options
 option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
@@ -46,13 +46,13 @@ set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Coi
 
 mark_as_advanced(COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
-		 COINUTILS_USE_MEMPOOL_MAXPOOLED
-		 COINUTILS_HAS_ZLIB
-		 COINUTILS_HAS_BZLIB
-		 COIN_HAS_LAPACK
-		 COIN_HAS_BLAS
-		 COIN_COINUTILS_CHECKLEVEL
-		 COIN_COINUTILS_VERBOSITY)
+                 COINUTILS_USE_MEMPOOL_MAXPOOLED
+                 COINUTILS_HAS_ZLIB
+                 COINUTILS_HAS_BZLIB
+                 COIN_HAS_LAPACK
+                 COIN_HAS_BLAS
+                 COIN_COINUTILS_CHECKLEVEL
+                 COIN_COINUTILS_VERBOSITY)
 
 # Use fast code
 option(COIN_USE_FAST_CODE "Use fast code for CoinUtils" OFF)

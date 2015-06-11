@@ -181,6 +181,8 @@ set(COIN_HAS_OSI       1)
 set(COIN_HAS_OSITESTS  1)
 # Set to 1 if the Sample package is available
 set(COIN_HAS_SAMPLE    1)
+set(COIN_HAS_CGL       1) # Set this to 1 if cgl is compiled
+set(COIN_HAS_CLP       1) # Set this to 1 if clp is compiled
 
 # Name of package
 set(PACKAGE           "Cgl")
@@ -612,13 +614,6 @@ endif ()
 if (USE_DYLP)
   set(COIN_HAS_DYLP 1)
 endif ()
-
-set(COIN_HAS_CGL 1) # Set this to 1 if cgl is compiled
-set(COIN_HAS_CLP 1) # Set this to 1 if clp is compiled
-#set(COIN_HAS_DEPEND 1) # Set this to 1 if coin has dependencies
-#set(COIN_HAS_MUMPS 1) # Set this to 1 if Mumps dependencies is available
-#set(COIN_HAS_NETLIB 1) # Set this to 1 if the NetLib dependencies is available
-#set(GLPK_HAS_INTOPT 1) # Set to 1 if GLPK has the advanced B&B solver lpx_intopt
 
 add_definitions(-DHAVE_CONFIG_H)
 

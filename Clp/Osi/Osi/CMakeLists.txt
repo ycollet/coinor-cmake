@@ -6,9 +6,9 @@ set(OSI_SVN_REV "${OSI_VERSION_RELEASE}")
 
 mark_as_advanced(OSI_VERSION_MAJOR
                  OSI_VERSION_MINOR
-		 OSI_VERSION_RELEASE
-		 OSI_VERSION
-		 OSI_SVN_REV)
+                 OSI_VERSION_RELEASE
+                 OSI_VERSION
+                 OSI_SVN_REV)
 
 add_definitions(-DOSI_BUILD)
 
@@ -30,12 +30,12 @@ set(Osi_SRC_LIST ${Osi_DIR}/src/Osi/OsiAuxInfo.cpp
 
 set(OsiCommonTests_SRC_LIST ${Osi_DIR}/src/OsiCommonTest/OsiUnitTestUtils.cpp
                             ${Osi_DIR}/src/OsiCommonTest/OsiColCutTest.cpp
-			    ${Osi_DIR}/src/OsiCommonTest/OsiCutsTest.cpp
-			    ${Osi_DIR}/src/OsiCommonTest/OsiNetlibTest.cpp
-			    ${Osi_DIR}/src/OsiCommonTest/OsiRowCutDebuggerTest.cpp
-			    ${Osi_DIR}/src/OsiCommonTest/OsiRowCutTest.cpp
-			    ${Osi_DIR}/src/OsiCommonTest/OsiSimplexAPITest.cpp
-			    ${Osi_DIR}/src/OsiCommonTest/OsiSolverInterfaceTest.cpp)
+                            ${Osi_DIR}/src/OsiCommonTest/OsiCutsTest.cpp
+                            ${Osi_DIR}/src/OsiCommonTest/OsiNetlibTest.cpp
+                            ${Osi_DIR}/src/OsiCommonTest/OsiRowCutDebuggerTest.cpp
+                            ${Osi_DIR}/src/OsiCommonTest/OsiRowCutTest.cpp
+                            ${Osi_DIR}/src/OsiCommonTest/OsiSimplexAPITest.cpp
+                            ${Osi_DIR}/src/OsiCommonTest/OsiSolverInterfaceTest.cpp)
 
 set(Osi_SRC_LIST_Headers ${Osi_DIR}/src/Osi/OsiAuxInfo.hpp
                          ${Osi_DIR}/src/Osi/OsiBranchingObject.hpp

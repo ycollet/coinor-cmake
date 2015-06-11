@@ -41,13 +41,13 @@ option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
-		 COIN_COMPILE_COVERAGE
-		 COIN_COMPILE_PROFILE
-		 COIN_COMPILE_PROFILE_VALGRIND
-		 COIN_COMPILE_LTO
-		 COIN_COMPILE_WHOPR
-		 COIN_USE_FAST_CODE
-		 COIN_COMPILE_WARNINGS)
+                 COIN_COMPILE_COVERAGE
+                 COIN_COMPILE_PROFILE
+                 COIN_COMPILE_PROFILE_VALGRIND
+                 COIN_COMPILE_LTO
+                 COIN_COMPILE_WHOPR
+                 COIN_USE_FAST_CODE
+                 COIN_COMPILE_WARNINGS)
 
 set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")

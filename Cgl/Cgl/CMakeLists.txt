@@ -7,9 +7,9 @@ set(CGL_SVN_REV "${CGL_VERSION_RELEASE}")
 
 mark_as_advanced(CGL_VERSION_MAJOR
                  CGL_VERSION_MINOR
-		 CGL_VERSION_RELEASE
-		 CGL_VERSION
-		 CGL_SVN_REV)
+                 CGL_VERSION_RELEASE
+                 CGL_VERSION
+                 CGL_SVN_REV)
 
 add_definitions(-DCGL_BUILD)
 
@@ -177,7 +177,7 @@ if (CGL_BUILD_EXAMPLES)
       target_link_libraries(${Name} amd)
     endif ()
     if (COIN_HAS_CHOLMOD)
-      target_link_libraries(${Name} cholmod)
+      target_link_libraries(${Name} cholmod suitesparseconfig amd ccolamd colamd camd)
     endif () 
     if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32)
       if (NOT WIN32)
@@ -220,7 +220,7 @@ if (COIN_HAS_AMD)
   target_link_libraries(unitTest amd)
 endif ()
 if (COIN_HAS_CHOLMOD)
-  target_link_libraries(unitTest cholmod)
+  target_link_libraries(unitTest cholmod suitesparseconfig amd ccolamd colamd camd)
 endif () 
 if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32)
   if (NOT WIN32)
