@@ -72,6 +72,10 @@ if (COIN_ENABLE_FIND_BZLIB AND COIN_DOWNLOAD_BZLIB)
   set(COIN_ENABLE_DOWNLOAD_BZLIB FALSE)
 endif ()
 
+if (COIN_DOWNLOAD_SUITESPARSE AND NOT (COIN_DOWNLOAD_LAPACK OR COIN_DOWNLOAD_CLAPACK OR COIN_ENABLE_FIND_LAPACK))
+  message(STATUS "Warning: SuiteSparse needs a Blas/Lapack library. Make sur that a Blas/Lapack library is download or installed.")
+endif ()
+
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 
