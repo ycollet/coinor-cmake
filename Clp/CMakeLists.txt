@@ -49,6 +49,7 @@ option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation fo
 option(COIN_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
 option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
+option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
@@ -58,6 +59,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_LTO
                  COIN_COMPILE_WHOPR
                  COIN_COMPILE_WARNINGS
+                 COIN_COMPILE_CXX11
                  Coin_DIR)
 
 # CoinUtils options
@@ -339,24 +341,6 @@ endif ()
 #-----------------------------------------------------------------------------
 
 if (NOT WIN32)
-  #enable_language(Fortran)
-  #
-  #include(FortranCInterface)
-  #
-  #FortranCInterface_HEADER(${CMAKE_BINARY_DIR}/F77Mangle.h
-  #                         MACRO_NAMESPACE "F77_"
-  #               SYMBOL_NAMESPACE "F77_"
-  #               SYMBOLS mysub mymod:my_sub
-  #              )
-  #
-  #file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
-  #string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
-  #set(F77_FUNC "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
-  #
-  #file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
-  #string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
-  #set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
-  
   set(F77_FUNC "F77_FUNC(name,NAME) name##_")
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
 else ()
@@ -404,22 +388,25 @@ check_include_file("cieeefp"     HAVE_CIEEEFP)
 check_include_file("cfloat"      HAVE_CFLOAT)
 check_include_file("cinttypes"   HAVE_CINTTYPES)
 
-#include(CheckCXXCompilerFlag)
-#
-#check_cxx_compiler_flag(-std=c++11 HAVE_STD_CPP11_FLAG)
-#if (HAVE_STD_CPP11_FLAG)
-#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-#else ()
-#  check_cxx_compiler_flag(-std=c++0x HAVE_STD_CPP0X_FLAG)
-#  if (HAVE_STD_CPP0X_FLAG)
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-#  endif ()
-#endif ()
+include(CheckCXXCompilerFlag)
 
-#check_cxx_compiler_flag(-Qunused-arguments HAVE_QUNUSED_ARGUMENTS)
-#if (HAVE_QUNUSED_ARGUMENTS)
-#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Qunused-arguments")
-#endif ()
+if (COIN_COMPILE_CXX11 AND NOT WIN32)
+  # VS2013 activate C++11 by default
+  check_cxx_compiler_flag(-std=c++11 HAVE_STD_CPP11_FLAG)
+  if (HAVE_STD_CPP11_FLAG)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  else ()
+    check_cxx_compiler_flag(-std=c++0x HAVE_STD_CPP0X_FLAG)
+    if (HAVE_STD_CPP0X_FLAG)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    endif ()
+  endif ()
+endif ()
+
+check_cxx_compiler_flag(-Qunused-arguments HAVE_QUNUSED_ARGUMENTS)
+if (HAVE_QUNUSED_ARGUMENTS)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Qunused-arguments")
+endif ()
 
 include(CheckTypeSize)
 
@@ -429,11 +416,6 @@ CHECK_TYPE_SIZE("int *"     SIZEOF_INT_P)
 CHECK_TYPE_SIZE("long"      SIZEOF_LONG)
 CHECK_TYPE_SIZE("long long" SIZEOF_LONG_LONG)
 
-#if (SIZEOF_INT64_T EQUAL "8")
-#  set(COIN_INTPTR_T "int64_t")
-#  set(COIN_INT64_T  "int64_t")
-#  set(COIN_UINT64_T "uint64_t")
-#elseif (SIZEOF_LONG_LONG EQUAL "8")
 if (SIZEOF_LONG_LONG EQUAL "8")
   set(COIN_INTPTR_T "long long")
   set(COIN_INT64_T  "long long")
@@ -447,11 +429,6 @@ elseif (SIZEOF_INT EQUAL "8")
   set(COIN_INT64_T  "int")
   set(COIN_UINT64_T "unsigned int")
 endif ()
-
-# With the trunk version of Cbc, Threads and Cilk are allowed
-#if (COIN_HAS_ABC AND (COINUTILS_USE_THREADS OR CBC_USE_THREADS))
-#  message(FATAL_ERROR "Error: Threads and Cilk (ABC) are incompatible")
-#endif ()
 
 if ((COIN_ABC_LEVEL LESS 0) OR (COIN_ABC_LEVEL GREATER 4))
   message(FATAL_ERROR "Error: COIN_ABC_LEVEL must be between 0 and 4")

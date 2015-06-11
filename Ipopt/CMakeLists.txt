@@ -38,6 +38,7 @@ option(COIN_COMPILE_LTO              "Activate the whole program optimization (u
 option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
 option(COIN_USE_FAST_CODE            "Use intensive optimization flags" OFF)
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
+option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
@@ -47,7 +48,8 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_LTO
                  COIN_COMPILE_WHOPR
                  COIN_USE_FAST_CODE
-                 COIN_COMPILE_WARNINGS)
+                 COIN_COMPILE_WARNINGS
+                 COIN_COMPILE_CXX11)
 
 set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
@@ -61,13 +63,13 @@ set(IPOPT_HAS_WSMP_INCLUDE_PATH "None" CACHE PATH "The WSMP linear solver includ
 set(IPOPT_HAS_WSMP_LIBRARY_PATH "None" CACHE PATH "The WSMP linear solver absolute library Path")
 
 mark_as_advanced(COIN_HAS_MUMPS
-		 COIN_HAS_MUMPS_INCLUDE_PATH
-		 COIN_HAS_MUMPS_LIBRARY_PATH
-		 COIN_HAS_WSMP
-		 COIN_HAS_WSMP_INCLUDE_PATH
-		 COIN_HAS_WSMP_LIBRARY_PATH
-		 COIN_IPOPT_CHECKLEVEL
-		 COIN_IPOPT_VERBOSITY)
+                 COIN_HAS_MUMPS_INCLUDE_PATH
+                 COIN_HAS_MUMPS_LIBRARY_PATH
+                 COIN_HAS_WSMP
+                 COIN_HAS_WSMP_INCLUDE_PATH
+                 COIN_HAS_WSMP_LIBRARY_PATH
+                 COIN_IPOPT_CHECKLEVEL
+                 COIN_IPOPT_VERBOSITY)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -259,22 +261,25 @@ check_include_file("time.h"      HAVE_TIME_H)
 check_include_file("unistd.h"    HAVE_UNISTD_H)
 check_include_file("windows.h"   HAVE_WINDOWS_H)
 
-#include(CheckCXXCompilerFlag)
-#
-#check_cxx_compiler_flag(-std=c++11 HAVE_STD_CPP11_FLAG)
-#if (HAVE_STD_CPP11_FLAG)
-#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-#else ()
-#  check_cxx_compiler_flag(-std=c++0x HAVE_STD_CPP0X_FLAG)
-#  if (HAVE_STD_CPP0X_FLAG)
-#    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-#  endif ()
-#endif ()
+include(CheckCXXCompilerFlag)
 
-#check_cxx_compiler_flag(-Qunused-arguments HAVE_QUNUSED_ARGUMENTS)
-#if (HAVE_QUNUSED_ARGUMENTS)
-#  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Qunused-arguments")
-#endif ()
+if (COIN_COMPILE_CXX11 AND NOT WIN32)
+  # VS2013 activate C++11 by default
+  check_cxx_compiler_flag(-std=c++11 HAVE_STD_CPP11_FLAG)
+  if (HAVE_STD_CPP11_FLAG)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  else ()
+    check_cxx_compiler_flag(-std=c++0x HAVE_STD_CPP0X_FLAG)
+    if (HAVE_STD_CPP0X_FLAG)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
+    endif ()
+  endif ()
+endif ()
+
+check_cxx_compiler_flag(-Qunused-arguments HAVE_QUNUSED_ARGUMENTS)
+if (HAVE_QUNUSED_ARGUMENTS)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Qunused-arguments")
+endif ()
 
 include(CheckTypeSize)
 
