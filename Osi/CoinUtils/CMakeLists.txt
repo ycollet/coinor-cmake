@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(CoinUtils)
-
 option(COINUTILS_ENABLE_UNITTEST "Enable building the unit test executable" OFF)
 set(COINUTILS_VERSION_MAJOR   "2"  CACHE STRING "The COINUTILS major version number")
 set(COINUTILS_VERSION_MINOR   "9"  CACHE STRING "The COINUTILS minor version number")
@@ -20,17 +16,17 @@ set(BZLIB_NAME "bz2" CACHE STRING "The BZlib library name")
 
 mark_as_advanced(COINUTILS_VERSION_MAJOR
                  COINUTILS_VERSION_MINOR
-		 COINUTILS_VERSION_RELEASE
-		 COINUTILS_VERSION
-		 COINUTILS_SVN_REV
-		 COINUTILS_HAS_ZLIB
-		 COINUTILS_HAS_ZLIB_INCLUDE_PATH
-		 COINUTILS_HAS_ZLIB_LIBRARY_PATH
-		 ZLIB_NAME
-		 COINUTILS_HAS_BZLIB
-		 COINUTILS_HAS_BZLIB_INCLUDE_PATH
-		 COINUTILS_HAS_BZLIB_LIBRARY_PATH
-		 BZLIB_NAME)
+                 COINUTILS_VERSION_RELEASE
+                 COINUTILS_VERSION
+                 COINUTILS_SVN_REV
+                 COINUTILS_HAS_ZLIB
+                 COINUTILS_HAS_ZLIB_INCLUDE_PATH
+                 COINUTILS_HAS_ZLIB_LIBRARY_PATH
+                 ZLIB_NAME
+                 COINUTILS_HAS_BZLIB
+                 COINUTILS_HAS_BZLIB_INCLUDE_PATH
+                 COINUTILS_HAS_BZLIB_LIBRARY_PATH
+                 BZLIB_NAME)
 
 include(coin-macros)
 

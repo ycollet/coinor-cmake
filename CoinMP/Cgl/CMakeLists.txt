@@ -7,9 +7,9 @@ set(CGL_SVN_REV "${CGL_VERSION_RELEASE}")
 
 mark_as_advanced(CGL_VERSION_MAJOR
                  CGL_VERSION_MINOR
-		 CGL_VERSION_RELEASE
-		 CGL_VERSION
-		 CGL_SVN_REV)
+                 CGL_VERSION_RELEASE
+                 CGL_VERSION
+                 CGL_SVN_REV)
 
 add_definitions(-DCGL_BUILD)
 

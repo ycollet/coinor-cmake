@@ -389,8 +389,8 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(longthin ${Cbc_DIR}/examples/longthin.cpp 
                        ${Cbc_DIR}/examples/CbcBranchUser.cpp
-		       ${Cbc_DIR}/examples/CbcCompareUser.cpp
-		       ${Cbc_DIR}/examples/CbcSolver2.cpp)
+                       ${Cbc_DIR}/examples/CbcCompareUser.cpp
+                       ${Cbc_DIR}/examples/CbcSolver2.cpp)
   
   add_test(NAME cbc_example_longthin
            COMMAND $<TARGET_FILE:longthin> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -435,10 +435,10 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(fast0507b ${Cbc_DIR}/examples/fast0507b.cpp
                         ${Cbc_DIR}/examples/CbcBranchFollow2.cpp
-			${Cbc_DIR}/examples/CbcBranchUser.cpp
-			${Cbc_DIR}/examples/CbcCompareUser.cpp
-			${Cbc_DIR}/examples/CbcSolver2.cpp
-			${Cbc_DIR}/examples/CbcSolver3.cpp)
+                        ${Cbc_DIR}/examples/CbcBranchUser.cpp
+                        ${Cbc_DIR}/examples/CbcCompareUser.cpp
+                        ${Cbc_DIR}/examples/CbcSolver2.cpp
+                        ${Cbc_DIR}/examples/CbcSolver3.cpp)
   
   add_test(NAME cbc_example_fast0507b
            COMMAND $<TARGET_FILE:fast0507b> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -460,8 +460,8 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(qmip ${Cbc_DIR}/examples/qmip.cpp
                    ${Cbc_DIR}/examples/CbcBranchUser.cpp
-		   ${Cbc_DIR}/examples/CbcCompareUser.cpp
-		   ${Cbc_DIR}/examples/ClpQuadInterface.cpp)
+                   ${Cbc_DIR}/examples/CbcCompareUser.cpp
+                   ${Cbc_DIR}/examples/ClpQuadInterface.cpp)
   
   add_test(NAME cbc_example_qmip
            COMMAND $<TARGET_FILE:qmip> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -483,8 +483,8 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(fast0507 ${Cbc_DIR}/examples/fast0507.cpp
                        ${Cbc_DIR}/examples/CbcCompareUser.cpp
-		       ${Cbc_DIR}/examples/CbcSolver3.cpp
-		       ${Cbc_DIR}/examples/CbcBranchUser.cpp)
+                       ${Cbc_DIR}/examples/CbcSolver3.cpp
+                       ${Cbc_DIR}/examples/CbcBranchUser.cpp)
   
   add_test(NAME cbc_example_fast0507
            COMMAND $<TARGET_FILE:fast0507> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -506,7 +506,7 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(repeat ${Cbc_DIR}/examples/repeat.cpp
                      ${Cbc_DIR}/examples/CbcBranchUser.cpp
-		     ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+                     ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_repeat
            COMMAND $<TARGET_FILE:repeat> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -591,7 +591,7 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(hotstart ${Cbc_DIR}/examples/hotstart.cpp
                        ${Cbc_DIR}/examples/CbcBranchUser.cpp
-		       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_hotstart
            COMMAND $<TARGET_FILE:hotstart> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -613,7 +613,7 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(sample2 ${Cbc_DIR}/examples/sample2.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
-		      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+                      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample2
            COMMAND $<TARGET_FILE:sample2> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -646,7 +646,7 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(sample3 ${Cbc_DIR}/examples/sample3.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
-		      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+                      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample3
            COMMAND $<TARGET_FILE:sample3> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -692,7 +692,7 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(sample4 ${Cbc_DIR}/examples/sample4.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
-		      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+                      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample4
            COMMAND $<TARGET_FILE:sample4> ${CMAKE_SOURCE_DIR}/Data/Sample)
