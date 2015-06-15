@@ -700,3 +700,6 @@ install(FILES ${Clp_SRC_LIST_Headers}
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
         DESTINATION include/coin
         RENAME ClpConfig.h)
+
+install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
+        DESTINATION include/coin)
