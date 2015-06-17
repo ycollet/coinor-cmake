@@ -13,12 +13,15 @@ option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" O
 option(COIN_USE_DOWNLOAD_BZLIB         "Enable the use of the thirdparty BZlib" OFF)
 option(COIN_USE_DOWNLOAD_SUITESPARSE   "Enable the use of the thirdparty SuiteSparse" OFF)
 
-if (WIN32)
+if (WIN32 AND NOT MINGW)
   set(ZLIB_NAME  "zlib.lib"   CACHE FILEPATH "The Zlib library name"  FORCE)
   set(BZLIB_NAME "libbz2.lib" CACHE FILEPATH "The BZlib library name" FORCE)
+elseif (MINGW)
+  set(ZLIB_NAME  "libzlibstatic.a" CACHE FILEPATH "The Zlib library name"  FORCE)
+  set(BZLIB_NAME "libbz2.a"  CACHE FILEPATH "The BZlib library name" FORCE)
 else ()
-  set(ZLIB_NAME  "libz.a"   CACHE FILEPATH "The Zlib library name"  FORCE)
-  set(BZLIB_NAME "libbz2.a" CACHE FILEPATH "The BZlib library name" FORCE)
+  set(ZLIB_NAME  "libz.a" CACHE FILEPATH "The Zlib library name"  FORCE)
+  set(BZLIB_NAME "libbz2.a"  CACHE FILEPATH "The BZlib library name" FORCE)
 endif ()
 
 mark_as_advanced(ZLIB_NAME
@@ -153,7 +156,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  if (WIN32)
+  if (WIN32 AND NOT MINGW)
     ExternalProject_Add(EP_Lapack
                         PREFIX            ${EP_InstallDir}/Lapack
                         URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
@@ -236,8 +239,10 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
   set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Zlib library include Path" FORCE)
   set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "${EP_InstallDir}/lib"     CACHE STRING "The Zlib library library Path" FORCE)
   
-  if (WIN32)
+  if (WIN32 AND NOT MINGW)
     set(ZLIB_NAME "${EP_InstallDir}/lib/zlib.lib" CACHE STRING "The Zlib library name" FORCE)
+  elseif (MINGW)
+    set(ZLIB_NAME "${EP_InstallDir}/lib/libzlibstatic.a" CACHE STRING "The Zlib library name" FORCE)
   else ()
     set(ZLIB_NAME "${EP_InstallDir}/lib/libz.a" CACHE STRING "The Zlib library name" FORCE)
   endif ()
@@ -283,7 +288,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The BZlib library include Path" FORCE)
   set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib"     CACHE STRING "The BZlib library library Path" FORCE)
   
-  if (WIN32)
+  if (WIN32 AND NOT MINGW)
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The BZlib library name" FORCE)
     
     ExternalProject_Add(EP_BZlib
@@ -339,15 +344,7 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
   set(GLPK_VERSION "4.55")
   set(COMPILE_OSI_GLPK ON CACHE BOOL "Compile the OSI GLPK solver" FORCE)
   
-  if (UNIX)
-    ExternalProject_Add(EP_glpk
-                        PREFIX ${EP_InstallDir}/glpk
-                        URL http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz
-                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ./configure --prefix=${EP_InstallDir} --enable-static --disable-shared --with-pic
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ${CMAKE_MAKE_PROGRAM} install
-                        )
-  elseif (WIN32)
+  if (WIN32 AND NOT MINGW)
     if (CMAKE_SIZEOF_VOID_P EQUAL 4)
       ExternalProject_Add(EP_glpk
                           PREFIX ${EP_InstallDir}/glpk
@@ -366,15 +363,23 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
                           INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/w64/glpk.lib ${EP_InstallDir}/lib &&
 			                                ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glpk.h   ${EP_InstallDir}/include 
                           )
-
-      check_symbol_exists(glpk_intopt "glpk.h" GLPK_HAS_INTOPT)
-      
-      if (GLPK_HAS_INTOPT)
-        message(STATUS "GLPK has glpk_intopt: yes")
-      else ()
-        message(STATUS "GLPK has glpk_intopt: no")
-      endif()
     endif ()
+  elseif ()
+    ExternalProject_Add(EP_glpk
+                        PREFIX ${EP_InstallDir}/glpk
+                        URL http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ./configure --prefix=${EP_InstallDir} --enable-static --disable-shared --with-pic
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ${CMAKE_MAKE_PROGRAM}
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ${CMAKE_MAKE_PROGRAM} install
+                        )
+  endif()
+  
+  check_symbol_exists(glpk_intopt "glpk.h" GLPK_HAS_INTOPT)
+  
+  if (GLPK_HAS_INTOPT)
+    message(STATUS "GLPK has glpk_intopt: yes")
+  else ()
+    message(STATUS "GLPK has glpk_intopt: no")
   endif()
 endif()
 
