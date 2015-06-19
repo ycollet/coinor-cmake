@@ -17,6 +17,10 @@ remove_definitions(-DCBC_BUILD)
 remove_definitions(-DCGL_BUILD)
 remove_definitions(-DOSI_BUILD)
 
+if (MINGW)
+  add_definitions(-D__MNO_CYGWIN)
+endif ()
+
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 else ()

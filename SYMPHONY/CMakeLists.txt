@@ -288,6 +288,11 @@ if (((COIN_HAS_CHOLMOD AND NOT COIN_HAS_AMD) OR (NOT COIN_HAS_CHOLMOD AND COIN_H
   message(FATAL_ERROR "CHOLMOD and AMD must be both activated or both desactivated")
 endif ()
 
+if (MINGW)
+  message(STATUS "Under MinGW, we disable sighandler")
+  set(SIGHANDLER OFF)
+endif ()
+
 # Check some directories
 
 coin_check_and_add_include_library_path(COIN_XPRESS_DIR)
@@ -578,6 +583,11 @@ if (NOT RTLIB-NOTFOUND)
   set(HAVE_CLOCK_GETTIME 1)
 endif ()
 
+include(CheckFunctionExists)
+
+CHECK_FUNCTION_EXISTS (srandom HAS_SRANDOM)
+CHECK_FUNCTION_EXISTS (random  HAS_RANDOM)
+
 # Define to dummy `main' function (if any) required to link to the Fortran libraries.
 # F77_DUMMY_MAIN
 
@@ -770,7 +780,11 @@ endif ()
 
 #add_definitions(-DUSE_SYM_APPLICATION) # only for libSymAppl
 #add_definitions(-D_OPENMP)
-add_definitions(-DHAS_RANDOM -DHAS_SRANDOM -D__NONE__)
+if (MINGW)
+  add_definitions(-D__NONE__)
+else ()
+  add_definitions(-DHAS_RANDOM -DHAS_SRANDOM -D__NONE__)
+endif ()
 
 subdirs(ThirdParty)
 
