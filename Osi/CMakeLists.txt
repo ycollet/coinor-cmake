@@ -156,7 +156,7 @@ set(PACKAGE_TARNAME   "osi")
 set(PACKAGE_VERSION   "0.106.6")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../osi_binary" 
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/osi_binary" 
       CACHE PATH "Osi install prefix" FORCE)
 endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
@@ -270,9 +270,10 @@ if (NOT WIN32 AND COIN_COMPILE_WARNINGS)
   set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
 endif ()
 
-set(BuildTools_DIR ${Coin_DIR}/BuildTools)
-set(CoinUtils_DIR ${Coin_DIR}/CoinUtils)
-set(Osi_DIR ${Coin_DIR}/Osi)
+set(BuildTools_DIR    ${Coin_DIR}/BuildTools)
+set(CoinUtils_DIR     ${Coin_DIR}/CoinUtils)
+set(CoinUtilsTest_DIR ${Coin_DIR}/CoinUtils/test)
+set(Osi_DIR           ${Coin_DIR}/Osi)
 
 include(CheckIncludeFile)
 

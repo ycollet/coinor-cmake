@@ -42,6 +42,7 @@ option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
 option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
 option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
 option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
+option(COIN_HAS_MKL        "Use Intel MKL library (requires Intel compiler)" OFF)
 
 set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
 set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
@@ -53,6 +54,7 @@ mark_as_advanced(COINUTILS_USE_THREADS
                  COINUTILS_HAS_BZLIB
                  COIN_HAS_LAPACK
                  COIN_HAS_BLAS
+                 COIN_HAS_MKL
                  COIN_COINUTILS_CHECKLEVEL
                  COIN_COINUTILS_VERBOSITY)
 
@@ -95,7 +97,7 @@ set(PACKAGE_TARNAME   "coinutils")
 set(PACKAGE_VERSION   "2.9.11")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../coinutils_binary" 
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/coinutils_binary" 
       CACHE PATH "CoinUtils install prefix" FORCE)
 endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 

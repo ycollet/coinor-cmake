@@ -115,6 +115,8 @@ set(COIN_ABC_LEVEL      "0" CACHE STRING "Use the Aboca solver (1, 2, 3, 4) - 0,
 set(COIN_CLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Clp (0 if no test)")
 set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if no output)")
 
+option(COIN_HAS_MKL "Use Intel MKL library (requires Intel compiler)" OFF)
+
 mark_as_advanced(COIN_ENABLE_AMD
                  COIN_HAS_AMD_INCLUDE_PATH
                  COIN_HAS_AMD_LIBRARY_PATH
@@ -133,7 +135,8 @@ mark_as_advanced(COIN_ENABLE_AMD
                  COIN_HAS_ABC
                  COIN_ABC_LEVEL
                  COIN_CLP_CHECKLEVEL
-                 COIN_CLP_VERBOSITY)
+                 COIN_CLP_VERBOSITY
+                 COIN_HAS_MKL)
 
 # Cgl options
 set(COIN_CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
@@ -210,9 +213,24 @@ set(PACKAGE_TARNAME   "cbc")
 set(PACKAGE_VERSION   "2.9.4")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../cbc_binary" 
+  set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/cbc_binary" 
       CACHE PATH "Cbc install prefix" FORCE)
 endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+
+# Check for MKL
+if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel") AND COIN_HAS_MKL)
+  find_package(MKL)
+  if (MKL_FOUND)
+    message(status "MKL library found")
+  else ()
+    message(status "MKL library not found")
+  endif ()
+  if (HAVE_64_BIT)
+    set(COIN_MKL_LIBS "mkl_intel_lp64 mkl_sequential mkl_core")
+  else ()
+    set(COIN_MKL_LIBS "mkl_intel_c mkl_sequential mkl_core")
+  endif ()
+endif ()
 
 # Check for AMD and CHOLMOD
 
@@ -355,8 +373,9 @@ if (NOT WIN32 AND COIN_COMPILE_WARNINGS)
   set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
 endif ()
 
-set(BuildTools_DIR ${Coin_DIR}/BuildTools)
-set(CoinUtils_DIR ${Coin_DIR}/CoinUtils)
+set(BuildTools_DIR    ${Coin_DIR}/BuildTools)
+set(CoinUtils_DIR     ${Coin_DIR}/CoinUtils)
+set(CoinUtilsTest_DIR ${Coin_DIR}/CoinUtils/test)
 set(Osi_DIR ${Coin_DIR}/Osi)
 set(Clp_DIR ${Coin_DIR}/Clp)
 set(Cgl_DIR ${Coin_DIR}/Cgl)
