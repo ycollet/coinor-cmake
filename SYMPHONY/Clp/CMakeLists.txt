@@ -250,7 +250,7 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libClp STATIC ${Clp_SRC_LIST})
 endif ()
-if (NOT WIN32)
+if (NOT WIN32 OR MINGW)
   set_target_properties(libClp PROPERTIES PREFIX "")
 endif ()
 

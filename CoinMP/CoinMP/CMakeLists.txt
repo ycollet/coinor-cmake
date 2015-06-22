@@ -34,7 +34,7 @@ if (USE_COINOR_BIN)
   add_library(libClp STATIC IMPORTED)
   add_library(libCbc STATIC IMPORTED)
 
-  if (WIN32)
+  if (WIN32 AND NOT MINGW)
     set_property(TARGET libCoinUtils PROPERTY IMPORTED_LOCATION ${COINOR_DIR}/lib/libCoinUtils.lib)
     set_property(TARGET libCgl       PROPERTY IMPORTED_LOCATION ${COINOR_DIR}/lib/libCgl.lib)
     set_property(TARGET libOsi       PROPERTY IMPORTED_LOCATION ${COINOR_DIR}/lib/libOsi.lib)
