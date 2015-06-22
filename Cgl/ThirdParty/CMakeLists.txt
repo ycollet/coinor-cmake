@@ -345,42 +345,23 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
   set(GLPK_VERSION "4.55")
   set(COMPILE_OSI_GLPK ON CACHE BOOL "Compile the OSI GLPK solver" FORCE)
   
-  if (UNIX)
-    ExternalProject_Add(EP_glpk
-                        PREFIX ${EP_InstallDir}/glpk
-                        URL http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz
-                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ./configure --prefix=${EP_InstallDir} --enable-static --disable-shared --with-pic
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk ${CMAKE_MAKE_PROGRAM} install
-                        )
-  elseif (WIN32)
-    if (CMAKE_SIZEOF_VOID_P EQUAL 4)
-      ExternalProject_Add(EP_glpk
-                          PREFIX ${EP_InstallDir}/glpk
-                          URL http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz
-                          CONFIGURE_COMMAND ""
-                          BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk/w32 ${CMAKE_MAKE_PROGRAM} -f Makefile_VC
-                          INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/w32/glpk.lib ${EP_InstallDir}/lib &&
-                                            ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glpk.h   ${EP_InstallDir}/include 
-                          )
-    else()
-      ExternalProject_Add(EP_glpk
-                          PREFIX ${EP_InstallDir}/glpk
-                          URL http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz
-                          CONFIGURE_COMMAND ""
-                          BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk/w64 ${CMAKE_MAKE_PROGRAM} -f Makefile_VC
-                          INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/w64/glpk.lib ${EP_InstallDir}/lib &&
-                                            ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/glpk/src/EP_glpk/src/glpk.h   ${EP_InstallDir}/include 
-                          )
-
-      check_symbol_exists(glpk_intopt "glpk.h" GLPK_HAS_INTOPT)
-      
-      if (GLPK_HAS_INTOPT)
-        message(STATUS "GLPK has glpk_intopt: yes")
-      else ()
-        message(STATUS "GLPK has glpk_intopt: no")
-      endif()
-    endif()
+  ExternalProject_Add(EP_glpk
+                      PREFIX ${EP_InstallDir}/glpk
+                      URL http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz
+                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/ThirdParty/GLPK/ ${EP_InstallDir}/glpk/src/EP_glpk/
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/glpk/src/EP_glpk/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk/build ${CMAKE_MAKE_PROGRAM}
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk/src/EP_glpk/build ${CMAKE_MAKE_PROGRAM} install
+                      )
+  
+  #check_symbol_exists(glpk_intopt "glpk.h" GLPK_HAS_INTOPT)
+  set(GLPK_HASH_INTOPT ON)
+  
+  if (GLPK_HAS_INTOPT)
+    message(STATUS "GLPK has glpk_intopt: yes")
+  else ()
+    message(STATUS "GLPK has glpk_intopt: no")
   endif()
 endif()
 
