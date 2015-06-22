@@ -8,6 +8,7 @@ project(Ipopt_Thirdparty)
 
 option(COIN_ENABLE_DOWNLOAD_MUMPS "Enable the download / compilation of Mumps" OFF)
 option(COIN_ENABLE_DOWNLOAD_METIS "Enable the download / compilation of Metis" OFF)
+option(COIN_ENABLE_DOWNLOAD_ASL   "Enable the download / compilation of Ampl Solver Library" OFF)
 
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
@@ -86,6 +87,32 @@ endif()
 # #################################################
 
 # #################################################
+# ===> ASL compilation
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_ASL)
+  set(coinasl "1.3.0")
+  set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
+  
+  ExternalProject_Add(EP_ASL
+                      PREFIX ${EP_InstallDir}/ASL
+                      URL https://github.com/ampl/mp/archive/${coinasl}.tar.gz
+                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/AMPLConfig.cmake.in ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
+                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/CMakeLists.txt      ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
+                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/FindDL.cmake        ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
+                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/details.c0.cmake.in ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM}
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM} install
+                      )
+endif()
+
+# #################################################
+# <=== ASL compilation
+# #################################################
+
+# #################################################
 # ===>   Restart cmake
 # #################################################
 
@@ -102,6 +129,9 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_METIS)
     add_dependencies(${_target} EP_Metis)
   endif ()
+  if (COIN_ENABLE_DOWNLOAD_ASL)
+    add_dependencies(${_target} EP_ASL)
+  endif ()
 endmacro()
 
 macro(add_executable _target)
@@ -112,6 +142,9 @@ macro(add_executable _target)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_METIS)
     add_dependencies(${_target} EP_Metis)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_ASL)
+    add_dependencies(${_target} EP_ASL)
   endif ()
 endmacro()
 

@@ -53,6 +53,7 @@ set(amplsolver_SRCS
   asldate.c
   atof.c
   auxinfo.c
+  #avldelete.c
   avltree.c
   b_search.c
   basename.c

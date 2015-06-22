@@ -53,7 +53,7 @@ set(amplsolver_SRCS
   asldate.c
   atof.c
   auxinfo.c
-  avldelete.c
+  #avldelete.c
   avltree.c
   b_search.c
   basename.c
@@ -131,7 +131,10 @@ set(amplsolver_SRCS
   x2check.c
   xectim.c
   xp1known.c
-  xp2known.c)
+  xp2known.c
+  obj_adj.c
+  mpec_adj.c
+  libnamsave.c)
 
 add_library(amplsolver ${amplsolver_SRCS})
 
