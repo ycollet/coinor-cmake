@@ -220,15 +220,25 @@ endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 # Check for MKL
 if (("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Intel") AND COIN_HAS_MKL)
   find_package(MKL)
+  
   if (MKL_FOUND)
     message(status "MKL library found")
   else ()
     message(status "MKL library not found")
   endif ()
+  
   if (HAVE_64_BIT)
     set(COIN_MKL_LIBS "mkl_intel_lp64 mkl_sequential mkl_core")
   else ()
     set(COIN_MKL_LIBS "mkl_intel_c mkl_sequential mkl_core")
+  endif ()
+  
+  include_directories(${MKL_INCLUDE_DIRS})
+  
+  if (HAVE_64_BIT)
+    link_directories(${MKL_ROOT}/lib/intel64)
+  else ()
+    link_directories(${MKL_ROOT}/lib/ia32)
   endif ()
 endif ()
 
