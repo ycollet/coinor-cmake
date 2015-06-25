@@ -242,7 +242,6 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build ${CMAKE_MAKE_PROGRAM} install
                       )
-  endif ()
 endif ()
 
 if (COIN_ENABLE_FIND_ZLIB)
