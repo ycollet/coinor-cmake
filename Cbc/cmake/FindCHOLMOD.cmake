@@ -108,7 +108,7 @@ find_library(SUITESPARSE_LIBRARY suitesparseconfig
 find_library(SUITESPARSE_LIBRARY suitesparseconfig
              DOC "The SUITESPARSECONFIG library")
 
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU" AND NOT APPLE)
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
   # Check for rt library
   find_library(RT_LIBRARY rt
                DOC "The RT library")

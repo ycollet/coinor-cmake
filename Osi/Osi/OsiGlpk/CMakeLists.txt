@@ -5,7 +5,7 @@ include_directories(${Osi_DIR}/src/Osi)
 include_directories(${Osi_DIR}/src/OsiGlpk)
 include_directories(${MY_GLPK_DIR}/include)
 
-if (("${COIN_HAS_GLPK_INCLUDE_PATH}" STREQUAL "None") AND ("${COIN_HAS_GLPK_LIBRARY_PATH}" STREQUAL "None"))
+if ((COIN_HAS_GLPK_INCLUDE_PATH STREQUAL "None") AND (COIN_HAS_GLPK_LIBRARY_PATH STREQUAL "None"))
   find_package(Glpk)
 else()
   set(GLPK_VERSION "4.52")
