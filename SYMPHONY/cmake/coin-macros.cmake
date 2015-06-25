@@ -1,7 +1,7 @@
 # coin_check_and_add_include_path: check if ${dir}/include is a path and exists
 # dir must be a variable containing "None" or a path
 macro(coin_check_and_add_include_path dir)
-  if (NOT "${${dir}}" STREQUAL "None")
+  if (NOT ${dir} STREQUAL "None")
     if (NOT EXISTS "${${dir}}")
       message(FATAL_ERROR "Error: ${dir} = ${${dir}} which is not an existing directory")
     else ()
@@ -13,7 +13,7 @@ endmacro ()
 # coin_check_and_add_library_path: check if ${dir}/lib is a path and exists
 # dir must be a variable containing "None" or a path
 macro(coin_check_and_add_library_path dir)
-  if (NOT "${${dir}}" STREQUAL "None")
+  if (NOT ${dir} STREQUAL "None")
     if (NOT EXISTS "${${dir}}")
       message(FATAL_ERROR "Error: ${dir} = ${${dir}} which is not an existing directory")
     else ()
@@ -25,7 +25,7 @@ endmacro ()
 # coin_check_and_add_include_library_path: check if ${dir}/lib and ${dir}/include are pathes and exists
 # dir must be a variable containing "None" or a path
 macro(coin_check_and_add_include_library_path dir)
-  if (NOT "${${dir}}" STREQUAL "None")
+  if (NOT ${dir} STREQUAL "None")
     if (NOT EXISTS "${${dir}}/include")
       message(FATAL_ERROR "Error: ${dir} = ${${dir}}/include which is not an existing directory")
     else ()
@@ -60,27 +60,6 @@ endif ()
 macro(add_coin_test Name SolverName FileData FileOut FileLog)
   file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
       "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${SolverName} ${FileData} \$ENV{COIN_EXE_OPTIONS} -solution ${FileOut} -solve\n"
-      "                OUTPUT_FILE ${FileLog})\n")
-  
-  add_test(NAME ${Name}
-           COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake)
-  
-  if (WIN32)
-    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
-  endif ()
-endmacro()
-
-# add_coin_sym_test: generate a cmake wrapper around symphony executable and then add the test
-# SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
-# Name: the name of the test
-# FileData: the name of the mps / lp data file
-# FileOut: the name of the .out data file
-# FileLog: the name of the .log data file
-
-macro(add_coin_sym_test Name SolverName FileData FileOut FileLog)
-  # -solution ${FileOut} -solve
-  file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-      "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/symphony -F ${FileData} \$ENV{COIN_EXE_OPTIONS} \n"
       "                OUTPUT_FILE ${FileLog})\n")
   
   add_test(NAME ${Name}
