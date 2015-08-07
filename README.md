@@ -104,6 +104,8 @@ $ cmake -DCOIN_ENABLE_DOWNLOAD_ZLIB=ON -DCOIN_ENABLE_DOWNLOAD_DATA_TEST=ON .
 $ make
 ```
 
+The option COIN_ENABLE_DOWNLOAD_DATA_TEST allows to download a set of tests from the coin-or website and it will install these files in the build directory. The COIN_ENABLE_DOWNLOAD_ZLIB activate the support of zlib in the CoinUtils library. With this support, we are now able to read compressed test files.
+
 You can some basic tests for cbc, clp and symphony:
 ```
 $ ctest -R exmip1 # To run all tests containing exmip1 in their names
