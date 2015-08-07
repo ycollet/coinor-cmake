@@ -198,7 +198,12 @@ if (UNIX)
   if (COIN_COMPILE_STATIC)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -z muldefs")
   elseif (COIN_COMPILE_COVERAGE)
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} --coverage -fno-inline")
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} --coverage -fno-inline")
+    endif ()
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+      set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fprofile-arcs -ftest-coverage -Xclang -coverage-cfg-checksum -Xclang -coverage-no-function-names-in-data -Xclang -coverage-version='408*'")
+    endif ()
   elseif (COIN_COMPILE_PROFILE)
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -pg")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
@@ -269,6 +274,46 @@ if (NOT WIN32 AND COIN_COMPILE_WARNINGS)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wuninitialized ")
   set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
 endif ()
+
+# Manage coverage via lcov automatically
+
+if (COIN_COMPILE_COVERAGE)
+  if (WIN32)
+    message(FATAL_ERROR "Error: code coverage analysis is only available under Linux for now.")
+  endif ()
+  
+  find_program(GCOV_PATH gcov)
+  find_program(LCOV_PATH lcov)
+  find_program(GENHTML_PATH genhtml)
+
+  if (NOT GCOV_PATH)
+    message(FATAL_ERROR "gcov not found! Please install lcov and gcov. Aborting...")
+  endif ()
+  
+  if (NOT LCOV_PATH)
+    message(FATAL_ERROR "lcov not found! Please install lcov and gcov. Aborting...")
+  endif ()
+  
+  if (NOT GENHTML_PATH)
+    message(FATAL_ERROR "genhtml not found! Please install lcov and gcov. Aborting...")
+  endif ()
+  
+  # /!\ FAILURE IF AT LEAST ONE TEST FAILS
+  # Capturing lcov counters and generating report
+  add_custom_target(coverage
+    COMMAND ${LCOV_PATH} --directory . --zerocounters
+    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} make test
+    COMMAND ${LCOV_PATH} --capture --directory . --output-file ${CMAKE_BINARY_DIR}/coverage.info
+    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+    COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMENT "Resetting code coverage counters to zero.
+Processing code coverage counters and generating report.
+You can zip the directory ${CMAKE_BINARY_DIR}/coverage and upload the content to a web server.")
+endif ()
+
+# End of coverage
 
 set(BuildTools_DIR    ${Coin_DIR}/BuildTools)
 set(CoinUtils_DIR     ${Coin_DIR}/CoinUtils)

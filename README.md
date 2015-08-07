@@ -97,12 +97,32 @@ $ nmake
 ```
 
 # Starting tests
+To enable a more complete list of tests:
+```
+$ cd build
+$ cmake -DCOIN_ENABLE_DOWNLOAD_ZLIB=ON -DCOIN_ENABLE_DOWNLOAD_DATA_TEST=ON .
+$ make
+```
+
 You can some basic tests for cbc, clp and symphony:
 ```
 $ ctest -R exmip1 # To run all tests containing exmip1 in their names
 $ ctest -L MPS # To run all tests which have the MPS label (available labels are MPS, LP, LONG)
 $ ctest -LE LONG # To run all tests which doesn't have the LONG label
 ```
+
+# Performing coverage
+Using lcov for code coverage (Linux only) - gcov and lcov must be installed on the system.
+The following steps are performed:
+ - first, activate COIN_COMPILE_COVERAGE
+ - activate all the solvers
+ - compile: `make`
+ - run the tests: `make test or ctest ...`
+ - generate the coverage report: `make coverage`
+
+You can trigger a code coverage analysis by issuing the following commande: `make coverage`
+
+Be careful to activate the right set of tests (not the long one).
 
 # To do
 
