@@ -96,6 +96,27 @@ $ cmake -DCMAKE_INSTALL_PREFIX=d:/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -G "NMake 
 $ nmake
 ```
 
+## Compilation using mingw under Linux
+
+First, you will need to install the mingw (32 or 64 bits) packages from the repositories of your Linux distribution.
+Then, edit the file cmake/mingw64-toolchain.cmake to fine tune wrt your mingw install.
+You can add another root directory where mingw will look for installed libraries by adding these lines:
+```
+# here is the target environment located
+SET(USER_ROOT_PATH /home/me/me-win32-dev)
+SET(CMAKE_FIND_ROOT_PATH  /usr/${COMPILER_PREFIX} ${USER_ROOT_PATH})
+```
+
+Now, run cmake:
+```
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/home/me/coinor-bin -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_TOOLCHAIN_FILE=cmake/mingw64-toolchain.cmake ..
+$ make
+```
+
+This command should produce a Windows executable.
+
 # Starting tests
 To enable a more complete list of tests:
 ```
