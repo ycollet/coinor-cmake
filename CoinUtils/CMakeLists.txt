@@ -248,7 +248,7 @@ if (COIN_COMPILE_COVERAGE)
   # Capturing lcov counters and generating report
   add_custom_target(coverage
     COMMAND ${LCOV_PATH} --directory . --zerocounters
-    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} make test
+    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE LONG -LE FAIL
     COMMAND ${LCOV_PATH} --capture --directory . --output-file ${CMAKE_BINARY_DIR}/coverage.info
     COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
