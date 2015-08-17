@@ -619,13 +619,8 @@ if (COIN_C_NAN_R)
   set(COIN_C_NAN isnand)
 endif ()
 
-# HAVE_CLOCK_GETTIME
-find_library(RTLIB
-             NAMES rt)
-
-if (NOT RTLIB-NOTFOUND)
-  set(HAVE_CLOCK_GETTIME 1)
-endif ()
+check_symbol_exists(clock_gettime sys/time.h HAVE_CLOCK_GETTIME)
+check_symbol_exists(gettimeofday  sys/time.h HAVE_GETTIMEOFDAY)
 
 # Define to dummy `main' function (if any) required to link to the Fortran libraries.
 # F77_DUMMY_MAIN
