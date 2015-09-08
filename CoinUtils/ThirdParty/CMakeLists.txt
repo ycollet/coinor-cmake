@@ -128,6 +128,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
     ExternalProject_Add(EP_Lapack
                         PREFIX            ${EP_InstallDir}/Lapack
                         URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
+                        UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
                                        && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
@@ -139,6 +140,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
     ExternalProject_Add(EP_Lapack
                         PREFIX            ${EP_InstallDir}/Lapack
                         URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
+                        UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
                                        && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
@@ -171,6 +173,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   ExternalProject_Add(EP_Lapack
                       PREFIX ${EP_InstallDir}/Lapack
                       URL http://www.coin-or.org/BuildTools/Lapack/lapack-3.4.2.tgz
+                      UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
@@ -218,6 +221,7 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
   ExternalProject_Add(EP_Zlib
                       PREFIX ${EP_InstallDir}/Zlib
                       URL http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
+                      UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Zlib/src/EP_Zlib/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib/src/EP_Zlib/build ${CMAKE_MAKE_PROGRAM}
@@ -262,6 +266,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
     ExternalProject_Add(EP_BZlib
                         PREFIX ${EP_InstallDir}/BZlib
                         URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
+                        UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib/src/EP_BZlib ${CMAKE_MAKE_PROGRAM} -f makefile.msc
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/libbz2.lib ${EP_InstallDir}/lib &&
@@ -274,6 +279,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
     ExternalProject_Add(EP_BZlib
                         PREFIX ${EP_InstallDir}/BZlib
                         URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
+                        UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib/src/EP_BZlib ${CMAKE_MAKE_PROGRAM}
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/libbz2.a ${EP_InstallDir}/lib &&
@@ -316,6 +322,7 @@ if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     ExternalProject_Add(EP_PThreads
                         PREFIX ${EP_InstallDir}/PThreads
                         URL ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
+                        UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/PThreads/src/EP_PThreads ${CMAKE_MAKE_PROGRAM} clean VC
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy  ${EP_InstallDir}/PThreads/src/EP_PThreads/pthreadVC2.lib ${CMAKE_BINARY_DIR}/Dependencies/lib/
@@ -342,8 +349,8 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
   ExternalProject_Add(EP_SuiteSparse
                       PREFIX ${EP_InstallDir}/SuiteSparse
 		              GIT_REPOSITORY https://github.com/jlblancoc/suitesparse-metis-for-windows.git
-                      PATCH_COMMAND     ""
                       UPDATE_COMMAND    ""
+                      PATCH_COMMAND     ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse//build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}

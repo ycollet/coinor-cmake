@@ -40,6 +40,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   ExternalProject_Add(EP_Mumps
                       PREFIX ${EP_InstallDir}/Mumps
                       URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
+                      UPDATE_COMMAND    ""
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/Mumps/CMakeLists.txt ${EP_InstallDir}/Mumps/src/EP_Mumps
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DPROJECT_REVISION=10 -DUSE_MUMPS_LIBSEQ=ON -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
@@ -63,6 +64,7 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
     ExternalProject_Add(EP_Metis
                         PREFIX ${EP_InstallDir}/Metis
                         URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                        UPDATE_COMMAND    ""
                         PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis/src/EP_Metis
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis/src/EP_Metis/build
                                        && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
@@ -73,6 +75,7 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
     ExternalProject_Add(EP_Metis
                         PREFIX ${EP_InstallDir}/Metis
                         URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                        UPDATE_COMMAND    ""
                         PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis/src/EP_Metis
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis/src/EP_Metis/build
                                        && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
@@ -97,6 +100,7 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
   ExternalProject_Add(EP_ASL
                       PREFIX ${EP_InstallDir}/ASL
                       URL https://github.com/ampl/mp/archive/${coinasl}.tar.gz
+                      UPDATE_COMMAND    ""
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/AMPLConfig.cmake.in ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
                                      && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/CMakeLists.txt      ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
                                      && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/FindDL.cmake        ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
