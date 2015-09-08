@@ -1495,7 +1495,7 @@ add_coin_sym_test(miplib3_cap6000_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_symphony.log)
 
-set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES TIMEOUT 120)
 set_tests_properties(miplib3_cap6000_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
 
 create_log_analysis(miplib3_cap6000_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_cap6000_symphony.log "Solution Cost: <number>" -2451377 1e-6)
@@ -1628,7 +1628,7 @@ add_coin_sym_test(miplib3_gesa2_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_symphony.log)
 
-set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES TIMEOUT 60)
 set_tests_properties(miplib3_gesa2_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
 
 create_log_analysis(miplib3_gesa2_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_symphony.log "Solution Cost: <number>" 25779856.372 1e-6)
@@ -1639,7 +1639,7 @@ add_coin_sym_test(miplib3_gesa2_o_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_symphony.log)
 
-set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES TIMEOUT 160)
 set_tests_properties(miplib3_gesa2_o_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
 
 create_log_analysis(miplib3_gesa2_o_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_gesa2_o_symphony.log "Solution Cost: <number>" 25779856.372 1e-6)
@@ -1760,8 +1760,8 @@ add_coin_sym_test(miplib3_mas76_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_symphony.log)
 
-set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
+set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_mas76_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB;LONG")
 
 create_log_analysis(miplib3_mas76_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_mas76_symphony.log "Solution Cost: <number>" 4005.1 1e-6)
 set_tests_properties(miplib3_mas76_symphony_standard_01_Analysis PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
@@ -1860,8 +1860,8 @@ add_coin_sym_test(miplib3_modglob_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_symphony.log)
 
-set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
+set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_modglob_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB;LONG")
 
 create_log_analysis(miplib3_modglob_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_modglob_symphony.log "Solution Cost: <number>" 20740508 1e-6)
 set_tests_properties(miplib3_modglob_symphony_standard_01_Analysis PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
@@ -1882,8 +1882,8 @@ add_coin_sym_test(miplib3_nw04_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_symphony.log)
 
-set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
+set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_nw04_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB;LONG")
 
 create_log_analysis(miplib3_nw04_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_nw04_symphony.log "Solution Cost: <number>" 16862 1e-6)
 set_tests_properties(miplib3_nw04_symphony_standard_01_Analysis PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
@@ -1948,7 +1948,7 @@ add_coin_sym_test(miplib3_pk1_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_symphony.log)
 
-set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES TIMEOUT 300)
+set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES TIMEOUT 600)
 set_tests_properties(miplib3_pk1_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
 
 create_log_analysis(miplib3_pk1_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pk1_symphony.log "Solution Cost: <number>" 11.0 1e-6)
@@ -1959,8 +1959,8 @@ add_coin_sym_test(miplib3_pp08aCUTS_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_symphony.log)
 
-set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES TIMEOUT 30)
-set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
+set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_pp08aCUTS_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB;LONG")
 
 create_log_analysis(miplib3_pp08aCUTS_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pp08aCUTS_symphony.log "Solution Cost: <number>" 7350.0 1e-6)
 set_tests_properties(miplib3_pp08aCUTS_symphony_standard_01_Analysis PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
@@ -1970,7 +1970,7 @@ add_coin_sym_test(miplib3_pp08a_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_symphony.log)
 
-set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_pp08a_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
 
 create_log_analysis(miplib3_pp08a_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_pp08a_symphony.log "Solution Cost: <number>" 7350.0 1e-6)
@@ -1981,8 +1981,8 @@ add_coin_sym_test(miplib3_qiu_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_symphony.log)
 
-set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES TIMEOUT 300)
-set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
+set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES TIMEOUT 3000)
+set_tests_properties(miplib3_qiu_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB;LONG")
 
 create_log_analysis(miplib3_qiu_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_qiu_symphony.log "Solution Cost: <number>" -132.873137 1e-6)
 set_tests_properties(miplib3_qiu_symphony_standard_01_Analysis PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
@@ -1992,7 +1992,7 @@ add_coin_sym_test(miplib3_qnet1_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_symphony.log)
 
-set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_qnet1_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
 
 create_log_analysis(miplib3_qnet1_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_qnet1_symphony.log "Solution Cost: <number>" 16029.692681 1e-6)
@@ -2081,7 +2081,7 @@ add_coin_sym_test(miplib3_stein45_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_symphony.log)
 
-set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES TIMEOUT 60)
 set_tests_properties(miplib3_stein45_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
 
 create_log_analysis(miplib3_stein45_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_stein45_symphony.log "Solution Cost: <number>" 30 1e-6)
@@ -2115,7 +2115,7 @@ add_coin_sym_test(miplib3_vpm2_symphony_standard symphony
               ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_symphony.out
               ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_symphony.log)
 
-set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES TIMEOUT 30)
+set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES TIMEOUT 60)
 set_tests_properties(miplib3_vpm2_symphony_standard PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB")
 
 create_log_analysis(miplib3_vpm2_symphony_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib3_vpm2_symphony.log "Solution Cost: <number>" 13.75 1e-6)
