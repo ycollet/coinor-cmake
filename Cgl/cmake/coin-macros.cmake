@@ -92,3 +92,52 @@ macro(create_log_analysis Name AdditionalName Filename TestRegex TestRefVal Test
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES ENVIRONMENT "${TEST_ENV_VAR}")
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES PASS_REGULAR_EXPRESSION "PASSED")
 endmacro()
+
+# From hydrogen CMakeLists.txt file
+string( ASCII 27 _escape)
+
+set(color_black    "${_escape}[0;30m") # Black - Regular
+set(color_red      "${_escape}[0;31m") # Red
+set(color_green    "${_escape}[0;32m") # Green
+set(color_yellow   "${_escape}[0;33m") # Yellow
+set(color_blue     "${_escape}[0;34m") # Blue
+set(color_purple   "${_escape}[0;35m") # Purple
+set(color_cyan     "${_escape}[0;36m") # Cyan
+set(color_white    "${_escape}[0;37m") # White
+set(color_bblack   "${_escape}[1;30m") # Black - Bold
+set(color_bred     "${_escape}[1;31m") # Red
+set(color_bgreen   "${_escape}[1;32m") # Green
+set(color_byellow  "${_escape}[1;33m") # Yellow
+set(color_bblue    "${_escape}[1;34m") # Blue
+set(color_bpurple  "${_escape}[1;35m") # Purple
+set(color_bcyan    "${_escape}[1;36m") # Cyan
+set(color_bwhite   "${_escape}[1;37m") # White
+set(color_ublack   "${_escape}[4;30m") # Black - Underline
+set(color_ured     "${_escape}[4;31m") # Red
+set(color_ugreen   "${_escape}[4;32m") # Green
+set(color_uyellow  "${_escape}[4;33m") # Yellow
+set(color_ublue    "${_escape}[4;34m") # Blue
+set(color_upurple  "${_escape}[4;35m") # Purple
+set(color_ucyan    "${_escape}[4;36m") # Cyan
+set(color_uwhite   "${_escape}[4;37m") # White
+set(color_bgblack  "${_escape}[40m")   # Black - Background
+set(color_bgred    "${_escape}[41m")   # Red
+set(color_bggreen  "${_escape}[42m")   # Green
+set(color_bgyellow "${_escape}[43m")   # Yellow
+set(color_bgblue   "${_escape}[44m")   # Blue
+set(color_bgpurple "${_escape}[45m")   # Purple
+set(color_bgcyan   "${_escape}[46m")   # Cyan
+set(color_bgwhite  "${_escape}[47m")   # White
+set(color_reset    "${_escape}[0m")    # Text Reset
+
+# Example of use:
+# COLOR_MESSAGE("${color_cyan}Installation Summary${color_reset}
+
+function(COLOR_MESSAGE TEXT)
+  if(CMAKE_COLOR_MAKEFILE)
+    message(${TEXT})
+  else()
+    string(REGEX REPLACE "${_escape}.[0123456789;]*m" "" __TEXT ${TEXT})
+    message(${__TEXT})
+  endif()
+endfunction()
