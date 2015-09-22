@@ -643,3 +643,29 @@ endif ()
 
 include(CPack)
 include(CTest)
+
+###########################
+#                         #
+# Sum-up of configuration #
+#                         #
+###########################
+
+# available colors: {u,b,bg, } black, red, green, yellow, blue, purple, cyan, white, reset
+
+COLOR_MESSAGE("${color_green}************************")
+COLOR_MESSAGE("*                      *")
+COLOR_MESSAGE("* Configuration sum-up *")
+COLOR_MESSAGE("*                      *")
+COLOR_MESSAGE("************************")
+COLOR_MESSAGE("${color_reset} ")
+
+COLOR_MESSAGE("${color_cyan}Installation directory:${color_reset} ${CMAKE_INSTALL_PREFIX}")
+COLOR_MESSAGE("${color_cyan}Build type:${color_reset} ${CMAKE_BUILD_TYPE}")
+
+get_directory_property(ALL_INCLUDES INCLUDE_DIRECTORIES)
+get_directory_property(ALL_LINKS    LINK_DIRECTORIES)
+get_directory_property(ALL_DEFS     COMPILE_DEFINITIONS)
+
+message(STATUS "${color_cyan}Include directories:${color_reset}     ${ALL_INCLUDES}")
+message(STATUS "${color_cyan}Link directories:${color_reset}        ${ALL_LINKS}")
+message(STATUS "${color_cyan}Compilation definitions:${color_reset} ${ALL_DEFS}")
