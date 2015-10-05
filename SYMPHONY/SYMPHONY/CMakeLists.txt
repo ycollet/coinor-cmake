@@ -17,6 +17,8 @@ remove_definitions(-DCBC_BUILD)
 remove_definitions(-DCGL_BUILD)
 remove_definitions(-DOSI_BUILD)
 
+message(STATUS "DEBUG: SYMPHONY_DIR = ${SYMPHONY_DIR}")
+
 if (MINGW)
   add_definitions(-D__MNO_CYGWIN)
 endif ()

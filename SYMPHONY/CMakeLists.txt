@@ -259,8 +259,6 @@ set(PACKAGE_TARNAME   "symphony")
 # Define to the version of this package.
 set(PACKAGE_VERSION   "5.6.9")
 
-set(SYMPHONY_DIR ${CMAKE_SOURCE_DIR})
-
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/symphony_binary" 
       CACHE PATH "SYMPHONY install prefix" FORCE)
@@ -408,6 +406,17 @@ elseif (WIN32)
 endif ()
 
 #-----------------------------------------------------------------------------
+# Manage specific VS flags
+#-----------------------------------------------------------------------------
+
+if (MSVC)
+  # Avoid Warning C4530 by using the flag /EHsc
+  set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} /EHsc ")
+  set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} /EHsc ")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /EHsc ")
+endif ()
+
+#-----------------------------------------------------------------------------
 # Manage threads include dir under Windows
 #-----------------------------------------------------------------------------
 
@@ -482,12 +491,15 @@ endif ()
 
 # End of coverage
 
+# Directories where to find the source code
+
 set(BuildTools_DIR    ${Coin_DIR}/BuildTools)
 set(CoinUtils_DIR     ${Coin_DIR}/CoinUtils)
 set(CoinUtilsTest_DIR ${Coin_DIR}/CoinUtils/test)
-set(Osi_DIR ${Coin_DIR}/Osi)
-set(Clp_DIR ${Coin_DIR}/Clp)
-set(Cgl_DIR ${Coin_DIR}/Cgl)
+set(Osi_DIR           ${Coin_DIR}/Osi)
+set(Clp_DIR           ${Coin_DIR}/Clp)
+set(Cgl_DIR           ${Coin_DIR}/Cgl)
+set(SYMPHONY_DIR      ${Coin_DIR}/)
 
 include(CheckIncludeFile)
 
@@ -738,23 +750,23 @@ set(doc_dir doc)
 find_package(Doxygen)
 
 if(DOXYGEN AND ENABLE_DOXYGEN)
-  configure_file(${CMAKE_SOURCE_DIR}/Clp/doxydoc/doxygen.conf.in       ${CMAKE_SOURCE_DIR}/Clp/doxydoc/doxygen.conf)
-  configure_file(${CMAKE_SOURCE_DIR}/Cgl/doxydoc/doxygen.conf.in       ${CMAKE_SOURCE_DIR}/Cgl/doxydoc/doxygen.conf)
-  configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf)
-  configure_file(${CMAKE_SOURCE_DIR}/Osi/doxydoc/doxygen.conf.in       ${CMAKE_SOURCE_DIR}/Osi/doxydoc/doxygen.conf)
+  configure_file(${CMAKE_SOURCE_DIR}/Clp/doxydoc/doxygen.conf.in       ${CMAKE_BINARY_DIR}/Clp/doxydoc/doxygen.conf)
+  configure_file(${CMAKE_SOURCE_DIR}/Cgl/doxydoc/doxygen.conf.in       ${CMAKE_BINARY_DIR}/Cgl/doxydoc/doxygen.conf)
+  configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf)
+  configure_file(${CMAKE_SOURCE_DIR}/Osi/doxydoc/doxygen.conf.in       ${CMAKE_BINARY_DIR}/Osi/doxydoc/doxygen.conf)
 
   add_custom_target(docs 
-                    ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Clp/doxydoc/doxygen.conf
-                    ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Cgl/doxydoc/doxygen.conf
-                    ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf
-                    ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Osi/doxydoc/doxygen.conf)
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Clp/doxydoc/doxygen.conf
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Cgl/doxydoc/doxygen.conf
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Osi/doxydoc/doxygen.conf)
 endif(DOXYGEN AND ENABLE_DOXYGEN)
 
 if (USE_OPENMP)
   find_package(OpenMP)
   if (OPENMP_FOUND)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   ${OpenMP_C_FLAGS}")
   endif()
 endif()
 
@@ -860,39 +872,41 @@ subdirs(ThirdParty)
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
 
+include_directories(${CMAKE_BINARY_DIR}/SYMPHONY/include)
+
 include_directories(${SYMPHONY_DIR}/SYMPHONY/include)
-include_directories(${SYMPHONY_DIR}/CoinUtils/src)
 
-include_directories(${SYMPHONY_DIR}/Clp/src)
-include_directories(${SYMPHONY_DIR}/Clp/src/OsiClp)
+include_directories(${CoinUtils_DIR}/src)
 
-include_directories(${SYMPHONY_DIR}/Cgl/src)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglAllDifferent)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglKnapsackCover)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglRedSplit2)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglZeroHalf)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglClique)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglDuplicateRow)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglLandP)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglMixedIntegerRounding)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglResidualCapacity)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglFlowCover)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglLiftAndProject)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglMixedIntegerRounding2)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglPreProcess)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglSimpleRounding)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglGMI)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglOddHole)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglProbing)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglGomory)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglRedSplit)
-include_directories(${SYMPHONY_DIR}/Cgl/src/CglTwomir)
+include_directories(${Clp_DIR}/src)
+include_directories(${Clp_DIR}/src/OsiClp)
 
-include_directories(${SYMPHONY_DIR}/Osi/src/Osi)
-include_directories(${SYMPHONY_DIR}/SYMPHONY/src/OsiSym)
+include_directories(${Cgl_DIR}/src)
+include_directories(${Cgl_DIR}/src/CglAllDifferent)
+include_directories(${Cgl_DIR}/src/CglKnapsackCover)
+include_directories(${Cgl_DIR}/src/CglRedSplit2)
+include_directories(${Cgl_DIR}/src/CglZeroHalf)
+include_directories(${Cgl_DIR}/src/CglClique)
+include_directories(${Cgl_DIR}/src/CglDuplicateRow)
+include_directories(${Cgl_DIR}/src/CglLandP)
+include_directories(${Cgl_DIR}/src/CglMixedIntegerRounding)
+include_directories(${Cgl_DIR}/src/CglResidualCapacity)
+include_directories(${Cgl_DIR}/src/CglFlowCover)
+include_directories(${Cgl_DIR}/src/CglLiftAndProject)
+include_directories(${Cgl_DIR}/src/CglMixedIntegerRounding2)
+include_directories(${Cgl_DIR}/src/CglPreProcess)
+include_directories(${Cgl_DIR}/src/CglSimpleRounding)
+include_directories(${Cgl_DIR}/src/CglGMI)
+include_directories(${Cgl_DIR}/src/CglOddHole)
+include_directories(${Cgl_DIR}/src/CglProbing)
+include_directories(${Cgl_DIR}/src/CglGomory)
+include_directories(${Cgl_DIR}/src/CglRedSplit)
+include_directories(${Cgl_DIR}/src/CglTwomir)
 
-include_directories(Osi/src/Osi)
-include_directories(Osi/src/OsiCommonTest)
+include_directories(${Osi_DIR}/src/Osi)
+include_directories(${SYMPHONY_DIR}/src/OsiSym)
+
+include_directories(${Osi_DIR}/src/OsiCommonTest)
 
 if (NOT USE_COINOR_BIN)
   if (COIN_ENABLE_DOWNLOAD_ZLIB)
@@ -903,7 +917,6 @@ if (NOT USE_COINOR_BIN)
   endif ()
   
   subdirs(CoinUtils)
-  
   subdirs(Cgl)
   subdirs(Clp)
   subdirs(Osi/Osi)
