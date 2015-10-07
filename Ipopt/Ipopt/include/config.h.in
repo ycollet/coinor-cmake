@@ -1,7 +1,7 @@
 /* src/Common/config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define to 1 if the inexact linear solver option is included */
-#define  BUILD_INEXACT @BUILD_INEXACT@
+#cmakedefine  BUILD_INEXACT
 
 /* Define to be the name of C-function for Inf check */
 #define COIN_C_FINITE @COIN_C_FINITE@

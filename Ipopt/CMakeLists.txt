@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 2.8)
 
 project(IpOpt)
 
-#undef BUILD_INEXACT - Define to 1 if the inexact linear solver option is included
-
 #undef HAVE_PARDISO
 #undef HAVE_MPI_INITIALIZED - Define to 1 if you have the `MPI_Initialized' function.
 #undef HAVE_PARDISO_MKL - Define to 1 if you are using Pardiso from MKL
@@ -17,7 +15,6 @@ option(IPOPT_HAS_PARDISO               "Enable Pardiso solver" OFF)
 option(IPOPT_HAS_HSL                   "Enable HSL interface"  OFF)
 option(IPOPT_HAS_WSMP                  "Enable WSMP solver"    OFF)
 option(IPOPT_HAS_MUMPS                 "Enable Mumps solver"   OFF)
-option(IPOPT_BUILD_INEXACT             "Enable the Inexact solver" OFF)
 option(IPOPT_BUILD_EXAMPLES            "Enable the building of examples" OFF)
 option(IPOPT_ENABLE_LINEARSOLVERLOADER "Build the dynamic linear solver loader" ON)
 option(IPOPT_ENABLE_INEXACT            "Build the inexact solver" ON)
@@ -530,12 +527,6 @@ subdirs(ThirdParty)
 
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
-
-if (IPOPT_BUILD_INEXACT)
-  set(BUILD_INEXACT ON)
-else ()
-  set(BUILD_INEXACT OFF)
-endif ()
 
 #
 # HSL Management

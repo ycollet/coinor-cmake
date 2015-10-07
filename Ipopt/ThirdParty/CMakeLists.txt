@@ -166,7 +166,8 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
                       )
 
-  set(COIN_HAS_MUMPS ON CACHE BOOL "Enable the Mumps linear solver (enabled by default)" FORCE)
+  set(COIN_HAS_MUMPS  ON CACHE BOOL "Enable the Mumps linear solver (enabled by default)" FORCE)
+  set(IPOPT_HAS_MUMPS ON CACHE BOOL "Enable the Mumps solver" FORCE)
 endif()
 
 # #################################################

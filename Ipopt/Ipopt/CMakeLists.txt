@@ -185,8 +185,12 @@ set (IPOPT_SRC_LIST ${IPOPT_SRC_ALGORITHM_LIST}
                     ${IPOPT_SRC_COMMON_LIST}
                     ${IPOPT_SRC_INTERFACES_LIST}
                     ${IPOPT_SRC_LINALG_LIST}
-                    ${IPOPT_SRC_LINALG_TMATRICES}
-                    ${IPOPT_SRC_ALGORITHM_INEXACT_LIST})
+                    ${IPOPT_SRC_LINALG_TMATRICES})
+
+if (IPOPT_ENABLE_INEXACT)
+  set(IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
+                     ${IPOPT_SRC_ALGORITHM_INEXACT_LIST})
+endif ()
 
 if (IPOPT_HAS_AMPL)
   set (IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
