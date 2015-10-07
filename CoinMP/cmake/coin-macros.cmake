@@ -134,10 +134,10 @@ set(color_reset    "${_escape}[0m")    # Text Reset
 # COLOR_MESSAGE("${color_cyan}Installation Summary${color_reset}
 
 function(COLOR_MESSAGE TEXT)
-  if(CMAKE_COLOR_MAKEFILE)
+  if (CMAKE_COLOR_MAKEFILE AND NOT WIN32)
     message(${TEXT})
-  else()
+  else ()
     string(REGEX REPLACE "${_escape}.[0123456789;]*m" "" __TEXT ${TEXT})
     message(${__TEXT})
-  endif()
+  endif ()
 endfunction()
