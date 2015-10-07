@@ -3,10 +3,8 @@ cmake_minimum_required(VERSION 2.8)
 project(IpOpt)
 
 #undef BUILD_INEXACT - Define to 1 if the inexact linear solver option is included
-#undef COIN_HAS_ASL
-#undef COIN_HAS_HSL
-#undef HAVE_PARDISO
 
+#undef HAVE_PARDISO
 #undef HAVE_MPI_INITIALIZED - Define to 1 if you have the `MPI_Initialized' function.
 #undef HAVE_PARDISO_MKL - Define to 1 if you are using Pardiso from MKL
 #undef HAVE_PARDISO_OLDINTERFACE - Define to 1 if you are not using at least a 4.0 version of Pardiso
@@ -14,12 +12,12 @@ project(IpOpt)
 #undef HAVE_LINEARSOLVERLOADER - Define to 1 if the linear solver loader should be compiled to allow dynamic loading of shared libraries with linear solvers
 #undef HAVE_WSMP - Define to 1 if WSMP is available
 
-option(IPOPT_HAS_AMPL    "Enable Ampl interface" OFF)
-option(IPOPT_HAS_PARDISO "Enable Pardiso solver" OFF)
-option(IPOPT_HAS_HSL     "Enable HSL interface"  OFF)
-option(IPOPT_HAS_WSMP    "Enable WSMP solver"    OFF)
-option(IPOPT_HAS_MUMPS   "Enable Mumps solver"   OFF)
-
+option(IPOPT_HAS_AMPL                  "Enable Ampl interface" OFF)
+option(IPOPT_HAS_PARDISO               "Enable Pardiso solver" OFF)
+option(IPOPT_HAS_HSL                   "Enable HSL interface"  OFF)
+option(IPOPT_HAS_WSMP                  "Enable WSMP solver"    OFF)
+option(IPOPT_HAS_MUMPS                 "Enable Mumps solver"   OFF)
+option(IPOPT_BUILD_INEXACT             "Enable the Inexact solver" OFF)
 option(IPOPT_BUILD_EXAMPLES            "Enable the building of examples" OFF)
 option(IPOPT_ENABLE_LINEARSOLVERLOADER "Build the dynamic linear solver loader" ON)
 option(IPOPT_ENABLE_INEXACT            "Build the inexact solver" ON)
@@ -50,7 +48,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
 set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
 
-set(COIN_HAS_MUMPS ON CACHE BOOL "Enable the Mumps linear solver (default solver enabled)" FORCE)
+set(COIN_HAS_MUMPS OFF CACHE BOOL "Enable the Mumps linear solver (default solver enabled)" FORCE)
 set(COIN_HAS_MUMPS_INCLUDE_PATH "None" CACHE PATH "The MUMPS linear solver include Path")
 set(COIN_HAS_MUMPS_LIBRARY_PATH "None" CACHE PATH "The MUMPS linear solver absolute library Path")
 
@@ -533,52 +531,18 @@ subdirs(ThirdParty)
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
 
+if (IPOPT_BUILD_INEXACT)
+  set(BUILD_INEXACT ON)
+else ()
+  set(BUILD_INEXACT OFF)
+endif ()
+
 #
 # HSL Management
 #
 
 #add_definitions(-DHAVE_LINEARSOLVERLOADER)
 
-if (COINHSL_HAS_MA57)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_MA57)
-endif ()
-if (COINHSL_HAS_MA28)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_MA28)
-endif ()
-if (COINHSL_HAS_MA86)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_MA86)
-endif ()
-if (COINHSL_HAS_METIS)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_METIS)
-endif ()
-if (COINHSL_HAS_MC19)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_MC19)
-endif ()
-if (COINHSL_HAS_MA77)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_MA77)
-endif ()
-if (COINHSL_HSL2013)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HSL2013)
-endif ()
-if (COINHSL_HAS_MC68)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_MC68)
-endif ()
-if (COINHSL_HAS_MA97)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_MA97)
-endif ()
-if (COINHSL_HAS_MA27)
-  set(COIN_HAS_HSL ON)
-  add_definitions(-DCOINHSL_HAS_MA27)
-endif ()
 if (COIN_ENABLE_DOWNLOAD_METIS) # METIS found
   add_definitions(-DCOINHSL_HAS_METIS)
 endif ()

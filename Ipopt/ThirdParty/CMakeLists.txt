@@ -11,6 +11,9 @@ option(COIN_ENABLE_DOWNLOAD_METIS   "Enable the download / compilation of Metis"
 option(COIN_ENABLE_DOWNLOAD_ASL     "Enable the download / compilation of Ampl Solver Library" OFF)
 option(COIN_ENABLE_DOWNLOAD_LAPACK  "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_CLAPACK "Enable the download / compilation of CBlas / CLapack" OFF)
+option(COIN_ENABLE_COMPILE_HSL      "Enable the compilation of HSL" OFF)
+
+set(COIN_HSL_PATH "None" CACHE PATH "The HSL source Path")
 
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
@@ -234,6 +237,84 @@ endif()
 # #################################################
 
 # #################################################
+# ===>    HSL
+# #################################################
+
+if (COIN_ENABLE_COMPILE_HSL AND NOT COIN_HSL_PATH STREQUAL "None")
+  set(COIN_HAS_HSL ON CACHE BOOL "Enable the HSL support" FORCE)
+
+  set(COINHSL_HAS_MA27  ON)
+  set(COINHSL_HAS_MA28  ON)
+  set(COINHSL_HAS_MC19  ON)
+  set(COINHSL_HAS_MA57  OFF)
+  set(COINHSL_HAS_MA86  OFF)
+  set(COINHSL_HAS_METIS OFF)
+  set(COINHSL_HAS_MA77  OFF)
+  set(COINHSL_HSL2013   OFF)
+  set(COINHSL_HAS_MC68  OFF)
+  set(COINHSL_HAS_MA97  OFF)
+  
+  set(COINHSL_VERSION "2014.01.17")
+  set(COINHSL_VERSION_MAJOR   2014)
+  set(COINHSL_VERSION_MINOR   1)
+  set(COINHSL_VERSION_RELEASE 17)
+  
+  if (COINHSL_HAS_MA57)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_MA57)
+  endif ()
+  if (COINHSL_HAS_MA28)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_MA28)
+  endif ()
+  if (COINHSL_HAS_MA86)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_MA86)
+  endif ()
+  if (COINHSL_HAS_METIS)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_METIS)
+  endif ()
+  if (COINHSL_HAS_MC19)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_MC19)
+  endif ()
+  if (COINHSL_HAS_MA77)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_MA77)
+  endif ()
+  if (COINHSL_HSL2013)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HSL2013)
+  endif ()
+  if (COINHSL_HAS_MC68)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_MC68)
+  endif ()
+  if (COINHSL_HAS_MA97)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_MA97)
+  endif ()
+  if (COINHSL_HAS_MA27)
+    set(COIN_HAS_HSL ON)
+    add_definitions(-DCOINHSL_HAS_MA27)
+  endif ()
+  
+  configure_file(${CMAKE_SOURCE_DIR}/Ipopt/include/config_coinhsl.h.in ${CMAKE_BINARY_DIR}/Ipopt/include/config_coinhsl.h)
+  
+  set(HSL_SRCS ${COIN_HSL_PATH}/ma28/ma28d.f
+               ${COIN_HSL_PATH}/ma27/ma27d.f
+               ${COIN_HSL_PATH}/common/deps.f
+               ${COIN_HSL_PATH}/mc19/mc19d.f)
+  
+  add_library(hsl SHARED ${HSL_SRCS})
+endif ()
+
+# #################################################
+# <===    HSL
+# #################################################
+
+# #################################################
 # ===>   Restart cmake
 # #################################################
 
@@ -253,6 +334,9 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_ASL)
     add_dependencies(${_target} EP_ASL)
   endif ()
+  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWLOAD_CLAPACK)
+    add_dependencies(${_target} EP_Lapack)
+  endif ()
 endmacro()
 
 macro(add_executable _target)
@@ -266,6 +350,9 @@ macro(add_executable _target)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_ASL)
     add_dependencies(${_target} EP_ASL)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWLOAD_CLAPACK)
+    add_dependencies(${_target} EP_Lapack)
   endif ()
 endmacro()
 
