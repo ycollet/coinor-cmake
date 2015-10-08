@@ -2,12 +2,13 @@ cmake_minimum_required(VERSION 2.8)
 
 project(IpOpt)
 
+# FUNNY_LAPACK_FINT
+
 #undef HAVE_PARDISO
 #undef HAVE_MPI_INITIALIZED - Define to 1 if you have the `MPI_Initialized' function.
 #undef HAVE_PARDISO_MKL - Define to 1 if you are using Pardiso from MKL
 #undef HAVE_PARDISO_OLDINTERFACE - Define to 1 if you are not using at least a 4.0 version of Pardiso
 #undef HAVE_PARDISO_PARALLEL - Define to 1 if you are using the parallel version of Pardiso
-#undef HAVE_LINEARSOLVERLOADER - Define to 1 if the linear solver loader should be compiled to allow dynamic loading of shared libraries with linear solvers
 #undef HAVE_WSMP - Define to 1 if WSMP is available
 
 option(IPOPT_HAS_AMPL                  "Enable Ampl interface" OFF)
@@ -532,13 +533,14 @@ link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
 # HSL Management
 #
 
-#add_definitions(-DHAVE_LINEARSOLVERLOADER)
 
 if (COIN_ENABLE_DOWNLOAD_METIS) # METIS found
   add_definitions(-DCOINHSL_HAS_METIS)
 endif ()
 
 if (IPOPT_ENABLE_LINEARSOLVERLOADER)
+  add_definitions(-DHAVE_LINEARSOLVERLOADER)
+  
   find_package(DL REQUIRED)
   
   set(BUILD_LINEARSOLVERLOADER ON)
@@ -547,9 +549,19 @@ else ()
   set(BUILD_LINEARSOLVERLOADER OFF)
   set(BUILD_PARDISOLOADER      OFF)
 endif ()
+
 if (IPOPT_HASH_MUMPS)
+  add_definitions(-DHAVE_MUMPS)
+  
   set(COINHSL_HAS_MUMPS ON)
 endif()
+
+if (IPOPT_HASH_WSMP)
+  add_definitions(-DHAVE_WSMP)
+  
+  set(COINHSL_HAS_WSMP ON)
+endif()
+
 set(BUILD_INEXACT OFF)
 if (IPOPT_ENABLE_INEXACT AND IPOPT_HAS_PARDISO)
   set(BUILD_INEXACT ON)
@@ -618,7 +630,8 @@ include(CTest)
 
 # available colors: {u,b,bg, } black, red, green, yellow, blue, purple, cyan, white, reset
 
-COLOR_MESSAGE("${color_green}************************")
+COLOR_MESSAGE("${color_green}")
+COLOR_MESSAGE("************************")
 COLOR_MESSAGE("*                      *")
 COLOR_MESSAGE("* Configuration sum-up *")
 COLOR_MESSAGE("*                      *")
