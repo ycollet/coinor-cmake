@@ -45,6 +45,7 @@ option(COIN_ENABLE_DOWNLOAD_METIS         "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_MUMPS         "Enable the download / compilation of Mumps" OFF)
 option(COIN_ENABLE_DOWNLOAD_ASL           "Enable the download / compilation of Ampl Solver Library" OFF)
 option(COIN_ENABLE_DOWNLOAD_DATA_TEST     "Enable the download / run of Data tests" OFF)
+option(COIN_ENABLE_DOWNLOAD_MIPLIB2000    "Enable the download / run of Miplib2000 tests" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_CONCORDE      "Enable the download / compilation of Concorde" OFF)
@@ -584,6 +585,23 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
   include(ClpTests.cmake)
   include(SYMPHONYTests.cmake)
 endif ()
+
+if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
+  set(MIPLIB2000_VERSION "1.1.1")
+  
+  ExternalProject_Add(EP_MIPLIB2000
+                      PREFIX ${EP_InstallDir}/MIPLIB2000
+                      URL http://miplib.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip
+                      PATCH_COMMAND     ""
+                      UPDATE_COMMAND     ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ""
+                      )
+
+  include(ClpMiplib2000Tests.cmake)
+  include(SYMPHONYMiplib2000Tests.cmake)
+endif()
 
 # #################################################
 # <=== Tests
