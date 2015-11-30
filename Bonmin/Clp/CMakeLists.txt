@@ -59,12 +59,12 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/ClpSimplexPrimal.cpp
                  ${Clp_DIR}/src/ClpSolve.cpp
                  ${Clp_DIR}/src/Idiot.cpp
-                 ${Clp_DIR}/src/IdiSolve.cpp
-                 ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
-                 ${Clp_DIR}/src/ClpPESimplex.cpp
-                 ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
-                 ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
-                 ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
+                 ${Clp_DIR}/src/IdiSolve.cpp)
+                 #${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
+                 #${Clp_DIR}/src/ClpPESimplex.cpp
+                 #${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
+                 #${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
+                 #${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
 
 set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
                        ${Clp_DIR}/src/CbcOrClpParam.cpp

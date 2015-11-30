@@ -16,6 +16,29 @@ add_definitions(-DBONMIN_BUILD)
 configure_file(${CMAKE_SOURCE_DIR}/Bonmin/include/config.h.in        ${CMAKE_BINARY_DIR}/Bonmin/include/config.h)
 configure_file(${CMAKE_SOURCE_DIR}/Bonmin/include/config_bonmin.h.in ${CMAKE_BINARY_DIR}/Bonmin/include/config_bonmin.h)
 
+include_directories(${Bonmin_DIR}/src/Interfaces/)
+include_directories(${Bonmin_DIR}/src/Interfaces/Filter/)
+include_directories(${Bonmin_DIR}/src/Interfaces/Ipopt/)
+include_directories(${Bonmin_DIR}/src/Interfaces/Ampl)
+include_directories(${Bonmin_DIR}/src/Algorithms/OaGenerators/)
+include_directories(${Bonmin_DIR}/src/Algorithms/Branching/)
+include_directories(${Bonmin_DIR}/src/Algorithms/)
+include_directories(${Bonmin_DIR}/src/Algorithms/QuadCuts/)
+include_directories(${Bonmin_DIR}/src/Algorithms/Ampl/)
+include_directories(${Bonmin_DIR}/src/CbcBonmin/)
+include_directories(${Bonmin_DIR}/src/CbcBonmin/Heuristics/)
+include_directories(${Bonmin_DIR}/src/CbcBonmin/)
+include_directories(${Bonmin_DIR}/src/Apps/)
+
+include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver)
+include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm)
+include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers)
+include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Interfaces)
+include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Common)
+include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/LinAlg)
+include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices)
+include_directories(${CMAKE_BINARY_DIR}/Ipopt/include)
+
 set(Bonmin_SRC_LIST ${Bonmin_DIR}/src/Interfaces/BonTNLPSolver.cpp
                     ${Bonmin_DIR}/src/Interfaces/BonBoundsReader.cpp
 		    ${Bonmin_DIR}/src/Interfaces/Filter/BonBqpdWarmStart.cpp
@@ -33,11 +56,7 @@ set(Bonmin_SRC_LIST ${Bonmin_DIR}/src/Interfaces/BonTNLPSolver.cpp
 		    ${Bonmin_DIR}/src/Interfaces/BonTNLP2FPNLP.cpp
 		    ${Bonmin_DIR}/src/Interfaces/BonCutStrengthener.cpp
 		    ${Bonmin_DIR}/src/Interfaces/BonStdCInterface.cpp
-		    ${Bonmin_DIR}/src/Interfaces/Ampl/sos_kludge.cpp
-		    ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplTMINLP.cpp
-		    ${Bonmin_DIR}/src/Interfaces/Ampl/BonSolReader.cpp
-		    ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplInterface.cpp
-		    ${Bonmin_DIR}/src/Interfaces/BonCurvatureEstimator.cpp
+		    #${Bonmin_DIR}/src/Interfaces/BonCurvatureEstimator.cpp
 		    ${Bonmin_DIR}/src/Interfaces/BonAuxInfos.cpp
 		    ${Bonmin_DIR}/src/Interfaces/BonStrongBranchingSolver.cpp
 		    ${Bonmin_DIR}/src/Interfaces/BonBranchingTQP.cpp
@@ -55,7 +74,7 @@ set(Bonmin_SRC_LIST ${Bonmin_DIR}/src/Interfaces/BonTNLPSolver.cpp
 		    ${Bonmin_DIR}/src/Algorithms/Branching/BonPseudoCosts.cpp
 		    ${Bonmin_DIR}/src/Algorithms/Branching/BonRandomChoice.cpp
 		    ${Bonmin_DIR}/src/Algorithms/Branching/BonChooseVariable.cpp
-		    ${Bonmin_DIR}/src/Algorithms/Branching/BonCurvBranchingSolver.cpp
+		    #${Bonmin_DIR}/src/Algorithms/Branching/BonCurvBranchingSolver.cpp
 		    ${Bonmin_DIR}/src/Algorithms/Branching/BonLpBranchingSolver.cpp
 		    ${Bonmin_DIR}/src/Algorithms/Branching/BonQpBranchingSolver.cpp
 		    ${Bonmin_DIR}/src/Algorithms/BonCbcLpStrategy.cpp
@@ -101,7 +120,7 @@ set(Bonmin_SRC_LIST_Headers ${Bonmin_DIR}/src/Interfaces/BonCutStrengthener.hpp
 			    ${Bonmin_DIR}/src/Interfaces/Filter/BonFilterTypes.hpp
 			    ${Bonmin_DIR}/src/Interfaces/Filter/BonBqpdWarmStart.hpp
 			    ${Bonmin_DIR}/src/Interfaces/Filter/BonFilterSolver.hpp
-			    ${Bonmin_DIR}/src/Interfaces/BonCurvatureEstimator.hpp
+			    #${Bonmin_DIR}/src/Interfaces/BonCurvatureEstimator.hpp
 			    ${Bonmin_DIR}/src/Interfaces/BonTMINLP.hpp
 			    ${Bonmin_DIR}/src/Interfaces/Ipopt/BonIpoptInteriorWarmStarter.hpp
 			    ${Bonmin_DIR}/src/Interfaces/Ipopt/BonIpoptSolver.hpp
@@ -120,9 +139,6 @@ set(Bonmin_SRC_LIST_Headers ${Bonmin_DIR}/src/Interfaces/BonCutStrengthener.hpp
 			    ${Bonmin_DIR}/src/Interfaces/BonOsiTMINLPInterface.hpp
 			    ${Bonmin_DIR}/src/Interfaces/BonColReader.hpp
 			    ${Bonmin_DIR}/src/Interfaces/BonBoundsReader.hpp
-			    ${Bonmin_DIR}/src/Interfaces/Ampl/BonSolReader.hpp
-			    ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplInterface.hpp
-			    ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplTMINLP.hpp
 			    ${Bonmin_DIR}/src/Interfaces/BonAuxInfos.hpp
 			    ${Bonmin_DIR}/src/Interfaces/BonStdCInterface.h
 			    ${Bonmin_DIR}/src/Interfaces/BonBranchingTQP.hpp
@@ -139,7 +155,7 @@ set(Bonmin_SRC_LIST_Headers ${Bonmin_DIR}/src/Interfaces/BonCutStrengthener.hpp
 			    ${Bonmin_DIR}/src/Algorithms/BonCbcLpStrategy.hpp
 			    ${Bonmin_DIR}/src/Algorithms/BonSubMipSolver.hpp
 			    ${Bonmin_DIR}/src/Algorithms/Branching/BonRandomChoice.hpp
-			    ${Bonmin_DIR}/src/Algorithms/Branching/BonCurvBranchingSolver.hpp
+			    #${Bonmin_DIR}/src/Algorithms/Branching/BonCurvBranchingSolver.hpp
 			    ${Bonmin_DIR}/src/Algorithms/Branching/BonChooseVariable.hpp
 			    ${Bonmin_DIR}/src/Algorithms/Branching/BonPseudoCosts.hpp
 			    ${Bonmin_DIR}/src/Algorithms/Branching/BonQpBranchingSolver.hpp
@@ -177,13 +193,18 @@ set(Bonmin_SRC_LIST_Headers ${Bonmin_DIR}/src/Interfaces/BonCutStrengthener.hpp
 			    ${Bonmin_DIR}/src/CbcBonmin/BonBabInfos.hpp
 			    ${Bonmin_DIR}/src/CbcBonmin/BonCbcNlpStrategy.hpp)
 
-#if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
-#  set(Bonmin_SRC_LIST ${Cbc_SRC_LIST}
-#                   ${Cbc_DIR}/src/Cbc_ampl.cpp)
-#  
-#  set(Bonmin_SRC_LIST_Headers ${Cbc_SRC_LIST_Headers}
-#                   ${Cbc_DIR}/src/Cbc_ampl.h)
-#endif ()
+if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
+  set(Bonmin_SRC_LIST ${Bonmin_SRC_LIST}
+		      ${Bonmin_DIR}/src/Interfaces/Ampl/sos_kludge.cpp
+		      ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplTMINLP.cpp
+		      ${Bonmin_DIR}/src/Interfaces/Ampl/BonSolReader.cpp
+		      ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplInterface.cpp)
+  
+  set(Bonmin_SRC_LIST_Headers ${Bonmin_SRC_LIST_Headers}
+			      ${Bonmin_DIR}/src/Interfaces/Ampl/BonSolReader.hpp
+			      ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplInterface.hpp
+			      ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplTMINLP.hpp)
+endif ()
 
 include_directories(${Bonmin_DIR}/src)
 include_directories(${Cbc_DIR}/src/OsiCbc)
@@ -389,7 +410,7 @@ if (BONMIN_BUILD_EXAMPLES)
 endif ()
 
 add_executable(bonmin ${Cbc_DIR}/src/CoinSolve.cpp)
-target_link_libraries(cbc libBonmin libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
+target_link_libraries(bonmin libBonmin libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
 set_include_directories(bonmin)
 if (MKL_FOUND)
   target_link_libraries(bonmin ${COIN_MKL_LIBS})

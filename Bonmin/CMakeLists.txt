@@ -35,6 +35,15 @@ set(COIN_DYLP_DIR     "None" CACHE PATH "The DyLP solver Path")
 # TODO
 # COIN_HAS_FILTERSQP
 
+option(IPOPT_HAS_AMPL                  "Enable Ampl interface" OFF)
+option(IPOPT_HAS_PARDISO               "Enable Pardiso solver" OFF)
+option(IPOPT_HAS_HSL                   "Enable HSL interface"  OFF)
+option(IPOPT_HAS_WSMP                  "Enable WSMP solver"    OFF)
+option(IPOPT_HAS_MUMPS                 "Enable Mumps solver"   OFF)
+option(IPOPT_BUILD_EXAMPLES            "Enable the building of examples" OFF)
+option(IPOPT_ENABLE_LINEARSOLVERLOADER "Build the dynamic linear solver loader" ON)
+option(IPOPT_ENABLE_INEXACT            "Build the inexact solver" ON)
+
 # Compile only the main part and use an external directory to link / use includes
 option(USE_COINOR_BIN "Use and external directory where the headers / libraries used are stored" OFF)
 set(COINOR_DIR "None" CACHE PATH "The Path where all the used CoinOR libraries are stored")
@@ -160,6 +169,9 @@ set(COIN_OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if
 
 # Use fast code
 option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
+
+set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
+set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
 
 # Perform SVN checkout of source code
 option(COIN_PERFORM_CHECKOUT "Perform Subversion checkout of source code" OFF)
@@ -389,6 +401,9 @@ if (WIN32)
   endif ()
 endif ()
 
+# Define FORTRAN_INTEGER_TYPE for Ipopt.
+set(FORTRAN_INTEGER_TYPE int)
+
 #-----------------------------------------------------------------------------
 # Detect name mangling convention used between Fortran and C
 #-----------------------------------------------------------------------------
@@ -463,7 +478,22 @@ set(Bonmin_DIR        ${Coin_DIR}/Bonmin)
 
 include(CheckIncludeFile)
 
+check_include_file("assert.h"    HAVE_ASSERT_H)
 check_include_file("bzlib.h"     HAVE_BZLIB_H)
+check_include_file("cmath"       HAVE_CMATH)
+check_include_file("cieeefp"     HAVE_CIEEEFP)
+check_include_file("cfloat"      HAVE_CFLOAT)
+check_include_file("cinttypes"   HAVE_CINTTYPES)
+check_include_file("cassert"     HAVE_CASSERT)
+check_include_file("cctype"      HAVE_CCTYPE)
+check_include_file("cieeefp"     HAVE_CIEEEFP)
+check_include_file("cstdarg"     HAVE_CSTDARG)
+check_include_file("cstddef"     HAVE_CSTDDEF)
+check_include_file("cstdio"      HAVE_CSTDIO)
+check_include_file("cstlib"      HAVE_CSTLIB)
+check_include_file("cstring"     HAVE_CSTRING)
+check_include_file("ctime"       HAVE_CTIME)
+check_include_file("ctype.h"     HAVE_CTYPE_H)
 check_include_file("dlfcn.h"     HAVE_DLFCN_H)
 check_include_file("endian.h"    HAVE_ENDIAN_H)
 check_include_file("float.h"     HAVE_FLOAT_H)
@@ -476,15 +506,15 @@ check_include_file("stdint.h"    HAVE_STDINT_H)
 check_include_file("stdlib.h"    HAVE_STDLIB_H)
 check_include_file("strings.h"   HAVE_STRINGS_H)
 check_include_file("string.h"    HAVE_STRING_H)
+check_include_file("stdarg.h"    HAVE_STDARG_H)
+check_include_file("stddef.h"    HAVE_STDDEF_H)
+check_include_file("stdio.h"     HAVE_STDIO_H)
 check_include_file("sys/stat.h"  HAVE_SYS_STAT_H)
 check_include_file("sys/types.h" HAVE_SYS_TYPES_H)
+check_include_file("time.h"      HAVE_TIME_H)
 check_include_file("unistd.h"    HAVE_UNISTD_H)
 check_include_file("windows.h"   HAVE_WINDOWS_H)
 check_include_file("zlib.h"      HAVE_ZLIB_H)
-check_include_file("cmath"       HAVE_CMATH)
-check_include_file("cieeefp"     HAVE_CIEEEFP)
-check_include_file("cfloat"      HAVE_CFLOAT)
-check_include_file("cinttypes"   HAVE_CINTTYPES)
 
 include(CheckCXXCompilerFlag)
 
@@ -571,6 +601,128 @@ if (COIN_HAS_ABC)
 endif ()
 
 include(CheckSymbolExists)
+include(CheckFunctionExists)
+
+if (HAVE_ASSERT_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "assert.h")
+endif ()
+if (HAVE_CASSERT)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cassert")
+endif ()
+if (HAVE_CCTYPE)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cctype")
+endif ()
+if (HAVE_CFLOAT)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cfloat")
+endif ()
+if (HAVE_CIEEEFP)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cieeefp")
+endif ()
+if (HAVE_CMATH)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cmath")
+endif ()
+if (HAVE_CSTDARG)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstdarg")
+endif ()
+if (HAVE_CSTDDEF)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstddef")
+endif ()
+if (HAVE_CSTDIO)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstdio")
+endif ()
+if (HAVE_CSTLIB)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstdlib")
+endif ()
+if (HAVE_CSTRING)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "cstring")
+endif ()
+if (HAVE_CTIME)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "ctime")
+endif ()
+if (HAVE_CTYPE_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "ctype.h")
+endif ()
+if (HAVE_DLFCN_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "dlfcn.h")
+endif ()
+if (HAVE_FLOAT_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "float.h")
+endif ()
+if (HAVE_IEEEFP_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "ieeefp.h")
+endif ()
+if (HAVE_INTTYPES_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "inttypes.h")
+endif ()
+if (HAVE_MATH_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "math.h")
+endif ()
+if (HAVE_STDARG_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stdarg.h")
+endif ()
+if (HAVE_STDDEF_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stddef.h")
+endif ()
+if (HAVE_STDINT_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stdint.h")
+endif ()
+if (HAVE_STDIO_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stdio.h")
+endif ()
+if (HAVE_STDLIB_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "stdlib.h")
+endif ()
+if (HAVE_STRINGS_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "strings.h")
+endif ()
+if (HAVE_STRING_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "string.h")
+endif ()
+if (HAVE_SYS_STAT_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "sys/stat.h")
+endif ()
+if (HAVE_SYS_TYPES_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "sys/types.h")
+endif ()
+if (HAVE_TIME_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "time.h")
+endif ()
+if (HAVE_UNISTD_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "unistd.h")
+endif ()
+if (HAVE_WINDOWS_H)
+  set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
+                        "windows.h")
+endif ()
 
 if (HAVE_CMATH)
   set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
@@ -626,6 +778,15 @@ CHECK_SYMBOL_EXISTS(isnand ${TEST_INCLUDE_LIST} COIN_C_ISNAN_R)
 if (COIN_C_NAN_R)
   set(COIN_C_NAN isnand)
 endif ()
+
+CHECK_FUNCTION_EXISTS(dran48     HAVE_DRAND48)
+CHECK_FUNCTION_EXISTS(rand       HAVE_RAND)
+CHECK_FUNCTION_EXISTS(snprintf   HAVE_SNPRINTF)
+CHECK_FUNCTION_EXISTS(std::rand  HAVE_STD__RAND)
+CHECK_FUNCTION_EXISTS(va_copy    HAVE_VA_COPY)
+CHECK_FUNCTION_EXISTS(vsnprintf  HAVE_VSNPRINTF)
+CHECK_FUNCTION_EXISTS(_snprintf  HAVE__SNPRINTF)
+CHECK_FUNCTION_EXISTS(_vsnprintf HAVE__VSNPRINTF)
 
 check_symbol_exists(clock_gettime sys/time.h HAVE_CLOCK_GETTIME)
 check_symbol_exists(gettimeofday  sys/time.h HAVE_GETTIMEOFDAY)
@@ -779,6 +940,7 @@ endif ()
 
 subdirs(Osi/OsiCbc)
 subdirs(Cbc)
+subdirs(Ipopt)
 subdirs(Bonmin)
 
 # Perform some tests
