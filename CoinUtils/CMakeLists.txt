@@ -2,12 +2,19 @@ cmake_minimum_required(VERSION 3.0.2)
 
 project(CoinUtils)
 
-# Threads path
-set(COIN_THREADS_INC_PATH "None" CACHE PATH "The path to the PThreads header files")
-set(COIN_THREADS_LIB_PATH "None" CACHE PATH "The path to the PThreads library files")
+# CoinUtils options
+option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
+option(COINUTILS_USE_MEMPOOL_OVERRIDE_NEW "enables the CoinUtils mempool to override global new/delete" OFF)
+option(COINUTILS_USE_MEMPOOL_MAXPOOLED    "Specify the default maximum memory allocation size that is served by the memory pool. If negative (or 'no') then the memory pool is disabled completely. Otherwise its value can be overridden at runtime using the COINUTILS_MEMPOOL_MAXPOOLED environment variable." OFF)
+option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
+option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
+option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
+option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
+option(COIN_HAS_MKL        "Use Intel MKL library (requires Intel compiler)" OFF)
+option(COIN_USE_FAST_CODE  "Use fast code for CoinUtils" OFF)
 
-mark_as_advanced(COIN_THREADS_INC_PATH
-                 COIN_THREADS_LIB_PATH)
+set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
+set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
 
 # Compilation options
 option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
@@ -20,10 +27,16 @@ option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (u
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 
+# Threads path
+set(COIN_THREADS_INC_PATH "None" CACHE PATH "The path to the PThreads header files")
+set(COIN_THREADS_LIB_PATH "None" CACHE PATH "The path to the PThreads library files")
+
 # Set paths of source
 set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The CoinUtils Path")
 
-mark_as_advanced(ENABLE_SHARED_LIBRARIES
+mark_as_advanced(COIN_THREADS_INC_PATH
+                 COIN_THREADS_LIB_PATH
+		 ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
                  COIN_COMPILE_COVERAGE
                  COIN_COMPILE_PROFILE
@@ -32,22 +45,8 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_WHOPR
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
-                 Coin_DIR)
-
-# CoinUtils options
-option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
-option(COINUTILS_USE_MEMPOOL_OVERRIDE_NEW "enables the CoinUtils mempool to override global new/delete" OFF)
-option(COINUTILS_USE_MEMPOOL_MAXPOOLED    "Specify the default maximum memory allocation size that is served by the memory pool. If negative (or 'no') then the memory pool is disabled completely. Otherwise its value can be overridden at runtime using the COINUTILS_MEMPOOL_MAXPOOLED environment variable." OFF)
-option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
-option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
-option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
-option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
-option(COIN_HAS_MKL        "Use Intel MKL library (requires Intel compiler)" OFF)
-
-set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
-set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
-
-mark_as_advanced(COINUTILS_USE_THREADS
+                 Coin_DIR
+		 COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
                  COINUTILS_USE_MEMPOOL_MAXPOOLED
                  COINUTILS_HAS_ZLIB
@@ -56,12 +55,8 @@ mark_as_advanced(COINUTILS_USE_THREADS
                  COIN_HAS_BLAS
                  COIN_HAS_MKL
                  COIN_COINUTILS_CHECKLEVEL
-                 COIN_COINUTILS_VERBOSITY)
-
-# Use fast code
-option(COIN_USE_FAST_CODE "Use fast code for CoinUtils" OFF)
-
-mark_as_advanced(COIN_USE_FAST_CODE)
+                 COIN_COINUTILS_VERBOSITY
+		 COIN_USE_FAST_CODE)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

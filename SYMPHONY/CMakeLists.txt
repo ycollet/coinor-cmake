@@ -2,47 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)
 
 project(Symphony)
 
-# External solvers
-option(USE_OSI_CLP    "Use Xpress solver" ON)
-option(USE_OSI_XPRESS "Use Xpress solver" OFF)
-option(USE_OSI_CPLEX  "Use Cplex solver"  OFF)
-option(USE_OSI_GLPK   "Use GLPK solver"   OFF)
-option(USE_OSI_GUROBI "Use GUROBI solver" OFF)
-option(USE_OSI_MOSEK  "Use Mosek solver"  OFF)
-option(USE_OSI_SOPLEX "Use Soplex solver" OFF)
-option(USE_VOL        "Use Vol solver"    OFF)
-option(USE_DYLP       "Use DyLP solver"   OFF)
-option(COMPILE_OSI_CLP    "Compile the OSI Clp solver"    OFF)
-option(COMPILE_OSI_XPRESS "Compile the OSI Xpress solver" OFF)
-option(COMPILE_OSI_CPLEX  "Compile the OSI Cplex solver"  OFF)
-option(COMPILE_OSI_GLPK   "Compile the OSI GLPK solver"   OFF)
-option(COMPILE_OSI_GUROBI "Compile the OSI GUROBI solver" OFF)
-option(COMPILE_OSI_MOSEK  "Compile the OSI Mosek solver"  OFF)
-option(COMPILE_OSI_SOPLEX "Compile the OSI Soplex solver" OFF)
-set(COIN_XPRESS_DIR "None" CACHE PATH "The Xpress solver Path")
-set(COIN_CPLEX_DIR  "None" CACHE PATH "The Cplex solver Path")
-set(COIN_GUROBI_DIR "None" CACHE PATH "The GUROBI solver Path")
-set(COIN_MOSEK_DIR  "None" CACHE PATH "The Mosek solver Path")
-set(COIN_SOPLEX_DIR "None" CACHE PATH "The Soplex solver Path")
-set(COIN_VOL_DIR    "None" CACHE PATH "The Vol solver Path")
-set(COIN_DYLP_DIR   "None" CACHE PATH "The DyLP solver Path")
-
-# Compile only the main part and use an external directory to link / use includes
-option(USE_COINOR_BIN "Use and external directory where the headers / libraries used are stored" OFF)
-set(COINOR_DIR "None" CACHE PATH "The Path where all the used CoinOR libraries are stored")
-
-mark_as_advanced(USE_COINOR_BIN
-                 COINOR_DIR)
-
-option(SYMPHONY_BUILD_EXAMPLES "Enable the building of examples" OFF)
-
-option(COIN_HAS_READLINE       "Readline support" OFF)
-option(CLP_LP_SOLVER           "Clp LP solver support" ON)
-option(GLPK_LP_SOLVER          "Glpk LP solver support" OFF)
-option(OSL_LP_SOLVER           "OSL LP solver support" OFF)
-option(CPLEX_LP_SOLVER         "CPLEX LP solver support" OFF)
-option(SOPLEX_LP_SOLVER        "SOPlex LP solver support" OFF)
-option(XPRESS_LP_SOLVER        "Xpress LP solver support" OFF)
+# Symphony options
 option(USE_CGL_CUTS            "Use CGL cuts" ON)
 option(USE_GMPL                "Use GMPL language" OFF)
 option(SENSITIVITY_ANALYSIS    "Enable sensitivity analysis" OFF)
@@ -67,85 +27,15 @@ option(SYM_PARALLEL            "Enable parallel" OFF)
 option(USE_OPENMP              "Use OpenMP" OFF)
 option(USE_CL                  "Use OpenCL" OFF)
 
-mark_as_advanced(COIN_HAS_READLINE
-                 CLP_LP_SOLVER
-                 GLPK_LP_SOLVER
-                 OSL_LP_SOLVER
-                 CPLEX_LP_SOLVER
-                 SOPLEX_LP_SOLVER
-                 XPRESS_LP_SOLVER
-                 USE_CGL_CUTS
-                 USE_GMPL
-                 SENSITIVITY_ANALYSIS
-                 ROOT_NODE_ONLY
-                 COMPILE_FRAC_BRANCHING
-                 DO_TESTS
-                 TM_BASIS_TESTS
-                 TRACE_PATH
-                 CHECK_CUT_VALIDITY
-                 STATISTICS
-                 PSEUDO_COSTS
-                 DRAWGRAPH
-                 STATICEXE
-                 SIGHANDLER
-                 SYM_WITH_APPL
-                 SYM_COMPILE_IN_CG
-                 SYM_COMPILE_IN_CP
-                 SYM_COMPILE_IN_LP
-                 SYM_COMPILE_IN_TM
-                 SYM_COMPILE_IN_LP
-                 SYM_PARALLEL
-                 USE_OPENMP
-                 USE_CL)
+option(SYMPHONY_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
-# Compilation options
-option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
-option(COIN_COMPILE_STATIC           "Activate the static linking" OFF)
-option(COIN_COMPILE_COVERAGE         "Activate the code coverage compilation" OFF)
-option(COIN_COMPILE_PROFILE          "Activate the code profiling compilation" OFF)
-option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation for valgrind" OFF)
-option(COIN_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
-option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
-option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
-option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
-
-# Set paths of source
-set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Clp Path")
-
-mark_as_advanced(ENABLE_SHARED_LIBRARIES
-                 COIN_COMPILE_STATIC
-                 COIN_COMPILE_COVERAGE
-                 COIN_COMPILE_PROFILE
-                 COIN_COMPILE_PROFILE_VALGRIND
-                 COIN_COMPILE_LTO
-                 COIN_COMPILE_WHOPR
-                 COIN_COMPILE_WARNINGS
-                 COIN_COMPILE_CXX11
-                 Coin_DIR)
-
-# CoinUtils options
-option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
-option(COINUTILS_USE_MEMPOOL_OVERRIDE_NEW "enables the CoinUtils mempool to override global new/delete" OFF)
-option(COINUTILS_USE_MEMPOOL_MAXPOOLED    "Specify the default maximum memory allocation size that is served by the memory pool. If negative (or 'no') then the memory pool is disabled completely. Otherwise its value can be overridden at runtime using the COINUTILS_MEMPOOL_MAXPOOLED environment variable." OFF)
-option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
-option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
-option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
-option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
-option(COIN_HAS_ASL        "Enable the ASL support" OFF)
-
-set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
-set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
-
-mark_as_advanced(COINUTILS_USE_THREADS
-                 COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
-                 COINUTILS_USE_MEMPOOL_MAXPOOLED
-                 COINUTILS_HAS_ZLIB
-                 COINUTILS_HAS_BZLIB
-                 COIN_HAS_LAPACK
-                 COIN_HAS_BLAS
-                 COIN_HAS_ASL
-                 COIN_COINUTILS_CHECKLEVEL
-                 COIN_COINUTILS_VERBOSITY)
+option(COIN_HAS_READLINE       "Readline support" OFF)
+option(CLP_LP_SOLVER           "Clp LP solver support" ON)
+option(GLPK_LP_SOLVER          "Glpk LP solver support" OFF)
+option(OSL_LP_SOLVER           "OSL LP solver support" OFF)
+option(CPLEX_LP_SOLVER         "CPLEX LP solver support" OFF)
+option(SOPLEX_LP_SOLVER        "SOPlex LP solver support" OFF)
+option(XPRESS_LP_SOLVER        "Xpress LP solver support" OFF)
 
 # Clp options
 option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
@@ -175,7 +65,124 @@ set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if
 
 option(COIN_HAS_MKL "Use Intel MKL library (requires Intel compiler)" OFF)
 
-mark_as_advanced(COIN_ENABLE_AMD
+# Cgl options
+set(COIN_CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
+set(COIN_CGL_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Cgl (0 if no output)")
+
+# Osi options
+set(COIN_OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
+set(COIN_OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if no output)")
+option(USE_OSI_CLP    "Use Xpress solver" ON)
+option(USE_OSI_XPRESS "Use Xpress solver" OFF)
+option(USE_OSI_CPLEX  "Use Cplex solver"  OFF)
+option(USE_OSI_GLPK   "Use GLPK solver"   OFF)
+option(USE_OSI_GUROBI "Use GUROBI solver" OFF)
+option(USE_OSI_MOSEK  "Use Mosek solver"  OFF)
+option(USE_OSI_SOPLEX "Use Soplex solver" OFF)
+option(COMPILE_OSI_CLP    "Compile the OSI Clp solver"    OFF)
+option(COMPILE_OSI_XPRESS "Compile the OSI Xpress solver" OFF)
+option(COMPILE_OSI_CPLEX  "Compile the OSI Cplex solver"  OFF)
+option(COMPILE_OSI_GLPK   "Compile the OSI GLPK solver"   OFF)
+option(COMPILE_OSI_GUROBI "Compile the OSI GUROBI solver" OFF)
+option(COMPILE_OSI_MOSEK  "Compile the OSI Mosek solver"  OFF)
+option(COMPILE_OSI_SOPLEX "Compile the OSI Soplex solver" OFF)
+
+# CoinUtils options
+option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
+option(COINUTILS_USE_MEMPOOL_OVERRIDE_NEW "enables the CoinUtils mempool to override global new/delete" OFF)
+option(COINUTILS_USE_MEMPOOL_MAXPOOLED    "Specify the default maximum memory allocation size that is served by the memory pool. If negative (or 'no') then the memory pool is disabled completely. Otherwise its value can be overridden at runtime using the COINUTILS_MEMPOOL_MAXPOOLED environment variable." OFF)
+option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
+option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
+option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
+option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
+option(COIN_HAS_ASL        "Enable the ASL support" OFF)
+option(COIN_USE_FAST_CODE  "Use fast code for CoinUtils" OFF)
+
+set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
+set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
+
+# External solvers
+option(USE_VOL        "Use Vol solver"    OFF)
+option(USE_DYLP       "Use DyLP solver"   OFF)
+set(COIN_XPRESS_DIR "None" CACHE PATH "The Xpress solver Path")
+set(COIN_CPLEX_DIR  "None" CACHE PATH "The Cplex solver Path")
+set(COIN_GUROBI_DIR "None" CACHE PATH "The GUROBI solver Path")
+set(COIN_MOSEK_DIR  "None" CACHE PATH "The Mosek solver Path")
+set(COIN_SOPLEX_DIR "None" CACHE PATH "The Soplex solver Path")
+set(COIN_VOL_DIR    "None" CACHE PATH "The Vol solver Path")
+set(COIN_DYLP_DIR   "None" CACHE PATH "The DyLP solver Path")
+
+# Compilation options
+option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
+option(COIN_COMPILE_STATIC           "Activate the static linking" OFF)
+option(COIN_COMPILE_COVERAGE         "Activate the code coverage compilation" OFF)
+option(COIN_COMPILE_PROFILE          "Activate the code profiling compilation" OFF)
+option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation for valgrind" OFF)
+option(COIN_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
+option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
+option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
+option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
+
+# Set paths of source
+set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Clp Path")
+
+# Compile only the main part and use an external directory to link / use includes
+option(USE_COINOR_BIN "Use and external directory where the headers / libraries used are stored" OFF)
+set(COINOR_DIR "None" CACHE PATH "The Path where all the used CoinOR libraries are stored")
+
+mark_as_advanced(USE_COINOR_BIN
+                 COINOR_DIR
+		 COIN_HAS_READLINE
+                 CLP_LP_SOLVER
+                 GLPK_LP_SOLVER
+                 OSL_LP_SOLVER
+                 CPLEX_LP_SOLVER
+                 SOPLEX_LP_SOLVER
+                 XPRESS_LP_SOLVER
+                 USE_CGL_CUTS
+                 USE_GMPL
+                 SENSITIVITY_ANALYSIS
+                 ROOT_NODE_ONLY
+                 COMPILE_FRAC_BRANCHING
+                 DO_TESTS
+                 TM_BASIS_TESTS
+                 TRACE_PATH
+                 CHECK_CUT_VALIDITY
+                 STATISTICS
+                 PSEUDO_COSTS
+                 DRAWGRAPH
+                 STATICEXE
+                 SIGHANDLER
+                 SYM_WITH_APPL
+                 SYM_COMPILE_IN_CG
+                 SYM_COMPILE_IN_CP
+                 SYM_COMPILE_IN_LP
+                 SYM_COMPILE_IN_TM
+                 SYM_COMPILE_IN_LP
+                 SYM_PARALLEL
+                 USE_OPENMP
+                 USE_CL
+		 ENABLE_SHARED_LIBRARIES
+                 COIN_COMPILE_STATIC
+                 COIN_COMPILE_COVERAGE
+                 COIN_COMPILE_PROFILE
+                 COIN_COMPILE_PROFILE_VALGRIND
+                 COIN_COMPILE_LTO
+                 COIN_COMPILE_WHOPR
+                 COIN_COMPILE_WARNINGS
+                 COIN_COMPILE_CXX11
+                 Coin_DIR
+		 COINUTILS_USE_THREADS
+                 COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
+                 COINUTILS_USE_MEMPOOL_MAXPOOLED
+                 COINUTILS_HAS_ZLIB
+                 COINUTILS_HAS_BZLIB
+                 COIN_HAS_LAPACK
+                 COIN_HAS_BLAS
+                 COIN_HAS_ASL
+                 COIN_COINUTILS_CHECKLEVEL
+                 COIN_COINUTILS_VERBOSITY
+		 COIN_ENABLE_AMD
                  COIN_HAS_AMD_INCLUDE_PATH
                  COIN_HAS_AMD_LIBRARY_PATH
                  COIN_ENABLE_CHOLMOD
@@ -194,20 +201,8 @@ mark_as_advanced(COIN_ENABLE_AMD
                  COIN_ABC_LEVEL
                  COIN_CLP_CHECKLEVEL
                  COIN_CLP_VERBOSITY
-                 COIN_HAS_MKL)
-
-# Cgl options
-set(COIN_CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
-set(COIN_CGL_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Cgl (0 if no output)")
-
-# Osi options
-set(COIN_OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
-set(COIN_OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if no output)")
-
-# Use fast code
-option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
-
-mark_as_advanced(COIN_CGL_CHECKLEVEL
+                 COIN_HAS_MKL
+		 COIN_CGL_CHECKLEVEL
                  COIN_CGL_VERBOSITY
                  COIN_OSI_CHECKLEVEL
                  COIN_OSI_VERBOSITY
