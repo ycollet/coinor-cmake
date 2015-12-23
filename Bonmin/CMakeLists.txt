@@ -85,7 +85,7 @@ option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
 option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
 option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
 option(COIN_HAS_ASL        "Enable the ASL support" OFF)
-option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
+option(COIN_USE_FAST_CODE  "Use fast code for CoinUtils and Clp" OFF)
 
 set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
 set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")

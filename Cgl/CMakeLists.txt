@@ -28,7 +28,7 @@ set(COIN_ABC_LEVEL      "0" CACHE STRING "Use the Aboca solver (1, 2, 3, 4) - 0,
 set(COIN_CLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Clp (0 if no test)")
 set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if no output)")
 
-option(COIN_HAS_MKL "Use Intel MKL library (requires Intel compiler)" OFF)
+option(COIN_HAS_MKL       "Use Intel MKL library (requires Intel compiler)" OFF)
 option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
 
 # Cgl options
