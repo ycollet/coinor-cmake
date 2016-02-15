@@ -243,7 +243,7 @@ if (COIN_HAS_WSMP AND (NOT COIN_HAS_WSMP_INCLUDE_PATH STREQUAL "None"))
 endif ()
 
 include_directories(${BuildTools_DIR}/headers)
-include_directories(${CoinUtils_DIR}/src)
+include_directories(SYSTEM ${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)
 include_directories(${Clp_DIR}/src/OsiClp)
 if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
