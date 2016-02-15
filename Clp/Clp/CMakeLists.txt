@@ -220,6 +220,10 @@ if (COIN_HAS_WSMP)
                            ${Clp_DIR}/src/ClpCholeskyWssmpKKT.hpp)
 endif ()
 
+if (CMAKE_COMPILER_IS_GNUCXX)
+  set_source_files_properties(${Clp_DIR}/src/CbcOrClpParam.cpp PROPERTIES COMPILE_FLAGS -fno-var-tracking-assignments)
+endif ()
+
 add_definitions(-DCOIN_HAS_CLP)
 
 if (COIN_HAS_AMD AND (NOT COIN_HAS_AMD_INCLUDE_PATH STREQUAL "None"))
