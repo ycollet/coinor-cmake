@@ -186,6 +186,10 @@ if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
                    ${Cbc_DIR}/src/Cbc_ampl.h)
 endif ()
 
+if (CMAKE_COMPILER_IS_GNUCXX)
+  set_source_files_properties(${Cbc_DIR}/src/CbcCbcParam.cpp PROPERTIES COMPILE_FLAGS -fno-var-tracking-assignments)
+endif ()
+
 include_directories(${Cbc_DIR}/src)
 include_directories(${Cbc_DIR}/src/OsiCbc)
 include_directories(${BuildTools_DIR}/headers)
