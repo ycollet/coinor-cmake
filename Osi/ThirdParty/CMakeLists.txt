@@ -387,7 +387,7 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
   ExternalProject_Add(EP_SuiteSparse
                       PREFIX ${EP_InstallDir}/SuiteSparse
 		      GIT_REPOSITORY https://github.com/jlblancoc/suitesparse-metis-for-windows.git
-		      GIT_TAG           "v1.2.3"
+		      GIT_TAG           "v1.3.1"
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build
