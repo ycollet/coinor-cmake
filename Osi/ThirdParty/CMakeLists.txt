@@ -320,7 +320,7 @@ endif()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_GLPK)
-  set(GLPK_VERSION "4.55")
+  set(GLPK_VERSION "4.60")
   set(COMPILE_OSI_GLPK ON CACHE BOOL "Compile the OSI GLPK solver" FORCE)
   
   ExternalProject_Add(EP_glpk
