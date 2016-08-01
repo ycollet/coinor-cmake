@@ -160,9 +160,9 @@ endif()
 install(TARGETS libCoinMP
         DESTINATION lib)
 
-install(FILES ${CoinMP_SRC}/src/CoinMP.h 
+install(FILES ${CoinMP_DIR}/src/CoinMP.h 
         DESTINATION include/coin)
 
-install(FILES ${CMAKE_BINARY_DIR}/CoinMP/include/config_clp.h
+install(FILES ${CMAKE_BINARY_DIR}/CoinMP/include/config_coinmp.h
         DESTINATION include/coin
         RENAME CoinMPConfig.h)
