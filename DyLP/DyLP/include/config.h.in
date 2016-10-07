@@ -1,0 +1,149 @@
+/* src/DylpStdLib/config.h.in.  Generated from configure.ac by autoheader.  */
+
+/* Define to the C type whose size in bytes matches the size in bytes of the
+   the C++ bool type. */
+#cmakedefine BOOL
+
+/* Define to the debug sanity check level (0 is no test) */
+#define COIN_DYLP_CHECKLEVEL @COIN_DYLP_CHECKLEVEL@
+
+/* Define to the debug verbosity level (0 is no output) */
+#define COIN_DYLP_VERBOSITY @COIN_DYLP_VERBOSITY@
+
+/* Define to 1 if the CoinUtils package is available */
+#define COIN_HAS_COINUTILS @COIN_HAS_COINUTILS@
+
+/* Define to 1 if the Netlib package is available */
+#define COIN_HAS_NETLIB @COIN_HAS_NETLIB@
+
+/* Define to 1 if the Osi package is available */
+#define COIN_HAS_OSI @COIN_HAS_OSI@
+
+/* Define to 1 if the OsiTests package is available */
+#define COIN_HAS_OSITESTS @COIN_HAS_OSITESTS@
+
+/* Define to 1 if the Sample package is available */
+#define COIN_HAS_SAMPLE @COIN_HAS_SAMPLE@
+
+/* Directory containing the DyLP error message text file (dy_errmsgs.txt).
+   Should be set to /absolute/path/to/srcdir/DyLP/src/Dylp, using native path
+   syntax (i.e., drive letters and backslashes on Windows). */
+#cmakedefine DYLP_ERRMSGDIR "@DYLP_ERRMSGDIR@"
+
+/* Define this symbol if the quiet_nan function exists. This function should
+   return the bit pattern for IEEE quiet NaN. */
+#cmakedefine DYLP_HAS_QUIET_NAN @DYLP_HAS_QUIET_NAN@
+
+/* Define to be the name of the C function used to check that an IEEE floating
+   point value is finite. */
+#define DYLP_ISFINITE @DYLP_ISFINITE@
+
+/* Define to be the name of the C function used to check that an IEEE floating
+   point value is NaN. */
+#define DYLP_ISNAN @DYLP_ISNAN@
+
+/* Define this variable to disable dylp's informational printing features. */
+#cmakedefine DYLP_NDEBUG @DYLP_NDEBUG@
+
+/* Define this variable to enable dylp's paranoid checks. */
+#cmakedefine DYLP_PARANOIA @DYLP_PARANOIA@
+
+/* Define this variable to enable dylp's statistics collection features. */
+#cmakedefine DYLP_STATISTICS @DYLP_STATISTICS@
+
+/* SVN revision number of project */
+#define DYLP_SVN_REV @DYLP_SVN_REV@
+
+/* Version number of project */
+#define DYLP_VERSION @DYLP_VERSION@
+
+/* Major Version number of project */
+#define DYLP_VERSION_MAJOR @DYLP_VERSION_MAJOR@
+
+/* Minor Version number of project */
+#define DYLP_VERSION_MINOR @DYLP_VERSION_MINOR@
+
+/* Release Version number of project */
+#define DYLP_VERSION_RELEASE @DYLP_VERSION_RELEASE@
+
+/* Define to 1 if you have the <dlfcn.h> header file. */
+#cmakedefine HAVE_DLFCN_H
+
+/* Define to 1 if float.h exists. */
+#cmakedefine FLOAT_H
+
+/* Define to 1 if ieeefp.h exists. */
+#cmakedefine IEEEFP_H
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#cmakedefine INTTYPES_H
+
+/* Define to 1 if math.h exists. */
+#cmakedefine MATH_H
+
+/* Define to 1 if you have the <memory.h> header file. */
+#cmakedefine MEMORY_H
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#cmakedefine STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#cmakedefine STDLIB_H
+
+/* Define to 1 if you have the <strings.h> header file. */
+#cmakedefine STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#cmakedefine STRING_H
+
+/* Define to 1 if sunmath.h exists. */
+#cmakedefine SUNMATH_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#cmakedefine SYS_STAT_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#cmakedefine SYS_TYPES_H
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#cmakedefine UNISTD_H
+
+/* Define this variable to enable OsiDylp's informational printing features.
+   */
+#cmakedefine INFOMSGS
+
+/* Control OsiDylp's paranoid checks. Legal values: 0 - off; 1 - normal; 2 -
+   consistency (expensive) */
+#cmakedefine ODSI_PARANOIA @ODSI_PARANOIA@
+
+/* Define this variable to enable support for dylp's statistics collection
+   features. */
+#cmakedefine ODSI_STATISTICS
+
+/* Name of package */
+#define PACKAGE "@PACKAGE@"
+
+/* Define to the address where bug reports for this package should be sent. */
+#define PACKAGE_BUGREPORT "@PACKAGE_BUGREPORT@"
+
+/* Define to the full name of this package. */
+#define PACKAGE_NAME "@PACKAGE_NAME@"
+
+/* Define to the full name and version of this package. */
+#define PACKAGE_STRING "@PACKAGE_STRING@"
+
+/* Define to the one symbol short name of this package. */
+#define PACKAGE_TARNAME "@PACKAGE_TARNAME@"
+
+/* Define to the version of this package. */
+#define PACKAGE_VERSION "@PACKAGE_VERSION@"
+
+/* Define to 1 if you have the ANSI C header files. */
+#cmakedefine STDC_HEADERS
+
+/* Version number of package */
+#define VERSION "@VERSION@"
+
+/* Define to 1 if your processor stores words with the most significant byte
+   first (like Motorola and SPARC, unlike Intel and VAX). */
+#cmakedefine WORDS_BIGENDIAN
