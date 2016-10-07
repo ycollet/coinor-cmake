@@ -1,0 +1,120 @@
+option(VOL_BUILD_EXAMPLES "Enable the building of examples" OFF)
+set(VOL_VERSION_MAJOR   "1" CACHE STRING "The Vol major version number")
+set(VOL_VERSION_MINOR   "5" CACHE STRING "The Vol minor version number")
+set(VOL_VERSION_RELEASE "3" CACHE STRING "The Vol patch version number")
+set(VOL_VERSION "${VOL_VERSION_MAJOR}.${VOL_VERSION_MINOR}.${VOL_VERSION_RELEASE}")
+set(VOL_SVN_REV "${VOL_VERSION_RELEASE}")
+
+add_definitions(-DVOL_BUILD)
+
+if (CMAKE_COMPILER_IS_GNUCXX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic-errors -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long")
+endif ()
+
+configure_file(${CMAKE_SOURCE_DIR}/Vol/include/config_vol.h.in ${CMAKE_BINARY_DIR}/Vol/include/config_vol.h)
+
+set(Vol_SRC_LIST ${Vol_DIR}/src/VolVolume.cpp)
+
+include_directories(${BuildTools_DIR}/headers)
+include_directories(SYSTEM ${CoinUtils_DIR}/src)
+include_directories(${Vol_DIR}/src)
+include_directories(${Vol_DIR}/src/OsiVol)
+if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
+  include_directories(${CMAKE_BINARY_DIR}/Dependencies/include/ampl)
+endif ()
+
+macro(set_include_directories TARGET)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Col/include)
+endmacro()
+
+if (WIN32)
+  add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
+endif ()
+
+if (ENABLE_SHARED_LIBRARIES)
+  add_library(libVol SHARED ${Vol_SRC_LIST})
+else ()
+  add_library(libVol STATIC ${Vol_SRC_LIST})
+endif ()
+if (NOT WIN32 OR MINGW)
+  set_target_properties(libVol PROPERTIES PREFIX "")
+endif ()
+
+if (COIN_HAS_AMD AND (NOT COIN_HAS_AMD_LIBRARY_PATH STREQUAL "None"))
+  link_directories(${COIN_HAS_AMD_LIBRARY_PATH})
+endif ()
+if (COIN_HAS_CHOLMOD AND (NOT COIN_HAS_CHOLMOD_LIBRARY_PATH STREQUAL "None"))
+  link_directories(${COIN_HAS_CHOLMOD_LIBRARY_PATH})
+endif ()
+if (COIN_HAS_GLPK AND (NOT COIN_HAS_GLPK_LIBRARY_PATH STREQUAL "None"))
+  link_directories(${COIN_HAS_GLPK_LIBRARY_PATH})
+endif ()
+if (COIN_HAS_MUMPS AND (NOT COIN_HAS_MUMPS_LIBRARY_PATH STREQUAL "None"))
+  link_directories(${COIN_HAS_MUMPS_LIBRARY_PATH})
+endif ()
+if (COIN_HAS_WSMP AND (NOT COIN_HAS_WSMP_LIBRARY_PATH STREQUAL "None"))
+  link_directories(${COIN_HAS_WSMP_LIBRARY_PATH})
+endif ()
+set_include_directories(libVol)
+
+if (VOL_BUILD_EXAMPLES)
+  #
+  # Build Examples
+  #
+  macro(add_example Name)
+    add_executable(${Name} ${ARGN})
+    target_link_libraries(${Name} libVol libCoinUtils)
+    set_include_directories(${Name})
+    if (MKL_FOUND)
+      target_link_libraries(${Name} ${COIN_MKL_LIBS})
+    else ()
+      if (COIN_HAS_LAPACK OR COIN_USE_DOWNLOAD_LAPACK)
+        target_link_libraries(${Name} lapack)
+      endif ()
+      if (COIN_HAS_BLAS OR COIN_USE_DOWNLOAD_BLAS)
+        target_link_libraries(${Name} blas)
+      endif ()
+      if (COIN_ENABLE_DOWNLOAD_CLAPACK)
+        target_link_libraries(${Name} f2c)
+      endif ()
+      if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND NOT COIN_USE_DOWNLOAD_LAPACK)
+        target_link_libraries(${Name} gfortran)
+      endif ()
+    endif ()
+    if (COINUTILS_HAS_ZLIB OR COIN_USE_DOWNLOAD_ZLIB)
+      target_link_libraries(${Name} ${ZLIB_NAME})
+    endif ()
+    if (COINUTILS_HAS_BZLIB OR COIN_USE_DOWNLOAD_ZLIB)
+      target_link_libraries(${Name} ${BZLIB_NAME})
+    endif ()
+    if (COIN_HAS_GLPK OR COIN_USE_DOWNLOAD_GLPK)
+      target_link_libraries(${Name} glpk)
+    endif ()
+    if (USE_OPENMP AND UNIX)
+      target_link_libraries(${Name} gomp)
+    endif ()
+  endmacro ()
+  
+  add_example(vollp ${Vol_DIR}/examples/VolLp/vollp.cpp)
+  
+  add_test(NAME vol_example_afiro
+           COMMAND $<TARGET_FILE:vollp> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
+  set_tests_properties(vol_example_afiro PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(vol_example_afiro PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
+endif () 
+
+install(TARGETS libVol 
+        DESTINATION lib)
+
+install(FILES ${Vol_SRC_LIST_Headers} 
+        DESTINATION include/coin)
+
+install(FILES ${CMAKE_BINARY_DIR}/Vol/include/config_vol.h
+        DESTINATION include/coin
+        RENAME VolConfig.h)
+
+install(FILES ${CMAKE_BINARY_DIR}/Vol/include/config_vol.h
+        DESTINATION include/coin)
