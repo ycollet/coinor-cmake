@@ -98,11 +98,37 @@ if (VOL_BUILD_EXAMPLES)
   
   add_example(vollp ${Vol_DIR}/examples/VolLp/vollp.cpp)
   
-  add_test(NAME vol_example_afiro
+  add_test(NAME vollp_example_afiro
            COMMAND $<TARGET_FILE:vollp> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
-  set_tests_properties(vol_example_afiro PROPERTIES TIMEOUT 30)
+  set_tests_properties(vollp_example_afiro PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(vol_example_afiro PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(vollp_example_afiro PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
+  
+  add_example(volufl ${Vol_DIR}/examples/VolUfl/ufl.cpp)
+
+  # TODO: Need to gunzip Vol/examples/VolUfl/data.gz
+  add_test(NAME volufl_example_par
+           COMMAND $<TARGET_FILE:volufl>
+	   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Vol/examples/VolUfl)
+  
+  set_tests_properties(volufl_example_par PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(volufl_example_par PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  endif ()
+
+  # TODO: Need to gunzip Vol/examples/Volume-LP/data.mps.gz
+  add_example(volume-lp ${Vol_DIR}/examples/Volume-LP/lpc.cpp
+                        ${Vol_DIR}/examples/Volume-LP/lp.cpp
+			${Vol_DIR}/examples/Volume-LP/reader.cpp)
+
+  add_test(NAME volume_lp_example_data
+           COMMAND $<TARGET_FILE:volume-lp>
+	   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Vol/examples/Volume-LP)
+  
+  set_tests_properties(volume_lp_example_data PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(volume_lp_example_data PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
   endif ()
 endif () 
 
