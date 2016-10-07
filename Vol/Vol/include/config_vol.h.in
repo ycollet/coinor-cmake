@@ -1,88 +1,88 @@
 /* inc/config_vol.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define to 1 if the CoinUtils package is available */
-#undef COIN_HAS_COINUTILS
+#cmakedefine COIN_HAS_COINUTILS
 
 /* Define to 1 if the Osi package is available */
-#undef COIN_HAS_OSI
+#cmakedefine COIN_HAS_OSI
 
 /* Define to 1 if the OsiTests package is available */
-#undef COIN_HAS_OSITESTS
+#cmakedefine COIN_HAS_OSITESTS
 
 /* Define to 1 if the Sample package is available */
-#undef COIN_HAS_SAMPLE
+#cmakedefine COIN_HAS_SAMPLE
 
 /* Define to the debug sanity check level (0 is no test) */
-#undef COIN_VOL_CHECKLEVEL
+#define COIN_VOL_CHECKLEVEL @COIN_VOL_CHECKLEVEL@
 
 /* Define to the debug verbosity level (0 is no output) */
-#undef COIN_VOL_VERBOSITY
+#define COIN_VOL_VERBOSITY @COIN_VOL_VERBOSITY@
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#undef HAVE_DLFCN_H
+#cmakedefine HAVE_DLFCN_H
 
 /* Define to 1 if you have the <inttypes.h> header file. */
-#undef HAVE_INTTYPES_H
+#cmakedefine HAVE_INTTYPES_H
 
 /* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
+#cmakedefine HAVE_MEMORY_H
 
 /* Define to 1 if you have the <stdint.h> header file. */
-#undef HAVE_STDINT_H
+#cmakedefine HAVE_STDINT_H
 
 /* Define to 1 if you have the <stdlib.h> header file. */
-#undef HAVE_STDLIB_H
+#cmakedefine HAVE_STDLIB_H
 
 /* Define to 1 if you have the <strings.h> header file. */
-#undef HAVE_STRINGS_H
+#cmakedefine HAVE_STRINGS_H
 
 /* Define to 1 if you have the <string.h> header file. */
-#undef HAVE_STRING_H
+#cmakedefine HAVE_STRING_H
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
-#undef HAVE_SYS_STAT_H
+#cmakedefine HAVE_SYS_STAT_H
 
 /* Define to 1 if you have the <sys/types.h> header file. */
-#undef HAVE_SYS_TYPES_H
+#cmakedefine HAVE_SYS_TYPES_H
 
 /* Define to 1 if you have the <unistd.h> header file. */
-#undef HAVE_UNISTD_H
+#cmakedefine HAVE_UNISTD_H
 
 /* Name of package */
-#undef PACKAGE
+#define PACKAGE "@PACKAGE@"
 
 /* Define to the address where bug reports for this package should be sent. */
-#undef PACKAGE_BUGREPORT
+#define PACKAGE_BUGREPORT "@PACKAGE_BUGREPORT@"
 
 /* Define to the full name of this package. */
-#undef PACKAGE_NAME
+#define PACKAGE_NAME "@PACKAGE_NAME@"
 
 /* Define to the full name and version of this package. */
-#undef PACKAGE_STRING
+#define PACKAGE_STRING "@PACKAGE_STRING@"
 
 /* Define to the one symbol short name of this package. */
-#undef PACKAGE_TARNAME
+#define PACKAGE_TARNAME "@PACKAGE_TARNAME@"
 
 /* Define to the version of this package. */
-#undef PACKAGE_VERSION
+#define PACKAGE_VERSION "@PACKAGE_VERSION@"
 
 /* Define to 1 if you have the ANSI C header files. */
-#undef STDC_HEADERS
+#cmakedefine STDC_HEADERS
 
 /* Version number of package */
-#undef VERSION
+#define VERSION "@VERSION@"
 
 /* SVN revision number of project */
-#undef VOL_SVN_REV
+#define VOL_SVN_REV "@VOL_SVN_REV@"
 
 /* Version number of project */
-#undef VOL_VERSION
+#define VOL_VERSION "@VOL_VERSION@"
 
 /* Major Version number of project */
-#undef VOL_VERSION_MAJOR
+#define VOL_VERSION_MAJOR @VOL_VERSION_MAJOR@
 
 /* Minor Version number of project */
-#undef VOL_VERSION_MINOR
+#define VOL_VERSION_MINOR @VOL_VERSION_MINOR@
 
 /* Release Version number of project */
-#undef VOL_VERSION_RELEASE
+#define VOL_VERSION_RELEASE @VOL_VERSION_RELEASE@
