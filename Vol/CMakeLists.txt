@@ -4,13 +4,16 @@ project(Vol)
 
 # Vol options
 
-option(COIN_HAS_GLPK "Clp uses GLPK" OFF)
-set(COIN_HAS_GLPK_INCLUDE_PATH "None" CACHE PATH "The GLPK linear solver include Path")
-set(COIN_HAS_GLPK_LIBRARY_PATH "None" CACHE PATH "The GLPK linear solver absolute library Path")
+set(COIN_VOL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
+set(COIN_VOL_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if no output)")
 
 # Osi options
 set(COIN_OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
 set(COIN_OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if no output)")
+
+option(COIN_HAS_GLPK "Clp uses GLPK" OFF)
+set(COIN_HAS_GLPK_INCLUDE_PATH "None" CACHE PATH "The GLPK linear solver include Path")
+set(COIN_HAS_GLPK_LIBRARY_PATH "None" CACHE PATH "The GLPK linear solver absolute library Path")
 
 option(USE_OSI_XPRESS "Use Xpress solver" OFF)
 option(USE_OSI_CPLEX  "Use Cplex solver"  OFF)
