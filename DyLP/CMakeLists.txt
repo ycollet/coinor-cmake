@@ -417,6 +417,10 @@ CHECK_TYPE_SIZE("long"      SIZEOF_LONG)
 CHECK_TYPE_SIZE("long long" SIZEOF_LONG_LONG)
 set(BOOL "char")
 
+set(COIN_INTPTR_T "int")
+set(COIN_INT64_T  "int")
+set(COIN_UINT64_T "unsigned int")
+
 if (SIZEOF_LONG_LONG EQUAL "8")
   set(COIN_INTPTR_T "long long")
   set(COIN_INT64_T  "long long")
