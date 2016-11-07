@@ -410,9 +410,8 @@ endif ()
 
 if (MSVC)
   # Avoid Warning C4530 by using the flag /EHsc
-  set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} /EHsc ")
-  set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} /EHsc ")
-  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /EHsc ")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /EHsc ")
+  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} /EHsc ")
 endif ()
 
 #-----------------------------------------------------------------------------
