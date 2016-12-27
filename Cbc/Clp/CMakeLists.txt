@@ -63,7 +63,7 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/Idiot.cpp
                  ${Clp_DIR}/src/IdiSolve.cpp)
 
-if ("${VERSION_STRING" STREQUAL "trunk")
+if ("${VERSION_STRING}" STREQUAL "trunk")
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
                    ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
                    ${Clp_DIR}/src/ClpPESimplex.cpp
