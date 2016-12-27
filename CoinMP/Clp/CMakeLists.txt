@@ -190,7 +190,7 @@ set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/CbcOrClpParam.hpp
                          ${Clp_DIR}/src/Idiot.hpp)
 
-if ("${VERSION_STRING" STREQUAL "trunk")
+if ("${VERSION_STRING}" STREQUAL "trunk")
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
                            ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
                            ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
