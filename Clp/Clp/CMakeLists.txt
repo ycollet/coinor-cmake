@@ -7,9 +7,6 @@ set(CLP_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CLP patch version n
 set(CLP_VERSION "${CLP_VERSION_MAJOR}.${CLP_VERSION_MINOR}.${CLP_VERSION_RELEASE}")
 set(CLP_SVN_REV "${CLP_VERSION_RELEASE}")
 
-# Define to the version of this package.
-set(PACKAGE_VERSION "${CLP_VERSION}")
-
 add_definitions(-DCLP_BUILD)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
@@ -64,12 +61,16 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/ClpSimplexPrimal.cpp
                  ${Clp_DIR}/src/ClpSolve.cpp
                  ${Clp_DIR}/src/Idiot.cpp
-                 ${Clp_DIR}/src/IdiSolve.cpp
-                 ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
-                 ${Clp_DIR}/src/ClpPESimplex.cpp
-                 ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
-                 ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
-                 ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
+                 ${Clp_DIR}/src/IdiSolve.cpp)
+
+if ("${VERSION_STRING" STREQUAL "trunk")
+  set(Clp_SRC_LIST ${Clp_SRC_LIST}
+                   ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
+                   ${Clp_DIR}/src/ClpPESimplex.cpp
+                   ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
+                   ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
+                   ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
+endif ()
 
 set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
                        ${Clp_DIR}/src/CbcOrClpParam.cpp
@@ -187,12 +188,16 @@ set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/ClpSimplexPrimal.hpp
                          ${Clp_DIR}/src/ClpSolve.hpp
                          ${Clp_DIR}/src/CbcOrClpParam.hpp
-                         ${Clp_DIR}/src/Idiot.hpp
-                         ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
-                         ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
-                         ${Clp_DIR}/src/ClpPESimplex.hpp
-                         ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
-                         ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
+                         ${Clp_DIR}/src/Idiot.hpp)
+
+if ("${VERSION_STRING" STREQUAL "trunk")
+  set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
+                           ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
+                           ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
+                           ${Clp_DIR}/src/ClpPESimplex.hpp
+                           ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
+                           ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
+endif ()
 
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
