@@ -219,13 +219,24 @@ if (CMAKE_Fortran_COMPILER)
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
   set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
-  
-  set(F77_FUNC "F77_FUNC(name,NAME) name##_")
-  set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
 else ()
-  set(F77_FUNC "F77_FUNC(name,NAME) name##_")
+  set(F77_FUNC  "F77_FUNC(name,NAME)  name##_")
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
 endif ()
+
+set(F77_DUMMY_MAIN "" CACHE STRING "Define to dummy 'main' function (if any) required to link to the Fortran libraries.")
+set(FC_DUMMY_MAIN  "" CACHE STRING "Define to dummy 'main' function (if any) required to link to the Fortran libraries.")
+option(FC_DUMMY_MAIN_EQ_F77 "Define if F77 and FC dummy 'main' functions are identical." OFF)
+
+if (FC_DUMMY_MAIN_EQ_F77)
+  set(FC_DUMMY_MAIN "${F77_DUMMY_MAIN}")
+endif ()
+
+mark_as_advanced(F77_FUNC
+                 F77_FUNC_
+		 F77_DUMMY_MAIN
+		 FC_DUMMY_MAIN
+		 FC_DUMMY_MAIN_EQ_F77)
 
 # End detect fortran mangling
 
@@ -479,19 +490,6 @@ CHECK_FUNCTION_EXISTS(va_copy    HAVE_VA_COPY)
 CHECK_FUNCTION_EXISTS(vsnprintf  HAVE_VSNPRINTF)
 CHECK_FUNCTION_EXISTS(_snprintf  HAVE__SNPRINTF)
 CHECK_FUNCTION_EXISTS(_vsnprintf HAVE__VSNPRINTF)
-
-# Define to dummy `main' function (if any) required to link to the Fortran libraries.
-# F77_DUMMY_MAIN
-
-# Define to a macro mangling the given C identifier (in lower and upper
-# case), which must not contain underscores, for linking with Fortran.
-# F77_FUNC
-
-# As F77_FUNC, but for C identifiers containing underscores.
-# F77_FUNC_
-
-# Define if F77 and FC dummy `main' functions are identical.
-# FC_DUMMY_MAIN_EQ_F77
 
 if (COIN_USE_FAST_CODE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fomit-frame-pointer ")

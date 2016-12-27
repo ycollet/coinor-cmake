@@ -359,13 +359,41 @@ endif ()
 # Detect name mangling convention used between Fortran and C
 #-----------------------------------------------------------------------------
 
-if (NOT WIN32)
-  set(F77_FUNC "F77_FUNC(name,NAME) name##_")
-  set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
+if (CMAKE_Fortran_COMPILER)
+  enable_language(Fortran)
+  
+  include(FortranCInterface)
+  
+  FortranCInterface_HEADER(${CMAKE_BINARY_DIR}/F77Mangle.h
+                           MACRO_NAMESPACE "F77_"
+                           SYMBOL_NAMESPACE "F77_"
+                           SYMBOLS mysub mymod:my_sub)
+  
+  file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
+  string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
+  set(F77_FUNC "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
+  
+  file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
+  string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
+  set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
 else ()
-  set(F77_FUNC "F77_FUNC(name,NAME) name##_")
+  set(F77_FUNC  "F77_FUNC(name,NAME)  name##_")
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
 endif ()
+
+set(F77_DUMMY_MAIN "" CACHE STRING "Define to dummy 'main' function (if any) required to link to the Fortran libraries.")
+set(FC_DUMMY_MAIN  "" CACHE STRING "Define to dummy 'main' function (if any) required to link to the Fortran libraries.")
+option(FC_DUMMY_MAIN_EQ_F77 "Define if F77 and FC dummy 'main' functions are identical." OFF)
+
+if (FC_DUMMY_MAIN_EQ_F77)
+  set(FC_DUMMY_MAIN "${F77_DUMMY_MAIN}")
+endif ()
+
+mark_as_advanced(F77_FUNC
+                 F77_FUNC_
+		 F77_DUMMY_MAIN
+		 FC_DUMMY_MAIN
+		 FC_DUMMY_MAIN_EQ_F77)
 
 # End detect fortran mangling
 
@@ -614,19 +642,6 @@ endif ()
 
 check_symbol_exists(clock_gettime sys/time.h HAVE_CLOCK_GETTIME)
 check_symbol_exists(gettimeofday  sys/time.h HAVE_GETTIMEOFDAY)
-
-# Define to dummy `main' function (if any) required to link to the Fortran libraries.
-# F77_DUMMY_MAIN
-
-# Define to a macro mangling the given C identifier (in lower and upper
-# case), which must not contain underscores, for linking with Fortran.
-# F77_FUNC
-
-# As F77_FUNC, but for C identifiers containing underscores.
-# F77_FUNC_
-
-# Define if F77 and FC dummy `main' functions are identical.
-# FC_DUMMY_MAIN_EQ_F77
 
 if (COIN_USE_FAST_CODE)
   add_definitions(-DCOIN_FAST_CODE -DCLP_FAST_CODE -DUSE_MEMCPY -DCOIN_USE_RESTRICT -DCOIN_NOTEST_DUPLICATE)
