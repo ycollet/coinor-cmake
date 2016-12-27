@@ -1,7 +1,9 @@
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Bonmin/configure.ac)
+
 option(BONMIN_BUILD_EXAMPLES    "Enable the building of examples" OFF)
-set(BONMIN_VERSION_MAJOR   "2" CACHE STRING "The BONMIN major version number")
-set(BONMIN_VERSION_MINOR   "8" CACHE STRING "The BONMIN minor version number")
-set(BONMIN_VERSION_RELEASE "9" CACHE STRING "The BONMIN patch version number")
+set(BONMIN_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The BONMIN major version number")
+set(BONMIN_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The BONMIN minor version number")
+set(BONMIN_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The BONMIN patch version number")
 set(BONMIN_VERSION "${BONMIN_VERSION_MAJOR}.${BONMIN_VERSION_MINOR}.${BONMIN_VERSION_RELEASE}")
 set(BONMIN_SVN_REV "${BONMIN_VERSION_RELEASE}")
 

@@ -1,7 +1,9 @@
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Cgl/configure.ac)
+
 option(CGL_BUILD_EXAMPLES "Enable the building of examples" OFF)
-set(CGL_VERSION_MAJOR   "0"  CACHE STRING "The CGL major version number")
-set(CGL_VERSION_MINOR   "58" CACHE STRING "The CGL minor version number")
-set(CGL_VERSION_RELEASE "6"  CACHE STRING "The CGL patch version number")
+set(CGL_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The CGL major version number")
+set(CGL_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The CGL minor version number")
+set(CGL_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CGL patch version number")
 set(CGL_VERSION "${CGL_VERSION_MAJOR}.${CGL_VERSION_MINOR}.${CGL_VERSION_RELEASE}")
 set(CGL_SVN_REV "${CGL_VERSION_RELEASE}")
 

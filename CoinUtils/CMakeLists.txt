@@ -67,6 +67,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       ${CMAKE_SOURCE_DIR}/cmake)
 
 include(coin-macros)
+include(GetAcInitVersion)
 
 #------------------------------------------------------------
 # Detect 64 bits

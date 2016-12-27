@@ -1,10 +1,8 @@
-cmake_minimum_required(VERSION 2.8)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Ipopt/configure.ac)
 
-project(Ipopt)
-
-set(IPOPT_VERSION_MAJOR   "3"  CACHE STRING "The IpOpt major version number")
-set(IPOPT_VERSION_MINOR   "12" CACHE STRING "The IpOpt minor version number")
-set(IPOPT_VERSION_RELEASE "4"  CACHE STRING "The IpOpt patch version number")
+set(IPOPT_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The IpOpt major version number")
+set(IPOPT_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The IpOpt minor version number")
+set(IPOPT_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The IpOpt patch version number")
 set(IPOPT_VERSION "${IPOPT_VERSION_MAJOR}.${IPOPT_VERSION_MINOR}.${IPOPT_VERSION_RELEASE}")
 set(IPOPT_SVN_REV "${IPOPT_VERSION_RELEASE}")
 

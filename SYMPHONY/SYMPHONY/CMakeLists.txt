@@ -1,9 +1,11 @@
+get_ac_init_version(${CMAKE_SOURCE_DIR}/SYMPHONY/configure.ac)
+
 option(SYMPHONY_BUILD_EXAMPLES     "Enable the building of examples" OFF)
 option(SYMPHONY_BUILD_APPLICATIONS "Enable the building of applications" OFF)
 
-set(SYMPHONY_VERSION_MAJOR   "5" CACHE STRING "The Symphony major version number")
-set(SYMPHONY_VERSION_MINOR   "5" CACHE STRING "The Symphony minor version number")
-set(SYMPHONY_VERSION_RELEASE "7" CACHE STRING "The Symphony patch version number")
+set(SYMPHONY_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The Symphony major version number")
+set(SYMPHONY_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The Symphony minor version number")
+set(SYMPHONY_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The Symphony patch version number")
 set(SYMPHONY_VERSION "${SYMPHONY_VERSION_MAJOR}.${SYMPHONY_VERSION_MINOR}.${SYMPHONY_VERSION_RELEASE}")
 set(SYMPHONY_SVN_REV "${SYMPHONY_VERSION_RELEASE}")
 

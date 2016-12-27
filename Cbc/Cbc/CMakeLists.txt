@@ -1,8 +1,10 @@
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Cbc/configure.ac)
+
 option(CBC_BUILD_CBC_GENERIC "Build the generic version of Cbc" OFF)
 option(CBC_BUILD_EXAMPLES    "Enable the building of examples" OFF)
-set(CBC_VERSION_MAJOR   "2" CACHE STRING "The CBC major version number")
-set(CBC_VERSION_MINOR   "8" CACHE STRING "The CBC minor version number")
-set(CBC_VERSION_RELEASE "9" CACHE STRING "The CBC patch version number")
+set(CBC_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The CBC major version number")
+set(CBC_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The CBC minor version number")
+set(CBC_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CBC patch version number")
 set(CBC_VERSION "${CBC_VERSION_MAJOR}.${CBC_VERSION_MINOR}.${CBC_VERSION_RELEASE}")
 set(CBC_SVN_REV "${CBC_VERSION_RELEASE}")
 

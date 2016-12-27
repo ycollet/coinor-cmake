@@ -1,6 +1,8 @@
-set(OSI_VERSION_MAJOR   "0"   CACHE STRING "The OSI major version number")
-set(OSI_VERSION_MINOR   "106" CACHE STRING "The OSI minor version number")
-set(OSI_VERSION_RELEASE "6"   CACHE STRING "The OSI patch version number")
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Osi/configure.ac)
+
+set(OSI_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The OSI major version number")
+set(OSI_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The OSI minor version number")
+set(OSI_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The OSI patch version number")
 set(OSI_VERSION "${OSI_VERSION_MAJOR}.${OSI_VERSION_MINOR}.${OSI_VERSION_RELEASE}")
 set(OSI_SVN_REV "${OSI_VERSION_RELEASE}")
 

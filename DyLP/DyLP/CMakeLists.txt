@@ -1,7 +1,9 @@
+get_ac_init_version(${CMAKE_SOURCE_DIR}/DyLP/configure.ac)
+
 option(DYLP_BUILD_EXAMPLES "Enable the building of examples" OFF)
-set(DYLP_VERSION_MAJOR   "1" CACHE STRING "The Vol major version number")
-set(DYLP_VERSION_MINOR   "5" CACHE STRING "The Vol minor version number")
-set(DYLP_VERSION_RELEASE "0" CACHE STRING "The Vol patch version number")
+set(DYLP_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The Vol major version number")
+set(DYLP_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The Vol minor version number")
+set(DYLP_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The Vol patch version number")
 set(DYLP_VERSION "${DYLP_VERSION_MAJOR}.${DYLP_VERSION_MINOR}.${DYLP_VERSION_RELEASE}")
 set(DYLP_SVN_REV "${DYLP_VERSION_RELEASE}")
 
