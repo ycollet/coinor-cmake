@@ -89,8 +89,6 @@ set(PACKAGE_NAME      "CoinUtils")
 set(PACKAGE_STRING    "CoinUtils")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "coinutils")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "2.9.11")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/coinutils_binary" 

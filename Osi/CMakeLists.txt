@@ -148,8 +148,6 @@ set(PACKAGE_NAME      "Osi")
 set(PACKAGE_STRING    "Osi")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "osi")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "0.106.6")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/osi_binary" 

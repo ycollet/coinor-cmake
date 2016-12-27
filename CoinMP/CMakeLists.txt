@@ -210,8 +210,6 @@ set(PACKAGE_NAME      "CoinMP")
 set(PACKAGE_STRING    "CoinMP")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "coinmp")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "2.8.9")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/coinmp_binary" 

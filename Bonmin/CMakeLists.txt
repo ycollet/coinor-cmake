@@ -223,8 +223,6 @@ set(PACKAGE_NAME      "Bonmin")
 set(PACKAGE_STRING    "Bonmin")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "bonmin")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "2.9.4")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/bonmin_binary" 

@@ -193,8 +193,6 @@ set(PACKAGE_NAME      "Cgl")
 set(PACKAGE_STRING    "Cgl")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "cgl")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "0.58.6")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/cgl_binary" 

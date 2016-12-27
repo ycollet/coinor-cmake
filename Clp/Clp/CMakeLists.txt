@@ -7,6 +7,9 @@ set(CLP_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CLP patch version n
 set(CLP_VERSION "${CLP_VERSION_MAJOR}.${CLP_VERSION_MINOR}.${CLP_VERSION_RELEASE}")
 set(CLP_SVN_REV "${CLP_VERSION_RELEASE}")
 
+# Define to the version of this package.
+set(PACKAGE_VERSION "${CLP_VERSION}")
+
 add_definitions(-DCLP_BUILD)
 
 if (CMAKE_COMPILER_IS_GNUCXX)

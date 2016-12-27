@@ -155,8 +155,6 @@ set(PACKAGE_NAME      "DyLP")
 set(PACKAGE_STRING    "DyLP")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "dylp")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "1.5.3")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/dylp_binary" 

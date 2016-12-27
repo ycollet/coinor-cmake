@@ -252,8 +252,6 @@ set(PACKAGE_NAME      "Symphony")
 set(PACKAGE_STRING    "Symphony")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "symphony")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "5.6.9")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/symphony_binary" 

@@ -209,8 +209,6 @@ set(PACKAGE_NAME      "Cbc")
 set(PACKAGE_STRING    "Cbc")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "cbc")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "2.9.4")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/cbc_binary" 
@@ -388,10 +386,10 @@ endif ()
 #-----------------------------------------------------------------------------
 
 if (NOT WIN32)
-  set(F77_FUNC "F77_FUNC(name,NAME) name##_")
+  set(F77_FUNC  "F77_FUNC(name,NAME)  name##_")
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
 else ()
-  set(F77_FUNC "F77_FUNC(name,NAME) name##_")
+  set(F77_FUNC  "F77_FUNC(name,NAME)  name##_")
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
 endif ()
 

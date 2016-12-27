@@ -148,8 +148,6 @@ set(PACKAGE_NAME      "Vol")
 set(PACKAGE_STRING    "Vol")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "vol")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "1.5.3")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/vol_binary" 

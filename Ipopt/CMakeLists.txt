@@ -97,8 +97,6 @@ set(PACKAGE_NAME      "IpOpt")
 set(PACKAGE_STRING    "IpOpt")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "ipopt")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "3.12.4")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/ipopt_binary" 

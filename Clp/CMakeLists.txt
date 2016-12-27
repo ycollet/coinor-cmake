@@ -186,8 +186,6 @@ set(PACKAGE_NAME      "Clp")
 set(PACKAGE_STRING    "Clp")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "clp")
-# Define to the version of this package.
-set(PACKAGE_VERSION   "1.15.6")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/clp_binary" 

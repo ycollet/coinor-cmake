@@ -8,6 +8,9 @@ set(CBC_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CBC patch version n
 set(CBC_VERSION "${CBC_VERSION_MAJOR}.${CBC_VERSION_MINOR}.${CBC_VERSION_RELEASE}")
 set(CBC_SVN_REV "${CBC_VERSION_RELEASE}")
 
+# Define to the version of this package.
+set(PACKAGE_VERSION "${CBC_VERSION}")
+
 mark_as_advanced(CBC_VERSION_MAJOR
                  CBC_VERSION_MINOR
                  CBC_VERSION_RELEASE

@@ -6,6 +6,9 @@ set(IPOPT_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The IpOpt patch versi
 set(IPOPT_VERSION "${IPOPT_VERSION_MAJOR}.${IPOPT_VERSION_MINOR}.${IPOPT_VERSION_RELEASE}")
 set(IPOPT_SVN_REV "${IPOPT_VERSION_RELEASE}")
 
+# Define to the version of this package.
+set(PACKAGE_VERSION "${IPOPT_VERSION}")
+
 add_definitions(-DIPOPT_BUILD)
 
 configure_file(${CMAKE_SOURCE_DIR}/Ipopt/include/config.h.in       ${CMAKE_BINARY_DIR}/Ipopt/include/config.h)

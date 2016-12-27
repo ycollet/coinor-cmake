@@ -7,6 +7,9 @@ set(CGL_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CGL patch version n
 set(CGL_VERSION "${CGL_VERSION_MAJOR}.${CGL_VERSION_MINOR}.${CGL_VERSION_RELEASE}")
 set(CGL_SVN_REV "${CGL_VERSION_RELEASE}")
 
+# Define to the version of this package.
+set(PACKAGE_VERSION "${CGL_VERSION}")
+
 mark_as_advanced(CGL_VERSION_MAJOR
                  CGL_VERSION_MINOR
                  CGL_VERSION_RELEASE

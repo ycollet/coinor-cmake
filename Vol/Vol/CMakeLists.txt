@@ -7,6 +7,9 @@ set(VOL_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The Vol patch version n
 set(VOL_VERSION "${VOL_VERSION_MAJOR}.${VOL_VERSION_MINOR}.${VOL_VERSION_RELEASE}")
 set(VOL_SVN_REV "${VOL_VERSION_RELEASE}")
 
+# Define to the version of this package.
+set(PACKAGE_VERSION "${VOL_VERSION}")
+
 add_definitions(-DVOL_BUILD)
 
 if (CMAKE_COMPILER_IS_GNUCXX)

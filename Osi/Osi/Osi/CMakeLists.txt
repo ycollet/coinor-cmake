@@ -6,6 +6,9 @@ set(OSI_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The OSI patch version n
 set(OSI_VERSION "${OSI_VERSION_MAJOR}.${OSI_VERSION_MINOR}.${OSI_VERSION_RELEASE}")
 set(OSI_SVN_REV "${OSI_VERSION_RELEASE}")
 
+# Define to the version of this package.
+set(PACKAGE_VERSION "${OSI_VERSION}")
+
 mark_as_advanced(OSI_VERSION_MAJOR
                  OSI_VERSION_MINOR
                  OSI_VERSION_RELEASE
