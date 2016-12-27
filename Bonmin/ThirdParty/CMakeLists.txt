@@ -193,6 +193,8 @@ endif()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_LAPACK)
+  enable_language(Fortran)
+  
   if (UNIX)
     if (NOT CMAKE_SIZEOF_VOID_P EQUAL 4)
       set(LAPACK_C_FLAGS "-fPIC")
