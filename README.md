@@ -155,7 +155,6 @@ The next project to be added will be Ipopt.
 
 Tasks:
 
-- [ ] Check the usage of CHECK_SYMBOL_EXISTS (missing -lm and parenthesis)
 - [ ] Finish tests for DyLP
 - [ ] Check missing functions and missing headers in Vol and DyLP
 - [ ] Fine tune check of headers and add missing check from original configure.ac files

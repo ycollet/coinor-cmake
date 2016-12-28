@@ -38,4 +38,6 @@ if (HAVE_DIRENT_H)
   set(HAVE_SYS_TYPES_H 1)
 endif ()
 
-set(HAVE_LIBM 1)
+if (NOT WIN32)
+  set(HAVE_LIBM 1)
+endif ()
