@@ -507,6 +507,8 @@ if (COIN_USE_FAST_CODE)
   
 endif ()
 
+include(AC_HEADER_STDC)
+
 add_definitions(-DHAVE_CONFIG_H)
 
 #-----------------------------------------------

@@ -461,6 +461,8 @@ elseif (SIZEOF_INT EQUAL "8")
   set(COIN_UINT64_T "unsigned int")
 endif ()
 
+include(AC_HEADER_STDC)
+
 if ((COIN_ABC_LEVEL LESS 0) OR (COIN_ABC_LEVEL GREATER 4))
   message(FATAL_ERROR "Error: COIN_ABC_LEVEL must be between 0 and 4")
 endif ()

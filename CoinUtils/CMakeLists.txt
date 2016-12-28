@@ -374,6 +374,8 @@ elseif (SIZEOF_INT EQUAL "8")
   set(COIN_UINT64_T "unsigned int")
 endif ()
 
+include(AC_HEADER_STDC)
+
 if (WIN32)
   # From Linux endian.h
   #define __LITTLE_ENDIAN 1234
