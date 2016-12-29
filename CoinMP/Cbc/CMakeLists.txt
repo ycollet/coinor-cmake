@@ -8,6 +8,9 @@ set(CBC_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CBC patch version n
 set(CBC_VERSION "${CBC_VERSION_MAJOR}.${CBC_VERSION_MINOR}.${CBC_VERSION_RELEASE}")
 set(CBC_SVN_REV "${CBC_VERSION_RELEASE}")
 
+# Define to the version of this package.
+set(PACKAGE_VERSION "${CBC_VERSION}")
+
 mark_as_advanced(CBC_VERSION_MAJOR
                  CBC_VERSION_MINOR
                  CBC_VERSION_RELEASE
@@ -104,7 +107,7 @@ set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcThread.cpp
                  ${Cbc_DIR}/src/CbcTree.cpp
                  ${Cbc_DIR}/src/CbcTreeLocal.cpp
-	             ${Cbc_DIR}/src/unitTestClp.cpp)
+	         ${Cbc_DIR}/src/unitTestClp.cpp)
 
 set(Cbc_SRC_LIST_Headers ${Cbc_DIR}/src/Cbc_C_Interface.h
                          ${Cbc_DIR}/src/CbcBranchActual.hpp
@@ -207,7 +210,7 @@ if (USE_COINOR_BIN)
   add_library(libCoinUtils STATIC IMPORTED)
   add_library(libOsiGlpk   STATIC IMPORTED)
   if (COIN_USE_DOWNLOAD_ASL)
-    add_library(amplsolver   STATIC IMPORTED)
+    add_library(amplsolver STATIC IMPORTED)
   endif ()
   
   if (WIN32 AND NOT MINGW)
