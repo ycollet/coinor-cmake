@@ -786,7 +786,7 @@ add_definitions(-DHAVE_CONFIG_H)
 set(doc_dir doc)
 find_package(Doxygen)
 
-if(DOXYGEN AND ENABLE_DOXYGEN)
+if (DOXYGEN AND ENABLE_DOXYGEN)
   configure_file(${CMAKE_SOURCE_DIR}/Clp/doxydoc/doxygen.conf.in       ${CMAKE_BINARY_DIR}/Clp/doxydoc/doxygen.conf)
   configure_file(${CMAKE_SOURCE_DIR}/Cgl/doxydoc/doxygen.conf.in       ${CMAKE_BINARY_DIR}/Cgl/doxydoc/doxygen.conf)
   configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf)
@@ -797,15 +797,15 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Cgl/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Osi/doxydoc/doxygen.conf)
-endif(DOXYGEN AND ENABLE_DOXYGEN)
+endif ()
 
 if (USE_OPENMP)
   find_package(OpenMP)
   if (OPENMP_FOUND)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
     set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   ${OpenMP_C_FLAGS}")
-  endif()
-endif()
+  endif ()
+endif ()
 
 # Set some definitions
 if (CLP_LP_SOLVER)

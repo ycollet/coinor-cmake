@@ -583,7 +583,7 @@ add_definitions(-DHAVE_CONFIG_H)
 set(doc_dir doc)
 find_package(Doxygen)
 
-if(DOXYGEN AND ENABLE_DOXYGEN)
+if (DOXYGEN AND ENABLE_DOXYGEN)
   configure_file(${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf.in           ${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf)
   configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf)
   configure_file(${CMAKE_SOURCE_DIR}/Osi/doxydoc/doxygen.conf.in       ${CMAKE_SOURCE_DIR}/Osi/doxydoc/doxygen.conf)
@@ -592,7 +592,7 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Osi/doxydoc/doxygen.conf)
-endif(DOXYGEN AND ENABLE_DOXYGEN)
+endif ()
 
 subdirs(ThirdParty)
 

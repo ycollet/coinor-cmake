@@ -641,7 +641,7 @@ add_definitions(-DHAVE_CONFIG_H)
 set(doc_dir doc)
 find_package(Doxygen)
 
-if(DOXYGEN AND ENABLE_DOXYGEN)
+if (DOXYGEN AND ENABLE_DOXYGEN)
   configure_file(${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf.in           ${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf)
   configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf)
   configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/doxydoc/doxygen.conf.in   ${CMAKE_SOURCE_DIR}/Osi/Osi/doxydoc/doxygen.conf)
@@ -650,7 +650,7 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Osi/Osi/doxydoc/doxygen.conf)
-endif(DOXYGEN AND ENABLE_DOXYGEN)
+endif ()
 
 subdirs(ThirdParty)
 
@@ -702,7 +702,7 @@ subdirs(Osi/OsiDyLP)
 # Create a directory to store results from tests
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)
   make_directory(${CMAKE_BINARY_DIR}/tests)
-endif()
+endif ()
 
 #add_test(NAME afiro_mps_vol_standard 
 #         COMMAND $<TARGET_FILE:dylp> ${Coin_DIR}/Data/Sample/afiro.mps -solution ${CMAKE_BINARY_DIR}/tests/afiro.out -solve)

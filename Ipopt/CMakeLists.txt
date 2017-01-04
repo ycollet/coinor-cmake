@@ -518,12 +518,12 @@ add_definitions(-DHAVE_CONFIG_H)
 set(doc_dir doc)
 find_package(Doxygen)
 
-if(DOXYGEN AND ENABLE_DOXYGEN)
+if (DOXYGEN AND ENABLE_DOXYGEN)
   configure_file(${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
 
   add_custom_target(docs 
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
-endif(DOXYGEN AND ENABLE_DOXYGEN)
+endif ()
 
 subdirs(ThirdParty)
 
@@ -533,7 +533,6 @@ link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
 #
 # HSL Management
 #
-
 
 if (COIN_ENABLE_DOWNLOAD_METIS) # METIS found
   add_definitions(-DCOINHSL_HAS_METIS)
@@ -555,13 +554,13 @@ if (IPOPT_HASH_MUMPS)
   add_definitions(-DHAVE_MUMPS)
   
   set(COINHSL_HAS_MUMPS ON)
-endif()
+endif ()
 
 if (IPOPT_HASH_WSMP)
   add_definitions(-DHAVE_WSMP)
   
   set(COINHSL_HAS_WSMP ON)
-endif()
+endif ()
 
 set(BUILD_INEXACT OFF)
 if (IPOPT_ENABLE_INEXACT AND IPOPT_HAS_PARDISO)

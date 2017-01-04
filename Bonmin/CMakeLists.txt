@@ -905,7 +905,7 @@ add_definitions(-DHAVE_CONFIG_H)
 set(doc_dir doc)
 find_package(Doxygen)
 
-if(DOXYGEN AND ENABLE_DOXYGEN)
+if (DOXYGEN AND ENABLE_DOXYGEN)
   configure_file(${CMAKE_SOURCE_DIR}/Cgl/doxydoc/doxygen.conf.in       ${CMAKE_SOURCE_DIR}/Cgl/doxydoc/doxygen.conf)
   configure_file(${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf.in           ${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf)
   configure_file(${CMAKE_SOURCE_DIR}/Clp/doxydoc/doxygen.conf.in       ${CMAKE_SOURCE_DIR}/Clp/doxydoc/doxygen.conf)
@@ -922,7 +922,7 @@ if(DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Cbc/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Bonmin/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/Osi/Osi/doxydoc/doxygen.conf)
-endif(DOXYGEN AND ENABLE_DOXYGEN)
+endif ()
 
 subdirs(ThirdParty)
 
@@ -982,7 +982,7 @@ subdirs(Bonmin)
 # Create a directory to store results from tests
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)
   make_directory(${CMAKE_BINARY_DIR}/tests)
-endif()
+endif ()
 
 if (COIN_HAS_CLP)
   # With MPS files
