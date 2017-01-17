@@ -245,7 +245,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_ZLIB)
-  set(ZLIB_VERSION "1.2.8")
+  set(ZLIB_VERSION "1.2.11")
 
   set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The Zlib library include Path" FORCE)
   set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "${EP_InstallDir}/lib"     CACHE STRING "The Zlib library library Path" FORCE)
