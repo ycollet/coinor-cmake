@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-project(Glpk)
+project(Glpk C)
 
 option(GLPK_WITH_DL       "enable shared library support" OFF)
 option(GLPK_WITH_OBDC     "enable MathProg ODBC support"  OFF)
@@ -203,11 +203,6 @@ include_directories(${CMAKE_SOURCE_DIR}/src/zlib)
 
 set(GLPK_SRCS ${CMAKE_SOURCE_DIR}/src/bfd.c
               ${CMAKE_SOURCE_DIR}/src/bfx.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi01.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi02.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi03.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi04.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi05.c
               ${CMAKE_SOURCE_DIR}/src/glpapi06.c
               ${CMAKE_SOURCE_DIR}/src/glpapi07.c
               ${CMAKE_SOURCE_DIR}/src/glpapi08.c
@@ -387,6 +382,24 @@ set(GLPK_SRCS ${CMAKE_SOURCE_DIR}/src/bfd.c
               ${CMAKE_SOURCE_DIR}/src/zlib/uncompr.c
               ${CMAKE_SOURCE_DIR}/src/zlib/zio.c
               ${CMAKE_SOURCE_DIR}/src/zlib/zutil.c)
+
+if (GLPK_VERSION STRLESS "4.61")
+  set(GLPK_SRCS ${GLPK_SRCS}
+                ${CMAKE_SOURCE_DIR}/src/glpapi01.c
+		${CMAKE_SOURCE_DIR}/src/glpapi02.c
+		${CMAKE_SOURCE_DIR}/src/glpapi03.c
+		${CMAKE_SOURCE_DIR}/src/glpapi04.c
+		${CMAKE_SOURCE_DIR}/src/glpapi05.c)
+endif ()
+
+if ((GLPK_VERSION STREQUAL "4.61") OR (GLPK_VERSION STRGREATER "4.61"))
+  set(GLPK_SRCS ${GLPK_SRCS}
+                ${CMAKE_SOURCE_DIR}/src/api/prob1.c
+                ${CMAKE_SOURCE_DIR}/src/api/prob2.c
+		${CMAKE_SOURCE_DIR}/src/api/prob3.c
+		${CMAKE_SOURCE_DIR}/src/api/prob4.c
+		${CMAKE_SOURCE_DIR}/src/api/prob5.c)
+endif ()
 
 if (ENABLE_SHARED_LIBRARIES)
   add_library(glpk SHARED ${GLPK_SRCS})
