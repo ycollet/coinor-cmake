@@ -151,7 +151,7 @@ Be careful to activate the right set of tests (not the long one).
 
 # To do
 
-The next project to be added will be Ipopt.
+The f2c.h file included in each ThirdParty directory is copied from the Fedora f2c package.
 
 Tasks:
 
