@@ -50,6 +50,10 @@ else ()
   set(HAVE_64_BIT 1)
 endif ()
 
+include(GetAcInitVersion)
+
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac)
+
 # Name of package
 set(PACKAGE           "Glpk")
 # Define to the address where bug reports for this package should be sent.
@@ -61,7 +65,7 @@ set(PACKAGE_STRING    "Glpk")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "glpk")
 # Define to the version of this package.
-set(PACKAGE_VERSION   "4.60")
+set(PACKAGE_VERSION   "${VERSION_STRING}")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../glpk_binary" 
@@ -118,6 +122,7 @@ elseif (WIN32)
 endif ()
 
 include(CheckIncludeFile)
+include(CheckFunctionExists)
 
 # OBDC_DLNAME
 # MYSQL_DLNAME
@@ -141,16 +146,24 @@ if (WIN32)
 endif ()
 
 if (GLPK_WITH_OBDC)
+  find_package(ODBC)
+  set(HAVE_OBDC ${ODBC_FOUND})
+  
   #set(ODBC_DLNAME "${LIBIODBC}") # Static case ?
   set(ODBC_DLNAME "${LIBODBC}")
 endif ()
 
 if (GLPK_WITH_MYSQL)
+  find_package(MySQL)
+  set(HAVE_MYSQL ${MYSQL_FOUND})
+  
   add_include_directories(/usr/include/mysql)
   set(MYSQL_DLNAME "${LIBMYSQL}")
 endif ()
 
-# Check include files
+# Check memcpy
+
+check_function_exists(memcpy HAVE_MEMCPY)
 
 check_include_file("gmp.h"      HAVE_GMP)
 check_include_file("sys/time.h" HAVE_SYS_TIME_H)

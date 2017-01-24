@@ -10,6 +10,9 @@
 /* defined if the GNU MP bignum library is available */
 /* requires <gmp.h> and -lgmp */
 
+#cmakedefine HAVE_MEMCPY @HAVE_MEMCPY@
+/* defined if memcpy is available */
+
 #cmakedefine HAVE_LTDL @HAVE_LTDL@
 /* defined if the GNU Libtool shared library support is enabled */
 /* requires <ltdl.h> and -lltdl */
@@ -23,5 +26,11 @@
 
 #cmakedefine MYSQL_DLNAME @MYSQL_DLNAME@
 /* MySQL shared library name if this feature is enabled */
+
+#cmakedefine HAVE_MYSQL @HAVE_MYSQL@
+/* defined if MySQL is present */
+
+#cmakedefine HAVE_OBDC @HAVE_OBDC@
+/* defined if OBDC is present */
 
 /* eof */
