@@ -2,12 +2,13 @@ cmake_minimum_required(VERSION 3.0.2)
 
 project(Glpk C)
 
-option(GLPK_WITH_DL       "enable shared library support" OFF)
-option(GLPK_WITH_OBDC     "enable MathProg ODBC support"  OFF)
-option(GLPK_WITH_MYSQL    "enable MathProg MySQL support" OFF)
-option(GLPK_WITH_GMP      "use GNU MP bignum library"     OFF)
-option(GLPK_WITH_OLDAPI   "build the Glpk old API"        OFF)
-option(GLPK_WITH_CPLEXAPI "build the Glpk CPLEX API"      OFF)
+option(GLPK_BUILD_EXAMPLES "build the Glpk examples"       OFF)
+option(GLPK_WITH_DL        "enable shared library support" OFF)
+option(GLPK_WITH_OBDC      "enable MathProg ODBC support"  OFF)
+option(GLPK_WITH_MYSQL     "enable MathProg MySQL support" OFF)
+option(GLPK_WITH_GMP       "use GNU MP bignum library"     OFF)
+option(GLPK_WITH_OLDAPI    "build the Glpk old API"        OFF)
+option(GLPK_WITH_CPLEXAPI  "build the Glpk CPLEX API"      OFF)
 
 option(COIN_ENABLE_DOWNLOAD_DATA_TEST "Enable the download / run of Data tests from Coin website" OFF)
 
@@ -427,94 +428,8 @@ else ()
   add_library(glpk STATIC ${GLPK_SRCS})
 endif ()
 
-# Examples
-
-add_executable(glpsol ${CMAKE_SOURCE_DIR}/examples/glpsol.c)
-target_link_libraries(glpsol glpk)
-if (NOT WIN32)
-  target_link_libraries(glpsol m)
-endif ()
-if (LTDL_FOUND)
-  target_link_libraries(glpsol ${LTDL_LIBRARIES})
-endif ()
-#check: glpsol$(EXEEXT)
-#	./glpsol$(EXEEXT) --version
-#	./glpsol$(EXEEXT) --mps $(srcdir)/plan.mps
-
-add_executable(iptsamp examples/iptsamp.c)
-target_link_libraries(iptsamp glpk)
-if (NOT WIN32)
-  target_link_libraries(iptsamp m)
-endif ()
-if (LTDL_FOUND)
-  target_link_libraries(iptsamp ${LTDL_LIBRARIES})
-endif ()
-
-add_executable(mplsamp1 examples/mplsamp1.c)
-target_link_libraries(mplsamp1 glpk)
-if (NOT WIN32)
-  target_link_libraries(mplsamp1 m)
-endif ()
-if (LTDL_FOUND)
-  target_link_libraries(mplsamp1 ${LTDL_LIBRARIES})
-endif ()
-
-add_executable(mplsamp2 examples/mplsamp2.c)
-target_link_libraries(mplsamp2 glpk)
-if (NOT WIN32)
-  target_link_libraries(mplsamp2 m)
-endif ()
-if (LTDL_FOUND)
-  target_link_libraries(mplsamp2 ${LTDL_LIBRARIES})
-endif ()
-
-add_executable(netgen examples/netgen.c)
-target_link_libraries(netgen glpk)
-if (NOT WIN32)
-  target_link_libraries(netgen m)
-endif ()
-if (LTDL_FOUND)
-  target_link_libraries(netgen ${LTDL_LIBRARIES})
-endif ()
-
-add_executable(sample examples/sample.c)
-target_link_libraries(sample glpk)
-if (NOT WIN32)
-  target_link_libraries(sample m)
-endif ()
-if (LTDL_FOUND)
-  target_link_libraries(sample ${LTDL_LIBRARIES})
-endif ()
-
-add_executable(spxsamp1 examples/spxsamp1.c)
-target_link_libraries(spxsamp1 glpk)
-if (NOT WIN32)
-  target_link_libraries(spxsamp1 m)
-endif ()
-if (LTDL_FOUND)
-  target_link_libraries(spxsamp1 ${LTDL_LIBRARIES})
-endif ()
-
-add_executable(spxsamp2 examples/spxsamp2.c)
-target_link_libraries(spxsamp2 glpk)
-if (NOT WIN32)
-  target_link_libraries(spxsamp2 m)
-endif ()
-if (LTDL_FOUND)
-  target_link_libraries(spxsamp2 ${LTDL_LIBRARIES})
-endif ()
-
 if (GLPK_WITH_OLDAPI)
   add_library(glpk-oldapi examples/oldapi/lpx.c)
-  add_executable(lpxsamp examples/oldapi/lpxsamp.c)
-  target_link_libraries(lpxsamp glpk-oldapi glpk)
-  target_include_directories(lpxsamp BEFORE PUBLIC examples/oldapi)
-  if (NOT WIN32)
-    target_link_libraries(lpxsamp m)
-  endif ()
-  if (LTDL_FOUND)
-    target_link_libraries(lpxsamp ${LTDL_LIBRARIES})
-  endif ()
 endif ()
 
 if (GLPK_WITH_CPLEXAPI)
@@ -522,7 +437,103 @@ if (GLPK_WITH_CPLEXAPI)
   target_include_directories(glpk-cplexapi BEFORE PUBLIC examples/cplex)
 endif ()
 
-# Installation rules
+############
+#          #
+# Examples #
+#          #
+############
+
+if (GLPK_BUILD_EXAMPLES)
+  add_executable(glpsol ${CMAKE_SOURCE_DIR}/examples/glpsol.c)
+  target_link_libraries(glpsol glpk)
+  if (NOT WIN32)
+    target_link_libraries(glpsol m)
+  endif ()
+  if (LTDL_FOUND)
+    target_link_libraries(glpsol ${LTDL_LIBRARIES})
+  endif ()
+  
+  add_executable(iptsamp examples/iptsamp.c)
+  target_link_libraries(iptsamp glpk)
+  if (NOT WIN32)
+    target_link_libraries(iptsamp m)
+  endif ()
+  if (LTDL_FOUND)
+    target_link_libraries(iptsamp ${LTDL_LIBRARIES})
+  endif ()
+  
+  add_executable(mplsamp1 examples/mplsamp1.c)
+  target_link_libraries(mplsamp1 glpk)
+  if (NOT WIN32)
+    target_link_libraries(mplsamp1 m)
+  endif ()
+  if (LTDL_FOUND)
+    target_link_libraries(mplsamp1 ${LTDL_LIBRARIES})
+  endif ()
+  
+  add_executable(mplsamp2 examples/mplsamp2.c)
+  target_link_libraries(mplsamp2 glpk)
+  if (NOT WIN32)
+    target_link_libraries(mplsamp2 m)
+  endif ()
+  if (LTDL_FOUND)
+    target_link_libraries(mplsamp2 ${LTDL_LIBRARIES})
+  endif ()
+  
+  add_executable(netgen examples/netgen.c)
+  target_link_libraries(netgen glpk)
+  if (NOT WIN32)
+    target_link_libraries(netgen m)
+  endif ()
+  if (LTDL_FOUND)
+    target_link_libraries(netgen ${LTDL_LIBRARIES})
+  endif ()
+  
+  add_executable(sample examples/sample.c)
+  target_link_libraries(sample glpk)
+  if (NOT WIN32)
+    target_link_libraries(sample m)
+  endif ()
+  if (LTDL_FOUND)
+    target_link_libraries(sample ${LTDL_LIBRARIES})
+  endif ()
+  
+  add_executable(spxsamp1 examples/spxsamp1.c)
+  target_link_libraries(spxsamp1 glpk)
+  if (NOT WIN32)
+    target_link_libraries(spxsamp1 m)
+  endif ()
+  if (LTDL_FOUND)
+    target_link_libraries(spxsamp1 ${LTDL_LIBRARIES})
+  endif ()
+  
+  add_executable(spxsamp2 examples/spxsamp2.c)
+  target_link_libraries(spxsamp2 glpk)
+  if (NOT WIN32)
+    target_link_libraries(spxsamp2 m)
+  endif ()
+  if (LTDL_FOUND)
+    target_link_libraries(spxsamp2 ${LTDL_LIBRARIES})
+  endif ()
+  
+  if (GLPK_WITH_OLDAPI)
+    add_executable(lpxsamp examples/oldapi/lpxsamp.c)
+    target_link_libraries(lpxsamp glpk-oldapi glpk)
+    target_include_directories(lpxsamp BEFORE PUBLIC examples/oldapi)
+    if (NOT WIN32)
+      target_link_libraries(lpxsamp m)
+    endif ()
+    if (LTDL_FOUND)
+      target_link_libraries(lpxsamp ${LTDL_LIBRARIES})
+    endif ()
+  endif ()
+endif ()
+
+######################
+#                    #
+# Installation rules #
+#                    #
+######################
 
 install(TARGETS glpk
         DESTINATION lib)
@@ -533,7 +544,40 @@ install(TARGETS glpsol
 install(FILES src/glpk.h
         DESTINATION include)
 
-# Perform some tests
+######################
+#                    #
+# Perform some tests #
+#                    #
+######################
+
+# #################################################
+# ===> Tests
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
+  include(ExternalProject)
+
+  if (NOT EXISTS ${CMAKE_BINARY_DIR}/DATA_TEST)
+    make_directory(${CMAKE_BINARY_DIR}/DATA_TEST)
+  endif ()
+  
+  set(DATA_TEST_VERSION "1.0.7")
+  
+  ExternalProject_Add(EP_DATA_TEST
+                      PREFIX ${CMAKE_BINARY_DIR}/DATA_TEST
+                      URL http://www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz
+                      PATCH_COMMAND     ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ""
+                      )
+
+  include(GlpkTests.cmake)
+endif()
+
+# #################################################
+# <=== Tests
+# #################################################
 
 # Create a directory to store results from tests
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)
@@ -1085,32 +1129,3 @@ if (GLPK_WITH_MYSQL)
     set_tests_properties(mysql_transp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 endif ()
-
-# #################################################
-# ===> Tests
-# #################################################
-
-if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
-  include(ExternalProject)
-
-  if (NOT EXISTS ${CMAKE_BINARY_DIR}/DATA_TEST)
-    make_directory(${CMAKE_BINARY_DIR}/DATA_TEST)
-  endif ()
-  
-  set(DATA_TEST_VERSION "1.0.7")
-  
-  ExternalProject_Add(EP_DATA_TEST
-                      PREFIX ${CMAKE_BINARY_DIR}/DATA_TEST
-                      URL http://www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz
-                      PATCH_COMMAND     ""
-                      CONFIGURE_COMMAND ""
-                      BUILD_COMMAND     ""
-                      INSTALL_COMMAND   ""
-                      )
-
-  include(GlpkTests.cmake)
-endif()
-
-# #################################################
-# <=== Tests
-# #################################################
