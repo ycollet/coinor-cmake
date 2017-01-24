@@ -71,7 +71,7 @@ set(PACKAGE_VERSION   "${VERSION_STRING}")
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../glpk_binary" 
       CACHE PATH "Glpk install prefix" FORCE)
-endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+endif ()
 
 #-----------------------------------------------------------------------------
 # Manage compilation options
@@ -200,9 +200,11 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif ()
 
-#
-# Build libraries and executables
-#
+###################################
+#                                 #
+# Build libraries and executables #
+#                                 #
+###################################
 
 # Library
 
