@@ -444,6 +444,13 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
 endif ()
 
 include(CheckSymbolExists)
+include(CheckFunctionExists)
+
+check_function_exists(memcpy USE_MEMCPY)
+
+if (USE_MEMCPY)
+  add_definitions(-DUSE_MEMCPY)
+endif ()
 
 if (HAVE_CMATH)
   set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
@@ -521,7 +528,7 @@ check_symbol_exists(clock_gettime sys/time.h HAVE_CLOCK_GETTIME)
 check_symbol_exists(gettimeofday  sys/time.h HAVE_GETTIMEOFDAY)
 
 if (COIN_USE_FAST_CODE)
-  add_definitions(-DCOIN_FAST_CODE -DUSE_MEMCPY -DCOIN_USE_RESTRICT -DCOIN_NOTEST_DUPLICATE)
+  add_definitions(-DCOIN_FAST_CODE -DCOIN_USE_RESTRICT -DCOIN_NOTEST_DUPLICATE)
   
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fomit-frame-pointer ")
   set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} -fomit-frame-pointer ")
