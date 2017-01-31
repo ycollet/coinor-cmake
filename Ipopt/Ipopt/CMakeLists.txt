@@ -1,13 +1,24 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Ipopt/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Ipopt/configure.ac IPOPT)
 
-set(IPOPT_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The IpOpt major version number")
-set(IPOPT_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The IpOpt minor version number")
-set(IPOPT_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The IpOpt patch version number")
-set(IPOPT_VERSION "${IPOPT_VERSION_MAJOR}.${IPOPT_VERSION_MINOR}.${IPOPT_VERSION_RELEASE}")
-set(IPOPT_SVN_REV "${IPOPT_VERSION_RELEASE}")
+set(IPOPT_VERSION_MAJOR   "${IPOPT_MAJOR_VERSION}"  CACHE STRING "The IpOpt major version number")
+set(IPOPT_VERSION_MINOR   "${IPOPT_MINOR_VERSION}"  CACHE STRING "The IpOpt minor version number")
+set(IPOPT_VERSION_RELEASE "${IPOPT_PATCH_VERSION}"  CACHE STRING "The IpOpt patch version number")
+set(IPOPT_VERSION         "${IPOPT_VERSION_STRING}" CACHE STRING "The IpOpt version")
 
-# Define to the version of this package.
-set(PACKAGE_VERSION "${IPOPT_VERSION}")
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} IPOPT)
+else ()
+  set(IPOPT_WC_REVISION "0")
+endif ()
+message(STATUS "Current IPOPT revision is ${IPOPT_WC_REVISION}")
+set(IPOPT_SVN_REV "${IPOPT_WC_REVISION}" CACHE STRING "The IPOPT subversion revision" FORCE)
+
+mark_as_advanced(IPOPT_VERSION_MAJOR
+                 IPOPT_VERSION_MINOR
+                 IPOPT_VERSION_RELEASE
+                 IPOPT_VERSION
+                 IPOPT_SVN_REV)
 
 add_definitions(-DIPOPT_BUILD)
 
