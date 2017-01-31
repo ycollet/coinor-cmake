@@ -1,14 +1,27 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/DyLP/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/DyLP/configure.ac DYLP)
 
 option(DYLP_BUILD_EXAMPLES "Enable the building of examples" OFF)
-set(DYLP_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The Vol major version number")
-set(DYLP_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The Vol minor version number")
-set(DYLP_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The Vol patch version number")
-set(DYLP_VERSION "${DYLP_VERSION_MAJOR}.${DYLP_VERSION_MINOR}.${DYLP_VERSION_RELEASE}")
+
+set(DYLP_VERSION_MAJOR   "${DYLP_MAJOR_VERSION}"  CACHE STRING "The Vol major version number")
+set(DYLP_VERSION_MINOR   "${DYLP_MINOR_VERSION}"  CACHE STRING "The Vol minor version number")
+set(DYLP_VERSION_RELEASE "${DYLP_PATCH_VERSION}"  CACHE STRING "The Vol patch version number")
+set(DYLP_VERSION         "${DYLP_VERSION_STRING}" CACHE STRING "The Vol version")
 set(DYLP_SVN_REV "${DYLP_VERSION_RELEASE}")
 
-# Define to the version of this package.
-set(PACKAGE_VERSION "${DYLP_VERSION}")
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} DYLP)
+else ()
+  set(DYLP_WC_REVISION "0")
+endif ()
+message(STATUS "Current DYLP revision is ${DYLP_WC_REVISION}")
+set(DYLP_SVN_REV "${DYLP_WC_REVISION}" CACHE STRING "The DYLP subversion revision" FORCE)
+
+mark_as_advanced(DYLP_VERSION_MAJOR
+                 DYLP_VERSION_MINOR
+                 DYLP_VERSION_RELEASE
+                 DYLP_VERSION
+                 DYLP_SVN_REV)
 
 add_definitions(-DDYLP_BUILD -DODSI_PARANOIA=0)
 

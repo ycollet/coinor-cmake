@@ -1,11 +1,26 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Clp/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Clp/configure.ac CLP)
 
 option(CLP_BUILD_EXAMPLES "Enable the building of examples" OFF)
-set(CLP_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The CLP major version number")
-set(CLP_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The CLP minor version number")
-set(CLP_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CLP patch version number")
-set(CLP_VERSION "${CLP_VERSION_MAJOR}.${CLP_VERSION_MINOR}.${CLP_VERSION_RELEASE}")
-set(CLP_SVN_REV "${CLP_VERSION_RELEASE}")
+
+set(CLP_VERSION_MAJOR   "${CLP_MAJOR_VERSION}"  CACHE STRING "The CLP major version number")
+set(CLP_VERSION_MINOR   "${CLP_MINOR_VERSION}"  CACHE STRING "The CLP minor version number")
+set(CLP_VERSION_RELEASE "${CLP_PATCH_VERSION}"  CACHE STRING "The CLP patch version number")
+set(CLP_VERSION         "${CLP_VERSION_STRING}" CACHE STRING "The CLP version")
+
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CLP)
+else ()
+  set(CLP_WC_REVISION "0")
+endif ()
+message(STATUS "Current CLP revision is ${CLP_WC_REVISION}")
+set(CLP_SVN_REV "${CLP_WC_REVISION}" CACHE STRING "The CLP subversion revision" PARENT_SCOPE)
+
+mark_as_advanced(CLP_VERSION_MAJOR
+                 CLP_VERSION_MINOR
+                 CLP_VERSION_RELEASE
+                 CLP_VERSION
+                 CLP_SVN_REV)
 
 add_definitions(-DCLP_BUILD)
 
@@ -63,7 +78,7 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/Idiot.cpp
                  ${Clp_DIR}/src/IdiSolve.cpp)
 
-if ("${VERSION_STRING}" STREQUAL "trunk")
+if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
                    ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
                    ${Clp_DIR}/src/ClpPESimplex.cpp
@@ -190,7 +205,7 @@ set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/CbcOrClpParam.hpp
                          ${Clp_DIR}/src/Idiot.hpp)
 
-if ("${VERSION_STRING}" STREQUAL "trunk")
+if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
                            ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
                            ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp

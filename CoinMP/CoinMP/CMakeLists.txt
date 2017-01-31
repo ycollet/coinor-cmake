@@ -1,14 +1,20 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/CoinMP/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/CoinMP/configure.ac COINMP)
 
 option(COINMP_BUILD_EXAMPLES "Enable the building of examples" OFF)
-set(COINMP_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The CoinMP major version number")
-set(COINMP_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The CoinMP minor version number")
-set(COINMP_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CoinMP patch version number")
-set(COINMP_VERSION "${COINMP_VERSION_MAJOR}.${COINMP_VERSION_MINOR}.${COINMP_VERSION_RELEASE}")
-set(COINMP_SVN_REV "${COINMP_VERSION_RELEASE}")
 
-# Define to the version of this package.
-set(PACKAGE_VERSION "${COINMP_VERSION}")
+set(COINMP_VERSION_MAJOR   "${COINMP_MAJOR_VERSION}"  CACHE STRING "The CoinMP major version number")
+set(COINMP_VERSION_MINOR   "${COINMP_MINOR_VERSION}"  CACHE STRING "The CoinMP minor version number")
+set(COINMP_VERSION_RELEASE "${COINMP_PATCH_VERSION}"  CACHE STRING "The CoinMP patch version number")
+set(COINMP_VERSION         "${COINMP_VERSION_STRING}" CACHE STRING "The CoinMP version")
+
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINMP)
+else ()
+  set(COINMP_WC_REVISION "0")
+endif ()
+message(STATUS "Current COINMP revision is ${COINMP_WC_REVISION}")
+set(COINMP_SVN_REV "${COINMP_WC_REVISION}" CACHE STRING "The COINMP subversion revision" FORCE)
 
 add_definitions(-DCOINMP_BUILD)
 

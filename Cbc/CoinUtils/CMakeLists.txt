@@ -1,20 +1,30 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/CoinUtils/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/CoinUtils/configure.ac COINUTILS)
 
 option(COINUTILS_ENABLE_UNITTEST "Enable building the unit test executable" OFF)
-set(COINUTILS_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The COINUTILS major version number")
-set(COINUTILS_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The COINUTILS minor version number")
-set(COINUTILS_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The COINUTILS patch version number")
-set(COINUTILS_VERSION "${COINUTILS_VERSION_MAJOR}.${COINUTILS_VERSION_MINOR}.${COINUTILS_VERSION_RELEASE}")
-set(COINUTILS_SVN_REV "${COINUTILS_VERSION_RELEASE}")
+
+set(COINUTILS_VERSION_MAJOR   "${COINUTILS_MAJOR_VERSION}"  CACHE STRING "The COINUTILS major version number")
+set(COINUTILS_VERSION_MINOR   "${COINUTILS_MINOR_VERSION}"  CACHE STRING "The COINUTILS minor version number")
+set(COINUTILS_VERSION_RELEASE "${COINUTILS_PATCH_VERSION}"  CACHE STRING "The COINUTILS patch version number")
+set(COINUTILS_VERSION         "${COINUTILS_VERSION_STRING}" CACHE STRING "The COINUTILS version")
 
 option(COINUTILS_HAS_ZLIB "CoinUtils uses the Zlib library" OFF)
 set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "None" CACHE STRING "The Zlib library include Path")
 set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "None" CACHE STRING "The Zlib library absolute library Path")
 set(ZLIB_NAME "z" CACHE STRING "The Zlib library name")
+
 option(COINUTILS_HAS_BZLIB "CoinUtils uses the BZlib library" OFF)
 set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "None" CACHE STRING "The BZlib library include Path")
 set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "None" CACHE STRING "The BZlib library absolute library Path")
 set(BZLIB_NAME "bz2" CACHE STRING "The BZlib library name")
+
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINUTILS)
+else ()
+  set(COINUTILS_WC_REVISION "0")
+endif ()
+message(STATUS "Current COINUTILS revision is ${COINUTILS_WC_REVISION}")
+set(COINUTILS_SVN_REV "${COINUTILS_WC_REVISION}" CACHE STRING "The COINUTILS subversion revision")
 
 mark_as_advanced(COINUTILS_VERSION_MAJOR
                  COINUTILS_VERSION_MINOR

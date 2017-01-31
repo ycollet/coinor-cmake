@@ -1,28 +1,35 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/SYMPHONY/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/SYMPHONY/configure.ac SYMPHONY)
 
 option(SYMPHONY_BUILD_EXAMPLES     "Enable the building of examples" OFF)
 option(SYMPHONY_BUILD_APPLICATIONS "Enable the building of applications" OFF)
 
-set(SYMPHONY_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The Symphony major version number")
-set(SYMPHONY_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The Symphony minor version number")
-set(SYMPHONY_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The Symphony patch version number")
-set(SYMPHONY_VERSION "${SYMPHONY_VERSION_MAJOR}.${SYMPHONY_VERSION_MINOR}.${SYMPHONY_VERSION_RELEASE}")
-set(SYMPHONY_SVN_REV "${SYMPHONY_VERSION_RELEASE}")
+set(SYMPHONY_VERSION_MAJOR   "${SYMPHONY_MAJOR_VERSION}"  CACHE STRING "The Symphony major version number")
+set(SYMPHONY_VERSION_MINOR   "${SYMPHONY_MINOR_VERSION}"  CACHE STRING "The Symphony minor version number")
+set(SYMPHONY_VERSION_RELEASE "${SYMPHONY_PATCH_VERSION}"  CACHE STRING "The Symphony patch version number")
+set(SYMPHONY_VERSION         "${SYMPHONY_VERSION_STRING}" CACHE STRING "The Symphony version")
 
-# Define to the version of this package.
-set(PACKAGE_VERSION "${SYMPHONY_VERSION}")
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} SYMPHONY)
+else ()
+  set(SYMPHONY_WC_REVISION "0")
+endif ()
+message(STATUS "Current SYMPHONY revision is ${SYMPHONY_WC_REVISION}")
+set(SYMPHONY_SVN_REV "${SYMPHONY_WC_REVISION}" CACHE STRING "The SYMPHONY subversion revision" FORCE)
 
-# Symphony part
+mark_as_advanced(SYMPHONY_VERSION_MAJOR
+                 SYMPHONY_VERSION_MINOR
+                 SYMPHONY_VERSION_RELEASE
+                 SYMPHONY_VERSION
+                 SYMPHONY_SVN_REV)
 
 add_definitions(-DSYMPHONY_BUILD -DHAVE_CONFIG_H)
 
-remove_definitions(-DCOINUTILS_BUILD)
-remove_definitions(-DCLP_BUILD)
-remove_definitions(-DCBC_BUILD)
-remove_definitions(-DCGL_BUILD)
-remove_definitions(-DOSI_BUILD)
-
-message(STATUS "DEBUG: SYMPHONY_DIR = ${SYMPHONY_DIR}")
+#remove_definitions(-DCOINUTILS_BUILD)
+#remove_definitions(-DCLP_BUILD)
+#remove_definitions(-DCBC_BUILD)
+#remove_definitions(-DCGL_BUILD)
+#remove_definitions(-DOSI_BUILD)
 
 if (MINGW)
   add_definitions(-D__MNO_CYGWIN)

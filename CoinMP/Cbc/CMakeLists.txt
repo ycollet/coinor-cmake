@@ -1,15 +1,21 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Cbc/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Cbc/configure.ac CBC)
 
 option(CBC_BUILD_CBC_GENERIC "Build the generic version of Cbc" OFF)
-option(CBC_BUILD_EXAMPLES    "Enable the building of examples" OFF)
-set(CBC_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The CBC major version number")
-set(CBC_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The CBC minor version number")
-set(CBC_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CBC patch version number")
-set(CBC_VERSION "${CBC_VERSION_MAJOR}.${CBC_VERSION_MINOR}.${CBC_VERSION_RELEASE}")
-set(CBC_SVN_REV "${CBC_VERSION_RELEASE}")
+option(CBC_BUILD_EXAMPLES    "Enable the building of examples"  OFF)
 
-# Define to the version of this package.
-set(PACKAGE_VERSION "${CBC_VERSION}")
+set(CBC_VERSION_MAJOR   "${CBC_MAJOR_VERSION}"  CACHE STRING "The CBC major version number")
+set(CBC_VERSION_MINOR   "${CBC_MINOR_VERSION}"  CACHE STRING "The CBC minor version number")
+set(CBC_VERSION_RELEASE "${CBC_PATCH_VERSION}"  CACHE STRING "The CBC patch version number")
+set(CBC_VERSION         "${CBC_VERSION_STRING}" CACHE STRING "The CBC version")
+
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CBC)
+else ()
+  set(CBC_WC_REVISION "0")
+endif ()
+message(STATUS "Current CBC revision is ${CBC_WC_REVISION}")
+set(CBC_SVN_REV "${CBC_WC_REVISION}" CACHE STRING "The CBC subversion revision" FORCE)
 
 mark_as_advanced(CBC_VERSION_MAJOR
                  CBC_VERSION_MINOR

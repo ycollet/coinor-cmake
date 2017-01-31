@@ -1,11 +1,20 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Cgl/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Cgl/configure.ac CGL)
 
 option(CGL_BUILD_EXAMPLES "Enable the building of examples" OFF)
-set(CGL_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The CGL major version number")
-set(CGL_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The CGL minor version number")
-set(CGL_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The CGL patch version number")
-set(CGL_VERSION "${CGL_VERSION_MAJOR}.${CGL_VERSION_MINOR}.${CGL_VERSION_RELEASE}")
-set(CGL_SVN_REV "${CGL_VERSION_RELEASE}")
+
+set(CGL_VERSION_MAJOR   "${CGL_MAJOR_VERSION}"  CACHE STRING "The CGL major version number")
+set(CGL_VERSION_MINOR   "${CGL_MINOR_VERSION}"  CACHE STRING "The CGL minor version number")
+set(CGL_VERSION_RELEASE "${CGL_PATCH_VERSION}"  CACHE STRING "The CGL patch version number")
+set(CGL_VERSION         "${CGL_VERSION_STRING}" CACHE STRING "The CGL version")
+
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CGL)
+else ()
+  set(CGL_WC_REVISION "0")
+endif ()
+message(STATUS "Current CGL revision is ${CGL_WC_REVISION}")
+set(CGL_SVN_REV "${CGL_WC_REVISION}" CACHE STRING "The CGL subversion revision")
 
 mark_as_advanced(CGL_VERSION_MAJOR
                  CGL_VERSION_MINOR

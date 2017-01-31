@@ -1,14 +1,26 @@
 get_ac_init_version(${CMAKE_SOURCE_DIR}/Vol/configure.ac)
 
 option(VOL_BUILD_EXAMPLES "Enable the building of examples" OFF)
-set(VOL_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The Vol major version number")
-set(VOL_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The Vol minor version number")
-set(VOL_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The Vol patch version number")
-set(VOL_VERSION "${VOL_VERSION_MAJOR}.${VOL_VERSION_MINOR}.${VOL_VERSION_RELEASE}")
-set(VOL_SVN_REV "${VOL_VERSION_RELEASE}")
 
-# Define to the version of this package.
-set(PACKAGE_VERSION "${VOL_VERSION}")
+set(VOL_VERSION_MAJOR   "${VOL_MAJOR_VERSION}"  CACHE STRING "The Vol major version number")
+set(VOL_VERSION_MINOR   "${VOL_MINOR_VERSION}"  CACHE STRING "The Vol minor version number")
+set(VOL_VERSION_RELEASE "${VOL_PATCH_VERSION}"  CACHE STRING "The Vol patch version number")
+set(VOL_VERSION         "${VOL_VERSION_STRING}" CACHE STRING "The Vol version")
+
+find_package(Subversion)
+if (Subversion_FOUND)
+  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} VOL)
+else ()
+  set(VOL_WC_REVISION "0")
+endif ()
+message(STATUS "Current VOL revision is ${VOL_WC_REVISION}")
+set(VOL_SVN_REV "${VOL_WC_REVISION}" CACHE STRING "The VOL subversion revision" FORCE)
+
+mark_as_advanced(VOL_VERSION_MAJOR
+                 VOL_VERSION_MINOR
+                 VOL_VERSION_RELEASE
+                 VOL_VERSION
+                 VOL_SVN_REV)
 
 add_definitions(-DVOL_BUILD)
 
