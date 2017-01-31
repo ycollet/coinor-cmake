@@ -178,7 +178,7 @@
 #define SIZEOF_LONG_LONG @SIZEOF_LONG_LONG@
 
 /* Define to 1 if you have the ANSI C header files. */
-#cmakedefine STDC_HEADERS
+#cmakedefine STDC_HEADERS @STDC_HEADERS@
 
 /* Version number of package */
 #define VERSION "@VERSION@"

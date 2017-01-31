@@ -144,7 +144,7 @@
 #define PACKAGE_VERSION "@PACKAGE_VERSION@"
 
 /* Define to 1 if you have the ANSI C header files. */
-#cmakedefine STDC_HEADERS
+#cmakedefine STDC_HEADERS @STDC_HEADERS@
 
 /* SVN revision number of project */
 #define SYMPHONY_SVN_REV @SYMPHONY_SVN_REV@
