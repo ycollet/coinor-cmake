@@ -73,7 +73,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 include(coin-macros)
 include(GetAcInitVersion)
 
-Enable_Testing()
+Enable_Testing ()
 
 #------------------------------------------------------------
 # Detect 64 bits

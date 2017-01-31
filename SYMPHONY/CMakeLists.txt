@@ -219,7 +219,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 include(coin-macros)
 include(GetAcInitVersion)
 
-Enable_Testing()
+Enable_Testing ()
 
 #------------------------------------------------------------
 # Detect 64 bits
@@ -667,7 +667,7 @@ if (HAVE_CIEEEFP)
 endif ()
 if (HAVE_IEEEFP_H)
   set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST} "ieeefp.h")
-endif()
+endif ()
 
 set(CMAKE_REQUIRED_LIBRARIES m)
 check_symbol_exists(isfinite "${TEST_INCLUDE_LIST}" COIN_C_FINITE_R)

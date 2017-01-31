@@ -223,7 +223,7 @@ if (COINUTILS_ENABLE_UNITTEST)
       target_link_libraries(unitTest-coinutils pthreadVC2)
     endif ()
   endif ()
-endif()
+endif ()
 
 install(TARGETS libCoinUtils 
         DESTINATION lib)

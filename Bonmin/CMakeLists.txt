@@ -189,7 +189,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 include(coin-macros)
 include(GetAcInitVersion)
 
-Enable_Testing()
+Enable_Testing ()
 
 #------------------------------------------------------------
 # Detect 64 bits
@@ -781,7 +781,7 @@ endif ()
 if (HAVE_IEEEFP_H)
   set(TEST_INCLUDE_LIST ${TEST_INCLUDE_LIST}
                         "ieeefp.h")
-endif()
+endif ()
 
 set(CMAKE_REQUIRED_LIBRARIES m)
 check_symbol_exists(isfinite "${TEST_INCLUDE_LIST}" COIN_C_FINITE_R)
@@ -1203,7 +1203,7 @@ if (COIN_HAS_CLP)
   if (WIN32)
     set_tests_properties(exmip1_lp_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
   endif ()
-endif()
+endif ()
 
 if (CBC_BUILD_CBC_GENERIC)
   # With MPS files
@@ -1418,7 +1418,7 @@ if (CBC_BUILD_CBC_GENERIC)
   if (WIN32)
     set_tests_properties(exmip1_lp_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
   endif ()
-endif()
+endif ()
 
 #
 # Packaging

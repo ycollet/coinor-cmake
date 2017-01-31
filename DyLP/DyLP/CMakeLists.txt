@@ -90,7 +90,7 @@ include_directories(${DyLP_DIR}/src/OsiDyLP)
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/DyLP/include)
-endmacro()
+endmacro ()
 
 add_definitions(-DDYLP_BUILD)
 if (WIN32)

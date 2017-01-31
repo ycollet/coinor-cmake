@@ -13,13 +13,13 @@ include_directories(${amplsolver_SOURCE_DIR}
 set(genarith_srcs arithchk.c)
 if(WIN32)
   set_source_files_properties(arithchk.c PROPERTIES COMPILE_FLAGS "-DNO_FPINIT")
-else()
+else ()
   list(APPEND genarith_srcs fpinit.c)
-endif()
+endif ()
 add_executable(genarith ${genarith_srcs})
 if(UNIX)
   target_link_libraries(genarith m)
-endif()
+endif ()
 
 configure_file(${amplsolver_SOURCE_DIR}/stdio1.h0 ${amplsolver_BINARY_DIR}/stdio1.h)
 

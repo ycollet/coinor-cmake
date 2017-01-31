@@ -39,7 +39,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
                       ${CMAKE_SOURCE_DIR}/cmake)
 
-Enable_Testing()
+Enable_Testing ()
 
 #------------------------------------------------------------
 # Detect 64 bits
@@ -575,7 +575,7 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
                       )
 
   include(GlpkTests.cmake)
-endif()
+endif ()
 
 # #################################################
 # <=== Tests
@@ -584,7 +584,7 @@ endif()
 # Create a directory to store results from tests
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)
   make_directory(${CMAKE_BINARY_DIR}/tests)
-endif()
+endif ()
 
 #
 # Mps

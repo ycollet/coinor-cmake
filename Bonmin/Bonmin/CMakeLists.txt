@@ -329,7 +329,7 @@ macro(set_include_directories TARGET)
   endif ()
   
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Bonmin/include)
-endmacro()
+endmacro ()
 
 if (WIN32)
   add_definitions(-DUSE_BONMINCONFIG -DCOIN_NO_CLP_MESSAGE -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -408,7 +408,7 @@ if (BONMIN_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_DOWNLOAD_METIS)
       target_link_libraries(${Name} metis m)
     endif ()  
-  endmacro()
+  endmacro ()
   
   add_example(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
   

@@ -100,7 +100,7 @@ macro(set_include_directories TARGET)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cbc/include)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   endif ()
-endmacro()
+endmacro ()
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -168,7 +168,7 @@ if (COINMP_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_DOWNLOAD_METIS)
       target_link_libraries(${Name} metis m)
     endif ()  
-  endmacro()
+  endmacro ()
   
   add_example(example ${CoinMP_DIR}/examples/example.c)
   
@@ -178,7 +178,7 @@ if (COINMP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(coinmp_example PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
   endif ()
-endif()
+endif ()
 
 install(TARGETS libCoinMP
         DESTINATION lib)

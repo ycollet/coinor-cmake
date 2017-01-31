@@ -29,7 +29,7 @@ mark_as_advanced(ZLIB_NAME
 if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWNLOAD_CLAPACK OR
     COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_SUITESPARSE OR
     COIN_USE_DOWNLOAD_BZLIB)
-  return()
+  return ()
 endif ()
 
 option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
@@ -158,7 +158,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
                                        && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/BLAS/SRC/libblas.a ${EP_InstallDir}/lib
                         )
   endif ()
-endif()
+endif ()
 
 # #################################################
 # <===    CLapack
@@ -205,7 +205,7 @@ if (COIN_ENABLE_FIND_LAPACK)
     set(COIN_HAS_LAPACK OFF CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
     set(COIN_HAS_BLAS   OFF CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   endif ()
-endif()
+endif ()
 
 # #################################################
 # <===    Lapack
@@ -255,7 +255,7 @@ if (COIN_ENABLE_FIND_ZLIB)
     set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "None" CACHE STRING "The Zlib library library Path" FORCE)
     set(COINUTILS_HAS_ZLIB OFF CACHE BOOL "Activate Zlib for CoinUtils" FORCE)
   endif ()
-endif()
+endif ()
 
 # #################################################
 # <===    Zlib
@@ -315,7 +315,7 @@ if (COIN_ENABLE_FIND_BZLIB)
     set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "None" CACHE STRING "The BZlib library library Path" FORCE)
     set(COINUTILS_HAS_BZLIB OFF CACHE BOOL "Activate BZlib for CoinUtils" FORCE)
   endif ()
-endif()
+endif ()
 
 # #################################################
 # <===    BZlib
@@ -347,8 +347,8 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
     message(STATUS "GLPK has glpk_intopt: yes")
   else ()
     message(STATUS "GLPK has glpk_intopt: no")
-  endif()
-endif()
+  endif ()
+endif ()
 
 # #################################################
 # <===    glpk
@@ -401,7 +401,7 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
                       )
-endif()
+endif ()
 
 # #################################################
 # <=== SuiteSparse compilation
@@ -436,7 +436,7 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
     add_dependencies(${_target} EP_SuiteSparse)
   endif ()
-endmacro()
+endmacro ()
 
 macro(add_executable _target)
   _add_executable (${_target} ${ARGN})
@@ -459,7 +459,7 @@ macro(add_executable _target)
   if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
     add_dependencies(${_target} EP_SuiteSparse)
   endif ()
-endmacro()
+endmacro ()
 
 # #################################################
 # <===   Restart cmake 

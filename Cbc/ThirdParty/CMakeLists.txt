@@ -31,7 +31,7 @@ if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWN
     COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR COIN_USE_DOWNLOAD_METIS OR
     COIN_USE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_SUITESPARSE OR
     COIN_USE_DOWNLOAD_BZLIB)
-  return()
+  return ()
 endif ()
 
 option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
@@ -111,7 +111,7 @@ link_directories(${EP_InstallDir}/lib)
 # add_regex: allow to concat several regex into one for using it with cmake
 macro(add_regex VARIABLE REGEX)
   set(${VARIABLE} "${${VARIABLE}}${REGEX}.*")
-endmacro()
+endmacro ()
 
 # Example of use:
 #
@@ -136,7 +136,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
     if (NOT HAVE_64_BIT)
       set(CLAPACK_C_FLAGS      "-fPIC")
       set(CLAPACK_LINKER_FLAGS "-fPIC")
-    endif()
+    endif ()
     
     if (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
       if (RM_COMPILE_LTO)
@@ -191,7 +191,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
                                        && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/BLAS/SRC/libblas.a ${EP_InstallDir}/lib
                         )
   endif ()
-endif()
+endif ()
 
 # #################################################
 # <===    CLapack
@@ -208,7 +208,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
     if (NOT HAVE_64_BIT)
       set(LAPACK_C_FLAGS      "-fPIC")
       set(LAPACK_LINKER_FLAGS "-fPIC")
-    endif()
+    endif ()
   endif ()
   
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
@@ -348,7 +348,7 @@ if (COIN_ENABLE_FIND_BZLIB)
     set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "None" CACHE STRING "The BZlib library library Path" FORCE)
     set(COINUTILS_HAS_BZLIB OFF CACHE BOOL "Activate BZlib for CoinUtils" FORCE)
   endif ()
-endif()
+endif ()
 
 # #################################################
 # <===    BZlib
@@ -380,8 +380,8 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
     message(STATUS "GLPK has glpk_intopt: yes")
   else ()
     message(STATUS "GLPK has glpk_intopt: no")
-  endif()
-endif()
+  endif ()
+endif ()
 
 # #################################################
 # <===    glpk
@@ -441,7 +441,7 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
                                      && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/defs.h   ${EP_InstallDir}/include/metis/
                                      && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Metis/src/EP_Metis/Lib/rename.h ${EP_InstallDir}/include/metis/
                       )
-endif()
+endif ()
 
 # #################################################
 # <=== Metis compilation
@@ -480,7 +480,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
                       )
-endif()
+endif ()
 
 # #################################################
 # <=== Mumps compilation
@@ -507,7 +507,7 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM} install
                       )
-endif()
+endif ()
 
 # #################################################
 # <=== ASL compilation
@@ -532,7 +532,7 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
                       )
-endif()
+endif ()
 
 # #################################################
 # <=== SuiteSparse compilation
@@ -557,7 +557,7 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
 
   include(ClpTests.cmake)
   include(CbcTests.cmake)
-endif()
+endif ()
 
 if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
   set(MIPLIB2000_VERSION "1.1.2")
@@ -574,7 +574,7 @@ if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
 
   include(ClpMiplib2000Tests.cmake)
   include(CbcMiplib2000Tests.cmake)
-endif()
+endif ()
 
 # #################################################
 # <=== Tests
@@ -618,7 +618,7 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
     add_dependencies(${_target} EP_SuiteSparse)
   endif ()
-endmacro()
+endmacro ()
 
 macro(add_executable _target)
   _add_executable (${_target} ${ARGN})
@@ -650,7 +650,7 @@ macro(add_executable _target)
   if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
     add_dependencies(${_target} EP_SuiteSparse)
   endif ()
-endmacro()
+endmacro ()
 
 # #################################################
 # <===   Restart cmake 

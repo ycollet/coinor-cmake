@@ -7,14 +7,14 @@ include_directories(${MY_GLPK_DIR}/include)
 
 if ((COIN_HAS_GLPK_INCLUDE_PATH STREQUAL "None") AND (COIN_HAS_GLPK_LIBRARY_PATH STREQUAL "None"))
   find_package(Glpk)
-else()
+else ()
   set(GLPK_VERSION "4.52")
 endif ()
 
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
-endmacro()
+endmacro ()
 
 if (NOT COIN_GLPK_DIR STREQUAL "None")
   include_directories(${COIN_GLPK_DIR}/include)

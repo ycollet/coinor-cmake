@@ -8,7 +8,7 @@ include_directories(${MY_CPLEX_DIR}/include)
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
-endmacro()
+endmacro ()
 
 if (NOT COIN_CPLEX_DIR STREQUAL "None")
   include_directories(${COIN_CPLEX_DIR}/include)

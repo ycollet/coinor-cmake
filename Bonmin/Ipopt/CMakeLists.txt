@@ -198,7 +198,7 @@ endif ()
 
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Ipopt/include)
-endmacro()
+endmacro ()
 
 include_directories(${CMAKE_SOURCE_DIR}/ThirdParty/HSL)
 

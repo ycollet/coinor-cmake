@@ -101,7 +101,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
                                        && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/BLAS/SRC/libblas.a ${EP_InstallDir}/lib
                         )
   endif ()
-endif()
+endif ()
 
 # #################################################
 # <===    CLapack
@@ -174,7 +174,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
 
   set(COIN_HAS_MUMPS  ON CACHE BOOL "Enable the Mumps linear solver (enabled by default)" FORCE)
   set(IPOPT_HAS_MUMPS ON CACHE BOOL "Enable the Mumps solver" FORCE)
-endif()
+endif ()
 
 # #################################################
 # <===    Mumps
@@ -209,8 +209,8 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM}
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM} install
                         )
-  endif()
-endif()
+  endif ()
+endif ()
 
 # #################################################
 # <===    Metis
@@ -237,7 +237,7 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM} install
                       )
-endif()
+endif ()
 
 # #################################################
 # <=== ASL compilation
@@ -344,7 +344,7 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWLOAD_CLAPACK)
     add_dependencies(${_target} EP_Lapack)
   endif ()
-endmacro()
+endmacro ()
 
 macro(add_executable _target)
   _add_executable (${_target} ${ARGN})
@@ -361,7 +361,7 @@ macro(add_executable _target)
   if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWLOAD_CLAPACK)
     add_dependencies(${_target} EP_Lapack)
   endif ()
-endmacro()
+endmacro ()
 
 # #################################################
 # <===   Restart cmake 

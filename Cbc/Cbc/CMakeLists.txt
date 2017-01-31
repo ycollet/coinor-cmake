@@ -307,7 +307,7 @@ macro(set_include_directories TARGET)
   endif ()
   
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cbc/include)
-endmacro()
+endmacro ()
 
 if (WIN32)
   add_definitions(-DUSE_CBCCONFIG -DCOIN_NO_CLP_MESSAGE -D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -386,7 +386,7 @@ if (CBC_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_DOWNLOAD_METIS)
       target_link_libraries(${Name} metis m)
     endif ()  
-  endmacro()
+  endmacro ()
   
   add_example(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
   
@@ -721,7 +721,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_sample4 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
   endif ()
-endif()
+endif ()
 
 add_executable(cbc ${Cbc_DIR}/src/CoinSolve.cpp)
 target_link_libraries(cbc libCbc libCgl libOsiClp libOsi libClp libCoinUtils)

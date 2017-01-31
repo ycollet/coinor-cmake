@@ -83,7 +83,7 @@ if (SYMPHONY_VERSION VERSION_LESS "5.5.4")
   # This file has been removed in Symphony-5.5.4
   set(Symphony_SRC_LIST_Headers ${Symphony_SRC_LIST_Headers}
                                 ${SYMPHONY_DIR}/SYMPHONY/include/sym_return_values.h)
-endif()
+endif ()
 
 if (USE_CL)
   set(Symphony_SRC_LIST_Headers ${Symphony_SRC_LIST_Headers}
@@ -164,7 +164,7 @@ if (SYM_COMPILE_IN_LP)
                ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_func.c
                ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_wrapper.c)
   endif ()
-else()
+else ()
   set(MASTER_SRC ${MASTER_SRC}
                  ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_solver.c)
 endif ()
@@ -343,7 +343,7 @@ macro(set_include_directories TARGET)
   endif ()
   
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/SYMPHONY/include)
-endmacro()
+endmacro ()
 
 set_source_files_properties(${EXAMPLES_SRC} PROPERTIES LANGUAGE CXX)
 set_source_files_properties(${MAIN_SRC} PROPERTIES LANGUAGE CXX)
@@ -569,7 +569,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
         target_link_libraries(${Name} dmumps mumps_common seq blas lapack ifort pthread)
       else ()
         target_link_libraries(${Name} dmumps mumps_common seq blas lapack gfortran pthread)
-      endif()
+      endif ()
     endif ()  
     if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_DOWNLOAD_METIS)
       target_link_libraries(${Name} metis m)
@@ -689,7 +689,7 @@ install(FILES ${OSISYM_Headers}
 # Create a directory to store results from tests
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)
   make_directory(${CMAKE_BINARY_DIR}/tests)
-endif()
+endif ()
 
 # With MPS files
 
