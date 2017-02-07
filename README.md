@@ -24,6 +24,22 @@ How to use these cmake files ?
 - Make the libraries: make
 - Install the libraries: sudo make install
 
+An example:
+```
+$ wget https://www.coin-or.org/download/source/Cbc/Cbc-2.9.8.tgz
+$ tar xvfz Cbc-2.9.8.tgz
+$ git clone https://github.com/ycollet/coinor-cmake.git
+$ cp -r coinor-cmake/Cbc/* Cbc-2.9.8/
+$ cd Cbc-2.9.8
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.8 -DCMAKE_BUILD_TYPE=RELEASE ..
+# Now activate all the options you want ... and click on  configure + generate and exit
+$ cmake-gui .
+$ make
+$ sudo make install
+```
+
 Under Windows, with Visual Studio:
 
 - Clone the repository
