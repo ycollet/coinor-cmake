@@ -328,6 +328,8 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
                                           ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/BZlib/src/EP_BZlib/bzlib_private.h ${EP_InstallDir}/include
                         )
   endif ()
+  
+  set(HAVE_BZIP_H 1)
 endif ()
 
 if (COIN_ENABLE_FIND_BZLIB)
@@ -339,6 +341,7 @@ if (COIN_ENABLE_FIND_BZLIB)
     set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${BZIP2_INCLUDE_DIR}" CACHE STRING "The BZlib library include Path" FORCE)
     set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "None" CACHE STRING "The BZlib library library Path" FORCE)
     set(COINUTILS_HAS_BZLIB ON CACHE BOOL "Activate BZlib for CoinUtils" FORCE)
+    set(HAVE_BZIP_H 1)
   else ()
     set(BZLIB_NAME "" CACHE STRING "The BZlib library name" FORCE)
     set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "None" CACHE STRING "The BZlib library include Path" FORCE)

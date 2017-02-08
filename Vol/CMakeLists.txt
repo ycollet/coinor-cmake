@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-project(Vol)
+project(Vol CXX)
 
 # Vol options
 
@@ -383,8 +383,11 @@ set(Osi_DIR           ${Coin_DIR}/Osi)
 set(Vol_DIR           ${Coin_DIR}/Vol)
 
 include(CheckIncludeFile)
+include(VA_COPY)
 
+check_include_file("assert.h"    HAVE_ASSERT_H)
 check_include_file("bzlib.h"     HAVE_BZLIB_H)
+check_include_file("ctype.h"     HAVE_CTYPE_H)
 check_include_file("dlfcn.h"     HAVE_DLFCN_H)
 check_include_file("endian.h"    HAVE_ENDIAN_H)
 check_include_file("float.h"     HAVE_FLOAT_H)
@@ -406,6 +409,13 @@ check_include_file("cmath"       HAVE_CMATH)
 check_include_file("cieeefp"     HAVE_CIEEEFP)
 check_include_file("cfloat"      HAVE_CFLOAT)
 check_include_file("cinttypes"   HAVE_CINTTYPES)
+check_include_file("cassert"     HAVE_CASSERT)
+check_include_file("cstdio"      HAVE_CSTDIO)
+check_include_file("cstdlib"     HAVE_CSTDLIB)
+check_include_file("cstdarg"     HAVE_CSTDARG)
+check_include_file("cstddef"     HAVE_CSTDDEF)
+check_include_file("cstring"     HAVE_CSTRING)
+check_include_file("ctime"       HAVE_CTIME)
 
 include(CheckCXXCompilerFlag)
 
