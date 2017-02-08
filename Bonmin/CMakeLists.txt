@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-project(Bonmin CXX)
+project(Bonmin)
 
 # Bonmin options
 set(COIN_BONMIN_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Bonmin (0 if no test)")

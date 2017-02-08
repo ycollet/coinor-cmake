@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(IpOpt CXX)
+project(IpOpt)
 
 # FUNNY_LAPACK_FINT
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-project(Cbc CXX)
+project(Cbc)
 
 # Cbc options
 option(CBC_USE_THREADS "Enable the compilation of the SMP version of CBC" OFF)

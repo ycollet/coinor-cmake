@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-project(DyLP CXX)
+project(DyLP)
 
 # DyLP options
 set(COIN_DYLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-project(Symphony C)
+project(Symphony)
 
 # Symphony options
 option(USE_CGL_CUTS            "Use CGL cuts" ON)

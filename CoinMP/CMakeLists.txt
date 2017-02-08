@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0.2)
 
-project(CoinMP CXX)
+project(CoinMP)
 
 # CoinMP options
 set(COIN_COINMP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinMP (0 if no test)")
