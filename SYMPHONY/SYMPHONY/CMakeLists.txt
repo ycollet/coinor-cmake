@@ -10,7 +10,11 @@ set(SYMPHONY_VERSION         "${SYMPHONY_VERSION_STRING}" CACHE STRING "The Symp
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} SYMPHONY)
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} SYMPHONY)
+  else ()
+    set(SYMPHONY_WC_REVISION "0")
+  endif ()
 else ()
   set(SYMPHONY_WC_REVISION "0")
 endif ()

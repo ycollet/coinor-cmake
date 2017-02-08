@@ -9,7 +9,11 @@ set(BONMIN_VERSION         "${BONMIN_VERSION_STRING}" CACHE STRING "The BONMIN v
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} BONMIN)
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} BONMIN)
+  else ()
+    set(BONMIN_WC_REVISION "0")
+  endif ()
 else ()
   set(BONMIN_WC_REVISION "0")
 endif ()

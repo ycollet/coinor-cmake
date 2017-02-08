@@ -1,13 +1,22 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Osi/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Osi/configure.ac OSI)
 
-set(OSI_VERSION_MAJOR   "${MAJOR_VERSION}" CACHE STRING "The OSI major version number")
-set(OSI_VERSION_MINOR   "${MINOR_VERSION}" CACHE STRING "The OSI minor version number")
-set(OSI_VERSION_RELEASE "${PATCH_VERSION}" CACHE STRING "The OSI patch version number")
-set(OSI_VERSION "${OSI_VERSION_MAJOR}.${OSI_VERSION_MINOR}.${OSI_VERSION_RELEASE}")
-set(OSI_SVN_REV "${OSI_VERSION_RELEASE}")
+set(OSI_VERSION_MAJOR   "${OSI_MAJOR_VERSION}"  CACHE STRING "The OSI major version number")
+set(OSI_VERSION_MINOR   "${OSI_MINOR_VERSION}"  CACHE STRING "The OSI minor version number")
+set(OSI_VERSION_RELEASE "${OSI_PATCH_VERSION}"  CACHE STRING "The OSI patch version number")
+set(OSI_VERSION         "${OSI_VERSION_STRING}" CACHE STRING "The OSI version")
 
-# Define to the version of this package.
-set(PACKAGE_VERSION "${OSI_VERSION}")
+find_package(Subversion)
+if (Subversion_FOUND)
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. OSI)
+  else ()
+    set(OSI_WC_REVISION "0")
+  endif ()
+else ()
+  set(OSI_WC_REVISION "0")
+endif ()
+message(STATUS "Current OSI revision is ${OSI_WC_REVISION}")
+set(OSI_SVN_REV "${OSI_WC_REVISION}" CACHE STRING "The OSI subversion revision" PARENT_SCOPE)
 
 mark_as_advanced(OSI_VERSION_MAJOR
                  OSI_VERSION_MINOR

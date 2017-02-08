@@ -9,7 +9,11 @@ set(COINMP_VERSION         "${COINMP_VERSION_STRING}" CACHE STRING "The CoinMP v
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINMP)
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINMP)
+  else ()
+    set(COINMP_WC_REVISION "0")
+  endif ()
 else ()
   set(COINMP_WC_REVISION "0")
 endif ()
