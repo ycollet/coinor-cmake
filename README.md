@@ -17,10 +17,10 @@ Up to now, only the following projects are supported:
 How to use these cmake files ?
 
 - Clone the repository
-- Copy all the files from Cbc-git to Cbc-2.8.9 (for example)
-- In Cbc-2.8.9 create a build directory (mkdir build)
-- In Cbc-2.8.9/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.8.9 -DCMAKE_BUILD_TYPE=RELEASE ..'
-- In Cbc-2.8.9/buil, launch 'cmake-gui .' to fine tune the configuration
+- Copy all the files from Cbc-git to Cbc-2.9.8 (for example)
+- In Cbc-2.9.8 create a build directory (mkdir build)
+- In Cbc-2.9.8/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.8 -DCMAKE_BUILD_TYPE=RELEASE ..'
+- In Cbc-2.9.8/buil, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: make
 - Install the libraries: sudo make install
 
@@ -43,10 +43,10 @@ $ sudo make install
 Under Windows, with Visual Studio:
 
 - Clone the repository
-- Copy all the files from Cbc-git to Cbc-2.8.9 (for example)
-- In Cbc-2.8.9 create a build directory (mkdir build)
-- In Cbc-2.8.9/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.8.9 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
-- In Cbc-2.8.9/buil, launch 'cmake-gui .' to fine tune the configuration
+- Copy all the files from Cbc-git to Cbc-2.9.8 (for example)
+- In Cbc-2.9.8 create a build directory (mkdir build)
+- In Cbc-2.9.8/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.8 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
+- In Cbc-2.9.8/buil, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: nmake
 - Install the libraries: nmake install
 
