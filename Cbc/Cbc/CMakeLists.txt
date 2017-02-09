@@ -10,7 +10,7 @@ set(CBC_VERSION         "${CBC_VERSION_STRING}" CACHE STRING "The CBC version")
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CBC)
   else ()
     set(CBC_WC_REVISION "0")

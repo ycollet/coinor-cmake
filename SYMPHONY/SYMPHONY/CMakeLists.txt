@@ -10,7 +10,7 @@ set(SYMPHONY_VERSION         "${SYMPHONY_VERSION_STRING}" CACHE STRING "The Symp
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} SYMPHONY)
   else ()
     set(SYMPHONY_WC_REVISION "0")
@@ -28,12 +28,6 @@ mark_as_advanced(SYMPHONY_VERSION_MAJOR
                  SYMPHONY_SVN_REV)
 
 add_definitions(-DSYMPHONY_BUILD -DHAVE_CONFIG_H)
-
-#remove_definitions(-DCOINUTILS_BUILD)
-#remove_definitions(-DCLP_BUILD)
-#remove_definitions(-DCBC_BUILD)
-#remove_definitions(-DCGL_BUILD)
-#remove_definitions(-DOSI_BUILD)
 
 if (MINGW)
   add_definitions(-D__MNO_CYGWIN)

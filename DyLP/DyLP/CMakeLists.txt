@@ -10,7 +10,7 @@ set(DYLP_SVN_REV "${DYLP_VERSION_RELEASE}")
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} DYLP)
   else ()
     set(DYLP_WC_REVISION "0")

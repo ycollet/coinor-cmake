@@ -7,7 +7,7 @@ set(IPOPT_VERSION         "${IPOPT_VERSION_STRING}" CACHE STRING "The IpOpt vers
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} IPOPT)
   else ()
     set(IPOPT_WC_REVISION "0")

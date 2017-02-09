@@ -9,7 +9,7 @@ set(CGL_VERSION         "${CGL_VERSION_STRING}" CACHE STRING "The CGL version")
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CGL)
   else ()
     set(CGL_WC_REVISION "0")

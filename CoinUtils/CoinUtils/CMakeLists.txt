@@ -19,7 +19,7 @@ set(BZLIB_NAME "bz2" CACHE STRING "The BZlib library name")
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINUTILS)
   else ()
     set(COINUTILS_WC_REVISION "0")
