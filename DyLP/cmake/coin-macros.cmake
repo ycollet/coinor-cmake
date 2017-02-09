@@ -101,8 +101,6 @@ endmacro()
 # FileLog: the name of the .log data file
 
 macro(add_coin_dylp_test Name SolverName FileData FileOut FileLog)
-  # -solution ${FileOut} -solve
-  message(STATUS "DEBUG: FileData = ${FileData}")
   if (WIN32)
     file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
          "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData} \n"
