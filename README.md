@@ -168,9 +168,12 @@ You can trigger a code coverage analysis by issuing the following commande: `mak
 
 Be careful to activate the right set of tests (not the long one).
 
-# To do
+# Notes
 
 The f2c.h file included in each ThirdParty directory is copied from the Fedora f2c package.
+This header is used to fix compilation of clapack ...
+
+# To do
 
 Tasks:
 
