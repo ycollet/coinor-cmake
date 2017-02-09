@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Vol/configure.ac)
+get_ac_init_version(${CMAKE_SOURCE_DIR}/Vol/configure.ac VOL)
 
 option(VOL_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
