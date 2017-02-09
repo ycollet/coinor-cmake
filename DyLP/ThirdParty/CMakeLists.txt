@@ -528,8 +528,7 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
                       INSTALL_COMMAND   ""
                       )
 
-  include(ClpTests.cmake)
-  include(CbcTests.cmake)
+  include(DyLPTests.cmake)
 endif ()
 
 if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
@@ -545,8 +544,7 @@ if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
                       INSTALL_COMMAND   ""
                       )
 
-  include(ClpMiplib2000Tests.cmake)
-  include(CbcMiplib2000Tests.cmake)
+  include(DyLPMiplib2000Tests.cmake)
 endif ()
 
 # #################################################
