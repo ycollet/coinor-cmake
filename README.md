@@ -147,9 +147,12 @@ The option COIN_ENABLE_DOWNLOAD_DATA_TEST allows to download a set of tests from
 
 You can some basic tests for cbc, clp and symphony:
 ```
+$ ctest --print-labels # Display all available labels
+$ ctest -N # Display all available tests name (you can use the -R, -L, -LE flags with -N)
 $ ctest -R exmip1 # To run all tests containing exmip1 in their names
 $ ctest -L MPS # To run all tests which have the MPS label (available labels are MPS, LP, LONG)
 $ ctest -LE LONG # To run all tests which doesn't have the LONG label
+$ ctest -LE (LONG|FAIL) # To run all tests which doesn't have the LONG or FAIL labels
 ```
 
 # Performing coverage
