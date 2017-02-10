@@ -12,7 +12,7 @@ add_coin_dylp_test(miplib2000_30n20b8_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_30n20b8_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_30n20b8_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_30n20b8_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_30n20b8.log "Optimal objective <number>" 302 1e-6)
+create_log_analysis(miplib2000_30n20b8_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_30n20b8.log "lp status: optimal          objective: <number>" 302 1e-6)
 set_tests_properties(miplib2000_30n20b8_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_acc-tight5_mps_dylp_standard osi_dylp
@@ -23,7 +23,7 @@ add_coin_dylp_test(miplib2000_acc-tight5_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_acc-tight5_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_acc-tight5_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_acc-tight5_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_acc-tight5.log "Optimal objective <number>" 0 1e-6)
+create_log_analysis(miplib2000_acc-tight5_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_acc-tight5.log "lp status: optimal          objective: <number>" 0 1e-6)
 set_tests_properties(miplib2000_acc-tight5_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_aflow40b_mps_dylp_standard osi_dylp
@@ -34,7 +34,7 @@ add_coin_dylp_test(miplib2000_aflow40b_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_aflow40b_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_aflow40b_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_aflow40b_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_aflow40b.log "Optimal objective <number>" 1168 1e-6)
+create_log_analysis(miplib2000_aflow40b_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_aflow40b.log "lp status: optimal          objective: <number>" 1168 1e-6)
 set_tests_properties(miplib2000_aflow40b_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_air04_mps_dylp_standard osi_dylp
@@ -45,7 +45,7 @@ add_coin_dylp_test(miplib2000_air04_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_air04_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_air04_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_air04_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_air04.log "Optimal objective <number>" 56137 1e-6)
+create_log_analysis(miplib2000_air04_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_air04.log "lp status: optimal          objective: <number>" 56137 1e-6)
 set_tests_properties(miplib2000_air04_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_app1-2_mps_dylp_standard osi_dylp
@@ -56,7 +56,7 @@ add_coin_dylp_test(miplib2000_app1-2_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_app1-2_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_app1-2_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_app1-2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_app1-2.log "Optimal objective <number>" -41 1e-6)
+create_log_analysis(miplib2000_app1-2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_app1-2.log "lp status: optimal          objective: <number>" -41 1e-6)
 set_tests_properties(miplib2000_app1-2_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 # Infeasible
@@ -76,7 +76,7 @@ add_coin_dylp_test(miplib2000_bab5_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_bab5_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_bab5_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_bab5_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bab5.log "Optimal objective <number>" -106411.8401 1e-6)
+create_log_analysis(miplib2000_bab5_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bab5.log "lp status: optimal          objective: <number>" -106411.8401 1e-6)
 set_tests_properties(miplib2000_bab5_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_beasleyC3_mps_dylp_standard osi_dylp
@@ -87,7 +87,7 @@ add_coin_dylp_test(miplib2000_beasleyC3_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_beasleyC3_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_beasleyC3_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_beasleyC3_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_beasleyC3.log "Optimal objective <number>" 754 1e-6)
+create_log_analysis(miplib2000_beasleyC3_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_beasleyC3.log "lp status: optimal          objective: <number>" 754 1e-6)
 set_tests_properties(miplib2000_beasleyC3_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_biella1_mps_dylp_standard osi_dylp
@@ -98,7 +98,7 @@ add_coin_dylp_test(miplib2000_biella1_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_biella1_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_biella1_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_biella1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_biella1.log "Optimal objective <number>" 3065005.78 1e-6)
+create_log_analysis(miplib2000_biella1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_biella1.log "lp status: optimal          objective: <number>" 3065005.78 1e-6)
 set_tests_properties(miplib2000_biella1_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_bienst2_mps_dylp_standard osi_dylp
@@ -109,7 +109,7 @@ add_coin_dylp_test(miplib2000_bienst2_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_bienst2_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_bienst2_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_bienst2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bienst2.log "Optimal objective <number>" 54.6 1e-6)
+create_log_analysis(miplib2000_bienst2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bienst2.log "lp status: optimal          objective: <number>" 54.6 1e-6)
 set_tests_properties(miplib2000_bienst2_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_binkar10_1_mps_dylp_standard osi_dylp
@@ -120,7 +120,7 @@ add_coin_dylp_test(miplib2000_binkar10_1_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_binkar10_1_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_binkar10_1_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_binkar10_1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_binkar10_1.log "Optimal objective <number>" 6742.200024 1e-6)
+create_log_analysis(miplib2000_binkar10_1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_binkar10_1.log "lp status: optimal          objective: <number>" 6742.200024 1e-6)
 set_tests_properties(miplib2000_binkar10_1_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_bley_xl1_mps_dylp_standard osi_dylp
@@ -131,7 +131,7 @@ add_coin_dylp_test(miplib2000_bley_xl1_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_bley_xl1_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_bley_xl1_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_bley_xl1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bley_xl1.log "Optimal objective <number>" 190 1e-6)
+create_log_analysis(miplib2000_bley_xl1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bley_xl1.log "lp status: optimal          objective: <number>" 190 1e-6)
 set_tests_properties(miplib2000_bley_xl1_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_bnatt350_mps_dylp_standard osi_dylp
@@ -142,7 +142,7 @@ add_coin_dylp_test(miplib2000_bnatt350_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_bnatt350_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_bnatt350_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_bnatt350_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bnatt350.log "Optimal objective <number>" 0 1e-6)
+create_log_analysis(miplib2000_bnatt350_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bnatt350.log "lp status: optimal          objective: <number>" 0 1e-6)
 set_tests_properties(miplib2000_bnatt350_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_core2536-691_mps_dylp_standard osi_dylp
@@ -153,7 +153,7 @@ add_coin_dylp_test(miplib2000_core2536-691_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_core2536-691_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_core2536-691_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_core2536-691_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_core2536-691.log "Optimal objective <number>" 689 1e-6)
+create_log_analysis(miplib2000_core2536-691_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_core2536-691.log "lp status: optimal          objective: <number>" 689 1e-6)
 set_tests_properties(miplib2000_core2536-691_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_cov1075_mps_dylp_standard osi_dylp
@@ -164,7 +164,7 @@ add_coin_dylp_test(miplib2000_cov1075_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_cov1075_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_cov1075_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_cov1075_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_cov1075.log "Optimal objective <number>" 20 1e-6)
+create_log_analysis(miplib2000_cov1075_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_cov1075.log "lp status: optimal          objective: <number>" 20 1e-6)
 set_tests_properties(miplib2000_cov1075_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_csched010_mps_dylp_standard osi_dylp
@@ -175,7 +175,7 @@ add_coin_dylp_test(miplib2000_csched010_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_csched010_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_csched010_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_csched010_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_csched010.log "Optimal objective <number>" 408 1e-6)
+create_log_analysis(miplib2000_csched010_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_csched010.log "lp status: optimal          objective: <number>" 408 1e-6)
 set_tests_properties(miplib2000_csched010_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_danoint_mps_dylp_standard osi_dylp
@@ -186,7 +186,7 @@ add_coin_dylp_test(miplib2000_danoint_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_danoint_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_danoint_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_danoint_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_danoint.log "Optimal objective <number>" 65.666667 1e-6)
+create_log_analysis(miplib2000_danoint_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_danoint.log "lp status: optimal          objective: <number>" 65.666667 1e-6)
 set_tests_properties(miplib2000_danoint_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_dfn-gwin-UUM_mps_dylp_standard osi_dylp
@@ -197,7 +197,7 @@ add_coin_dylp_test(miplib2000_dfn-gwin-UUM_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_dfn-gwin-UUM_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_dfn-gwin-UUM_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_dfn-gwin-UUM_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_dfn-gwin-UUM.log "Optimal objective <number>" 38752 1e-6)
+create_log_analysis(miplib2000_dfn-gwin-UUM_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_dfn-gwin-UUM.log "lp status: optimal          objective: <number>" 38752 1e-6)
 set_tests_properties(miplib2000_dfn-gwin-UUM_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_eil33-2_mps_dylp_standard osi_dylp
@@ -208,7 +208,7 @@ add_coin_dylp_test(miplib2000_eil33-2_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_eil33-2_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_eil33-2_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_eil33-2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_eil33-2.log "Optimal objective <number>" 934.007916 1e-6)
+create_log_analysis(miplib2000_eil33-2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_eil33-2.log "lp status: optimal          objective: <number>" 934.007916 1e-6)
 set_tests_properties(miplib2000_eil33-2_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_eilB101_mps_dylp_standard osi_dylp
@@ -219,7 +219,7 @@ add_coin_dylp_test(miplib2000_eilB101_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_eilB101_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_eilB101_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_eilB101_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_eilB101.log "Optimal objective <number>" 1216.920174 1e-6)
+create_log_analysis(miplib2000_eilB101_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_eilB101.log "lp status: optimal          objective: <number>" 1216.920174 1e-6)
 set_tests_properties(miplib2000_eilB101_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_enlight13_mps_dylp_standard osi_dylp
@@ -230,7 +230,7 @@ add_coin_dylp_test(miplib2000_enlight13_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_enlight13_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_enlight13_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_enlight13_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_enlight13.log "Optimal objective <number>" 71 1e-6)
+create_log_analysis(miplib2000_enlight13_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_enlight13.log "lp status: optimal          objective: <number>" 71 1e-6)
 set_tests_properties(miplib2000_enlight13_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 # Infeasible
@@ -250,7 +250,7 @@ add_coin_dylp_test(miplib2000_ex9_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_ex9_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_ex9_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_ex9_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ex9.log "Optimal objective <number>" 81 1e-6)
+create_log_analysis(miplib2000_ex9_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ex9.log "lp status: optimal          objective: <number>" 81 1e-6)
 set_tests_properties(miplib2000_ex9_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_glass4_mps_dylp_standard osi_dylp
@@ -261,7 +261,7 @@ add_coin_dylp_test(miplib2000_glass4_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_glass4_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_glass4_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_glass4_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_glass4.log "Optimal objective <number>" 1200012600 1e-6)
+create_log_analysis(miplib2000_glass4_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_glass4.log "lp status: optimal          objective: <number>" 1200012600 1e-6)
 set_tests_properties(miplib2000_glass4_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_gmu-35-40_mps_dylp_standard osi_dylp
@@ -272,7 +272,7 @@ add_coin_dylp_test(miplib2000_gmu-35-40_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_gmu-35-40_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_gmu-35-40_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_gmu-35-40_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_gmu-35-40.log "Optimal objective <number>" -2406733.3688 1e-6)
+create_log_analysis(miplib2000_gmu-35-40_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_gmu-35-40.log "lp status: optimal          objective: <number>" -2406733.3688 1e-6)
 set_tests_properties(miplib2000_gmu-35-40_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_iis-100-0-cov_mps_dylp_standard osi_dylp
@@ -283,7 +283,7 @@ add_coin_dylp_test(miplib2000_iis-100-0-cov_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_iis-100-0-cov_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_iis-100-0-cov_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_iis-100-0-cov_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-100-0-cov.log "Optimal objective <number>" 29 1e-6)
+create_log_analysis(miplib2000_iis-100-0-cov_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-100-0-cov.log "lp status: optimal          objective: <number>" 29 1e-6)
 set_tests_properties(miplib2000_iis-100-0-cov_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_iis-bupa-cov_mps_dylp_standard osi_dylp
@@ -294,7 +294,7 @@ add_coin_dylp_test(miplib2000_iis-bupa-cov_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_iis-bupa-cov_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_iis-bupa-cov_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_iis-bupa-cov_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-bupa-cov.log "Optimal objective <number>" 36 1e-6)
+create_log_analysis(miplib2000_iis-bupa-cov_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-bupa-cov.log "lp status: optimal          objective: <number>" 36 1e-6)
 set_tests_properties(miplib2000_iis-bupa-cov_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_iis-pima-cov_mps_dylp_standard osi_dylp
@@ -305,7 +305,7 @@ add_coin_dylp_test(miplib2000_iis-pima-cov_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_iis-pima-cov_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_iis-pima-cov_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_iis-pima-cov_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-pima-cov.log "Optimal objective <number>" 33 1e-6)
+create_log_analysis(miplib2000_iis-pima-cov_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-pima-cov.log "lp status: optimal          objective: <number>" 33 1e-6)
 set_tests_properties(miplib2000_iis-pima-cov_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_lectsched-4-obj_mps_dylp_standard osi_dylp
@@ -316,7 +316,7 @@ add_coin_dylp_test(miplib2000_lectsched-4-obj_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_lectsched-4-obj_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_lectsched-4-obj_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_lectsched-4-obj_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_lectsched-4-obj.log "Optimal objective <number>" 4 1e-6)
+create_log_analysis(miplib2000_lectsched-4-obj_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_lectsched-4-obj.log "lp status: optimal          objective: <number>" 4 1e-6)
 set_tests_properties(miplib2000_lectsched-4-obj_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_m100n500k4r1_mps_dylp_standard osi_dylp
@@ -327,7 +327,7 @@ add_coin_dylp_test(miplib2000_m100n500k4r1_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_m100n500k4r1_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_m100n500k4r1_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_m100n500k4r1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_m100n500k4r1.log "Optimal objective <number>" -25 1e-6)
+create_log_analysis(miplib2000_m100n500k4r1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_m100n500k4r1.log "lp status: optimal          objective: <number>" -25 1e-6)
 set_tests_properties(miplib2000_m100n500k4r1_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_macrophage_mps_dylp_standard osi_dylp
@@ -338,7 +338,7 @@ add_coin_dylp_test(miplib2000_macrophage_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_macrophage_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_macrophage_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_macrophage_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_macrophage.log "Optimal objective <number>" 374 1e-6)
+create_log_analysis(miplib2000_macrophage_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_macrophage.log "lp status: optimal          objective: <number>" 374 1e-6)
 set_tests_properties(miplib2000_macrophage_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_map18_mps_dylp_standard osi_dylp
@@ -349,7 +349,7 @@ add_coin_dylp_test(miplib2000_map18_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_map18_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_map18_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_map18_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_map18.log "Optimal objective <number>" -847 1e-6)
+create_log_analysis(miplib2000_map18_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_map18.log "lp status: optimal          objective: <number>" -847 1e-6)
 set_tests_properties(miplib2000_map18_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_map20_mps_dylp_standard osi_dylp
@@ -360,7 +360,7 @@ add_coin_dylp_test(miplib2000_map20_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_map20_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_map20_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_map20_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_map20.log "Optimal objective <number>" -922 1e-6)
+create_log_analysis(miplib2000_map20_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_map20.log "lp status: optimal          objective: <number>" -922 1e-6)
 set_tests_properties(miplib2000_map20_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_mcsched_mps_dylp_standard osi_dylp
@@ -371,7 +371,7 @@ add_coin_dylp_test(miplib2000_mcsched_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_mcsched_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_mcsched_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_mcsched_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mcsched.log "Optimal objective <number>" 211913 1e-6)
+create_log_analysis(miplib2000_mcsched_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mcsched.log "lp status: optimal          objective: <number>" 211913 1e-6)
 set_tests_properties(miplib2000_mcsched_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_mik-250-1-100-1_mps_dylp_standard osi_dylp
@@ -382,7 +382,7 @@ add_coin_dylp_test(miplib2000_mik-250-1-100-1_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_mik-250-1-100-1_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_mik-250-1-100-1_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_mik-250-1-100-1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mik-250-1-100-1.log "Optimal objective <number>" -66729 1e-6)
+create_log_analysis(miplib2000_mik-250-1-100-1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mik-250-1-100-1.log "lp status: optimal          objective: <number>" -66729 1e-6)
 set_tests_properties(miplib2000_mik-250-1-100-1_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_mine-166-5_mps_dylp_standard osi_dylp
@@ -393,7 +393,7 @@ add_coin_dylp_test(miplib2000_mine-166-5_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_mine-166-5_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_mine-166-5_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_mine-166-5_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-166-5.log "Optimal objective <number>" -566395707.870830059 1e-6)
+create_log_analysis(miplib2000_mine-166-5_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-166-5.log "lp status: optimal          objective: <number>" -566395707.870830059 1e-6)
 set_tests_properties(miplib2000_mine-166-5_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_mine-90-10_mps_dylp_standard osi_dylp
@@ -404,7 +404,7 @@ add_coin_dylp_test(miplib2000_mine-90-10_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_mine-90-10_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_mine-90-10_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_mine-90-10_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-90-10.log "Optimal objective <number>" -784302337.633172989 1e-6)
+create_log_analysis(miplib2000_mine-90-10_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-90-10.log "lp status: optimal          objective: <number>" -784302337.633172989 1e-6)
 set_tests_properties(miplib2000_mine-90-10_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_msc98-ip_mps_dylp_standard osi_dylp
@@ -415,7 +415,7 @@ add_coin_dylp_test(miplib2000_msc98-ip_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_msc98-ip_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_msc98-ip_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_msc98-ip_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_msc98-ip.log "Optimal objective <number>" 19839497.0058740 1e-6)
+create_log_analysis(miplib2000_msc98-ip_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_msc98-ip.log "lp status: optimal          objective: <number>" 19839497.0058740 1e-6)
 set_tests_properties(miplib2000_msc98-ip_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_mspp16_mps_dylp_standard osi_dylp
@@ -426,7 +426,7 @@ add_coin_dylp_test(miplib2000_mspp16_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_mspp16_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_mspp16_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_mspp16_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mspp16.log "Optimal objective <number>" 363 1e-6)
+create_log_analysis(miplib2000_mspp16_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mspp16.log "lp status: optimal          objective: <number>" 363 1e-6)
 set_tests_properties(miplib2000_mspp16_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_mzzv11_mps_dylp_standard osi_dylp
@@ -437,7 +437,7 @@ add_coin_dylp_test(miplib2000_mzzv11_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_mzzv11_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_mzzv11_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_mzzv11_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mzzv11.log "Optimal objective <number>" -21718 1e-6)
+create_log_analysis(miplib2000_mzzv11_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mzzv11.log "lp status: optimal          objective: <number>" -21718 1e-6)
 set_tests_properties(miplib2000_mzzv11_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_n3div36_mps_dylp_standard osi_dylp
@@ -448,7 +448,7 @@ add_coin_dylp_test(miplib2000_n3div36_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_n3div36_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_n3div36_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_n3div36_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n3div36.log "Optimal objective <number>" 131000 1e-6)
+create_log_analysis(miplib2000_n3div36_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n3div36.log "lp status: optimal          objective: <number>" 131000 1e-6)
 set_tests_properties(miplib2000_n3div36_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_n3seq24_mps_dylp_standard osi_dylp
@@ -459,7 +459,7 @@ add_coin_dylp_test(miplib2000_n3seq24_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_n3seq24_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_n3seq24_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_n3seq24_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n3seq24.log "Optimal objective <number>" 52200 1e-6)
+create_log_analysis(miplib2000_n3seq24_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n3seq24.log "lp status: optimal          objective: <number>" 52200 1e-6)
 set_tests_properties(miplib2000_n3seq24_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_n4-3_mps_dylp_standard osi_dylp
@@ -470,7 +470,7 @@ add_coin_dylp_test(miplib2000_n4-3_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_n4-3_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_n4-3_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_n4-3_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n4-3.log "Optimal objective <number>" 8993 1e-6)
+create_log_analysis(miplib2000_n4-3_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n4-3.log "lp status: optimal          objective: <number>" 8993 1e-6)
 set_tests_properties(miplib2000_n4-3_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-1109824_mps_dylp_standard osi_dylp
@@ -481,7 +481,7 @@ add_coin_dylp_test(miplib2000_neos-1109824_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-1109824_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-1109824_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-1109824_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1109824.log "Optimal objective <number>" 378 1e-6)
+create_log_analysis(miplib2000_neos-1109824_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1109824.log "lp status: optimal          objective: <number>" 378 1e-6)
 set_tests_properties(miplib2000_neos-1109824_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-1337307_mps_dylp_standard osi_dylp
@@ -492,7 +492,7 @@ add_coin_dylp_test(miplib2000_neos-1337307_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-1337307_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-1337307_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-1337307_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1337307.log "Optimal objective <number>" -202319 1e-6)
+create_log_analysis(miplib2000_neos-1337307_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1337307.log "lp status: optimal          objective: <number>" -202319 1e-6)
 set_tests_properties(miplib2000_neos-1337307_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-1396125_mps_dylp_standard osi_dylp
@@ -503,7 +503,7 @@ add_coin_dylp_test(miplib2000_neos-1396125_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-1396125_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-1396125_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-1396125_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1396125.log "Optimal objective <number>" 3000.045337 1e-6)
+create_log_analysis(miplib2000_neos-1396125_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1396125.log "lp status: optimal          objective: <number>" 3000.045337 1e-6)
 set_tests_properties(miplib2000_neos-1396125_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos13_mps_dylp_standard osi_dylp
@@ -514,7 +514,7 @@ add_coin_dylp_test(miplib2000_neos13_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos13_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos13_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos13_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos13.log "Optimal objective <number>" -95.474807 1e-6)
+create_log_analysis(miplib2000_neos13_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos13.log "lp status: optimal          objective: <number>" -95.474807 1e-6)
 set_tests_properties(miplib2000_neos13_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-1601936_mps_dylp_standard osi_dylp
@@ -525,7 +525,7 @@ add_coin_dylp_test(miplib2000_neos-1601936_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-1601936_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-1601936_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-1601936_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1601936.log "Optimal objective <number>" 3 1e-6)
+create_log_analysis(miplib2000_neos-1601936_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1601936.log "lp status: optimal          objective: <number>" 3 1e-6)
 set_tests_properties(miplib2000_neos-1601936_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos18_mps_dylp_standard osi_dylp
@@ -536,7 +536,7 @@ add_coin_dylp_test(miplib2000_neos18_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos18_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos18_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos18_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos18.log "Optimal objective <number>" 18 1e-6)
+create_log_analysis(miplib2000_neos18_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos18.log "lp status: optimal          objective: <number>" 18 1e-6)
 set_tests_properties(miplib2000_neos18_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-476283_mps_dylp_standard osi_dylp
@@ -547,7 +547,7 @@ add_coin_dylp_test(miplib2000_neos-476283_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-476283_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-476283_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-476283_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-476283.log "Optimal objective <number>" 406.363207 1e-6)
+create_log_analysis(miplib2000_neos-476283_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-476283.log "lp status: optimal          objective: <number>" 406.363207 1e-6)
 set_tests_properties(miplib2000_neos-476283_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-686190_mps_dylp_standard osi_dylp
@@ -558,7 +558,7 @@ add_coin_dylp_test(miplib2000_neos-686190_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-686190_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-686190_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-686190_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-686190.log "Optimal objective <number>" 6730 1e-6)
+create_log_analysis(miplib2000_neos-686190_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-686190.log "lp status: optimal          objective: <number>" 6730 1e-6)
 set_tests_properties(miplib2000_neos-686190_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-849702_mps_dylp_standard osi_dylp
@@ -569,7 +569,7 @@ add_coin_dylp_test(miplib2000_neos-849702_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-849702_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-849702_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-849702_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-849702.log "Optimal objective <number>" 0 1e-6)
+create_log_analysis(miplib2000_neos-849702_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-849702.log "lp status: optimal          objective: <number>" 0 1e-6)
 set_tests_properties(miplib2000_neos-849702_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-916792_mps_dylp_standard osi_dylp
@@ -580,7 +580,7 @@ add_coin_dylp_test(miplib2000_neos-916792_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-916792_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-916792_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-916792_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-916792.log "Optimal objective <number>" 31.870398 1e-6)
+create_log_analysis(miplib2000_neos-916792_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-916792.log "lp status: optimal          objective: <number>" 31.870398 1e-6)
 set_tests_properties(miplib2000_neos-916792_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_neos-934278_mps_dylp_standard osi_dylp
@@ -591,7 +591,7 @@ add_coin_dylp_test(miplib2000_neos-934278_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_neos-934278_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_neos-934278_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_neos-934278_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-934278.log "Optimal objective <number>" 260 1e-6)
+create_log_analysis(miplib2000_neos-934278_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-934278.log "lp status: optimal          objective: <number>" 260 1e-6)
 set_tests_properties(miplib2000_neos-934278_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_net12_mps_dylp_standard osi_dylp
@@ -602,7 +602,7 @@ add_coin_dylp_test(miplib2000_net12_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_net12_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_net12_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_net12_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_net12.log "Optimal objective <number>" 214 1e-6)
+create_log_analysis(miplib2000_net12_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_net12.log "lp status: optimal          objective: <number>" 214 1e-6)
 set_tests_properties(miplib2000_net12_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_netdiversion_mps_dylp_standard osi_dylp
@@ -613,7 +613,7 @@ add_coin_dylp_test(miplib2000_netdiversion_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_netdiversion_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_netdiversion_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_netdiversion_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_netdiversion.log "Optimal objective <number>" 242 1e-6)
+create_log_analysis(miplib2000_netdiversion_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_netdiversion.log "lp status: optimal          objective: <number>" 242 1e-6)
 set_tests_properties(miplib2000_netdiversion_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_newdano_mps_dylp_standard osi_dylp
@@ -624,7 +624,7 @@ add_coin_dylp_test(miplib2000_newdano_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_newdano_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_newdano_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_newdano_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_newdano.log "Optimal objective <number>" 65.666667 1e-6)
+create_log_analysis(miplib2000_newdano_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_newdano.log "lp status: optimal          objective: <number>" 65.666667 1e-6)
 set_tests_properties(miplib2000_newdano_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_noswot_mps_dylp_standard osi_dylp
@@ -635,7 +635,7 @@ add_coin_dylp_test(miplib2000_noswot_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_noswot_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_noswot_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_noswot_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_noswot.log "Optimal objective <number>" -41 1e-6)
+create_log_analysis(miplib2000_noswot_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_noswot.log "lp status: optimal          objective: <number>" -41 1e-6)
 set_tests_properties(miplib2000_noswot_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_ns1208400_mps_dylp_standard osi_dylp
@@ -646,7 +646,7 @@ add_coin_dylp_test(miplib2000_ns1208400_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_ns1208400_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_ns1208400_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_ns1208400_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1208400.log "Optimal objective <number>" 2 1e-6)
+create_log_analysis(miplib2000_ns1208400_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1208400.log "lp status: optimal          objective: <number>" 2 1e-6)
 set_tests_properties(miplib2000_ns1208400_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_ns1688347_mps_dylp_standard osi_dylp
@@ -657,7 +657,7 @@ add_coin_dylp_test(miplib2000_ns1688347_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_ns1688347_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_ns1688347_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_ns1688347_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1688347.log "Optimal objective <number>" 27 1e-6)
+create_log_analysis(miplib2000_ns1688347_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1688347.log "lp status: optimal          objective: <number>" 27 1e-6)
 set_tests_properties(miplib2000_ns1688347_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_ns1758913_mps_dylp_standard osi_dylp
@@ -668,7 +668,7 @@ add_coin_dylp_test(miplib2000_ns1758913_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_ns1758913_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_ns1758913_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_ns1758913_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1758913.log "Optimal objective <number>" -1454.671755 1e-6)
+create_log_analysis(miplib2000_ns1758913_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1758913.log "lp status: optimal          objective: <number>" -1454.671755 1e-6)
 set_tests_properties(miplib2000_ns1758913_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 # Infeasible
@@ -688,7 +688,7 @@ add_coin_dylp_test(miplib2000_ns1830653_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_ns1830653_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_ns1830653_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_ns1830653_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1830653.log "Optimal objective <number>" 20622 1e-6)
+create_log_analysis(miplib2000_ns1830653_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1830653.log "lp status: optimal          objective: <number>" 20622 1e-6)
 set_tests_properties(miplib2000_ns1830653_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_opm2-z7-s2_mps_dylp_standard osi_dylp
@@ -699,7 +699,7 @@ add_coin_dylp_test(miplib2000_opm2-z7-s2_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_opm2-z7-s2_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_opm2-z7-s2_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_opm2-z7-s2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_opm2-z7-s2.log "Optimal objective <number>" -10280 1e-6)
+create_log_analysis(miplib2000_opm2-z7-s2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_opm2-z7-s2.log "lp status: optimal          objective: <number>" -10280 1e-6)
 set_tests_properties(miplib2000_opm2-z7-s2_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_pg5_34_mps_dylp_standard osi_dylp
@@ -710,7 +710,7 @@ add_coin_dylp_test(miplib2000_pg5_34_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_pg5_34_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_pg5_34_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_pg5_34_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pg5_34.log "Optimal objective <number>" -14339.353447 1e-6)
+create_log_analysis(miplib2000_pg5_34_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pg5_34.log "lp status: optimal          objective: <number>" -14339.353447 1e-6)
 set_tests_properties(miplib2000_pg5_34_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_pigeon-10_mps_dylp_standard osi_dylp
@@ -721,7 +721,7 @@ add_coin_dylp_test(miplib2000_pigeon-10_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_pigeon-10_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_pigeon-10_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_pigeon-10_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pigeon-10.log "Optimal objective <number>" -9000 1e-6)
+create_log_analysis(miplib2000_pigeon-10_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pigeon-10.log "lp status: optimal          objective: <number>" -9000 1e-6)
 set_tests_properties(miplib2000_pigeon-10_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_pw-myciel4_mps_dylp_standard osi_dylp
@@ -732,7 +732,7 @@ add_coin_dylp_test(miplib2000_pw-myciel4_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_pw-myciel4_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_pw-myciel4_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_pw-myciel4_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pw-myciel4.log "Optimal objective <number>" 10 1e-6)
+create_log_analysis(miplib2000_pw-myciel4_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pw-myciel4.log "lp status: optimal          objective: <number>" 10 1e-6)
 set_tests_properties(miplib2000_pw-myciel4_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_qiu_mps_dylp_standard osi_dylp
@@ -743,7 +743,7 @@ add_coin_dylp_test(miplib2000_qiu_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_qiu_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_qiu_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_qiu_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_qiu.log "Optimal objective <number>" -132.873137 1e-6)
+create_log_analysis(miplib2000_qiu_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_qiu.log "lp status: optimal          objective: <number>" -132.873137 1e-6)
 set_tests_properties(miplib2000_qiu_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_rail507_mps_dylp_standard osi_dylp
@@ -754,7 +754,7 @@ add_coin_dylp_test(miplib2000_rail507_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_rail507_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_rail507_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_rail507_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rail507.log "Optimal objective <number>" 174 1e-6)
+create_log_analysis(miplib2000_rail507_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rail507.log "lp status: optimal          objective: <number>" 174 1e-6)
 set_tests_properties(miplib2000_rail507_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_ran16x16_mps_dylp_standard osi_dylp
@@ -765,7 +765,7 @@ add_coin_dylp_test(miplib2000_ran16x16_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_ran16x16_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_ran16x16_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_ran16x16_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ran16x16.log "Optimal objective <number>" 3823 1e-6)
+create_log_analysis(miplib2000_ran16x16_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ran16x16.log "lp status: optimal          objective: <number>" 3823 1e-6)
 set_tests_properties(miplib2000_ran16x16_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_reblock67_mps_dylp_standard osi_dylp
@@ -776,7 +776,7 @@ add_coin_dylp_test(miplib2000_reblock67_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_reblock67_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_reblock67_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_reblock67_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_reblock67.log "Optimal objective <number>" -34630648.438331999 1e-6)
+create_log_analysis(miplib2000_reblock67_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_reblock67.log "lp status: optimal          objective: <number>" -34630648.438331999 1e-6)
 set_tests_properties(miplib2000_reblock67_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_rmatr100-p10_mps_dylp_standard osi_dylp
@@ -787,7 +787,7 @@ add_coin_dylp_test(miplib2000_rmatr100-p10_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_rmatr100-p10_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_rmatr100-p10_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_rmatr100-p10_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p10.log "Optimal objective <number>" 423 1e-6)
+create_log_analysis(miplib2000_rmatr100-p10_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p10.log "lp status: optimal          objective: <number>" 423 1e-6)
 set_tests_properties(miplib2000_rmatr100-p10_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_rmatr100-p5_mps_dylp_standard osi_dylp
@@ -798,7 +798,7 @@ add_coin_dylp_test(miplib2000_rmatr100-p5_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_rmatr100-p5_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_rmatr100-p5_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_rmatr100-p5_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p5.log "Optimal objective <number>" 976 1e-6)
+create_log_analysis(miplib2000_rmatr100-p5_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p5.log "lp status: optimal          objective: <number>" 976 1e-6)
 set_tests_properties(miplib2000_rmatr100-p5_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_rmine6_mps_dylp_standard osi_dylp
@@ -809,7 +809,7 @@ add_coin_dylp_test(miplib2000_rmine6_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_rmine6_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_rmine6_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_rmine6_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmine6.log "Optimal objective <number>" -457.186140000 1e-6)
+create_log_analysis(miplib2000_rmine6_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmine6.log "lp status: optimal          objective: <number>" -457.186140000 1e-6)
 set_tests_properties(miplib2000_rmine6_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_rocII-4-11_mps_dylp_standard osi_dylp
@@ -820,7 +820,7 @@ add_coin_dylp_test(miplib2000_rocII-4-11_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_rocII-4-11_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_rocII-4-11_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_rocII-4-11_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rocII-4-11.log "Optimal objective <number>" -6.65275566 1e-6)
+create_log_analysis(miplib2000_rocII-4-11_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rocII-4-11.log "lp status: optimal          objective: <number>" -6.65275566 1e-6)
 set_tests_properties(miplib2000_rocII-4-11_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_rococoC10-001000_mps_dylp_standard osi_dylp
@@ -831,7 +831,7 @@ add_coin_dylp_test(miplib2000_rococoC10-001000_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_rococoC10-001000_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_rococoC10-001000_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_rococoC10-001000_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rococoC10-001000.log "Optimal objective <number>" 11460 1e-6)
+create_log_analysis(miplib2000_rococoC10-001000_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rococoC10-001000.log "lp status: optimal          objective: <number>" 11460 1e-6)
 set_tests_properties(miplib2000_rococoC10-001000_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_roll3000_mps_dylp_standard osi_dylp
@@ -842,7 +842,7 @@ add_coin_dylp_test(miplib2000_roll3000_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_roll3000_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_roll3000_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_roll3000_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_roll3000.log "Optimal objective <number>" 12890 1e-6)
+create_log_analysis(miplib2000_roll3000_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_roll3000.log "lp status: optimal          objective: <number>" 12890 1e-6)
 set_tests_properties(miplib2000_roll3000_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_satellites1-25_mps_dylp_standard osi_dylp
@@ -853,7 +853,7 @@ add_coin_dylp_test(miplib2000_satellites1-25_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_satellites1-25_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_satellites1-25_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_satellites1-25_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_satellites1-25.log "Optimal objective <number>" -5 1e-6)
+create_log_analysis(miplib2000_satellites1-25_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_satellites1-25.log "lp status: optimal          objective: <number>" -5 1e-6)
 set_tests_properties(miplib2000_satellites1-25_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_sp98ic_mps_dylp_standard osi_dylp
@@ -864,7 +864,7 @@ add_coin_dylp_test(miplib2000_sp98ic_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_sp98ic_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_sp98ic_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_sp98ic_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ic.log "Optimal objective <number>" 449144758.399999976 1e-6)
+create_log_analysis(miplib2000_sp98ic_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ic.log "lp status: optimal          objective: <number>" 449144758.399999976 1e-6)
 set_tests_properties(miplib2000_sp98ic_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_sp98ir_mps_dylp_standard osi_dylp
@@ -875,7 +875,7 @@ add_coin_dylp_test(miplib2000_sp98ir_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_sp98ir_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_sp98ir_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_sp98ir_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ir.log "Optimal objective <number>" 219676790.400000006 1e-6)
+create_log_analysis(miplib2000_sp98ir_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ir.log "lp status: optimal          objective: <number>" 219676790.400000006 1e-6)
 set_tests_properties(miplib2000_sp98ir_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_tanglegram1_mps_dylp_standard osi_dylp
@@ -886,7 +886,7 @@ add_coin_dylp_test(miplib2000_tanglegram1_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_tanglegram1_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_tanglegram1_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_tanglegram1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram1.log "Optimal objective <number>" 5182 1e-6)
+create_log_analysis(miplib2000_tanglegram1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram1.log "lp status: optimal          objective: <number>" 5182 1e-6)
 set_tests_properties(miplib2000_tanglegram1_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_tanglegram2_mps_dylp_standard osi_dylp
@@ -897,7 +897,7 @@ add_coin_dylp_test(miplib2000_tanglegram2_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_tanglegram2_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_tanglegram2_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_tanglegram2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram2.log "Optimal objective <number>" 443 1e-6)
+create_log_analysis(miplib2000_tanglegram2_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram2.log "lp status: optimal          objective: <number>" 443 1e-6)
 set_tests_properties(miplib2000_tanglegram2_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_timtab1_mps_dylp_standard osi_dylp
@@ -908,7 +908,7 @@ add_coin_dylp_test(miplib2000_timtab1_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_timtab1_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_timtab1_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_timtab1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_timtab1.log "Optimal objective <number>" 764772 1e-6)
+create_log_analysis(miplib2000_timtab1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_timtab1.log "lp status: optimal          objective: <number>" 764772 1e-6)
 set_tests_properties(miplib2000_timtab1_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_triptim1_mps_dylp_standard osi_dylp
@@ -919,7 +919,7 @@ add_coin_dylp_test(miplib2000_triptim1_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_triptim1_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_triptim1_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_triptim1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_triptim1.log "Optimal objective <number>" 22.8681 1e-6)
+create_log_analysis(miplib2000_triptim1_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_triptim1.log "lp status: optimal          objective: <number>" 22.8681 1e-6)
 set_tests_properties(miplib2000_triptim1_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_unitcal_7_mps_dylp_standard osi_dylp
@@ -930,7 +930,7 @@ add_coin_dylp_test(miplib2000_unitcal_7_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_unitcal_7_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_unitcal_7_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_unitcal_7_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_unitcal_7.log "Optimal objective <number>" 19635558.244019002 1e-6)
+create_log_analysis(miplib2000_unitcal_7_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_unitcal_7.log "lp status: optimal          objective: <number>" 19635558.244019002 1e-6)
 set_tests_properties(miplib2000_unitcal_7_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_vpphard_mps_dylp_standard osi_dylp
@@ -941,7 +941,7 @@ add_coin_dylp_test(miplib2000_vpphard_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_vpphard_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_vpphard_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_vpphard_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_vpphard.log "Optimal objective <number>" 5 1e-6)
+create_log_analysis(miplib2000_vpphard_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_vpphard.log "lp status: optimal          objective: <number>" 5 1e-6)
 set_tests_properties(miplib2000_vpphard_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
 add_coin_dylp_test(miplib2000_zib54-UUE_mps_dylp_standard osi_dylp
@@ -952,5 +952,5 @@ add_coin_dylp_test(miplib2000_zib54-UUE_mps_dylp_standard osi_dylp
 set_tests_properties(miplib2000_zib54-UUE_mps_dylp_standard PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib2000_zib54-UUE_mps_dylp_standard PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")
 
-create_log_analysis(miplib2000_zib54-UUE_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_zib54-UUE.log "Optimal objective <number>" 10334015.82 1e-6)
+create_log_analysis(miplib2000_zib54-UUE_mps_dylp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_zib54-UUE.log "lp status: optimal          objective: <number>" 10334015.82 1e-6)
 set_tests_properties(miplib2000_zib54-UUE_mps_dylp_standard_01_Analysis PROPERTIES LABELS "MPS;DYLP;MIPLIB2000;BENCHMARK")

@@ -101,14 +101,35 @@ endmacro()
 # FileLog: the name of the .log data file
 
 macro(add_coin_dylp_test Name SolverName FileData FileOut FileLog)
-  if (WIN32)
-    file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData} \n"
-         "                OUTPUT_FILE ${FileLog})\n")
+  if (NOT EXISTS ${CMAKE_BINARY_DIR}/tmp)
+    make_directory(${CMAKE_BINARY_DIR}/tmp)
+  endif ()
+  
+  get_filename_component(FileData_EXT ${FileData} EXT)
+  get_filename_component(FileData_NAME ${FileData} NAME)
+  
+  if ((FileData_EXT STREQUAL ".mps.gz") OR (FileData_EXT STREQUAL ".lp.gz") OR (FileData_EXT STREQUAL ".gz"))
+    string(REGEX REPLACE ".gz" "" FileData_NAME_NOGZ ${FileData_NAME})
+    
+    if (WIN32)
+      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+           "execute_process(COMMAND     ${CMAKE_COMMAND} -E copy ${FileData} ${CMAKE_BINARY_DIR}/tmp \n"
+           "                         && gunzip.exe -f ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME} \n"
+           "                         && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${FileLog} -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})")
+    else ()
+      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+           "execute_process(COMMAND     ${CMAKE_COMMAND} -E copy ${FileData} ${CMAKE_BINARY_DIR}/tmp \n"
+           "                         && gunzip -f ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME} \n"
+           "                         && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${FileLog} -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})")
+    endif ()
   else ()
-    file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData} \n"
-         "                OUTPUT_FILE ${FileLog})\n")
+    if (WIN32)
+      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+           "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${FileLog} -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})")
+    else ()
+      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+           "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${FileLog} -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})")
+    endif ()
   endif ()
   
   add_test(NAME ${Name}
