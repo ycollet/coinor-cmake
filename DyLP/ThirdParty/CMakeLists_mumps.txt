@@ -2,11 +2,14 @@ project (MUMPS C CXX Fortran)
 
 cmake_minimum_required (VERSION 2.8)
 
-option(MUMPS_USE_LIBSEQ "Use the MUMPS sequential MPI stub" OFF)
-option(MUMPS_USE_METIS  "Use the Metis library" OFF)
+option(MUMPS_USE_LIBSEQ   "Use the MUMPS sequential MPI stub" OFF)
+option(MUMPS_USE_METIS    "Use the Metis library" OFF)
+option(MUMPS_INSTALL_COIN "Install MUMPS for CoinOR" OFF)
 
 set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path")
 set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path")
+
+set(MUMPS_LAPACK_LIB_PATH "None" CACHE PATH "The Lapack library library Path")
 
 #------------------------------------------------------------
 # End of user config part
@@ -81,8 +84,8 @@ endif ()
 
 if (NOT BLAS_FOUND OR NOT LAPACK_FOUND)
   message(STATUS "Searching for BLAS and LAPACK")
-  find_package(BLAS)
-  find_package(LAPACK)
+  find_package(BLAS   REQUIRED)
+  find_package(LAPACK REQUIRED)
 endif ()
 
 #------------------------------------------------------------
@@ -123,6 +126,9 @@ if (NOT MUMPS_METIS_INC_PATH STREQUAL "None")
 endif ()
 if (NOT MUMPS_METIS_LIB_PATH STREQUAL "None")
   link_directories(${MUMPS_METIS_LIB_PATH})
+endif ()
+if (NOT MUMPS_LAPACK_LIB_PATH STREQUAL "None")
+  link_directories(${MUMPS_LAPACK_LIB_PATH})
 endif ()
 
 #------------------------------------------------------------
@@ -246,7 +252,7 @@ if (WIN32)
 else ()
   if (MKL_FOUND)
     set(LINK_LIBS ${LINK_LIBS} 
-	              ${ATLAS_LIBRARIES}
+                  ${ATLAS_LIBRARIES}
                   iomp5)
   endif ()
   
@@ -260,12 +266,12 @@ else ()
   
   if (BLAS_FOUND)
     set(LINK_LIBS ${LINK_LIBS} 
-	              blas)
+                  blas)
   endif ()
   
   if (LAPACK_FOUND)
     set(LINK_LIBS ${LINK_LIBS} 
-	              lapack)
+                  lapack)
   endif ()
   
   set(LINK_LIBS ${LINK_LIBS} 
@@ -394,6 +400,18 @@ if (MUMPS_USE_LIBSEQ)
   install(DIRECTORY libseq/
           DESTINATION include/
           PATTERN "*.h")
+
+  if (MUMPS_INSTALL_COIN)
+    install(FILES libseq/mpi.h
+            DESTINATION include/
+            RENAME mumps_mpi.h)
+  endif ()
+else ()
+  if (MUMPS_INSTALL_COIN)
+    install(FILES ${MPI_C_INCLUDE_PATH}/libseq/mpi.h
+            DESTINATION include/
+            RENAME mumps_mpi.h)
+  endif ()
 endif ()
 
 install(DIRECTORY include/
