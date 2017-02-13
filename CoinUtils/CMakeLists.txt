@@ -36,7 +36,7 @@ set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The CoinUtils Path")
 
 mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_THREADS_LIB_PATH
-		 ENABLE_SHARED_LIBRARIES
+                 ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
                  COIN_COMPILE_COVERAGE
                  COIN_COMPILE_PROFILE
@@ -46,7 +46,7 @@ mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
                  Coin_DIR
-		 COINUTILS_USE_THREADS
+                 COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
                  COINUTILS_USE_MEMPOOL_MAXPOOLED
                  COINUTILS_HAS_ZLIB
@@ -56,7 +56,7 @@ mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_HAS_MKL
                  COIN_COINUTILS_CHECKLEVEL
                  COIN_COINUTILS_VERBOSITY
-		 COIN_USE_FAST_CODE)
+                 COIN_USE_FAST_CODE)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -243,9 +243,9 @@ endif ()
 
 mark_as_advanced(F77_FUNC
                  F77_FUNC_
-		 F77_DUMMY_MAIN
-		 FC_DUMMY_MAIN
-		 FC_DUMMY_MAIN_EQ_F77)
+                 F77_DUMMY_MAIN
+                 FC_DUMMY_MAIN
+                 FC_DUMMY_MAIN_EQ_F77)
 
 # End detect fortran mangling
 

@@ -122,7 +122,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
                  Coin_DIR
-		 COINUTILS_USE_THREADS
+                 COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
                  COINUTILS_USE_MEMPOOL_MAXPOOLED
                  COINUTILS_HAS_ZLIB
@@ -132,7 +132,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_HAS_ASL
                  COIN_COINUTILS_CHECKLEVEL
                  COIN_COINUTILS_VERBOSITY
-		 COIN_ENABLE_AMD
+                 COIN_ENABLE_AMD
                  COIN_HAS_AMD_INCLUDE_PATH
                  COIN_HAS_AMD_LIBRARY_PATH
                  COIN_ENABLE_CHOLMOD
@@ -152,7 +152,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_CLP_CHECKLEVEL
                  COIN_CLP_VERBOSITY
                  COIN_HAS_MKL
-		 COIN_CGL_CHECKLEVEL
+                 COIN_CGL_CHECKLEVEL
                  COIN_CGL_VERBOSITY
                  CBC_USE_THREADS
                  CBC_DEFAULT_SOLVER
@@ -161,7 +161,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_OSI_CHECKLEVEL
                  COIN_OSI_VERBOSITY
                  COIN_USE_FAST_CODE
-		 USE_COINOR_BIN
+                 USE_COINOR_BIN
                  COINOR_DIR)
 
 # Set paths for binary and library generation inside the build directory:
@@ -417,9 +417,9 @@ endif ()
 
 mark_as_advanced(F77_FUNC
                  F77_FUNC_
-		 F77_DUMMY_MAIN
-		 FC_DUMMY_MAIN
-		 FC_DUMMY_MAIN_EQ_F77)
+                 F77_DUMMY_MAIN
+                 FC_DUMMY_MAIN
+                 FC_DUMMY_MAIN_EQ_F77)
 
 # End detect fortran mangling
 

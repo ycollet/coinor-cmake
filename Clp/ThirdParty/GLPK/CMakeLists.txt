@@ -409,19 +409,19 @@ set(GLPK_SRCS ${CMAKE_SOURCE_DIR}/src/bfd.c
 if (GLPK_VERSION STRLESS "4.61")
   set(GLPK_SRCS ${GLPK_SRCS}
                 ${CMAKE_SOURCE_DIR}/src/glpapi01.c
-		${CMAKE_SOURCE_DIR}/src/glpapi02.c
-		${CMAKE_SOURCE_DIR}/src/glpapi03.c
-		${CMAKE_SOURCE_DIR}/src/glpapi04.c
-		${CMAKE_SOURCE_DIR}/src/glpapi05.c)
+                ${CMAKE_SOURCE_DIR}/src/glpapi02.c
+                ${CMAKE_SOURCE_DIR}/src/glpapi03.c
+                ${CMAKE_SOURCE_DIR}/src/glpapi04.c
+                ${CMAKE_SOURCE_DIR}/src/glpapi05.c)
 endif ()
 
 if ((GLPK_VERSION STREQUAL "4.61") OR (GLPK_VERSION STRGREATER "4.61"))
   set(GLPK_SRCS ${GLPK_SRCS}
                 ${CMAKE_SOURCE_DIR}/src/api/prob1.c
                 ${CMAKE_SOURCE_DIR}/src/api/prob2.c
-		${CMAKE_SOURCE_DIR}/src/api/prob3.c
-		${CMAKE_SOURCE_DIR}/src/api/prob4.c
-		${CMAKE_SOURCE_DIR}/src/api/prob5.c)
+                ${CMAKE_SOURCE_DIR}/src/api/prob3.c
+                ${CMAKE_SOURCE_DIR}/src/api/prob4.c
+                ${CMAKE_SOURCE_DIR}/src/api/prob5.c)
 endif ()
 
 if (ENABLE_SHARED_LIBRARIES)

@@ -53,7 +53,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_USE_FAST_CODE
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
-		 COIN_HAS_MUMPS
+                 COIN_HAS_MUMPS
                  COIN_HAS_MUMPS_INCLUDE_PATH
                  COIN_HAS_MUMPS_LIBRARY_PATH
                  COIN_HAS_WSMP
@@ -234,9 +234,9 @@ endif ()
 
 mark_as_advanced(F77_FUNC
                  F77_FUNC_
-		 F77_DUMMY_MAIN
-		 FC_DUMMY_MAIN
-		 FC_DUMMY_MAIN_EQ_F77)
+                 F77_DUMMY_MAIN
+                 FC_DUMMY_MAIN
+                 FC_DUMMY_MAIN_EQ_F77)
 
 # End detect fortran mangling
 

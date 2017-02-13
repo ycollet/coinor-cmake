@@ -117,7 +117,7 @@ set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcThread.cpp
                  ${Cbc_DIR}/src/CbcTree.cpp
                  ${Cbc_DIR}/src/CbcTreeLocal.cpp
-	         ${Cbc_DIR}/src/unitTestClp.cpp)
+                 ${Cbc_DIR}/src/unitTestClp.cpp)
 
 set(Cbc_SRC_LIST_Headers ${Cbc_DIR}/src/Cbc_C_Interface.h
                          ${Cbc_DIR}/src/CbcBranchActual.hpp
@@ -371,7 +371,7 @@ if (CBC_BUILD_EXAMPLES)
       elseif (NOT WIN32)
         target_link_libraries(${Name} pthread)
       else ()
-	    target_link_libraries(${Name} pthreadVC2)
+        target_link_libraries(${Name} pthreadVC2)
       endif ()
     endif ()
     if (COIN_HAS_ABC AND (COIN_ABC_LEVEL GREATER 2))
@@ -438,7 +438,7 @@ if (CBC_BUILD_EXAMPLES)
   
   add_example(sample5 ${Cbc_DIR}/examples/sample5.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
-		      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
+                      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample5
            COMMAND $<TARGET_FILE:sample5> ${CMAKE_SOURCE_DIR}/Data/Sample)

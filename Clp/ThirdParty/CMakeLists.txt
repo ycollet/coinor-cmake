@@ -169,8 +169,8 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
                         PREFIX            ${EP_InstallDir}/Lapack
                         URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
                         UPDATE_COMMAND    ""
-			PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/INCLUDE/
-			               && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/F2CLIBS/libf2c/
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/INCLUDE/
+                                       && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/F2CLIBS/libf2c/
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
                                        && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
@@ -183,8 +183,8 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
                         PREFIX            ${EP_InstallDir}/Lapack
                         URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
                         UPDATE_COMMAND    ""
-			PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/INCLUDE/
-			               && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/F2CLIBS/libf2c/
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/INCLUDE/
+                                       && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/F2CLIBS/libf2c/
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
                                        && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
@@ -433,7 +433,7 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
   
   ExternalProject_Add(EP_Metis
                       PREFIX ${EP_InstallDir}/Metis
-		              URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                      URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ""
                       CONFIGURE_COMMAND ""
@@ -528,8 +528,8 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
   
   ExternalProject_Add(EP_SuiteSparse
                       PREFIX ${EP_InstallDir}/SuiteSparse
-		      GIT_REPOSITORY https://github.com/jlblancoc/suitesparse-metis-for-windows.git
-		      GIT_TAG           "v1.3.1"
+                      GIT_REPOSITORY https://github.com/jlblancoc/suitesparse-metis-for-windows.git
+                      GIT_TAG           "v1.3.1"
                       PATCH_COMMAND     ""
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse/src/EP_SuiteSparse/build

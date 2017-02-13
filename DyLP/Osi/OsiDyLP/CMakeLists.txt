@@ -19,9 +19,9 @@ endif ()
 
 set(OsiDyLP_SRC_LIST ${DyLP_DIR}/src/OsiDylp/OsiDylpMessages.cpp
                      ${DyLP_DIR}/src/OsiDylp/OsiDylpSimplex.cpp
-		     ${DyLP_DIR}/src/OsiDylp/OsiDylpWarmStartBasis.cpp
-		     ${DyLP_DIR}/src/OsiDylp/OsiDylpPresolve.cpp
-		     ${DyLP_DIR}/src/OsiDylp/OsiDylpSolverInterface.cpp)
+                     ${DyLP_DIR}/src/OsiDylp/OsiDylpWarmStartBasis.cpp
+                     ${DyLP_DIR}/src/OsiDylp/OsiDylpPresolve.cpp
+                     ${DyLP_DIR}/src/OsiDylp/OsiDylpSolverInterface.cpp)
 
 if (ENABLE_SHARED_LIBRARIES)
   add_library(libOsiDyLP SHARED ${OsiDyLP_SRC_LIST})
@@ -38,5 +38,5 @@ install(TARGETS libOsiDyLP
 
 install(FILES ${DyLP_DIR}/src/OsiDylp/OsiDylpMessages.hpp
               ${DyLP_DIR}/src/OsiDylp/OsiDylpSolverInterface.hpp
-	      ${DyLP_DIR}/src/OsiDylp/OsiDylpWarmStartBasis.hpp
+              ${DyLP_DIR}/src/OsiDylp/OsiDylpWarmStartBasis.hpp
         DESTINATION include/coin)

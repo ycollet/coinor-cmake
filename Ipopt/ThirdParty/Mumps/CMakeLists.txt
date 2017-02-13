@@ -210,7 +210,7 @@ if (WIN32)
 else (WIN32)
   if (MKL_FOUND)
     set(LINK_LIBS ${LINK_LIBS} 
-	              ${ATLAS_LIBRARIES}
+                  ${ATLAS_LIBRARIES}
                   iomp5)
   endif (MKL_FOUND)
   
@@ -224,12 +224,12 @@ else (WIN32)
   
   if (BLAS_FOUND)
     set(LINK_LIBS ${LINK_LIBS} 
-	              blas)
+                  blas)
   endif (BLAS_FOUND)
   
   if (LAPACK_FOUND)
     set(LINK_LIBS ${LINK_LIBS} 
-	              lapack)
+                  lapack)
   endif (LAPACK_FOUND)
   set(LINK_LIBS ${LINK_LIBS} 
                 pthread)
@@ -313,7 +313,7 @@ endif (WIN32)
 if (USE_MUMPS_LIBSEQ)
   install(TARGETS libseq 
           DESTINATION lib)
-	
+  
   install(FILES libseq/elapse.h libseq/mpi.h libseq/mpif.h
           DESTINATION include)
   

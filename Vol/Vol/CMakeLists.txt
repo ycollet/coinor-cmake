@@ -116,7 +116,7 @@ if (VOL_BUILD_EXAMPLES)
   # TODO: Need to gunzip Vol/examples/VolUfl/data.gz
   add_test(NAME volufl_example_par
            COMMAND $<TARGET_FILE:volufl>
-	   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Vol/examples/VolUfl)
+           WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Vol/examples/VolUfl)
   
   set_tests_properties(volufl_example_par PROPERTIES TIMEOUT 30)
   if (WIN32)
@@ -126,11 +126,11 @@ if (VOL_BUILD_EXAMPLES)
   # TODO: Need to gunzip Vol/examples/Volume-LP/data.mps.gz
   add_example(volume-lp ${Vol_DIR}/examples/Volume-LP/lpc.cpp
                         ${Vol_DIR}/examples/Volume-LP/lp.cpp
-			${Vol_DIR}/examples/Volume-LP/reader.cpp)
+                        ${Vol_DIR}/examples/Volume-LP/reader.cpp)
 
   add_test(NAME volume_lp_example_data
            COMMAND $<TARGET_FILE:volume-lp>
-	   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Vol/examples/Volume-LP)
+           WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Vol/examples/Volume-LP)
   
   set_tests_properties(volume_lp_example_data PROPERTIES TIMEOUT 30)
   if (WIN32)
