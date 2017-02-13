@@ -38,21 +38,21 @@
 if (MPI_CXX_FOUND)
   find_path(PARMETIS_INCLUDE_DIRS parmetis.h
             HINTS ${PARMETIS_DIR}/include $ENV{PARMETIS_DIR}/include ${PETSC_DIR}/include ${PETSC_DIR}/${PETSC_ARCH}/include
-	    DOC "Directory where the ParMETIS header files are located")
+            DOC "Directory where the ParMETIS header files are located")
 
   find_library(PARMETIS_LIBRARY parmetis
                HINTS ${PARMETIS_DIR}/lib $ENV{PARMETIS_DIR}/lib ${PETSC_DIR}/lib ${PETSC_DIR}/${PETSC_ARCH}/lib
-	             ${PARMETIS_DIR}/lib64 $ENV{PARMETIS_DIR}/lib64 ${PETSC_DIR}/lib64 ${PETSC_DIR}/${PETSC_ARCH}/lib64
-	       NO_DEFAULT_PATH
-	       DOC "Directory where the ParMETIS library is located")
+                     ${PARMETIS_DIR}/lib64 $ENV{PARMETIS_DIR}/lib64 ${PETSC_DIR}/lib64 ${PETSC_DIR}/${PETSC_ARCH}/lib64
+               NO_DEFAULT_PATH
+               DOC "Directory where the ParMETIS library is located")
   
   find_library(PARMETIS_LIBRARY parmetis
                DOC "Directory where the ParMETIS library is located")
 
   find_library(METIS_LIBRARY metis
                HINTS ${PARMETIS_DIR}/lib $ENV{PARMETIS_DIR}/lib ${PETSC_DIR}/lib ${PETSC_DIR}/${PETSC_ARCH}/lib
-	       NO_DEFAULT_PATH
-	       DOC "Directory where the METIS library is located")
+               NO_DEFAULT_PATH
+               DOC "Directory where the METIS library is located")
   
   find_library(METIS_LIBRARY metis
                DOC "Directory where the METIS library is located")
@@ -84,11 +84,11 @@ if (MPI_CXX_FOUND)
 int main() {
 #ifdef PARMETIS_SUBMINOR_VERSION
   std::cout << PARMETIS_MAJOR_VERSION << \".\"
-	    << PARMETIS_MINOR_VERSION << \".\"
+            << PARMETIS_MINOR_VERSION << \".\"
             << PARMETIS_SUBMINOR_VERSION;
 #else
   std::cout << PARMETIS_MAJOR_VERSION << \".\"
-	    << PARMETIS_MINOR_VERSION;
+            << PARMETIS_MINOR_VERSION;
 #endif
   return 0;
 }
@@ -96,12 +96,12 @@ int main() {
 
     try_run(PARMETIS_CONFIG_TEST_VERSION_EXITCODE
             PARMETIS_CONFIG_TEST_VERSION_COMPILED
-	    ${CMAKE_CURRENT_BINARY_DIR}
-	    ${PARMETIS_CONFIG_TEST_VERSION_CPP}
-	    CMAKE_FLAGS "-DINCLUDE_DIRECTORIES:STRING=${CMAKE_REQUIRED_INCLUDES}"
-	                "-DLINK_LIBRARIES:STRING=${CMAKE_REQUIRED_LIBRARIES}"
+            ${CMAKE_CURRENT_BINARY_DIR}
+            ${PARMETIS_CONFIG_TEST_VERSION_CPP}
+            CMAKE_FLAGS "-DINCLUDE_DIRECTORIES:STRING=${CMAKE_REQUIRED_INCLUDES}"
+                        "-DLINK_LIBRARIES:STRING=${CMAKE_REQUIRED_LIBRARIES}"
             COMPILE_OUTPUT_VARIABLE PARMETIS_CONFIG_TEST_VERSION_COMPILE_OUTPUT
-	    RUN_OUTPUT_VARIABLE PARMETIS_CONFIG_TEST_VERSION_OUTPUT)
+            RUN_OUTPUT_VARIABLE PARMETIS_CONFIG_TEST_VERSION_OUTPUT)
     
     if (PARMETIS_CONFIG_TEST_VERSION_EXITCODE EQUAL 0)
       set(PARMETIS_VERSION ${PARMETIS_CONFIG_TEST_VERSION_OUTPUT} CACHE TYPE STRING)
@@ -111,7 +111,7 @@ int main() {
     if (ParMETIS_FIND_VERSION)
       # Check if version found is >= required version
       if (NOT "${PARMETIS_VERSION}" VERSION_LESS "${ParMETIS_FIND_VERSION}")
-	set(PARMETIS_VERSION_OK TRUE)
+        set(PARMETIS_VERSION_OK TRUE)
       endif()
     else()
       # No specific version requested
@@ -144,5 +144,5 @@ find_package_handle_standard_args(ParMETIS
                                   PARMETIS_LIBRARIES
                                   PARMETIS_TEST_RUNS
                                   PARMETIS_INCLUDE_DIRS
-				  PARMETIS_VERSION
-				  PARMETIS_VERSION_OK)
+                                  PARMETIS_VERSION
+                                  PARMETIS_VERSION_OK)

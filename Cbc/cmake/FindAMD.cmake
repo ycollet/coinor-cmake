@@ -39,17 +39,17 @@ message(STATUS "Checking for package 'AMD'")
 # Check for header file
 find_path(AMD_INCLUDE_DIRS amd.h
           HINTS ${AMD_DIR}/include $ENV{AMD_DIR}/include
-	  PATH_SUFFIXES suitesparse ufsparse
-	  DOC "Directory where the AMD header is located")
+          PATH_SUFFIXES suitesparse ufsparse
+          DOC "Directory where the AMD header is located")
 
 mark_as_advanced(AMD_INCLUDE_DIRS)
 
 # Check for AMD library
 find_library(AMD_LIBRARIES amd
              HINTS ${AMD_DIR}/lib $ENV{AMD_DIR}/lib
-	           ${AMD_DIR}/lib64 $ENV{AMD_DIR}/lib64
-	     NO_DEFAULT_PATH
-	     DOC "The AMD library")
+                   ${AMD_DIR}/lib64 $ENV{AMD_DIR}/lib64
+             NO_DEFAULT_PATH
+             DOC "The AMD library")
 
 find_library(AMD_LIBRARIES amd
              DOC "The AMD library")
@@ -61,4 +61,4 @@ include(FindPackageHandleStandardArgs)
 
 find_package_handle_standard_args(AMD
                                   "AMD could not be found. Be sure to set AMD_DIR."
-				  AMD_LIBRARIES AMD_INCLUDE_DIRS)
+                                  AMD_LIBRARIES AMD_INCLUDE_DIRS)

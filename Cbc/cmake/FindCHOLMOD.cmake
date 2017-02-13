@@ -56,15 +56,15 @@ find_package(ParMETIS 4.0.2 QUIET)
 # Check for header file
 find_path(CHOLMOD_INCLUDE_DIRS cholmod.h
           HINTS ${CHOLMOD_DIR}/include $ENV{CHOLMOD_DIR}/include
-	  PATH_SUFFIXES suitesparse ufsparse
-	  DOC "Directory where the CHOLMOD header is located")
+          PATH_SUFFIXES suitesparse ufsparse
+          DOC "Directory where the CHOLMOD header is located")
 
 # Check for CHOLMOD library
 find_library(CHOLMOD_LIBRARY cholmod
              HINTS ${CHOLMOD_DIR}/lib $ENV{CHOLMOD_DIR}/lib 
                    ${CHOLMOD_DIR}/lib64 $ENV{CHOLMOD_DIR}/lib64
-	     NO_DEFAULT_PATH
-	     DOC "The CHOLMOD library")
+             NO_DEFAULT_PATH
+             DOC "The CHOLMOD library")
 
 find_library(CHOLMOD_LIBRARY cholmod
              DOC "The CHOLMOD library")
@@ -73,8 +73,8 @@ find_library(CHOLMOD_LIBRARY cholmod
 find_library(CAMD_LIBRARY camd
              HINTS ${CHOLMOD_DIR}/lib ${CAMD_DIR}/lib $ENV{CHOLMOD_DIR}/lib $ENV{CAMD_DIR}/lib 
                    ${CHOLMOD_DIR}/lib64 ${CAMD_DIR}/lib64 $ENV{CHOLMOD_DIR}/lib64 $ENV{CAMD_DIR}/lib64
-	     NO_DEFAULT_PATH
-	     DOC "The CAMD library")
+             NO_DEFAULT_PATH
+             DOC "The CAMD library")
 
 find_library(CAMD_LIBRARY camd
              DOC "The CAMD library")
@@ -82,9 +82,9 @@ find_library(CAMD_LIBRARY camd
 # Check for COLAMD library
 find_library(COLAMD_LIBRARY colamd
              HINTS ${CHOLMOD_DIR}/lib ${COLAMD_DIR}/lib $ENV{CHOLMOD_DIR}/lib $ENV{COLAMD_DIR}/lib
-	           ${CHOLMOD_DIR}/lib64 ${COLAMD_DIR}/lib64 $ENV{CHOLMOD_DIR}/lib64 $ENV{COLAMD_DIR}/lib64
+                   ${CHOLMOD_DIR}/lib64 ${COLAMD_DIR}/lib64 $ENV{CHOLMOD_DIR}/lib64 $ENV{COLAMD_DIR}/lib64
              NO_DEFAULT_PATH
-	     DOC "The COLAMD library")
+             DOC "The COLAMD library")
 
 find_library(COLAMD_LIBRARY colamd
              DOC "The COLAMD library")
@@ -92,9 +92,9 @@ find_library(COLAMD_LIBRARY colamd
 # Check for CCOLAMD library
 find_library(CCOLAMD_LIBRARY ccolamd
              HINTS ${CHOLMOD_DIR}/lib ${CCOLAMD_DIR}/lib $ENV{CHOLMOD_DIR}/lib $ENV{CCOLAMD_DIR}/lib
-	           ${CHOLMOD_DIR}/lib64 ${CCOLAMD_DIR}/lib64 $ENV{CHOLMOD_DIR}/lib64 $ENV{CCOLAMD_DIR}/lib64
-	     NO_DEFAULT_PATH
-	     DOC "The CCOLAMD library")
+                   ${CHOLMOD_DIR}/lib64 ${CCOLAMD_DIR}/lib64 $ENV{CHOLMOD_DIR}/lib64 $ENV{CCOLAMD_DIR}/lib64
+             NO_DEFAULT_PATH
+             DOC "The CCOLAMD library")
 
 find_library(CCOLAMD_LIBRARY ccolamd
              DOC "The CCOLAMD library")
@@ -102,8 +102,8 @@ find_library(CCOLAMD_LIBRARY ccolamd
 # Check for SUITESPARSECONFIG library
 find_library(SUITESPARSE_LIBRARY suitesparseconfig
              HINTS ${CHOLMOD_DIR}/lib ${CCOLAMD_DIR}/lib $ENV{CHOLMOD_DIR}/lib $ENV{CCOLAMD_DIR}/lib
-	     NO_DEFAULT_PATH
-	     DOC "The SUITESPARSECONFIG library")
+             NO_DEFAULT_PATH
+             DOC "The SUITESPARSECONFIG library")
 
 find_library(SUITESPARSE_LIBRARY suitesparseconfig
              DOC "The SUITESPARSECONFIG library")
@@ -148,7 +148,7 @@ find_program(GFORTRAN_EXECUTABLE gfortran)
 if (GFORTRAN_EXECUTABLE)
   execute_process(COMMAND ${GFORTRAN_EXECUTABLE} -print-file-name=libgfortran.so
                   OUTPUT_VARIABLE GFORTRAN_LIBRARY
-		  OUTPUT_STRIP_TRAILING_WHITESPACE)
+                  OUTPUT_STRIP_TRAILING_WHITESPACE)
   if (EXISTS "${GFORTRAN_LIBRARY}")
     set(CHOLMOD_LIBRARIES ${CHOLMOD_LIBRARIES} ${GFORTRAN_LIBRARY})
   endif()
@@ -223,5 +223,5 @@ endif()
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(CHOLMOD "CHOLMOD could not be found. Be sure to set CHOLMOD_DIR."
                                            CHOLMOD_LIBRARIES
-					   CHOLMOD_INCLUDE_DIRS
-					   CHOLMOD_TEST_RUNS)
+                                           CHOLMOD_INCLUDE_DIRS
+                                           CHOLMOD_TEST_RUNS)

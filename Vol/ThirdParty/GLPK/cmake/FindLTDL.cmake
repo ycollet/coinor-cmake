@@ -26,7 +26,7 @@ if (LTDL_INCLUDE_DIR)
       if(${_lib})
         get_filename_component(_path ${${_lib}} PATH)
         check_library_exists(${_library_name} ${_function_name} 
-	                     ${_path} ${_have_lib})
+                             ${_path} ${_have_lib})
       endif()
     endmacro()
 
@@ -54,7 +54,7 @@ if (LTDL_INCLUDE_DIR)
             set(LTDL_LIBRARIES ${LTDL_LIBRARIES} ${LTDL_LTDL_ADDLIB2})
             set(LTDL_FOUND ON)
           else()
-	    set(LTDL_FOUND OFF)
+            set(LTDL_FOUND OFF)
           endif()
         endif()
       endif()
@@ -83,5 +83,5 @@ endif ()
 
 mark_as_advanced(LTDL_LTDL_ADDLIB0 LTDL_LTDL_HAVE_ADDLIB0
                  LTDL_LTDL_ADDLIB1 LTDL_LTDL_HAVE_ADDLIB1
-		 LTDL_LTDL_ADDLIB2 LTDL_LTDL_HAVE_ADDLIB2
-		 LTDL_LTDL_ADDLIB3 LTDL_LTDL_HAVE_ADDLIB3)
+                 LTDL_LTDL_ADDLIB2 LTDL_LTDL_HAVE_ADDLIB2
+                 LTDL_LTDL_ADDLIB3 LTDL_LTDL_HAVE_ADDLIB3)

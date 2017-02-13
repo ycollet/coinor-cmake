@@ -34,13 +34,13 @@ get_filename_component(GLPK_ROOT_PATH ${GLPK_REGKEY} ABSOLUTE)
 
 find_path(GLPK_INCLUDE_DIR
           glpk.h
-	  PATHS ${GLPK_REGKEY}/include
-	  HINTS ${GLPK_ROOT_DIR}/include)
+          PATHS ${GLPK_REGKEY}/include
+          HINTS ${GLPK_ROOT_DIR}/include)
 
 find_library(GLPK_LIBRARY
              glpk
-	     PATHS ${GLPK_REGKEY}/lib ${GLPK_REGKEY}/lib64
-	     HINTS ${GLPK_ROOT_DIR}/lib ${GLPK_ROOT_DIR}/lib64)
+             PATHS ${GLPK_REGKEY}/lib ${GLPK_REGKEY}/lib64
+             HINTS ${GLPK_ROOT_DIR}/lib ${GLPK_ROOT_DIR}/lib64)
 
 if (GLPK_INCLUDE_DIR AND GLPK_LIBRARY)
   file(READ ${GLPK_INCLUDE_DIR}/glpk.h GLPK_GLPK_H)

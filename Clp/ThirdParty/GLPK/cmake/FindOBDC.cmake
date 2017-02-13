@@ -24,21 +24,21 @@ if (WIN32)
 else ()
   find_path(ODBC_INCLUDE_DIR sqlext.h
             /usr/include
-	    /usr/include/odbc
-	    /usr/local/include
-	    /usr/local/include/odbc
-	    /usr/local/odbc/include
-	    $ENV{ODBC_DIR}/include
-	    DOC "Specify the directory containing sql.h.")
+            /usr/include/odbc
+            /usr/local/include
+            /usr/local/include/odbc
+            /usr/local/odbc/include
+            $ENV{ODBC_DIR}/include
+            DOC "Specify the directory containing sql.h.")
 
   find_library(ODBC_LIBRARY NAMES iodbc odbc odbc32
                PATHS /usr/lib
-	             /usr/lib/odbc
-		     /usr/local/lib
-		     /usr/local/lib/odbc
-		     /usr/local/odbc/lib
-		     $ENV{ODBC_DIR}/lib
-	       DOC "Specify the ODBC driver manager library here.")
+                     /usr/lib/odbc
+                     /usr/local/lib
+                     /usr/local/lib/odbc
+                     /usr/local/odbc/lib
+                     $ENV{ODBC_DIR}/lib
+               DOC "Specify the ODBC driver manager library here.")
   if (ODBC_LIBRARY AND ODBC_INCLUDE_DIR)
     set(ODBC_FOUND ON)
   endif ()
@@ -48,5 +48,5 @@ set(ODBC_LIBRARIES ${ODBC_LIBRARY})
 
 mark_as_advanced(ODBC_FOUND
                  ODBC_LIBRARY
-		 ODBC_EXTRA_LIBRARIES
-		 ODBC_INCLUDE_DIR)
+                 ODBC_EXTRA_LIBRARIES
+                 ODBC_INCLUDE_DIR)
