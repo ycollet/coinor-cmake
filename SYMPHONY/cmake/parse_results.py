@@ -13,18 +13,18 @@ import sys
 # comparator = 3 -> ">"
 # comparator = 4 -> ">="
 
+rel_level  = 1e-6
+comparator = 1
+
 if (len(sys.argv) <= 4):
     filename   = sys.argv[1]
     pattern    = sys.argv[2]
     ref_value  = float(sys.argv[3])
-    rel_level  = 1e-6
-    comparator = 1
 elif (len(sys.argv) <= 5):
     filename  = sys.argv[1]
     pattern   = sys.argv[2]
     ref_value = float(sys.argv[3])
     rel_level = float(sys.argv[4])
-    comparator = 1
 elif (len(sys.argv) <= 6):
     filename  = sys.argv[1]
     pattern   = sys.argv[2]
@@ -57,14 +57,19 @@ for line in lines:
     if match:
         if comparator == 0: # <=
             result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) <= rel_level
+            print "abs(float(%s) - %d) / max(abs(%d), 1e-9) <= %d ==> %s" % (match[0],ref_value,ref_value,rel_level,result)
         elif comparator == 1: # <
             result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) < rel_level
+            print "abs(float(%s) - %d) / max(abs(%d), 1e-9) < %d ==> %s" % (match[0],ref_value,ref_value,rel_level,result)
         elif comparator == 2: # =
-            result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) = rel_level
+            result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) == rel_level
+            print "abs(float(%s) - %d) / max(abs(%d), 1e-9) == %d ==> %s" % (match[0],ref_value,ref_value,rel_level,result)
         elif comparator == 3: # >
             result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) > rel_level
+            print "abs(float(%s) - %d) / max(abs(%d), 1e-9) > %d ==> %s" % (match[0],ref_value,ref_value,rel_level,result)
         elif comparator == 4: # >=
             result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) >= rel_level
+            print "abs(float(%s) - %d) / max(abs(%d), 1e-9) >= %d ==> %s" % (match[0],ref_value,ref_value,rel_level,result)
         
         if (not result):
             print "FAILED"
