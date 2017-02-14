@@ -187,19 +187,19 @@ Tasks:
 This benchmark uses the tests from netlib and miplib2000.
  - COIN_ENABLE_DOWNLOAD_DATA_TEST
  - COIN_ENABLE_DOWNLOAD_ZLIB
- - COIN_ENABLE_DOWNLOAD_MIPLIB2000
 
 The options tested are the following ones:
  - COIN_ENABLE_DOWNLOAD_LAPACK
  - COIN_ENABLE_DOWNLOAD_MUMPS
  - COIN_ENABLE_DOWNLOAD_SUITESPARSE
+ - COIN_ENABLE_DOWNLOAD_CLAPACK
 
 The command used to launch the tests:
 ```
 $ ctest -LE LONG
 ```
 
-With Lapack fortran and Mumps:
+With Lapack fortran and Mumps (using mumps / libseq and not MPI):
 
 88% tests passed, 82 tests failed out of 680
 
@@ -266,4 +266,21 @@ SAMPLE     =   3.80 sec (34 tests)
 WARNING    =  21.88 sec (8 tests)
 
 Total Test time (real) = 1074.91 sec
+
+With CLapack:
+
+88% tests passed, 79 tests failed out of 680
+
+Label Time Summary:
+CBC        = 957.43 sec (329 tests)
+CLP        =  47.56 sec (329 tests)
+INFEAS     =  11.75 sec (56 tests)
+LP         =   0.01 sec (1 test)
+MIPLIB     = 921.59 sec (204 tests)
+MPS        = 1009.95 sec (677 tests)
+NETLIB     =  58.09 sec (360 tests)
+SAMPLE     =   3.59 sec (34 tests)
+WARNING    =  22.01 sec (8 tests)
+
+Total Test time (real) = 1010.68 sec
 
