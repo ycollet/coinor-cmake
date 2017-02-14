@@ -182,3 +182,88 @@ Tasks:
 - [ ] Fine tune check of headers and add missing check from original configure.ac files
 - [ ] use add_test to test various combination of flags
 
+# Benchmark
+
+This benchmark uses the tests from netlib and miplib2000.
+ - COIN_ENABLE_DOWNLOAD_DATA_TEST
+ - COIN_ENABLE_DOWNLOAD_ZLIB
+ - COIN_ENABLE_DOWNLOAD_MIPLIB2000
+
+The options tested are the following ones:
+ - COIN_ENABLE_DOWNLOAD_LAPACK
+ - COIN_ENABLE_DOWNLOAD_MUMPS
+ - COIN_ENABLE_DOWNLOAD_SUITESPARSE
+
+The command used to launch the tests:
+```
+$ ctest -LE LONG
+```
+
+With Lapack fortran and Mumps:
+
+88% tests passed, 82 tests failed out of 680
+
+Label Time Summary:
+CBC        = 1690.32 sec (329 tests)
+CLP        = 133.33 sec (329 tests)
+INFEAS     =  33.03 sec (56 tests)
+LP         =   0.01 sec (1 test)
+MIPLIB     = 1593.88 sec (204 tests)
+MPS        = 1837.59 sec (677 tests)
+NETLIB     = 158.89 sec (360 tests)
+SAMPLE     =   9.54 sec (34 tests)
+WARNING    =  56.65 sec (8 tests)
+
+Total Test time (real) = 1838.46 sec
+
+Without options:
+
+88% tests passed, 80 tests failed out of 680
+
+Label Time Summary:
+CBC        = 1004.88 sec (329 tests)
+CLP        =  52.22 sec (329 tests)
+INFEAS     =  12.52 sec (56 tests)
+LP         =   0.00 sec (1 test)
+MIPLIB     = 967.56 sec (204 tests)
+MPS        = 1062.23 sec (677 tests)
+NETLIB     =  62.45 sec (360 tests)
+SAMPLE     =   3.80 sec (34 tests)
+WARNING    =  21.92 sec (8 tests)
+
+Total Test time (real) = 1062.97 sec
+
+With lapack fortran:
+
+88% tests passed, 79 tests failed out of 680
+
+Label Time Summary:
+CBC        = 995.23 sec (329 tests)
+CLP        =  50.12 sec (329 tests)
+INFEAS     =  12.92 sec (56 tests)
+LP         =   0.01 sec (1 test)
+MIPLIB     = 954.95 sec (204 tests)
+MPS        = 1050.36 sec (677 tests)
+NETLIB     =  63.19 sec (360 tests)
+SAMPLE     =   3.82 sec (34 tests)
+WARNING    =  22.82 sec (8 tests)
+
+Total Test time (real) = 1051.04 sec
+
+With Lapack fortran and SuiteSparse:
+
+88% tests passed, 79 tests failed out of 680
+
+Label Time Summary:
+CBC        = 1014.70 sec (329 tests)
+CLP        =  54.28 sec (329 tests)
+INFEAS     =  12.29 sec (56 tests)
+LP         =   0.01 sec (1 test)
+MIPLIB     = 980.29 sec (204 tests)
+MPS        = 1074.20 sec (677 tests)
+NETLIB     =  61.76 sec (360 tests)
+SAMPLE     =   3.80 sec (34 tests)
+WARNING    =  21.88 sec (8 tests)
+
+Total Test time (real) = 1074.91 sec
+
