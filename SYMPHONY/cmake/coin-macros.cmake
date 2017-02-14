@@ -76,33 +76,6 @@ macro(add_coin_test Name SolverName FileData FileOut FileLog)
   endif ()
 endmacro()
 
-# add_coin_sym_test: generate a cmake wrapper around symphony executable and then add the test
-# SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
-# Name: the name of the test
-# FileData: the name of the mps / lp data file
-# FileOut: the name of the .out data file
-# FileLog: the name of the .log data file
-
-macro(add_coin_sym_test Name SolverName FileData FileOut FileLog)
-  # -solution ${FileOut} -solve
-  if (WIN32)
-    file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/symphony -F ${FileData} %COIN_EXE_OPTIONS% \n"
-         "                OUTPUT_FILE ${FileLog})\n")
-  else ()
-    file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/symphony -F ${FileData} $COIN_EXE_OPTIONS \n"
-         "                OUTPUT_FILE ${FileLog})\n")
-  endif ()
-  
-  add_test(NAME ${Name}
-           COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake)
-  
-  if (WIN32)
-    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
-  endif ()
-endmacro()
-
 # create_log_analysis: build a log analysis test for one solver. The string FAILED is returned is case of failure and PASSED in case of success
 # - Name: a value corresponding to the name of the test
 # - AdditionalName: a value corresponding to the suffix name of the test
@@ -164,7 +137,11 @@ function(COLOR_MESSAGE TEXT)
   if (CMAKE_COLOR_MAKEFILE AND NOT WIN32)
     message(${TEXT})
   else ()
-    string(REGEX REPLACE "${_escape}.[0123456789;]*m" "" __TEXT ${TEXT})
+    if (WIN32)
+      string(REGEX REPLACE "${_escape}[\\[0123456789;]*m" "" __TEXT ${TEXT})
+    else ()
+      string(REGEX REPLACE "${_escape}[0123456789;]*m" "" __TEXT ${TEXT})
+    endif ()
     message(${__TEXT})
   endif ()
-endfunction()
+endfunction ()

@@ -25,19 +25,19 @@ macro(CHECK_DIRSYMBOL_EXISTS FILES VARIABLE)
     
     if (CMAKE_REQUIRED_LIBRARIES)
       set(CHECK_DIRSYMBOL_EXISTS_LIBS "-DLINK_LIBRARIES:STRING=${CMAKE_REQUIRED_LIBRARIES}")
-    else (CMAKE_REQUIRED_LIBRARIES)
+    else ()
       set(CHECK_DIRSYMBOL_EXISTS_LIBS)
-    endif (CMAKE_REQUIRED_LIBRARIES)
+    endif ()
     
     if(CMAKE_REQUIRED_INCLUDES)
       set(CMAKE_DIRSYMBOL_EXISTS_INCLUDES "-DINCLUDE_DIRECTORIES:STRING=${CMAKE_REQUIRED_INCLUDES}")
-    else(CMAKE_REQUIRED_INCLUDES)
+    else ()
       set(CMAKE_DIRSYMBOL_EXISTS_INCLUDES)
-    endif(CMAKE_REQUIRED_INCLUDES)
+    endif ()
     
     foreach(FILE ${FILES})
       set(CMAKE_CONFIGURABLE_FILE_CONTENT "${CMAKE_CONFIGURABLE_FILE_CONTENT}#include <${FILE}>\n")
-    endforeach(FILE)
+    endforeach ()
     
     set(CMAKE_CONFIGURABLE_FILE_CONTENT "${CMAKE_CONFIGURABLE_FILE_CONTENT}\nint main()\n{if ((DIR *) 0) return 0;}\n")
 
@@ -63,7 +63,7 @@ macro(CHECK_DIRSYMBOL_EXISTS FILES VARIABLE)
         "passed with the following output:\n"
         "${OUTPUT}\nFile ${CMAKE_BINARY_DIR}/CMakeFiles/CMakeTmp/CheckDIRSymbolExists.c:\n"
         "${CMAKE_CONFIGURABLE_FILE_CONTENT}\n")
-    else (${VARIABLE})
+    else ()
       message(STATUS "Looking for DIR in ${FILES} - not found.")
       set(${VARIABLE} "" CACHE INTERNAL "Have symbol DIR")
       file(APPEND ${CMAKE_BINARY_DIR}/CMakeFiles/CMakeError.log 
@@ -71,6 +71,6 @@ macro(CHECK_DIRSYMBOL_EXISTS FILES VARIABLE)
         "failed with the following output:\n"
         "${OUTPUT}\nFile ${CMAKE_BINARY_DIR}/CMakeFiles/CMakeTmp/CheckDIRSymbolExists.c:\n"
         "${CMAKE_CONFIGURABLE_FILE_CONTENT}\n")
-    endif (${VARIABLE})
-  endif (NOT DEFINED ${VARIABLE})
-endmacro (CHECK_DIRSYMBOL_EXISTS)
+    endif ()
+  endif ()
+endmacro ()

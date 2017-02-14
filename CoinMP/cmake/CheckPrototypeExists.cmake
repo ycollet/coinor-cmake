@@ -16,7 +16,7 @@ macro(CHECK_PROTOTYPE_EXISTS _SYMBOL _HEADER _RESULT)
   set(_INCLUDE_FILES)
   foreach(it ${_HEADER})
     set(_INCLUDE_FILES "${_INCLUDE_FILES}#include <${it}>\n")
-  endforeach(it)
+  endforeach()
   
   set(_CHECK_PROTO_EXISTS_SOURCE_CODE "
 ${_INCLUDE_FILES}
@@ -33,5 +33,6 @@ int main()
   return 0;
 }
 ")
+  
   check_c_source_compiles("${_CHECK_PROTO_EXISTS_SOURCE_CODE}" ${_RESULT})
-endmacro(CHECK_PROTOTYPE_EXISTS _SYMBOL _HEADER _RESULT)
+endmacro()

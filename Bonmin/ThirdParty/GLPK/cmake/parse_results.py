@@ -7,19 +7,37 @@ import sys
 # parse_results.py netlib_fit2d_cbc.log 'Optimal objective <number>' -68464.293294 1e-6
 # parse_results.py netlib_fit2d_cbc.log 'Optimal objective <number>' -68464.293294
 
+# comparator = 0 -> "<="
+# comparator = 1 -> "<"
+# comparator = 2 -> "="
+# comparator = 3 -> ">"
+# comparator = 4 -> ">="
+
 if (len(sys.argv) <= 4):
-    filename  = sys.argv[1]
-    pattern   = sys.argv[2]
-    ref_value = float(sys.argv[3])
-    rel_level = 1e-6
+    filename   = sys.argv[1]
+    pattern    = sys.argv[2]
+    ref_value  = float(sys.argv[3])
+    rel_level  = 1e-6
+    comparator = 1
 elif (len(sys.argv) <= 5):
     filename  = sys.argv[1]
     pattern   = sys.argv[2]
     ref_value = float(sys.argv[3])
     rel_level = float(sys.argv[4])
+    comparator = 1
+elif (len(sys.argv) <= 6):
+    filename  = sys.argv[1]
+    pattern   = sys.argv[2]
+    ref_value = float(sys.argv[3])
+    rel_level = float(sys.argv[4])
+    comparator = int(sys.argv[5])
 else:
-    print 'usage: parse_result.py filename pattern ref_value [rel_level=1e-6]'
+    print 'usage: parse_result.py filename pattern ref_value [rel_level=1e-6] [comparator=1]'
     sys.exit(1)
+
+if comparator > 4:
+    print 'wrong value for comparator (0,1,2,3,4) here: %s' % comparator
+    comparator = 1
 
 # Internal variables
 number_re = '([-+]?\d+\.*\d*)'
@@ -37,7 +55,17 @@ for line in lines:
     # Regex applied to each line
     match = re.findall(pattern, line)
     if match:
-        result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) < rel_level
+        if comparator == 0: # <=
+            result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) <= rel_level
+        elif comparator == 1: # <
+            result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) < rel_level
+        elif comparator == 2: # =
+            result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) = rel_level
+        elif comparator == 3: # >
+            result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) > rel_level
+        elif comparator == 4: # >=
+            result = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9) >= rel_level
+        
         if (not result):
             print "FAILED"
             sys.exit(-1)

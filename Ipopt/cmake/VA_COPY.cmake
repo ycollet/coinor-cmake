@@ -1,4 +1,4 @@
-MACRO(VA_COPY)
+macro(VA_COPY)
   write_file("${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeTmp/cmake_try_compile.c"
     "#include <stdarg.h>
     void f (int i, ...) {

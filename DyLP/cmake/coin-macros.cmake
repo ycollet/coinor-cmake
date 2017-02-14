@@ -93,53 +93,6 @@ macro(create_log_analysis Name AdditionalName Filename TestRegex TestRefVal Test
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES PASS_REGULAR_EXPRESSION "PASSED")
 endmacro()
 
-# add_coin_dylp_test: generate a cmake wrapper around osi_dylp executable and then add the test
-# SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
-# Name: the name of the test
-# FileData: the name of the mps / lp data file
-# FileOut: the name of the .out data file
-# FileLog: the name of the .log data file
-
-macro(add_coin_dylp_test Name SolverName FileData FileOut FileLog)
-  if (NOT EXISTS ${CMAKE_BINARY_DIR}/tmp)
-    make_directory(${CMAKE_BINARY_DIR}/tmp)
-  endif ()
-  
-  get_filename_component(FileData_EXT ${FileData} EXT)
-  get_filename_component(FileData_NAME ${FileData} NAME)
-  
-  if ((FileData_EXT STREQUAL ".mps.gz") OR (FileData_EXT STREQUAL ".lp.gz") OR (FileData_EXT STREQUAL ".gz"))
-    string(REGEX REPLACE ".gz" "" FileData_NAME_NOGZ ${FileData_NAME})
-    
-    if (WIN32)
-      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-           "execute_process(COMMAND     ${CMAKE_COMMAND} -E copy ${FileData} ${CMAKE_BINARY_DIR}/tmp \n"
-           "                         && gunzip.exe -f ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME} \n"
-           "                         && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${FileLog} -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})")
-    else ()
-      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-           "execute_process(COMMAND     ${CMAKE_COMMAND} -E copy ${FileData} ${CMAKE_BINARY_DIR}/tmp \n"
-           "                         && gunzip -f ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME} \n"
-           "                         && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${FileLog} -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})")
-    endif ()
-  else ()
-    if (WIN32)
-      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-           "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${FileLog} -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})")
-    else ()
-      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-           "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${FileLog} -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})")
-    endif ()
-  endif ()
-  
-  add_test(NAME ${Name}
-           COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake)
-  
-  if (WIN32)
-    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
-  endif ()
-endmacro()
-
 # From hydrogen CMakeLists.txt file
 string( ASCII 27 _escape)
 
@@ -191,4 +144,4 @@ function(COLOR_MESSAGE TEXT)
     endif ()
     message(${__TEXT})
   endif ()
-endfunction()
+endfunction ()
