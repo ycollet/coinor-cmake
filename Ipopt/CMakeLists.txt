@@ -353,7 +353,7 @@ endif ()
 
 include(CheckTypeSize)
 
-CHECK_TYPE_SIZE("int *" SIZEOF_INT_P)
+check_type_size("int *" SIZEOF_INT_P)
 
 include(CheckSymbolExists)
 include(CheckFunctionExists)
@@ -640,16 +640,16 @@ include(CTest)
 
 # available colors: {u,b,bg, } black, red, green, yellow, blue, purple, cyan, white, reset
 
-COLOR_MESSAGE("${color_green}")
-COLOR_MESSAGE("************************")
-COLOR_MESSAGE("*                      *")
-COLOR_MESSAGE("* Configuration sum-up *")
-COLOR_MESSAGE("*                      *")
-COLOR_MESSAGE("************************")
-COLOR_MESSAGE("${color_reset} ")
+color_message("${color_green}")
+color_message("************************")
+color_message("*                      *")
+color_message("* Configuration sum-up *")
+color_message("*                      *")
+color_message("************************")
+color_message("${color_reset} ")
 
-COLOR_MESSAGE("${color_cyan}Installation directory:${color_reset} ${CMAKE_INSTALL_PREFIX}")
-COLOR_MESSAGE("${color_cyan}Build type:${color_reset} ${CMAKE_BUILD_TYPE}")
+color_message("${color_cyan}Installation directory:${color_reset} ${CMAKE_INSTALL_PREFIX}")
+color_message("${color_cyan}Build type:${color_reset} ${CMAKE_BUILD_TYPE}")
 
 get_directory_property(ALL_INCLUDES INCLUDE_DIRECTORIES)
 get_directory_property(ALL_LINKS    LINK_DIRECTORIES)
