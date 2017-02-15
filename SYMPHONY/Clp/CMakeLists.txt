@@ -142,15 +142,7 @@ if (COIN_HAS_ABC)
                    ${Clp_DIR}/src/CoinAbcSmallFactorization5.cpp)
 endif ()
            
-if (COIN_HAS_AMD)
-  set(Clp_SRC_LIST ${Clp_SRC_LIST}
-                   ${Clp_DIR}/src/ClpCholeskyUfl.cpp)
-endif ()
-if (COIN_HAS_CHOLMOD)
-  set(Clp_SRC_LIST ${Clp_SRC_LIST}
-                   ${Clp_DIR}/src/ClpCholeskyUfl.cpp)
-endif ()
-if (COIN_HAS_GLPK)
+if (COIN_HAS_AMD OR COIN_HAS_CHOLMOD OR COIN_HAS_GLPK)
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
                    ${Clp_DIR}/src/ClpCholeskyUfl.cpp)
 endif ()
@@ -226,15 +218,7 @@ if (COIN_HAS_ABC)
 endif ()
 
 # if AMD, CHOLMOD, or GLPK is available, then install ClpCholeskyUfl.hpp (for advanced users)
-if (COIN_HAS_AMD)
-  set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
-                           ${Clp_DIR}/src/ClpCholeskyUfl.hpp)
-endif ()
-if (COIN_HAS_CHOLMOD)
-  set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
-                           ${Clp_DIR}/src/ClpCholeskyUfl.hpp)
-endif ()
-if (COIN_HAS_GLPK)
+if (COIN_HAS_AMD OR COIN_HAS_CHOLMOD OR COIN_HAS_GLPK)
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
                            ${Clp_DIR}/src/ClpCholeskyUfl.hpp)
 endif ()
