@@ -312,8 +312,6 @@ if (COIN_PERFORM_CHECKOUT)
   set(Coin_DIR ${CMAKE_BINARY_DIR}/SVN)
 endif ()
 
-link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
-
 if (NOT COINOR_DIR STREQUAL "None")
   link_directories(${COINOR_DIR})
 endif ()
@@ -477,7 +475,7 @@ if (COIN_COMPILE_COVERAGE)
     COMMAND ${LCOV_PATH} --directory . --zerocounters
     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE LONG -LE FAIL
     COMMAND ${LCOV_PATH} --capture --directory . --output-file ${CMAKE_BINARY_DIR}/coverage.info
-    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -935,8 +933,8 @@ endif ()
 
 subdirs(ThirdParty)
 
-include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
-link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
 
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
@@ -991,6 +989,9 @@ if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)
 endif ()
 
 if (COIN_HAS_CLP)
+  set(TEST_LIB_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib")
+  set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+  
   # With MPS files
   
   add_test(NAME afiro_mps_cbc_standard 
@@ -998,7 +999,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(afiro_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(afiro_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(afiro_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(afiro_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   # This test seems to be specific for Ipopt
@@ -1007,7 +1008,7 @@ if (COIN_HAS_CLP)
   #set_tests_properties(conic_mps_cbc_standard PROPERTIES TIMEOUT 3000)
   #set_tests_properties(conic_mps_cbc_standard PROPERTIES LABELS "MPS;LONG")
   #if (WIN32)
-  #  set_tests_properties(conic_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  #  set_tests_properties(conic_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   #endif ()
   
   add_test(NAME exmip1_mps_cbc_standard 
@@ -1015,7 +1016,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(exmip1_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(exmip1_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(exmip1_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(exmip1_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME galenet_mps_cbc_standard 
@@ -1023,7 +1024,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(galenet_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(galenet_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(galenet_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(galenet_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME nw460_mps_cbc_standard 
@@ -1031,7 +1032,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(nw460_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(nw460_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(nw460_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(nw460_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME p0548_mps_cbc_standard 
@@ -1039,7 +1040,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(p0548_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(p0548_mps_cbc_standard PROPERTIES LABEL "MPS")
   if (WIN32)
-    set_tests_properties(p0548_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(p0548_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME scOneInt_mps_cbc_standard 
@@ -1047,7 +1048,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(scOneInt_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(scOneInt_mps_cbc_standard PROPERTIES TIMEOUT "MPS")
   if (WIN32)
-    set_tests_properties(scOneInt_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(scOneInt_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME tp3_mps_cbc_standard 
@@ -1055,7 +1056,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(tp3_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(tp3_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(tp3_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(tp3_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME wedding_16_mps_cbc_standard 
@@ -1063,7 +1064,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(wedding_16_mps_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(wedding_16_mps_cbc_standard PROPERTIES LABELS "MPS;LONG")
   if (WIN32)
-    set_tests_properties(wedding_16_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(wedding_16_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME atm_5_10_1_mps_cbc_standard 
@@ -1071,7 +1072,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(atm_5_10_1_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(atm_5_10_1_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(atm_5_10_1_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(atm_5_10_1_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME e226_mps_cbc_standard
@@ -1079,7 +1080,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(e226_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(e226_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(e226_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(e226_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME finnis_mps_cbc_standard 
@@ -1087,7 +1088,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(finnis_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(finnis_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(finnis_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(finnis_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME hello_mps_cbc_standard 
@@ -1095,7 +1096,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(hello_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(hello_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(hello_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(hello_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME p0033_mps_cbc_standard 
@@ -1103,7 +1104,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(p0033_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(p0033_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(p0033_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(p0033_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME pack1_mps_cbc_standard 
@@ -1111,7 +1112,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(pack1_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(pack1_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(pack1_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(pack1_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME share2qp_mps_cbc_standard 
@@ -1119,7 +1120,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(share2qp_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(share2qp_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(share2qp_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(share2qp_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME tp4_mps_cbc_standard 
@@ -1127,7 +1128,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(tp4_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(tp4_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(tp4_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(tp4_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME brandy_mps_cbc_standard 
@@ -1135,7 +1136,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(brandy_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(brandy_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(brandy_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(brandy_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME exmip1.5_mps_cbc_standard 
@@ -1143,7 +1144,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(exmip1.5_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(exmip1.5_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(exmip1.5_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(exmip1.5_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME galenetbnds_mps_cbc_standard 
@@ -1151,7 +1152,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(galenetbnds_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(galenetbnds_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(galenetbnds_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(galenetbnds_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME lseu_mps_cbc_standard
@@ -1159,7 +1160,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(lseu_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(lseu_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(lseu_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(lseu_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME p0201_mps_cbc_standard
@@ -1167,7 +1168,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(p0201_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(p0201_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(p0201_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(p0201_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME retail3_mps_cbc_standard
@@ -1175,7 +1176,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(retail3_mps_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(retail3_mps_cbc_standard PROPERTIES LABELS "MPS;LONG")
   if (WIN32)
-    set_tests_properties(retail3_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(retail3_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME spec_sections_mps_cbc_standard
@@ -1183,7 +1184,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(spec_sections_mps_cbc_standard PROPERTIES TIMEOUT 3000)
   set_tests_properties(spec_sections_mps_cbc_standard PROPERTIES LABELS "MPS;LONG")
   if (WIN32)
-    set_tests_properties(spec_sections_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(spec_sections_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME tp5_mps_cbc_standard
@@ -1191,7 +1192,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(tp5_mps_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(tp5_mps_cbc_standard PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(tp5_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(tp5_mps_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   # With LP files
@@ -1201,7 +1202,7 @@ if (COIN_HAS_CLP)
   set_tests_properties(exmip1_lp_cbc_standard PROPERTIES TIMEOUT 30)
   set_tests_properties(exmip1_lp_cbc_standard PROPERTIES LABELS "LP")
   if (WIN32)
-    set_tests_properties(exmip1_lp_cbc_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(exmip1_lp_cbc_standard PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
 endif ()
 
@@ -1213,7 +1214,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(afiro_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(afiro_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(afiro_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(afiro_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   # This test seems to be specific for Ipopt
@@ -1222,7 +1223,7 @@ if (CBC_BUILD_CBC_GENERIC)
   #set_tests_properties(conic_mps_cbc_generic PROPERTIES TIMEOUT 30)
   #set_tests_properties(conic_mps_cbc_generic PROPERTIES LABELS "MPS")
   #if (WIN32)
-  #  set_tests_properties(conic_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+  #  set_tests_properties(conic_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   #endif ()
   
   add_test(NAME exmip1_mps_cbc_generic 
@@ -1230,7 +1231,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(exmip1_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(exmip1_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(exmip1_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(exmip1_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME galenet_mps_cbc_generic 
@@ -1238,7 +1239,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(galenet_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(galenet_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(galenet_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(galenet_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME nw460_mps_cbc_generic 
@@ -1246,7 +1247,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(nw460_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(nw460_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(nw460_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(nw460_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME p0548_mps_cbc_generic 
@@ -1254,7 +1255,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(p0548_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(p0548_mps_cbc_generic PROPERTIES LABEL "MPS")
   if (WIN32)
-    set_tests_properties(p0548_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(p0548_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME scOneInt_mps_cbc_generic 
@@ -1262,7 +1263,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(scOneInt_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(scOneInt_mps_cbc_generic PROPERTIES TIMEOUT "MPS")
   if (WIN32)
-    set_tests_properties(scOneInt_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(scOneInt_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME tp3_mps_cbc_generic 
@@ -1270,7 +1271,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(tp3_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(tp3_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(tp3_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(tp3_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME wedding_16_mps_cbc_generic 
@@ -1278,7 +1279,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(wedding_16_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(wedding_16_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(wedding_16_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(wedding_16_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME atm_5_10_1_mps_cbc_generic 
@@ -1286,7 +1287,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(atm_5_10_1_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(atm_5_10_1_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(atm_5_10_1_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(atm_5_10_1_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME e226_mps_cbc_generic
@@ -1294,7 +1295,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(e226_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(e226_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(e226_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(e226_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME finnis_mps_cbc_generic 
@@ -1302,7 +1303,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(finnis_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(finnis_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(finnis_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(finnis_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME hello_mps_cbc_generic 
@@ -1310,7 +1311,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(hello_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(hello_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(hello_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(hello_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME p0033_mps_cbc_generic 
@@ -1318,7 +1319,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(p0033_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(p0033_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(p0033_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(p0033_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME pack1_mps_cbc_generic 
@@ -1326,7 +1327,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(pack1_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(pack1_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(pack1_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(pack1_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME share2qp_mps_cbc_generic 
@@ -1334,7 +1335,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(share2qp_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(share2qp_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(share2qp_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(share2qp_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME tp4_mps_cbc_generic 
@@ -1342,7 +1343,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(tp4_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(tp4_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(tp4_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(tp4_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME brandy_mps_cbc_generic 
@@ -1350,7 +1351,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(brandy_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(brandy_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(brandy_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(brandy_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME exmip1.5_mps_cbc_generic 
@@ -1358,7 +1359,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(exmip1.5_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(exmip1.5_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(exmip1.5_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(exmip1.5_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME galenetbnds_mps_cbc_generic 
@@ -1366,7 +1367,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(galenetbnds_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(galenetbnds_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(galenetbnds_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(galenetbnds_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME lseu_mps_cbc_generic
@@ -1374,7 +1375,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(lseu_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(lseu_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(lseu_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(lseu_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME p0201_mps_cbc_generic
@@ -1382,7 +1383,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(p0201_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(p0201_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(p0201_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(p0201_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME retail3_mps_cbc_generic
@@ -1390,7 +1391,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(retail3_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(retail3_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(retail3_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(retail3_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME spec_sections_mps_cbc_generic
@@ -1398,7 +1399,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(spec_sections_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(spec_sections_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(spec_sections_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(spec_sections_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_test(NAME tp5_mps_cbc_generic
@@ -1406,7 +1407,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(tp5_mps_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(tp5_mps_cbc_generic PROPERTIES LABELS "MPS")
   if (WIN32)
-    set_tests_properties(tp5_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(tp5_mps_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   # With LP files
@@ -1416,7 +1417,7 @@ if (CBC_BUILD_CBC_GENERIC)
   set_tests_properties(exmip1_lp_cbc_generic PROPERTIES TIMEOUT 30)
   set_tests_properties(exmip1_lp_cbc_generic PROPERTIES LABELS "LP")
   if (WIN32)
-    set_tests_properties(exmip1_lp_cbc_generic PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(exmip1_lp_cbc_generic PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
 endif ()
 

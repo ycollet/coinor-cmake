@@ -209,8 +209,6 @@ if (COIN_PERFORM_CHECKOUT)
   set(Coin_DIR ${CMAKE_BINARY_DIR}/SVN)
 endif ()
 
-link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
-
 if (NOT COINOR_DIR STREQUAL "None")
   link_directories(${COINOR_DIR})
 endif ()
@@ -371,7 +369,7 @@ if (COIN_COMPILE_COVERAGE)
     COMMAND ${LCOV_PATH} --directory . --zerocounters
     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE LONG -LE FAIL
     COMMAND ${LCOV_PATH} --capture --directory . --output-file ${CMAKE_BINARY_DIR}/coverage.info
-    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -679,8 +677,8 @@ endif ()
 
 subdirs(ThirdParty)
 
-include_directories(${CMAKE_BINARY_DIR}/Dependencies/include)
-link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
+include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
 
 include_directories(Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
@@ -734,7 +732,7 @@ endif ()
 #set_tests_properties(afiro_mps_dylp_standard PROPERTIES TIMEOUT 30)
 #set_tests_properties(afiro_mps_dylp_standard PROPERTIES LABELS "MPS")
 #if (WIN32)
-#  set_tests_properties(afiro_mps_dylp_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+#  set_tests_properties(afiro_mps_dylp_standard PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
 #endif ()
 
 #

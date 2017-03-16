@@ -2,8 +2,6 @@
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
-set(EP_InstallDir ${CMAKE_BINARY_DIR}/Dependencies)
-
 option(COIN_USE_DOWNLOAD_PTHREAD_WIN32 "Enable the use of the thirdparty PThreads for Windows" OFF)
 option(COIN_USE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
 option(COIN_USE_DOWNLOAD_CLAPACK       "Enable the use of the thirdparty CBlas / CLapack" OFF)
@@ -72,9 +70,9 @@ endif ()
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 
-include(ExternalProject)
+set(EP_InstallDir ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/)
 
-set(EP_InstallDir ${CMAKE_BINARY_DIR}/Dependencies)
+include(ExternalProject)
 
 if (NOT EXISTS ${EP_InstallDir})
   make_directory(${EP_InstallDir})

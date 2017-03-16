@@ -159,7 +159,7 @@ if (DYLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:osi_dylp> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(osi_dylp_example_afiro PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(osi_dylp_example_afiro PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(osi_dylp_example_afiro PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
   endif ()
 endif () 
 

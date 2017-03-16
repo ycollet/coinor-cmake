@@ -180,7 +180,7 @@ if (COINMP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:example> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(coinmp_example PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(coinmp_example PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(coinmp_example PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
   endif ()
 endif ()
 

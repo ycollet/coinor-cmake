@@ -295,7 +295,7 @@ else ()
     include_directories(${Osi_DIR}/src/OsiSpx) 
   endif ()
   if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ASL)
-    include_directories(${CMAKE_BINARY_DIR}/Dependencies/include/ampl)
+    include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include/ampl)
   endif ()
   
   link_directories(${CMAKE_BINARY_DIR}/bin)
@@ -330,6 +330,9 @@ endif ()
 set_include_directories(libCbc)
 
 if (CBC_BUILD_EXAMPLES)
+  set(TEST_LIB_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib")
+  set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+  
   macro(add_example Name)
     add_executable(${Name} ${ARGN})
     target_link_libraries(${Name} libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
@@ -398,7 +401,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:allCuts> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_allCuts PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_allCuts PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_allCuts PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -408,7 +411,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:cbc_driver> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_driver PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_driver PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_driver PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -421,7 +424,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:longthin> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_longthin PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_longthin PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_longthin PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -432,7 +435,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:qmip2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_qmip2 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_qmip2 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_qmip2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -444,7 +447,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sample5> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_sample5 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_sample5 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_sample5 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -454,7 +457,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:barrier> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_barrier PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_barrier PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_barrier PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -469,7 +472,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:fast0507b> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_fast0507b PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_fast0507b PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_fast0507b PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -479,7 +482,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:lotsize> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_lotsize PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_lotsize PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_lotsize PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -492,7 +495,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:qmip> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_qmip PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_qmip PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_qmip PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -502,7 +505,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:simpleBAB> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_simpleBAB PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_simpleBAB PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_simpleBAB PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -515,7 +518,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:fast0507> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_fast0507 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_fast0507 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_fast0507 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -525,7 +528,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:cbc_minimum> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_minimum PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_minimum PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_minimum PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -537,7 +540,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:repeat> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_repeat PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_repeat PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_repeat PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -547,7 +550,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sos> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_sos PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_sos PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_sos PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -557,7 +560,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:crew> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_crew PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_crew PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_crew PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -568,7 +571,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:gear> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_gear PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_gear PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_gear PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -578,7 +581,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:cbc_modify> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_modify PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_modify PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_modify PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -589,7 +592,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sample1> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_sample1 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_sample1 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_sample1 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -599,7 +602,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sudoku> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_sudoku PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_sudoku PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_sudoku PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -610,7 +613,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:cbc_driver2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_driver2 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_driver2 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_driver2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -622,7 +625,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:hotstart> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_hotstart PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_hotstart PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_hotstart PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -632,7 +635,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:nway> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_nway PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_nway PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_nway PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -644,7 +647,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sample2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_sample2 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_sample2 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_sample2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -654,7 +657,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:cbc_driver3> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_driver3 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_driver3 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_driver3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -665,7 +668,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:interrupt> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_interrupt PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_interrupt PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_interrupt PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -677,7 +680,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sample3> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_sample3 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_sample3 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_sample3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -688,7 +691,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:cbc_driver4> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_driver4 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_driver4 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_driver4 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -699,7 +702,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:link> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_link PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_link PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_link PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -711,7 +714,7 @@ if (CBC_BUILD_EXAMPLES)
              COMMAND $<TARGET_FILE:parallel> ${CMAKE_SOURCE_DIR}/Data/Sample)
     set_tests_properties(cbc_example_parallel PROPERTIES TIMEOUT 30)
     if (WIN32)
-      set_tests_properties(cbc_example_parallel PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+      set_tests_properties(cbc_example_parallel PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
     endif ()
   endif ()
   
@@ -723,7 +726,7 @@ if (CBC_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sample4> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(cbc_example_sample4 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(cbc_example_sample4 PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(cbc_example_sample4 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
 endif ()
 

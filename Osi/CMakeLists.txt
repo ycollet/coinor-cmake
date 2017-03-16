@@ -178,8 +178,6 @@ if (NOT Coin_DIR STREQUAL CMAKE_SOURCE_DIR)
   endif ()
 endif ()
 
-link_directories(${CMAKE_BINARY_DIR}/Dependencies/lib)
-
 if (NOT COINOR_DIR STREQUAL "None")
   link_directories(${COINOR_DIR})
 endif ()
@@ -340,7 +338,7 @@ if (COIN_COMPILE_COVERAGE)
     COMMAND ${LCOV_PATH} --directory . --zerocounters
     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE LONG -LE FAIL
     COMMAND ${LCOV_PATH} --capture --directory . --output-file ${CMAKE_BINARY_DIR}/coverage.info
-    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
@@ -620,6 +618,9 @@ if (DOXYGEN AND ENABLE_DOXYGEN)
 endif ()
 
 subdirs(ThirdParty)
+
+include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
 
 if (NOT USE_COINOR_BIN)
   if (COIN_ENABLE_DOWNLOAD_ZLIB)

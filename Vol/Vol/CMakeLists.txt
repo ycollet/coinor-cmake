@@ -102,13 +102,16 @@ if (VOL_BUILD_EXAMPLES)
     endif ()
   endmacro ()
   
+  set(TEST_LIB_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib")
+  set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+  
   add_example(vollp ${Vol_DIR}/examples/VolLp/vollp.cpp)
   
   add_test(NAME vollp_example_afiro
            COMMAND $<TARGET_FILE:vollp> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(vollp_example_afiro PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(vollp_example_afiro PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(vollp_example_afiro PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   
   add_example(volufl ${Vol_DIR}/examples/VolUfl/ufl.cpp)
@@ -120,7 +123,7 @@ if (VOL_BUILD_EXAMPLES)
   
   set_tests_properties(volufl_example_par PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(volufl_example_par PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(volufl_example_par PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
 
   # TODO: Need to gunzip Vol/examples/Volume-LP/data.mps.gz
@@ -134,7 +137,7 @@ if (VOL_BUILD_EXAMPLES)
   
   set_tests_properties(volume_lp_example_data PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(volume_lp_example_data PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/lib\\;${CMAKE_BINARY_DIR}/Dependencies/bin")
+    set_tests_properties(volume_lp_example_data PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
 endif () 
 
