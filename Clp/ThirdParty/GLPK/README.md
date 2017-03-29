@@ -2,13 +2,13 @@ Copy files CMakeLists.txt and config.h.cmake to the root of the glpk distributio
 Then configure your glpk project the following way:
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=/opt/glpk-4.60 -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+cmake -DCMAKE_INSTALL_PREFIX=/opt/glpk-4.61 -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
 make
 sudo make install
 
 Under Windows, it's the same thing. The only difference is in the cmake command line:
 
-cmake -DCMAKE_INSTALL_PREFIX=d:/glpk-4.60 -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "NMake Makefiles" ..
+cmake -DCMAKE_INSTALL_PREFIX=d:/glpk-4.61 -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "NMake Makefiles" ..
 
 nmake
 nmake install
