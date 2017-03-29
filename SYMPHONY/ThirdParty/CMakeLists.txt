@@ -581,7 +581,7 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
 endif ()
 
 if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
-  set(MIPLIB2000_VERSION "1.1.2")
+  set(MIPLIB2000_VERSION "1.1.3")
   
   ExternalProject_Add(EP_MIPLIB2000
                       PREFIX ${EP_InstallDir}/MIPLIB2000
