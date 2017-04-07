@@ -10,12 +10,21 @@ set(COINUTILS_VERSION         "${COINUTILS_VERSION_STRING}" CACHE STRING "The CO
 option(COINUTILS_HAS_ZLIB "CoinUtils uses the Zlib library" OFF)
 set(COINUTILS_HAS_ZLIB_INCLUDE_PATH "None" CACHE STRING "The Zlib library include Path")
 set(COINUTILS_HAS_ZLIB_LIBRARY_PATH "None" CACHE STRING "The Zlib library absolute library Path")
-set(ZLIB_NAME "z" CACHE STRING "The Zlib library name")
 
 option(COINUTILS_HAS_BZLIB "CoinUtils uses the BZlib library" OFF)
 set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "None" CACHE STRING "The BZlib library include Path")
 set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "None" CACHE STRING "The BZlib library absolute library Path")
-set(BZLIB_NAME "bz2" CACHE STRING "The BZlib library name")
+
+if (WIN32 AND NOT MINGW)
+  set(ZLIB_NAME  "zlibstatic.lib" CACHE FILEPATH "The Zlib library name"  FORCE)
+  set(BZLIB_NAME "libbz2.lib" CACHE FILEPATH "The BZlib library name" FORCE)
+elseif (MINGW)
+  set(ZLIB_NAME  "libzlibstatic.a" CACHE FILEPATH "The Zlib library name"  FORCE)
+  set(BZLIB_NAME "libbz2.a"  CACHE FILEPATH "The BZlib library name" FORCE)
+else ()
+  set(ZLIB_NAME  "libz.a" CACHE FILEPATH "The Zlib library name"  FORCE)
+  set(BZLIB_NAME "libbz2.a"  CACHE FILEPATH "The BZlib library name" FORCE)
+endif ()
 
 find_package(Subversion)
 if (Subversion_FOUND)
