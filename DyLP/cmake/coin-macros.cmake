@@ -150,6 +150,25 @@ macro(add_coin_vol_test Name SolverName FileData)
   endif ()
 endmacro()
 
+# add_coin_vol_test_list: generate a cmake wrapper around osi_vol executable and then add the test
+# Prefix: a prefix which will be added to the test name
+# Suffix: a suffix which will be added to the test name
+# FileList: the list of test file
+# Label: a default label to tag tests
+# Timeout: a dafault timeout for tests
+macro(add_coin_vol_test_list Prefix Suffix FileList Label Timeout)
+  foreach(File ${${FileList}})
+    get_filename_component(_NAME ${File} NAME)
+    string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
+    #message(STATUS "DEBUG: _NAME = ${_NAME}")
+    
+    add_coin_test(${Prefix}_${_NAME}_${Suffix} osi_vol ${File})
+    
+    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
+  endforeach ()
+endmacro()
+
 # add_coin_dylp_test: generate a cmake wrapper around osi_dylp executable and then add the test
 # SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
 # Name: the name of the test
@@ -193,6 +212,25 @@ macro(add_coin_dylp_test Name SolverName FileData)
   if (WIN32)
     set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
   endif ()
+endmacro()
+
+# add_coin_dylp_test_list: generate a cmake wrapper around osi_dylp executable and then add the test
+# Prefix: a prefix which will be added to the test name
+# Suffix: a suffix which will be added to the test name
+# FileList: the list of test file
+# Label: a default label to tag tests
+# Timeout: a dafault timeout for tests
+macro(add_coin_dylp_test_list Prefix Suffix FileList Label Timeout)
+  foreach(File ${${FileList}})
+    get_filename_component(_NAME ${File} NAME)
+    string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
+    #message(STATUS "DEBUG: _NAME = ${_NAME}")
+    
+    add_coin_test(${Prefix}_${_NAME}_${Suffix} osi_dylp ${File})
+    
+    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
+  endforeach ()
 endmacro()
 
 # create_log_analysis: build a log analysis test for one solver. The string FAILED is returned is case of failure and PASSED in case of success
