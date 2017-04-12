@@ -1,962 +1,790 @@
 include(coin-macros)
 
+set(CLP_INSTANCES_DIR "${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances")
+
 #
 # Miplib 2000 tests
 #
 
 add_coin_test(miplib2000_30n20b8_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/30n20b8.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_30n20b8.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_30n20b8.log)
+             ${CLP_INSTANCES_DIR}/30n20b8.mps.gz)
 
 set_tests_properties(miplib2000_30n20b8_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_30n20b8_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_30n20b8_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_30n20b8.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_30n20b8_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_30n20b8_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_acc-tight5_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/acc-tight5.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_acc-tight5.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_acc-tight5.log)
+             ${CLP_INSTANCES_DIR}/acc-tight5.mps.gz)
 
 set_tests_properties(miplib2000_acc-tight5_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_acc-tight5_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_acc-tight5_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_acc-tight5.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_acc-tight5_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_acc-tight5_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_aflow40b_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/aflow40b.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_aflow40b.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_aflow40b.log)
+             ${CLP_INSTANCES_DIR}/aflow40b.mps.gz)
 
 set_tests_properties(miplib2000_aflow40b_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_aflow40b_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_aflow40b_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_aflow40b.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_aflow40b_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_aflow40b_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_air04_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/air04.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_air04.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_air04.log)
+             ${CLP_INSTANCES_DIR}/air04.mps.gz)
 
 set_tests_properties(miplib2000_air04_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_air04_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_air04_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_air04.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_air04_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_air04_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_app1-2_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/app1-2.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_app1-2.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_app1-2.log)
+             ${CLP_INSTANCES_DIR}/app1-2.mps.gz)
 
 set_tests_properties(miplib2000_app1-2_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_app1-2_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_app1-2_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_app1-2.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_app1-2_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_app1-2_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_ash608gpia-3col_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/ash608gpia-3col.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ash608gpia-3col.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ash608gpia-3col.log)
+             ${CLP_INSTANCES_DIR}/ash608gpia-3col.mps.gz)
 
 set_tests_properties(miplib2000_ash608gpia-3col_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_ash608gpia-3col_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_ash608gpia-3col_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ash608gpia-3col.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_ash608gpia-3col_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ash608gpia-3col_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_bab5_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/bab5.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_bab5.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_bab5.log)
+             ${CLP_INSTANCES_DIR}/bab5.mps.gz)
 
 set_tests_properties(miplib2000_bab5_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_bab5_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_bab5_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bab5.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_bab5_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_bab5_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_beasleyC3_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/beasleyC3.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_beasleyC3.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_beasleyC3.log)
+             ${CLP_INSTANCES_DIR}/beasleyC3.mps.gz)
 
 set_tests_properties(miplib2000_beasleyC3_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_beasleyC3_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_beasleyC3_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_beasleyC3.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_beasleyC3_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_beasleyC3_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_biella1_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/biella1.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_biella1.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_biella1.log)
+             ${CLP_INSTANCES_DIR}/biella1.mps.gz)
 
 set_tests_properties(miplib2000_biella1_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_biella1_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_biella1_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_biella1.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_biella1_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_biella1_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_bienst2_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/bienst2.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_bienst2.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_bienst2.log)
+             ${CLP_INSTANCES_DIR}/bienst2.mps.gz)
 
 set_tests_properties(miplib2000_bienst2_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_bienst2_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_bienst2_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bienst2.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_bienst2_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_bienst2_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_binkar10_1_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/binkar10_1.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_binkar10_1.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_binkar10_1.log)
+             ${CLP_INSTANCES_DIR}/binkar10_1.mps.gz)
 
 set_tests_properties(miplib2000_binkar10_1_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_binkar10_1_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_binkar10_1_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_binkar10_1.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_binkar10_1_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_binkar10_1_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_bley_xl1_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/bley_xl1.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_bley_xl1.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_bley_xl1.log)
+             ${CLP_INSTANCES_DIR}/bley_xl1.mps.gz)
 
 set_tests_properties(miplib2000_bley_xl1_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_bley_xl1_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_bley_xl1_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bley_xl1.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_bley_xl1_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_bley_xl1_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_bnatt350_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/bnatt350.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_bnatt350.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_bnatt350.log)
+             ${CLP_INSTANCES_DIR}/bnatt350.mps.gz)
 
 set_tests_properties(miplib2000_bnatt350_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_bnatt350_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_bnatt350_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_bnatt350.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_bnatt350_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_bnatt350_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_core2536-691_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/core2536-691.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_core2536-691.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_core2536-691.log)
+             ${CLP_INSTANCES_DIR}/core2536-691.mps.gz)
 
 set_tests_properties(miplib2000_core2536-691_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_core2536-691_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_core2536-691_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_core2536-691.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_core2536-691_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_core2536-691_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_cov1075_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/cov1075.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_cov1075.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_cov1075.log)
+             ${CLP_INSTANCES_DIR}/cov1075.mps.gz)
 
 set_tests_properties(miplib2000_cov1075_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_cov1075_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_cov1075_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_cov1075.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_cov1075_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_cov1075_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_csched010_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/csched010.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_csched010.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_csched010.log)
+             ${CLP_INSTANCES_DIR}/csched010.mps.gz)
 
 set_tests_properties(miplib2000_csched010_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_csched010_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_csched010_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_csched010.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_csched010_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_csched010_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_danoint_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/danoint.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_danoint.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_danoint.log)
+             ${CLP_INSTANCES_DIR}/danoint.mps.gz)
 
 set_tests_properties(miplib2000_danoint_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_danoint_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_danoint_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_danoint.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_danoint_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_danoint_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_dfn-gwin-UUM_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/dfn-gwin-UUM.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_dfn-gwin-UUM.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_dfn-gwin-UUM.log)
+             ${CLP_INSTANCES_DIR}/dfn-gwin-UUM.mps.gz)
 
 set_tests_properties(miplib2000_dfn-gwin-UUM_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_dfn-gwin-UUM_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_dfn-gwin-UUM_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_dfn-gwin-UUM.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_dfn-gwin-UUM_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_dfn-gwin-UUM_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_eil33-2_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/eil33-2.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_eil33-2.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_eil33-2.log)
+             ${CLP_INSTANCES_DIR}/eil33-2.mps.gz)
 
 set_tests_properties(miplib2000_eil33-2_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_eil33-2_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_eil33-2_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_eil33-2.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_eil33-2_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_eil33-2_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_eilB101_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/eilB101.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_eilB101.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_eilB101.log)
+             ${CLP_INSTANCES_DIR}/eilB101.mps.gz)
 
 set_tests_properties(miplib2000_eilB101_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_eilB101_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_eilB101_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_eilB101.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_eilB101_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_eilB101_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_enlight13_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/enlight13.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_enlight13.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_enlight13.log)
+             ${CLP_INSTANCES_DIR}/enlight13.mps.gz)
 
 set_tests_properties(miplib2000_enlight13_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_enlight13_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_enlight13_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_enlight13.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_enlight13_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_enlight13_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_enlight14_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/enlight14.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_enlight14.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_enlight14.log)
+             ${CLP_INSTANCES_DIR}/enlight14.mps.gz)
 
 set_tests_properties(miplib2000_enlight14_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_enlight14_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_enlight14_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_enlight14.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_enlight14_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_enlight14_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_ex9_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/ex9.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ex9.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ex9.log)
+             ${CLP_INSTANCES_DIR}/ex9.mps.gz)
 
 set_tests_properties(miplib2000_ex9_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_ex9_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_ex9_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ex9.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_ex9_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ex9_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_glass4_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/glass4.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_glass4.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_glass4.log)
+             ${CLP_INSTANCES_DIR}/glass4.mps.gz)
 
 set_tests_properties(miplib2000_glass4_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_glass4_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_glass4_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_glass4.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_glass4_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_glass4_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_gmu-35-40_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/gmu-35-40.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_gmu-35-40.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_gmu-35-40.log)
+             ${CLP_INSTANCES_DIR}/gmu-35-40.mps.gz)
 
 set_tests_properties(miplib2000_gmu-35-40_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_gmu-35-40_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_gmu-35-40_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_gmu-35-40.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_gmu-35-40_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_gmu-35-40_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_iis-100-0-cov_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/iis-100-0-cov.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-100-0-cov.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-100-0-cov.log)
+             ${CLP_INSTANCES_DIR}/iis-100-0-cov.mps.gz)
 
 set_tests_properties(miplib2000_iis-100-0-cov_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_iis-100-0-cov_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_iis-100-0-cov_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-100-0-cov.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_iis-100-0-cov_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_iis-100-0-cov_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_iis-bupa-cov_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/iis-bupa-cov.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-bupa-cov.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-bupa-cov.log)
+             ${CLP_INSTANCES_DIR}/iis-bupa-cov.mps.gz)
 
 set_tests_properties(miplib2000_iis-bupa-cov_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_iis-bupa-cov_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_iis-bupa-cov_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-bupa-cov.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_iis-bupa-cov_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_iis-bupa-cov_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_iis-pima-cov_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/iis-pima-cov.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-pima-cov.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-pima-cov.log)
+             ${CLP_INSTANCES_DIR}/iis-pima-cov.mps.gz)
 
 set_tests_properties(miplib2000_iis-pima-cov_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_iis-pima-cov_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_iis-pima-cov_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_iis-pima-cov.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_iis-pima-cov_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_iis-pima-cov_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_lectsched-4-obj_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/lectsched-4-obj.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_lectsched-4-obj.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_lectsched-4-obj.log)
+             ${CLP_INSTANCES_DIR}/lectsched-4-obj.mps.gz)
 
 set_tests_properties(miplib2000_lectsched-4-obj_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_lectsched-4-obj_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_lectsched-4-obj_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_lectsched-4-obj.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_lectsched-4-obj_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_lectsched-4-obj_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_m100n500k4r1_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/m100n500k4r1.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_m100n500k4r1.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_m100n500k4r1.log)
+             ${CLP_INSTANCES_DIR}/m100n500k4r1.mps.gz)
 
 set_tests_properties(miplib2000_m100n500k4r1_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_m100n500k4r1_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_m100n500k4r1_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_m100n500k4r1.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_m100n500k4r1_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_m100n500k4r1_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_macrophage_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/macrophage.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_macrophage.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_macrophage.log)
+             ${CLP_INSTANCES_DIR}/macrophage.mps.gz)
 
 set_tests_properties(miplib2000_macrophage_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_macrophage_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_macrophage_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_macrophage.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_macrophage_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_macrophage_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_map18_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/map18.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_map18.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_map18.log)
+             ${CLP_INSTANCES_DIR}/map18.mps.gz)
 
 set_tests_properties(miplib2000_map18_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_map18_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_map18_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_map18.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_map18_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_map18_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_map20_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/map20.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_map20.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_map20.log)
+             ${CLP_INSTANCES_DIR}/map20.mps.gz)
 
 set_tests_properties(miplib2000_map20_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_map20_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_map20_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_map20.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_map20_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_map20_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_mcsched_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/mcsched.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mcsched.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mcsched.log)
+             ${CLP_INSTANCES_DIR}/mcsched.mps.gz)
 
 set_tests_properties(miplib2000_mcsched_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_mcsched_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_mcsched_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mcsched.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_mcsched_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_mcsched_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_mik-250-1-100-1_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/mik-250-1-100-1.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mik-250-1-100-1.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mik-250-1-100-1.log)
+             ${CLP_INSTANCES_DIR}/mik-250-1-100-1.mps.gz)
 
 set_tests_properties(miplib2000_mik-250-1-100-1_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_mik-250-1-100-1_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_mik-250-1-100-1_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mik-250-1-100-1.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_mik-250-1-100-1_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_mik-250-1-100-1_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_mine-166-5_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/mine-166-5.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-166-5.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-166-5.log)
+             ${CLP_INSTANCES_DIR}/mine-166-5.mps.gz)
 
 set_tests_properties(miplib2000_mine-166-5_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_mine-166-5_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_mine-166-5_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-166-5.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_mine-166-5_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_mine-166-5_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_mine-90-10_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/mine-90-10.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-90-10.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-90-10.log)
+             ${CLP_INSTANCES_DIR}/mine-90-10.mps.gz)
 
 set_tests_properties(miplib2000_mine-90-10_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_mine-90-10_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_mine-90-10_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mine-90-10.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_mine-90-10_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_mine-90-10_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_msc98-ip_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/msc98-ip.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_msc98-ip.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_msc98-ip.log)
+             ${CLP_INSTANCES_DIR}/msc98-ip.mps.gz)
 
 set_tests_properties(miplib2000_msc98-ip_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_msc98-ip_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_msc98-ip_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_msc98-ip.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_msc98-ip_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_msc98-ip_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_mspp16_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/mspp16.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mspp16.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mspp16.log)
+             ${CLP_INSTANCES_DIR}/mspp16.mps.gz)
 
 set_tests_properties(miplib2000_mspp16_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_mspp16_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_mspp16_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mspp16.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_mspp16_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_mspp16_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_mzzv11_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/mzzv11.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mzzv11.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_mzzv11.log)
+             ${CLP_INSTANCES_DIR}/mzzv11.mps.gz)
 
 set_tests_properties(miplib2000_mzzv11_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_mzzv11_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_mzzv11_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_mzzv11.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_mzzv11_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_mzzv11_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_n3div36_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/n3div36.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_n3div36.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_n3div36.log)
+             ${CLP_INSTANCES_DIR}/n3div36.mps.gz)
 
 set_tests_properties(miplib2000_n3div36_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_n3div36_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_n3div36_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n3div36.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_n3div36_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_n3div36_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_n3seq24_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/n3seq24.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_n3seq24.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_n3seq24.log)
+             ${CLP_INSTANCES_DIR}/n3seq24.mps.gz)
 
 set_tests_properties(miplib2000_n3seq24_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_n3seq24_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_n3seq24_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n3seq24.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_n3seq24_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_n3seq24_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_n4-3_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/n4-3.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_n4-3.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_n4-3.log)
+             ${CLP_INSTANCES_DIR}/n4-3.mps.gz)
 
 set_tests_properties(miplib2000_n4-3_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_n4-3_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_n4-3_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_n4-3.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_n4-3_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_n4-3_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-1109824_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-1109824.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1109824.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1109824.log)
+             ${CLP_INSTANCES_DIR}/neos-1109824.mps.gz)
 
 set_tests_properties(miplib2000_neos-1109824_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-1109824_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-1109824_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1109824.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-1109824_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-1109824_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-1337307_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-1337307.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1337307.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1337307.log)
+             ${CLP_INSTANCES_DIR}/neos-1337307.mps.gz)
 
 set_tests_properties(miplib2000_neos-1337307_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-1337307_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-1337307_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1337307.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-1337307_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-1337307_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-1396125_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-1396125.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1396125.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1396125.log)
+             ${CLP_INSTANCES_DIR}/neos-1396125.mps.gz)
 
 set_tests_properties(miplib2000_neos-1396125_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-1396125_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-1396125_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1396125.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-1396125_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-1396125_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos13_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos13.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos13.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos13.log)
+             ${CLP_INSTANCES_DIR}/neos13.mps.gz)
 
 set_tests_properties(miplib2000_neos13_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos13_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos13_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos13.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos13_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos13_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-1601936_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-1601936.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1601936.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1601936.log)
+             ${CLP_INSTANCES_DIR}/neos-1601936.mps.gz)
 
 set_tests_properties(miplib2000_neos-1601936_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-1601936_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-1601936_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-1601936.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-1601936_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-1601936_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos18_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos18.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos18.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos18.log)
+             ${CLP_INSTANCES_DIR}/neos18.mps.gz)
 
 set_tests_properties(miplib2000_neos18_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos18_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos18_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos18.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos18_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos18_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-476283_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-476283.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-476283.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-476283.log)
+             ${CLP_INSTANCES_DIR}/neos-476283.mps.gz)
 
 set_tests_properties(miplib2000_neos-476283_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-476283_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-476283_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-476283.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-476283_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-476283_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-686190_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-686190.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-686190.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-686190.log)
+             ${CLP_INSTANCES_DIR}/neos-686190.mps.gz)
 
 set_tests_properties(miplib2000_neos-686190_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-686190_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-686190_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-686190.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-686190_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-686190_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-849702_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-849702.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-849702.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-849702.log)
+             ${CLP_INSTANCES_DIR}/neos-849702.mps.gz)
 
 set_tests_properties(miplib2000_neos-849702_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-849702_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-849702_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-849702.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-849702_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-849702_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-916792_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-916792.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-916792.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-916792.log)
+             ${CLP_INSTANCES_DIR}/neos-916792.mps.gz)
 
 set_tests_properties(miplib2000_neos-916792_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-916792_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-916792_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-916792.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-916792_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-916792_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_neos-934278_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/neos-934278.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-934278.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-934278.log)
+             ${CLP_INSTANCES_DIR}/neos-934278.mps.gz)
 
 set_tests_properties(miplib2000_neos-934278_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_neos-934278_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_neos-934278_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_neos-934278.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_neos-934278_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-934278_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_net12_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/net12.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_net12.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_net12.log)
+             ${CLP_INSTANCES_DIR}/net12.mps.gz)
 
 set_tests_properties(miplib2000_net12_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_net12_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_net12_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_net12.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_net12_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_net12_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_netdiversion_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/netdiversion.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_netdiversion.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_netdiversion.log)
+             ${CLP_INSTANCES_DIR}/netdiversion.mps.gz)
 
 set_tests_properties(miplib2000_netdiversion_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_netdiversion_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_netdiversion_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_netdiversion.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_netdiversion_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_netdiversion_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_newdano_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/newdano.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_newdano.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_newdano.log)
+             ${CLP_INSTANCES_DIR}/newdano.mps.gz)
 
 set_tests_properties(miplib2000_newdano_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_newdano_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_newdano_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_newdano.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_newdano_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_newdano_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_noswot_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/noswot.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_noswot.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_noswot.log)
+             ${CLP_INSTANCES_DIR}/noswot.mps.gz)
 
 set_tests_properties(miplib2000_noswot_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_noswot_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_noswot_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_noswot.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_noswot_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_noswot_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_ns1208400_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/ns1208400.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1208400.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1208400.log)
+             ${CLP_INSTANCES_DIR}/ns1208400.mps.gz)
 
 set_tests_properties(miplib2000_ns1208400_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_ns1208400_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_ns1208400_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1208400.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_ns1208400_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ns1208400_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_ns1688347_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/ns1688347.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1688347.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1688347.log)
+             ${CLP_INSTANCES_DIR}/ns1688347.mps.gz)
 
 set_tests_properties(miplib2000_ns1688347_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_ns1688347_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_ns1688347_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1688347.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_ns1688347_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ns1688347_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_ns1758913_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/ns1758913.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1758913.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1758913.log)
+             ${CLP_INSTANCES_DIR}/ns1758913.mps.gz)
 
 set_tests_properties(miplib2000_ns1758913_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_ns1758913_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_ns1758913_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1758913.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_ns1758913_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ns1758913_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_ns1766074_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/ns1766074.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1766074.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1766074.log)
+             ${CLP_INSTANCES_DIR}/ns1766074.mps.gz)
 
 set_tests_properties(miplib2000_ns1766074_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_ns1766074_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_ns1766074_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1766074.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_ns1766074_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ns1766074_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_ns1830653_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/ns1830653.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1830653.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1830653.log)
+             ${CLP_INSTANCES_DIR}/ns1830653.mps.gz)
 
 set_tests_properties(miplib2000_ns1830653_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_ns1830653_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_ns1830653_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ns1830653.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_ns1830653_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ns1830653_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_opm2-z7-s2_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/opm2-z7-s2.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_opm2-z7-s2.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_opm2-z7-s2.log)
+             ${CLP_INSTANCES_DIR}/opm2-z7-s2.mps.gz)
 
 set_tests_properties(miplib2000_opm2-z7-s2_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_opm2-z7-s2_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_opm2-z7-s2_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_opm2-z7-s2.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_opm2-z7-s2_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_opm2-z7-s2_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_pg5_34_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/pg5_34.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_pg5_34.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_pg5_34.log)
+             ${CLP_INSTANCES_DIR}/pg5_34.mps.gz)
 
 set_tests_properties(miplib2000_pg5_34_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_pg5_34_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_pg5_34_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pg5_34.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_pg5_34_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_pg5_34_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_pigeon-10_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/pigeon-10.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_pigeon-10.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_pigeon-10.log)
+             ${CLP_INSTANCES_DIR}/pigeon-10.mps.gz)
 
 set_tests_properties(miplib2000_pigeon-10_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_pigeon-10_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_pigeon-10_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pigeon-10.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_pigeon-10_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_pigeon-10_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_pw-myciel4_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/pw-myciel4.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_pw-myciel4.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_pw-myciel4.log)
+             ${CLP_INSTANCES_DIR}/pw-myciel4.mps.gz)
 
 set_tests_properties(miplib2000_pw-myciel4_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_pw-myciel4_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_pw-myciel4_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_pw-myciel4.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_pw-myciel4_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_pw-myciel4_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_qiu_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/qiu.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_qiu.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_qiu.log)
+             ${CLP_INSTANCES_DIR}/qiu.mps.gz)
 
 set_tests_properties(miplib2000_qiu_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_qiu_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_qiu_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_qiu.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_qiu_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_qiu_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_rail507_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/rail507.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rail507.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rail507.log)
+             ${CLP_INSTANCES_DIR}/rail507.mps.gz)
 
 set_tests_properties(miplib2000_rail507_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_rail507_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_rail507_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rail507.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_rail507_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_rail507_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_ran16x16_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/ran16x16.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ran16x16.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_ran16x16.log)
+             ${CLP_INSTANCES_DIR}/ran16x16.mps.gz)
 
 set_tests_properties(miplib2000_ran16x16_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_ran16x16_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_ran16x16_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_ran16x16.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_ran16x16_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ran16x16_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_reblock67_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/reblock67.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_reblock67.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_reblock67.log)
+             ${CLP_INSTANCES_DIR}/reblock67.mps.gz)
 
 set_tests_properties(miplib2000_reblock67_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_reblock67_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_reblock67_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_reblock67.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_reblock67_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_reblock67_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_rmatr100-p10_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/rmatr100-p10.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p10.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p10.log)
+             ${CLP_INSTANCES_DIR}/rmatr100-p10.mps.gz)
 
 set_tests_properties(miplib2000_rmatr100-p10_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_rmatr100-p10_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_rmatr100-p10_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p10.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_rmatr100-p10_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_rmatr100-p10_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_rmatr100-p5_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/rmatr100-p5.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p5.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p5.log)
+             ${CLP_INSTANCES_DIR}/rmatr100-p5.mps.gz)
 
 set_tests_properties(miplib2000_rmatr100-p5_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_rmatr100-p5_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_rmatr100-p5_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmatr100-p5.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_rmatr100-p5_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_rmatr100-p5_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_rmine6_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/rmine6.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rmine6.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rmine6.log)
+             ${CLP_INSTANCES_DIR}/rmine6.mps.gz)
 
 set_tests_properties(miplib2000_rmine6_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_rmine6_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_rmine6_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rmine6.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_rmine6_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_rmine6_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_rocII-4-11_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/rocII-4-11.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rocII-4-11.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rocII-4-11.log)
+             ${CLP_INSTANCES_DIR}/rocII-4-11.mps.gz)
 
 set_tests_properties(miplib2000_rocII-4-11_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_rocII-4-11_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_rocII-4-11_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rocII-4-11.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_rocII-4-11_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_rocII-4-11_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_rococoC10-001000_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/rococoC10-001000.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rococoC10-001000.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_rococoC10-001000.log)
+             ${CLP_INSTANCES_DIR}/rococoC10-001000.mps.gz)
 
 set_tests_properties(miplib2000_rococoC10-001000_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_rococoC10-001000_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_rococoC10-001000_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_rococoC10-001000.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_rococoC10-001000_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_rococoC10-001000_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_roll3000_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/roll3000.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_roll3000.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_roll3000.log)
+             ${CLP_INSTANCES_DIR}/roll3000.mps.gz)
 
 set_tests_properties(miplib2000_roll3000_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_roll3000_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_roll3000_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_roll3000.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_roll3000_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_roll3000_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_satellites1-25_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/satellites1-25.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_satellites1-25.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_satellites1-25.log)
+             ${CLP_INSTANCES_DIR}/satellites1-25.mps.gz)
 
 set_tests_properties(miplib2000_satellites1-25_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_satellites1-25_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_satellites1-25_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_satellites1-25.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_satellites1-25_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_satellites1-25_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_sp98ic_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/sp98ic.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ic.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ic.log)
+             ${CLP_INSTANCES_DIR}/sp98ic.mps.gz)
 
 set_tests_properties(miplib2000_sp98ic_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_sp98ic_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_sp98ic_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ic.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_sp98ic_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_sp98ic_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_sp98ir_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/sp98ir.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ir.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ir.log)
+             ${CLP_INSTANCES_DIR}/sp98ir.mps.gz)
 
 set_tests_properties(miplib2000_sp98ir_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_sp98ir_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_sp98ir_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_sp98ir.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_sp98ir_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_sp98ir_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_tanglegram1_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/tanglegram1.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram1.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram1.log)
+             ${CLP_INSTANCES_DIR}/tanglegram1.mps.gz)
 
 set_tests_properties(miplib2000_tanglegram1_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_tanglegram1_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_tanglegram1_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram1.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_tanglegram1_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_tanglegram1_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_tanglegram2_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/tanglegram2.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram2.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram2.log)
+             ${CLP_INSTANCES_DIR}/tanglegram2.mps.gz)
 
 set_tests_properties(miplib2000_tanglegram2_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_tanglegram2_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_tanglegram2_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_tanglegram2.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_tanglegram2_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_tanglegram2_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_timtab1_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/timtab1.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_timtab1.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_timtab1.log)
+             ${CLP_INSTANCES_DIR}/timtab1.mps.gz)
 
 set_tests_properties(miplib2000_timtab1_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_timtab1_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_timtab1_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_timtab1.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_timtab1_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_timtab1_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_triptim1_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/triptim1.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_triptim1.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_triptim1.log)
+             ${CLP_INSTANCES_DIR}/triptim1.mps.gz)
 
 set_tests_properties(miplib2000_triptim1_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_triptim1_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_triptim1_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_triptim1.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_triptim1_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_triptim1_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_unitcal_7_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/unitcal_7.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_unitcal_7.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_unitcal_7.log)
+             ${CLP_INSTANCES_DIR}/unitcal_7.mps.gz)
 
 set_tests_properties(miplib2000_unitcal_7_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_unitcal_7_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_unitcal_7_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_unitcal_7.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_unitcal_7_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_unitcal_7_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_vpphard_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/vpphard.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_vpphard.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_vpphard.log)
+             ${CLP_INSTANCES_DIR}/vpphard.mps.gz)
 
 set_tests_properties(miplib2000_vpphard_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_vpphard_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_vpphard_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_vpphard.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_vpphard_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_vpphard_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 add_coin_test(miplib2000_zib54-UUE_mps_clp_standard clp
-             ${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010/zib54-UUE.mps.gz
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_zib54-UUE.out
-             ${CMAKE_BINARY_DIR}/tests/miplib2000_zib54-UUE.log)
+             ${CLP_INSTANCES_DIR}/zib54-UUE.mps.gz)
 
 set_tests_properties(miplib2000_zib54-UUE_mps_clp_standard PROPERTIES TIMEOUT 30)
 set_tests_properties(miplib2000_zib54-UUE_mps_clp_standard PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-#create_log_analysis(miplib2000_zib54-UUE_mps_clp_standard "01_Analysis" ${CMAKE_BINARY_DIR}/tests/miplib2000_zib54-UUE.log "Optimal objective <number>" 0 1e-6)
+#create_log_analysis(miplib2000_zib54-UUE_mps_clp_standard "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_zib54-UUE_mps_clp_standard_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")

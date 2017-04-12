@@ -46,26 +46,125 @@ endmacro()
 
 find_package(PythonInterp REQUIRED)
 
+set(COIN_TEST_LOG_DIR  "${CMAKE_BINARY_DIR}/tests" CACHE PATH "The log and output directory for tests")
+
+mark_as_advanced(COIN_TEST_LOG_DIR)
+
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/CoinTests)
   make_directory(${CMAKE_BINARY_DIR}/CoinTests)
+endif ()
+
+if (NOT EXISTS ${COIN_TEST_LOG_DIR})
+  make_directory(${COIN_TEST_LOG_DIR})
 endif ()
 
 # add_coin_test: generate a cmake wrapper around cbc executable and then add the test
 # SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
 # Name: the name of the test
 # FileData: the name of the mps / lp data file
-# FileOut: the name of the .out data file
-# FileLog: the name of the .log data file
 
-macro(add_coin_test Name SolverName FileData FileOut FileLog)
+macro(add_coin_test Name SolverName FileData)
   if (WIN32)
     file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${SolverName} ${FileData} %COIN_EXE_OPTIONS% -solution ${FileOut} -solve\n"
-         "                OUTPUT_FILE ${FileLog})\n")
+         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${SolverName} ${FileData} %COIN_EXE_OPTIONS% -solution ${COIN_TEST_LOG_DIR}/${Name}.out -solve\n"
+         "                OUTPUT_FILE ${COIN_TEST_LOG_DIR}/${Name}.log)\n")
   else ()
     file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
-         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${SolverName} ${FileData} $COIN_EXE_OPTIONS -solution ${FileOut} -solve\n"
-         "                OUTPUT_FILE ${FileLog})\n")
+         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${SolverName} ${FileData} $COIN_EXE_OPTIONS -solution ${COIN_TEST_LOG_DIR}/${Name}.out -solve\n"
+         "                OUTPUT_FILE ${COIN_TEST_LOG_DIR}/${Name}.log)\n")
+  endif ()
+  
+  add_test(NAME ${Name}
+           COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake)
+  
+  if (WIN32)
+    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+  endif ()
+endmacro()
+
+# add_coin_sym_test: generate a cmake wrapper around symphony executable and then add the test
+# SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
+# Name: the name of the test
+# FileData: the name of the mps / lp data file
+
+macro(add_coin_sym_test Name SolverName FileData)
+  if (WIN32)
+    file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+        "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/symphony -F ${FileData} %COIN_EXE_OPTIONS% \n"
+        "                OUTPUT_FILE ${COIN_TEST_LOG_DIR}/${Name}.log)\n")
+  else ()
+    file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+        "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/symphony -F ${FileData} $COIN_EXE_OPTIONS \n"
+        "                OUTPUT_FILE ${COIN_TEST_LOG_DIR}/${Name}.log)\n")
+  endif ()
+  
+  add_test(NAME ${Name}
+           COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake)
+  
+  if (WIN32)
+    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+  endif ()
+endmacro()
+
+# add_coin_vol_test: generate a cmake wrapper for Vol and then add the test
+# SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
+# Name: the name of the test
+# FileData: the name of the mps / lp data file
+
+macro(add_coin_vol_test Name SolverName FileData)
+  if (WIN32)
+    file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/vollp.exe ${FileData} \n"
+         "                OUTPUT_FILE ${COIN_TEST_LOG_DIR}/${Name}.log)\n")
+  else ()
+    file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+         "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/vollp ${FileData} \n"
+         "                OUTPUT_FILE ${COIN_TEST_LOG_DIR}/${Name}.log)\n")
+  endif ()
+  
+  add_test(NAME ${Name}
+           COMMAND ${CMAKE_COMMAND} -P ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake)
+  
+  if (WIN32)
+    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+  endif ()
+endmacro()
+
+# add_coin_dylp_test: generate a cmake wrapper around osi_dylp executable and then add the test
+# SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
+# Name: the name of the test
+# FileData: the name of the mps / lp data file
+
+macro(add_coin_dylp_test Name SolverName FileData)
+  if (NOT EXISTS ${CMAKE_BINARY_DIR}/tmp)
+    make_directory(${CMAKE_BINARY_DIR}/tmp)
+  endif ()
+  
+  get_filename_component(FileData_EXT ${FileData} EXT)
+  get_filename_component(FileData_NAME ${FileData} NAME)
+  
+  if ((FileData_EXT STREQUAL ".mps.gz") OR (FileData_EXT STREQUAL ".lp.gz") OR (FileData_EXT STREQUAL ".gz"))
+    string(REGEX REPLACE ".gz" "" FileData_NAME_NOGZ ${FileData_NAME})
+    
+    if (WIN32)
+      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+           "execute_process(COMMAND     ${CMAKE_COMMAND} -E copy ${FileData} ${CMAKE_BINARY_DIR}/tmp \n"
+           "                         && gunzip.exe -f ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME} \n"
+           "                         && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})")
+    else ()
+      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+           "execute_process(COMMAND     ${CMAKE_COMMAND} -E copy ${FileData} ${CMAKE_BINARY_DIR}/tmp \n"
+           "                         && gunzip -f ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME} \n"
+           "                         && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})")
+    endif ()
+  else ()
+    if (WIN32)
+      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+           "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})")
+    else ()
+      file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.cmake
+           "execute_process(COMMAND     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})")
+    endif ()
   endif ()
   
   add_test(NAME ${Name}
@@ -86,7 +185,7 @@ endmacro()
 macro(create_log_analysis Name AdditionalName Filename TestRegex TestRefVal TestRelLevel)
   add_test(NAME ${Name}_${AdditionalName}
            WORKING_DIRECTORY ${BinTestPath}
-           COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cmake/parse_results.py ${Filename} ${TestRegex} ${TestRefVal} ${TestRelLevel})
+           COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cmake/parse_results.py ${COIN_TEST_LOG_DIR}/${Name}.log ${TestRegex} ${TestRefVal} ${TestRelLevel})
     
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES DEPENDS "${TestName}_${TestSolverName}")
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES ENVIRONMENT "${TEST_ENV_VAR}")
