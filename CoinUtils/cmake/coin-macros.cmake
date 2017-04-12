@@ -58,7 +58,7 @@ if (NOT EXISTS ${COIN_TEST_LOG_DIR})
   make_directory(${COIN_TEST_LOG_DIR})
 endif ()
 
-# add_coin_test: generate a cmake wrapper around cbc executable and then add the test
+# add_coin_test: generate a cmake wrapper around cbc / clp executable and then add the test
 # SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
 # Name: the name of the test
 # FileData: the name of the mps / lp data file
@@ -80,6 +80,26 @@ macro(add_coin_test Name SolverName FileData)
   if (WIN32)
     set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
   endif ()
+endmacro()
+
+# add_coin_test_list: generate a cmake wrapper around cbc / clp executable and then add the test
+# SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
+# Prefix: a prefix which will be added to the test name
+# Suffix: a suffix which will be added to the test name
+# FileList: the list of test file
+# Label: a default label to tag tests
+# Timeout: a dafault timeout for tests
+macro(add_coin_test_list SolverName Prefix Suffix FileList Label Timeout)
+  foreach(File ${${FileList}})
+    get_filename_component(_NAME ${File} NAME)
+    string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
+    #message(STATUS "DEBUG: _NAME = ${_NAME}")
+    
+    add_coin_test(${Prefix}_${_NAME}_${Suffix} ${SolverName} ${File})
+    
+    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
+  endforeach ()
 endmacro()
 
 # add_coin_sym_test: generate a cmake wrapper around symphony executable and then add the test
@@ -178,11 +198,10 @@ endmacro()
 # create_log_analysis: build a log analysis test for one solver. The string FAILED is returned is case of failure and PASSED in case of success
 # - Name: a value corresponding to the name of the test
 # - AdditionalName: a value corresponding to the suffix name of the test
-# - Filename: the filename of the log file
 # - TestRegex: the regex to be extracted with <number> where the result must be found
 # - TestRefVal: the reference result
 # - TestRelLevel: the test threshold
-macro(create_log_analysis Name AdditionalName Filename TestRegex TestRefVal TestRelLevel)
+macro(create_log_analysis Name AdditionalName TestRegex TestRefVal TestRelLevel)
   add_test(NAME ${Name}_${AdditionalName}
            WORKING_DIRECTORY ${BinTestPath}
            COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cmake/parse_results.py ${COIN_TEST_LOG_DIR}/${Name}.log ${TestRegex} ${TestRefVal} ${TestRelLevel})
