@@ -40,7 +40,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_CLAPACK)
-  set(CLapack_version "3.2.1")
+  set(CLAPACK_VERSION "3.2.1")
   
   if (UNIX)
     if (NOT HAVE_64_BIT)
@@ -74,31 +74,31 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
   
   if (WIN32 AND NOT MINGW)
     ExternalProject_Add(EP_Lapack
-                        PREFIX            ${EP_InstallDir}/Lapack
-                        URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
+                        PREFIX            ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}
+                        URL               http://netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz
                         UPDATE_COMMAND    ""
-                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/INCLUDE/
-                                       && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/F2CLIBS/libf2c/
-                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
-                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/SRC/lapack.lib ${EP_InstallDir}/lib
-                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/F2CLIBS/libf2c/libf2c.lib ${EP_InstallDir}/lib/f2c.lib
-                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/BLAS/SRC/blas.lib ${EP_InstallDir}/lib
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/INCLUDE/
+                                       && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/F2CLIBS/libf2c/
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build/SRC/lapack.lib ${EP_InstallDir}/lib
+                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build/F2CLIBS/libf2c/libf2c.lib ${EP_InstallDir}/lib/f2c.lib
+                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build/BLAS/SRC/blas.lib ${EP_InstallDir}/lib
                         )
   elseif (UNIX)
     ExternalProject_Add(EP_Lapack
-                        PREFIX            ${EP_InstallDir}/Lapack
-                        URL               http://netlib.sandia.gov/clapack/clapack-${CLapack_version}-CMAKE.tgz
+                        PREFIX            ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}
+                        URL               http://netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz
                         UPDATE_COMMAND    ""
-                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/INCLUDE/
-                                       && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack/src/EP_Lapack/F2CLIBS/libf2c/
-                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
-                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/SRC/liblapack.a ${EP_InstallDir}/lib
-                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/F2CLIBS/libf2c/libf2c.a ${EP_InstallDir}/lib
-                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/BLAS/SRC/libblas.a ${EP_InstallDir}/lib
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/INCLUDE/
+                                       && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/F2CLIBS/libf2c/
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build/SRC/liblapack.a ${EP_InstallDir}/lib
+                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build/F2CLIBS/libf2c/libf2c.a ${EP_InstallDir}/lib
+                                       && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${CLAPACK_VERSION}/src/EP_Lapack/build/BLAS/SRC/libblas.a ${EP_InstallDir}/lib
                         )
   endif ()
 endif ()
@@ -112,8 +112,10 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_LAPACK)
-  enable_language(Fortran)
+  set(LAPACK_VERSION "3.6.1")
   
+  enable_language(Fortran)
+
   if (UNIX)
     if (NOT HAVE_64_BIT)
       set(LAPACK_C_FLAGS      "-fPIC")
@@ -125,15 +127,15 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
 
   ExternalProject_Add(EP_Lapack
-                      PREFIX ${EP_InstallDir}/Lapack
-                      URL http://www.coin-or.org/BuildTools/Lapack/lapack-3.4.2.tgz
+                      PREFIX ${EP_InstallDir}/Lapack-${LAPACK_VERSION}
+                      URL http://www.coin-or.org/BuildTools/Lapack/lapack-${LAPACK_VERSION}.tgz
                       UPDATE_COMMAND    ""
-                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack/src/EP_Lapack/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/lib/liblapack.a ${EP_InstallDir}/lib
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/lib/libblas.a   ${EP_InstallDir}/lib
-                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack/src/EP_Lapack/build/lib/libtmglib.a ${EP_InstallDir}/lib
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build/lib/liblapack.a ${EP_InstallDir}/lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build/lib/libblas.a   ${EP_InstallDir}/lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build/lib/libtmglib.a ${EP_InstallDir}/lib
                       )
 endif ()
 
@@ -162,14 +164,14 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
 
   ExternalProject_Add(EP_Mumps
-                      PREFIX ${EP_InstallDir}/Mumps
+                      PREFIX ${EP_InstallDir}/Mumps-${MUMPS_VERSION}
                       URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
-                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/Mumps/CMakeLists.txt ${EP_InstallDir}/Mumps/src/EP_Mumps
-                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps/src/EP_Mumps/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DPROJECT_REVISION=10 -DUSE_MUMPS_LIBSEQ=ON -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM}
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
+                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/Mumps/CMakeLists.txt ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DPROJECT_REVISION=10 -DUSE_MUMPS_LIBSEQ=ON -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM}
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
                       )
 
   set(COIN_HAS_MUMPS  ON CACHE BOOL "Enable the Mumps linear solver (enabled by default)" FORCE)
@@ -189,25 +191,25 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
 
   if (WIN32)
     ExternalProject_Add(EP_Metis
-                        PREFIX ${EP_InstallDir}/Metis
+                        PREFIX ${EP_InstallDir}/Metis-${METIS_VERSION}
                         URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
-                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis/src/EP_Metis
-                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis/src/EP_Metis/build
-                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM} install
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM}
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM} install
                         )
   else ()
     ExternalProject_Add(EP_Metis
-                        PREFIX ${EP_InstallDir}/Metis
+                        PREFIX ${EP_InstallDir}/Metis-${METIS_VERSION}
                         URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
-                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis/src/EP_Metis
-                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis/src/EP_Metis/build
-                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM} install
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build
+                                       && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM}
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build ${CMAKE_MAKE_PROGRAM} install
                         )
   endif ()
 endif ()
@@ -221,21 +223,21 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_ASL)
-  set(coinasl "1.3.0")
+  set(ASL_VERSION "1.3.0")
   set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
   
   ExternalProject_Add(EP_ASL
-                      PREFIX ${EP_InstallDir}/ASL
-                      URL https://github.com/ampl/mp/archive/${coinasl}.tar.gz
+                      PREFIX ${EP_InstallDir}/ASL-${ASL_VERSION}
+                      URL https://github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
-                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/AMPLConfig.cmake.in ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
-                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/CMakeLists.txt      ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
-                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/FindDL.cmake        ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
-                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/details.c0.cmake.in ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/
-                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM}
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM} install
+                      PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/AMPLConfig.cmake.in ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/
+                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/CMakeLists.txt      ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/
+                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/FindDL.cmake        ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/
+                                     && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/details.c0.cmake.in ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM}
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM} install
                       )
 endif ()
 
