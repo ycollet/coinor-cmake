@@ -1,6 +1,6 @@
 include(coin-macros)
 
-set(CLP_INSTANCES_DIR "${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances")
+set(CLP_INSTANCES_DIR "${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010")
 
 set(TEST_LIST_MIPLIB2000 ${CLP_INSTANCES_DIR}/30n20b8.mps.gz
                          ${CLP_INSTANCES_DIR}/acc-tight5.mps.gz
