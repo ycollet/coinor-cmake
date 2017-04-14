@@ -478,10 +478,17 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
   set(COIN_ENABLE_CHOLMOD ON CACHE BOOL "Clp use the CholMod linear solver" FORCE)
   set(COIN_ENABLE_AMD     ON CACHE BOOL "Clp uses the AMD linear solver" FORCE)
 
+  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK)
+    set(DEPENDS_SUITESPARSE EP_Lapack)
+  else ()
+    set(DEPENDS_SUITESPARSE "")
+  endif ()
+  
   ExternalProject_Add(EP_SuiteSparse
-                      PREFIX ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}
-                      GIT_REPOSITORY https://github.com/jlblancoc/suitesparse-metis-for-windows.git
-                      GIT_TAG           "v1.3.1"
+                      PREFIX            ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}
+                      DEPENDS           ${DEPENDS_SUITESPARSE}
+                      GIT_REPOSITORY    https://github.com/jlblancoc/suitesparse-metis-for-windows.git
+                      GIT_TAG           "v${SUITESPARSE_VERSION}"
                       PATCH_COMMAND     ""
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build

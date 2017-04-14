@@ -391,19 +391,28 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
+  set(SUITESPARSE_VERSION "1.3.1")
+  
   set(COIN_ENABLE_CHOLMOD ON CACHE BOOL "Clp use the CholMod linear solver" FORCE)
-  set(COIN_ENABLE_AMD     ON CACHE BOOL "Clp uses the AMD linear solver"    FORCE)
+  set(COIN_ENABLE_AMD     ON CACHE BOOL "Clp uses the AMD linear solver" FORCE)
+
+  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK)
+    set(DEPENDS_SUITESPARSE EP_Lapack)
+  else ()
+    set(DEPENDS_SUITESPARSE "")
+  endif ()
   
   ExternalProject_Add(EP_SuiteSparse
-                      PREFIX ${EP_InstallDir}/SuiteSparse-${SUITESPARSE}
-                      GIT_REPOSITORY https://github.com/jlblancoc/suitesparse-metis-for-windows.git
-                      GIT_TAG           "v1.3.1"
-                      UPDATE_COMMAND    ""
+                      PREFIX            ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}
+                      DEPENDS           ${DEPENDS_SUITESPARSE}
+                      GIT_REPOSITORY    https://github.com/jlblancoc/suitesparse-metis-for-windows.git
+                      GIT_TAG           "v${SUITESPARSE_VERSION}"
                       PATCH_COMMAND     ""
-                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse-${SUITESPARSE}/src/EP_SuiteSparse/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE}/src/EP_SuiteSparse//build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
+                      UPDATE_COMMAND    ""
+                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DSHARED=OFF -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
                       )
 endif ()
 

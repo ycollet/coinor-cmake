@@ -302,7 +302,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.a" CACHE STRING "The BZlib library name" FORCE)
     
     ExternalProject_Add(EP_BZlib
-                        PREFIX ${EP_InstallDir}/BZlib
+                        PREFIX ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
                         URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
@@ -508,9 +508,16 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
   set(COIN_ENABLE_CHOLMOD ON CACHE BOOL "Clp use the CholMod linear solver" FORCE)
   set(COIN_ENABLE_AMD     ON CACHE BOOL "Clp uses the AMD linear solver" FORCE)
 
+  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK)
+    set(DEPENDS_SUITESPARSE EP_Lapack)
+  else ()
+    set(DEPENDS_SUITESPARSE "")
+  endif ()
+  
   ExternalProject_Add(EP_SuiteSparse
-                      PREFIX ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}
-                      GIT_REPOSITORY https://github.com/jlblancoc/suitesparse-metis-for-windows.git
+                      PREFIX            ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}
+                      DEPENDS           ${DEPENDS_SUITESPARSE}
+                      GIT_REPOSITORY    https://github.com/jlblancoc/suitesparse-metis-for-windows.git
                       GIT_TAG           "v${SUITESPARSE_VERSION}"
                       PATCH_COMMAND     ""
                       UPDATE_COMMAND    ""
@@ -533,10 +540,10 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
   set(DATA_TEST_VERSION "1.0.7")
   
   ExternalProject_Add(EP_DATA_TEST
-                      PREFIX ${EP_InstallDir}/DATA_TEST
-                      URL http://www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz
+                      PREFIX            ${EP_InstallDir}/DATA_TEST
+                      URL               http://www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz
                       PATCH_COMMAND     ""
-                      UPDATE_COMMAND     ""
+                      UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND     ""
                       INSTALL_COMMAND   ""
@@ -550,10 +557,10 @@ if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
   set(MIPLIB2000_VERSION "1.1.3")
   
   ExternalProject_Add(EP_MIPLIB2000
-                      PREFIX ${EP_InstallDir}/MIPLIB2000
-                      URL http://miplib.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip
+                      PREFIX            ${EP_InstallDir}/MIPLIB2000
+                      URL               http://miplib.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip
                       PATCH_COMMAND     ""
-                      UPDATE_COMMAND     ""
+                      UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND     ""
                       INSTALL_COMMAND   ""
