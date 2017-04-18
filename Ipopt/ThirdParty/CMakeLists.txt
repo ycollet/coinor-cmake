@@ -6,12 +6,13 @@ project(Ipopt_Thirdparty)
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
-option(COIN_ENABLE_DOWNLOAD_MUMPS   "Enable the download / compilation of Mumps" OFF)
-option(COIN_ENABLE_DOWNLOAD_METIS   "Enable the download / compilation of Metis" OFF)
-option(COIN_ENABLE_DOWNLOAD_ASL     "Enable the download / compilation of Ampl Solver Library" OFF)
-option(COIN_ENABLE_DOWNLOAD_LAPACK  "Enable the download / compilation of Blas / Lapack" OFF)
-option(COIN_ENABLE_DOWNLOAD_CLAPACK "Enable the download / compilation of CBlas / CLapack" OFF)
-option(COIN_ENABLE_COMPILE_HSL      "Enable the compilation of HSL" OFF)
+option(COIN_ENABLE_DOWNLOAD_MUMPS         "Enable the download / compilation of Mumps" OFF)
+option(COIN_ENABLE_DOWNLOAD_METIS         "Enable the download / compilation of Metis" OFF)
+option(COIN_ENABLE_DOWNLOAD_ASL           "Enable the download / compilation of Ampl Solver Library" OFF)
+option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK  "Enable the download / compilation of MinGW compiled Blas / Lapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
+option(COIN_ENABLE_COMPILE_HSL            "Enable the compilation of HSL" OFF)
 
 set(COIN_HSL_PATH "None" CACHE PATH "The HSL source Path")
 
@@ -154,6 +155,46 @@ endif ()
 
 # #################################################
 # <===    Lapack
+# #################################################
+
+# #################################################
+# ===>    MinGW Lapack
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_MINGW_LAPACK)
+  set(COIN_MINGW_LAPACK_ZIP_FILE "None" CACHE FILEPATH "Path to the zip file containing MinGW Lapack")
+  
+  set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+  set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+
+  ExternalProject_Add(EP_Lapack
+                      PREFIX            ${EP_InstallDir}/MinGW-Lapack
+                      URL               ${COIN_MINGW_LAPACK_ZIP_FILE}
+                      UPDATE_COMMAND    ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/lib/liblapack.lib       ${EP_InstallDir}/lib/lapack.lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/lib/libblas.lib         ${EP_InstallDir}/lib/blas.lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/lib/libtmglib.lib       ${EP_InstallDir}/lib/tmglib.lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/liblapack.dll       ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libblas.dll         ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libtmglib.dll       ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libgcc_s_seh-1.dll  ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libgfortran-3.dll   ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libquadmath-0.dll   ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libwinpthread-1.dll ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/liblapack.dll       ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libblas.dll         ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libtmglib.dll       ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libgcc_s_seh-1.dll  ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libgfortran-3.dll   ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libquadmath-0.dll   ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libwinpthread-1.dll ${CMAKE_BINARY_DIR}/bin
+                      )
+endif ()
+
+# #################################################
+# <===    MinGW Lapack
 # #################################################
 
 # #################################################

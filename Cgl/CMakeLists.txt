@@ -802,6 +802,16 @@ if (USE_OSI_SOPLEX OR COMPILE_OSI_SOPLEX)
 endif ()
 
 #
+# Install dll dependencies
+#
+
+if (WIN32)
+  install(DIRECTORY ${CMAKE_BINARY_DIR}/bin
+          DESTINATION bin
+          PATTERN "*.dll")
+endif ()
+
+#
 # Packaging
 #
 

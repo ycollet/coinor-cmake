@@ -981,7 +981,19 @@ subdirs(Cbc)
 subdirs(Ipopt)
 subdirs(Bonmin)
 
+#
+# Install dll dependencies
+#
+
+if (WIN32)
+  install(DIRECTORY ${CMAKE_BINARY_DIR}/bin
+          DESTINATION bin
+          PATTERN "*.dll")
+endif ()
+
+#
 # Perform some tests
+#
 
 # Create a directory to store results from tests
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)

@@ -168,6 +168,32 @@ You can trigger a code coverage analysis by issuing the following commande: `mak
 
 Be careful to activate the right set of tests (not the long one).
 
+# Compiling Lapack under Windows with MinGW:
+
+ - download lapack-3.7.0.tgz from http://www.netlib.org/lapack/lapack-3.7.0.tgz
+ - start a CMD windows
+ - set PATH=c:\Mingw64\MinGW64\bin;%PATH% (on a similar path)
+
+```
+ cmake -DCMAKE_INSTALL_PREFIX=c:/lapack-3.7.0 -DCMAKE_BUILD_TYPE_RELEASE -DBUILD_SHARED_LIBS=ON \
+       -DCMAKE_GNUtoMS=ON -DCMAKE_GNUtoMS_VCVARS=c:/Program Files (x86)/Microsoft Visual Studio 11/VC/vcvarsall.bat \
+       -G "Unix Makefiles" ..
+ c:/MinGW64/MinGW64/bin/mingw32-make.exe
+ c:/MinGW64/MinGW64/bin/mingw32-make.exe install
+```
+
+- copy libgfortran-3.dll libquadmath-0.dll libgcc_s_seh-1.dll libwinpthread.dll from c:\MinGW64\MinGW64\bin to
+   c:/lapack-3.7.0/bin
+ - zip c:/lapack-3.7.0 to lapack-3.7.0.zip
+
+ Now, you can use this zip for the compilation of Coin:
+ 
+ Set COIN_MINGW_LAPACK_ZIP_FILE to c:/lapack-3.7.0.zip
+ Check COIN_ENABLE_DOWNLOAD_MINGW_LAPACK
+ Configure
+ Generate
+ make
+
 # Notes
 
 The f2c.h file included in each ThirdParty directory is copied from the Fedora f2c package.

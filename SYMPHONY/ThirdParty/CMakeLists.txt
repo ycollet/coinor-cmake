@@ -3,6 +3,7 @@
 # Thirdparty dependencies
 
 option(COIN_USE_DOWNLOAD_PTHREAD_WIN32 "Enable the use of the thirdparty PThreads for Windows" OFF)
+option(COIN_USE_DOWNLOAD_MINGW_LAPACK  "Enable the use of the thirdparty MinGW compiled Blas / Lapack" OFF)
 option(COIN_USE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
 option(COIN_USE_DOWNLOAD_CLAPACK       "Enable the use of the thirdparty CBlas / CLapack" OFF)
 option(COIN_USE_DOWNLOAD_GLPK          "Enable the use of the thirdparty GLPK" OFF)
@@ -28,7 +29,7 @@ endif ()
 mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
 
-if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWNLOAD_CLAPACK OR
+if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWNLOAD_CLAPACK OR COIN_USE_DOWNLOAD_MINGW_LAPACK OR
     COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR COIN_USE_DOWNLOAD_METIS OR
     COIN_USE_DOWNLOAD_ASL OR COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_SUITESPARSE OR
     COIN_USE_DOWNLOAD_BZLIB OR COIN_USE_DOWNLOAD_CONCORDE)
@@ -36,6 +37,7 @@ if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWN
 endif ()
 
 option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
+option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK  "Enable the download / compilation of MinGW compiled Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
@@ -58,28 +60,28 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST OR COIN_ENABLE_DOWNLOAD_MIPLIB2000)
   set(COIN_ENABLE_DOWNLOAD_ZLIB TRUE)
 endif ()
 
-if (COIN_ENABLE_FIND_LAPACK AND (COIN_DOWNLOAD_LAPACK OR COIN_DOWNLOAD_CLAPACK))
+if (COIN_ENABLE_FIND_LAPACK AND (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK))
   message(STATUS "Warning: COIN_ENABLE_FIND_LAPACK and COIN_ENABLE_DOWNLOAD_[C]LAPACK are activated. Desactivate COIN_ENABLE_DOWNLOAD_[C]LAPACK")
   set(COIN_ENABLE_DOWNLOAD_LAPACK  FALSE)
   set(COIN_ENABLE_DOWNLOAD_CLAPACK FALSE)
 endif ()
 
-if (COIN_DOWNLOAD_LAPACK AND COIN_DOWNLOAD_CLAPACK)
+if (COIN_ENABLE_DOWNLOAD_LAPACK AND COIN_ENABLE_DOWNLOAD_CLAPACK)
   message(STATUS "Warning: COIN_ENABLE_DOWNLOAD_LAPACK and COIN_ENABLE_DOWNLOAD_CLAPACK are activated. I desactivate COIN_ENABLE_DOWNLOAD_LAPACK")
   set(COIN_ENABLE_DOWNLOAD_LAPACK FALSE)
 endif ()
 
-if (COIN_ENABLE_FIND_ZLIB AND COIN_DOWNLOAD_ZLIB)
+if (COIN_ENABLE_FIND_ZLIB AND COIN_ENABLE_DOWNLOAD_ZLIB)
   message(STATUS "Warning: COIN_ENABLE_FIND_ZLIB and COIN_ENABLE_DOWNLOAD_ZLIB are activated. Desactivate COIN_ENABLE_DOWNLOAD_ZLIB")
   set(COIN_ENABLE_DOWNLOAD_ZLIB FALSE)
 endif ()
 
-if (COIN_ENABLE_FIND_BZLIB AND COIN_DOWNLOAD_BZLIB)
+if (COIN_ENABLE_FIND_BZLIB AND COIN_ENABLE_DOWNLOAD_BZLIB)
   message(STATUS "Warning: COIN_ENABLE_FIND_BZLIB and COIN_ENABLE_DOWNLOAD_BZLIB are activated. Desactivate COIN_ENABLE_DOWNLOAD_BZLIB")
   set(COIN_ENABLE_DOWNLOAD_BZLIB FALSE)
 endif ()
 
-if (COIN_DOWNLOAD_SUITESPARSE AND NOT (COIN_DOWNLOAD_LAPACK OR COIN_DOWNLOAD_CLAPACK OR COIN_ENABLE_FIND_LAPACK))
+if (COIN_ENABLE_DOWNLOAD_SUITESPARSE AND NOT (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_ENABLE_FIND_LAPACK))
   message(STATUS "Warning: SuiteSparse needs a Blas/Lapack library. Make sur that a Blas/Lapack library is download or installed.")
 endif ()
 
@@ -225,6 +227,46 @@ endif ()
 
 # #################################################
 # <===    Lapack
+# #################################################
+
+# #################################################
+# ===>    MinGW Lapack
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_MINGW_LAPACK)
+  set(COIN_MINGW_LAPACK_ZIP_FILE "None" CACHE FILEPATH "Path to the zip file containing MinGW Lapack")
+  
+  set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
+  set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
+
+  ExternalProject_Add(EP_Lapack
+                      PREFIX            ${EP_InstallDir}/MinGW-Lapack
+                      URL               ${COIN_MINGW_LAPACK_ZIP_FILE}
+                      UPDATE_COMMAND    ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/lib/liblapack.lib       ${EP_InstallDir}/lib/lapack.lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/lib/libblas.lib         ${EP_InstallDir}/lib/blas.lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/lib/libtmglib.lib       ${EP_InstallDir}/lib/tmglib.lib
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/liblapack.dll       ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libblas.dll         ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libtmglib.dll       ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libgcc_s_seh-1.dll  ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libgfortran-3.dll   ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libquadmath-0.dll   ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libwinpthread-1.dll ${EP_InstallDir}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/liblapack.dll       ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libblas.dll         ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libtmglib.dll       ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libgcc_s_seh-1.dll  ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libgfortran-3.dll   ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libquadmath-0.dll   ${CMAKE_BINARY_DIR}/bin
+                                     && ${CMAKE_COMMAND} -E copy ${EP_InstallDir}/MinGW-Lapack/src/EP_Lapack/bin/libwinpthread-1.dll ${CMAKE_BINARY_DIR}/bin
+                      )
+endif ()
+
+# #################################################
+# <===    MinGW Lapack
 # #################################################
 
 # #################################################
