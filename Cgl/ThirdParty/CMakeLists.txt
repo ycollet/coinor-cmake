@@ -546,7 +546,7 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
   
   set(COIN_ENABLE_CHOLMOD ON CACHE BOOL "Clp use the CholMod linear solver" FORCE)
   set(COIN_ENABLE_AMD     ON CACHE BOOL "Clp uses the AMD linear solver" FORCE)
-  
+
   if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK)
     set(DEPENDS_SUITESPARSE EP_Lapack)
   else ()
@@ -558,13 +558,40 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
                       DEPENDS           ${DEPENDS_SUITESPARSE}
                       GIT_REPOSITORY    https://github.com/jlblancoc/suitesparse-metis-for-windows.git
                       GIT_TAG           "v${SUITESPARSE_VERSION}"
-                      UPDATE_COMMAND    ""
                       PATCH_COMMAND     ""
+                      UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse//build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DSHARED=OFF -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
                       )
+elseif (COIN_ENABLE_AMD OR COIN_ENABLE_CHOLMOD)
+  # Check for AMD and CHOLMOD
+  
+  if (COIN_ENABLE_AMD)
+    find_package(AMD)
+    if (AMD_FOUND)
+      set(COIN_HAS_AMD_INCLUDE_PATH "${AMD_INCLUDE_DIRS}")
+      get_filename_component(AMD_LIBRARIES_PATH "${AMD_LIBRARIES}" DIRECTORY)
+      set(COIN_HAS_AMD_LIBRARY_PATH "${AMD_LIBRARIES_PATH}")
+      set(COIN_HAS_AMD ON)
+    endif ()
+  endif ()
+  
+  if (COIN_ENABLE_CHOLMOD)
+    find_package(CHOLMOD)
+    if (CHOLMOD_FOUND)
+      set(COIN_HAS_CHOLMOD_INCLUDE_PATH "${CHOLMOD_INCLUDE_DIRS}")
+      get_filename_component(CHOLMOD_LIBRARIES_PATH "${CHOLMOD_LIBRARIES}" DIRECTORY)
+      set(COIN_HAS_CHOLMOD_LIBRARY_PATH "${CHOLDMOD_LIBRARIES_PATH}")
+      set(COIN_HAS_CHOLMOD ON)
+    endif ()
+  endif ()
+  
+  if (((COIN_HAS_CHOLMOD AND NOT COIN_HAS_AMD) OR (NOT COIN_HAS_CHOLMOD AND COIN_HAS_AMD)) OR
+      ((COIN_ENABLE_CHOLMOD AND NOT COIN_ENABLE_AMD) OR (NOT COIN_ENABLE_CHOLMOD AND COIN_ENABLE_AMD)))
+    message(FATAL_ERROR "CHOLMOD and AMD must be both activated or both desactivated")
+  endif ()
 endif ()
 
 # #################################################

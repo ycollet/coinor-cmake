@@ -11,7 +11,6 @@ option(COIN_USE_DOWNLOAD_METIS         "Enable the use of the thirdparty METIS" 
 option(COIN_USE_DOWNLOAD_MUMPS         "Enable the use of the thirdparty Mumps" OFF)
 option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" OFF)
 option(COIN_USE_DOWNLOAD_BZLIB         "Enable the use of the thirdparty BZlib" OFF)
-option(COIN_USE_DOWNLOAD_SUITESPARSE   "Enable the use of the thirdparty SuiteSparse" OFF)
 
 if (WIN32 AND NOT MINGW)
   set(ZLIB_NAME  "zlibstatic.lib" CACHE FILEPATH "The Zlib library name"  FORCE)
@@ -29,7 +28,7 @@ mark_as_advanced(ZLIB_NAME
 
 if (COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWNLOAD_CLAPACK OR COIN_USE_DOWNLOAD_MINGW_LAPACK OR
     COIN_USE_DOWNLOAD_GLPK OR COIN_USE_DOWNLOAD_MUMPS OR COIN_USE_DOWNLOAD_METIS OR
-    COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_SUITESPARSE OR COIN_USE_DOWNLOAD_BZLIB)
+    COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_BZLIB)
   return ()
 endif ()
 
@@ -44,7 +43,6 @@ option(COIN_ENABLE_DOWNLOAD_DATA_TEST     "Enable the download / run of Data tes
 option(COIN_ENABLE_DOWNLOAD_MIPLIB2000    "Enable the download / run of miplib 2000 - benchmark" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
-option(COIN_ENABLE_DOWNLOAD_SUITESPARSE   "Enable the download / compilation of SuiteSparse" OFF)
 
 option(COIN_ENABLE_FIND_LAPACK "Enable the detection of Blas / Lapack" OFF)
 option(COIN_ENABLE_FIND_ZLIB   "Enable the detection of Zlib" OFF)
@@ -74,10 +72,6 @@ endif ()
 if (COIN_ENABLE_FIND_BZLIB AND COIN_ENABLE_DOWNLOAD_BZLIB)
   message(STATUS "Warning: COIN_ENABLE_FIND_BZLIB and COIN_ENABLE_DOWNLOAD_BZLIB are activated. Desactivate COIN_ENABLE_DOWNLOAD_BZLIB")
   set(COIN_ENABLE_DOWNLOAD_BZLIB FALSE)
-endif ()
-
-if (COIN_ENABLE_DOWNLOAD_SUITESPARSE AND NOT (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_ENABLE_FIND_LAPACK))
-  message(STATUS "Warning: SuiteSparse needs a Blas/Lapack library. Make sur that a Blas/Lapack library is download or installed.")
 endif ()
 
 # Prevent the "make clean" from cleaning this directory
@@ -511,40 +505,6 @@ endif ()
 # #################################################
 
 # #################################################
-# ===> SuiteSparse compilation
-# #################################################
-
-if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
-  set(SUITESPARSE_VERSION "1.3.1")
-  
-  set(COIN_ENABLE_CHOLMOD ON CACHE BOOL "Clp use the CholMod linear solver" FORCE)
-  set(COIN_ENABLE_AMD     ON CACHE BOOL "Clp uses the AMD linear solver" FORCE)
-
-  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK)
-    set(DEPENDS_SUITESPARSE EP_Lapack)
-  else ()
-    set(DEPENDS_SUITESPARSE "")
-  endif ()
-  
-  ExternalProject_Add(EP_SuiteSparse
-                      PREFIX            ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}
-                      DEPENDS           ${DEPENDS_SUITESPARSE}
-                      GIT_REPOSITORY    https://github.com/jlblancoc/suitesparse-metis-for-windows.git
-                      GIT_TAG           "v${SUITESPARSE_VERSION}"
-                      PATCH_COMMAND     ""
-                      UPDATE_COMMAND    ""
-                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build
-                                     && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DSHARED=OFF -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
-                      )
-endif ()
-
-# #################################################
-# <=== SuiteSparse compilation
-# #################################################
-
-# #################################################
 # ===> Tests
 # #################################################
 
@@ -616,9 +576,6 @@ macro(add_library _target)
   if (COIN_ENABLE_DOWNLOAD_BZLIB)
     add_dependencies(${_target} EP_BZlib)
   endif ()
-  if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
-    add_dependencies(${_target} EP_SuiteSparse)
-  endif ()
 endmacro ()
 
 macro(add_executable _target)
@@ -644,9 +601,6 @@ macro(add_executable _target)
   endif ()
   if (COIN_ENABLE_DOWNLOAD_BZLIB)
     add_dependencies(${_target} EP_BZlib)
-  endif ()
-  if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
-    add_dependencies(${_target} EP_SuiteSparse)
   endif ()
 endmacro ()
 

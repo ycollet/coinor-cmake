@@ -6,13 +6,13 @@ project(Ipopt_Thirdparty)
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
-option(COIN_ENABLE_DOWNLOAD_MUMPS         "Enable the download / compilation of Mumps" OFF)
-option(COIN_ENABLE_DOWNLOAD_METIS         "Enable the download / compilation of Metis" OFF)
-option(COIN_ENABLE_DOWNLOAD_ASL           "Enable the download / compilation of Ampl Solver Library" OFF)
-option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK  "Enable the download / compilation of MinGW compiled Blas / Lapack" OFF)
-option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
-option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
-option(COIN_ENABLE_COMPILE_HSL            "Enable the compilation of HSL" OFF)
+option(COIN_ENABLE_DOWNLOAD_MUMPS        "Enable the download / compilation of Mumps" OFF)
+option(COIN_ENABLE_DOWNLOAD_METIS        "Enable the download / compilation of Metis" OFF)
+option(COIN_ENABLE_DOWNLOAD_ASL          "Enable the download / compilation of Ampl Solver Library" OFF)
+option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK "Enable the download / compilation of MinGW compiled Blas / Lapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_LAPACK       "Enable the download / compilation of Blas / Lapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_CLAPACK      "Enable the download / compilation of CBlas / CLapack" OFF)
+option(COIN_ENABLE_COMPILE_HSL           "Enable the compilation of HSL" OFF)
 
 set(COIN_HSL_PATH "None" CACHE PATH "The HSL source Path")
 

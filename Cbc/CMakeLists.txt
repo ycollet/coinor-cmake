@@ -189,15 +189,15 @@ endif ()
 
 # Various definitions
 # Set to 1 if the CoinUtils package is available -> ?? used ??
-set(COIN_HAS_COINUTILS 1)
+set(COIN_HAS_COINUTILS 1) # NOT USED
 # Set to 1 if the Osi package is available -> See Clp/Makefile.am
-set(COIN_HAS_OSI       1)
+set(COIN_HAS_OSI       1) # NOT USED
 # Set to 1 if the OsiTests package is available -> see Clp/test/Makefile.am
-set(COIN_HAS_OSITESTS  1)
+set(COIN_HAS_OSITESTS  1) # NOT USED
 # Set to 1 if the Sample package is available -> see Cbc/test/Makefile.am
-set(COIN_HAS_SAMPLE    1)
-set(COIN_HAS_CGL       1) # Set this to 1 if cgl is compiled
-set(COIN_HAS_CLP       1) # Set this to 1 if clp is compiled
+set(COIN_HAS_SAMPLE    1) # NOT USED
+set(COIN_HAS_CGL       1) # Set this to 1 if cgl is compiled # NOT USED
+set(COIN_HAS_CLP       1) # Set this to 1 if clp is compiled # USED
 
 # Name of package
 set(PACKAGE           "Cbc")
@@ -238,31 +238,6 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
   else ()
     link_directories(${MKL_ROOT}/lib/ia32)
   endif ()
-endif ()
-
-# Check for AMD and CHOLMOD
-
-if (COIN_ENABLE_AMD)
-  find_package(AMD)
-  if (AMD_FOUND)
-    set(COIN_HAS_AMD_INCLUDE_PATH "${AMD_INCLUDE_DIRS}")
-    set(COIN_HAS_AMD_LIBRARY_PATH "None")
-    set(COIN_HAS_AMD ON)
-  endif ()
-endif ()
-
-if (COIN_ENABLE_CHOLMOD)
-  find_package(CHOLMOD)
-  if (CHOLMOD_FOUND)
-    set(COIN_HAS_CHOLMOD_INCLUDE_PATH "${CHOLMOD_INCLUDE_DIRS}")
-    set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None")
-    set(COIN_HAS_CHOLMOD ON)
-  endif ()
-endif ()
-
-if (((COIN_HAS_CHOLMOD AND NOT COIN_HAS_AMD) OR (NOT COIN_HAS_CHOLMOD AND COIN_HAS_AMD)) OR
-    ((COIN_ENABLE_CHOLMOD AND NOT COIN_ENABLE_AMD) OR (NOT COIN_ENABLE_CHOLMOD AND COIN_ENABLE_AMD)))
-  message(FATAL_ERROR "CHOLMOD and AMD must be both activated or both desactivated")
 endif ()
 
 # Check some directories
