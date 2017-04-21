@@ -236,6 +236,16 @@ if (COINUTILS_ENABLE_UNITTEST)
       target_link_libraries(unitTest-coinutils pthreadVC2)
     endif ()
   endif ()
+  
+  set(TEST_LIB_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib")
+  set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+  
+  add_test(NAME unitTest_coinutils
+           COMMAND $<TARGET_FILE:unitTest-coinutils> -mpsDir=${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(unitTest_coinutils PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(unitTest_coinutils PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+  endif ()
 endif ()
 
 install(TARGETS libCoinUtils 
