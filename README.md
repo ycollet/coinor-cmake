@@ -99,7 +99,7 @@ All the sanitize options for clang are detailled here: http://clang.llvm.org/doc
 
 ```
 $ mkdir build
-$ cd buile
+$ cd build
 $ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/opt/intel/bin/icpc -DCMAKE_C_COMPILER=/opt/intel/bin/icc ..
 $ make
 ```
@@ -139,7 +139,7 @@ This command should produce a Windows executable.
 To enable a more complete list of tests:
 ```
 $ cd build
-$ cmake -DCOIN_ENABLE_DOWNLOAD_ZLIB=ON -DCOIN_ENABLE_DOWNLOAD_DATA_TEST=ON .
+$ cmake -DCOIN_ENABLE_DOWNLOAD_ZLIB=ON -DCOIN_ENABLE_DOWNLOAD_DATA_TEST=ON -DCMAKE_BUILD_TYPE=RELEASE ..
 $ make
 ```
 
@@ -203,9 +203,6 @@ This header is used to fix compilation of clapack ...
 
 Tasks:
 
-- [ ] Finish tests for DyLP
-- [ ] Check missing functions and missing headers in Vol and DyLP
-- [ ] Fine tune check of headers and add missing check from original configure.ac files
 - [ ] use add_test to test various combination of flags
 
 # Benchmark
