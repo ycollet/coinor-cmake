@@ -215,6 +215,25 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
       CACHE PATH "Cbc install prefix" FORCE)
 endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
+# Check for readline
+set(COIN_HAS_READLINE )
+find_package(Readline)
+if (READLINE_FOUND)
+  set(COIN_HAS_READLINE "ON")
+  
+  include_directories(${READLINE_INCLUDE_DIR})
+endif ()
+
+# Check for SSE* and AVX*
+find_package(SSE)
+if (MMX_FOUND OR
+    SSE2_FOUND OR SSE3_FOUND OR SSSE3_FOUND OR SSE4_1_FOUND OR SSE4_2_FOUND OR
+    AVX_FOUND OR AVX2_FOUND)
+  set(CMAKE_C_FLAGS       "${CMAKE_C_FLAGS} ${SSE_COMPILER_FLAGS}")
+  set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} ${SSE_COMPILER_FLAGS}")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${SSE_COMPILER_FLAGS}")
+endif ()
+
 # Check for MKL
 if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
   find_package(MKL)
@@ -1330,3 +1349,5 @@ get_directory_property(ALL_DEFS     COMPILE_DEFINITIONS)
 message(STATUS "${color_cyan}Include directories:${color_reset}     ${ALL_INCLUDES}")
 message(STATUS "${color_cyan}Link directories:${color_reset}        ${ALL_LINKS}")
 message(STATUS "${color_cyan}Compilation definitions:${color_reset} ${ALL_DEFS}")
+message(STATUS "${color_cyan}C flags:${color_reset}                 ${CMAKE_C_FLAGS}")
+message(STATUS "${color_cyan}C++ flags:${color_reset}               ${CMAKE_CXX_FLAGS}")

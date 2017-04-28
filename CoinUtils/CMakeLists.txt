@@ -95,6 +95,25 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
       CACHE PATH "CoinUtils install prefix" FORCE)
 endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 
+# Check for readline
+set(COIN_HAS_READLINE )
+find_package(Readline)
+if (READLINE_FOUND)
+  set(COIN_HAS_READLINE "ON")
+  
+  include_directories(${READLINE_INCLUDE_DIR})
+endif ()
+
+# Check for SSE* and AVX*
+find_package(SSE)
+if (MMX_FOUND OR
+    SSE2_FOUND OR SSE3_FOUND OR SSSE3_FOUND OR SSE4_1_FOUND OR SSE4_2_FOUND OR
+    AVX_FOUND OR AVX2_FOUND)
+  set(CMAKE_C_FLAGS       "${CMAKE_C_FLAGS} ${SSE_COMPILER_FLAGS}")
+  set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} ${SSE_COMPILER_FLAGS}")
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${SSE_COMPILER_FLAGS}")
+endif ()
+
 if ((NOT Coin_DIR STREQUAL CMAKE_SOURCE_DIR) AND (NOT EXISTS ${Coin_DIR}))
   message(FATAL_ERROR "Error: Coin_DIR = ${Coin_DIR} which is not an existing directory")
 endif ()
