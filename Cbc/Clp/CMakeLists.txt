@@ -272,6 +272,8 @@ if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
 endif ()
 
+remove_definitions(-DCBC_THREAD)
+
 if (ENABLE_SHARED_LIBRARIES)
   add_library(libClp SHARED ${Clp_SRC_LIST})
 else ()
@@ -317,7 +319,7 @@ if (CLP_BUILD_EXAMPLES)
   #
   macro(add_example Name)
     add_executable(${Name} ${ARGN})
-    if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
+    if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 OR CBC_USE_THREADS)
       if (MINGW)
         target_link_libraries(${Name} winpthread)
       elseif (NOT WIN32)
@@ -414,6 +416,7 @@ if (CLP_BUILD_EXAMPLES)
   
   
   add_example(decomp2 ${Clp_DIR}/examples/decomp2.cpp)
+
   
   add_test(NAME clp_example_decomp2
            COMMAND $<TARGET_FILE:decomp2> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -529,6 +532,7 @@ if (CLP_BUILD_EXAMPLES)
   
   
   add_example(network ${Clp_DIR}/examples/network.cpp)
+
   
   add_test(NAME clp_example_network
            COMMAND $<TARGET_FILE:network> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -617,9 +621,11 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_testGub2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
+
   
   
   add_example(testGub ${Clp_DIR}/examples/testGub.cpp)
+
   
   add_test(NAME clp_example_testGub
            COMMAND $<TARGET_FILE:testGub> ${CMAKE_SOURCE_DIR}/Data/Sample)
@@ -704,7 +710,7 @@ endif ()
 if (COINUTILS_HAS_BZLIB OR COIN_USE_DOWNLOAD_BZLIB)
   target_link_libraries(clp ${BZLIB_NAME})
 endif ()
-if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
+if (COINUTILS_USE_THREADS OR COIN_USE_DOWNLOAD_PTHREAD_WIN32 OR COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 OR CBC_USE_THREADS)
   if (MINGW)
     target_link_libraries(clp winpthread)
   elseif (NOT WIN32)
