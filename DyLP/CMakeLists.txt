@@ -76,6 +76,8 @@ option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (u
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 
+option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
+
 # Perform SVN checkout of source code
 option(COIN_PERFORM_CHECKOUT "Perform Subversion checkout of source code" OFF)
 
@@ -108,7 +110,8 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_OSI_VERBOSITY
                  COIN_USE_FAST_CODE
                  USE_COINOR_BIN
-                 COINOR_DIR)
+                 COINOR_DIR
+                 USE_PROCESSOR_EXTENSIONS)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -170,14 +173,16 @@ if (READLINE_FOUND)
   include_directories(${READLINE_INCLUDE_DIR})
 endif ()
 
-# Check for SSE* and AVX*
-find_package(SSE)
-if (MMX_FOUND OR
-    SSE2_FOUND OR SSE3_FOUND OR SSSE3_FOUND OR SSE4_1_FOUND OR SSE4_2_FOUND OR
-    AVX_FOUND OR AVX2_FOUND)
-  set(CMAKE_C_FLAGS       "${CMAKE_C_FLAGS} ${SSE_COMPILER_FLAGS}")
-  set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} ${SSE_COMPILER_FLAGS}")
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${SSE_COMPILER_FLAGS}")
+if (USE_PROCESSOR_EXTENSIONS)
+  # Check for SSE* and AVX*
+  find_package(SSE)
+  if (MMX_FOUND OR
+      SSE2_FOUND OR SSE3_FOUND OR SSSE3_FOUND OR SSE4_1_FOUND OR SSE4_2_FOUND OR
+      AVX_FOUND OR AVX2_FOUND)
+    set(CMAKE_C_FLAGS       "${CMAKE_C_FLAGS} ${SSE_COMPILER_FLAGS}")
+    set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} ${SSE_COMPILER_FLAGS}")
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${SSE_COMPILER_FLAGS}")
+  endif ()
 endif ()
 
 # Check for MKL

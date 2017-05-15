@@ -27,6 +27,8 @@ option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (u
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 
+option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
+
 # Threads path
 set(COIN_THREADS_INC_PATH "None" CACHE PATH "The path to the PThreads header files")
 set(COIN_THREADS_LIB_PATH "None" CACHE PATH "The path to the PThreads library files")
@@ -46,6 +48,7 @@ mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
                  Coin_DIR
+                 USE_PROCESSOR_EXTENSIONS
                  COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
                  COINUTILS_USE_MEMPOOL_MAXPOOLED
@@ -104,14 +107,16 @@ if (READLINE_FOUND)
   include_directories(${READLINE_INCLUDE_DIR})
 endif ()
 
-# Check for SSE* and AVX*
-find_package(SSE)
-if (MMX_FOUND OR
-    SSE2_FOUND OR SSE3_FOUND OR SSSE3_FOUND OR SSE4_1_FOUND OR SSE4_2_FOUND OR
-    AVX_FOUND OR AVX2_FOUND)
-  set(CMAKE_C_FLAGS       "${CMAKE_C_FLAGS} ${SSE_COMPILER_FLAGS}")
-  set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} ${SSE_COMPILER_FLAGS}")
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${SSE_COMPILER_FLAGS}")
+if (USE_PROCESSOR_EXTENSIONS)
+  # Check for SSE* and AVX*
+  find_package(SSE)
+  if (MMX_FOUND OR
+      SSE2_FOUND OR SSE3_FOUND OR SSSE3_FOUND OR SSE4_1_FOUND OR SSE4_2_FOUND OR
+      AVX_FOUND OR AVX2_FOUND)
+    set(CMAKE_C_FLAGS       "${CMAKE_C_FLAGS} ${SSE_COMPILER_FLAGS}")
+    set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} ${SSE_COMPILER_FLAGS}")
+    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${SSE_COMPILER_FLAGS}")
+  endif ()
 endif ()
 
 if ((NOT Coin_DIR STREQUAL CMAKE_SOURCE_DIR) AND (NOT EXISTS ${Coin_DIR}))
