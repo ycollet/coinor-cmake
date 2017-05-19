@@ -9,11 +9,11 @@ option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
 
-option(COIN_USE_DOWNLOAD_MINGW_LAPACK  "Enable the use of the thirdparty MinGW compiled Blas / Lapack" OFF)
-option(COIN_USE_DOWNLOAD_LAPACK        "Enable the use of the thirdparty Blas / Lapack" OFF)
-option(COIN_USE_DOWNLOAD_CLAPACK       "Enable the use of the thirdparty CBlas / CLapack" OFF)
-option(COIN_USE_DOWNLOAD_ZLIB          "Enable the use of the thirdparty Zlib" OFF)
-option(COIN_USE_DOWNLOAD_BZLIB         "Enable the use of the thirdparty BZlib" OFF)
+option(COIN_USE_MINGW_LAPACK  "Enable the use of MinGW compiled Blas / Lapack" OFF)
+option(COIN_USE_LAPACK        "Enable the use of Blas / Lapack" OFF)
+option(COIN_USE_CLAPACK       "Enable the use of CBlas / CLapack" OFF)
+option(COIN_USE_ZLIB          "Enable the use of Zlib" OFF)
+option(COIN_USE_BZLIB         "Enable the use of BZlib" OFF)
   
 if (WIN32 AND NOT MINGW)
   set(ZLIB_NAME  "zlibstatic.lib" CACHE FILEPATH "The Zlib library name"  FORCE)
@@ -29,8 +29,8 @@ endif ()
 mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
 
-if (COIN_USE_DOWNLOAD_ZLIB OR COIN_USE_DOWNLOAD_BZLIB OR COIN_USE_DOWNLOAD_MINGW_LAPACK OR
-    COIN_USE_DOWNLOAD_LAPACK OR COIN_USE_DOWNLOAD_CLAPACK)
+if (COIN_USE_ZLIB OR COIN_USE_BZLIB OR COIN_USE_MINGW_LAPACK OR
+    COIN_USE_LAPACK OR COIN_USE_CLAPACK)
   return ()
 endif ()
 
