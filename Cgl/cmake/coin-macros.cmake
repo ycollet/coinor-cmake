@@ -287,17 +287,13 @@ set(color_bgwhite  "${_escape}[47m")   # White
 set(color_reset    "${_escape}[0m")    # Text Reset
 
 # Example of use:
-# COLOR_MESSAGE("${color_cyan}Installation Summary${color_reset}
+# COLOR_MESSAGE("${color_cyan}Installation Summary${color_reset}")
 
 function(COLOR_MESSAGE TEXT)
   if (CMAKE_COLOR_MAKEFILE AND NOT WIN32)
     message(${TEXT})
   else ()
-    if (WIN32)
-      string(REGEX REPLACE "${_escape}[\\[0123456789;]*m" "" __TEXT ${TEXT})
-    else ()
-      string(REGEX REPLACE "${_escape}[0123456789;]*m" "" __TEXT ${TEXT})
-    endif ()
+    string(REGEX REPLACE "${_escape}[\\[0123456789;]*m" "" __TEXT ${TEXT})
     message(${__TEXT})
   endif ()
 endfunction ()
