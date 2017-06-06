@@ -294,7 +294,7 @@ function(COLOR_MESSAGE TEXT)
     message(${TEXT})
   else ()
     string(REGEX REPLACE "${_escape}[\\[0123456789;]*m" "" __TEXT ${TEXT})
-    message(${__TEXT})
+    message("${__TEXT} ")
   endif ()
 endfunction ()
 
