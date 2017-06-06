@@ -240,7 +240,7 @@ if (USE_PROCESSOR_EXTENSIONS)
 endif ()
 
 # Check for MKL
-if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
+if (COIN_HAS_MKL)
   find_package(MKL)
   
   if (MKL_FOUND)
@@ -249,10 +249,11 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
     message(status "MKL library not found")
   endif ()
   
-  if (HAVE_64_BIT)
-    set(COIN_MKL_LIBS "mkl_intel_lp64 mkl_sequential mkl_core")
+  set(COIN_MKL_LIBS "${MKL_LIBRARIES}")
+  if (WIN32)
+    set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_intel_thread libiomp5md)
   else ()
-    set(COIN_MKL_LIBS "mkl_intel_c mkl_sequential mkl_core")
+    set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_gnu_thread gomp dl)
   endif ()
   
   include_directories(${MKL_INCLUDE_DIRS})

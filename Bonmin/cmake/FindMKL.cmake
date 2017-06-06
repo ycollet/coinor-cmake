@@ -1,159 +1,117 @@
-# - Find Intel MKL
-# Find the MKL libraries
-#
-# Options:
-#
-#   MKL_STATIC         : use static linking
-#   MKL_MULTI_THREADED : use multi-threading
-#   MKL_SDL            : Single Dynamic Library interface
-#
-# This module defines the following variables:
-#
-#   MKL_FOUND          : True if MKL_INCLUDE_DIR are found
-#   MKL_INCLUDE_DIR    : where to find mkl.h, etc.
-#   MKL_INCLUDE_DIRS   : set when MKL_INCLUDE_DIR found
-#   MKL_LIBRARIES      : the library to link against.
+# - Find the MKL libraries
+# Modified from Armadillo's ARMA_FindMKL.cmake
+# This module defines
+#  MKL_INCLUDE_DIR, the directory for the MKL headers
+#  MKL_LIB_DIR, the directory for the MKL library files
+#  MKL_COMPILER_LIB_DIR, the directory for the MKL compiler library files
+#  MKL_LIBRARIES, the libraries needed to use Intel's implementation of BLAS & LAPACK.
+#  MKL_FOUND, If false, do not try to use MKL; if true, the macro definition USE_MKL is added.
 
-include(FindPackageHandleStandardArgs)
-
-set(INTEL_ROOT "/opt/intel" CACHE PATH "Folder contains intel libs")
-set(MKL_ROOT $ENV{MKLROOT} CACHE PATH "Folder contains MKL")
-
-if (CMAKE_SIZEOF_VOID_P EQUAL 4)
-  set(IS_64BIT OFF)
-else ()
-  set(IS_64BIT ON)
-endif ()
-
-# Find include dir
-find_path(MKL_INCLUDE_DIR mkl.h
-          PATHS           ${MKL_ROOT}/include)
-
-# Find include directory
-#  There is no include folder under linux
-if (WIN32)
-  find_path(INTEL_INCLUDE_DIR omp.h
-            PATHS             ${INTEL_ROOT}/include)
-  
-  set(MKL_INCLUDE_DIR ${MKL_INCLUDE_DIR} ${INTEL_INCLUDE_DIR})
-endif ()
-
-# Find libraries
-
-# Handle suffix
-set(_MKL_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES ${CMAKE_FIND_LIBRARY_SUFFIXES})
+# Set the include path
+# TODO: what if MKL is not installed in /opt/intel/mkl?
+# try to find at /opt/intel/mkl
+# in windows, try to find MKL at C:/Program Files (x86)/Intel/Composer XE/mkl
 
 if (WIN32)
-  if (MKL_STATIC)
-    set(CMAKE_FIND_LIBRARY_SUFFIXES .lib)
-  else ()
-    set(CMAKE_FIND_LIBRARY_SUFFIXES _dll.lib)
+  if (NOT DEFINED ENV{MKLROOT_PATH})
+    set(MKLROOT_PATH "C:/Program Files (x86)/Intel/Composer XE" CACHE PATH "Where the MKL are stored")
   endif ()
 else ()
-  if (MKL_STATIC)
-    set(CMAKE_FIND_LIBRARY_SUFFIXES .a)
-  else ()
-    set(CMAKE_FIND_LIBRARY_SUFFIXES .so)
-  endif ()
+  set(MKLROOT_PATH "/opt/intel" CACHE PATH "Where the MKL are stored")
 endif ()
 
-# MKL is composed by four layers: Interface, Threading, Computational and RTL
-
-if (MKL_SDL)
-  if (IS_64BIT)
-    find_library(MKL_LIBRARY mkl_rt
-                 PATHS       ${MKL_ROOT}/lib/intel64/)
+if (EXISTS ${MKLROOT_PATH}/mkl OR EXISTS ${MKLROOT_PATH})
+  set(MKL_FOUND TRUE)
+  if (EXISTS ${MKLROOT_PATH}/mkl)
+    message("MKL is found at ${MKLROOT_PATH}/mkl")
   else ()
-    find_library(MKL_LIBRARY mkl_rt
-                 PATHS       ${MKL_ROOT}/lib/ia32/)
+    message("MKL is found at ${MKLROOT_PATH}")
   endif ()
   
-  set(MKL_MINIMAL_LIBRARY ${MKL_LIBRARY})
+  if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+    set(USE_MKL_64BIT ON)
+    if (ARMADILLO_FOUND)
+      if (ARMADILLO_BLAS_LONG_LONG)
+        set(USE_MKL_64BIT_LIB ON)
+        add_definitions(-DMKL_ILP64)
+        message("MKL is linked against ILP64 interface ... ")
+      endif ()
+    endif ()
+  else ()
+    set(USE_MKL_64BIT OFF)
+  endif ()
 else ()
-  ######################### Interface layer #######################
-  if (WIN32)
-    set(MKL_INTERFACE_LIBNAME mkl_intel_c)
-  else ()
-    set(MKL_INTERFACE_LIBNAME mkl_intel)
-  endif ()
-
-  if (IS_64BIT)
-    find_library(MKL_INTERFACE_LIBRARY ${MKL_INTERFACE_LIBNAME}
-                 PATHS                 ${MKL_ROOT}/lib/intel64/)
-  else()
-    find_library(MKL_INTERFACE_LIBRARY ${MKL_INTERFACE_LIBNAME}
-                 PATHS                 ${MKL_ROOT}/lib/ia32/)
-  endif ()
-  
-  ######################## Threading layer ########################
-  if (MKL_MULTI_THREADED)
-    set(MKL_THREADING_LIBNAME mkl_intel_thread)
-  else ()
-    set(MKL_THREADING_LIBNAME mkl_sequential)
-  endif ()
-
-  if (IS_64BIT)
-    find_library(MKL_THREADING_LIBRARY ${MKL_THREADING_LIBNAME}
-                 PATHS                 ${MKL_ROOT}/lib/intel64/)
-  else ()
-    find_library(MKL_THREADING_LIBRARY ${MKL_THREADING_LIBNAME}
-                 PATHS                 ${MKL_ROOT}/lib/ia32/)
-  endif ()
-  
-  ####################### Computational layer #####################
-  if (IS_64BIT)
-    find_library(MKL_CORE_LIBRARY mkl_core
-                 PATHS ${MKL_ROOT}/lib/intel64/)
-    find_library(MKL_FFT_LIBRARY mkl_cdft_core
-                 PATHS ${MKL_ROOT}/lib/intel64/)
-    find_library(MKL_SCALAPACK_LIBRARY mkl_scalapack_core
-                 PATHS ${MKL_ROOT}/lib/intel64/)
-  else ()
-    find_library(MKL_CORE_LIBRARY mkl_core
-                 PATHS ${MKL_ROOT}/lib/ia32/)
-    find_library(MKL_FFT_LIBRARY mkl_cdft_core
-                 PATHS ${MKL_ROOT}/lib/ia32/)
-    find_library(MKL_SCALAPACK_LIBRARY mkl_scalapack_core
-                 PATHS ${MKL_ROOT}/lib/ia32/)
-  endif ()
-  
-  ############################ RTL layer ##########################
-  if (WIN32)
-    set(MKL_RTL_LIBNAME libiomp5md)
-  else ()
-    set(MKL_RTL_LIBNAME libiomp5)
-  endif ()
-
-  if (IS_64BIT)
-    find_library(MKL_RTL_LIBRARY ${MKL_RTL_LIBNAME}
-                 PATHS           ${INTEL_RTL_ROOT}/lib/intel64/)
-  else ()
-    find_library(MKL_RTL_LIBRARY ${MKL_RTL_LIBNAME}
-                 PATHS           ${INTEL_RTL_ROOT}/lib/ia32/)
-  endif ()
-  
-  set(MKL_LIBRARY ${MKL_INTERFACE_LIBRARY}
-                  ${MKL_THREADING_LIBRARY}
-                  ${MKL_CORE_LIBRARY}
-                  ${MKL_FFT_LIBRARY}
-                  ${MKL_SCALAPACK_LIBRARY}
-                  ${MKL_RTL_LIBRARY})
-  
-  set(MKL_MINIMAL_LIBRARY ${MKL_INTERFACE_LIBRARY}
-                          ${MKL_THREADING_LIBRARY}
-                          ${MKL_CORE_LIBRARY}
-                          ${MKL_RTL_LIBRARY})
+  set(MKL_FOUND FALSE)
+  message("MKL is NOT found ... ")
 endif ()
-
-set(CMAKE_FIND_LIBRARY_SUFFIXES ${_MKL_ORIG_CMAKE_FIND_LIBRARY_SUFFIXES})
-
-find_package_handle_standard_args(MKL DEFAULT_MSG
-                                      MKL_INCLUDE_DIR
-                                      MKL_LIBRARY
-                                      MKL_MINIMAL_LIBRARY)
 
 if (MKL_FOUND)
-  set(MKL_INCLUDE_DIRS      ${MKL_INCLUDE_DIR})
-  set(MKL_LIBRARIES         ${MKL_LIBRARY})
-  set(MKL_MINIMAL_LIBRARIES ${MKL_LIBRARY})
+  if (EXISTS ${MKLROOT_PATH}/mkl)
+    set(MKL_INCLUDE_DIR "${MKLROOT_PATH}/mkl/include")
+  else ()
+    set(MKL_INCLUDE_DIR "${MKLROOT_PATH}/include")
+  endif ()
+  add_definitions(-DUSE_MKL)
+  if (USE_MKL_64BIT)
+    if (EXISTS ${MKLROOT_PATH}/mkl)
+      set(MKL_LIB_DIR "${MKLROOT_PATH}/mkl/lib/intel64")
+    else ()
+      set(MKL_LIB_DIR "${MKLROOT_PATH}/lib/intel64")
+    endif ()
+    set(MKL_COMPILER_LIB_DIR "${MKLROOT_PATH}/compiler/lib/intel64")
+    set(MKL_COMPILER_LIB_DIR ${MKL_COMPILER_LIB_DIR} "${MKLROOT_PATH}/lib/intel64")
+    if (USE_MKL_64BIT_LIB)
+      if (WIN32)
+        set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_intel_ilp64)
+      else ()
+        set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_intel_ilp64)
+      endif ()
+    else ()
+      if (WIN32)
+        set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_intel_lp64)
+      else ()
+        set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_intel_lp64)
+      endif ()
+    endif ()
+  else ()
+    if (EXISTS ${MKLROOT_PATH}/mkl)
+      set(MKL_LIB_DIR "${MKLROOT_PATH}/mkl/lib/ia32")
+    else ()
+      set(MKL_LIB_DIR "${MKLROOT_PATH}/lib/ia32")
+    endif ()
+    set(MKL_COMPILER_LIB_DIR "${MKLROOT_PATH}/compiler/lib/ia32")
+    set(MKL_COMPILER_LIB_DIR ${MKL_COMPILER_LIB_DIR} "${MKLROOT_PATH}/lib/ia32")
+    if (WIN32)
+      set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_intel_c)
+    else ( )
+      set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_intel)
+    endif ( )
+  endif ()
+
+  if (WIN32)
+    set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_intel_thread)
+    set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_core)
+    set(MKL_LIBRARIES ${MKL_LIBRARIES} libiomp5md)
+  else ()
+    set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_gnu_thread)
+    set(MKL_LIBRARIES ${MKL_LIBRARIES} mkl_core)
+  endif () 
 endif ()
+
+if (MKL_FOUND)
+  if (NOT MKL_FIND_QUIETLY)
+    message(STATUS "Found MKL libraries:  ${MKL_LIBRARIES}")
+    message(STATUS "MKL_INCLUDE_DIR:      ${MKL_INCLUDE_DIR}")
+    message(STATUS "MKL_LIB_DIR:          ${MKL_LIB_DIR}")
+    message(STATUS "MKL_COMPILER_LIB_DIR: ${MKL_COMPILER_LIB_DIR}")
+  endif ()
+
+  include_directories(${MKL_INCLUDE_DIR})
+  link_directories(${MKL_LIB_DIR} ${MKLROOT_PATH}/lib ${MKLROOT_PATH} ${MKL_COMPILER_LIB_DIR})
+else ()
+  if (MKL_FIND_REQUIRED)
+    message(FATAL_ERROR "Could not find MKL libraries")
+  endif ()
+endif ()
+
+# MARK_AS_ADVANCED(MKL_LIBRARY)

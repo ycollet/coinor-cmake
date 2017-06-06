@@ -11,6 +11,7 @@ option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
 option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
 option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
 option(COIN_USE_FAST_CODE  "Use fast code for CoinUtils" OFF)
+option(COIN_HAS_MKL        "Use Intel MKL library (requires Intel compiler)" OFF)
 
 set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
 set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
@@ -108,6 +109,7 @@ mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_HAS_GLPK_LIBRARY_PATH
                  COIN_OSI_CHECKLEVEL
                  COIN_OSI_VERBOSITY
+                 COIN_HAS_MKL
                  COIN_USE_FAST_CODE)
 
 # Set paths for binary and library generation inside the build directory:
@@ -175,6 +177,32 @@ if (USE_PROCESSOR_EXTENSIONS)
     set(CMAKE_C_FLAGS       "${CMAKE_C_FLAGS} ${SSE_COMPILER_FLAGS}")
     set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} ${SSE_COMPILER_FLAGS}")
     set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${SSE_COMPILER_FLAGS}")
+  endif ()
+endif ()
+
+# Check for MKL
+if (COIN_HAS_MKL)
+  find_package(MKL)
+  
+  if (MKL_FOUND)
+    message(status "MKL library found")
+  else ()
+    message(status "MKL library not found")
+  endif ()
+  
+  set(COIN_MKL_LIBS "${MKL_LIBRARIES}")
+  if (WIN32)
+    set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_intel_thread libiomp5md)
+  else ()
+    set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_gnu_thread gomp dl)
+  endif ()
+  
+  include_directories(${MKL_INCLUDE_DIRS})
+  
+  if (HAVE_64_BIT)
+    link_directories(${MKL_ROOT}/lib/intel64)
+  else ()
+    link_directories(${MKL_ROOT}/lib/ia32)
   endif ()
 endif ()
 

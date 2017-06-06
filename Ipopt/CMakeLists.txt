@@ -39,6 +39,7 @@ option(COIN_COMPILE_PROFILE          "Activate the code profiling compilation" O
 option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation for valgrind" OFF)
 option(COIN_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
 option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
+option(COIN_HAS_MKL                  "Use Intel MKL library (requires Intel compiler)" OFF)
 option(COIN_USE_FAST_CODE            "Use intensive optimization flags" OFF)
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
@@ -52,6 +53,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_PROFILE_VALGRIND
                  COIN_COMPILE_LTO
                  COIN_COMPILE_WHOPR
+                 COIN_HAS_MKL
                  COIN_USE_FAST_CODE
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
@@ -124,6 +126,32 @@ if (USE_PROCESSOR_EXTENSIONS)
     set(CMAKE_C_FLAGS       "${CMAKE_C_FLAGS} ${SSE_COMPILER_FLAGS}")
     set(CMAKE_CXX_FLAGS     "${CMAKE_CXX_FLAGS} ${SSE_COMPILER_FLAGS}")
     set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} ${SSE_COMPILER_FLAGS}")
+  endif ()
+endif ()
+
+# Check for MKL
+if (COIN_HAS_MKL)
+  find_package(MKL)
+  
+  if (MKL_FOUND)
+    message(status "MKL library found")
+  else ()
+    message(status "MKL library not found")
+  endif ()
+  
+  set(COIN_MKL_LIBS "${MKL_LIBRARIES}")
+  if (WIN32)
+    set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_intel_thread libiomp5md)
+  else ()
+    set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_gnu_thread gomp dl)
+  endif ()
+  
+  include_directories(${MKL_INCLUDE_DIRS})
+  
+  if (HAVE_64_BIT)
+    link_directories(${MKL_ROOT}/lib/intel64)
+  else ()
+    link_directories(${MKL_ROOT}/lib/ia32)
   endif ()
 endif ()
 
