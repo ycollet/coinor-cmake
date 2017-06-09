@@ -210,11 +210,11 @@ set(TEST_LIST_MIPLIB3 ${SYMPHONY_INSTANCES_DIR}/miplib3/10teams.gz
                       ${SYMPHONY_INSTANCES_DIR}/miplib3/vpm1.gz
                       ${SYMPHONY_INSTANCES_DIR}/miplib3/vpm2.gz)
 
-add_coin_test_list(symphony infeas  symphony TEST_LIST_INFEAS  "MPS;SYMPHONY;INFEAS"  30)
-add_coin_test_list(symphony big     symphony TEST_LIST_BIG     "MPS;SYMPHONY;BIG"     30)
-add_coin_test_list(symphony sample  symphony TEST_LIST_SAMPLE  "MPS;SYMPHONY;SAMPLE"  30)
-add_coin_test_list(symphony netlib  symphony TEST_LIST_NETLIB  "MPS;SYMPHONY;NETLIB"  30)
-add_coin_test_list(symphony miplib3 symphony TEST_LIST_MIPLIB3 "MPS;SYMPHONY;MIPLIB3" 30)
+add_coin_sym_test_list(symphony infeas  symphony TEST_LIST_INFEAS  "MPS;SYMPHONY;INFEAS"  30)
+add_coin_sym_test_list(symphony big     symphony TEST_LIST_BIG     "MPS;SYMPHONY;BIG"     30)
+add_coin_sym_test_list(symphony sample  symphony TEST_LIST_SAMPLE  "MPS;SYMPHONY;SAMPLE"  30)
+add_coin_sym_test_list(symphony netlib  symphony TEST_LIST_NETLIB  "MPS;SYMPHONY;NETLIB"  30)
+add_coin_sym_test_list(symphony miplib3 symphony TEST_LIST_MIPLIB3 "MPS;SYMPHONY;MIPLIB3" 30)
 
 set_tests_properties(miplib3_air04_gz_symphony      PROPERTIES TIMEOUT 300)
 set_tests_properties(miplib3_air05_gz_symphony      PROPERTIES TIMEOUT 300)

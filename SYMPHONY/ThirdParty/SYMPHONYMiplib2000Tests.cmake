@@ -90,7 +90,7 @@ set(TEST_LIST_MIPLIB2000 ${SYMPHONY_INSTANCE_DIR}/30n20b8.mps.gz
 			 ${SYMPHONY_INSTANCE_DIR}/vpphard.mps.gz
 			 ${SYMPHONY_INSTANCE_DIR}/zib54-UUE.mps.gz)
 
-add_coin_test_list(symphony miplib2000 symphony TEST_LIST_MIPLIB2000 "MPS;SYMPHONY;MIPLIB2000;BENCHMARK" 300)
+add_coin_sym_test_list(symphony miplib2000 symphony TEST_LIST_MIPLIB2000 "MPS;SYMPHONY;MIPLIB2000;BENCHMARK" 300)
 
 create_log_analysis(miplib2000_30n20b8_mps_gz_symphony "01_Analysis" "Optimal objective <number>" 302 1e-6)
 create_log_analysis(miplib2000_acc-tight5_mps_gz_symphony "01_Analysis" "Optimal objective <number>" 0 1e-6)

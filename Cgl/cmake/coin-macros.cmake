@@ -125,6 +125,25 @@ macro(add_coin_sym_test Name SolverName FileData)
   endif ()
 endmacro()
 
+# add_coin_sym_test_list: generate a cmake wrapper around symphony executable and then add the test
+# SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
+# Prefix: a prefix which will be added to the test name
+# Suffix: a suffix which will be added to the test name
+# FileList: the list of test file
+# Label: a default label to tag tests
+# Timeout: a dafault timeout for tests
+macro(add_coin_sym_test_list SolverName Prefix Suffix FileList Label Timeout)
+  foreach(File ${${FileList}})
+    get_filename_component(_NAME ${File} NAME)
+    string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
+    
+    add_coin_sym_test(${Prefix}_${_NAME}_${Suffix} ${SolverName} ${File})
+    
+    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
+  endforeach ()
+endmacro()
+
 # add_coin_vol_test: generate a cmake wrapper for Vol and then add the test
 # SolverName: the name of the solver. Will be appended to the out and log filename (must have the same name as the built target)
 # Name: the name of the test
