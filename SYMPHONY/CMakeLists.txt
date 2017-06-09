@@ -259,7 +259,7 @@ set(PACKAGE_TARNAME   "symphony")
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/symphony_binary" 
       CACHE PATH "SYMPHONY install prefix" FORCE)
-endif (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+endif ()
 
 # Check for readline
 set(COIN_HAS_READLINE )
@@ -500,14 +500,14 @@ if (COIN_COMPILE_COVERAGE)
   # /!\ FAILURE IF AT LEAST ONE TEST FAILS
   # Capturing lcov counters and generating report
   add_custom_target(coverage
-    COMMAND ${LCOV_PATH} --directory . --zerocounters
-    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE LONG -LE FAIL
-    COMMAND ${LCOV_PATH} --capture --directory . --output-file ${CMAKE_BINARY_DIR}/coverage.info
-    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
-    COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
-    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMENT "Resetting code coverage counters to zero.
+                    COMMAND ${LCOV_PATH} --directory . --zerocounters
+                    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L SAMPLE
+                    COMMAND ${LCOV_PATH} --capture --directory . --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+                    COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+                    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+                    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+                    COMMENT "Resetting code coverage counters to zero.
 Processing code coverage counters and generating report.
 You can zip the directory ${CMAKE_BINARY_DIR}/coverage and upload the content to a web server.")
 endif ()
