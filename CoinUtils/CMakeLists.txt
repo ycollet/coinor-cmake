@@ -34,7 +34,7 @@ set(COIN_THREADS_INC_PATH "None" CACHE PATH "The path to the PThreads header fil
 set(COIN_THREADS_LIB_PATH "None" CACHE PATH "The path to the PThreads library files")
 
 # Set paths of source
-set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The CoinUtils Path")
+set(COIN_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The CoinUtils Path")
 
 mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_THREADS_LIB_PATH
@@ -47,7 +47,7 @@ mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_COMPILE_WHOPR
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
-                 Coin_DIR
+                 COIN_DIR
                  USE_PROCESSOR_EXTENSIONS
                  COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
@@ -119,8 +119,8 @@ if (USE_PROCESSOR_EXTENSIONS)
   endif ()
 endif ()
 
-if ((NOT Coin_DIR STREQUAL CMAKE_SOURCE_DIR) AND (NOT EXISTS ${Coin_DIR}))
-  message(FATAL_ERROR "Error: Coin_DIR = ${Coin_DIR} which is not an existing directory")
+if ((NOT COIN_DIR STREQUAL CMAKE_SOURCE_DIR) AND (NOT EXISTS ${COIN_DIR}))
+  message(FATAL_ERROR "Error: COIN_DIR = ${COIN_DIR} which is not an existing directory")
 endif ()
 
 if (NOT COINOR_DIR STREQUAL "None")
@@ -322,8 +322,8 @@ endif ()
 
 # Directories where to find the source code
 
-set(BuildTools_DIR    ${Coin_DIR}/BuildTools)
-set(CoinUtils_DIR     ${Coin_DIR}/CoinUtils)
+set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
 set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
 
 include(CheckIncludeFileCXX)

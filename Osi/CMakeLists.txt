@@ -78,7 +78,7 @@ option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
 
 # Set paths of source
-set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Osi Path")
+set(COIN_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Osi Path")
 
 mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_THREADS_LIB_PATH
@@ -94,7 +94,7 @@ mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_COMPILE_WHOPR
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
-                 Coin_DIR
+                 COIN_DIR
                  COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
                  COINUTILS_USE_MEMPOOL_MAXPOOLED
@@ -224,9 +224,9 @@ endif ()
 coin_check_and_add_include_path(COIN_HAS_GLPK_INCLUDE_PATH)
 coin_check_and_add_library_path(COIN_HAS_GLPK_LIBRARY_PATH)
 
-if (NOT Coin_DIR STREQUAL CMAKE_SOURCE_DIR)
-  if (NOT EXISTS "${Coin_DIR}")
-    message(FATAL_ERROR "Error: Coin_DIR = ${Coin_DIR} which is not an existing directory")
+if (NOT COIN_DIR STREQUAL CMAKE_SOURCE_DIR)
+  if (NOT EXISTS "${COIN_DIR}")
+    message(FATAL_ERROR "Error: COIN_DIR = ${COIN_DIR} which is not an existing directory")
   endif ()
 endif ()
 
@@ -403,10 +403,10 @@ endif ()
 
 # Directories where to find the source code
 
-set(BuildTools_DIR    ${Coin_DIR}/BuildTools)
-set(CoinUtils_DIR     ${Coin_DIR}/CoinUtils)
-set(CoinUtilsTest_DIR ${Coin_DIR}/CoinUtils/test)
-set(Osi_DIR           ${Coin_DIR}/Osi)
+set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+set(Osi_DIR           ${COIN_DIR}/Osi)
 
 include(CheckIncludeFileCXX)
 include(CheckIncludeFile)

@@ -77,7 +77,7 @@ option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during comp
 option(COIN_PERFORM_CHECKOUT "Perform Subversion checkout of source code" OFF)
 
 # Set paths of source
-set(Coin_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Vol Path")
+set(COIN_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The Vol Path")
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
@@ -88,7 +88,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_WHOPR
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
-                 Coin_DIR
+                 COIN_DIR
                  COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
                  COINUTILS_USE_MEMPOOL_MAXPOOLED
@@ -224,7 +224,7 @@ if (COIN_PERFORM_CHECKOUT)
   exec_program(${Subversion_SVN_EXECUTABLE}
                ARGS checkout https://projects.coin-or.org/svn/Vol/trunk ${CMAKE_BINARY_DIR}/SVN)
   
-  set(Coin_DIR ${CMAKE_BINARY_DIR}/SVN)
+  set(COIN_DIR ${CMAKE_BINARY_DIR}/SVN)
 endif ()
 
 if (NOT COINOR_DIR STREQUAL "None")
@@ -399,11 +399,11 @@ endif ()
 # End of coverage
 
 # Directories where to find the source code
-set(BuildTools_DIR    ${Coin_DIR}/BuildTools)
-set(CoinUtils_DIR     ${Coin_DIR}/CoinUtils)
-set(CoinUtilsTest_DIR ${Coin_DIR}/CoinUtils/test)
-set(Osi_DIR           ${Coin_DIR}/Osi)
-set(Vol_DIR           ${Coin_DIR}/Vol)
+set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+set(Osi_DIR           ${COIN_DIR}/Osi)
+set(Vol_DIR           ${COIN_DIR}/Vol)
 
 include(CheckIncludeFileCXX)
 include(CheckIncludeFile)
@@ -759,7 +759,7 @@ if (NOT EXISTS ${CMAKE_BINARY_DIR}/tests)
 endif ()
 
 #add_test(NAME afiro_mps_vol_standard 
-#         COMMAND $<TARGET_FILE:vol> ${Coin_DIR}/Data/Sample/afiro.mps -solution ${CMAKE_BINARY_DIR}/tests/afiro.out -solve)
+#         COMMAND $<TARGET_FILE:vol> ${COIN_DIR}/Data/Sample/afiro.mps -solution ${CMAKE_BINARY_DIR}/tests/afiro.out -solve)
 #set_tests_properties(afiro_mps_vol_standard PROPERTIES TIMEOUT 30)
 #set_tests_properties(afiro_mps_vol_standard PROPERTIES LABELS "MPS")
 #if (WIN32)
