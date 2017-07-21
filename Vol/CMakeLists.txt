@@ -188,6 +188,19 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
     message(status "MKL library not found")
   endif ()
   
+  # Copy libiomp5md.dll in the build directory
+  if (WIN32)
+    if (HAVE_64_BIT)
+      set(MKL_DLL_DIR ${MKL_ROOT}/bin/intel64)
+    else ()
+      set(MKL_DLL_DIR ${MKL_ROOT}/bin/ia32)
+    endif ()
+    
+    execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/bin/
+                    COMMAND ${CMAKE_COMMAND} -E copy ${MKL_DLL_DIR}/libiomp5md.dll ${CMAKE_BINARY_DIR}/bin/
+                    COMMAND ${CMAKE_COMMAND} -E echo "Copying ${MKL_DLL_DIR}/libiomp5md.dll into ${CMAKE_BINARY_DIR}/bin/")
+  endif ()
+  
   set(COIN_MKL_LIBS "${MKL_LIBRARIES}")
   if (WIN32)
     set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_intel_thread libiomp5md)
