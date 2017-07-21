@@ -53,7 +53,7 @@ endif ()
 
 include(GetAcInitVersion)
 
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac)
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac GLPK)
 
 # Name of package
 set(PACKAGE           "Glpk")
@@ -66,7 +66,7 @@ set(PACKAGE_STRING    "Glpk")
 # Define to the one symbol short name of this package.
 set(PACKAGE_TARNAME   "glpk")
 # Define to the version of this package.
-set(PACKAGE_VERSION   "${VERSION_STRING}")
+set(PACKAGE_VERSION   "${GLPK_VERSION_STRING}")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../glpk_binary" 
