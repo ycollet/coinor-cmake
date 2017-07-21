@@ -78,7 +78,12 @@ macro(add_coin_test Name SolverName FileData)
   endif ()
   
   if (WIN32)
-    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+    # Escape each ';' in the %PATH% environment variable
+    string(REGEX REPLACE "\\\\" "/" WINPATH "$ENV{PATH}")
+    string(REGEX REPLACE "\;" "\\\\;" WINPATH "${WINPATH}")
+      
+    set(ENV_COIN_TESTS "PATH=${WINPATH}\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${ENV_COIN_TESTS}")
   endif ()
 endmacro()
 
@@ -121,7 +126,12 @@ macro(add_coin_sym_test Name SolverName FileData)
   endif ()
   
   if (WIN32)
-    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+    # Escape each ';' in the %PATH% environment variable
+    string(REGEX REPLACE "\\\\" "/" WINPATH "$ENV{PATH}")
+    string(REGEX REPLACE "\;" "\\\\;" WINPATH "${WINPATH}")
+      
+    set(ENV_COIN_TESTS "PATH=${WINPATH}\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${ENV_COIN_TESTS}")
   endif ()
 endmacro()
 
@@ -164,7 +174,12 @@ macro(add_coin_vol_test Name SolverName FileData)
   endif ()
   
   if (WIN32)
-    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+    # Escape each ';' in the %PATH% environment variable
+    string(REGEX REPLACE "\\\\" "/" WINPATH "$ENV{PATH}")
+    string(REGEX REPLACE "\;" "\\\\;" WINPATH "${WINPATH}")
+      
+    set(ENV_COIN_TESTS "PATH=${WINPATH}\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${ENV_COIN_TESTS}")
   endif ()
 endmacro()
 
@@ -239,7 +254,12 @@ macro(add_coin_dylp_test Name SolverName FileData)
   endif ()
   
   if (WIN32)
-    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+    # Escape each ';' in the %PATH% environment variable
+    string(REGEX REPLACE "\\\\" "/" WINPATH "$ENV{PATH}")
+    string(REGEX REPLACE "\;" "\\\\;" WINPATH "${WINPATH}")
+      
+    set(ENV_COIN_TESTS "PATH=${WINPATH}\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+    set_tests_properties(${Name} PROPERTIES ENVIRONMENT "PATH=${ENV_COIN_TESTS}")
   endif ()
 endmacro()
 
