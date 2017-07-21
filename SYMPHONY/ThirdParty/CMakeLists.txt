@@ -200,8 +200,8 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
 
   ExternalProject_Add(EP_Lapack
-                      PREFIX ${EP_InstallDir}/Lapack-${LAPACK_VERSION}
-                      URL http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz
+                      PREFIX            ${EP_InstallDir}/Lapack-${LAPACK_VERSION}
+                      URL               http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
@@ -288,8 +288,8 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
   endif ()
   
   ExternalProject_Add(EP_Zlib
-                      PREFIX ${EP_InstallDir}/Zlib-${ZLIB_VERSION}
-                      URL http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
+                      PREFIX            ${EP_InstallDir}/Zlib-${ZLIB_VERSION}
+                      URL               http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Zlib-${ZLIB_VERSION}/src/EP_Zlib/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib-${ZLIB_VERSION}/src/EP_Zlib/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
@@ -333,8 +333,8 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The BZlib library name" FORCE)
     
     ExternalProject_Add(EP_BZlib
-                        PREFIX ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
-                        URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
+                        PREFIX            ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
+                        URL               http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib-${BZLIB_VERSION}/src/EP_BZlib ${CMAKE_MAKE_PROGRAM} -f makefile.msc
@@ -346,8 +346,8 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.a" CACHE STRING "The BZlib library name" FORCE)
     
     ExternalProject_Add(EP_BZlib
-                        PREFIX ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
-                        URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
+                        PREFIX            ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
+                        URL               http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib-${BZLIB_VERSION}/src/EP_BZlib ${CMAKE_MAKE_PROGRAM}
@@ -391,8 +391,8 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
   set(COMPILE_OSI_GLPK ON CACHE BOOL "Compile the OSI GLPK solver" FORCE)
   
   ExternalProject_Add(EP_glpk
-                      PREFIX ${EP_InstallDir}/glpk-${GLPK_VERSION}
-                      URL http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz
+                      PREFIX            ${EP_InstallDir}/glpk-${GLPK_VERSION}
+                      URL               http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/ThirdParty/GLPK/ ${EP_InstallDir}/glpk-${GLPK_VERSION}/src/EP_glpk/
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/glpk-${GLPK_VERSION}/src/EP_glpk/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/glpk-${GLPK_VERSION}/src/EP_glpk/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
@@ -424,8 +424,8 @@ if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     set(COIN_THREADS_LIB_PATH "${EP_InstallDir}/lib" CACHE STRING "The PThreads library library Path" FORCE)
     
     ExternalProject_Add(EP_PThreads
-                        PREFIX ${EP_InstallDir}/PThreads
-                        URL ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
+                        PREFIX            ${EP_InstallDir}/PThreads
+                        URL               ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/PThreads/src/EP_PThreads ${CMAKE_MAKE_PROGRAM} clean VC
@@ -455,8 +455,8 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
   endif ()
   
   ExternalProject_Add(EP_Metis
-                      PREFIX ${EP_InstallDir}/Metis-${METIS_VERSION}
-                      URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                      PREFIX            ${EP_InstallDir}/Metis-${METIS_VERSION}
+                      URL               http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ""
                       CONFIGURE_COMMAND ""
@@ -498,9 +498,9 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   endif ()
   
   ExternalProject_Add(EP_Mumps
-                      PREFIX ${EP_InstallDir}/Mumps-${MUMPS_VERSION}
-                      DEPENDS ${MUMPS_DEPENDS}
-                      URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
+                      PREFIX            ${EP_InstallDir}/Mumps-${MUMPS_VERSION}
+                      DEPENDS           ${MUMPS_DEPENDS}
+                      URL               http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/CMakeLists_mumps.txt ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps/CMakeLists.txt
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps/build
@@ -523,8 +523,8 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
   set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
   
   ExternalProject_Add(EP_ASL
-                      PREFIX ${EP_InstallDir}/ASL-${ASL_VERSION}
-                      URL https://github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz
+                      PREFIX            ${EP_InstallDir}/ASL-${ASL_VERSION}
+                      URL               https://github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/AMPLConfig.cmake.in ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/
                                      && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/CMakeLists.txt      ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/
@@ -613,8 +613,8 @@ if (COIN_ENABLE_DOWNLOAD_CONCORDE AND UNIX)
 
   if (OFF)
     ExternalProject_Add(EP_Concorde
-                        PREFIX ${EP_InstallDir}/Concorde
-                        URL ${CONCORDE_URL}
+                        PREFIX            ${EP_InstallDir}/Concorde
+                        URL               ${CONCORDE_URL}
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Concorde/src/EP_Concorde ./configure --prefix=${EP_InstallDir}
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Concorde/src/EP_Concorde ${CMAKE_MAKE_PROGRAM}
@@ -625,8 +625,8 @@ if (COIN_ENABLE_DOWNLOAD_CONCORDE AND UNIX)
 
   if (ON)
     ExternalProject_Add(EP_Concorde
-                        PREFIX ${EP_InstallDir}/Concorde
-                        URL ${CONCORDE_URL}
+                        PREFIX            ${EP_InstallDir}/Concorde
+                        URL               ${CONCORDE_URL}
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Concorde/src/EP_Concorde ${CMAKE_MAKE_PROGRAM}
@@ -648,8 +648,8 @@ if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
   set(DATA_TEST_VERSION "1.0.7")
   
   ExternalProject_Add(EP_DATA_TEST
-                      PREFIX ${EP_InstallDir}/DATA_TEST
-                      URL http://www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz
+                      PREFIX            ${EP_InstallDir}/DATA_TEST
+                      URL               http://www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ""
                       CONFIGURE_COMMAND ""
@@ -665,10 +665,10 @@ if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
   set(MIPLIB2000_VERSION "1.1.3")
   
   ExternalProject_Add(EP_MIPLIB2000
-                      PREFIX ${EP_InstallDir}/MIPLIB2000
-                      URL http://miplib.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip
+                      PREFIX            ${EP_InstallDir}/MIPLIB2000
+                      URL               http://miplib.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip
                       PATCH_COMMAND     ""
-                      UPDATE_COMMAND     ""
+                      UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ""
                       BUILD_COMMAND     ""
                       INSTALL_COMMAND   ""

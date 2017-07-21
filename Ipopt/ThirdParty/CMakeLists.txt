@@ -128,8 +128,8 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
 
   ExternalProject_Add(EP_Lapack
-                      PREFIX ${EP_InstallDir}/Lapack-${LAPACK_VERSION}
-                      URL http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz
+                      PREFIX            ${EP_InstallDir}/Lapack-${LAPACK_VERSION}
+                      URL               http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
@@ -205,8 +205,8 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
 
   ExternalProject_Add(EP_Mumps
-                      PREFIX ${EP_InstallDir}/Mumps-${MUMPS_VERSION}
-                      URL http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
+                      PREFIX            ${EP_InstallDir}/Mumps-${MUMPS_VERSION}
+                      URL               http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/Mumps/CMakeLists.txt ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Mumps-${MUMPS_VERSION}/src/EP_Mumps/build
@@ -232,8 +232,8 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
 
   if (WIN32)
     ExternalProject_Add(EP_Metis
-                        PREFIX ${EP_InstallDir}/Metis-${METIS_VERSION}
-                        URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                        PREFIX            ${EP_InstallDir}/Metis-${METIS_VERSION}
+                        URL               http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
                         PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build
@@ -243,8 +243,8 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
                         )
   else ()
     ExternalProject_Add(EP_Metis
-                        PREFIX ${EP_InstallDir}/Metis-${METIS_VERSION}
-                        URL http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
+                        PREFIX            ${EP_InstallDir}/Metis-${METIS_VERSION}
+                        URL               http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
                         PATCH_COMMAND     ${CMAKE_COMMAND} -E copy  ${CMAKE_SOURCE_DIR}/ThirdParty/Metis/CMakeLists.txt ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Metis-${METIS_VERSION}/src/EP_Metis/build
@@ -268,8 +268,8 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
   set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
   
   ExternalProject_Add(EP_ASL
-                      PREFIX ${EP_InstallDir}/ASL-${ASL_VERSION}
-                      URL https://github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz
+                      PREFIX            ${EP_InstallDir}/ASL-${ASL_VERSION}
+                      URL               https://github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/AMPLConfig.cmake.in ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/
                                      && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/CMakeLists.txt      ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/

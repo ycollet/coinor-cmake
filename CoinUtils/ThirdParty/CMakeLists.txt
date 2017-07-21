@@ -179,8 +179,8 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
 
   ExternalProject_Add(EP_Lapack
-                      PREFIX ${EP_InstallDir}/Lapack-${LAPACK_VERSION}
-                      URL http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz
+                      PREFIX            ${EP_InstallDir}/Lapack-${LAPACK_VERSION}
+                      URL               http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
@@ -267,8 +267,8 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
   endif ()
   
   ExternalProject_Add(EP_Zlib
-                      PREFIX ${EP_InstallDir}/Zlib-${ZLIB_VERSION}
-                      URL http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
+                      PREFIX            ${EP_InstallDir}/Zlib-${ZLIB_VERSION}
+                      URL               http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Zlib-${ZLIB_VERSION}/src/EP_Zlib/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Zlib-${ZLIB_VERSION}/src/EP_Zlib/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
@@ -312,8 +312,8 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.lib" CACHE STRING "The BZlib library name" FORCE)
     
     ExternalProject_Add(EP_BZlib
-                        PREFIX ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
-                        URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
+                        PREFIX            ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
+                        URL               http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib-${BZLIB_VERSION}/src/EP_BZlib ${CMAKE_MAKE_PROGRAM} -f makefile.msc
@@ -325,8 +325,8 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.a" CACHE STRING "The BZlib library name" FORCE)
     
     ExternalProject_Add(EP_BZlib
-                        PREFIX ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
-                        URL http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
+                        PREFIX            ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
+                        URL               http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/BZlib-${BZLIB_VERSION}/src/EP_BZlib ${CMAKE_MAKE_PROGRAM}
@@ -371,8 +371,8 @@ if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     set(COIN_THREADS_LIB_PATH "${EP_InstallDir}/lib" CACHE STRING "The PThreads library library Path" FORCE)
     
     ExternalProject_Add(EP_PThreads
-                        PREFIX ${EP_InstallDir}/PThreads
-                        URL ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
+                        PREFIX            ${EP_InstallDir}/PThreads
+                        URL               ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-2-9-1-release.tar.gz
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/PThreads/src/EP_PThreads ${CMAKE_MAKE_PROGRAM} clean VC
