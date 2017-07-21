@@ -174,7 +174,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_LAPACK)
-  set(LAPACK_VERSION "3.6.1")
+  set(LAPACK_VERSION "3.7.1")
   
   enable_language(Fortran)
 
@@ -190,7 +190,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
 
   ExternalProject_Add(EP_Lapack
                       PREFIX ${EP_InstallDir}/Lapack-${LAPACK_VERSION}
-                      URL http://www.coin-or.org/BuildTools/Lapack/lapack-${LAPACK_VERSION}.tgz
+                      URL http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build
                                      && ${CMAKE_COMMAND} -E chdir ${EP_InstallDir}/Lapack-${LAPACK_VERSION}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
@@ -376,7 +376,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_GLPK)
-  set(GLPK_VERSION "4.60")
+  set(GLPK_VERSION "4.62")
   set(COMPILE_OSI_GLPK ON CACHE BOOL "Compile the OSI GLPK solver" FORCE)
   
   ExternalProject_Add(EP_glpk
