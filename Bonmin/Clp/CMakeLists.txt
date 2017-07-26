@@ -661,7 +661,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(OsiClpSolverInterfaceTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+    set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
 endif ()
 
