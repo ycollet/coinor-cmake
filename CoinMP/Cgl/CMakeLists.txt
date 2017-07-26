@@ -210,7 +210,7 @@ if (CGL_BUILD_EXAMPLES)
   endmacro ()
   
   add_example(cgl1 ${Cgl_DIR}/examples/cgl1.cpp)
-  add_example(cgl_data_test ${Cgl_DIR}/examples/cgl_data_test.cpp)
+  #add_example(cgl_data_test ${Cgl_DIR}/examples/cgl_data_test.cpp) # Compilation error
 endif ()
 
 add_executable(unitTest-cgl ${Cgl_DIR}/test/unitTest.cpp)

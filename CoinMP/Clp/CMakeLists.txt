@@ -631,16 +631,15 @@ if (CLP_BUILD_EXAMPLES)
   endif ()
  
   
-  # Compilation error
-  #add_example(testQP ${Clp_DIR}/examples/testQP.cpp)
-  #
-  #add_test(NAME clp_example_testQP
-  #         COMMAND $<TARGET_FILE:testQP> ${CMAKE_SOURCE_DIR}/Data/Sample)
-  #set_tests_properties(clp_example_testQP PROPERTIES TIMEOUT 30)
-  #if (WIN32)
-  #  set_tests_properties(clp_example_testQP PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
-  #endif ()
-  #
+  add_example(testQP ${Clp_DIR}/examples/testQP.cpp)
+  
+  add_test(NAME clp_example_testQP
+           COMMAND $<TARGET_FILE:testQP> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_testQP PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(clp_example_testQP PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+  endif ()
+  
 
   # Need VOL
   #add_example(useVolume ${Clp_DIR}/examples/useVolume.cpp)
@@ -654,25 +653,16 @@ if (CLP_BUILD_EXAMPLES)
   #
   
   # Need OSI to compile
-  #add_example(OsiClpSolverInterfaceTest ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp)
-  #
-  #add_test(NAME clp_example_OsiClpSolverInterfaceTest
-  #         COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
-  #set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES TIMEOUT 30)
-  #if (WIN32)
-  #  set_tests_properties(OsiClpSolverInterfaceTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
-  #endif ()
-  #
+  add_example(OsiClpSolverInterfaceTest ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp
+                                        ${Clp_DIR}/test/osiUnitTest.cpp)
+  target_link_libraries(OsiClpSolverInterfaceTest libOsiClp libOsiCommonTests libOsi)
   
-  #add_example(osiUnitTest ${Clp_DIR}/test/osiUnitTest.cpp)
-  #
-  #add_test(NAME clp_example_osiUnitTest
-  #         COMMAND $<TARGET_FILE:osiUnitTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
-  #set_tests_properties(clp_example_osiUnitTest PROPERTIES TIMEOUT 30)
-  #if (WIN32)
-  #  set_tests_properties(clp_example_osiUnitTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
-  #endif ()
-  #
+  add_test(NAME clp_example_OsiClpSolverInterfaceTest
+           COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(OsiClpSolverInterfaceTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+  endif ()
 endif ()
 
 add_executable(clp ${Clp_MAIN_SRC_LIST})
