@@ -522,7 +522,7 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
   set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
   
   ExternalProject_Add(EP_ASL
-                      PREFIX            ${EP_InstallDir}/ASL
+                      PREFIX            ${EP_InstallDir}/ASL-${ASL_VERSION}
                       URL               https://github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/ASL/AMPLConfig.cmake.in ${EP_InstallDir}/ASL-${ASL_VERSION}/src/EP_ASL/src/asl/solvers/
