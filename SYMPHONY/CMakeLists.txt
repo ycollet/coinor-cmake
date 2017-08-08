@@ -934,10 +934,8 @@ endif ()
 
 #add_definitions(-DUSE_SYM_APPLICATION) # only for libSymAppl
 #add_definitions(-D_OPENMP)
-if (MINGW)
-  add_definitions(-D__NONE__)
-else ()
-  add_definitions(-DHAS_RANDOM -DHAS_SRANDOM -D__NONE__)
+if (NOT MINGW)
+  add_definitions(-DHAS_RANDOM -DHAS_SRANDOM)
 endif ()
 
 subdirs(ThirdParty)
