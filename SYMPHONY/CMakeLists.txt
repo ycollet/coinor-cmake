@@ -3,29 +3,25 @@ cmake_minimum_required(VERSION 3.0.2)
 project(Symphony)
 
 # Symphony options
-option(USE_CGL_CUTS            "Use CGL cuts" ON)
-option(USE_GMPL                "Use GMPL language" OFF)
-option(SENSITIVITY_ANALYSIS    "Enable sensitivity analysis" OFF)
-option(ROOT_NODE_ONLY          "Root node only" OFF)
-option(COMPILE_FRAC_BRANCHING  "Compile frac branching" OFF)
-option(DO_TESTS                "Do tests" OFF)
-option(TM_BASIS_TESTS          "TM Basis tests" OFF)
-option(TRACE_PATH              "Trace PATH" OFF)
-option(CHECK_CUT_VALIDITY      "Check cut validity" OFF)
-option(STATISTICS              "Statistics" OFF)
-option(PSEUDO_COSTS            "Pseudo costs" OFF)
-option(DRAWGRAPH               "Draw graph" OFF)
-option(STATICEXE               "Build a static executable" OFF)
-option(SIGHANDLER              "Use a signal handler" ON)
-option(SYM_WITH_APPL           "Symphony with APPL" ON)
-option(SYM_COMPILE_IN_CG       "Symphony compile in CG" ON)
-option(SYM_COMPILE_IN_CP       "Symphony compile in CP" ON)
-option(SYM_COMPILE_IN_LP       "Symphony compile in LP" ON)
-option(SYM_COMPILE_IN_TM       "Symphony compile in TM" ON)
-option(SYM_COMPILE_IN_LP       "Symphony compile in LP" ON)
-option(SYM_PARALLEL            "Enable parallel" OFF)
-option(USE_OPENMP              "Use OpenMP" OFF)
-option(USE_CL                  "Use OpenCL" OFF)
+option(SYM_OPTION_USE_CGL_CUTS           "Use CGL cuts" ON)
+option(SYM_OPTION_USE_GMPL               "Use GMPL language" OFF)
+option(SYM_OPTION_SENSITIVITY_ANALYSIS   "Enable sensitivity analysis" OFF)
+option(SYM_OPTION_ROOT_NODE_ONLY         "Root node only" OFF)
+option(SYM_OPTION_COMPILE_FRAC_BRANCHING "Compile frac branching" OFF)
+option(SYM_OPTION_DO_TESTS               "Do tests" OFF)
+option(SYM_OPTION_TM_BASIS_TESTS         "TM Basis tests" OFF)
+option(SYM_OPTION_TRACE_PATH             "Trace PATH" OFF)
+option(SYM_OPTION_CHECK_CUT_VALIDITY     "Check cut validity" OFF)
+option(SYM_OPTION_STATISTICS             "Statistics" OFF)
+option(SYM_OPTION_PSEUDO_COSTS           "Pseudo costs" OFF)
+option(SYM_OPTION_STATICEXE              "Build a static executable" OFF)
+option(SYM_OPTION_SIGHANDLER             "Use a signal handler" ON)
+option(SYM_COMPILE_IN_CG                 "Symphony compile in CG" ON)
+option(SYM_COMPILE_IN_CP                 "Symphony compile in CP" ON)
+option(SYM_COMPILE_IN_LP                 "Symphony compile in LP" ON)
+option(SYM_COMPILE_IN_TM                 "Symphony compile in TM" ON)
+option(SYM_PARALLEL                      "Enable parallel" OFF)
+option(SYM_OPTION_USE_OPENMP             "Use OpenMP" OFF)
 
 option(SYMPHONY_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -142,29 +138,25 @@ mark_as_advanced(USE_COINOR_BIN
                  CPLEX_LP_SOLVER
                  SOPLEX_LP_SOLVER
                  XPRESS_LP_SOLVER
-                 USE_CGL_CUTS
-                 USE_GMPL
-                 SENSITIVITY_ANALYSIS
-                 ROOT_NODE_ONLY
-                 COMPILE_FRAC_BRANCHING
-                 DO_TESTS
-                 TM_BASIS_TESTS
-                 TRACE_PATH
-                 CHECK_CUT_VALIDITY
-                 STATISTICS
-                 PSEUDO_COSTS
-                 DRAWGRAPH
-                 STATICEXE
-                 SIGHANDLER
-                 SYM_WITH_APPL
+                 SYM_OPTION_USE_CGL_CUTS
+                 SYM_OPTION_USE_GMPL
+                 SYM_OPTION_SENSITIVITY_ANALYSIS
+                 SYM_OPTION_ROOT_NODE_ONLY
+                 SYM_OPTION_COMPILE_FRAC_BRANCHING
+                 SYM_OPTION_DO_TESTS
+                 SYM_OPTION_TM_BASIS_TESTS
+                 SYM_OPTION_TRACE_PATH
+                 SYM_OPTION_CHECK_CUT_VALIDITY
+                 SYM_OPTION_STATISTICS
+                 SYM_OPTION_PSEUDO_COSTS
+                 SYM_OPTION_STATICEXE
+                 SYM_OPTION_SIGHANDLER
                  SYM_COMPILE_IN_CG
                  SYM_COMPILE_IN_CP
                  SYM_COMPILE_IN_LP
                  SYM_COMPILE_IN_TM
-                 SYM_COMPILE_IN_LP
                  SYM_PARALLEL
-                 USE_OPENMP
-                 USE_CL
+                 SYM_OPTION_USE_OPENMP
                  ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_STATIC
                  COIN_COMPILE_COVERAGE
@@ -870,51 +862,71 @@ endif ()
 
 # Additional Definitions
 
+if (SYM_COMPILE_IN_CG)
+  add_definitions(-DCOMPILE_IN_CG)
+endif ()
+
+if (SYM_COMPILE_IN_CP)
+  add_definitions(-DCOMPILE_IN_CP)
+endif ()
+
+if (SYM_COMPILE_IN_LP)
+  add_definitions(-DCOMPILE_IN_LP)
+endif ()
+
+if (SYM_COMPILE_IN_TM)
+  add_definitions(-DCOMPILE_IN_TM)
+endif ()
+
 if (COIN_HAS_READLINE)
   add_definitions(-DHAS_READLINE)
 endif ()
 
-if (SENSITIVITY_ANALYSIS)
+if (SYM_OPTION_STATICEXE)
+  set(ENABLE_SHARED_LIBRARIES FALSE)
+endif ()
+
+if (SYM_OPTION_SENSITIVITY_ANALYSIS)
   add_definitions(-DSENSITIVITY_ANALYSIS)
 endif ()
 
-if (USE_CGL_CUTS)
+if (SYM_OPTION_USE_CGL_CUTS)
   add_definitions(-DUSE_CGL_CUTS)
 endif ()
 
-if (ROOT_NODE_ONLY)
+if (SYM_OPTION_ROOT_NODE_ONLY)
   add_definitions(-DROOT_NODE_ONLY)
 endif ()
 
-if (COMPILE_FRAC_BRANCHING)
+if (SYM_OPTION_COMPILE_FRAC_BRANCHING)
   add_definitions(-DCOMPILE_FRAC_BRANCHING)
 endif ()
 
-if (DO_TESTS)
+if (SYM_OPTION_DO_TESTS)
   add_definitions(-DDO_TESTS)
 endif ()
 
-if (TM_BASIS_TESTS)
+if (SYM_OPTION_TM_BASIS_TESTS)
   add_definitions(-DTM_BASIS_TESTS)
 endif ()
 
-if (TRACE_PATH)
+if (SYM_OPTION_TRACE_PATH)
   add_definitions(-DTRACE_PATH)
 endif ()
 
-if (CHECK_CUT_VALIDITY)
+if (SYM_OPTION_CHECK_CUT_VALIDITY)
   add_definitions(-DCHECK_CUT_VALIDITY)
 endif ()
 
-if (STATISTICS)
+if (SYM_OPTION_STATISTICS)
   add_definitions(-DSTATISTICS)
 endif ()
 
-if (PSEUDO_COSTS)
+if (SYM_OPTION_PSEUDO_COSTS)
   add_definitions(-DPSEUDO_COSTS)
 endif ()
 
-if (SIGHANDLER)
+if (SYM_OPTION_SIGHANDLER)
   add_definitions(-DSIGHANDLER)
 endif ()
 
