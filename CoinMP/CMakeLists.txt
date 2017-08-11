@@ -219,6 +219,16 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
       CACHE PATH "CoinMP install prefix" FORCE)
 endif ()
 
+include(CheckCCompilerFlag)
+
+# Desactivate some relocation types for portability
+if (UNIX)
+  check_c_compiler_flag("-Wa,-mrelax-relocations=no" HAVE_RELAX_RELOC_FLAG)
+  if (HAVE_RELAX_RELOC_FLAG)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wa,-mrelax-relocations=no")
+  endif ()
+endif ()
+
 # Check for readline
 set(COIN_HAS_READLINE )
 find_package(Readline)
