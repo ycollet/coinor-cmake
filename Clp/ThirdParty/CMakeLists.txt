@@ -344,7 +344,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
     set(BZLIB_NAME "${EP_InstallDir}/lib/libbz2.a" CACHE STRING "The BZlib library name" FORCE)
     
     ExternalProject_Add(EP_BZlib
-                        PREFIX            ${EP_InstallDir}/BZlib
+                        PREFIX            ${EP_InstallDir}/BZlib-${BZLIB_VERSION}
                         URL               http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ""
