@@ -574,6 +574,16 @@ CHECK_FUNCTION_EXISTS(vsnprintf  HAVE_VSNPRINTF)
 CHECK_FUNCTION_EXISTS(_snprintf  HAVE__SNPRINTF)
 CHECK_FUNCTION_EXISTS(_vsnprintf HAVE__VSNPRINTF)
 
+if (WIN32)
+  # snprintf not correctly detected under Visual Studio.
+  # Hack: we just activate snprintf under Windows. 
+  # TO BE FIXED
+  set(HAVE_SNPRINTF   1)
+  set(HAVE__SNPRINTF  1)
+  set(HAVE_VSNPRINTF  1)
+  set(HAVE__VSNPRINTF 1)
+endif ()
+
 if (COIN_USE_FAST_CODE)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fomit-frame-pointer ")
   set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} -fomit-frame-pointer ")

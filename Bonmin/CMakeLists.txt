@@ -866,6 +866,16 @@ check_function_exists(_vsnprintf HAVE__VSNPRINTF)
 check_symbol_exists(clock_gettime sys/time.h HAVE_CLOCK_GETTIME)
 check_symbol_exists(gettimeofday  sys/time.h HAVE_GETTIMEOFDAY)
 
+if (WIN32)
+  # snprintf not correctly detected under Visual Studio.
+  # Hack: we just activate snprintf under Windows. 
+  # TO BE FIXED
+  set(HAVE_SNPRINTF   1)
+  set(HAVE__SNPRINTF  1)
+  set(HAVE_VSNPRINTF  1)
+  set(HAVE__VSNPRINTF 1)
+endif ()
+
 if (COIN_USE_FAST_CODE)
   add_definitions(-DCOIN_FAST_CODE -DCLP_FAST_CODE -DCOIN_USE_RESTRICT -DCOIN_NOTEST_DUPLICATE)
   
