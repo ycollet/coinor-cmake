@@ -311,6 +311,9 @@ endif ()
 set_include_directories(libClpSolver)
 
 if (CLP_BUILD_EXAMPLES)
+  set(TEST_LIB_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib")
+  set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+  
   #
   # Build Examples
   #
@@ -345,7 +348,7 @@ if (CLP_BUILD_EXAMPLES)
       if (COIN_ENABLE_DOWNLOAD_CLAPACK)
         target_link_libraries(${Name} f2c)
       endif ()
-      if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND NOT COIN_USE_LAPACK)
+      if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND NOT COIN_USE_LAPACK AND NOT (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel"))
         target_link_libraries(${Name} gfortran)
       endif ()
     endif ()
@@ -382,16 +385,13 @@ if (CLP_BUILD_EXAMPLES)
     endif ()  
   endmacro ()
   
-  set(TEST_LIB_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib")
-  set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
-
   add_example(addBits ${Clp_DIR}/examples/addBits.cpp)
   
   add_test(NAME clp_example_addBits
            COMMAND $<TARGET_FILE:addBits> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_addBits PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_addBits PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_addBits PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -401,7 +401,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:addColumns> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_addColumns PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_addColumns PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_addColumns PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -411,7 +411,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:addRows> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_addRows PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_addRows PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_addRows PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -421,7 +421,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:decomp2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_decomp2 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_decomp2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_decomp2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -431,7 +431,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:decomp3> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_decomp3 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_decomp3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_decomp3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -441,7 +441,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:decompose> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_decompose PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_decompose PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_decompose PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -451,7 +451,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:default> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_default PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_default PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_default PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -461,7 +461,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:driver2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_driver2 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_driver2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_driver2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -471,7 +471,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:driver> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_driver PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_driver PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_driver PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -481,7 +481,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:dualCuts> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_dualCuts PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_dualCuts PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_dualCuts PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
 
@@ -496,7 +496,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:hello> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_hello PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_hello PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_hello PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -506,7 +506,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:makeDual> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_makeDual PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_makeDual PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_makeDual PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -516,7 +516,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:minimum> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_minimum PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_minimum PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_minimum PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -526,7 +526,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:modify> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_modify PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_modify PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_modify PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -536,7 +536,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:network> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_network PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_network PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_network PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -547,7 +547,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:pdco> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_pdco PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_pdco PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_pdco PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -557,7 +557,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:piece> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_piece PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_piece PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_piece PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -567,7 +567,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:rowColumn> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_rowColumn PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_rowColumn PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_rowColumn PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -577,7 +577,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sprint2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_sprint2 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_sprint2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_sprint2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -587,7 +587,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:sprint> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_sprint PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_sprint PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_sprint PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -597,7 +597,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:testBarrier> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_testBarrier PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_testBarrier PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_testBarrier PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -607,7 +607,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:testBasis> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_testBasis PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_testBasis PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_testBasis PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -617,7 +617,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:testGub2> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_testGub2 PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_testGub2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_testGub2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
   
@@ -627,7 +627,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:testGub> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_testGub PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_testGub PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_testGub PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
  
   
@@ -637,7 +637,7 @@ if (CLP_BUILD_EXAMPLES)
            COMMAND $<TARGET_FILE:testQP> ${CMAKE_SOURCE_DIR}/Data/Sample)
   set_tests_properties(clp_example_testQP PROPERTIES TIMEOUT 30)
   if (WIN32)
-    set_tests_properties(clp_example_testQP PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+    set_tests_properties(clp_example_testQP PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
 
@@ -648,7 +648,7 @@ if (CLP_BUILD_EXAMPLES)
   #         COMMAND $<TARGET_FILE:useVolume> ${CMAKE_SOURCE_DIR}/Data/Sample)
   #set_tests_properties(clp_example_useVolume PROPERTIES TIMEOUT 30)
   #if (WIN32)
-  #  set_tests_properties(clp_example_useVolume PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+  #  set_tests_properties(clp_example_useVolume PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   #endif ()
   #
   
@@ -686,7 +686,7 @@ else ()
   if (COIN_ENABLE_DOWNLOAD_CLAPACK)
     target_link_libraries(clp f2c)
   endif ()
-  if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND NOT COIN_USE_LAPACK)
+  if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND NOT COIN_USE_LAPACK AND NOT (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel"))
     target_link_libraries(clp gfortran)
   endif ()
 endif ()
