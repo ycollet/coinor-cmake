@@ -578,10 +578,12 @@ if (WIN32)
   # snprintf not correctly detected under Visual Studio.
   # Hack: we just activate snprintf under Windows. 
   # TO BE FIXED
+  set(HAVE_STDIO_H    1)
   set(HAVE_SNPRINTF   1)
   set(HAVE__SNPRINTF  1)
   set(HAVE_VSNPRINTF  1)
   set(HAVE__VSNPRINTF 1)
+  set(HAVE_VA_COPY    1)
 endif ()
 
 if (COIN_USE_FAST_CODE)
