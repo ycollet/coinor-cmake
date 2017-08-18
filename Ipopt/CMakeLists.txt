@@ -624,7 +624,7 @@ endif ()
 if (IPOPT_ENABLE_LINEARSOLVERLOADER)
   add_definitions(-DHAVE_LINEARSOLVERLOADER)
   
-  find_package(DL REQUIRED)
+  find_package(DL)
   
   set(BUILD_LINEARSOLVERLOADER ON)
   set(BUILD_PARDISOLOADER      ON)
