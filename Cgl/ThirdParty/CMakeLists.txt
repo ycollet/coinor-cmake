@@ -147,7 +147,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
   set(CLAPACK_InstallDir "${EP_InstallDir}/CLapack-${CLAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
-    ExternalProject_Add(EP_Lapack
+    ExternalProject_Add(EP_CLapack
                         PREFIX            ${CLAPACK_InstallDir}
                         URL               ${CLAPACK_URL}
                         UPDATE_COMMAND    ""
@@ -161,18 +161,18 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
                                        && ${CMAKE_COMMAND} -E copy ${CLAPACK_InstallDir}/src/EP_CLapack/build/BLAS/SRC/blas.lib         ${EP_InstallDir}/lib
                         )
   elseif (UNIX)
-    ExternalProject_Add(EP_Lapack
+    ExternalProject_Add(EP_CLapack
                         PREFIX            ${CLAPACK_InstallDir}
                         URL               ${CLAPACK_URL}
                         UPDATE_COMMAND    ""
-                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${CLAPACK_InstallDir}/src/EP_Lapack/INCLUDE/
-                                       && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${CLAPACK_InstallDir}/src/EP_Lapack/F2CLIBS/libf2c/
-                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${CLAPACK_InstallDir}/src/EP_Lapack/build
-                                       && ${CMAKE_COMMAND} -E chdir ${CLAPACK_InstallDir}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
-                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${CLAPACK_InstallDir}/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
-                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${CLAPACK_InstallDir}/src/EP_Lapack/build/SRC/liblapack.a         ${EP_InstallDir}/lib
-                                       && ${CMAKE_COMMAND} -E copy ${CLAPACK_InstallDir}/src/EP_Lapack/build/F2CLIBS/libf2c/libf2c.a ${EP_InstallDir}/lib
-                                       && ${CMAKE_COMMAND} -E copy ${CLAPACK_InstallDir}/src/EP_Lapack/build/BLAS/SRC/libblas.a      ${EP_InstallDir}/lib
+                        PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${CLAPACK_InstallDir}/src/EP_CLapack/INCLUDE/
+                                       && ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ThirdParty/f2c.h ${CLAPACK_InstallDir}/src/EP_CLapack/F2CLIBS/libf2c/
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${CLAPACK_InstallDir}/src/EP_CLapack/build
+                                       && ${CMAKE_COMMAND} -E chdir ${CLAPACK_InstallDir}/src/EP_CLapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${CLAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${CLAPACK_InstallDir}/src/EP_CLapack/build ${CMAKE_MAKE_PROGRAM}
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${CLAPACK_InstallDir}/src/EP_CLapack/build/SRC/liblapack.a         ${EP_InstallDir}/lib
+                                       && ${CMAKE_COMMAND} -E copy ${CLAPACK_InstallDir}/src/EP_CLapack/build/F2CLIBS/libf2c/libf2c.a ${EP_InstallDir}/lib
+                                       && ${CMAKE_COMMAND} -E copy ${CLAPACK_InstallDir}/src/EP_CLapack/build/BLAS/SRC/libblas.a      ${EP_InstallDir}/lib
                         )
   endif ()
 endif ()
