@@ -601,6 +601,9 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
     set(DEPENDS_SUITESPARSE "")
   endif ()
   
+  #SET(BUILD_METIS ${BUILD_METIS_DEFAULT} CACHE BOOL "Build METIS for partitioning?")
+  #SET(METIS_DIR ${${PROJECT_NAME}_SOURCE_DIR}/metis CACHE PATH "Source directory of METIS")
+  
   set(SUITESPARSE_URL        "https://github.com/jlblancoc/suitesparse-metis-for-windows.git")
   set(SUITESPARSE_InstallDir "${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/${CMAKE_CFG_INTDIR}/")
   
@@ -612,7 +615,7 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
                       PATCH_COMMAND     ""
                       UPDATE_COMMAND    ""
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build
-                                     && ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DSHARED=OFF -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                                     && ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DSHARED=OFF -DBUILD_METIS=OFF -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
                       )
