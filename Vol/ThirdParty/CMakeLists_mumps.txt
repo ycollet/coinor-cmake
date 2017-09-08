@@ -328,7 +328,7 @@ if (WIN32)
   set_property(TARGET libdmumps PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
   set_property(TARGET libsmumps PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
   set_property(TARGET libzmumps PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
-  set_property(TARGET libpord PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
+  set_property(TARGET libpord   PROPERTY INTERPROCEDURAL_OPTIMIZATION TRUE)
 
   set_property(TARGET libsmumps PROPERTY COMPILE_FLAGS "/DMUMPS_ARITH=MUMPS_ARITH_s")
   set_property(TARGET libdmumps PROPERTY COMPILE_FLAGS "/DMUMPS_ARITH=MUMPS_ARITH_d")
@@ -361,7 +361,6 @@ endif ()
 
 add_executable(ssimple_test examples/ssimpletest.F)
 target_link_libraries(ssimple_test libsmumps libmumps_common libpord ${LINK_LIBS})
-
 set_target_properties(ssimple_test PROPERTIES LINKER_LANGUAGE Fortran)
 
 add_executable(dsimple_test examples/dsimpletest.F)
