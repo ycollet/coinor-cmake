@@ -528,11 +528,16 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
     set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path" FORCE)
     set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path" FORCE)
   endif ()
+
+  set(MUMPS_DEPENDS "")
   
+  if (COIN_ENABLE_DOWNLOAD_CLAPACK)
+    set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_CLapack)
+  elseif (COIN_ENABLE_DOWNLOAD_LAPACK)
+    set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Lapack)
+  endif ()
   if (COIN_ENABLE_DOWNLOAD_METIS)
-    set(MUMPS_DEPENDS EP_Lapack EP_Metis)
-  else ()
-    set(MUMPS_DEPENDS EP_Lapack)
+    set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Metis)
   endif ()
   
   set(MUMPS_URL        "http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz")
@@ -594,33 +599,45 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
   
   set(COIN_ENABLE_CHOLMOD ON CACHE BOOL "Clp use the CholMod linear solver" FORCE)
   set(COIN_ENABLE_AMD     ON CACHE BOOL "Clp uses the AMD linear solver" FORCE)
-  
-  if (NOT COIN_ENABLE_DOWNLOAD_METIS)
-    message(FATAL_ERROR "To build SuiteSparse, you must enable Metis")
+
+  if (NOT WIN32)
+    if (NOT COIN_ENABLE_DOWNLOAD_METIS)
+      message(FATAL_ERROR "To build SuiteSparse, you must enable Metis")
+    endif ()
+    set(METIS_DIR "${METIS_InstallDir}/src/EP_Metis" CACHE PATH "Source directory of METIS")
   endif ()
-  set(METIS_DIR "${METIS_InstallDir}/src/EP_Metis" CACHE PATH "Source directory of METIS")
   
-  if (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK)
-    set(DEPENDS_SUITESPARSE EP_Lapack EP_Metis)
-  else ()
-    set(DEPENDS_SUITESPARSE EP_Metis)
+  if (COIN_ENABLE_DOWNLOAD_MUMPS)
+    set(DEPENDS_SUITESPARSE EP_Mumps)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_LAPACK)
+    set(DEPENDS_SUITESPARSE ${DEPENDS_SUITESPARSE} EP_Lapack)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_CLAPACK)
+    set(DEPENDS_SUITESPARSE ${DEPENDS_SUITESPARSE} EP_CLapack)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_METIS)
+    set(DEPENDS_SUITESPARSE ${DEPENDS_SUITESPARSE} EP_Metis)
   endif ()
   
   set(SUITESPARSE_URL        "https://github.com/jlblancoc/suitesparse-metis-for-windows.git")
   set(SUITESPARSE_InstallDir "${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/${CMAKE_CFG_INTDIR}/")
-  
-  ExternalProject_Add(EP_SuiteSparse
-                      PREFIX            ${SUITESPARSE_InstallDir}
-                      DEPENDS           ${DEPENDS_SUITESPARSE}
-                      GIT_REPOSITORY    ${SUITESPARSE_URL}
-                      GIT_TAG           "v${SUITESPARSE_VERSION}"
-                      PATCH_COMMAND     ""
-                      UPDATE_COMMAND    ""
-                      CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build
-                                     && ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DSHARED=OFF -DBUILD_METIS=ON -DMETIS_DIR=${METIS_DIR} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
-                      BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
-                      INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
-                      )
+
+  if (WIN32)
+  else ()
+    ExternalProject_Add(EP_SuiteSparse
+                        PREFIX            ${SUITESPARSE_InstallDir}
+                        DEPENDS           ${DEPENDS_SUITESPARSE}
+                        GIT_REPOSITORY    ${SUITESPARSE_URL}
+                        GIT_TAG           "v${SUITESPARSE_VERSION}"
+                        PATCH_COMMAND     ""
+                        UPDATE_COMMAND    ""
+                        CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build
+                                       && ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DLIB_POSTFIX:STRING="" -DSHARED=OFF -DBUILD_METIS=OFF -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                        BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM}
+                        INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build ${CMAKE_MAKE_PROGRAM} install
+                        )
+  endif ()
 elseif (COIN_ENABLE_AMD OR COIN_ENABLE_CHOLMOD)
   # Check for AMD and CHOLMOD
   
