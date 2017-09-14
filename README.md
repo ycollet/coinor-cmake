@@ -17,23 +17,23 @@ Up to now, only the following projects are supported:
 How to use these cmake files ?
 
 - Clone the repository
-- Copy all the files from Cbc-git to Cbc-2.9.8 (for example)
-- In Cbc-2.9.8 create a build directory (mkdir build)
-- In Cbc-2.9.8/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.8 -DCMAKE_BUILD_TYPE=RELEASE ..'
-- In Cbc-2.9.8/buil, launch 'cmake-gui .' to fine tune the configuration
+- Copy all the files from Cbc-git to Cbc-2.9.9 (for example)
+- In Cbc-2.9.9 create a build directory (mkdir build)
+- In Cbc-2.9.9/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.9 -DCMAKE_BUILD_TYPE=RELEASE ..'
+- In Cbc-2.9.9/buil, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: make
 - Install the libraries: sudo make install
 
 An example:
 ```
-$ wget https://www.coin-or.org/download/source/Cbc/Cbc-2.9.8.tgz
-$ tar xvfz Cbc-2.9.8.tgz
+$ wget https://www.coin-or.org/download/source/Cbc/Cbc-2.9.9.tgz
+$ tar xvfz Cbc-2.9.9.tgz
 $ git clone https://github.com/ycollet/coinor-cmake.git
-$ cp -r coinor-cmake/Cbc/* Cbc-2.9.8/
-$ cd Cbc-2.9.8
+$ cp -r coinor-cmake/Cbc/* Cbc-2.9.9/
+$ cd Cbc-2.9.9
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.8 -DCMAKE_BUILD_TYPE=RELEASE ..
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.9 -DCMAKE_BUILD_TYPE=RELEASE ..
 # Now activate all the options you want ... and click on  configure + generate and exit
 $ cmake-gui .
 $ make
@@ -43,10 +43,10 @@ $ sudo make install
 Under Windows, with Visual Studio:
 
 - Clone the repository
-- Copy all the files from Cbc-git to Cbc-2.9.8 (for example)
-- In Cbc-2.9.8 create a build directory (mkdir build)
-- In Cbc-2.9.8/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.8 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
-- In Cbc-2.9.8/buil, launch 'cmake-gui .' to fine tune the configuration
+- Copy all the files from Cbc-git to Cbc-2.9.9 (for example)
+- In Cbc-2.9.9 create a build directory (mkdir build)
+- In Cbc-2.9.9/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.9 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
+- In Cbc-2.9.9/buil, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: nmake
 - Install the libraries: nmake install
 
@@ -121,8 +121,8 @@ Then, edit the file cmake/mingw64-toolchain.cmake to fine tune wrt your mingw in
 You can add another root directory where mingw will look for installed libraries by adding these lines:
 ```
 # here is the target environment located
-SET(USER_ROOT_PATH /home/me/me-win32-dev)
-SET(CMAKE_FIND_ROOT_PATH  /usr/${COMPILER_PREFIX} ${USER_ROOT_PATH})
+set(USER_ROOT_PATH /home/me/me-win32-dev)
+set(CMAKE_FIND_ROOT_PATH  /usr/${COMPILER_PREFIX} ${USER_ROOT_PATH})
 ```
 
 Now, run cmake:
