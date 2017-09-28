@@ -259,11 +259,11 @@ set_tests_properties(miplib3_seymour_gz_cbc_standard     PROPERTIES LABELS "MPS;
 set_tests_properties(miplib3_swath_gz_cbc_standard       PROPERTIES LABELS "MPS;CBC;MIPLIB;LONG;WARNING")
 
 if (CBC_BUILD_CBC_GENERIC) 
-  add_coin_test_list(cbc-generic infeas  cbc_generic TEST_LIST_INFEAS  "MPS;CBC-GENERIC;INFEAS"  30)
-  add_coin_test_list(cbc-generic big     cbc_generic TEST_LIST_BIG     "MPS;CBC-GENERIC;BIG"     30)
-  add_coin_test_list(cbc-generic sample  cbc_generic TEST_LIST_SAMPLE  "MPS;CBC-GENERIC;SAMPLE"  30)
-  add_coin_test_list(cbc-generic netlib  cbc_generic TEST_LIST_NETLIB  "MPS;CBC-GENERIC;NETLIB"  30)
-  add_coin_test_list(cbc-generic miplib3 cbc_generic TEST_LIST_MIPLIB3 "MPS;CBC-GENERIC;MIPLIB3" 30)
+  add_coin_test_list(cbc-generic infeas  cbc-generic TEST_LIST_INFEAS  "MPS;CBC-GENERIC;INFEAS"  30)
+  add_coin_test_list(cbc-generic big     cbc-generic TEST_LIST_BIG     "MPS;CBC-GENERIC;BIG"     30)
+  add_coin_test_list(cbc-generic sample  cbc-generic TEST_LIST_SAMPLE  "MPS;CBC-GENERIC;SAMPLE"  30)
+  add_coin_test_list(cbc-generic netlib  cbc-generic TEST_LIST_NETLIB  "MPS;CBC-GENERIC;NETLIB"  30)
+  add_coin_test_list(cbc-generic miplib3 cbc-generic TEST_LIST_MIPLIB3 "MPS;CBC-GENERIC;MIPLIB3" 30)
   
   set_tests_properties(miplib3_air04_gz_cbc-generic      PROPERTIES TIMEOUT 300)
   set_tests_properties(miplib3_air05_gz_cbc-generic      PROPERTIES TIMEOUT 300)
