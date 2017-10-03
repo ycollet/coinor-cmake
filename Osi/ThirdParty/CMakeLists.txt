@@ -392,7 +392,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_GLPK)
-  set(GLPK_VERSION "4.62")
+  set(GLPK_VERSION "4.63")
   set(COMPILE_OSI_GLPK ON CACHE BOOL "Compile the OSI GLPK solver" FORCE)
   
   set(GLPK_URL        "http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz")

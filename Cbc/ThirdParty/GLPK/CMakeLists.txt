@@ -256,7 +256,6 @@ set(GLPK_SRCS ${CMAKE_SOURCE_DIR}/src/bfd.c
               ${CMAKE_SOURCE_DIR}/src/glpssx01.c
               ${CMAKE_SOURCE_DIR}/src/glpssx02.c
               ${CMAKE_SOURCE_DIR}/src/lux.c
-              ${CMAKE_SOURCE_DIR}/src/spv.c
               ${CMAKE_SOURCE_DIR}/src/amd/amd_1.c
               ${CMAKE_SOURCE_DIR}/src/amd/amd_2.c
               ${CMAKE_SOURCE_DIR}/src/amd/amd_aat.c
@@ -422,6 +421,15 @@ if ((GLPK_VERSION STREQUAL "4.61") OR (GLPK_VERSION STRGREATER "4.61"))
                 ${CMAKE_SOURCE_DIR}/src/api/prob3.c
                 ${CMAKE_SOURCE_DIR}/src/api/prob4.c
                 ${CMAKE_SOURCE_DIR}/src/api/prob5.c)
+endif ()
+
+if (GLPK_VERSION STRGREATER "4.62")
+  set(GLPK_SRCS ${GLPK_SRCS}
+                ${CMAKE_SOURCE_DIR}/src/env/stdc.c
+                ${CMAKE_SOURCE_DIR}/src/cglib/spv.c)
+else ()
+  set(GLPK_SRCS ${GLPK_SRCS}
+                ${CMAKE_SOURCE_DIR}/src/spv.c)
 endif ()
 
 if (ENABLE_SHARED_LIBRARIES)
