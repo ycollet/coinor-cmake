@@ -13,9 +13,6 @@
 /* Define to 1 if the Netlib package is available */
 #define COIN_HAS_NETLIB @COIN_HAS_NETLIB@
 
-/* Define to 1 if the Osi package is available */
-#define COIN_HAS_OSI @COIN_HAS_OSI@
-
 /* Define to 1 if the OsiTests package is available */
 #define COIN_HAS_OSITESTS @COIN_HAS_OSITESTS@
 

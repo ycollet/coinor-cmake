@@ -43,9 +43,6 @@
 /* Define to 1 if the Netlib package is available */
 #cmakedefine COIN_HAS_NETLIB
 
-/* Define to 1 if the Osi package is available */
-#cmakedefine COIN_HAS_OSI
-
 /* Define to 1 if the OsiTests package is available */
 #cmakedefine COIN_HAS_OSITESTS
 

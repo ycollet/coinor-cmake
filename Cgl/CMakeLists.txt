@@ -175,8 +175,6 @@ else ()
 endif ()
 
 # Various definitions
-# Set to 1 if the Osi package is available
-set(COIN_HAS_OSI       1)
 # Set to 1 if the OsiTests package is available
 set(COIN_HAS_OSITESTS  1)
 # Set to 1 if the Sample package is available

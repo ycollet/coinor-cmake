@@ -21,9 +21,6 @@
 /* Define to the debug verbosity level (0 is no output) */
 #define COIN_CGL_VERBOSITY @COIN_CGL_VERBOSITY@
 
-/* Define to 1 if the Osi package is available */
-#cmakedefine COIN_HAS_OSI
-
 /* Define to 1 if the OsiClp package is available */
 #cmakedefine COIN_HAS_OSICLP
 

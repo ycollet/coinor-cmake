@@ -132,8 +132,6 @@ else ()
 endif ()
 
 # Various definitions
-# Set to 1 if the Osi package is available -> See Vol/Makefile.am
-set(COIN_HAS_OSI       1)
 # Set to 1 if the OsiTests package is available -> see Vol/test/Makefile.am
 set(COIN_HAS_OSITESTS  1)
 # Set to 1 if the Sample package is available -> see Vol/test/Makefile.am
