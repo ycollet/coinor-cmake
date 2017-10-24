@@ -10,9 +10,6 @@
 /* Define to the debug verbosity level (0 is no output) */
 #define COIN_DYLP_VERBOSITY @COIN_DYLP_VERBOSITY@
 
-/* Define to 1 if the CoinUtils package is available */
-#define COIN_HAS_COINUTILS @COIN_HAS_COINUTILS@
-
 /* Define to 1 if the Netlib package is available */
 #define COIN_HAS_NETLIB @COIN_HAS_NETLIB@
 

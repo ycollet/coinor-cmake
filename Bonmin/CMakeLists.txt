@@ -205,8 +205,6 @@ else ()
 endif ()
 
 # Various definitions
-# Set to 1 if the CoinUtils package is available -> ?? used ??
-set(COIN_HAS_COINUTILS 1)
 # Set to 1 if the Osi package is available -> See Clp/Makefile.am
 set(COIN_HAS_OSI       1)
 # Set to 1 if the OsiTests package is available -> see Clp/test/Makefile.am

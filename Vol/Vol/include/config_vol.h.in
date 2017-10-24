@@ -1,8 +1,5 @@
 /* inc/config_vol.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Define to 1 if the CoinUtils package is available */
-#cmakedefine COIN_HAS_COINUTILS
-
 /* Define to 1 if the Osi package is available */
 #cmakedefine COIN_HAS_OSI
 

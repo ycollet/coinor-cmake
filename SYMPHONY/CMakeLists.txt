@@ -227,8 +227,6 @@ else ()
 endif ()
 
 # Various definitions
-# Set to 1 if the CoinUtils package is available
-set(COIN_HAS_COINUTILS 1)
 # Set to 1 if the Osi package is available
 set(COIN_HAS_OSI       1)
 # Set to 1 if the OsiTests package is available

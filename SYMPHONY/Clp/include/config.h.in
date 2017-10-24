@@ -34,9 +34,6 @@
 /* Define to 1 if the CHOLMOD package is available */
 #cmakedefine COIN_HAS_CHOLMOD
 
-/* Define to 1 if the CoinUtils package is available */
-#cmakedefine COIN_HAS_COINUTILS
-
 /* Define to 1 if the Glpk package is available */
 #cmakedefine COIN_HAS_GLPK
 
