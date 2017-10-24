@@ -227,11 +227,7 @@ else ()
 endif ()
 
 # Various definitions
-# Set to 1 if the OsiTests package is available
-set(COIN_HAS_OSITESTS  1)
-# Set to 1 if the Sample package is available
-set(COIN_HAS_SAMPLE    1)
-set(COIN_HAS_CGL       1) # Set this to 1 if cgl is compiled
+set(COIN_HAS_CGL 1) # Set this to 1 if cgl is compiled
 
 # Name of package
 set(PACKAGE           "Symphony")

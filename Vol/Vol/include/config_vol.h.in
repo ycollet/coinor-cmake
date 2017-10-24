@@ -1,11 +1,5 @@
 /* inc/config_vol.h.in.  Generated from configure.ac by autoheader.  */
 
-/* Define to 1 if the OsiTests package is available */
-#cmakedefine COIN_HAS_OSITESTS
-
-/* Define to 1 if the Sample package is available */
-#cmakedefine COIN_HAS_SAMPLE
-
 /* Define to the debug sanity check level (0 is no test) */
 #define COIN_VOL_CHECKLEVEL @COIN_VOL_CHECKLEVEL@
 

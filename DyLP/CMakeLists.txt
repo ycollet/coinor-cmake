@@ -137,12 +137,8 @@ else ()
 endif ()
 
 # Various definitions
-# Set to 1 if the OsiTests package is available -> see DyLP/test/Makefile.am
-set(COIN_HAS_OSITESTS  1)
-# Set to 1 if the Sample package is available -> see DyLP/test/Makefile.am
-set(COIN_HAS_SAMPLE    1)
 # Set to 1 if the Netlib package is available -> see DyLP/test/Makefile.am
-set(COIN_HAS_NETLIB    0)
+set(COIN_HAS_NETLIB 0)
 
 # Name of package
 set(PACKAGE           "DyLP")

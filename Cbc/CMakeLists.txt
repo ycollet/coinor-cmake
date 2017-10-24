@@ -191,12 +191,8 @@ else ()
 endif ()
 
 # Various definitions
-# Set to 1 if the OsiTests package is available -> see Clp/test/Makefile.am
-set(COIN_HAS_OSITESTS  1) # NOT USED
-# Set to 1 if the Sample package is available -> see Cbc/test/Makefile.am
-set(COIN_HAS_SAMPLE    1) # NOT USED
-set(COIN_HAS_CGL       1) # Set this to 1 if cgl is compiled # NOT USED
-set(COIN_HAS_CLP       1) # Set this to 1 if clp is compiled # USED
+set(COIN_HAS_CGL 1) # Set this to 1 if cgl is compiled # NOT USED
+set(COIN_HAS_CLP 1) # Set this to 1 if clp is compiled # USED
 
 # Name of package
 set(PACKAGE           "Cbc")

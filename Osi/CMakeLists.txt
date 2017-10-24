@@ -133,12 +133,6 @@ else ()
   set(HAVE_64_BIT 1)
 endif ()
 
-# Various definitions
-# Set to 1 if the OsiTests package is available
-set(COIN_HAS_OSITESTS  1)
-# Set to 1 if the Sample package is available
-set(COIN_HAS_SAMPLE    1)
-
 # Name of package
 set(PACKAGE           "Osi")
 # Define to the address where bug reports for this package should be sent.
