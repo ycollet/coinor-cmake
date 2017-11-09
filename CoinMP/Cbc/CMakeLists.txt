@@ -401,7 +401,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
   
   add_test(NAME cbc_example_allCuts
-           COMMAND $<TARGET_FILE:allCuts> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:allCuts> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_allCuts PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_allCuts PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -411,7 +411,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(cbc_driver ${Cbc_DIR}/examples/driver.cpp)
   
   add_test(NAME cbc_example_driver
-           COMMAND $<TARGET_FILE:cbc_driver> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:cbc_driver> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_driver PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_driver PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -424,7 +424,7 @@ if (CBC_BUILD_EXAMPLES)
                        ${Cbc_DIR}/examples/CbcSolver2.cpp)
   
   add_test(NAME cbc_example_longthin
-           COMMAND $<TARGET_FILE:longthin> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:longthin> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_longthin PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_longthin PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -435,7 +435,7 @@ if (CBC_BUILD_EXAMPLES)
                     ${Cbc_DIR}/examples/CbcBranchUser.cpp)
   
   add_test(NAME cbc_example_qmip2
-           COMMAND $<TARGET_FILE:qmip2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:qmip2> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.5.mps)
   set_tests_properties(cbc_example_qmip2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_qmip2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -447,7 +447,7 @@ if (CBC_BUILD_EXAMPLES)
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample5
-           COMMAND $<TARGET_FILE:sample5> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:sample5> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_sample5 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sample5 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -457,7 +457,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(barrier ${Cbc_DIR}/examples/barrier.cpp)
   
   add_test(NAME cbc_example_barrier
-           COMMAND $<TARGET_FILE:barrier> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:barrier> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_barrier PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_barrier PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -472,7 +472,7 @@ if (CBC_BUILD_EXAMPLES)
                         ${Cbc_DIR}/examples/CbcSolver3.cpp)
   
   add_test(NAME cbc_example_fast0507b
-           COMMAND $<TARGET_FILE:fast0507b> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:fast0507b> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_fast0507b PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_fast0507b PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -482,7 +482,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(lotsize ${Cbc_DIR}/examples/lotsize.cpp)
   
   add_test(NAME cbc_example_lotsize
-           COMMAND $<TARGET_FILE:lotsize> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:lotsize> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_lotsize PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_lotsize PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -495,7 +495,7 @@ if (CBC_BUILD_EXAMPLES)
                    ${Cbc_DIR}/examples/ClpQuadInterface.cpp)
   
   add_test(NAME cbc_example_qmip
-           COMMAND $<TARGET_FILE:qmip> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:qmip> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.5.mps)
   set_tests_properties(cbc_example_qmip PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_qmip PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -505,7 +505,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(simpleBAB ${Cbc_DIR}/examples/simpleBAB.cpp)
   
   add_test(NAME cbc_example_simpleBAB
-           COMMAND $<TARGET_FILE:simpleBAB> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:simpleBAB> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_simpleBAB PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_simpleBAB PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -518,21 +518,23 @@ if (CBC_BUILD_EXAMPLES)
                        ${Cbc_DIR}/examples/CbcBranchUser.cpp)
   
   add_test(NAME cbc_example_fast0507
-           COMMAND $<TARGET_FILE:fast0507> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:fast0507> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_fast0507 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_fast0507 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
   
+  # Must compile minimum.cpp with -DSAMPLEDIR=${CMAKE_SOURCE_DIR}/Data/Sample
   add_example(cbc_minimum ${Cbc_DIR}/examples/minimum.cpp)
   
   add_test(NAME cbc_example_minimum
-           COMMAND $<TARGET_FILE:cbc_minimum> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:cbc_minimum> ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps)
   set_tests_properties(cbc_example_minimum PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_minimum PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_minimum PROPERTIES LABELS "FAIL")
   
   
   add_example(repeat ${Cbc_DIR}/examples/repeat.cpp
@@ -540,7 +542,7 @@ if (CBC_BUILD_EXAMPLES)
                      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_repeat
-           COMMAND $<TARGET_FILE:repeat> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:repeat> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_repeat PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_repeat PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -550,7 +552,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(sos ${Cbc_DIR}/examples/sos.cpp)
   
   add_test(NAME cbc_example_sos
-           COMMAND $<TARGET_FILE:sos> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:sos> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_sos PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sos PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -560,7 +562,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(crew ${Cbc_DIR}/examples/crew.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_crew
-           COMMAND $<TARGET_FILE:crew> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:crew> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_crew PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_crew PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -571,38 +573,40 @@ if (CBC_BUILD_EXAMPLES)
                    ${Cbc_DIR}/examples/CbcBranchLink.cpp)
   
   add_test(NAME cbc_example_gear
-           COMMAND $<TARGET_FILE:gear> ${CMAKE_SOURCE_DIR}/Data/Sample)
-  set_tests_properties(cbc_example_gear PROPERTIES TIMEOUT 30)
+           COMMAND $<TARGET_FILE:gear>)
+  set_tests_properties(cbc_example_gear PROPERTIES TIMEOUT 180)
   if (WIN32)
     set_tests_properties(cbc_example_gear PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_gear PROPERTIES LABELS "LONG")
   
   
   add_example(cbc_modify ${Cbc_DIR}/examples/modify.cpp)
   
   add_test(NAME cbc_example_modify
-           COMMAND $<TARGET_FILE:cbc_modify> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:cbc_modify> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_modify PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_modify PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
   
-  
+  # This test hangs with COIN_BIG_INDEX==2
   add_example(sample1 ${Cbc_DIR}/examples/sample1.cpp
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample1
-           COMMAND $<TARGET_FILE:sample1> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:sample1> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.5.mps)
   set_tests_properties(cbc_example_sample1 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sample1 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_sample1 PROPERTIES LABELS "FAIL")
   
   
   add_example(sudoku ${Cbc_DIR}/examples/sudoku.cpp)
   
   add_test(NAME cbc_example_sudoku
-           COMMAND $<TARGET_FILE:sudoku> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:sudoku> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_sudoku PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sudoku PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -613,7 +617,7 @@ if (CBC_BUILD_EXAMPLES)
   target_link_libraries(cbc_driver2 libOsi libOsiCbc)
   
   add_test(NAME cbc_example_driver2
-           COMMAND $<TARGET_FILE:cbc_driver2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:cbc_driver2> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_driver2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_driver2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -625,7 +629,7 @@ if (CBC_BUILD_EXAMPLES)
                        ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_hotstart
-           COMMAND $<TARGET_FILE:hotstart> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:hotstart> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_hotstart PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_hotstart PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -635,7 +639,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(nway ${Cbc_DIR}/examples/nway.cpp)
   
   add_test(NAME cbc_example_nway
-           COMMAND $<TARGET_FILE:nway> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:nway> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_nway PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_nway PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -647,7 +651,7 @@ if (CBC_BUILD_EXAMPLES)
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample2
-           COMMAND $<TARGET_FILE:sample2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:sample2> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_sample2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sample2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -657,7 +661,7 @@ if (CBC_BUILD_EXAMPLES)
   add_example(cbc_driver3 ${Cbc_DIR}/examples/driver3.cpp)
   
   add_test(NAME cbc_example_driver3
-           COMMAND $<TARGET_FILE:cbc_driver3> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:cbc_driver3> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_driver3 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_driver3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -668,7 +672,7 @@ if (CBC_BUILD_EXAMPLES)
                         ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_interrupt
-           COMMAND $<TARGET_FILE:interrupt> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:interrupt> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_interrupt PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_interrupt PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -680,7 +684,7 @@ if (CBC_BUILD_EXAMPLES)
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample3
-           COMMAND $<TARGET_FILE:sample3> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:sample3> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_sample3 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sample3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -691,7 +695,7 @@ if (CBC_BUILD_EXAMPLES)
                           ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_driver4
-           COMMAND $<TARGET_FILE:cbc_driver4> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:cbc_driver4> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_driver4 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_driver4 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -702,7 +706,7 @@ if (CBC_BUILD_EXAMPLES)
                    ${Cbc_DIR}/examples/CbcBranchLink.cpp)
   
   add_test(NAME cbc_example_link
-           COMMAND $<TARGET_FILE:link> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:link> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(cbc_example_link PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_link PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
@@ -714,23 +718,25 @@ if (CBC_BUILD_EXAMPLES)
                          ${Cbc_DIR}/examples/CbcCompareUser.cpp)
     
     add_test(NAME cbc_example_parallel
-             COMMAND $<TARGET_FILE:parallel> ${CMAKE_SOURCE_DIR}/Data/Sample)
+             COMMAND $<TARGET_FILE:parallel> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
     set_tests_properties(cbc_example_parallel PROPERTIES TIMEOUT 30)
     if (WIN32)
       set_tests_properties(cbc_example_parallel PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
     endif ()
   endif ()
-  
+
+  # This test fails ...
   add_example(sample4 ${Cbc_DIR}/examples/sample4.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample4
-           COMMAND $<TARGET_FILE:sample4> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:sample4> ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps)
   set_tests_properties(cbc_example_sample4 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sample4 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_sample4 PROPERTIES LABELS "FAIL")
 endif ()
 
 add_executable(cbc ${Cbc_DIR}/src/CoinSolve.cpp)
