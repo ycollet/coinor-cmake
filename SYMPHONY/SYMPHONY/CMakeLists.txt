@@ -586,7 +586,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_example(bicriteria ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c)
 
   add_test(NAME symphony_example_bicriteria
-           COMMAND $<TARGET_FILE:bicriteria> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:bicriteria> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(symphony_example_bicriteria PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(symphony_example_bicriteria PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -596,7 +596,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_example(milp ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c)
   
   add_test(NAME symphony_example_milp
-           COMMAND $<TARGET_FILE:milp> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:milp> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(symphony_example_milp PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(symphony_example_milp PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -606,7 +606,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_example(milp2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c)
   
   add_test(NAME symphony_example_milp2
-           COMMAND $<TARGET_FILE:milp2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:milp2> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(symphony_example_milp2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(symphony_example_milp2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -617,7 +617,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   #target_link_libraries(milpOsi libOsiSym libOsi libCgl libCoinUtils z bz2 libSym libCgl libCoinUtils libClp libOsiClp libCoinUtils libOsi)
   # 
   #add_test(NAME symphony_example_milpOsi
-  #         COMMAND $<TARGET_FILE:milpOsi> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  #         COMMAND $<TARGET_FILE:milpOsi> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   #set_tests_properties(symphony_example_milpOsi PROPERTIES TIMEOUT 30)
   #if (WIN32)
   #  set_tests_properties(symphony_example_milpOsi PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -628,7 +628,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   #add_example(milpOsi2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c)
   #
   #add_test(NAME symphony_example_milpOsi2
-  #         COMMAND $<TARGET_FILE:milpOsi2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+  #         COMMAND $<TARGET_FILE:milpOsi2> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   #set_tests_properties(symphony_example_milpOsi2 PROPERTIES TIMEOUT 30)
   #if (WIN32)
   #  set_tests_properties(symphony_example_milpOsi2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -638,7 +638,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_example(sensitivity ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c)
   
   add_test(NAME symphony_example_sensitivity
-           COMMAND $<TARGET_FILE:sensitivity> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:sensitivity> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(symphony_example_sensitivity PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(symphony_example_sensitivity PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -648,7 +648,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_example(warm_start1 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c)
   
   add_test(NAME symphony_example_warm_start1
-           COMMAND $<TARGET_FILE:warm_start1> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:warm_start1> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(symphony_example_warm_start1 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(symphony_example_warm_start1 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -658,7 +658,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_example(warm_start2 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c)
   
   add_test(NAME symphony_example_warm_start2
-           COMMAND $<TARGET_FILE:warm_start2> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:warm_start2> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(symphony_example_warm_start2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(symphony_example_warm_start2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -668,7 +668,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   add_example(warm_start3 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
   
   add_test(NAME symphony_example_warm_start3
-           COMMAND $<TARGET_FILE:warm_start3> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:warm_start3> -F ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(symphony_example_warm_start3 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(symphony_example_warm_start3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
