@@ -545,13 +545,15 @@ if (COIN_HAS_ABC)
   elseif ((COIN_ABC_LEVEL STREQUAL "3") OR (COIN_ABC_LEVEL STREQUAL "4"))
     # If we compile using gcc-5.0.*, we can remove the following definition
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 5.0 OR CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 5.0)
+      if ((CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 5.0 OR CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 5.0) OR
+	  (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.0 OR CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 8.0))
+	# cilkplus is to be removed from gcc starting from version 8
         message(STATUS "gcc Version >= 5.0")
         set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fcilkplus ")
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fcilkplus ")
       else ()
-        message(STATUS "gcc Version < 5.0")
-        message(FATAL_ERROR "Error: gcc has no Cilk extension yet (gcc-4.9 is the first version with Cilk support")
+        message(STATUS "gcc Version < 5.0 or Version > 8.0")
+        message(FATAL_ERROR "Error: gcc has no Cilk extension yet (gcc-4.9 is the first version with Cilk support)")
       endif ()
     endif ()
   endif ()
