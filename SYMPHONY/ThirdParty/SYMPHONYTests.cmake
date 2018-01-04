@@ -429,8 +429,8 @@ create_log_analysis(miplib3_swath_gz_symphony "01_Analysis" "Solution Cost: <num
 create_log_analysis(miplib3_vpm1_gz_symphony "01_Analysis" "Solution Cost: <number>" 20 1e-6)
 create_log_analysis(miplib3_vpm2_gz_symphony "01_Analysis" "Solution Cost: <number>" 13.75 1e-6)
 
-set_tests_properties(infeas_greenbea_mps_symphony_01_Analysis    PROPERTIES LABELS "MPS;SYMPHONY;INFEAS;LONG")
-set_tests_properties(big_mkc7_mps_gz_symphony_01_Analysis        PROPERTIES LABELS "MPS;SYMPHONY;BIG;LONG")
+#set_tests_properties(infeas_greenbea_mps_symphony_01_Analysis    PROPERTIES LABELS "MPS;SYMPHONY;INFEAS;LONG")
+#set_tests_properties(big_mkc7_mps_gz_symphony_01_Analysis        PROPERTIES LABELS "MPS;SYMPHONY;BIG;LONG")
 set_tests_properties(netlib_dfl001_mps_gz_symphony_01_Analysis   PROPERTIES LABELS "MPS;SYMPHONY;NETLIB;WARNING")
 set_tests_properties(netlib_standgub_mps_gz_symphony_01_Analysis PROPERTIES LABELS "MPS;SYMPHONY;NETLIB;WARNING")
 set_tests_properties(miplib3_arki001_gz_symphony_01_Analysis     PROPERTIES LABELS "MPS;SYMPHONY;MIPLIB;LONG;WARNING")
