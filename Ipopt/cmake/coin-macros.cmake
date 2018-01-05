@@ -295,6 +295,7 @@ macro(create_log_analysis Name AdditionalName TestRegex TestRefVal TestRelLevel)
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES DEPENDS "${TestName}_${TestSolverName}")
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES ENVIRONMENT "${TEST_ENV_VAR}")
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES PASS_REGULAR_EXPRESSION "PASSED")
+  set_tests_properties(${Name}_${AdditionalName} PROPERTIES LABELS "ANALYSIS")
 endmacro()
 
 # From hydrogen CMakeLists.txt file
