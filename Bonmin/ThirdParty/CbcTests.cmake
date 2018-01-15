@@ -217,7 +217,7 @@ add_coin_test_list(cbc netlib  cbc_standard TEST_LIST_NETLIB  "MPS;CBC;NETLIB"  
 add_coin_test_list(cbc miplib3 cbc_standard TEST_LIST_MIPLIB3 "MPS;CBC;MIPLIB3" 30)
 
 set_tests_properties(miplib3_air04_gz_cbc_standard      PROPERTIES TIMEOUT 500)
-set_tests_properties(miplib3_air05_gz_cbc_standard      PROPERTIES TIMEOUT 50)
+set_tests_properties(miplib3_air05_gz_cbc_standard      PROPERTIES TIMEOUT 250)
 set_tests_properties(miplib3_arki001_gz_cbc_standard    PROPERTIES TIMEOUT 3000)
 set_tests_properties(miplib3_bell5_gz_cbc_standard      PROPERTIES TIMEOUT 500)
 set_tests_properties(miplib3_dano3mip_gz_cbc_standard   PROPERTIES TIMEOUT 3000)
