@@ -14,6 +14,7 @@ import sys
 # comparator = 4 -> ">="
 
 rel_level  = 1e-6
+epsilon    = 1e-9
 comparator = 1
 
 if (len(sys.argv) <= 4):
@@ -57,28 +58,24 @@ for line in lines:
         # Regex applied to each line
         match = re.findall(pattern, line)
         if match:
-            #print "DEBUG: line = %s\n" % line
-            #print "DEBUG: pattern = %s\n" % pattern
-            #print "DEBUG: match = %s\n" % match
-        
             if comparator == 0: # <=
-                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9)
+                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res <= rel_level
                 print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) <= %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
             elif comparator == 1: # <
-                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9)
+                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res < rel_level
                 print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) < %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
             elif comparator == 2: # =
-                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9)
+                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res == rel_level
                 print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) == %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
             elif comparator == 3: # >
-                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9)
+                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res > rel_level
                 print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) > %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
             elif comparator == 4: # >=
-                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), 1e-9)
+                res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res >= rel_level
                 print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) >= %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
                 
@@ -88,10 +85,6 @@ for line in lines:
             else:
                 print "PASSED"
                 sys.exit()
-        #else:
-        #    print "DEBUG: line = %s\n" % line
-        #    print "DEBUG: pattern = %s\n" % pattern
-        #    print "DEBUG: match = %s\n" % match
 
 print "NOT FOUND"
 sys.exit(-1)
