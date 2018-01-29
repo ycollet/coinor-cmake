@@ -546,11 +546,15 @@ if (CLP_BUILD_EXAMPLES)
   
 
   # This test hangs because it requires the following files:./g.tiny ./gparm.tiny in the exe directory
+  execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Clp/examples/g.tiny     ${CMAKE_BINARY_DIR}/bin/
+                  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Clp/examples/gparm.tiny ${CMAKE_BINARY_DIR}/bin/)
+
   add_example(pdco ${Clp_DIR}/examples/pdco.cpp)
                    #${Clp_DIR}/examples/myPdco.cpp)
   
   add_test(NAME clp_example_pdco
-           COMMAND $<TARGET_FILE:pdco> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:pdco> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps
+           WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
   set_tests_properties(clp_example_pdco PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_pdco PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")

@@ -595,7 +595,7 @@ if (CBC_BUILD_EXAMPLES)
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample1
-           COMMAND $<TARGET_FILE:sample1> ${CMAKE_SOURCE_DIR}/Data/Sample/exmip1.5.mps)
+           COMMAND $<TARGET_FILE:sample1> ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps)
   set_tests_properties(cbc_example_sample1 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sample1 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
