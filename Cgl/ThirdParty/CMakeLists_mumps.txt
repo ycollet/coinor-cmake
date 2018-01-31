@@ -4,6 +4,7 @@ cmake_minimum_required (VERSION 2.8)
 
 option(MUMPS_USE_LIBSEQ   "Use the MUMPS sequential MPI stub" OFF)
 option(MUMPS_USE_METIS    "Use the Metis library" OFF)
+option(MUMPS_USE_F2C      "F2c was used to compiled CLapack" OFF)
 option(MUMPS_INSTALL_COIN "Install MUMPS for CoinOR" OFF)
 
 set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path")
@@ -274,9 +275,18 @@ else ()
                   lapack)
   endif ()
   
+  if (MUMPS_USE_F2C)
+    set(LINK_LIBS ${LINK_LIBS} 
+                  f2c)
+  endif ()
+  
   set(LINK_LIBS ${LINK_LIBS} 
                 pthread)
-  
+endif ()
+
+if (MUMPS_USE_METIS)
+  set(LINK_LIBS ${LINK_LIBS}
+                metis m)
 endif ()
 
 if (MUMPS_USE_LIBSEQ)
@@ -337,14 +347,6 @@ endif ()
 if (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
   set(LINK_LIBS ${LINK_LIBS}
                 ifcore)
-endif ()
-
-set(LINK_LIBS ${LINK_LIBS}
-              blas lapack)
-
-if (MUMPS_USE_METIS)
-  set(LINK_LIBS ${LINK_LIBS}
-                metis m)
 endif ()
 
 add_executable(ssimple_test examples/ssimpletest.F)
