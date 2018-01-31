@@ -267,7 +267,7 @@ if (IPOPT_BUILD_EXAMPLES)
   add_executable(solve_problem ${ScalableProblems_SRCS})
   target_link_libraries(solve_problem libIpopt)
   if (COIN_HAS_MUMPS)
-    target_link_libraries(solve_problem libdmumps libmumps_common libseq pthread)
+    target_link_libraries(solve_problem dmumps mumps_common seq pthread)
   endif ()
   if (MKL_FOUND)
     target_link_libraries(${Name} ${COIN_MKL_LIBS})
@@ -278,7 +278,7 @@ if (IPOPT_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_CLAPACK)
       target_link_libraries(solve_problem f2c)
     endif ()
-  if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_HAS_MUMPS)
+  if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_HAS_MUMPS)
     target_link_libraries(solve_problem gfortran)
   endif ()
   endif ()
@@ -290,6 +290,206 @@ if (IPOPT_BUILD_EXAMPLES)
   endif ()
   include_directories(${CMAKE_SOURCE_DIR}/Ipopt/examples/ScalableProblems)
   set_include_directories(solve_problem)
+  
+  add_test(NAME ipopt_example_luksan_LukVlE1
+           COMMAND $<TARGET_FILE:solve_problem> LukVlE1 10)
+  set_tests_properties(ipopt_example_luksan_LukVlE1 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlE1 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlE2
+           COMMAND $<TARGET_FILE:solve_problem> LukVlE2 14)
+  set_tests_properties(ipopt_example_luksan_LukVlE2 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlE2 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlE3
+           COMMAND $<TARGET_FILE:solve_problem> LukVlE3 10)
+  set_tests_properties(ipopt_example_luksan_LukVlE3 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlE3 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlE4
+           COMMAND $<TARGET_FILE:solve_problem> LukVlE4 10)
+  set_tests_properties(ipopt_example_luksan_LukVlE4 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlE4 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlE5
+           COMMAND $<TARGET_FILE:solve_problem> LukVlE5 10)
+  set_tests_properties(ipopt_example_luksan_LukVlE5 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlE5 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlE6
+           COMMAND $<TARGET_FILE:solve_problem> LukVlE6 10)
+  set_tests_properties(ipopt_example_luksan_LukVlE6 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlE6 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlE7
+           COMMAND $<TARGET_FILE:solve_problem> LukVlE7 4)
+  set_tests_properties(ipopt_example_luksan_LukVlE7 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlE7 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlI1
+           COMMAND $<TARGET_FILE:solve_problem> LukVlI1 10)
+  set_tests_properties(ipopt_example_luksan_LukVlI1 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlI1 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlI2
+           COMMAND $<TARGET_FILE:solve_problem> LukVlI2 14)
+  set_tests_properties(ipopt_example_luksan_LukVlI2 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlI2 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlI3
+           COMMAND $<TARGET_FILE:solve_problem> LukVlI3 10)
+  set_tests_properties(ipopt_example_luksan_LukVlI3 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlI3 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlI4
+           COMMAND $<TARGET_FILE:solve_problem> LukVlI4 10)
+  set_tests_properties(ipopt_example_luksan_LukVlI4 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlI4 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlI5
+           COMMAND $<TARGET_FILE:solve_problem> LukVlI5 10)
+  set_tests_properties(ipopt_example_luksan_LukVlI5 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlI5 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlI6
+           COMMAND $<TARGET_FILE:solve_problem> LukVlI6 10)
+  set_tests_properties(ipopt_example_luksan_LukVlI6 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlI6 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_LukVlI7
+           COMMAND $<TARGET_FILE:solve_problem> LukVlI7 4)
+  set_tests_properties(ipopt_example_luksan_LukVlI7 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_LukVlI7 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl1
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl1 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl1 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl1 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl2
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl2 14)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl2 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl2 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl3
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl3 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl3 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl3 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl4
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl4 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl4 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl4 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl5
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl5 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl5 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl5 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl6
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl6 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl6 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl6 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl7
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl7 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl7 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl7 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl8
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl8 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl8 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl8 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl_3D
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl_3D 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl_3D PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl_3D PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl_3D_27
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl_3D_27 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl_3D_27 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl_3D_27 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl_3D_27BT
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl_3D_27BT 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl_3D_27BT PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl_3D_27BT PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MBndryCntrl_3Dsin
+           COMMAND $<TARGET_FILE:solve_problem> MBndryCntrl_3Dsin 10)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl_3Dsin PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MBndryCntrl_3Dsin PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl1
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl1 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl1 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl1 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl2
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl2 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl2 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl2 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl3
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl3 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl3 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl3 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl3a
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl3a 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl3a PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl3a PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl4
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl4 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl4 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl4 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl4a
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl4a 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl4a PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl4a PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl5
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl5 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl5 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl5 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl5a
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl5a 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl5a PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl5a PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl6
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl6 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl6 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl6 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MDistCntrl6a
+           COMMAND $<TARGET_FILE:solve_problem> MDistCntrl6a 10)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl6a PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MDistCntrl6a PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MPara5_1
+           COMMAND $<TARGET_FILE:solve_problem> MPara5_1 10)
+  set_tests_properties(ipopt_example_luksan_MPara5_1 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MPara5_1 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MPara5_2_1
+           COMMAND $<TARGET_FILE:solve_problem> MPara5_2_1 10)
+  set_tests_properties(ipopt_example_luksan_MPara5_2_1 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MPara5_2_1 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MPara5_2_2
+           COMMAND $<TARGET_FILE:solve_problem> MPara5_2_2 10)
+  set_tests_properties(ipopt_example_luksan_MPara5_2_2 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MPara5_2_2 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
+  add_test(NAME ipopt_example_luksan_MPara5_2_3
+           COMMAND $<TARGET_FILE:solve_problem> MPara5_2_3 10)
+  set_tests_properties(ipopt_example_luksan_MPara5_2_3 PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_luksan_MPara5_2_3 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
 
   set(Cpp_example_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/Cpp_example/cpp_example.cpp
                        ${CMAKE_SOURCE_DIR}/Ipopt/examples/Cpp_example/MyNLP.cpp)
@@ -297,7 +497,7 @@ if (IPOPT_BUILD_EXAMPLES)
   add_executable(cpp_example ${Cpp_example_SRCS})
   target_link_libraries(cpp_example libIpopt)
   if (COIN_HAS_MUMPS)
-    target_link_libraries(cpp_example libdmumps libmumps_common libseq pthread)
+    target_link_libraries(cpp_example dmumps mumps_common seq pthread)
   endif ()
   if (MKL_FOUND)
     target_link_libraries(${Name} ${COIN_MKL_LIBS})
@@ -308,7 +508,7 @@ if (IPOPT_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_CLAPACK)
       target_link_libraries(cpp_example f2c)
     endif ()
-    if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_HAS_MUMPS)
+    if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_HAS_MUMPS)
       target_link_libraries(cpp_example gfortran)
     endif ()
   endif ()
@@ -319,13 +519,19 @@ if (IPOPT_BUILD_EXAMPLES)
     target_link_libraries(cpp_example dl)
   endif ()
   set_include_directories(cpp_example)
+  
+  add_test(NAME ipopt_example_cpp_example
+           COMMAND $<TARGET_FILE:cpp_example>)
+  set_tests_properties(ipopt_example_cpp_example PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_cpp_example PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+
 
   set(hs071_c_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_c/hs071_c.c)
   
   add_executable(hs071_c ${hs071_c_SRCS})
   target_link_libraries(hs071_c libIpopt)
   if (COIN_HAS_MUMPS)
-    target_link_libraries(hs071_c libdmumps libmumps_common libseq pthread)
+    target_link_libraries(hs071_c dmumps mumps_common seq pthread)
   endif ()
   if (MKL_FOUND)
     target_link_libraries(${Name} ${COIN_MKL_LIBS})
@@ -336,7 +542,7 @@ if (IPOPT_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_CLAPACK)
       target_link_libraries(hs071_c f2c)
     endif ()
-    if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_HAS_MUMPS)
+    if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_HAS_MUMPS)
       target_link_libraries(hs071_c gfortran)
     endif ()
   endif ()
@@ -348,13 +554,19 @@ if (IPOPT_BUILD_EXAMPLES)
   endif ()
   set_include_directories(hs071_c)
 
+  add_test(NAME ipopt_example_hs071_c
+           COMMAND $<TARGET_FILE:hs071_c>)
+  set_tests_properties(ipopt_example_hs071_c PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_hs071_c PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+  
+  
   set(hs071_cpp_SRCS ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_main.cpp
                      ${CMAKE_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_nlp.cpp)
   
   add_executable(hs071_cpp ${hs071_cpp_SRCS})
   target_link_libraries(hs071_cpp libIpopt)
   if (COIN_HAS_MUMPS)
-    target_link_libraries(hs071_cpp libdmumps libmumps_common libseq gfortran pthread)
+    target_link_libraries(hs071_cpp dmumps mumps_common seq gfortran pthread)
   endif ()
   if (MKL_FOUND)
     target_link_libraries(${Name} ${COIN_MKL_LIBS})
@@ -365,7 +577,7 @@ if (IPOPT_BUILD_EXAMPLES)
     if (COIN_ENABLE_DOWNLOAD_CLAPACK)
       target_link_libraries(hs071_cpp f2c)
     endif ()
-    if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_HAS_MUMPS)
+    if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_HAS_MUMPS)
       target_link_libraries(hs071_cpp gfortran)
     endif ()
   endif ()
@@ -376,6 +588,12 @@ if (IPOPT_BUILD_EXAMPLES)
     target_link_libraries(hs071_cpp dl)
   endif ()
   set_include_directories(hs071_cpp)
+  
+  add_test(NAME ipopt_example_hs071_cpp
+           COMMAND $<TARGET_FILE:hs071_cpp>)
+  set_tests_properties(ipopt_example_hs071_cpp PROPERTIES TIMEOUT 30)
+  set_tests_properties(ipopt_example_hs071_cpp PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
+  
 
   if (CMAKE_Fortran_COMPILER)
     if (HAVE_64_BIT)
@@ -392,7 +610,7 @@ if (IPOPT_BUILD_EXAMPLES)
     add_executable(hs071_f ${hs071_f_SRCS})
     target_link_libraries(hs071_f libIpopt)
     if (COIN_HAS_MUMPS)
-      target_link_libraries(hs071_f libdmumps libmumps_common libseq pthread)
+      target_link_libraries(hs071_f dmumps mumps_common seq pthread)
     endif ()
     if (MKL_FOUND)
       target_link_libraries(${Name} ${COIN_MKL_LIBS})
@@ -403,7 +621,7 @@ if (IPOPT_BUILD_EXAMPLES)
       if (COIN_ENABLE_DOWNLOAD_CLAPACK)
         target_link_libraries(hs071_f f2c)
       endif ()
-      if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_HAS_MUMPS)
+      if (COIN_ENABLE_COMPILE_HSL OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_HAS_MUMPS)
         target_link_libraries(hs071_f gfortran)
       endif ()
     endif ()
@@ -414,47 +632,9 @@ if (IPOPT_BUILD_EXAMPLES)
       target_link_libraries(hs071_f dl)
     endif ()
     set_include_directories(hs071_f)
+    add_test(NAME ipopt_example_hs071_f
+            COMMAND $<TARGET_FILE:hs071_f>)
+    set_tests_properties(ipopt_example_hs071_f PROPERTIES TIMEOUT 30)
+    set_tests_properties(ipopt_example_hs071_f PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
   endif ()
 endif ()
-
-# Tests from solve_problem
-#LukVlE1
-#LukVlE2
-#LukVlE3
-#LukVlE4
-#LukVlE5
-#LukVlE6
-#LukVlE7
-#LukVlI1
-#LukVlI2
-#LukVlI3
-#LukVlI4
-#LukVlI5
-#LukVlI6
-#LukVlI7
-#MBndryCntrl1
-#MBndryCntrl2
-#MBndryCntrl3
-#MBndryCntrl4
-#MBndryCntrl5
-#MBndryCntrl6
-#MBndryCntrl7
-#MBndryCntrl8
-#MBndryCntrl_3D
-#MBndryCntrl_3D_27
-#MBndryCntrl_3D_27BT
-#MBndryCntrl_3Dsin
-#MDistCntrl1
-#MDistCntrl2
-#MDistCntrl3
-#MDistCntrl3a
-#MDistCntrl4
-#MDistCntrl4a
-#MDistCntrl5
-#MDistCntrl5a
-#MDistCntrl6
-#MDistCntrl6a
-#MPara5_1
-#MPara5_2_1
-#MPara5_2_2
-#MPara5_2_3
