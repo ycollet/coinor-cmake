@@ -461,7 +461,7 @@ if (COIN_COMPILE_COVERAGE)
   add_custom_target(coverage
                     COMMAND ${LCOV_PATH} --directory ${CMAKE_BINARY_DIR} --zerocounters
                     COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_BINARY_DIR}/Cgl --output-file ${CMAKE_BINARY_DIR}/coverage.info
-                    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE \"(LONG|FAIL)\" -L SAMPLE
+                    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L SAMPLE
                     COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_BINARY_DIR}/Cgl --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
