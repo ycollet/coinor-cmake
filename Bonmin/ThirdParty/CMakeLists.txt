@@ -541,6 +541,8 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_URL        "http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz")
   set(MUMPS_InstallDir "${EP_InstallDir}/Mumps-${MUMPS_VERSION}/${CMAKE_CFG_INTDIR}/")
   
+  set(IPOPT_HAS_MUMPS  ON CACHE BOOL "Enable Mumps solver" FORCE)
+  
   ExternalProject_Add(EP_Mumps
                       PREFIX            ${MUMPS_InstallDir}
                       DEPENDS           ${MUMPS_DEPENDS}
