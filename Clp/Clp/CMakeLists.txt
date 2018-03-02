@@ -653,6 +653,18 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_testQP PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+
+  if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
+    add_example(iis ${Clp_DIR}/examples/iis.cpp)
+    
+    add_test(NAME clp_example_iis
+             COMMAND $<TARGET_FILE:iis> ${CMAKE_BINARY_DIR}/Dependencies/DATA_TEST/src/EP_DATA_TEST/Infeas/greenbea.mps)
+    set_tests_properties(clp_example_iis PROPERTIES TIMEOUT 30)
+    if (WIN32)
+      set_tests_properties(clp_example_iis PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+    endif ()
+  endif ()
+  
   # Need VOL
   #add_example(useVolume ${Clp_DIR}/examples/useVolume.cpp)
   #
