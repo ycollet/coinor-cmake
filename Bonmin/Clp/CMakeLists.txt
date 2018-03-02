@@ -663,6 +663,13 @@ if (CLP_BUILD_EXAMPLES)
     if (WIN32)
       set_tests_properties(clp_example_iis PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
     endif ()
+
+    set(TEST_REGEX )
+    add_regex(TEST_REGEX "The following 2 rows cover the IIS")
+    add_regex(TEST_REGEX "1491 KTX.CPU.")
+    add_regex(TEST_REGEX "53 BLG...AN")
+    
+    set_tests_properties(clp_example_iis PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   endif ()
   
   # Need VOL
