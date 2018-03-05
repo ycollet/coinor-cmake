@@ -428,7 +428,6 @@ macro(add_example Name)
 endmacro ()
 
 add_example(symphony ${MAIN_SRC})
-#symphony_CPPFLAGS = $(SYMCPPFLAGS)
 
 if (NOT SYM_COMPILE_IN_LP)
   set_source_files_properties(${ALL_LP} PROPERTIES LANGUAGE CXX)
@@ -442,7 +441,6 @@ if (NOT SYM_COMPILE_IN_LP)
   set_include_directories(libSym_lp)
 
   add_example(symphony_lp ${MAIN_SRC})
-  #symphony_CPPFLAGS = $(PCPPFLAGS)
 
   install(TARGETS symphony_lp
           DESTINATION bin)
@@ -463,7 +461,6 @@ if (NOT SYM_COMPILE_IN_CG)
   set_include_directories(libSym_cg)
 
   add_example(symphony_cg ${MAIN_SRC})
-  #symphony_CPPFLAGS = $(PCPPFLAGS)
   
   install(TARGETS symphony_cg
           DESTINATION bin)
@@ -484,7 +481,6 @@ if (NOT SYM_COMPILE_IN_CP)
   set_include_directories(libSym_cp)
 
   add_example(symphony_cp ${MAIN_SRC})
-  #symphony_CPPFLAGS = $(PCPPFLAGS)
   
   install(TARGETS symphony_cp
           DESTINATION bin)
@@ -505,7 +501,6 @@ if (NOT SYM_COMPILE_IN_TM)
   set_include_directories(libSym_tm)
 
   add_example(symphony_tm ${MAIN_SRC})
-  #symphony_CPPFLAGS = $(PCPPFLAGS)
   
   install(TARGETS symphony_tm
           DESTINATION bin)
