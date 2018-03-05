@@ -868,8 +868,6 @@ if (CLP_BUILD_EXAMPLES)
     if (WIN32)
       set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
     endif ()
-    set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES LABELS "CLP;EXAMPLE;FAIL")
-    
     set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES LABELS "CLP;EXAMPLE")
   endif ()
 endif ()
