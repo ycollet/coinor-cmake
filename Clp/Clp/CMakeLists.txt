@@ -396,6 +396,9 @@ if (CLP_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(clp_example_addBits PROPERTIES LABELS "FAIL")
   
+  set_tests_properties(clp_example_addBits PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -49.857")
+  set_tests_properties(clp_example_addBits PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(addColumns ${Clp_DIR}/examples/addColumns.cpp)
   
@@ -405,6 +408,9 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_addColumns PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
+  
+  set_tests_properties(clp_example_addColumns PROPERTIES PASS_REGULAR_EXPRESSION "Clp0032I Optimal objective -464.75.* - 5 iterations")
+  set_tests_properties(clp_example_addColumns PROPERTIES LABELS "CLP;EXAMPLE")
   
   
   add_example(addRows ${Clp_DIR}/examples/addRows.cpp)
@@ -416,16 +422,21 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_addRows PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set_tests_properties(clp_example_addRows PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value 1")
+  set_tests_properties(clp_example_addRows PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(decomp2 ${Clp_DIR}/examples/decomp2.cpp)
 
-  
   add_test(NAME clp_example_decomp2
            COMMAND $<TARGET_FILE:decomp2> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
   set_tests_properties(clp_example_decomp2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_decomp2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
+  
+  set_tests_properties(clp_example_decomp2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_decomp2 PROPERTIES LABELS "CLP;EXAMPLE")
   
   
   add_example(decomp3 ${Clp_DIR}/examples/decomp3.cpp)
@@ -437,6 +448,9 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_decomp3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set_tests_properties(clp_example_decomp3 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_decomp3 PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(decompose ${Clp_DIR}/examples/decompose.cpp)
   
@@ -446,6 +460,9 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_decompose PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
+  
+  set_tests_properties(clp_example_decompose PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_decompose PROPERTIES LABELS "CLP;EXAMPLE")
   
   
   add_example(default ${Clp_DIR}/examples/defaults.cpp)
@@ -457,6 +474,43 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_default PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set(TEST_REGEX )
+  add_regex(TEST_REGEX "Column 0 \\\\( 23, 0.301\\\\) \\\\( 0, -1\\\\) \\\\( 1, -1.06\\\\) \\\\( 2, 1\\\\)")
+  add_regex(TEST_REGEX "Column 1 \\\\( 3, -1\\\\) \\\\( 0, 1\\\\)")
+  add_regex(TEST_REGEX "Column 2 \\\\( 21, -1\\\\) \\\\( 0, 1\\\\)")
+  add_regex(TEST_REGEX "Column 3 \\\\( 25, 1\\\\) \\\\( 1, 1\\\\)")
+  add_regex(TEST_REGEX "Column 4 \\\\( 24, 0.301\\\\) \\\\( 4, -1\\\\) \\\\( 5, -1.06\\\\) \\\\( 6, 1\\\\)")
+  add_regex(TEST_REGEX "Column 5 \\\\( 24, 0.313\\\\) \\\\( 4, -1\\\\) \\\\( 5, -1.06\\\\) \\\\( 7, 1\\\\)")
+  add_regex(TEST_REGEX "Column 6 \\\\( 24, 0.313\\\\) \\\\( 4, -1\\\\) \\\\( 5, -0.96\\\\) \\\\( 8, 1\\\\)")
+  add_regex(TEST_REGEX "Column 7 \\\\( 24, 0.326\\\\) \\\\( 4, -1\\\\) \\\\( 5, -0.86\\\\) \\\\( 9, 1\\\\)")
+  add_regex(TEST_REGEX "Column 8 \\\\( 20, 2.364\\\\) \\\\( 6, -1\\\\)")
+  add_regex(TEST_REGEX "Column 9 \\\\( 20, 2.386\\\\) \\\\( 7, -1\\\\)")
+  add_regex(TEST_REGEX "Column 10 \\\\( 20, 2.408\\\\) \\\\( 8, -1\\\\)")
+  add_regex(TEST_REGEX "Column 11 \\\\( 20, 2.429\\\\) \\\\( 9, -1\\\\)")
+  add_regex(TEST_REGEX "Column 12 \\\\( 3, 1.4\\\\) \\\\( 4, 1\\\\)")
+  add_regex(TEST_REGEX "Column 13 \\\\( 22, -1\\\\) \\\\( 4, 1\\\\)")
+  add_regex(TEST_REGEX "Column 14 \\\\( 26, 1\\\\) \\\\( 5, 1\\\\)")
+  add_regex(TEST_REGEX "Column 15 \\\\( 21, 0.109\\\\) \\\\( 10, -1\\\\) \\\\( 11, -0.43\\\\) \\\\( 12, 1\\\\)")
+  add_regex(TEST_REGEX "Column 16 \\\\( 13, -1\\\\) \\\\( 10, 1\\\\)")
+  add_regex(TEST_REGEX "Column 17 \\\\( 23, -1\\\\) \\\\( 10, 1\\\\)")
+  add_regex(TEST_REGEX "Column 18 \\\\( 20, -1\\\\) \\\\( 10, 1\\\\)")
+  add_regex(TEST_REGEX "Column 19 \\\\( 25, 1\\\\) \\\\( 11, 1\\\\)")
+  add_regex(TEST_REGEX "Column 20 \\\\( 22, 0.109\\\\) \\\\( 14, -0.43\\\\) \\\\( 15, 1\\\\) \\\\( 16, 1\\\\)")
+  add_regex(TEST_REGEX "Column 21 \\\\( 22, 0.108\\\\) \\\\( 14, -0.43\\\\) \\\\( 15, 1\\\\) \\\\( 17, 1\\\\)")
+  add_regex(TEST_REGEX "Column 22 \\\\( 22, 0.108\\\\) \\\\( 14, -0.39\\\\) \\\\( 15, 1\\\\) \\\\( 18, 1\\\\)")
+  add_regex(TEST_REGEX "Column 23 \\\\( 22, 0.107\\\\) \\\\( 14, -0.37\\\\) \\\\( 15, 1\\\\) \\\\( 19, 1\\\\)")
+  add_regex(TEST_REGEX "Column 24 \\\\( 20, 2.191\\\\) \\\\( 16, -1\\\\)")
+  add_regex(TEST_REGEX "Column 25 \\\\( 20, 2.219\\\\) \\\\( 17, -1\\\\)")
+  add_regex(TEST_REGEX "Column 26 \\\\( 20, 2.249\\\\) \\\\( 18, -1\\\\)")
+  add_regex(TEST_REGEX "Column 27 \\\\( 20, 2.279\\\\) \\\\( 19, -1\\\\)")
+  add_regex(TEST_REGEX "Column 28 \\\\( 13, 1.4\\\\) \\\\( 15, -1\\\\)")
+  add_regex(TEST_REGEX "Column 29 \\\\( 24, -1\\\\) \\\\( 15, 1\\\\)")
+  add_regex(TEST_REGEX "Column 30 \\\\( 26, 1\\\\) \\\\( 14, 1\\\\)")
+  add_regex(TEST_REGEX "Column 31 \\\\( 15, 1\\\\)")
+  
+  set_tests_properties(clp_example_default PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(clp_example_default PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(driver2 ${Clp_DIR}/examples/driver2.cpp)
   
@@ -466,6 +520,9 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_driver2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
+  
+  set_tests_properties(clp_example_driver2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_driver2 PROPERTIES LABELS "CLP;EXAMPLE")
   
   
   add_example(driver ${Clp_DIR}/examples/driver.cpp)
@@ -477,6 +534,12 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_driver PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set(TEST_REGEX )
+  add_regex(TEST_REGEX "Clp0032I Optimal objective -464.75.* - 5 iterations time .*, Presolve 0.00")
+  add_regex(TEST_REGEX "Model AFIRO has 27 rows and 32 columns")
+  set_tests_properties(clp_example_driver PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(clp_example_driver PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(dualCuts ${Clp_DIR}/examples/dualCuts.cpp)
   
@@ -486,8 +549,11 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_dualCuts PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
-  
 
+  set_tests_properties(clp_example_dualCuts PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_dualCuts PROPERTIES LABELS "CLP;EXAMPLE")
+  
+  
   # Needs ekk_api_c.h ...
   #add_example(ekk ${Clp_DIR}/examples/ekk.cpp)
   
@@ -502,6 +568,39 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_hello PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set(TEST_REGEX )
+  add_regex(TEST_REGEX "This prints x wherever a non-zero element exists in the matrix.")
+  add_regex(TEST_REGEX "xxx                             ")
+  add_regex(TEST_REGEX "x  x                            ")
+  add_regex(TEST_REGEX "x                               ")
+  add_regex(TEST_REGEX " x          x                   ")
+  add_regex(TEST_REGEX "    xxxx    xx                  ")
+  add_regex(TEST_REGEX "    xxxx      x                 ")
+  add_regex(TEST_REGEX "    x   x                       ")
+  add_regex(TEST_REGEX "     x   x                      ")
+  add_regex(TEST_REGEX "      x   x                     ")
+  add_regex(TEST_REGEX "       x   x                    ")
+  add_regex(TEST_REGEX "               xxxx             ")
+  add_regex(TEST_REGEX "               x   x            ")
+  add_regex(TEST_REGEX "               x                ")
+  add_regex(TEST_REGEX "                x           x   ")
+  add_regex(TEST_REGEX "                    xxxx      x ")
+  add_regex(TEST_REGEX "                    xxxx    xx x")
+  add_regex(TEST_REGEX "                    x   x       ")
+  add_regex(TEST_REGEX "                     x   x      ")
+  add_regex(TEST_REGEX "                      x   x     ")
+  add_regex(TEST_REGEX "                       x   x    ")
+  add_regex(TEST_REGEX "        xxxx      x     xxxx    ")
+  add_regex(TEST_REGEX "  x            x                ")
+  add_regex(TEST_REGEX "             x      xxxx        ")
+  add_regex(TEST_REGEX "x                x              ")
+  add_regex(TEST_REGEX "    xxxx                     x  ")
+  add_regex(TEST_REGEX "   x               x            ")
+  add_regex(TEST_REGEX "              x               x ")
+  
+  set_tests_properties(clp_example_hello PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(clp_example_hello PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(makeDual ${Clp_DIR}/examples/makeDual.cpp)
   
@@ -511,6 +610,10 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_makeDual PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
+  
+  set_tests_properties(clp_example_makeDual PROPERTIES PASS_REGULAR_EXPRESSION "Coin0002I Problem AFIRO has 27 rows, 32 columns and 83 elements")
+  set_tests_properties(clp_example_makeDual PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   # Must compile minimum.cpp with -DSAMPLEDIR=${CMAKE_SOURCE_DIR}/Data/Sample
   add_example(minimum ${Clp_DIR}/examples/minimum.cpp)
@@ -523,6 +626,8 @@ if (CLP_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(clp_example_minimum PROPERTIES LABELS "FAIL")
   
+  set_tests_properties(clp_example_minimum PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_minimum PROPERTIES LABELS "CLP;EXAMPLE")
   
   add_example(modify ${Clp_DIR}/examples/modify.cpp)
   
@@ -533,9 +638,14 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_modify PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set(TEST_REGEX )
+  add_regex(TEST_REGEX "Column 5 has value 4")
+  add_regex(TEST_REGEX "Column 6 has value 0.0475")
+  set_tests_properties(clp_example_modify PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(clp_example_modify PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(network ${Clp_DIR}/examples/network.cpp)
-
   
   add_test(NAME clp_example_network
            COMMAND $<TARGET_FILE:network> ${CMAKE_SOURCE_DIR}/Data/Sample/input.130)
@@ -544,7 +654,10 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_network PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set_tests_properties(clp_example_network PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value 38939608")
+  set_tests_properties(clp_example_network PROPERTIES LABELS "CLP;EXAMPLE")
 
+  
   # This test hangs because it requires the following files:./g.tiny ./gparm.tiny in the exe directory
   execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Clp/examples/g.tiny     ${CMAKE_BINARY_DIR}/bin/
                   COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/Clp/examples/gparm.tiny ${CMAKE_BINARY_DIR}/bin/)
@@ -559,8 +672,22 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_pdco PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(clp_example_pdco PROPERTIES LABELS "FAIL")
   
+  set(TEST_REGEX )
+  add_regex(TEST_REGEX "")
+  add_regex(TEST_REGEX "Distribution of Solution Values")
+  add_regex(TEST_REGEX " 0.1  to  1.00001 1")
+  add_regex(TEST_REGEX " 0.01  to  0.1 14")
+  add_regex(TEST_REGEX " 0.001  to  0.01 0")
+  add_regex(TEST_REGEX " 0.0001  to  0.001 10")
+  add_regex(TEST_REGEX " 1e-05  to  0.0001 3")
+  add_regex(TEST_REGEX " 1e-06  to  1e-05 0")
+  add_regex(TEST_REGEX " 1e-07  to  1e-06 0")
+  add_regex(TEST_REGEX "   Less than   1e-06 0")
+  
+  set_tests_properties(clp_example_pdco PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(clp_example_pdco PROPERTIES LABELS "CLP;EXAMPLE")  
+
   
   add_example(piece ${Clp_DIR}/examples/piece.cpp)
   
@@ -571,6 +698,13 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_piece PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set(TEST_REGEX )
+  add_regex(TEST_REGEX "Clp0000I Optimal - objective value -464.75")
+  add_regex(TEST_REGEX "80 25.5 54.5 84.8 58.156 0 0 0 0 0 0 0 18.2143 39.9417 61.6454 500 475.92 24.08 0 215 366.438 0 0 0 0 0 0 0 339.943 17.505 157.568 0 ")
+  
+  set_tests_properties(clp_example_piece PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(clp_example_piece PROPERTIES LABELS "CLP;EXAMPLE")
+
   
   add_example(rowColumn ${Clp_DIR}/examples/rowColumn.cpp)
   
@@ -581,6 +715,14 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_rowColumn PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set(TEST_REGEX )
+  add_regex(TEST_REGEX "Clp0000I Optimal - objective value 76000")
+  add_regex(TEST_REGEX "Column 0 has value 8")
+  add_regex(TEST_REGEX "Column 4 has value 6.8")
+  
+  set_tests_properties(clp_example_rowColumn PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+  set_tests_properties(clp_example_rowColumn PROPERTIES LABELS "CLP;EXAMPLE")  
+
   
   add_example(sprint2 ${Clp_DIR}/examples/sprint2.cpp)
   
@@ -591,6 +733,9 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_sprint2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set_tests_properties(clp_example_sprint2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_sprint2 PROPERTIES LABELS "CLP;EXAMPLE")
+
   
   add_example(sprint ${Clp_DIR}/examples/sprint.cpp)
   
@@ -601,6 +746,9 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_sprint PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set_tests_properties(clp_example_sprint PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_sprint PROPERTIES LABELS "CLP;EXAMPLE")
+
   
   add_example(testBarrier ${Clp_DIR}/examples/testBarrier.cpp)
   
@@ -610,6 +758,9 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_testBarrier PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
+  
+  set_tests_properties(clp_example_testBarrier PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_testBarrier PROPERTIES LABELS "CLP;EXAMPLE")
   
   
   add_example(testBasis ${Clp_DIR}/examples/testBasis.cpp)
@@ -621,6 +772,9 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_testBasis PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
+  set_tests_properties(clp_example_testBasis PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_testBasis PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(testGub2 ${Clp_DIR}/examples/testGub2.cpp)
   
@@ -630,11 +784,11 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_testGub2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
-
   
+  set_tests_properties(clp_example_testGub2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_testGub2 PROPERTIES LABELS "CLP;EXAMPLE")
   
   add_example(testGub ${Clp_DIR}/examples/testGub.cpp)
-
   
   add_test(NAME clp_example_testGub
            COMMAND $<TARGET_FILE:testGub> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
@@ -642,7 +796,10 @@ if (CLP_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(clp_example_testGub PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
- 
+  
+  set_tests_properties(clp_example_testGub PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_testGub PROPERTIES LABELS "CLP;EXAMPLE")
+  
   
   add_example(testQP ${Clp_DIR}/examples/testQP.cpp)
   
@@ -653,7 +810,10 @@ if (CLP_BUILD_EXAMPLES)
     set_tests_properties(clp_example_testQP PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   endif ()
   
-
+  set_tests_properties(clp_example_testQP PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_testQP PROPERTIES LABELS "CLP;EXAMPLE")
+  
+  
   if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
     add_example(iis ${Clp_DIR}/examples/iis.cpp)
     
@@ -681,29 +841,37 @@ if (CLP_BUILD_EXAMPLES)
   #if (WIN32)
   #  set_tests_properties(clp_example_useVolume PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
   #endif ()
-  #
   
-  # Need OSI to compile
-  # This test fails because some Sample tests doesn't pass.
-  # On Fedora 26:
-  # Severity NOTE      :    0  thereof expected:    0
-  # Severity PASSED    : 1100  thereof expected:    0
-  # Severity WARNING   :    3  thereof expected:    0
-  # Severity ERROR     :  476  thereof expected:    0
-  # Tests completed with 476 unexpected errors.
-  
-  add_example(OsiClpSolverInterfaceTest ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp
-                                        ${Clp_DIR}/test/osiUnitTest.cpp)
-  target_link_libraries(OsiClpSolverInterfaceTest libOsiClp libOsiCommonTests libOsi)
-  
-  add_test(NAME clp_example_OsiClpSolverInterfaceTest
-           COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> -mpsDir=${CMAKE_SOURCE_DIR}/Data/Sample -testOsiSolverInterface -nobuf)
+  #set(TEST_REGEX )
+  #add_regex(TEST_REGEX "")
+  #set_tests_properties(clp_example_useVolume PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -49.857189")
+  #set_tests_properties(clp_example_useVolume PROPERTIES LABELS "CLP;EXAMPLE")
 
-  set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES TIMEOUT 30)
-  if (WIN32)
-    set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+  if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
+    # Need OSI to compile
+    # This test fails because some Sample tests doesn't pass.
+    # On Fedora 26:
+    # Severity NOTE      :    0  thereof expected:    0
+    # Severity PASSED    : 1100  thereof expected:    0
+    # Severity WARNING   :    3  thereof expected:    0
+    # Severity ERROR     :  476  thereof expected:    0
+    # Tests completed with 476 unexpected errors.
+    
+    add_example(OsiClpSolverInterfaceTest ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp
+                                          ${Clp_DIR}/test/osiUnitTest.cpp)
+    target_link_libraries(OsiClpSolverInterfaceTest libOsiClp libOsiCommonTests libOsi)
+    
+    add_test(NAME clp_example_OsiClpSolverInterfaceTest
+             COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> -netlibDir=${CMAKE_BINARY_DIR}/Dependencies/DATA_TEST/src/EP_DATA_TEST/Netlib -mpsDir=${CMAKE_SOURCE_DIR}/Data/Sample -testOsiSolverInterface -nobuf)
+  
+    set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES TIMEOUT 90)
+    if (WIN32)
+      set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+    endif ()
+    set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES LABELS "CLP;EXAMPLE;FAIL")
+    
+    set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES LABELS "CLP;EXAMPLE")
   endif ()
-  set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES LABELS "FAIL")
 endif ()
 
 add_executable(clp ${Clp_MAIN_SRC_LIST})
