@@ -406,6 +406,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_allCuts PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_allCuts PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(cbc_driver ${Cbc_DIR}/examples/driver.cpp)
@@ -416,6 +417,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_driver PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_driver PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(longthin ${Cbc_DIR}/examples/longthin.cpp 
@@ -429,6 +431,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_longthin PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_longthin PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(qmip2 ${Cbc_DIR}/examples/qmip2.cpp 
@@ -440,6 +443,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_qmip2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_qmip2 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(sample5 ${Cbc_DIR}/examples/sample5.cpp
@@ -452,6 +456,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_sample5 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_sample5 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(barrier ${Cbc_DIR}/examples/barrier.cpp)
@@ -462,6 +467,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_barrier PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_barrier PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(fast0507b ${Cbc_DIR}/examples/fast0507b.cpp
@@ -477,6 +483,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_fast0507b PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_fast0507b PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(lotsize ${Cbc_DIR}/examples/lotsize.cpp)
@@ -487,6 +494,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_lotsize PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_lotsize PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(qmip ${Cbc_DIR}/examples/qmip.cpp
@@ -500,6 +508,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_qmip PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_qmip PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(simpleBAB ${Cbc_DIR}/examples/simpleBAB.cpp)
@@ -510,6 +519,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_simpleBAB PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_simpleBAB PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(fast0507 ${Cbc_DIR}/examples/fast0507.cpp
@@ -523,10 +533,12 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_fast0507 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_fast0507 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   # Must compile minimum.cpp with -DSAMPLEDIR=${CMAKE_SOURCE_DIR}/Data/Sample
   add_example(cbc_minimum ${Cbc_DIR}/examples/minimum.cpp)
+  set_target_properties(cbc_minimum PROPERTIES COMPILE_DEFINITIONS SAMPLEDIR=\"${CMAKE_SOURCE_DIR}/Data/Sample\")
   
   add_test(NAME cbc_example_minimum
            COMMAND $<TARGET_FILE:cbc_minimum> ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps)
@@ -534,7 +546,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_minimum PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(cbc_example_minimum PROPERTIES LABELS "FAIL")
+  set_tests_properties(cbc_example_minimum PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(repeat ${Cbc_DIR}/examples/repeat.cpp
@@ -547,6 +559,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_repeat PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_repeat PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(sos ${Cbc_DIR}/examples/sos.cpp)
@@ -557,6 +570,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_sos PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_sos PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(crew ${Cbc_DIR}/examples/crew.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
@@ -567,6 +581,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_crew PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_crew PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(gear ${Cbc_DIR}/examples/gear.cpp
@@ -578,7 +593,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_gear PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(cbc_example_gear PROPERTIES LABELS "LONG")
+  set_tests_properties(cbc_example_gear PROPERTIES LABELS "CBC;EXAMPLE;LONG")
   
   
   add_example(cbc_modify ${Cbc_DIR}/examples/modify.cpp)
@@ -589,18 +604,19 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_modify PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_modify PROPERTIES LABELS "CBC;EXAMPLE")
   
   # This test hangs with COIN_BIG_INDEX==2
   add_example(sample1 ${Cbc_DIR}/examples/sample1.cpp
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample1
-           COMMAND $<TARGET_FILE:sample1> ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps)
+           COMMAND $<TARGET_FILE:sample1> ${CMAKE_SOURCE_DIR}/Data/Sample/lseu.mps)
   set_tests_properties(cbc_example_sample1 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sample1 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(cbc_example_sample1 PROPERTIES LABELS "FAIL")
+  set_tests_properties(cbc_example_sample1 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(sudoku ${Cbc_DIR}/examples/sudoku.cpp)
@@ -611,6 +627,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_sudoku PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_sudoku PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(cbc_driver2 ${Cbc_DIR}/examples/driver2.cpp)
@@ -622,6 +639,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_driver2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_driver2 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(hotstart ${Cbc_DIR}/examples/hotstart.cpp
@@ -634,6 +652,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_hotstart PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_hotstart PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(nway ${Cbc_DIR}/examples/nway.cpp)
@@ -644,6 +663,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_nway PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_nway PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(sample2 ${Cbc_DIR}/examples/sample2.cpp
@@ -656,6 +676,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_sample2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_sample2 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(cbc_driver3 ${Cbc_DIR}/examples/driver3.cpp)
@@ -666,6 +687,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_driver3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_driver3 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(interrupt ${Cbc_DIR}/examples/interrupt.cpp
@@ -677,6 +699,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_interrupt PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_interrupt PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(sample3 ${Cbc_DIR}/examples/sample3.cpp
@@ -689,6 +712,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_sample3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_sample3 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(cbc_driver4 ${Cbc_DIR}/examples/driver4.cpp
@@ -700,6 +724,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_driver4 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_driver4 PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   add_example(link ${Cbc_DIR}/examples/link.cpp
@@ -711,6 +736,7 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_link PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
+  set_tests_properties(cbc_example_link PROPERTIES LABELS "CBC;EXAMPLE")
   
   
   if (CBC_USE_THREADS)
@@ -723,20 +749,21 @@ if (CBC_BUILD_EXAMPLES)
     if (WIN32)
       set_tests_properties(cbc_example_parallel PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
     endif ()
+    set_tests_properties(cbc_example_parallel PROPERTIES LABELS "CBC;EXAMPLE;PARALLEL")
   endif ()
-
+  
   # This test fails ...
   add_example(sample4 ${Cbc_DIR}/examples/sample4.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_sample4
-           COMMAND $<TARGET_FILE:sample4> ${CMAKE_SOURCE_DIR}/Data/Sample/p0033.mps)
+           COMMAND $<TARGET_FILE:sample4> ${CMAKE_BINARY_DIR}/Dependencies/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz)
   set_tests_properties(cbc_example_sample4 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_sample4 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(cbc_example_sample4 PROPERTIES LABELS "FAIL")
+  set_tests_properties(cbc_example_sample4 PROPERTIES LABELS "CBC;EXAMPLE")
 endif ()
 
 add_executable(cbc ${Cbc_DIR}/src/CoinSolve.cpp)
