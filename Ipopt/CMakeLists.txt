@@ -37,8 +37,7 @@ option(COIN_COMPILE_STATIC           "Activate the static linking" OFF)
 option(COIN_COMPILE_COVERAGE         "Activate the code coverage compilation" OFF)
 option(COIN_COMPILE_PROFILE          "Activate the code profiling compilation" OFF)
 option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation for valgrind" OFF)
-option(COIN_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
-option(COIN_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
+option(COIN_COMPILE_LTO              "Activate the whole program optimization" OFF)
 option(COIN_HAS_MKL                  "Use Intel MKL library (requires Intel compiler)" OFF)
 option(COIN_USE_FAST_CODE            "Use intensive optimization flags" OFF)
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
@@ -52,7 +51,6 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_COMPILE_PROFILE
                  COIN_COMPILE_PROFILE_VALGRIND
                  COIN_COMPILE_LTO
-                 COIN_COMPILE_WHOPR
                  COIN_HAS_MKL
                  COIN_USE_FAST_CODE
                  COIN_COMPILE_WARNINGS
@@ -109,6 +107,13 @@ if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
 endif ()
 
 include(CheckCCompilerFlag)
+if (COIN_COMPILE_LTO)
+  if (NOT CMAKE_VERSION VERSION_LESS "3.9")
+    cmake_policy(SET CMP0069 NEW)
+    include(CheckIPOSupported)
+    check_ipo_supported()
+  endif ()
+endif ()
 
 # Desactivate some relocation types for portability
 if (UNIX)
@@ -213,36 +218,6 @@ if (UNIX)
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC")
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z muldefs")
-    endif ()
-  endif ()
-  
-  if (COIN_COMPILE_LTO)
-    if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
-      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -lto")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lto")
-    endif ()
-    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      set(CMAKE_C_ARCHIVE_CREATE "<CMAKE_AR> qcs <TARGET> <LINK_FLAGS> <OBJECTS>")
-      set(CMAKE_C_ARCHIVE_FINISH "")
-      set(CMAKE_AR  "gcc-ar")
-      set(CMAKE_NM  "gcc-nm")
-      set(CMAKE_RANLIB  "gcc-ranlib")
-      
-      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -flto")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -flto")
-    endif ()
-  elseif (COIN_COMPILE_WHOPR)
-    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -fwhopr")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fwhopr")
-    endif ()
-  endif ()
-elseif (WIN32)
-  if (MSVC)
-    if (COIN_COMPILE_LTO OR COIN_COMPILE_WHOPR)
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /GL ")
-      set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS} /GL ")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG ")
     endif ()
   endif ()
 endif ()

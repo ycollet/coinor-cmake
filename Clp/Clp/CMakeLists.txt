@@ -279,6 +279,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libClp STATIC ${Clp_SRC_LIST})
 endif ()
+if (COIN_COMPILE_LTO)
+  set_target_properties(libClp PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+endif ()
 if (NOT WIN32 OR MINGW)
   set_target_properties(libClp PROPERTIES PREFIX "")
 endif ()
@@ -305,6 +308,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libClpSolver STATIC ${ClpSolver_SRC_LIST})
 endif ()
+if (COIN_COMPILE_LTO)
+  set_target_properties(libClpSolver PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+endif ()
 if (NOT WIN32)
   set_target_properties(libClpSolver PROPERTIES PREFIX "")
 endif ()
@@ -319,6 +325,9 @@ if (CLP_BUILD_EXAMPLES)
   #
   macro(add_example Name)
     add_executable(${Name} ${ARGN})
+    if (COIN_COMPILE_LTO)
+      set_target_properties(${Name} PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+    endif ()
     if (COINUTILS_USE_THREADS OR COIN_USE_PTHREAD_WIN32 OR COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 OR CBC_USE_THREADS)
       if (MINGW)
         target_link_libraries(${Name} winpthread)
@@ -398,8 +407,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_addBits PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -49.857")
   set_tests_properties(clp_example_addBits PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(addColumns ${Clp_DIR}/examples/addColumns.cpp)
   
   add_test(NAME clp_example_addColumns
@@ -411,8 +419,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_addColumns PROPERTIES PASS_REGULAR_EXPRESSION "Clp0032I Optimal objective -464.75.* - 5 iterations")
   set_tests_properties(clp_example_addColumns PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(addRows ${Clp_DIR}/examples/addRows.cpp)
   
   add_test(NAME clp_example_addRows
@@ -424,8 +431,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_addRows PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value 1")
   set_tests_properties(clp_example_addRows PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(decomp2 ${Clp_DIR}/examples/decomp2.cpp)
 
   add_test(NAME clp_example_decomp2
@@ -437,8 +443,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_decomp2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_decomp2 PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(decomp3 ${Clp_DIR}/examples/decomp3.cpp)
   
   add_test(NAME clp_example_decomp3
@@ -450,8 +455,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_decomp3 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_decomp3 PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(decompose ${Clp_DIR}/examples/decompose.cpp)
   
   add_test(NAME clp_example_decompose
@@ -463,8 +467,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_decompose PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_decompose PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(default ${Clp_DIR}/examples/defaults.cpp)
   
   add_test(NAME clp_example_default
@@ -511,7 +514,6 @@ if (CLP_BUILD_EXAMPLES)
   set_tests_properties(clp_example_default PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   set_tests_properties(clp_example_default PROPERTIES LABELS "CLP;EXAMPLE")
   
-  
   add_example(driver2 ${Clp_DIR}/examples/driver2.cpp)
   
   add_test(NAME clp_example_driver2
@@ -523,8 +525,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_driver2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_driver2 PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(driver ${Clp_DIR}/examples/driver.cpp)
   
   add_test(NAME clp_example_driver
@@ -539,8 +540,7 @@ if (CLP_BUILD_EXAMPLES)
   add_regex(TEST_REGEX "Model AFIRO has 27 rows and 32 columns")
   set_tests_properties(clp_example_driver PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   set_tests_properties(clp_example_driver PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(dualCuts ${Clp_DIR}/examples/dualCuts.cpp)
   
   add_test(NAME clp_example_dualCuts
@@ -552,8 +552,7 @@ if (CLP_BUILD_EXAMPLES)
 
   set_tests_properties(clp_example_dualCuts PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_dualCuts PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   # Needs ekk_api_c.h ...
   #add_example(ekk ${Clp_DIR}/examples/ekk.cpp)
   
@@ -600,8 +599,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_hello PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   set_tests_properties(clp_example_hello PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(makeDual ${Clp_DIR}/examples/makeDual.cpp)
   
   add_test(NAME clp_example_makeDual
@@ -613,8 +611,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_makeDual PROPERTIES PASS_REGULAR_EXPRESSION "Coin0002I Problem AFIRO has 27 rows, 32 columns and 83 elements")
   set_tests_properties(clp_example_makeDual PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   # Must compile minimum.cpp with -DSAMPLEDIR=${CMAKE_SOURCE_DIR}/Data/Sample
   add_example(minimum ${Clp_DIR}/examples/minimum.cpp)
   
@@ -643,8 +640,7 @@ if (CLP_BUILD_EXAMPLES)
   add_regex(TEST_REGEX "Column 6 has value 0.0475")
   set_tests_properties(clp_example_modify PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   set_tests_properties(clp_example_modify PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(network ${Clp_DIR}/examples/network.cpp)
   
   add_test(NAME clp_example_network
@@ -687,7 +683,6 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_pdco PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   set_tests_properties(clp_example_pdco PROPERTIES LABELS "CLP;EXAMPLE")  
-
   
   add_example(piece ${Clp_DIR}/examples/piece.cpp)
   
@@ -704,7 +699,6 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_piece PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   set_tests_properties(clp_example_piece PROPERTIES LABELS "CLP;EXAMPLE")
-
   
   add_example(rowColumn ${Clp_DIR}/examples/rowColumn.cpp)
   
@@ -722,7 +716,6 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_rowColumn PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   set_tests_properties(clp_example_rowColumn PROPERTIES LABELS "CLP;EXAMPLE")  
-
   
   add_example(sprint2 ${Clp_DIR}/examples/sprint2.cpp)
   
@@ -735,7 +728,6 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_sprint2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_sprint2 PROPERTIES LABELS "CLP;EXAMPLE")
-
   
   add_example(sprint ${Clp_DIR}/examples/sprint.cpp)
   
@@ -748,7 +740,6 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_sprint PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_sprint PROPERTIES LABELS "CLP;EXAMPLE")
-
   
   add_example(testBarrier ${Clp_DIR}/examples/testBarrier.cpp)
   
@@ -761,8 +752,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_testBarrier PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_testBarrier PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(testBasis ${Clp_DIR}/examples/testBasis.cpp)
   
   add_test(NAME clp_example_testBasis
@@ -774,8 +764,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_testBasis PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_testBasis PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(testGub2 ${Clp_DIR}/examples/testGub2.cpp)
   
   add_test(NAME clp_example_testGub2
@@ -799,8 +788,7 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_testGub PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_testGub PROPERTIES LABELS "CLP;EXAMPLE")
-  
-  
+    
   add_example(testQP ${Clp_DIR}/examples/testQP.cpp)
   
   add_test(NAME clp_example_testQP
@@ -875,6 +863,9 @@ endif ()
 add_executable(clp ${Clp_MAIN_SRC_LIST})
 target_link_libraries(clp libClpSolver libClp libCoinUtils)
 set_include_directories(clp)
+if (COIN_COMPILE_LTO)
+  set_target_properties(clp PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+endif ()
 if (COIN_HAS_AMD)
   target_link_libraries(clp amd)
 endif ()

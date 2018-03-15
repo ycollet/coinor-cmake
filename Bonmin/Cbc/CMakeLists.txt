@@ -324,6 +324,9 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(libCbc STATIC ${Cbc_SRC_LIST})
 endif ()
+if (COIN_COMPILE_LTO)
+  set_target_properties(libCbc PROPERTIEs INTERPROCEDURAL_OPTIMIZATION true)
+endif ()
 if (NOT WIN32 OR MINGW)
   set_target_properties(libCbc PROPERTIES PREFIX "")
 endif ()
@@ -337,6 +340,9 @@ if (CBC_BUILD_EXAMPLES)
     add_executable(${Name} ${ARGN})
     target_link_libraries(${Name} libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
     set_include_directories(${Name})
+    if (COIN_COMPILE_LTO)
+      set_target_properties(${Name} PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+    endif ()
     if (COIN_HAS_AMD)
       target_link_libraries(${Name} amd)
     endif ()
@@ -419,8 +425,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_driver PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_driver PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
-  
-  
+    
   add_example(longthin ${Cbc_DIR}/examples/longthin.cpp 
                        ${Cbc_DIR}/examples/CbcBranchUser.cpp
                        ${Cbc_DIR}/examples/CbcCompareUser.cpp
@@ -435,7 +440,6 @@ if (CBC_BUILD_EXAMPLES)
   set_tests_properties(cbc_example_longthin PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_longthin PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 0 nodes with objective -464.75.* Finished")
   
-  
   add_example(qmip2 ${Cbc_DIR}/examples/qmip2.cpp 
                     ${Cbc_DIR}/examples/CbcBranchUser.cpp)
   
@@ -447,7 +451,6 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_qmip2 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_qmip2 PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 4 nodes with objective -4 Finished")
-  
   
   add_example(sample5 ${Cbc_DIR}/examples/sample5.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
@@ -462,7 +465,6 @@ if (CBC_BUILD_EXAMPLES)
   set_tests_properties(cbc_example_sample5 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_sample5 PROPERTIES PASS_REGULAR_EXPRESSION ".*3 1.000000")
   
-  
   add_example(barrier ${Cbc_DIR}/examples/barrier.cpp)
   
   add_test(NAME cbc_example_barrier
@@ -473,7 +475,6 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_barrier PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_barrier PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds,  with objective -464.75.*")
-  
   
   add_example(fast0507b ${Cbc_DIR}/examples/fast0507b.cpp
                         ${Cbc_DIR}/examples/CbcBranchFollow2.cpp
@@ -490,8 +491,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_fast0507b PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_fast0507b PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 0 nodes with objective -464.753 Finished")
-  
-  
+    
   add_example(lotsize ${Cbc_DIR}/examples/lotsize.cpp)
   
   add_test(NAME cbc_example_lotsize
@@ -502,8 +502,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_lotsize PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_lotsize PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 0 nodes with objective -464.753 Finished")
-  
-  
+    
   add_example(qmip ${Cbc_DIR}/examples/qmip.cpp
                    ${Cbc_DIR}/examples/CbcBranchUser.cpp
                    ${Cbc_DIR}/examples/CbcCompareUser.cpp
@@ -517,7 +516,6 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_qmip PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_qmip PROPERTIES PASS_REGULAR_EXPRESSION "Cbc0006I The LP relaxation is infeasible or too expensive")
-
   
   add_example(simpleBAB ${Cbc_DIR}/examples/simpleBAB.cpp)
   
@@ -529,8 +527,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_simpleBAB PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_simpleBAB PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value 2.95")
-  
-  
+    
   add_example(fast0507 ${Cbc_DIR}/examples/fast0507.cpp
                        ${Cbc_DIR}/examples/CbcCompareUser.cpp
                        ${Cbc_DIR}/examples/CbcSolver3.cpp
@@ -544,8 +541,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_fast0507 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_fast0507 PROPERTIES PASS_REGULAR_EXPRESSION "Cbc0006I The LP relaxation is infeasible or too expensive")
-  
-  
+    
   add_example(cbc_minimum ${Cbc_DIR}/examples/minimum.cpp)
   set_target_properties(cbc_minimum PROPERTIES COMPILE_DEFINITIONS SAMPLEDIR=\"${CMAKE_SOURCE_DIR}/Data/Sample\")
   
@@ -557,8 +553,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_minimum PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_minimum PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value 3089")
-  
-  
+    
   add_example(repeat ${Cbc_DIR}/examples/repeat.cpp
                      ${Cbc_DIR}/examples/CbcBranchUser.cpp
                      ${Cbc_DIR}/examples/CbcCompareUser.cpp)
@@ -571,8 +566,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_repeat PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_repeat PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 0 nodes with objective -464.753 Finished")
-  
-  
+    
   add_example(sos ${Cbc_DIR}/examples/sos.cpp)
   
   add_test(NAME cbc_example_sos
@@ -583,8 +577,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_sos PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_sos PROPERTIES PASS_REGULAR_EXPRESSION "0 SOS")
-  
-  
+    
   add_example(crew ${Cbc_DIR}/examples/crew.cpp ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
   add_test(NAME cbc_example_crew
@@ -595,8 +588,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_crew PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_crew PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 0 nodes with objective -464.753 Finished")
-  
-  
+    
   add_example(gear ${Cbc_DIR}/examples/gear.cpp
                    ${Cbc_DIR}/examples/CbcBranchLink.cpp)
   
@@ -608,8 +600,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_gear PROPERTIES LABELS "CBC;EXAMPLE;LONG")
   set_tests_properties(cbc_example_gear PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 19870 nodes with objective 1.64343e-06 Finished")
-  
-  
+    
   add_example(cbc_modify ${Cbc_DIR}/examples/modify.cpp)
   
   add_test(NAME cbc_example_modify
@@ -620,8 +611,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_modify PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_modify PROPERTIES PASS_REGULAR_EXPRESSION "Cbc0001I Search completed - best objective -257.92.*, took 0 iterations and 0 nodes (.* seconds)")
-  
-  
+    
   # This test hangs with COIN_BIG_INDEX==2
   add_example(sample1 ${Cbc_DIR}/examples/sample1.cpp
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
@@ -634,8 +624,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_sample1 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_sample1 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value 1120")
-  
-  
+    
   add_example(sudoku ${Cbc_DIR}/examples/sudoku.cpp)
   
   add_test(NAME cbc_example_sudoku
@@ -646,8 +635,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_sudoku PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_sudoku PROPERTIES PASS_REGULAR_EXPRESSION "Clp0032I PrimalInfeasible objective -73.56.* - 0 iterations time .*")
-  
-  
+    
   add_example(cbc_driver2 ${Cbc_DIR}/examples/driver2.cpp)
   target_link_libraries(cbc_driver2 libOsi libOsiCbc)
   
@@ -659,8 +647,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_driver2 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_driver2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75.*")
-  
-  
+    
   add_example(hotstart ${Cbc_DIR}/examples/hotstart.cpp
                        ${Cbc_DIR}/examples/CbcBranchUser.cpp
                        ${Cbc_DIR}/examples/CbcCompareUser.cpp)
@@ -673,8 +660,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_hotstart PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_hotstart PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 0 nodes with objective -464.753 Finished")
-  
-  
+    
   add_example(nway ${Cbc_DIR}/examples/nway.cpp)
   
   add_test(NAME cbc_example_nway
@@ -685,8 +671,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_nway PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_nway PROPERTIES PASS_REGULAR_EXPRESSION "0 SOS")
-  
-  
+    
   add_example(sample2 ${Cbc_DIR}/examples/sample2.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
@@ -699,8 +684,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_sample2 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_sample2 PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 0 nodes with objective -464.753 Finished")
-  
-  
+    
   add_example(cbc_driver3 ${Cbc_DIR}/examples/driver3.cpp)
   
   add_test(NAME cbc_example_driver3
@@ -711,8 +695,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_driver3 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_driver3 PROPERTIES PASS_REGULAR_EXPRESSION "Optimal objective -464.75.* - 1 iterations time 0.002, Presolve 0.00")
-  
-  
+    
   add_example(interrupt ${Cbc_DIR}/examples/interrupt.cpp
                         ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
@@ -724,8 +707,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_interrupt PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_interrupt PROPERTIES PASS_REGULAR_EXPRESSION "Optimal objective -464.75.* - 5 iterations time .*, Presolve 0.00")
-  
-  
+    
   add_example(sample3 ${Cbc_DIR}/examples/sample3.cpp
                       ${Cbc_DIR}/examples/CbcBranchUser.cpp
                       ${Cbc_DIR}/examples/CbcCompareUser.cpp)
@@ -738,8 +720,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_sample3 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_sample3 PROPERTIES PASS_REGULAR_EXPRESSION "took .* seconds, 0 nodes with objective -464.753 Finished")
-  
-  
+    
   add_example(cbc_driver4 ${Cbc_DIR}/examples/driver4.cpp
                           ${Cbc_DIR}/examples/CbcCompareUser.cpp)
   
@@ -751,8 +732,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_driver4 PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_driver4 PROPERTIES PASS_REGULAR_EXPRESSION "Optimal objective -464.75.* - 5 iterations time .*, Presolve 0.00")
-  
-  
+    
   add_example(link ${Cbc_DIR}/examples/link.cpp
                    ${Cbc_DIR}/examples/CbcBranchLink.cpp)
   
@@ -764,8 +744,7 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_link PROPERTIES LABELS "CBC;EXAMPLE")
   set_tests_properties(cbc_example_link PROPERTIES PASS_REGULAR_EXPRESSION "Optimal solution when x is 1, y 1.06066, z 0.5 and w 1")
-  
-  
+    
   if (CBC_USE_THREADS)
     add_example(parallel ${Cbc_DIR}/examples/parallel.cpp
                          ${Cbc_DIR}/examples/CbcCompareUser.cpp)
@@ -799,6 +778,9 @@ endif ()
 add_executable(cbc ${Cbc_DIR}/src/CoinSolve.cpp)
 target_link_libraries(cbc libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
 set_include_directories(cbc)
+if (COIN_COMPILE_LTO)
+  set_target_properties(cbc PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+endif ()
 if (COIN_HAS_AMD)
   target_link_libraries(cbc amd)
 endif ()
@@ -878,6 +860,9 @@ if (CBC_BUILD_CBC_GENERIC)
   
   target_link_libraries(cbc-generic libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
   set_include_directories(cbc-generic)
+  if (COIN_COMPILE_LTO)
+    set_target_properties(cbc-generic PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  endif ()
   if (COIN_HAS_AMD)
     target_link_libraries(cbc-generic amd)
   endif ()

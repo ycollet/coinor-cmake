@@ -354,6 +354,10 @@ else ()
   add_library(libSym    STATIC ${ALL_SYM_MASTER})
   add_library(libOsiSym STATIC ${OSISYM_SRC})
 endif ()
+if (COIN_COMPILE_LTO)
+  set_target_properties(libSym PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  set_target_properties(libOsiSym PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+endif ()
 if (NOT WIN32)
   set_target_properties(libSym PROPERTIES PREFIX "")
   set_target_properties(libOsiSym PROPERTIES PREFIX "")
@@ -366,6 +370,9 @@ macro(add_example Name)
   add_executable(${Name} ${ARGN})
   target_link_libraries(${Name} libSym libCgl libOsiClp libOsi libClp libCoinUtils)
   set_include_directories(${Name})
+  if (COIN_COMPILE_LTO)
+    set_target_properties(${Name} PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  endif ()
   if (COIN_HAS_AMD)
     target_link_libraries(${Name} amd)
   endif ()
@@ -437,6 +444,9 @@ if (NOT SYM_COMPILE_IN_LP)
   else ()
     add_library(libSym_lp STATIC ${ALL_LP})
   endif ()
+  if (COIN_COMPILE_LTO)
+    set_target_properties(libSym_lp PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  endif ()
   
   set_include_directories(libSym_lp)
 
@@ -456,6 +466,9 @@ if (NOT SYM_COMPILE_IN_CG)
     add_library(libSym_cg SHARED ${ALL_CG})
   else ()
     add_library(libSym_cg STATIC ${ALL_CG})
+  endif ()
+  if (COIN_COMPILE_LTO)
+    set_target_properties(libSym_cg PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
   endif ()
   
   set_include_directories(libSym_cg)
@@ -477,6 +490,9 @@ if (NOT SYM_COMPILE_IN_CP)
   else ()
     add_library(libSym_cp STATIC ${ALL_CP})
   endif ()
+  if (COIN_COMPILE_LTO)
+    set_target_properties(libSym_cp PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  endif ()
   
   set_include_directories(libSym_cp)
 
@@ -496,6 +512,9 @@ if (NOT SYM_COMPILE_IN_TM)
     add_library(libSym_tm SHARED ${ALL_TM})
   else ()
     add_library(libSym_tm STATIC ${ALL_TM})
+  endif ()
+  if (COIN_COMPILE_LTO)
+    set_target_properties(libSym_tm PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
   endif ()
   
   set_include_directories(libSym_tm)
@@ -517,6 +536,9 @@ if (SYMPHONY_BUILD_EXAMPLES)
     add_executable(${Name} ${ARGN})
     target_link_libraries(${Name} libSym libCgl libOsiClp libOsi libClp libCoinUtils)
     set_include_directories(${Name})
+    if (COIN_COMPILE_LTO)
+      set_target_properties(${Name} PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+    endif ()
     if (COIN_HAS_AMD)
       target_link_libraries(${Name} amd)
     endif ()
@@ -586,8 +608,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(symphony_example_bicriteria PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
-  
-  
+    
   add_example(milp ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c)
   
   add_test(NAME symphony_example_milp
@@ -596,8 +617,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(symphony_example_milp PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
-  
-  
+    
   add_example(milp2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c)
   
   add_test(NAME symphony_example_milp2
@@ -606,8 +626,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(symphony_example_milp2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
-  
-  
+    
   #add_example(milpOsi ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c)
   #target_link_libraries(milpOsi libOsiSym libOsi libCgl libCoinUtils z bz2 libSym libCgl libCoinUtils libClp libOsiClp libCoinUtils libOsi)
   # 
@@ -617,8 +636,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   #if (WIN32)
   #  set_tests_properties(symphony_example_milpOsi PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   #endif ()
-  
-  
+    
   #ERROR: Missing include files in milpOsi2
   #add_example(milpOsi2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c)
   #
@@ -638,8 +656,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(symphony_example_sensitivity PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
-  
-  
+    
   add_example(warm_start1 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c)
   
   add_test(NAME symphony_example_warm_start1
@@ -648,8 +665,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(symphony_example_warm_start1 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
-  
-  
+    
   add_example(warm_start2 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c)
   
   add_test(NAME symphony_example_warm_start2
@@ -658,8 +674,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(symphony_example_warm_start2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
-  
-  
+    
   add_example(warm_start3 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
   
   add_test(NAME symphony_example_warm_start3
