@@ -104,6 +104,7 @@ option(COIN_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation fo
 option(COIN_COMPILE_LTO              "Activate the whole program optimization" OFF)
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
+option(COIN_TESTS_DISABLE_TIMEOUT    "Disable the timeout of the tests" OFF)
 
 option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
 

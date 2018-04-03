@@ -100,8 +100,10 @@ macro(add_coin_test_list SolverName Prefix Suffix FileList Label Timeout)
     string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
     
     add_coin_test(${Prefix}_${_NAME}_${Suffix} ${SolverName} ${File})
-    
-    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+
+    if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+      set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+    endif ()
     set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
   endforeach ()
 endmacro()
@@ -148,8 +150,10 @@ macro(add_coin_sym_test_list SolverName Prefix Suffix FileList Label Timeout)
     string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
     
     add_coin_sym_test(${Prefix}_${_NAME}_${Suffix} ${SolverName} ${File})
-    
-    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+
+    if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+      set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+    endif ()
     set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
   endforeach ()
 endmacro()
@@ -196,8 +200,10 @@ macro(add_coin_vol_test_list Prefix Suffix FileList Label Timeout)
     #message(STATUS "DEBUG: _NAME = ${_NAME}")
     
     add_coin_test(${Prefix}_${_NAME}_${Suffix} osi_vol ${File})
-    
-    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+
+    if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+      set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+    endif ()
     set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
   endforeach ()
 endmacro()
@@ -275,8 +281,10 @@ macro(add_coin_dylp_test_list Prefix Suffix FileList Label Timeout)
     string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
     
     add_coin_test(${Prefix}_${_NAME}_${Suffix} osi_dylp ${File})
-    
-    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+
+    if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+      set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
+    endif ()
     set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
   endforeach ()
 endmacro()

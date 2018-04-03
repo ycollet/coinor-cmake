@@ -206,18 +206,24 @@ add_coin_test_list(clp miplib2000 clp TEST_LIST_MIPLIB2000 "MPS;CLP;MIPLIB2000;B
 #create_log_analysis(miplib2000_msc98-ip_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_msc98-ip_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK"
 
-set_tests_properties(miplib2000_mspp16_mps_gz_clp PROPERTIES TIMEOUT 60)
+if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+  set_tests_properties(miplib2000_mspp16_mps_gz_clp PROPERTIES TIMEOUT 60)
+endif ()
 #create_log_analysis(miplib2000_mspp16_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_mspp16_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-set_tests_properties(miplib2000_mzzv11_mps_gz_clp PROPERTIES TIMEOUT 60)
+if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+  set_tests_properties(miplib2000_mzzv11_mps_gz_clp PROPERTIES TIMEOUT 60)
+endif ()
 #create_log_analysis(miplib2000_mzzv11_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_mzzv11_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
 #create_log_analysis(miplib2000_n3div36_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_n3div36_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-set_tests_properties(miplib2000_n3seq24_mps_gz_clp PROPERTIES TIMEOUT 60)
+if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+  set_tests_properties(miplib2000_n3seq24_mps_gz_clp PROPERTIES TIMEOUT 60)
+endif ()
 #create_log_analysis(miplib2000_n3seq24_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_n3seq24_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
@@ -242,7 +248,9 @@ set_tests_properties(miplib2000_n3seq24_mps_gz_clp PROPERTIES TIMEOUT 60)
 #create_log_analysis(miplib2000_neos18_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos18_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-set_tests_properties(miplib2000_neos-476283_mps_gz_clp PROPERTIES TIMEOUT 180)
+if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+  set_tests_properties(miplib2000_neos-476283_mps_gz_clp PROPERTIES TIMEOUT 180)
+endif ()
 #create_log_analysis(miplib2000_neos-476283_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_neos-476283_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
@@ -261,7 +269,9 @@ set_tests_properties(miplib2000_neos-476283_mps_gz_clp PROPERTIES TIMEOUT 180)
 #create_log_analysis(miplib2000_net12_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_net12_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-set_tests_properties(miplib2000_netdiversion_mps_gz_clp PROPERTIES TIMEOUT 600)
+if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+  set_tests_properties(miplib2000_netdiversion_mps_gz_clp PROPERTIES TIMEOUT 600)
+endif ()
 set_tests_properties(miplib2000_netdiversion_mps_gz_clp PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK;LONG")
 #create_log_analysis(miplib2000_netdiversion_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_netdiversion_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
@@ -278,7 +288,9 @@ set_tests_properties(miplib2000_netdiversion_mps_gz_clp PROPERTIES LABELS "MPS;C
 #create_log_analysis(miplib2000_ns1688347_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ns1688347_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-set_tests_properties(miplib2000_ns1758913_mps_gz_clp PROPERTIES TIMEOUT 120)
+if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+  set_tests_properties(miplib2000_ns1758913_mps_gz_clp PROPERTIES TIMEOUT 120)
+endif ()
 #create_log_analysis(miplib2000_ns1758913_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_ns1758913_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
@@ -348,7 +360,9 @@ set_tests_properties(miplib2000_ns1758913_mps_gz_clp PROPERTIES TIMEOUT 120)
 #create_log_analysis(miplib2000_timtab1_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_timtab1_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
-set_tests_properties(miplib2000_triptim1_mps_gz_clp PROPERTIES TIMEOUT 120)
+if (NOT COIN_TESTS_DISABLE_TIMEOUT)
+  set_tests_properties(miplib2000_triptim1_mps_gz_clp PROPERTIES TIMEOUT 120)
+endif ()
 #create_log_analysis(miplib2000_triptim1_mps_gz_clp "01_Analysis" "Optimal objective <number>" 0 1e-6)
 #set_tests_properties(miplib2000_triptim1_mps_gz_clp_01_Analysis PROPERTIES LABELS "MPS;CLP;MIPLIB2000;BENCHMARK")
 
