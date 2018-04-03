@@ -165,6 +165,7 @@ mark_as_advanced(USE_COINOR_BIN
                  COIN_COMPILE_LTO
                  COIN_COMPILE_WARNINGS
                  COIN_COMPILE_CXX11
+		 COIN_TESTS_DISABLE_TIMEOUT
                  COIN_DIR
                  COINUTILS_USE_THREADS
                  COINUTILS_USE_MEMPOOL_OVERRIDE_NEW
