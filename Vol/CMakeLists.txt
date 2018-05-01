@@ -53,6 +53,8 @@ set(COIN_SYMPHONY_DIR "None" CACHE PATH "The Symphony solver Path")
 option(USE_COINOR_BIN "Use and external directory where the headers / libraries used are stored" OFF)
 set(COINOR_DIR "None" CACHE PATH "The Path where all the used CoinOR libraries are stored")
 
+option(COIN_HAS_MKL "Use Intel MKL library (requires Intel compiler)" OFF)
+
 # Threads path
 set(COIN_THREADS_INC_PATH "None" CACHE PATH "The path to the PThreads header files")
 set(COIN_THREADS_LIB_PATH "None" CACHE PATH "The path to the PThreads library files")
@@ -96,6 +98,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COINUTILS_HAS_BZLIB
                  COIN_HAS_LAPACK
                  COIN_HAS_BLAS
+                 COIN_HAS_MKL
                  COIN_COINUTILS_CHECKLEVEL
                  COIN_COINUTILS_VERBOSITY
                  COIN_HAS_GLPK
@@ -222,6 +225,8 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
   else ()
     link_directories(${MKL_ROOT}/lib/ia32)
   endif ()
+  
+  set(COIN_HAS_LAPACK ON CACHE BOOL "Use Intel MKL library (requires Intel compiler)")
 endif ()
 
 # Check some directories

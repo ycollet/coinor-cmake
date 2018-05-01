@@ -260,6 +260,8 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
   else ()
     link_directories(${MKL_ROOT}/lib/ia32)
   endif ()
+  
+  set(COIN_HAS_LAPACK ON CACHE BOOL "Use Intel MKL library (requires Intel compiler)")
 endif ()
 
 # Check some directories

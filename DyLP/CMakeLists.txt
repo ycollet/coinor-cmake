@@ -43,6 +43,8 @@ option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
 option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
 option(COIN_HAS_ASL        "Enable the ASL support" OFF)
 
+option(COIN_HAS_MKL "Use Intel MKL library (requires Intel compiler)" OFF)
+
 set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
 set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
 
@@ -101,6 +103,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COINUTILS_HAS_BZLIB
                  COIN_HAS_LAPACK
                  COIN_HAS_BLAS
+                 COIN_HAS_MKL
                  COIN_COINUTILS_CHECKLEVEL
                  COIN_COINUTILS_VERBOSITY
                  COIN_HAS_GLPK
@@ -231,6 +234,8 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
   else ()
     link_directories(${MKL_ROOT}/lib/ia32)
   endif ()
+  
+  set(COIN_HAS_LAPACK ON CACHE BOOL "Use Intel MKL library (requires Intel compiler)")
 endif ()
 
 # Check some directories
