@@ -18,7 +18,8 @@ option(GLPK_COMPILE_STATIC           "Activate the static linking" OFF)
 option(GLPK_COMPILE_COVERAGE         "Activate the code coverage compilation" OFF)
 option(GLPK_COMPILE_PROFILE          "Activate the code profiling compilation" OFF)
 option(GLPK_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation for valgrind" OFF)
-option(GLPK_COMPILE_LTO              "Activate the whole program optimization" OFF)
+option(GLPK_COMPILE_LTO              "Activate the whole program optimization (using LTO)" OFF)
+option(GLPK_COMPILE_WHOPR            "Activate the whole program optimization (using WHOPR)" OFF)
 option(GLPK_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
@@ -27,6 +28,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  GLPK_COMPILE_PROFILE
                  GLPK_COMPILE_PROFILE_VALGRIND
                  GLPK_COMPILE_LTO
+                 GLPK_COMPILE_WHOPR
                  GLPK_COMPILE_WARNINGS)
 
 # Set paths for binary and library generation inside the build directory:
@@ -65,6 +67,7 @@ set(PACKAGE_STRING    "Glpk")
 set(PACKAGE_TARNAME   "glpk")
 # Define to the version of this package.
 set(PACKAGE_VERSION   "${GLPK_VERSION_STRING}")
+set(GLPK_VERSION      "${GLPK_VERSION_STRING}")
 
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/../glpk_binary" 
@@ -92,6 +95,30 @@ if (UNIX)
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC")
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z muldefs")
+    endif ()
+  endif ()
+  
+  if (GLPK_COMPILE_LTO)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -lto")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lto")
+    endif ()
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -flto")
+    endif ()
+  elseif (GLPK_COMPILE_WHOPR)
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -fwhopr")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fwhopr")
+    endif ()
+  endif ()
+elseif (WIN32)
+  if (MSVC)
+    if (GLPK_COMPILE_LTO OR GLPK_COMPILE_WHOPR)
+      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} /GL ")
+      set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} /GL ")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG ")
     endif ()
   endif ()
 endif ()
@@ -188,196 +215,287 @@ include_directories(${CMAKE_SOURCE_DIR}/src/api)
 include_directories(${CMAKE_SOURCE_DIR}/src/bflib)
 include_directories(${CMAKE_SOURCE_DIR}/src/cglib)
 include_directories(${CMAKE_SOURCE_DIR}/src/colamd)
+include_directories(${CMAKE_SOURCE_DIR}/src/draft)
 include_directories(${CMAKE_SOURCE_DIR}/src/env)
+include_directories(${CMAKE_SOURCE_DIR}/src/intopt)
 include_directories(${CMAKE_SOURCE_DIR}/src/minisat)
 include_directories(${CMAKE_SOURCE_DIR}/src/misc)
 include_directories(${CMAKE_SOURCE_DIR}/src/mpl)
+include_directories(${CMAKE_SOURCE_DIR}/src/npp)
 include_directories(${CMAKE_SOURCE_DIR}/src/proxy)
 include_directories(${CMAKE_SOURCE_DIR}/src/simplex)
 include_directories(${CMAKE_SOURCE_DIR}/src/zlib)
 
 # libglpk_la_LDFLAGS = -version-info 37:2:1 -export-symbols-regex '^glp_*'
 
-set(GLPK_SRCS ${CMAKE_SOURCE_DIR}/src/bfd.c
-              ${CMAKE_SOURCE_DIR}/src/bfx.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi06.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi07.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi08.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi09.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi10.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi12.c
-              ${CMAKE_SOURCE_DIR}/src/glpapi13.c
-              ${CMAKE_SOURCE_DIR}/src/glphbm.c
-              ${CMAKE_SOURCE_DIR}/src/glpios01.c
-              ${CMAKE_SOURCE_DIR}/src/glpios02.c
-              ${CMAKE_SOURCE_DIR}/src/glpios03.c
-              ${CMAKE_SOURCE_DIR}/src/glpios07.c
-              ${CMAKE_SOURCE_DIR}/src/glpios09.c
-              ${CMAKE_SOURCE_DIR}/src/glpios10.c
-              ${CMAKE_SOURCE_DIR}/src/glpios11.c
-              ${CMAKE_SOURCE_DIR}/src/glpios12.c
-              ${CMAKE_SOURCE_DIR}/src/glpipm.c
-              ${CMAKE_SOURCE_DIR}/src/glpmat.c
-              ${CMAKE_SOURCE_DIR}/src/glpnpp01.c
-              ${CMAKE_SOURCE_DIR}/src/glpnpp02.c
-              ${CMAKE_SOURCE_DIR}/src/glpnpp03.c
-              ${CMAKE_SOURCE_DIR}/src/glpnpp04.c
-              ${CMAKE_SOURCE_DIR}/src/glpnpp05.c
-              ${CMAKE_SOURCE_DIR}/src/glpnpp06.c
-              ${CMAKE_SOURCE_DIR}/src/glprgr.c
-              ${CMAKE_SOURCE_DIR}/src/glpscl.c
-              ${CMAKE_SOURCE_DIR}/src/glpspm.c
-              ${CMAKE_SOURCE_DIR}/src/glpssx01.c
-              ${CMAKE_SOURCE_DIR}/src/glpssx02.c
-              ${CMAKE_SOURCE_DIR}/src/lux.c
+if (GLPK_VERSION STRLESS "4.64")
+  set(GLPK_SRCS ${CMAKE_SOURCE_DIR}/src/bfd.c
+                ${CMAKE_SOURCE_DIR}/src/bfx.c
+		${CMAKE_SOURCE_DIR}/src/glpapi06.c
+		${CMAKE_SOURCE_DIR}/src/glpapi07.c
+		${CMAKE_SOURCE_DIR}/src/glpapi08.c
+		${CMAKE_SOURCE_DIR}/src/glpapi09.c
+		${CMAKE_SOURCE_DIR}/src/glpapi10.c
+		${CMAKE_SOURCE_DIR}/src/glpapi12.c
+		${CMAKE_SOURCE_DIR}/src/glpapi13.c
+		${CMAKE_SOURCE_DIR}/src/glphbm.c
+		${CMAKE_SOURCE_DIR}/src/glpios01.c
+		${CMAKE_SOURCE_DIR}/src/glpios02.c
+		${CMAKE_SOURCE_DIR}/src/glpios03.c
+		${CMAKE_SOURCE_DIR}/src/glpios07.c
+		${CMAKE_SOURCE_DIR}/src/glpios09.c
+		${CMAKE_SOURCE_DIR}/src/glpios10.c
+		${CMAKE_SOURCE_DIR}/src/glpios11.c
+		${CMAKE_SOURCE_DIR}/src/glpios12.c
+		${CMAKE_SOURCE_DIR}/src/glpipm.c
+		${CMAKE_SOURCE_DIR}/src/glpmat.c
+		${CMAKE_SOURCE_DIR}/src/glpnpp01.c
+		${CMAKE_SOURCE_DIR}/src/glpnpp02.c
+		${CMAKE_SOURCE_DIR}/src/glpnpp03.c
+		${CMAKE_SOURCE_DIR}/src/glpnpp04.c
+		${CMAKE_SOURCE_DIR}/src/glpnpp05.c
+		${CMAKE_SOURCE_DIR}/src/glpnpp06.c
+		${CMAKE_SOURCE_DIR}/src/glprgr.c
+		${CMAKE_SOURCE_DIR}/src/glpscl.c
+		${CMAKE_SOURCE_DIR}/src/glpspm.c
+		${CMAKE_SOURCE_DIR}/src/glpssx01.c
+		${CMAKE_SOURCE_DIR}/src/glpssx02.c
+		${CMAKE_SOURCE_DIR}/src/lux.c
+		${CMAKE_SOURCE_DIR}/src/cglib/cfg.c
+		${CMAKE_SOURCE_DIR}/src/cglib/cfg1.c
+		${CMAKE_SOURCE_DIR}/src/cglib/cfg2.c
+		${CMAKE_SOURCE_DIR}/src/cglib/clqcut.c
+		${CMAKE_SOURCE_DIR}/src/cglib/gmicut.c
+		${CMAKE_SOURCE_DIR}/src/cglib/gmigen.c
+		${CMAKE_SOURCE_DIR}/src/cglib/mirgen.c)
+else ()
+  set(GLPK_SRCS ${GLPK_SRCS}
+                ${CMAKE_SOURCE_DIR}/src/draft/bfd.c
+                ${CMAKE_SOURCE_DIR}/src/draft/bfx.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpapi06.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpapi07.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpapi08.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpapi09.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpapi10.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpapi12.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpapi13.c
+		${CMAKE_SOURCE_DIR}/src/draft/glphbm.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpios01.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpios02.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpios03.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpios07.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpios09.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpios11.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpios12.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpipm.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpmat.c
+		${CMAKE_SOURCE_DIR}/src/draft/glprgr.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpscl.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpspm.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpssx01.c
+		${CMAKE_SOURCE_DIR}/src/draft/glpssx02.c
+		${CMAKE_SOURCE_DIR}/src/draft/lux.c)
+	      
+  if (NOT (GLPK_VERSION STREQUAL "4.64"))
+    set(GLPK_SRCS ${GLPK_SRCS}
+                  ${CMAKE_SOURCE_DIR}/src/intopt/fpump.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/clqcut.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/gmicut.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/cfg2.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/cfg.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/mirgen.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/spv.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/cfg1.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/gmigen.c
+		  ${CMAKE_SOURCE_DIR}/src/intopt/covgen.c
+		  ${CMAKE_SOURCE_DIR}/src/npp/npp5.c
+		  ${CMAKE_SOURCE_DIR}/src/npp/npp1.c
+		  ${CMAKE_SOURCE_DIR}/src/npp/npp6.c
+		  ${CMAKE_SOURCE_DIR}/src/npp/npp3.c
+		  ${CMAKE_SOURCE_DIR}/src/npp/npp4.c
+		  ${CMAKE_SOURCE_DIR}/src/npp/npp2.c
+		  ${CMAKE_SOURCE_DIR}/src/api/npp.c
+		  ${CMAKE_SOURCE_DIR}/src/misc/mt1.c
+		  ${CMAKE_SOURCE_DIR}/src/misc/ks.c
+		  ${CMAKE_SOURCE_DIR}/src/misc/fvs.c)
+  endif ()
+endif ()
+
+if (GLPK_VERSION STRLESS "4.65")
+  if (GLPK_VERSION STRLESS "4.64")
+    set(GLPK_SRCS ${GLPK_SRCS}
+                  ${CMAKE_SOURCE_DIR}/src/glpios10.c
+		  ${CMAKE_SOURCE_DIR}/src/glpnpp01.c
+		  ${CMAKE_SOURCE_DIR}/src/glpnpp02.c
+		  ${CMAKE_SOURCE_DIR}/src/glpnpp03.c
+		  ${CMAKE_SOURCE_DIR}/src/glpnpp04.c
+		  ${CMAKE_SOURCE_DIR}/src/glpnpp05.c
+		  ${CMAKE_SOURCE_DIR}/src/glpnpp06.c)
+  else ()
+    set(GLPK_SRCS ${GLPK_SRCS}
+                  ${CMAKE_SOURCE_DIR}/src/draft/glpios10.c
+		  ${CMAKE_SOURCE_DIR}/src/draft/glpnpp01.c
+		  ${CMAKE_SOURCE_DIR}/src/draft/glpnpp02.c
+		  ${CMAKE_SOURCE_DIR}/src/draft/glpnpp03.c
+		  ${CMAKE_SOURCE_DIR}/src/draft/glpnpp04.c
+		  ${CMAKE_SOURCE_DIR}/src/draft/glpnpp05.c
+		  ${CMAKE_SOURCE_DIR}/src/draft/glpnpp06.c
+		  ${CMAKE_SOURCE_DIR}/src/cglib/cfg.c
+		  ${CMAKE_SOURCE_DIR}/src/cglib/cfg1.c
+		  ${CMAKE_SOURCE_DIR}/src/cglib/cfg2.c
+		  ${CMAKE_SOURCE_DIR}/src/cglib/clqcut.c
+		  ${CMAKE_SOURCE_DIR}/src/cglib/gmicut.c
+		  ${CMAKE_SOURCE_DIR}/src/cglib/gmigen.c
+		  ${CMAKE_SOURCE_DIR}/src/cglib/mirgen.c)
+    endif ()
+endif ()
+
+if (GLPK_VERSION STRLESS "4.65")
+  set(GLPK_SRCS ${GLPK_SRCS}
+                ${CMAKE_SOURCE_DIR}/src/bflib/fvs.c)
+endif ()
+
+set(GLPK_SRCS ${GLPK_SRCS}
               ${CMAKE_SOURCE_DIR}/src/amd/amd_1.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_2.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_aat.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_control.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_defaults.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_dump.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_info.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_order.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_post_tree.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_postorder.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_preprocess.c
-              ${CMAKE_SOURCE_DIR}/src/amd/amd_valid.c
-              ${CMAKE_SOURCE_DIR}/src/api/advbas.c
-              ${CMAKE_SOURCE_DIR}/src/api/asnhall.c
-              ${CMAKE_SOURCE_DIR}/src/api/asnlp.c
-              ${CMAKE_SOURCE_DIR}/src/api/asnokalg.c
-              ${CMAKE_SOURCE_DIR}/src/api/ckasn.c
-              ${CMAKE_SOURCE_DIR}/src/api/ckcnf.c
-              ${CMAKE_SOURCE_DIR}/src/api/cplex.c
-              ${CMAKE_SOURCE_DIR}/src/api/cpp.c
-              ${CMAKE_SOURCE_DIR}/src/api/cpxbas.c
-              ${CMAKE_SOURCE_DIR}/src/api/graph.c
-              ${CMAKE_SOURCE_DIR}/src/api/gridgen.c
-              ${CMAKE_SOURCE_DIR}/src/api/intfeas1.c
-              ${CMAKE_SOURCE_DIR}/src/api/maxffalg.c
-              ${CMAKE_SOURCE_DIR}/src/api/maxflp.c
-              ${CMAKE_SOURCE_DIR}/src/api/mcflp.c
-              ${CMAKE_SOURCE_DIR}/src/api/mcfokalg.c
-              ${CMAKE_SOURCE_DIR}/src/api/mcfrelax.c
-              ${CMAKE_SOURCE_DIR}/src/api/minisat1.c
-              ${CMAKE_SOURCE_DIR}/src/api/mpl.c
-              ${CMAKE_SOURCE_DIR}/src/api/mps.c
-              ${CMAKE_SOURCE_DIR}/src/api/netgen.c
-              ${CMAKE_SOURCE_DIR}/src/api/pript.c
-              ${CMAKE_SOURCE_DIR}/src/api/prmip.c
-              ${CMAKE_SOURCE_DIR}/src/api/prrngs.c
-              ${CMAKE_SOURCE_DIR}/src/api/prsol.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdasn.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdcc.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdcnf.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdipt.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdmaxf.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdmcf.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdmip.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdprob.c
-              ${CMAKE_SOURCE_DIR}/src/api/rdsol.c
-              ${CMAKE_SOURCE_DIR}/src/api/rmfgen.c
-              ${CMAKE_SOURCE_DIR}/src/api/strong.c
-              ${CMAKE_SOURCE_DIR}/src/api/topsort.c
-              ${CMAKE_SOURCE_DIR}/src/api/weak.c
-              ${CMAKE_SOURCE_DIR}/src/api/wcliqex.c
-              ${CMAKE_SOURCE_DIR}/src/api/wrasn.c
-              ${CMAKE_SOURCE_DIR}/src/api/wrcc.c
-              ${CMAKE_SOURCE_DIR}/src/api/wrcnf.c
-              ${CMAKE_SOURCE_DIR}/src/api/wript.c
-              ${CMAKE_SOURCE_DIR}/src/api/wrmaxf.c
-              ${CMAKE_SOURCE_DIR}/src/api/wrmcf.c
-              ${CMAKE_SOURCE_DIR}/src/api/wrmip.c
-              ${CMAKE_SOURCE_DIR}/src/api/wrprob.c
-              ${CMAKE_SOURCE_DIR}/src/api/wrsol.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/btf.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/btfint.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/fhv.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/fhvint.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/fvs.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/ifu.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/luf.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/lufint.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/scf.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/scfint.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/sgf.c
-              ${CMAKE_SOURCE_DIR}/src/bflib/sva.c
-              ${CMAKE_SOURCE_DIR}/src/cglib/cfg.c
-              ${CMAKE_SOURCE_DIR}/src/cglib/cfg1.c
-              ${CMAKE_SOURCE_DIR}/src/cglib/cfg2.c
-              ${CMAKE_SOURCE_DIR}/src/cglib/clqcut.c
-              ${CMAKE_SOURCE_DIR}/src/cglib/gmicut.c
-              ${CMAKE_SOURCE_DIR}/src/cglib/gmigen.c
-              ${CMAKE_SOURCE_DIR}/src/cglib/mirgen.c
-              ${CMAKE_SOURCE_DIR}/src/colamd/colamd.c
-              ${CMAKE_SOURCE_DIR}/src/env/alloc.c
-              ${CMAKE_SOURCE_DIR}/src/env/dlsup.c
-              ${CMAKE_SOURCE_DIR}/src/env/env.c
-              ${CMAKE_SOURCE_DIR}/src/env/error.c
-              ${CMAKE_SOURCE_DIR}/src/env/stdout.c
-              ${CMAKE_SOURCE_DIR}/src/env/stream.c
-              ${CMAKE_SOURCE_DIR}/src/env/time.c
-              ${CMAKE_SOURCE_DIR}/src/env/tls.c
-              ${CMAKE_SOURCE_DIR}/src/minisat/minisat.c
-              ${CMAKE_SOURCE_DIR}/src/misc/avl.c
-              ${CMAKE_SOURCE_DIR}/src/misc/bignum.c
-              ${CMAKE_SOURCE_DIR}/src/misc/dimacs.c
-              ${CMAKE_SOURCE_DIR}/src/misc/dmp.c
-              ${CMAKE_SOURCE_DIR}/src/misc/ffalg.c
-              ${CMAKE_SOURCE_DIR}/src/misc/fp2rat.c
-              ${CMAKE_SOURCE_DIR}/src/misc/gcd.c
-              ${CMAKE_SOURCE_DIR}/src/misc/jd.c
-              ${CMAKE_SOURCE_DIR}/src/misc/keller.c
-              ${CMAKE_SOURCE_DIR}/src/misc/mc13d.c
-              ${CMAKE_SOURCE_DIR}/src/misc/mc21a.c
-              ${CMAKE_SOURCE_DIR}/src/misc/mygmp.c
-              ${CMAKE_SOURCE_DIR}/src/misc/okalg.c
-              ${CMAKE_SOURCE_DIR}/src/misc/qmd.c
-              ${CMAKE_SOURCE_DIR}/src/misc/relax4.c
-              ${CMAKE_SOURCE_DIR}/src/misc/rng.c
-              ${CMAKE_SOURCE_DIR}/src/misc/rng1.c
-              ${CMAKE_SOURCE_DIR}/src/misc/round2n.c
-              ${CMAKE_SOURCE_DIR}/src/misc/str2int.c
-              ${CMAKE_SOURCE_DIR}/src/misc/str2num.c
-              ${CMAKE_SOURCE_DIR}/src/misc/strspx.c
-              ${CMAKE_SOURCE_DIR}/src/misc/strtrim.c
-              ${CMAKE_SOURCE_DIR}/src/misc/triang.c
-              ${CMAKE_SOURCE_DIR}/src/misc/wclique.c
-              ${CMAKE_SOURCE_DIR}/src/misc/wclique1.c
-              ${CMAKE_SOURCE_DIR}/src/mpl/mpl1.c
-              ${CMAKE_SOURCE_DIR}/src/mpl/mpl2.c
-              ${CMAKE_SOURCE_DIR}/src/mpl/mpl3.c
-              ${CMAKE_SOURCE_DIR}/src/mpl/mpl4.c
-              ${CMAKE_SOURCE_DIR}/src/mpl/mpl5.c
-              ${CMAKE_SOURCE_DIR}/src/mpl/mpl6.c
-              ${CMAKE_SOURCE_DIR}/src/mpl/mplsql.c
-              ${CMAKE_SOURCE_DIR}/src/proxy/proxy.c
-              ${CMAKE_SOURCE_DIR}/src/proxy/proxy1.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spxat.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spxchuzc.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spxchuzr.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spxlp.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spxnt.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spxprim.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spxprob.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spychuzc.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spychuzr.c
-              ${CMAKE_SOURCE_DIR}/src/simplex/spydual.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/adler32.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/compress.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/crc32.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/deflate.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/gzclose.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/gzlib.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/gzread.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/gzwrite.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/inffast.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/inflate.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/inftrees.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/trees.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/uncompr.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/zio.c
-              ${CMAKE_SOURCE_DIR}/src/zlib/zutil.c)
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_2.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_aat.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_control.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_defaults.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_dump.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_info.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_order.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_post_tree.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_postorder.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_preprocess.c
+	      ${CMAKE_SOURCE_DIR}/src/amd/amd_valid.c
+	      ${CMAKE_SOURCE_DIR}/src/api/advbas.c
+	      ${CMAKE_SOURCE_DIR}/src/api/asnhall.c
+	      ${CMAKE_SOURCE_DIR}/src/api/asnlp.c
+	      ${CMAKE_SOURCE_DIR}/src/api/asnokalg.c
+	      ${CMAKE_SOURCE_DIR}/src/api/ckasn.c
+	      ${CMAKE_SOURCE_DIR}/src/api/ckcnf.c
+	      ${CMAKE_SOURCE_DIR}/src/api/cplex.c
+	      ${CMAKE_SOURCE_DIR}/src/api/cpp.c
+	      ${CMAKE_SOURCE_DIR}/src/api/cpxbas.c
+	      ${CMAKE_SOURCE_DIR}/src/api/graph.c
+	      ${CMAKE_SOURCE_DIR}/src/api/gridgen.c
+	      ${CMAKE_SOURCE_DIR}/src/api/intfeas1.c
+	      ${CMAKE_SOURCE_DIR}/src/api/maxffalg.c
+	      ${CMAKE_SOURCE_DIR}/src/api/maxflp.c
+	      ${CMAKE_SOURCE_DIR}/src/api/mcflp.c
+	      ${CMAKE_SOURCE_DIR}/src/api/mcfokalg.c
+	      ${CMAKE_SOURCE_DIR}/src/api/mcfrelax.c
+	      ${CMAKE_SOURCE_DIR}/src/api/minisat1.c
+	      ${CMAKE_SOURCE_DIR}/src/api/mpl.c
+	      ${CMAKE_SOURCE_DIR}/src/api/mps.c
+	      ${CMAKE_SOURCE_DIR}/src/api/netgen.c
+	      ${CMAKE_SOURCE_DIR}/src/api/pript.c
+	      ${CMAKE_SOURCE_DIR}/src/api/prmip.c
+	      ${CMAKE_SOURCE_DIR}/src/api/prrngs.c
+	      ${CMAKE_SOURCE_DIR}/src/api/prsol.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdasn.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdcc.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdcnf.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdipt.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdmaxf.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdmcf.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdmip.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdprob.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rdsol.c
+	      ${CMAKE_SOURCE_DIR}/src/api/rmfgen.c
+	      ${CMAKE_SOURCE_DIR}/src/api/strong.c
+	      ${CMAKE_SOURCE_DIR}/src/api/topsort.c
+	      ${CMAKE_SOURCE_DIR}/src/api/weak.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wcliqex.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wrasn.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wrcc.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wrcnf.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wript.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wrmaxf.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wrmcf.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wrmip.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wrprob.c
+	      ${CMAKE_SOURCE_DIR}/src/api/wrsol.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/btf.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/btfint.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/fhv.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/fhvint.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/ifu.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/luf.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/lufint.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/scf.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/scfint.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/sgf.c
+	      ${CMAKE_SOURCE_DIR}/src/bflib/sva.c
+	      ${CMAKE_SOURCE_DIR}/src/colamd/colamd.c
+	      ${CMAKE_SOURCE_DIR}/src/env/alloc.c
+	      ${CMAKE_SOURCE_DIR}/src/env/dlsup.c
+	      ${CMAKE_SOURCE_DIR}/src/env/env.c
+	      ${CMAKE_SOURCE_DIR}/src/env/error.c
+	      ${CMAKE_SOURCE_DIR}/src/env/stdout.c
+	      ${CMAKE_SOURCE_DIR}/src/env/stream.c
+	      ${CMAKE_SOURCE_DIR}/src/env/time.c
+	      ${CMAKE_SOURCE_DIR}/src/env/tls.c
+	      ${CMAKE_SOURCE_DIR}/src/minisat/minisat.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/avl.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/bignum.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/dimacs.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/dmp.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/ffalg.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/fp2rat.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/gcd.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/jd.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/keller.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/mc13d.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/mc21a.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/mygmp.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/okalg.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/qmd.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/relax4.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/rng.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/rng1.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/round2n.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/str2int.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/str2num.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/strspx.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/strtrim.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/triang.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/wclique.c
+	      ${CMAKE_SOURCE_DIR}/src/misc/wclique1.c
+	      ${CMAKE_SOURCE_DIR}/src/mpl/mpl1.c
+	      ${CMAKE_SOURCE_DIR}/src/mpl/mpl2.c
+	      ${CMAKE_SOURCE_DIR}/src/mpl/mpl3.c
+	      ${CMAKE_SOURCE_DIR}/src/mpl/mpl4.c
+	      ${CMAKE_SOURCE_DIR}/src/mpl/mpl5.c
+	      ${CMAKE_SOURCE_DIR}/src/mpl/mpl6.c
+	      ${CMAKE_SOURCE_DIR}/src/mpl/mplsql.c
+	      ${CMAKE_SOURCE_DIR}/src/proxy/proxy.c
+	      ${CMAKE_SOURCE_DIR}/src/proxy/proxy1.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spxat.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spxchuzc.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spxchuzr.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spxlp.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spxnt.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spxprim.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spxprob.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spychuzc.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spychuzr.c
+	      ${CMAKE_SOURCE_DIR}/src/simplex/spydual.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/adler32.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/compress.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/crc32.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/deflate.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/gzclose.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/gzlib.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/gzread.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/gzwrite.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/inffast.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/inflate.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/inftrees.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/trees.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/uncompr.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/zio.c
+	      ${CMAKE_SOURCE_DIR}/src/zlib/zutil.c)
 
 if (GLPK_VERSION STRLESS "4.61")
   set(GLPK_SRCS ${GLPK_SRCS}
@@ -399,8 +517,14 @@ endif ()
 
 if (GLPK_VERSION STRGREATER "4.62")
   set(GLPK_SRCS ${GLPK_SRCS}
-                ${CMAKE_SOURCE_DIR}/src/env/stdc.c
-                ${CMAKE_SOURCE_DIR}/src/cglib/spv.c)
+                ${CMAKE_SOURCE_DIR}/src/env/stdc.c)
+  if (GLPK_VERSION STRGREATER "4.64")
+    set(GLPK_SRCS ${GLPK_SRCS}
+                  ${CMAKE_SOURCE_DIR}/src/intopt/spv.c)
+  else ()
+    set(GLPK_SRCS ${GLPK_SRCS}
+                  ${CMAKE_SOURCE_DIR}/src/cglib/spv.c)
+  endif ()
 else ()
   set(GLPK_SRCS ${GLPK_SRCS}
                 ${CMAKE_SOURCE_DIR}/src/spv.c)
@@ -411,22 +535,14 @@ if (ENABLE_SHARED_LIBRARIES)
 else ()
   add_library(glpk STATIC ${GLPK_SRCS})
 endif ()
-if (COIN_COMPILE_LTO)
-  set_target_properties(glpk PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-endif ()
+
 if (GLPK_WITH_OLDAPI)
   add_library(glpk-oldapi examples/oldapi/lpx.c)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(glpk-oldapi PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
 endif ()
 
 if (GLPK_WITH_CPLEXAPI)
   add_library(glpk-cplexapi examples/cplex/cplex.c)
   target_include_directories(glpk-cplexapi BEFORE PUBLIC examples/cplex)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(glpk-cplexapi PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
 endif ()
 
 ############
@@ -438,9 +554,6 @@ endif ()
 if (GLPK_BUILD_EXAMPLES)
   add_executable(glpsol ${CMAKE_SOURCE_DIR}/examples/glpsol.c)
   target_link_libraries(glpsol glpk)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(glpsol PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
   if (NOT WIN32)
     target_link_libraries(glpsol m)
   endif ()
@@ -450,9 +563,6 @@ if (GLPK_BUILD_EXAMPLES)
   
   add_executable(iptsamp examples/iptsamp.c)
   target_link_libraries(iptsamp glpk)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(iptsamp PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
   if (NOT WIN32)
     target_link_libraries(iptsamp m)
   endif ()
@@ -460,11 +570,19 @@ if (GLPK_BUILD_EXAMPLES)
     target_link_libraries(iptsamp ${LTDL_LIBRARIES})
   endif ()
   
+  if (GLPK_VERSION STRGREATER "4.64")
+    add_executable(nppsamp examples/nppsamp.c)
+    target_link_libraries(nppsamp glpk)
+    if (NOT WIN32)
+      target_link_libraries(nppsamp m)
+    endif ()
+    if (LTDL_FOUND)
+      target_link_libraries(nppsamp ${LTDL_LIBRARIES})
+    endif ()
+  endif ()
+  
   add_executable(mplsamp1 examples/mplsamp1.c)
   target_link_libraries(mplsamp1 glpk)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(mplsamp1 PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
   if (NOT WIN32)
     target_link_libraries(mplsamp1 m)
   endif ()
@@ -474,9 +592,6 @@ if (GLPK_BUILD_EXAMPLES)
   
   add_executable(mplsamp2 examples/mplsamp2.c)
   target_link_libraries(mplsamp2 glpk)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(mplsamp2 PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
   if (NOT WIN32)
     target_link_libraries(mplsamp2 m)
   endif ()
@@ -486,9 +601,6 @@ if (GLPK_BUILD_EXAMPLES)
   
   add_executable(netgen examples/netgen.c)
   target_link_libraries(netgen glpk)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(netgen PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
   if (NOT WIN32)
     target_link_libraries(netgen m)
   endif ()
@@ -498,9 +610,6 @@ if (GLPK_BUILD_EXAMPLES)
   
   add_executable(sample examples/sample.c)
   target_link_libraries(sample glpk)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(sample PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
   if (NOT WIN32)
     target_link_libraries(sample m)
   endif ()
@@ -510,9 +619,6 @@ if (GLPK_BUILD_EXAMPLES)
   
   add_executable(spxsamp1 examples/spxsamp1.c)
   target_link_libraries(spxsamp1 glpk)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(spxsamp1 PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
   if (NOT WIN32)
     target_link_libraries(spxsamp1 m)
   endif ()
@@ -522,9 +628,6 @@ if (GLPK_BUILD_EXAMPLES)
   
   add_executable(spxsamp2 examples/spxsamp2.c)
   target_link_libraries(spxsamp2 glpk)
-  if (COIN_COMPILE_LTO)
-    set_target_properties(spxsamp2 PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-  endif ()
   if (NOT WIN32)
     target_link_libraries(spxsamp2 m)
   endif ()
@@ -536,9 +639,6 @@ if (GLPK_BUILD_EXAMPLES)
     add_executable(lpxsamp examples/oldapi/lpxsamp.c)
     target_link_libraries(lpxsamp glpk-oldapi glpk)
     target_include_directories(lpxsamp BEFORE PUBLIC examples/oldapi)
-    if (COIN_COMPILE_LTO)
-      set_target_properties(lpxsamp PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
-    endif ()
     if (NOT WIN32)
       target_link_libraries(lpxsamp m)
     endif ()
