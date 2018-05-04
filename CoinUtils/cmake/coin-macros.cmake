@@ -375,3 +375,70 @@ endmacro ()
 # add_regex(TEST_REGEX "INFO  : Overall simulation cost : 3.40945e[+]09")
 # add_regex(TEST_REGEX "INFO  : Overall reward : -1.09579e[+]10" )
 # set_tests_properties(Test_Name PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}" )
+
+#
+# macros to manage files and version
+#
+
+# add_source_files(ListFiles FilesToInclude VersionRef VersionToCheck)
+# ListFiles: a variable name which will contain the resulting list of files
+# FilesToInclude: a variable name containing a list of files to be included
+# VersionRef: a string containing the reference version (above or equal to this version, the files are included in the resulting list)
+# VersionToCheck: a string containing the test version. If the version is above or equal to this version, the files are included in the resulting list
+macro(add_source_files ListFiles FilesToInclude VersionRef VersionToCheck)
+  if ("${VersionToCheck}" VERSION_GREATER_EQUAL "${VersionRef}")
+    set(${ListFiles} ${${ListFiles}}
+                     ${FilesToInclude})
+  endif ()
+endmacro()
+
+# remove_source_files(ListFiles FilesToExclude VersionRef VersionToCheck)
+# ListFiles: a variable name which will contain the resulting list of files
+# FilesToInclude: a variable name containing a list of files to be excluded
+# VersionRef: a string containing the reference version (above or equal to this version, the files are excluded from the resulting list)
+# VersionToCheck: a string containing the test version. If the version is above or equal to this version, the files are excluded from the resulting list
+macro(remove_source_files ListFiles FilesToExclude VersionRef VersionToCheck)
+  if ("${VersionToCheck}" VERSION_GREATER_EQUAL "${VersionRef}")
+    foreach(Item IN LISTS "${FilesToExclude}")
+      list(REMOVE_ITEM ${ListFiles} ${Item})
+    endforeach()
+  endif ()
+endmacro()
+
+#
+# How to use these macros:
+#
+#
+# set(LIST_SRCS file1.cpp
+#               file2.cpp
+#               file3.cpp)
+# 
+# set(LIST_TO_ADD_SRCS file4.cpp
+#                      file5.cpp
+#                      file6.cpp)
+# 
+# set(VERSION "1.1")
+# 
+# add_source_files(LIST_SRCS "${LIST_TO_ADD_SRCS}" "1.0" "${VERSION}")
+# 
+# set(LIST_TO_ADD_SRCS file7.cpp)
+# 
+# set(VERSION "0.9")
+# 
+# add_source_files(LIST_SRCS "${LIST_TO_ADD_SRCS}" "1.0" "${VERSION}")
+# 
+# message(STATUS "RESULT: ADD - LIST_SRCS = ${LIST_SRCS}")
+# 
+# set(LIST_TO_REMOVE_SRCS file4.cpp)
+# 
+# set(VERSION "1.1")
+# 
+# remove_source_files(LIST_SRCS LIST_TO_REMOVE_SRCS "1.0" "${VERSION}")
+# 
+# set(LIST_TO_REMOVE_SRCS file5.cpp)
+# 
+# set(VERSION "0.9")
+# 
+# remove_source_files(LIST_SRCS LIST_TO_REMOVE_SRCS "1.0" "${VERSION}")
+# 
+# message(STATUS "RESULT: REMOVE - LIST_SRCS = ${LIST_SRCS}")
