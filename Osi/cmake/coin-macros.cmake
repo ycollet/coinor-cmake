@@ -41,6 +41,25 @@ macro(coin_check_and_add_include_library_path dir)
 endmacro()
 
 #
+# macros to manage files and version
+#
+
+macro(add_source_files ListFiles FilesToInclude Version VersionToCheck)
+  if ("${${Version}}" VERSION_GREATER_EQUAL "${VersionToCheck}")
+    set(${ListFiles} ${${ListFiles}}
+                     ${${FilesToInclude}})
+  endif ()
+endmacro()
+
+macro(remove_source_files ListFiles FilesToExclude Version VersionToCheck)
+  if ("${${Version}}" VERSION_GREATER_EQUAL "${VersionToCheck}")
+    foreach(Item IN LIST ${FilesToExclude})
+      list(REMOVE_ITEM ${ListFiles} ${Item})
+    endforeach()
+  endif ()
+endmacro()
+
+#
 # macros for tests
 #
 
@@ -399,7 +418,9 @@ endmacro()
 # VersionToCheck: a string containing the test version. If the version is above or equal to this version, the files are excluded from the resulting list
 macro(remove_source_files ListFiles FilesToExclude VersionRef VersionToCheck)
   if ("${VersionToCheck}" VERSION_GREATER_EQUAL "${VersionRef}")
-    foreach(Item IN LISTS "${FilesToExclude}")
+    set(TMP_LIST ${FilesToExclude})
+    #foreach(Item ${TMP_LIST})
+    foreach(Item IN LISTS TMP_LIST)
       list(REMOVE_ITEM ${ListFiles} ${Item})
     endforeach()
   endif ()
