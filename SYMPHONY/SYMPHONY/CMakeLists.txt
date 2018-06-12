@@ -303,6 +303,12 @@ set(ALL_CP ${CP_SRC}
 
 set(MAIN_SRC ${MASTER_MAIN_SRC})
 
+if (COIN_ENABLE_COMPAT)
+  set(ALL_SYM_MASTER ${ALL_SYM_MASTER}
+                     ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                     ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
+
 if (USE_COINOR_BIN)
   include_directories(${COINOR_DIR}/include)
   

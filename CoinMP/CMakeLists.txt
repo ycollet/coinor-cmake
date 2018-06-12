@@ -107,6 +107,7 @@ option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 option(COIN_TESTS_DISABLE_TIMEOUT    "Disable the timeout of the tests" OFF)
 
 option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
+option(COIN_ENABLE_COMPAT            "Enable libc compatibility" OFF)
 
 # Set paths of source
 set(COIN_DIR "${CMAKE_SOURCE_DIR}" CACHE STRING "The CoinMP Path")
@@ -218,6 +219,13 @@ if (COIN_COMPILE_LTO)
     include(CheckIPOSupported)
     check_ipo_supported()
   endif ()
+endif ()
+
+if (COIN_ENABLE_COMPAT)
+  # Disable extra stdc++ symbols (@GLIBCXX_3.4.21)
+  add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -include ${CMAKE_SOURCE_DIR}/cmake/compatibility.h")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${CMAKE_SOURCE_DIR}/cmake/compatibility.h")
 endif ()
 
 # Desactivate some relocation types for portability

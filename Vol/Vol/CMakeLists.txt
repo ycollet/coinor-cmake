@@ -36,6 +36,12 @@ configure_file(${CMAKE_SOURCE_DIR}/Vol/include/config_vol.h.in ${CMAKE_BINARY_DI
 
 set(Vol_SRC_LIST ${Vol_DIR}/src/VolVolume.cpp)
 
+if (COIN_ENABLE_COMPAT)
+  set(Vol_SRC_LIST ${Vol_SRC_LIST}
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(SYSTEM ${CoinUtils_DIR}/src)
 include_directories(${Vol_DIR}/src)

@@ -214,6 +214,12 @@ if (IPOPT_HAS_AMPL)
                       ${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/AmplTNLP.cpp)
 endif ()
 
+if (COIN_ENABLE_COMPAT)
+  set(IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
+                     ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                     ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
+
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Ipopt/include)
 endmacro ()

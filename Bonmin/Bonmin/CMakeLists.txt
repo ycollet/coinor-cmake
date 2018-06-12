@@ -221,6 +221,12 @@ if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_ASL)
                               ${Bonmin_DIR}/src/Interfaces/Ampl/BonAmplTMINLP.hpp)
 endif ()
 
+if (COIN_ENABLE_COMPAT)
+  set(Bonmin_SRC_LIST ${Bonmin_SRC_LIST}
+                      ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                      ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
+
 include_directories(${Bonmin_DIR}/src)
 include_directories(${Cbc_DIR}/src/OsiCbc)
 include_directories(${BuildTools_DIR}/headers)

@@ -85,6 +85,12 @@ set(DyLP_SRC_LIST ${DyLP_DIR}/src/Dylp/dy_basis.c
                   ${DyLP_DIR}/src/Dylp/dy_penalty.c
                   ${DyLP_DIR}/src/Dylp/dy_tableau.c)
 
+if (COIN_ENABLE_COMPAT)
+  set(DyLP_SRC_LIST ${DyLP_SRC_LIST}
+                    ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                    ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(SYSTEM ${CoinUtils_DIR}/src)
 include_directories(${DyLP_DIR}/src/Dylp)

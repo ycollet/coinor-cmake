@@ -65,6 +65,12 @@ set(Osi_SRC_LIST_Headers ${Osi_DIR}/src/Osi/OsiAuxInfo.hpp
                          ${Osi_DIR}/src/Osi/OsiSolverInterface.hpp
                          ${Osi_DIR}/src/Osi/OsiSolverParameters.hpp)
 
+if (COIN_ENABLE_COMPAT)
+  set(Osi_SRC_LIST ${Osi_SRC_LIST}
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
+
 include_directories(${Osi_DIR}/src)
 include_directories(${Osi_DIR}/src/Osi)
 include_directories(${CoinUtils_DIR}/src)

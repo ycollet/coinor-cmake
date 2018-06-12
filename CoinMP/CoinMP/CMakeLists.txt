@@ -36,6 +36,12 @@ set(CoinMP_SRC_LIST ${CoinMP_DIR}/src/CoinMP.cpp
                     ${CoinMP_DIR}/src/CoinOption.c
                     ${CoinMP_DIR}/src/CoinCbc.cpp)
 
+if (COIN_ENABLE_COMPAT)
+  set(CoinMP_SRC_LIST ${CoinMP_SRC_LIST}
+                      ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                      ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinMP_DIR}/src)
 

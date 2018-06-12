@@ -200,6 +200,12 @@ if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_ASL)
   set(Cbc_SRC_LIST_Headers ${Cbc_SRC_LIST_Headers}
                    ${Cbc_DIR}/src/Cbc_ampl.h)
 endif ()
+	       
+if (COIN_ENABLE_COMPAT)
+  set(Cbc_SRC_LIST ${Cbc_SRC_LIST}
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
 
 if (CMAKE_COMPILER_IS_GNUCXX AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 4.4))
   set_source_files_properties(${Cbc_DIR}/src/CbcCbcParam.cpp PROPERTIES COMPILE_FLAGS -fno-var-tracking-assignments)

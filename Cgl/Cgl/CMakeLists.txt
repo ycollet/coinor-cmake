@@ -117,6 +117,12 @@ set(Cgl_SRC_LIST_Headers ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerR
                          ${Cgl_DIR}/src/CglParam.hpp
                          ${Cgl_DIR}/src/CglTreeInfo.hpp)
 
+if (COIN_ENABLE_COMPAT)
+  set(Cgl_SRC_LIST ${Cgl_SRC_LIST}
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+endif ()
+
 include_directories(${Cgl_DIR}/src)
 include_directories(${Cgl_DIR}/src/CglClique)
 include_directories(${Cgl_DIR}/src/CglDuplicateRow)
