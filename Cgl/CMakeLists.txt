@@ -525,6 +525,23 @@ if (HAVE_QUNUSED_ARGUMENTS)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Qunused-arguments")
 endif ()
 
+if (UNIX)
+  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
+    check_cxx_compiler_flag(-Wno-unused-local-typedefs GCC_HAS_TYPEDEFS)
+    if (GCC_HAS_TYPEDEFS)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
+    endif ()
+  endif ()
+  
+  if (NOT APPLE)
+    check_cxx_compiler_flag(-Wno-narrowing GCC_HAS_NARROWING)
+    if (GCC_HAS_NARROWING)
+      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-narrowing")
+      set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wno-narrowing")
+    endif ()
+  endif ()
+endif ()
+
 include(CheckTypeSize)
 
 check_type_size("int64_t"   SIZEOF_INT64_T)
