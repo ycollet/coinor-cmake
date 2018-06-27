@@ -195,6 +195,13 @@ include_directories(${CMAKE_BINARY_DIR}/Glpk)
 add_definitions(-DHAVE_CONFIG_H)
 
 #
+# Add uninstall-target
+#
+
+add_custom_target(uninstall
+                  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
+
+#
 # Windows compilation
 #
 

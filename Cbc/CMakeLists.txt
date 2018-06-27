@@ -480,6 +480,13 @@ endif ()
 
 # End of coverage
 
+#
+# Add uninstall-target
+#
+
+add_custom_target(uninstall
+                  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
+
 # Directories where to find the source code
 set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
 set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)

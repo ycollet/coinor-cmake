@@ -353,6 +353,13 @@ Processing code coverage counters and generating report.
 You can zip the directory ${CMAKE_BINARY_DIR}/coverage and upload the content to a web server.")
 endif ()
 
+#
+# Add uninstall-target
+#
+
+add_custom_target(uninstall
+                  COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
+
 # End of coverage
 
 include(CheckIncludeFileCXX)
