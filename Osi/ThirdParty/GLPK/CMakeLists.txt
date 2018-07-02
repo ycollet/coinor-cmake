@@ -15,6 +15,16 @@ option(COIN_ENABLE_DOWNLOAD_DATA_TEST "Enable the download / run of Data tests f
 # Compilation options
 option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
 option(GLPK_COMPILE_STATIC           "Activate the static linking" OFF)
+# Using lcov for code coverage (Linux only) - gcov and lcov must be installed on the system.
+# The following steps are performed:
+# - first, activate GLPK_COMPILE_COVERAGE
+# - activate all the solvers
+# - compile: 'make'
+# - run the tests: 'make test'
+# - generate the coverage report: 'make coverage'
+#
+# You can trigger a code coverage analysis by issuing the following commande: 'make coverage'
+# Be careful to activate the right set of tests (not the long one).
 option(GLPK_COMPILE_COVERAGE         "Activate the code coverage compilation" OFF)
 option(GLPK_COMPILE_PROFILE          "Activate the code profiling compilation" OFF)
 option(GLPK_COMPILE_PROFILE_VALGRIND "Activate the code profiling compilation for valgrind" OFF)
@@ -85,14 +95,19 @@ if (UNIX)
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -z muldefs")
     endif ()
   elseif (GLPK_COMPILE_COVERAGE)
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} --coverage -fno-inline")
+    set(CMAKE_C_FLAGS_DEBUG    "${CMAKE_C_FLAGS_DEBUG} -O0 --coverage")
+    set(CMAKE_CXX_FLAGS_DEBUG  "${CMAKE_CXX_FLAGS_DEBUG} -O0 --coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -O0 --coverage")
   elseif (GLPK_COMPILE_PROFILE)
+    set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} -pg")
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -pg")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
   elseif (GLPK_COMPILE_PROFILE_VALGRIND)
+    set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} -p")
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -p")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -p")
   else ()
+    set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} -Wno-deprecated -fPIC")
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC")
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z muldefs")
@@ -101,15 +116,18 @@ if (UNIX)
   
   if (GLPK_COMPILE_LTO)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
+      set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} -lto")
       set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -lto")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lto")
     endif ()
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -flto")
+      set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} -flto")
+      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -flto")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -flto")
     endif ()
   elseif (GLPK_COMPILE_WHOPR)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+      set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} -fwhopr")
       set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -fwhopr")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fwhopr")
     endif ()
@@ -117,9 +135,9 @@ if (UNIX)
 elseif (WIN32)
   if (MSVC)
     if (GLPK_COMPILE_LTO OR GLPK_COMPILE_WHOPR)
-      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} /GL ")
-      set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} /GL ")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG ")
+      set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} /GL")
+      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} /GL")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /LTCG")
     endif ()
   endif ()
 endif ()
@@ -688,6 +706,54 @@ endif ()
 install(FILES src/glpk.h
         DESTINATION include)
 
+##########################################
+#                                        #
+# Manage coverage via lcov automatically #
+#                                        #
+##########################################
+
+if (GLPK_COMPILE_COVERAGE AND NOT ((CMAKE_BUILD_TYPE STREQUAL "DEBUG") OR (CMAKE_BUILD_TYPE STREQUAL "RELWITHDEBINFO")))
+  message(STATUS "Warning: to enable coverage, you must compile in DEBUG ou RELWITHDEBINFO mode")
+endif ()
+
+if (GLPK_COMPILE_COVERAGE)
+  if (WIN32)
+    message(FATAL_ERROR "Error: code coverage analysis is only available under Linux for now.")
+  endif ()
+  
+  find_program(GCOV_PATH gcov)
+  find_program(LCOV_PATH lcov)
+  find_program(GENHTML_PATH genhtml)
+
+  if (NOT GCOV_PATH)
+    message(FATAL_ERROR "gcov not found! Please install lcov and gcov. Aborting...")
+  endif ()
+  
+  if (NOT LCOV_PATH)
+    message(FATAL_ERROR "lcov not found! Please install lcov and gcov. Aborting...")
+  endif ()
+  
+  if (NOT GENHTML_PATH)
+    message(FATAL_ERROR "genhtml not found! Please install lcov and gcov. Aborting...")
+  endif ()
+  
+  # /!\ FAILURE IF AT LEAST ONE TEST FAILS
+  # Capturing lcov counters and generating report
+  add_custom_target(coverage
+                    COMMAND ${LCOV_PATH} --directory ${CMAKE_SOURCE_DIR} --zerocounters
+                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)"
+                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/_dep/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+                    COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+                    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+		    VERBATIM
+                    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+                    COMMENT "Resetting code coverage counters to zero.
+Processing code coverage counters and generating report.
+You can zip the directory ${CMAKE_BINARY_DIR}/coverage and upload the content to a web server.")
+endif ()
+
 ######################
 #                    #
 # Perform some tests #
@@ -1214,10 +1280,10 @@ if (GLPK_BUILD_EXAMPLES)
   endif ()
 
   add_test(NAME csv_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/csv/transp_csv.mod
+    COMMAND $<TARGET_FILE:glpsol> --math transp_csv.mod
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/csv)
   set_tests_properties(csv_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(csv_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(csv_mod_glpsol PROPERTIES LABELS "MATHPROG;FAIL")
   if (WIN32)
     set_tests_properties(csv_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
@@ -1225,7 +1291,7 @@ if (GLPK_BUILD_EXAMPLES)
     COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/dbf/ForestMgt_Model_I_GIS_dbf.mod
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/dbf)
   set_tests_properties(dbf_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(dbf_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(dbf_mod_glpsol PROPERTIES LABELS "MATHPROG;FAIL")
   if (WIN32)
     set_tests_properties(dbf_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
