@@ -441,6 +441,10 @@ endif ()
 
 # Manage coverage via lcov automatically
 
+if (COIN_COMPILE_COVERAGE AND NOT ((CMAKE_BUILD_TYPE STREQUAL "DEBUG") OR (CMAKE_BUILD_TYPE STREQUAL "RELWITHDEBINFO")))
+  message(STATUS "Warning: to enable coverage, you must compile in DEBUG ou RELWITHDEBINFO mode")
+endif ()
+
 if (COIN_COMPILE_COVERAGE)
   if (WIN32)
     message(FATAL_ERROR "Error: code coverage analysis is only available under Linux for now.")
@@ -465,13 +469,14 @@ if (COIN_COMPILE_COVERAGE)
   # /!\ FAILURE IF AT LEAST ONE TEST FAILS
   # Capturing lcov counters and generating report
   add_custom_target(coverage
-                    COMMAND ${LCOV_PATH} --directory ${CMAKE_BINARY_DIR} --zerocounters
-                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_BINARY_DIR}/Cbc --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --directory ${CMAKE_SOURCE_DIR} --zerocounters
+                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L SAMPLE
-                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_BINARY_DIR}/Cbc --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+		    VERBATIM
                     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
                     COMMENT "Resetting code coverage counters to zero.
 Processing code coverage counters and generating report.

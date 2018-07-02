@@ -209,19 +209,22 @@ if (UNIX)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -z muldefs")
     endif ()
-  elseif (COIN_COMPILE_COVERAGE)
+  endif ()
+  if (COIN_COMPILE_COVERAGE)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fprofile-arcs")
-      set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} --coverage -fno-inline -fprofile-arcs -ftest-coverage")
-      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} --coverage -fno-inline -fprofile-arcs -ftest-coverage")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -O0 --coverage")
+      set(CMAKE_C_FLAGS_DEBUG    "${CMAKE_C_FLAGS_DEBUG} -O0 --coverage")
+      set(CMAKE_CXX_FLAGS_DEBUG  "${CMAKE_CXX_FLAGS_DEBUG} -O0 --coverage")
     endif ()
     if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -Xclang -coverage-cfg-checksum -Xclang -coverage-no-function-names-in-data -Xclang -coverage-version='408*'")
     endif ()
-  elseif (COIN_COMPILE_PROFILE)
+  endif ()
+  if (COIN_COMPILE_PROFILE)
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -pg")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pg")
-  elseif (COIN_COMPILE_PROFILE_VALGRIND)
+  endif ()
+  if (COIN_COMPILE_PROFILE_VALGRIND)
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -p")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -p")
   else ()
@@ -316,6 +319,10 @@ endif ()
 
 # Manage coverage via lcov automatically
 
+if (COIN_COMPILE_COVERAGE AND NOT ((CMAKE_BUILD_TYPE STREQUAL "DEBUG") OR (CMAKE_BUILD_TYPE STREQUAL "RELWITHDEBINFO")))
+  message(STATUS "Warning: to enable coverage, you must compile in DEBUG ou RELWITHDEBINFO mode")
+endif ()
+
 if (COIN_COMPILE_COVERAGE)
   if (WIN32)
     message(FATAL_ERROR "Error: code coverage analysis is only available under Linux for now.")
@@ -340,13 +347,14 @@ if (COIN_COMPILE_COVERAGE)
   # /!\ FAILURE IF AT LEAST ONE TEST FAILS
   # Capturing lcov counters and generating report
   add_custom_target(coverage
-                    COMMAND ${LCOV_PATH} --directory ${CMAKE_BINARY_DIR} --zerocounters
-                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_BINARY_DIR}/Ipopt --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --directory ${CMAKE_SOURCE_DIR} --zerocounters
+                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L SAMPLE
-                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_BINARY_DIR}/Ipopt --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+		    VERBATIM
                     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
                     COMMENT "Resetting code coverage counters to zero.
 Processing code coverage counters and generating report.
