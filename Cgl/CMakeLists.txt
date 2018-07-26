@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.0.2)
 
 project(Cgl)
 
+option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
+
 # Clp options
 option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
 set(COIN_HAS_AMD_INCLUDE_PATH "None" CACHE PATH "The AMD linear solver include Path")
@@ -220,12 +222,14 @@ if (UNIX)
 endif ()
 
 # Check for readline
-set(COIN_HAS_READLINE )
-find_package(Readline)
-if (READLINE_FOUND)
-  set(COIN_HAS_READLINE "ON")
-  
-  include_directories(${READLINE_INCLUDE_DIR})
+set(COIN_HAS_READLINE "OFF")
+if (COIN_ENABLE_READLINE)
+  find_package(Readline)
+  if (READLINE_FOUND)
+    set(COIN_HAS_READLINE "ON")
+    
+    include_directories(${READLINE_INCLUDE_DIR})
+  endif ()
 endif ()
 
 if (USE_PROCESSOR_EXTENSIONS)
@@ -498,7 +502,9 @@ check_include_file("ieeefp.h"    HAVE_IEEEFP_H)
 check_include_file("inttypes.h"  HAVE_INTTYPES_H)
 check_include_file("math.h"      HAVE_MATH_H)
 check_include_file("memory.h"    HAVE_MEMORY_H)
-check_include_file("readline/readline.h" HAVE_READLINE_READLINE_H)
+if (COIN_ENABLE_READLINE)
+  check_include_file("readline/readline.h" HAVE_READLINE_READLINE_H)
+endif ()
 check_include_file("stdint.h"    HAVE_STDINT_H)
 check_include_file("stdlib.h"    HAVE_STDLIB_H)
 check_include_file("stdio.h"     HAVE_STDIO_H)

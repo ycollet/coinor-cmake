@@ -11,6 +11,8 @@ project(IpOpt)
 #undef HAVE_PARDISO_PARALLEL - Define to 1 if you are using the parallel version of Pardiso
 #undef HAVE_WSMP - Define to 1 if WSMP is available
 
+option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
+
 option(IPOPT_HAS_AMPL                  "Enable Ampl interface" OFF)
 option(IPOPT_HAS_PARDISO               "Enable Pardiso solver" OFF)
 option(IPOPT_HAS_HSL                   "Enable HSL interface"  OFF)
@@ -47,6 +49,7 @@ option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during comp
 option(COIN_ENABLE_COMPAT            "Enable libc compatibility" OFF)
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
+                 COIN_ENABLE_READLINE
                  COIN_COMPILE_STATIC
                  COIN_COMPILE_COVERAGE
                  COIN_COMPILE_PROFILE
@@ -132,12 +135,14 @@ if (UNIX)
 endif ()
 
 # Check for readline
-set(COIN_HAS_READLINE )
-find_package(Readline)
-if (READLINE_FOUND)
-  set(COIN_HAS_READLINE "ON")
-  
-  include_directories(${READLINE_INCLUDE_DIR})
+set(COIN_HAS_READLINE "OFF")
+if (COIN_ENABLE_READLINE)
+  find_package(Readline)
+  if (READLINE_FOUND)
+    set(COIN_HAS_READLINE "ON")
+    
+    include_directories(${READLINE_INCLUDE_DIR})
+  endif ()
 endif ()
 
 if (USE_PROCESSOR_EXTENSIONS)
@@ -384,7 +389,9 @@ check_include_file("ieeefp.h"    HAVE_IEEEFP_H)
 check_include_file("inttypes.h"  HAVE_INTTYPES_H)
 check_include_file("math.h"      HAVE_MATH_H)
 check_include_file("memory.h"    HAVE_MEMORY_H)
-check_include_file("readline/readline.h" HAVE_READLINE_READLINE_H)
+if (COIN_ENABLE_READLINE)
+  check_include_file("readline/readline.h" HAVE_READLINE_READLINE_H)
+endif ()
 check_include_file("stdint.h"    HAVE_STDINT_H)
 check_include_file("stdlib.h"    HAVE_STDLIB_H)
 check_include_file("stdio.h"     HAVE_STDIO_H)
