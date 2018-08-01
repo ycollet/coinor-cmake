@@ -106,6 +106,16 @@ endif ()
 include_directories(${EP_InstallDir}/include)
 link_directories(${EP_InstallDir}/lib)
 
+set(CMAKE_GENERATOR_OLD    "${CMAKE_GENERATOR}")
+set(CMAKE_MAKE_PROGRAM_OLD "${CMAKE_MAKE_PROGRAM}")
+if (WIN32)
+  set(CMAKE_GENERATOR    "NMake Makefiles")
+  set(CMAKE_MAKE_PROGRAM "nmake.exe")
+else ()
+  set(CMAKE_GENERATOR    "Unix Makefiles")
+  set(CMAKE_MAKE_PROGRAM "make")
+endif ()
+
 # #################################################
 # ===>    CLapack
 # #################################################
@@ -332,7 +342,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The BZlib library include Path" FORCE)
   set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib"     CACHE STRING "The BZlib library library Path" FORCE)
   
-  set(BZLIB_URL        "http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to bzip2-${BZLIB_VERSION}.tar.gz source archive")
+  set(BZLIB_URL        "http:////www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to bzip2-${BZLIB_VERSION}.tar.gz source archive")
   set(BZLIB_InstallDir "${EP_InstallDir}/BZlib-${BZLIB_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -691,6 +701,9 @@ endif ()
 # #################################################
 # <=== Tests
 # #################################################
+
+set(CMAKE_GENERATOR    "${CMAKE_GENERATOR_OLD}")
+set(CMAKE_MAKE_PROGRAM "${CMAKE_MAKE_PROGRAM_OLD}")
 
 # #################################################
 # ===>   Restart cmake

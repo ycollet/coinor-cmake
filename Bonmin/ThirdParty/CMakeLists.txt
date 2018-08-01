@@ -106,6 +106,16 @@ endif ()
 include_directories(${EP_InstallDir}/include)
 link_directories(${EP_InstallDir}/lib)
 
+set(CMAKE_GENERATOR_OLD    "${CMAKE_GENERATOR}")
+set(CMAKE_MAKE_PROGRAM_OLD "${CMAKE_MAKE_PROGRAM}")
+if (WIN32)
+  set(CMAKE_GENERATOR    "NMake Makefiles")
+  set(CMAKE_MAKE_PROGRAM "nmake.exe")
+else ()
+  set(CMAKE_GENERATOR    "Unix Makefiles")
+  set(CMAKE_MAKE_PROGRAM "make")
+endif ()
+
 # #################################################
 # ===>    CLapack
 # #################################################
@@ -693,6 +703,9 @@ endif ()
 # #################################################
 # <=== Tests
 # #################################################
+
+set(CMAKE_GENERATOR    "${CMAKE_GENERATOR_OLD}")
+set(CMAKE_MAKE_PROGRAM "${CMAKE_MAKE_PROGRAM_OLD}")
 
 # #################################################
 # ===>   Restart cmake

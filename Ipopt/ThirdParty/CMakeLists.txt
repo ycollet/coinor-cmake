@@ -36,6 +36,16 @@ if (NOT EXISTS ${EP_InstallDir}/include)
   make_directory(${EP_InstallDir}/include)
 endif ()
 
+set(CMAKE_GENERATOR_OLD    "${CMAKE_GENERATOR}")
+set(CMAKE_MAKE_PROGRAM_OLD "${CMAKE_MAKE_PROGRAM}")
+if (WIN32)
+  set(CMAKE_GENERATOR    "NMake Makefiles")
+  set(CMAKE_MAKE_PROGRAM "nmake.exe")
+else ()
+  set(CMAKE_GENERATOR    "Unix Makefiles")
+  set(CMAKE_MAKE_PROGRAM "make")
+endif ()
+
 # #################################################
 # ===>    CLapack
 # #################################################
@@ -388,6 +398,9 @@ endif ()
 # #################################################
 # <===    HSL
 # #################################################
+
+set(CMAKE_GENERATOR    "${CMAKE_GENERATOR_OLD}")
+set(CMAKE_MAKE_PROGRAM "${CMAKE_MAKE_PROGRAM_OLD}")
 
 # #################################################
 # ===>   Restart cmake
