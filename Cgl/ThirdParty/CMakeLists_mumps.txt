@@ -3,9 +3,9 @@ project (MUMPS C CXX Fortran)
 cmake_minimum_required (VERSION 2.8)
 
 option(MUMPS_USE_LIBSEQ   "Use the MUMPS sequential MPI stub" OFF)
-option(MUMPS_USE_METIS    "Use the Metis library" OFF)
-option(MUMPS_USE_F2C      "F2c was used to compiled CLapack" OFF)
-option(MUMPS_INSTALL_COIN "Install MUMPS for CoinOR" OFF)
+option(MUMPS_USE_METIS    "Use the Metis library"             OFF)
+option(MUMPS_USE_F2C      "F2c was used to compiled CLapack"  OFF)
+option(MUMPS_INSTALL_COIN "Install MUMPS for CoinOR"          OFF)
 
 set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path")
 set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path")
@@ -375,15 +375,27 @@ endif ()
 
 # Install rules
 if (MUMPS_USE_LIBSEQ)
-  install(TARGETS libseq DESTINATION lib)
+  install(TARGETS libseq
+          DESTINATION lib)
 endif ()
 
-install(TARGETS libpord DESTINATION lib)
-install(TARGETS libmumps_common DESTINATION lib)
-install(TARGETS libcmumps DESTINATION lib)
-install(TARGETS libdmumps DESTINATION lib)
-install(TARGETS libsmumps DESTINATION lib)
-install(TARGETS libzmumps DESTINATION lib)
+install(TARGETS libpord
+        DESTINATION lib)
+
+install(TARGETS libmumps_common
+        DESTINATION lib)
+
+install(TARGETS libcmumps
+        DESTINATION lib)
+
+install(TARGETS libdmumps
+        DESTINATION lib)
+
+install(TARGETS libsmumps
+        DESTINATION lib)
+
+install(TARGETS libzmumps
+        DESTINATION lib)
 
 if (MUMPS_USE_LIBSEQ)
   install(DIRECTORY libseq/

@@ -102,7 +102,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  set(CLAPACK_URL        "http://netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz")
+  set(CLAPACK_URL        "http://netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz" CACHE FILEPATH "Path to clapack-${CLAPACK_VERSION}-CMAKE.tgz source archive")
   set(CLAPACK_InstallDir "${EP_InstallDir}/CLapack-${CLAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -159,7 +159,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  set(LAPACK_URL        "http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz")
+  set(LAPACK_URL        "http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz" CACHE FILEPATH "Path to lapack-${LAPACK_VERSION}.tgz source archive")
   set(LAPACK_InstallDir "${EP_InstallDir}/Lapack-${LAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -266,7 +266,7 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
     set(ZLIB_NAME "${EP_InstallDir}/lib/libz.a"          CACHE STRING "The Zlib library name" FORCE)
   endif ()
   
-  set(ZLIB_URL        "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz")
+  set(ZLIB_URL        "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to zlib-${ZLIB_VERSION}.tar.gz source archive")
   set(ZLIB_InstallDir "${EP_InstallDir}/Zlib-${ZLIB_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_Zlib
@@ -311,7 +311,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The BZlib library include Path" FORCE)
   set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib"     CACHE STRING "The BZlib library library Path" FORCE)
   
-  set(BZLIB_URL        "http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz")
+  set(BZLIB_URL        "http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to bzip2-${BZLIB_VERSION}.tar.gz source archive")
   set(BZLIB_InstallDir "${EP_InstallDir}/BZlib-${BZLIB_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -375,7 +375,7 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
   set(GLPK_VERSION "4.63")
   set(COMPILE_OSI_GLPK ON CACHE BOOL "Compile the OSI GLPK solver" FORCE)
   
-  set(GLPK_URL        "http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz")
+  set(GLPK_URL        "http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz" CACHE FILEPATH "Path to glpk-${GLPK_VERSION}.tar.gz source archive")
   set(GLPK_InstallDir "${EP_InstallDir}/glpk-${GLPK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_glpk
@@ -414,7 +414,7 @@ if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     set(COIN_THREADS_INC_PATH "${EP_InstallDir}/include" CACHE STRING "The PThreads library include Path" FORCE)
     set(COIN_THREADS_LIB_PATH "${EP_InstallDir}/lib"     CACHE STRING "The PThreads library library Path" FORCE)
     
-    set(PTHREADS_URL        "ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-${PTHREADS_VERSION}-release.tar.gz")
+    set(PTHREADS_URL        "ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-${PTHREADS_VERSION}-release.tar.gz" CACHE FILEPATH "Path to pthreads-w32-${PTHREADS_VERSION}-release.tar.gz source archive")
     set(PTHREADS_InstallDir "${EP_InstallDir}/PThreads-${PTHREADS_VERSION}/${CMAKE_CFG_INTDIR}/")
     
     ExternalProject_Add(EP_PThreads
