@@ -124,7 +124,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  set(CLAPACK_URL        "http://netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz" CACHE FILEPATH "Path to clapack-${CLAPACK_VERSION}-CMAKE.tgz source archive")
+  set(CLAPACK_URL        "http:////netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz" CACHE FILEPATH "Path to clapack-${CLAPACK_VERSION}-CMAKE.tgz source archive")
   set(CLAPACK_InstallDir "${EP_InstallDir}/CLapack-${CLAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -181,7 +181,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  set(LAPACK_URL        "http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz" CACHE FILEPATH "Path to lapack-${LAPACK_VERSION}.tgz source archive")
+  set(LAPACK_URL        "http:////www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz" CACHE FILEPATH "Path to lapack-${LAPACK_VERSION}.tgz source archive")
   set(LAPACK_InstallDir "${EP_InstallDir}/Lapack-${LAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -288,7 +288,7 @@ if (COIN_ENABLE_DOWNLOAD_ZLIB)
     set(ZLIB_NAME "${EP_InstallDir}/lib/libz.a"          CACHE STRING "The Zlib library name" FORCE)
   endif ()
   
-  set(ZLIB_URL        "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to zlib-${ZLIB_VERSION}.tar.gz source archive")
+  set(ZLIB_URL        "http:////zlib.net/zlib-${ZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to zlib-${ZLIB_VERSION}.tar.gz source archive")
   set(ZLIB_InstallDir "${EP_InstallDir}/Zlib-${ZLIB_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_Zlib
@@ -333,7 +333,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The BZlib library include Path" FORCE)
   set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib"     CACHE STRING "The BZlib library library Path" FORCE)
   
-  set(BZLIB_URL        "http://www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to bzip2-${BZLIB_VERSION}.tar.gz source archive")
+  set(BZLIB_URL        "http:////www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to bzip2-${BZLIB_VERSION}.tar.gz source archive")
   set(BZLIB_InstallDir "${EP_InstallDir}/BZlib-${BZLIB_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -397,7 +397,7 @@ if (COIN_ENABLE_DOWNLOAD_GLPK)
   set(GLPK_VERSION "4.63")
   set(COMPILE_OSI_GLPK ON CACHE BOOL "Compile the OSI GLPK solver" FORCE)
   
-  set(GLPK_URL        "http://ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz" CACHE FILEPATH "Path to glpk-${GLPK_VERSION}.tar.gz source archive")
+  set(GLPK_URL        "http:////ftp.gnu.org/gnu/glpk/glpk-${GLPK_VERSION}.tar.gz" CACHE FILEPATH "Path to glpk-${GLPK_VERSION}.tar.gz source archive")
   set(GLPK_InstallDir "${EP_InstallDir}/glpk-${GLPK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_glpk
@@ -436,7 +436,7 @@ if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     set(COIN_THREADS_INC_PATH "${EP_InstallDir}/include" CACHE STRING "The PThreads library include Path" FORCE)
     set(COIN_THREADS_LIB_PATH "${EP_InstallDir}/lib"     CACHE STRING "The PThreads library library Path" FORCE)
     
-    set(PTHREADS_URL        "ftp://sourceware.org/pub/pthreads-win32/pthreads-w32-${PTHREADS_VERSION}-release.tar.gz" CACHE FILEPATH "Path to pthreads-w32-${PTHREADS_VERSION}-release.tar.gz source archive")
+    set(PTHREADS_URL        "ftp:////sourceware.org/pub/pthreads-win32/pthreads-w32-${PTHREADS_VERSION}-release.tar.gz" CACHE FILEPATH "Path to pthreads-w32-${PTHREADS_VERSION}-release.tar.gz source archive")
     set(PTHREADS_InstallDir "${EP_InstallDir}/PThreads-${PTHREADS_VERSION}/${CMAKE_CFG_INTDIR}/")
     
     ExternalProject_Add(EP_PThreads
@@ -470,7 +470,7 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
     make_directory(${EP_InstallDir}/include/metis)
   endif ()
   
-  set(METIS_URL        "http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz" CACHE FILEPATH "Path to metis-${METIS_VERSION}.tar.gz source archive")
+  set(METIS_URL        "http:////glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz" CACHE FILEPATH "Path to metis-${METIS_VERSION}.tar.gz source archive")
   set(METIS_InstallDir "${EP_InstallDir}/Metis-${METIS_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_Metis
@@ -519,7 +519,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
     set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Metis)
   endif ()
   
-  set(MUMPS_URL        "http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path to MUMPS_${MUMPS_VERSION}.tar.gz source archive")
+  set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path to MUMPS_${MUMPS_VERSION}.tar.gz source archive")
   set(MUMPS_InstallDir "${EP_InstallDir}/Mumps-${MUMPS_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_Mumps
@@ -546,7 +546,7 @@ endif ()
 if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
   set(DATA_TEST_VERSION "1.0.7")
   
-  set(DATA_TEST_URL "http://www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz" CACHE FILEPATH "Path to Data-${DATA_TEST_VERSION} source archive")
+  set(DATA_TEST_URL "http:////www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz" CACHE FILEPATH "Path to Data-${DATA_TEST_VERSION} source archive")
   
   ExternalProject_Add(EP_DATA_TEST
                       PREFIX            ${EP_InstallDir}/DATA_TEST
@@ -564,7 +564,7 @@ endif ()
 if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
   set(MIPLIB2000_VERSION "1.1.3")
   
-  set(MIPLIB2000_URL "http://miplib.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip" CACHE FILEPATH "Path to miplib2010-${MIPLIB2000_VERSION}-benchmark.zip source archive")
+  set(MIPLIB2000_URL "http:////miplib.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip" CACHE FILEPATH "Path to miplib2010-${MIPLIB2000_VERSION}-benchmark.zip source archive")
   
   ExternalProject_Add(EP_MIPLIB2000
                       PREFIX            ${EP_InstallDir}/MIPLIB2000

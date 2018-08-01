@@ -63,7 +63,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  set(CLAPACK_URL        "http://netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz" CACHE FILEPATH "Path to clapack-${CLAPACK_VERSION}-CMAKE.tgz source archive")
+  set(CLAPACK_URL        "http:////netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz" CACHE FILEPATH "Path to clapack-${CLAPACK_VERSION}-CMAKE.tgz source archive")
   set(CLAPACK_InstallDir "${EP_InstallDir}/CLapack-${CLAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -120,7 +120,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  set(LAPACK_URL        "http://www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz" CACHE FILEPATH "Path to lapack-${LAPACK_VERSION}.tgz source archive")
+  set(LAPACK_URL        "http:////www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz" CACHE FILEPATH "Path to lapack-${LAPACK_VERSION}.tgz source archive")
   set(LAPACK_InstallDir "${EP_InstallDir}/Lapack-${LAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
@@ -220,7 +220,7 @@ if (COIN_ENABLE_DOWNLOAD_METIS)
     make_directory(${EP_InstallDir}/include/metis)
   endif ()
   
-  set(METIS_URL        "http://glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz" CACHE FILEPATH "Path to metis-${METIS_VERSION}.tar.gz source archive")
+  set(METIS_URL        "http:////glaros.dtc.umn.edu/gkhome/fetch/sw/metis/OLD/metis-${METIS_VERSION}.tar.gz" CACHE FILEPATH "Path to metis-${METIS_VERSION}.tar.gz source archive")
   set(METIS_InstallDir "${EP_InstallDir}/Metis-${METIS_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_Metis
@@ -269,7 +269,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
     set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Metis)
   endif ()
   
-  set(MUMPS_URL        "http://mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path to MUMPS_${MUMPS_VERSION}.tar.gz source archive")
+  set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path to MUMPS_${MUMPS_VERSION}.tar.gz source archive")
   set(MUMPS_InstallDir "${EP_InstallDir}/Mumps-${MUMPS_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   set(IPOPT_HAS_MUMPS  ON CACHE BOOL "Enable Mumps solver" FORCE)
@@ -299,7 +299,7 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
   set(ASL_VERSION "1.3.0")
   set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
   
-  set(ASL_URL        "https://github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz" CACHE FILEPATH "Path to ${ASL_VERSION}.tar.gz source archive")
+  set(ASL_URL        "https:////github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz" CACHE FILEPATH "Path to ${ASL_VERSION}.tar.gz source archive")
   set(ASL_InstallDir "${EP_InstallDir}/ASL-${ASL_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_ASL
