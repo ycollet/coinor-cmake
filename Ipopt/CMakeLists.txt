@@ -210,6 +210,9 @@ coin_check_and_add_library_path(COIN_HAS_WSMP_LIBRARY_PATH)
 #-----------------------------------------------------------------------------
 
 if (UNIX)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
+  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wno-deprecated -fPIC ")
+  
   if (COIN_COMPILE_STATIC)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -z muldefs")
@@ -233,7 +236,6 @@ if (UNIX)
     set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -p")
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -p")
   else ()
-    set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC")
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z muldefs")
     endif ()
@@ -315,8 +317,6 @@ mark_as_advanced(F77_FUNC
 # End detect fortran mangling
 
 if (NOT WIN32 AND COIN_COMPILE_WARNINGS)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
-  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wno-deprecated -fPIC ")
   # Try to locate unitizalized variables
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wuninitialized ")
   set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
