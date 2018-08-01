@@ -346,11 +346,16 @@ endif ()
 if (UNIX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
   set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wno-deprecated")
+
   if (NOT ENABLE_SHARED_LIBRARIES)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
     set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fPIC")
   endif ()
-  
+  if (COIN_COMPILE_WARNINGS)
+    # Try to locate unitizalized variables
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wuninitialized ")
+    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
+  endif ()
   if (COIN_COMPILE_STATIC)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -z muldefs")
@@ -442,14 +447,6 @@ mark_as_advanced(F77_FUNC
                  F77_DUMMY_MAIN
                  FC_DUMMY_MAIN
                  FC_DUMMY_MAIN_EQ_F77)
-
-# End detect fortran mangling
-
-if (NOT WIN32 AND COIN_COMPILE_WARNINGS)
-  # Try to locate unitizalized variables
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wshadow -Wuninitialized ")
-  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wall -Wshadow -Wmissing-prototypes -Wuninitialized ")
-endif ()
 
 # Manage coverage via lcov automatically
 
