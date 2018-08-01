@@ -210,8 +210,12 @@ coin_check_and_add_library_path(COIN_HAS_WSMP_LIBRARY_PATH)
 #-----------------------------------------------------------------------------
 
 if (UNIX)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated -fPIC ")
-  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wno-deprecated -fPIC ")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
+  set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -Wno-deprecated")
+  if (NOT ENABLE_SHARED_LIBRARIES)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
+    set(CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fPIC")
+  endif ()
   
   if (COIN_COMPILE_STATIC)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
