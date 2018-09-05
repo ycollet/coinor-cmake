@@ -321,7 +321,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(COINUTILS_HAS_BZLIB_INCLUDE_PATH "${EP_InstallDir}/include" CACHE STRING "The BZlib library include Path" FORCE)
   set(COINUTILS_HAS_BZLIB_LIBRARY_PATH "${EP_InstallDir}/lib"     CACHE STRING "The BZlib library library Path" FORCE)
   
-  set(BZLIB_URL        "http:////www.bzip.org/${BZLIB_VERSION}/bzip2-${BZLIB_VERSION}.tar.gz" CACHE FILEPATH "Path to bzip2-${BZLIB_VERSION}.tar.gz source archive")
+  set(BZLIB_URL        "http:////http.debian.net/debian/pool/main/b/bzip2/bzip2_${BZLIB_VERSION}.orig.tar.bz2" CACHE FILEPATH "Path to bzip2-${BZLIB_VERSION}.orig.tar.bz2 source archive")
   set(BZLIB_InstallDir "${EP_InstallDir}/BZlib-${BZLIB_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)

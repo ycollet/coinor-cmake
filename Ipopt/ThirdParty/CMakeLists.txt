@@ -252,6 +252,8 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
   set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
   
+  set(MUMPS_DEPENDS "")
+  
   if (COIN_ENABLE_DOWNLOAD_METIS)
     set(MUMPS_METIS_INC_PATH "${EP_InstallDir}/include/metis" CACHE PATH "The METIS library include Path" FORCE)
     set(MUMPS_METIS_LIB_PATH "${EP_InstallDir}/lib"           CACHE PATH "The METIS library library Path" FORCE)
@@ -260,8 +262,6 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
     set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path" FORCE)
   endif ()
 
-  set(MUMPS_DEPENDS "")
-  
   if (COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_ENABLE_DOWNLOAD_LAPACK)
     set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Lapack)
   endif ()
@@ -271,8 +271,6 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   
   set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path to MUMPS_${MUMPS_VERSION}.tar.gz source archive")
   set(MUMPS_InstallDir "${EP_InstallDir}/Mumps-${MUMPS_VERSION}/${CMAKE_CFG_INTDIR}/")
-  
-  set(IPOPT_HAS_MUMPS  ON CACHE BOOL "Enable Mumps solver" FORCE)
   
   ExternalProject_Add(EP_Mumps
                       PREFIX            ${MUMPS_InstallDir}
