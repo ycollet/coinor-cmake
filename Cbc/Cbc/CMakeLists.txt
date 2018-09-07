@@ -410,6 +410,17 @@ if (CBC_BUILD_EXAMPLES)
     endif ()  
   endmacro ()
   
+  add_example(inc ${Cbc_DIR}/examples/inc.cpp)
+  
+  add_test(NAME cbc_example_inc
+           COMMAND $<TARGET_FILE:inc> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
+  set_tests_properties(cbc_example_inc PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_inc PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_inc PROPERTIES LABELS "CBC;EXAMPLE")
+  set_tests_properties(cbc_example_inc PROPERTIES PASS_REGULAR_EXPRESSION "Optimal objective -464.753.* - 5 iterations time .*, Presolve 0.00")
+  
   add_example(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
   
   add_test(NAME cbc_example_allCuts

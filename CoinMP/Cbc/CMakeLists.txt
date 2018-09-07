@@ -10,7 +10,7 @@ set(CBC_VERSION         "${CBC_VERSION_STRING}" CACHE STRING "The CBC version")
 
 find_package(Subversion)
 if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CBC)
   else ()
     set(CBC_WC_REVISION "0")
@@ -199,6 +199,12 @@ if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_ASL)
   
   set(Cbc_SRC_LIST_Headers ${Cbc_SRC_LIST_Headers}
                    ${Cbc_DIR}/src/Cbc_ampl.h)
+endif ()
+	       
+if (COIN_ENABLE_COMPAT)
+  set(Cbc_SRC_LIST ${Cbc_SRC_LIST}
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
+                   ${CMAKE_SOURCE_DIR}/cmake/compat.c)
 endif ()
 
 if (CMAKE_COMPILER_IS_GNUCXX AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 4.4))
@@ -403,6 +409,17 @@ if (CBC_BUILD_EXAMPLES)
       target_link_libraries(${Name} metis m)
     endif ()  
   endmacro ()
+  
+  add_example(inc ${Cbc_DIR}/examples/inc.cpp)
+  
+  add_test(NAME cbc_example_inc
+           COMMAND $<TARGET_FILE:inc> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
+  set_tests_properties(cbc_example_inc PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_inc PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_inc PROPERTIES LABELS "CBC;EXAMPLE")
+  set_tests_properties(cbc_example_inc PROPERTIES PASS_REGULAR_EXPRESSION "Optimal objective -464.753.* - 5 iterations time .*, Presolve 0.00")
   
   add_example(allCuts ${Cbc_DIR}/examples/allCuts.cpp)
   
