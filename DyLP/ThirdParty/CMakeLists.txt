@@ -167,7 +167,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_LAPACK)
-  set(LAPACK_VERSION "3.7.1")
+  set(LAPACK_VERSION "3.8.0")
   
   enable_language(Fortran)
 
@@ -190,7 +190,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
                         URL               ${LAPACK_URL}
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${LAPACK_InstallDir}/src/EP_Lapack/build
-                                       && ${CMAKE_COMMAND} -E chdir ${LAPACK_InstallDir}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DBUILD_DEPRECATED:Bool=ON -DLAPACKE:Bool=ON -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                                       && ${CMAKE_COMMAND} -E chdir ${LAPACK_InstallDir}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DBUILD_DEPRECATED:Bool=ON -DLAPACKE:Bool=ON -DLAPACKE_WITH_TMG:Bool=ON -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${LAPACK_InstallDir}/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${LAPACK_InstallDir}/src/EP_Lapack/build/lib/lapack.lib  ${EP_InstallDir}/lib
                                        && ${CMAKE_COMMAND} -E copy ${LAPACK_InstallDir}/src/EP_Lapack/build/lib/lapacke.lib ${EP_InstallDir}/lib
@@ -203,7 +203,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
                         URL               ${LAPACK_URL}
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${LAPACK_InstallDir}/src/EP_Lapack/build
-                                       && ${CMAKE_COMMAND} -E chdir ${LAPACK_InstallDir}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DBUILD_DEPRECATED:Bool=ON -DLAPACKE:Bool=ON -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
+                                       && ${CMAKE_COMMAND} -E chdir ${LAPACK_InstallDir}/src/EP_Lapack/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DBUILD_DEPRECATED:Bool=ON -DLAPACKE:Bool=ON -DLAPACKE_WITH_TMG:Bool=ON -DCMAKE_C_FLAGS:String=${CLAPACK_C_FLAGS} -DCMAKE_EXE_LINKER_FLAGS:String=${LAPACK_LINKER_FLAGS} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} ..
                         BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${LAPACK_InstallDir}/src/EP_Lapack/build ${CMAKE_MAKE_PROGRAM}
                         INSTALL_COMMAND   ${CMAKE_COMMAND} -E copy ${LAPACK_InstallDir}/src/EP_Lapack/build/lib/liblapack.a  ${EP_InstallDir}/lib
                                        && ${CMAKE_COMMAND} -E copy ${LAPACK_InstallDir}/src/EP_Lapack/build/lib/liblapacke.a ${EP_InstallDir}/lib
