@@ -233,7 +233,7 @@ if (COIN_HAS_WSMP)
                            ${Clp_DIR}/src/ClpCholeskyWssmpKKT.hpp)
 endif ()
 
-if (CMAKE_COMPILER_IS_GNUCXX AND (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 4.4))
+if (CMAKE_COMPILER_IS_GNUCXX AND ((CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.4) OR (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 4.4)))
   set_source_files_properties(${Clp_DIR}/src/CbcOrClpParam.cpp PROPERTIES COMPILE_FLAGS -fno-var-tracking-assignments)
 endif ()
 

@@ -45,14 +45,14 @@ endmacro()
 #
 
 macro(add_source_files ListFiles FilesToInclude Version VersionToCheck)
-  if ("${${Version}}" VERSION_GREATER_EQUAL "${VersionToCheck}")
+  if (("${${Version}}" VERSION_GREATER "${VersionToCheck}") OR ("${${Version}}" VERSION_EQUAL "${VersionToCheck}"))
     set(${ListFiles} ${${ListFiles}}
                      ${${FilesToInclude}})
   endif ()
 endmacro()
 
 macro(remove_source_files ListFiles FilesToExclude Version VersionToCheck)
-  if ("${${Version}}" VERSION_GREATER_EQUAL "${VersionToCheck}")
+  if (("${${Version}}" VERSION_EQUAL "${VersionToCheck}") OR ("${${Version}}" VERSION_GREATER "${VersionToCheck}"))
     foreach(Item IN LIST ${FilesToExclude})
       list(REMOVE_ITEM ${ListFiles} ${Item})
     endforeach()
@@ -405,7 +405,7 @@ endmacro ()
 # VersionRef: a string containing the reference version (above or equal to this version, the files are included in the resulting list)
 # VersionToCheck: a string containing the test version. If the version is above or equal to this version, the files are included in the resulting list
 macro(add_source_files ListFiles FilesToInclude VersionRef VersionToCheck)
-  if ("${VersionToCheck}" VERSION_GREATER_EQUAL "${VersionRef}")
+  if (("${VersionToCheck}" VERSION_GREATER "${VersionRef}") OR ("${VersionToCheck}" VERSION_EQUAL "${VersionRef}"))
     set(${ListFiles} ${${ListFiles}}
                      ${FilesToInclude})
   endif ()
@@ -417,7 +417,7 @@ endmacro()
 # VersionRef: a string containing the reference version (above or equal to this version, the files are excluded from the resulting list)
 # VersionToCheck: a string containing the test version. If the version is above or equal to this version, the files are excluded from the resulting list
 macro(remove_source_files ListFiles FilesToExclude VersionRef VersionToCheck)
-  if ("${VersionToCheck}" VERSION_GREATER_EQUAL "${VersionRef}")
+  if (("${VersionToCheck}" VERSION_GREATER "${VersionRef}") OR ("${VersionToCheck}" VERSION_EQUAL "${VersionRef}"))
     set(TMP_LIST ${FilesToExclude})
     #foreach(Item ${TMP_LIST})
     foreach(Item IN LISTS TMP_LIST)
