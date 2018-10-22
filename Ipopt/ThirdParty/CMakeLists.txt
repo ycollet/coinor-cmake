@@ -313,6 +313,8 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${ASL_InstallDir}/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${ASL_InstallDir}/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM} install
                       )
+  
+  set(IPOPT_HAS_AMPL ON)
 endif ()
 
 # #################################################

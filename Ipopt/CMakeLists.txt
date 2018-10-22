@@ -628,16 +628,6 @@ endif ()
 subdirs(Ipopt)
 
 #
-# Install dll dependencies
-#
-
-if (WIN32)
-  install(DIRECTORY ${CMAKE_BINARY_DIR}/bin
-          DESTINATION bin
-          PATTERN "*.dll")
-endif ()
-
-#
 # Packaging
 #
 
@@ -712,3 +702,10 @@ get_directory_property(ALL_DEFS     COMPILE_DEFINITIONS)
 message(STATUS "${color_cyan}Include directories:${color_reset}     ${ALL_INCLUDES}")
 message(STATUS "${color_cyan}Link directories:${color_reset}        ${ALL_LINKS}")
 message(STATUS "${color_cyan}Compilation definitions:${color_reset} ${ALL_DEFS}")
+
+#
+# Install part
+#
+
+install(FILES LICENSE README 
+	DESTINATION share/coin/doc/Ipopt/)
