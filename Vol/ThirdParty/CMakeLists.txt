@@ -124,7 +124,7 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  set(CLAPACK_URL        "http:////netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tgz" CACHE FILEPATH "Path to clapack-${CLAPACK_VERSION}-CMAKE.tgz source archive")
+  set(CLAPACK_URL        "http:////netlib.sandia.gov/clapack/clapack-${CLAPACK_VERSION}-CMAKE.tar.gz" CACHE FILEPATH "Path to clapack-${CLAPACK_VERSION}-CMAKE.tgz source archive")
   set(CLAPACK_InstallDir "${EP_InstallDir}/CLapack-${CLAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)

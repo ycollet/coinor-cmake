@@ -166,7 +166,7 @@ if (COIN_ENABLE_DOWNLOAD_LAPACK)
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   
-  set(LAPACK_URL        "http:////www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tgz" CACHE FILEPATH "Path to lapack-${LAPACK_VERSION}.tgz source archive")
+  set(LAPACK_URL        "http:////www.netlib.org/lapack/lapack-${LAPACK_VERSION}.tar.gz" CACHE FILEPATH "Path to lapack-${LAPACK_VERSION}.tgz source archive")
   set(LAPACK_InstallDir "${EP_InstallDir}/Lapack-${LAPACK_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   if (WIN32 AND NOT MINGW)
