@@ -5,16 +5,23 @@ set(OSI_VERSION_MINOR   "${OSI_MINOR_VERSION}"  CACHE STRING "The OSI minor vers
 set(OSI_VERSION_RELEASE "${OSI_PATCH_VERSION}"  CACHE STRING "The OSI patch version number")
 set(OSI_VERSION         "${OSI_VERSION_STRING}" CACHE STRING "The OSI version")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+set(OSI_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. OSI)
-  else ()
-    set(OSI_WC_REVISION "0")
   endif ()
-else ()
-  set(OSI_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. OSI)
+    set(OSI_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current OSI revision is ${OSI_WC_REVISION}")
 set(OSI_SVN_REV "${OSI_WC_REVISION}" CACHE STRING "The OSI subversion revision" PARENT_SCOPE)
 

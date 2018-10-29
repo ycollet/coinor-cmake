@@ -5,16 +5,23 @@ set(IPOPT_VERSION_MINOR   "${IPOPT_MINOR_VERSION}"  CACHE STRING "The IpOpt mino
 set(IPOPT_VERSION_RELEASE "${IPOPT_PATCH_VERSION}"  CACHE STRING "The IpOpt patch version number")
 set(IPOPT_VERSION         "${IPOPT_VERSION_STRING}" CACHE STRING "The IpOpt version")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} IPOPT)
-  else ()
-    set(IPOPT_WC_REVISION "0")
+set(IPOPT_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. IPOPT)
   endif ()
-else ()
-  set(IPOPT_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. IPOPT)
+    set(IPOPT_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current IPOPT revision is ${IPOPT_WC_REVISION}")
 set(IPOPT_SVN_REV "${IPOPT_WC_REVISION}" CACHE STRING "The IPOPT subversion revision" FORCE)
 

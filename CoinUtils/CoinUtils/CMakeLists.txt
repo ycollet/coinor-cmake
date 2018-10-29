@@ -26,16 +26,23 @@ else ()
   set(BZLIB_NAME "libbz2.a" CACHE FILEPATH "The BZlib library name" FORCE)
 endif ()
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINUTILS)
-  else ()
-    set(COINUTILS_WC_REVISION "0")
+set(COINUTILS_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. COINUTILS)
   endif ()
-else ()
-  set(COINUTILS_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. COINUTILS)
+    set(COINUTILS_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current COINUTILS revision is ${COINUTILS_WC_REVISION}")
 set(COINUTILS_SVN_REV "${COINUTILS_WC_REVISION}" CACHE STRING "The COINUTILS subversion revision")
 
@@ -118,65 +125,65 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.cpp
                        ${CoinUtils_DIR}/src/CoinRational.cpp)
 
-set(CoinUtils_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
-                          ${CoinUtils_DIR}/src/CoinAlloc.hpp
-			  ${CoinUtils_DIR}/src/CoinBuild.hpp
-			  ${CoinUtils_DIR}/src/CoinDenseVector.hpp
-			  ${CoinUtils_DIR}/src/CoinDistance.hpp
-			  ${CoinUtils_DIR}/src/CoinError.hpp
-			  ${CoinUtils_DIR}/src/CoinFactorization.hpp
-			  ${CoinUtils_DIR}/src/CoinSimpFactorization.hpp
-			  ${CoinUtils_DIR}/src/CoinDenseFactorization.hpp
-			  ${CoinUtils_DIR}/src/CoinOslFactorization.hpp
-			  ${CoinUtils_DIR}/src/CoinFileIO.hpp
-			  ${CoinUtils_DIR}/src/CoinFinite.hpp
-			  ${CoinUtils_DIR}/src/CoinFloatEqual.hpp
-			  ${CoinUtils_DIR}/src/CoinHelperFunctions.hpp
-			  ${CoinUtils_DIR}/src/CoinIndexedVector.hpp
-			  ${CoinUtils_DIR}/src/CoinLpIO.hpp
-			  ${CoinUtils_DIR}/src/CoinMessage.hpp
-			  ${CoinUtils_DIR}/src/CoinMessageHandler.hpp
-			  ${CoinUtils_DIR}/src/CoinModel.hpp
-			  ${CoinUtils_DIR}/src/CoinStructuredModel.hpp
-			  ${CoinUtils_DIR}/src/CoinModelUseful.hpp
-			  ${CoinUtils_DIR}/src/CoinMpsIO.hpp
-			  ${CoinUtils_DIR}/src/CoinPackedMatrix.hpp
-			  ${CoinUtils_DIR}/src/CoinPackedVector.hpp
-			  ${CoinUtils_DIR}/src/CoinPackedVectorBase.hpp
-			  ${CoinUtils_DIR}/src/CoinParam.hpp
-			  ${CoinUtils_DIR}/src/CoinPragma.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveDoubleton.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveDual.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveDupcol.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveEmpty.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveFixed.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveForcing.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveImpliedFree.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveIsolated.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveMatrix.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveMonitor.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolvePsdebug.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveSingleton.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveSubst.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveTighten.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveTripleton.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveUseless.hpp
-			  ${CoinUtils_DIR}/src/CoinPresolveZeros.hpp
-			  ${CoinUtils_DIR}/src/CoinSearchTree.hpp
-			  ${CoinUtils_DIR}/src/CoinShallowPackedVector.hpp
-			  ${CoinUtils_DIR}/src/CoinSignal.hpp
-			  ${CoinUtils_DIR}/src/CoinSmartPtr.hpp
-			  ${CoinUtils_DIR}/src/CoinSnapshot.hpp
-			  ${CoinUtils_DIR}/src/CoinSort.hpp
-			  ${CoinUtils_DIR}/src/CoinTime.hpp
-			  ${CoinUtils_DIR}/src/CoinTypes.hpp
-			  ${CoinUtils_DIR}/src/CoinUtility.hpp
-			  ${CoinUtils_DIR}/src/CoinWarmStart.hpp
-			  ${CoinUtils_DIR}/src/CoinWarmStartBasis.hpp
-			  ${CoinUtils_DIR}/src/CoinWarmStartVector.hpp
-			  ${CoinUtils_DIR}/src/CoinWarmStartDual.hpp
-			  ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp
-			  ${CoinUtils_DIR}/src/CoinRational.hpp)
+set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
+                     ${CoinUtils_DIR}/src/CoinAlloc.hpp
+                     ${CoinUtils_DIR}/src/CoinBuild.hpp
+                     ${CoinUtils_DIR}/src/CoinDenseVector.hpp
+                     ${CoinUtils_DIR}/src/CoinDistance.hpp
+                     ${CoinUtils_DIR}/src/CoinError.hpp
+                     ${CoinUtils_DIR}/src/CoinFactorization.hpp
+                     ${CoinUtils_DIR}/src/CoinSimpFactorization.hpp
+                     ${CoinUtils_DIR}/src/CoinDenseFactorization.hpp
+                     ${CoinUtils_DIR}/src/CoinOslFactorization.hpp
+                     ${CoinUtils_DIR}/src/CoinFileIO.hpp
+                     ${CoinUtils_DIR}/src/CoinFinite.hpp
+                     ${CoinUtils_DIR}/src/CoinFloatEqual.hpp
+                     ${CoinUtils_DIR}/src/CoinHelperFunctions.hpp
+                     ${CoinUtils_DIR}/src/CoinIndexedVector.hpp
+                     ${CoinUtils_DIR}/src/CoinLpIO.hpp
+                     ${CoinUtils_DIR}/src/CoinMessage.hpp
+                     ${CoinUtils_DIR}/src/CoinMessageHandler.hpp
+                     ${CoinUtils_DIR}/src/CoinModel.hpp
+                     ${CoinUtils_DIR}/src/CoinStructuredModel.hpp
+                     ${CoinUtils_DIR}/src/CoinModelUseful.hpp
+                     ${CoinUtils_DIR}/src/CoinMpsIO.hpp
+                     ${CoinUtils_DIR}/src/CoinPackedMatrix.hpp
+                     ${CoinUtils_DIR}/src/CoinPackedVector.hpp
+                     ${CoinUtils_DIR}/src/CoinPackedVectorBase.hpp
+                     ${CoinUtils_DIR}/src/CoinParam.hpp
+                     ${CoinUtils_DIR}/src/CoinPragma.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveDoubleton.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveDual.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveDupcol.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveEmpty.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveFixed.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveForcing.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveImpliedFree.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveIsolated.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveMatrix.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveMonitor.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolvePsdebug.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveSingleton.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveSubst.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveTighten.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveTripleton.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveUseless.hpp
+                     ${CoinUtils_DIR}/src/CoinPresolveZeros.hpp
+                     ${CoinUtils_DIR}/src/CoinSearchTree.hpp
+                     ${CoinUtils_DIR}/src/CoinShallowPackedVector.hpp
+                     ${CoinUtils_DIR}/src/CoinSignal.hpp
+                     ${CoinUtils_DIR}/src/CoinSmartPtr.hpp
+                     ${CoinUtils_DIR}/src/CoinSnapshot.hpp
+                     ${CoinUtils_DIR}/src/CoinSort.hpp
+                     ${CoinUtils_DIR}/src/CoinTime.hpp
+                     ${CoinUtils_DIR}/src/CoinTypes.hpp
+                     ${CoinUtils_DIR}/src/CoinUtility.hpp
+                     ${CoinUtils_DIR}/src/CoinWarmStart.hpp
+                     ${CoinUtils_DIR}/src/CoinWarmStartBasis.hpp
+                     ${CoinUtils_DIR}/src/CoinWarmStartVector.hpp
+                     ${CoinUtils_DIR}/src/CoinWarmStartDual.hpp
+                     ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp
+                     ${CoinUtils_DIR}/src/CoinRational.hpp)
 
 set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
                            ${CoinUtilsTest_DIR}/CoinDenseVectorTest.cpp
@@ -189,12 +196,6 @@ set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
                            ${CoinUtilsTest_DIR}/CoinPackedVectorTest.cpp
                            ${CoinUtilsTest_DIR}/CoinShallowPackedVectorTest.cpp
                            ${CoinUtilsTest_DIR}/unitTest.cpp)
-
-if (COIN_ENABLE_COMPAT)
-  set(CoinUtils_SRC_LIST ${CoinUtils_SRC_LIST}
-                         ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
-                         ${CMAKE_SOURCE_DIR}/cmake/compat.c)
-endif ()
 
 include_directories(${CoinUtils_DIR}/src)
 
@@ -263,7 +264,7 @@ endif ()
 install(TARGETS libCoinUtils 
         DESTINATION lib)
 
-install(FILES ${CoinUtils_SRC_Headers} 
+install(FILES ${Coin_SRC_Headers} 
         DESTINATION include/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h

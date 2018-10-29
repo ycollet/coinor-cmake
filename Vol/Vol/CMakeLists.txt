@@ -7,16 +7,23 @@ set(VOL_VERSION_MINOR   "${VOL_MINOR_VERSION}"  CACHE STRING "The Vol minor vers
 set(VOL_VERSION_RELEASE "${VOL_PATCH_VERSION}"  CACHE STRING "The Vol patch version number")
 set(VOL_VERSION         "${VOL_VERSION_STRING}" CACHE STRING "The Vol version")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} VOL)
-  else ()
-    set(VOL_WC_REVISION "0")
+set(VOL_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. VOL)
   endif ()
-else ()
-  set(VOL_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. VOL)
+    set(VOL_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current VOL revision is ${VOL_WC_REVISION}")
 set(VOL_SVN_REV "${VOL_WC_REVISION}" CACHE STRING "The VOL subversion revision" FORCE)
 

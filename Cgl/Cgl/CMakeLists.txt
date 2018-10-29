@@ -7,16 +7,23 @@ set(CGL_VERSION_MINOR   "${CGL_MINOR_VERSION}"  CACHE STRING "The CGL minor vers
 set(CGL_VERSION_RELEASE "${CGL_PATCH_VERSION}"  CACHE STRING "The CGL patch version number")
 set(CGL_VERSION         "${CGL_VERSION_STRING}" CACHE STRING "The CGL version")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CGL)
-  else ()
-    set(CGL_WC_REVISION "0")
+set(CGL_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. CGL)
   endif ()
-else ()
-  set(CGL_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. CGL)
+    set(CGL_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current CGL revision is ${CGL_WC_REVISION}")
 set(CGL_SVN_REV "${CGL_WC_REVISION}" CACHE STRING "The CGL subversion revision")
 
@@ -116,12 +123,6 @@ set(Cgl_SRC_LIST_Headers ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerR
                          ${Cgl_DIR}/src/CglGMI/CglGMI.hpp
                          ${Cgl_DIR}/src/CglParam.hpp
                          ${Cgl_DIR}/src/CglTreeInfo.hpp)
-
-if (COIN_ENABLE_COMPAT)
-  set(Cgl_SRC_LIST ${Cgl_SRC_LIST}
-                   ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
-                   ${CMAKE_SOURCE_DIR}/cmake/compat.c)
-endif ()
 
 include_directories(${Cgl_DIR}/src)
 include_directories(${Cgl_DIR}/src/CglClique)

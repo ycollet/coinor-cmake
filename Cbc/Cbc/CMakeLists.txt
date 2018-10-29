@@ -8,16 +8,23 @@ set(CBC_VERSION_MINOR   "${CBC_MINOR_VERSION}"  CACHE STRING "The CBC minor vers
 set(CBC_VERSION_RELEASE "${CBC_PATCH_VERSION}"  CACHE STRING "The CBC patch version number")
 set(CBC_VERSION         "${CBC_VERSION_STRING}" CACHE STRING "The CBC version")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CBC)
-  else ()
-    set(CBC_WC_REVISION "0")
+set(CBC_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. CBC)
   endif ()
-else ()
-  set(CBC_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. CBC)
+    set(CBC_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current CBC revision is ${CBC_WC_REVISION}")
 set(CBC_SVN_REV "${CBC_WC_REVISION}" CACHE STRING "The CBC subversion revision" FORCE)
 

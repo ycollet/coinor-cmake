@@ -7,16 +7,23 @@ set(BONMIN_VERSION_MINOR   "${BONMIN_MINOR_VERSION}"  CACHE STRING "The BONMIN m
 set(BONMIN_VERSION_RELEASE "${BONMIN_PATCH_VERSION}"  CACHE STRING "The BONMIN patch version number")
 set(BONMIN_VERSION         "${BONMIN_VERSION_STRING}" CACHE STRING "The BONMIN version")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} BONMIN)
-  else ()
-    set(BONMIN_WC_REVISION "0")
+set(BONMIN_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. BONMIN)
   endif ()
-else ()
-  set(BONMIN_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. BONMIN)
+    set(BONMIN_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current BONMIN revision is ${BONMIN_WC_REVISION}")
 set(BONMIN_SVN_REV "${BONMIN_WC_REVISION}" CACHE STRING "The BONMIN subversion revision" FORCE)
 

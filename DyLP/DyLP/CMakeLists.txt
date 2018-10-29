@@ -8,16 +8,23 @@ set(DYLP_VERSION_RELEASE "${DYLP_PATCH_VERSION}"  CACHE STRING "The Vol patch ve
 set(DYLP_VERSION         "${DYLP_VERSION_STRING}" CACHE STRING "The Vol version")
 set(DYLP_SVN_REV "${DYLP_VERSION_RELEASE}")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} DYLP)
-  else ()
-    set(DYLP_WC_REVISION "0")
+set(DYLP_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. DYLP)
   endif ()
-else ()
-  set(DYLP_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. DYLP)
+    set(DYLP_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current DYLP revision is ${DYLP_WC_REVISION}")
 set(DYLP_SVN_REV "${DYLP_WC_REVISION}" CACHE STRING "The DYLP subversion revision" FORCE)
 

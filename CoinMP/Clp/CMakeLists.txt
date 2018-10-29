@@ -7,16 +7,23 @@ set(CLP_VERSION_MINOR   "${CLP_MINOR_VERSION}"  CACHE STRING "The CLP minor vers
 set(CLP_VERSION_RELEASE "${CLP_PATCH_VERSION}"  CACHE STRING "The CLP patch version number")
 set(CLP_VERSION         "${CLP_VERSION_STRING}" CACHE STRING "The CLP version")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+set(CLP_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
     Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CLP)
-  else ()
-    set(CLP_WC_REVISION "0")
   endif ()
-else ()
-  set(CLP_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CLP)
+    set(CLP_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current CLP revision is ${CLP_WC_REVISION}")
 set(CLP_SVN_REV "${CLP_WC_REVISION}" CACHE STRING "The CLP subversion revision" PARENT_SCOPE)
 

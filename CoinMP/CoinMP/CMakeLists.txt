@@ -7,16 +7,23 @@ set(COINMP_VERSION_MINOR   "${COINMP_MINOR_VERSION}"  CACHE STRING "The CoinMP m
 set(COINMP_VERSION_RELEASE "${COINMP_PATCH_VERSION}"  CACHE STRING "The CoinMP patch version number")
 set(COINMP_VERSION         "${COINMP_VERSION_STRING}" CACHE STRING "The CoinMP version")
 
-find_package(Subversion)
-if (Subversion_FOUND)
-  if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINMP)
-  else ()
-    set(COINMP_WC_REVISION "0")
+set(COINMP_WC_REVISION "0")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+  find_package(Subversion)
+  if (Subversion_FOUND)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. COINMP)
   endif ()
-else ()
-  set(COINMP_WC_REVISION "0")
 endif ()
+
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+  find_package(Git)
+  if (Git_FOUND)
+    include(export_git)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. COINMP)
+    set(COINMP_WC_REVISION "0") # alphanumeric rev not yet managed
+  endif ()
+endif ()
+
 message(STATUS "Current COINMP revision is ${COINMP_WC_REVISION}")
 set(COINMP_SVN_REV "${COINMP_WC_REVISION}" CACHE STRING "The COINMP subversion revision" FORCE)
 
