@@ -21,7 +21,7 @@ if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
   if (Git_FOUND)
     include(export_git)
     GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CBC)
-    set(CBC_WC_REVISION "0") # alphanumeric rev not yet managed
+    set(CBC_WC_REVISION "${CBC_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
 

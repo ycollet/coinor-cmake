@@ -21,7 +21,7 @@ if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
   if (Git_FOUND)
     include(export_git)
     GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. DYLP)
-    set(DYLP_WC_REVISION "0") # alphanumeric rev not yet managed
+    set(DYLP_WC_REVISION "${DYLP_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
 

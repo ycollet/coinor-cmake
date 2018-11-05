@@ -18,7 +18,7 @@ if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
   if (Git_FOUND)
     include(export_git)
     GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. OSI)
-    set(OSI_WC_REVISION "0") # alphanumeric rev not yet managed
+    set(OSI_WC_REVISION "${OSI_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
 

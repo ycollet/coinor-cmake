@@ -21,7 +21,7 @@ if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
   if (Git_FOUND)
     include(export_git)
     GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. SYMPHONY)
-    set(SYMPHONY_WC_REVISION "0") # alphanumeric rev not yet managed
+    set(SYMPHONY_WC_REVISION "${SYMPHONY_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
 
