@@ -1,6 +1,6 @@
 include(coin-macros)
 
-set(SYMPHONY_INSTANCES_DIR "${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000")
+set(SYMPHONY_INSTANCES_DIR "${EP_InstallDir}/MIPLIB2000/src/EP_MIPLIB2000/instances/miplib2010")
 
 set(TEST_LIST_MIPLIB2000 ${SYMPHONY_INSTANCE_DIR}/30n20b8.mps.gz
                          ${SYMPHONY_INSTANCE_DIR}/acc-tight5.mps.gz
