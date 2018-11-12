@@ -685,7 +685,7 @@ endif ()
 if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
   set(MIPLIB2000_VERSION "1.1.3")
   
-  set(MIPLIB2000_URL "http:////miplib.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip" CACHE FILEPATH "Path to miplib2010-${MIPLIB2000_VERSION}-benchmark.zip source archive")
+  set(MIPLIB2000_URL "http:////miplib2010.zib.de/download/miplib2010-${MIPLIB2000_VERSION}-benchmark.zip" CACHE FILEPATH "Path to miplib2010-${MIPLIB2000_VERSION}-benchmark.zip source archive")
   
   ExternalProject_Add(EP_MIPLIB2000
                       PREFIX            ${EP_InstallDir}/MIPLIB2000
