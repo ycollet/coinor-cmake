@@ -618,7 +618,7 @@ if (CBC_BUILD_EXAMPLES)
   
   add_test(NAME cbc_example_gear
            COMMAND $<TARGET_FILE:gear>)
-  set_tests_properties(cbc_example_gear PROPERTIES TIMEOUT 180)
+  set_tests_properties(cbc_example_gear PROPERTIES TIMEOUT 360)
   if (WIN32)
     set_tests_properties(cbc_example_gear PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
