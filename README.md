@@ -199,6 +199,23 @@ Be careful to activate the right set of tests (not the long one).
 The f2c.h file included in each ThirdParty directory is copied from the Fedora f2c package.
 This header is used to fix compilation of clapack ...
 
+# Compiling using git repo:
+
+$ git clone https://github.com/ycollet/coinor-cmake.git
+$ git clone https://github.com/coin-or/CoinMP.git
+$ cd CoinMP
+$ git clone https://github.com/coin-or-tools/BuildTools/
+$ BuildTools/get.dependencies.sh fetch
+$ cp -r ../coinor-cmake/CoinMP .
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/coinmp-devel -DCMAKE_BUILD_TYPE=RELEASE ..
+$ make
+
+# if you've got an error related to git describe:
+$ git tag test HEAD~1
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/coinmp-devel -DCMAKE_BUILD_TYPE=RELEASE ..
+
 # To do
 
 Tasks:
