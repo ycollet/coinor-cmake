@@ -28,7 +28,7 @@ endmacro()
 macro(create_log_analysis Name AdditionalName Filename TestRegex TestRefVal TestRelLevel)
   add_test(NAME ${Name}_${AdditionalName}
            WORKING_DIRECTORY ${BinTestPath}
-           COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cmake/parse_results.py ${Filename} ${TestRegex} ${TestRefVal} ${TestRelLevel})
+           COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/parse_results.py ${Filename} ${TestRegex} ${TestRefVal} ${TestRelLevel})
     
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES DEPENDS "${TestName}_${TestSolverName}")
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES ENVIRONMENT "${TEST_ENV_VAR}")
@@ -45,7 +45,7 @@ endmacro()
 # VersionRef: a string containing the reference version (above or equal to this version, the files are included in the resulting list)
 # VersionToCheck: a string containing the test version. If the version is above or equal to this version, the files are included in the resulting list
 macro(add_source_files ListFiles FilesToInclude VersionRef VersionToCheck)
-  if (("${VersionToCheck}" VERSION_GREATER "${VersionRef}") OR ("${VersionToCheck}" VERSION_EQUAL "${VersionRef}"))
+  if ("${VersionToCheck}" VERSION_GREATER_EQUAL "${VersionRef}")
     set(${ListFiles} ${${ListFiles}}
                      ${FilesToInclude})
   endif ()
@@ -57,7 +57,7 @@ endmacro()
 # VersionRef: a string containing the reference version (above or equal to this version, the files are excluded from the resulting list)
 # VersionToCheck: a string containing the test version. If the version is above or equal to this version, the files are excluded from the resulting list
 macro(remove_source_files ListFiles FilesToExclude VersionRef VersionToCheck)
-  if (("${VersionToCheck}" VERSION_GREATER "${VersionRef}") OR ("${VersionToCheck}" VERSION_EQUAL "${VersionRef}"))
+  if ("${VersionToCheck}" VERSION_GREATER_EQUAL "${VersionRef}")
     set(TMP_LIST ${FilesToExclude})
     #foreach(Item ${TMP_LIST})
     foreach(Item IN LISTS TMP_LIST)

@@ -47,7 +47,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-                      ${CMAKE_SOURCE_DIR}/cmake)
+                      ${CMAKE_SOURCE_CURRENT_DIR}/cmake)
 
 Enable_Testing ()
 
@@ -207,7 +207,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
   add_definitions(-DINTEL_COMPILER)
 endif ()
 
-configure_file(${CMAKE_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/Glpk/config.h)
+configure_file(${CMAKE_SOURCE_CURRENT_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/Glpk/config.h)
 include_directories(${CMAKE_BINARY_DIR}/Glpk)
 
 add_definitions(-DHAVE_CONFIG_H)
@@ -235,22 +235,22 @@ endif ()
 
 # Library
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
-include_directories(${CMAKE_SOURCE_DIR}/src/amd)
-include_directories(${CMAKE_SOURCE_DIR}/src/api)
-include_directories(${CMAKE_SOURCE_DIR}/src/bflib)
-include_directories(${CMAKE_SOURCE_DIR}/src/cglib)
-include_directories(${CMAKE_SOURCE_DIR}/src/colamd)
-include_directories(${CMAKE_SOURCE_DIR}/src/draft)
-include_directories(${CMAKE_SOURCE_DIR}/src/env)
-include_directories(${CMAKE_SOURCE_DIR}/src/intopt)
-include_directories(${CMAKE_SOURCE_DIR}/src/minisat)
-include_directories(${CMAKE_SOURCE_DIR}/src/misc)
-include_directories(${CMAKE_SOURCE_DIR}/src/mpl)
-include_directories(${CMAKE_SOURCE_DIR}/src/npp)
-include_directories(${CMAKE_SOURCE_DIR}/src/proxy)
-include_directories(${CMAKE_SOURCE_DIR}/src/simplex)
-include_directories(${CMAKE_SOURCE_DIR}/src/zlib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/amd)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/api)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/bflib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/cglib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/colamd)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/draft)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/env)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/intopt)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/minisat)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/misc)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/mpl)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/npp)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/proxy)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/simplex)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/zlib)
 
 # libglpk_la_LDFLAGS = -version-info 37:2:1 -export-symbols-regex '^glp_*'
 
@@ -593,7 +593,7 @@ endif ()
 ############
 
 if (GLPK_BUILD_EXAMPLES)
-  add_executable(glpsol ${CMAKE_SOURCE_DIR}/examples/glpsol.c)
+  add_executable(glpsol ${CMAKE_CURRENT_SOURCE_DIR}/examples/glpsol.c)
   target_link_libraries(glpsol glpk)
   if (NOT WIN32)
     target_link_libraries(glpsol m)
@@ -740,10 +740,10 @@ if (GLPK_COMPILE_COVERAGE)
   # /!\ FAILURE IF AT LEAST ONE TEST FAILS
   # Capturing lcov counters and generating report
   add_custom_target(coverage
-                    COMMAND ${LCOV_PATH} --directory ${CMAKE_SOURCE_DIR} --zerocounters
-                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --directory ${CMAKE_CURRENT_SOURCE_DIR} --zerocounters
+                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)"
-                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/_dep/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
@@ -800,57 +800,57 @@ endif ()
 
 if (GLPK_BUILD_EXAMPLES)
   add_test(NAME alloy_mps_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_SOURCE_DIR}/examples/alloy.mps)
+           COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_CURRENT_SOURCE_DIR}/examples/alloy.mps)
   set_tests_properties(alloy_mps_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(alloy_mps_glpsol PROPERTIES LABELS "MPS")
+  set_tests_properties(alloy_mps_glpsol PROPERTIES LABELS "DISTRIB;MPS")
   if (WIN32)
     set_tests_properties(alloy_mps_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME furnace_mps_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_SOURCE_DIR}/examples/furnace.mps)
+           COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_CURRENT_SOURCE_DIR}/examples/furnace.mps)
   set_tests_properties(furnace_mps_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(furnace_mps_glpsol PROPERTIES LABELS "MPS")
+  set_tests_properties(furnace_mps_glpsol PROPERTIES LABELS "DISTRIB;MPS")
   if (WIN32)
     set_tests_properties(furnace_mps_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME icecream_mps_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_SOURCE_DIR}/examples/icecream.mps)
+           COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_CURRENT_SOURCE_DIR}/examples/icecream.mps)
   set_tests_properties(icecream_mps_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(icecream_mps_glpsol PROPERTIES LABELS "MPS")
+  set_tests_properties(icecream_mps_glpsol PROPERTIES LABELS "DISTRIB;MPS")
   if (WIN32)
     set_tests_properties(icecream_mps_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME murtagh_mps_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_SOURCE_DIR}/examples/murtagh.mps)
+           COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_CURRENT_SOURCE_DIR}/examples/murtagh.mps)
   set_tests_properties(murtagh_mps_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(murtagh_mps_glpsol PROPERTIES LABELS "MPS")
+  set_tests_properties(murtagh_mps_glpsol PROPERTIES LABELS "DISTRIB;MPS")
   if (WIN32)
     set_tests_properties(murtagh_mps_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME plan_mps_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_SOURCE_DIR}/examples/plan.mps)
+           COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_CURRENT_SOURCE_DIR}/examples/plan.mps)
   set_tests_properties(plan_mps_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(plan_mps_glpsol PROPERTIES LABELS "MPS")
+  set_tests_properties(plan_mps_glpsol PROPERTIES LABELS "DISTRIB;MPS")
   if (WIN32)
     set_tests_properties(plan_mps_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME samp1_mps_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_SOURCE_DIR}/examples/samp1.mps)
+           COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_CURRENT_SOURCE_DIR}/examples/samp1.mps)
   set_tests_properties(samp1_mps_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(samp1_mps_glpsol PROPERTIES LABELS "MPS")
+  set_tests_properties(samp1_mps_glpsol PROPERTIES LABELS "DISTRIB;MPS")
   if (WIN32)
     set_tests_properties(samp1_mps_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME samp2_mps_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_SOURCE_DIR}/examples/samp2.mps)
+           COMMAND $<TARGET_FILE:glpsol> --mps ${CMAKE_CURRENT_SOURCE_DIR}/examples/samp2.mps)
   set_tests_properties(samp2_mps_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(samp2_mps_glpsol PROPERTIES LABELS "MPS")
+  set_tests_properties(samp2_mps_glpsol PROPERTIES LABELS "DISTRIB;MPS")
   if (WIN32)
     set_tests_properties(samp2_mps_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
@@ -860,9 +860,9 @@ if (GLPK_BUILD_EXAMPLES)
   #
 
   add_test(NAME plan_lp_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --lp ${CMAKE_SOURCE_DIR}/examples/plan.lp)
+           COMMAND $<TARGET_FILE:glpsol> --lp ${CMAKE_CURRENT_SOURCE_DIR}/examples/plan.lp)
   set_tests_properties(plan_lp_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(plan_lp_glpsol PROPERTIES LABELS "LP")
+  set_tests_properties(plan_lp_glpsol PROPERTIES LABELS "DISTRIB;LP")
   if (WIN32)
     set_tests_properties(plan_lp_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
@@ -872,450 +872,450 @@ if (GLPK_BUILD_EXAMPLES)
   #
 
   add_test(NAME assign_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/assign.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/assign.mod)
   set_tests_properties(assign_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(assign_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(assign_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(assign_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME bpp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/bpp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/bpp.mod)
   set_tests_properties(bpp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(bpp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(bpp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(bpp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME cal_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/cal.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/cal.mod)
   set_tests_properties(cal_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(cal_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(cal_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(cal_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME cf12a_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/cf12a.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/cf12a.mod)
   set_tests_properties(cf12a_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(cf12a_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(cf12a_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(cf12a_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME cf12b_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/cf12b.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/cf12b.mod)
   set_tests_properties(cf12b_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(cf12b_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(cf12b_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(cf12b_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME cflsq_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/cflsq.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/cflsq.mod)
   set_tests_properties(cflsq_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(cflsq_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(cflsq_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(cflsq_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME color_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/color.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/color.mod)
   set_tests_properties(color_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(color_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(color_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(color_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME cpp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/cpp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/cpp.mod)
   set_tests_properties(cpp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(cpp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(cpp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(cpp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME crypto_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/crypto.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/crypto.mod)
   set_tests_properties(crypto_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(crypto_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(crypto_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(crypto_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME dea_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/dea.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/dea.mod)
   set_tests_properties(dea_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(dea_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(dea_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(dea_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME diet_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/diet.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/diet.mod)
   set_tests_properties(diet_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(diet_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(diet_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(diet_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME dist_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/dist.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/dist.mod)
   set_tests_properties(dist_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(dist_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(dist_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(dist_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME egypt_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/egypt.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/egypt.mod)
   set_tests_properties(egypt_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(egypt_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(egypt_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(egypt_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME fctp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/fctp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/fctp.mod)
   set_tests_properties(fctp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(fctp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(fctp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(fctp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME food2_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/food2.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/food2.mod)
   set_tests_properties(food2_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(food2_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(food2_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(food2_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME food_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/food.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/food.mod)
   set_tests_properties(food_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(food_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(food_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(food_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME gap_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/gap.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/gap.mod)
   set_tests_properties(gap_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(gap_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(gap_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(gap_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME graph_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/graph.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/graph.mod)
   set_tests_properties(graph_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(graph_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(graph_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(graph_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME hashi_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/hashi.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/hashi.mod)
   set_tests_properties(hashi_mod_glpsol PROPERTIES TIMEOUT 3000)
-  set_tests_properties(hashi_mod_glpsol PROPERTIES LABELS "MATHPROG;LONG")
+  set_tests_properties(hashi_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG;LONG")
   if (WIN32)
     set_tests_properties(hashi_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME huge_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/huge.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/huge.mod)
   set_tests_properties(huge_mod_glpsol PROPERTIES TIMEOUT 60)
-  set_tests_properties(huge_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(huge_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(huge_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME jssp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/jssp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/jssp.mod)
   set_tests_properties(jssp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(jssp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(jssp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(jssp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME magic_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/magic.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/magic.mod)
   set_tests_properties(magic_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(magic_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(magic_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(magic_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME maxcut_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/maxcut.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/maxcut.mod)
   set_tests_properties(maxcut_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(maxcut_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(maxcut_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(maxcut_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME maxflow_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/maxflow.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/maxflow.mod)
   set_tests_properties(maxflow_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(maxflow_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(maxflow_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(maxflow_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME mfasp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/mfasp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/mfasp.mod)
   set_tests_properties(mfasp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(mfasp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(mfasp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(mfasp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME mfvsp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/mfvsp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/mfvsp.mod)
   set_tests_properties(mfvsp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(mfvsp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(mfvsp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(mfvsp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME min01ks_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/min01ks.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/min01ks.mod)
   set_tests_properties(min01ks_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(min01ks_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(min01ks_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(min01ks_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME misp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/misp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/misp.mod)
   set_tests_properties(misp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(misp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(misp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(misp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME money_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/money.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/money.mod)
   set_tests_properties(money_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(money_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(money_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(money_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME mvcp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/mvcp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/mvcp.mod)
   set_tests_properties(mvcp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(mvcp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(mvcp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(mvcp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME numbrix_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/numbrix.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/numbrix.mod)
   set_tests_properties(numbrix_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(numbrix_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(numbrix_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(numbrix_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME plan_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/plan.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/plan.mod)
   set_tests_properties(plan_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(plan_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(plan_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(plan_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME prod_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/prod.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/prod.mod)
   set_tests_properties(prod_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(prod_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(prod_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(prod_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME qfit_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/qfit.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/qfit.mod)
   set_tests_properties(qfit_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(qfit_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(qfit_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(qfit_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME queens_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/queens.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/queens.mod)
   set_tests_properties(queens_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(queens_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(queens_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(queens_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME sat_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/sat.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/sat.mod)
   set_tests_properties(sat_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(sat_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(sat_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(sat_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME shiftcov_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/shiftcov.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/shiftcov.mod)
   set_tests_properties(shiftcov_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(shiftcov_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(shiftcov_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(shiftcov_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME shikaku_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/shikaku.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/shikaku.mod)
   set_tests_properties(shikaku_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(shikaku_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(shikaku_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(shikaku_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME sorting_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/sorting.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/sorting.mod)
   set_tests_properties(sorting_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(sorting_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(sorting_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(sorting_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME spp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/spp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/spp.mod)
   set_tests_properties(spp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(spp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(spp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(spp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME stigler_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/stigler.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/stigler.mod)
   set_tests_properties(stigler_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(stigler_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(stigler_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(stigler_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME sudoku_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/sudoku.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/sudoku.mod)
   set_tests_properties(sudoku_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(sudoku_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(sudoku_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(sudoku_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME tas_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/tas.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/tas.mod)
   set_tests_properties(tas_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(tas_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(tas_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(tas_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME todd_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/todd.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/todd.mod)
   set_tests_properties(todd_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(todd_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(todd_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(todd_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME train_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/train.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/train.mod)
   set_tests_properties(train_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(train_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(train_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(train_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME transp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/transp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/transp.mod)
   set_tests_properties(transp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(transp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(transp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(transp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME trick_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/trick.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/trick.mod)
   set_tests_properties(trick_mod_glpsol PROPERTIES TIMEOUT 3000)
-  set_tests_properties(trick_mod_glpsol PROPERTIES LABELS "MATHPROG;LONG")
+  set_tests_properties(trick_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG;LONG")
   if (WIN32)
     set_tests_properties(trick_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME tsp_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/tsp.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/tsp.mod)
   set_tests_properties(tsp_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(tsp_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(tsp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(tsp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME xyacfs_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/xyacfs.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/xyacfs.mod)
   set_tests_properties(xyacfs_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(xyacfs_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(xyacfs_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(xyacfs_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME yacfs_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/yacfs.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/yacfs.mod)
   set_tests_properties(yacfs_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(yacfs_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(yacfs_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(yacfs_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME zebra_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/zebra.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/zebra.mod)
   set_tests_properties(zebra_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(zebra_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(zebra_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(zebra_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME csv_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math transp_csv.mod
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/csv)
+           COMMAND $<TARGET_FILE:glpsol> --math transp_csv.mod
+           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/examples/csv)
   set_tests_properties(csv_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(csv_mod_glpsol PROPERTIES LABELS "MATHPROG;FAIL")
+  set_tests_properties(csv_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG;FAIL")
   if (WIN32)
     set_tests_properties(csv_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
   add_test(NAME dbf_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/dbf/ForestMgt_Model_I_GIS_dbf.mod
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/examples/dbf)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/dbf/ForestMgt_Model_I_GIS_dbf.mod
+           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/examples/dbf)
   set_tests_properties(dbf_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(dbf_mod_glpsol PROPERTIES LABELS "MATHPROG;FAIL")
+  set_tests_properties(dbf_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG;FAIL")
   if (WIN32)
     set_tests_properties(dbf_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
 
   add_test(NAME pbn_mod_glpsol
-    COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/pbn/pbn.mod)
+           COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/pbn/pbn.mod)
   set_tests_properties(pbn_mod_glpsol PROPERTIES TIMEOUT 30)
-  set_tests_properties(pbn_mod_glpsol PROPERTIES LABELS "MATHPROG")
+  set_tests_properties(pbn_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG")
   if (WIN32)
     set_tests_properties(pbn_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
   endif ()
   if (GLPK_WITH_ODBC)
     add_test(NAME odbc_sudoku_mod_glpsol
-      COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/sql/sudoku_odbc.mod)
+             COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/sql/sudoku_odbc.mod)
     set_tests_properties(odbc_sudoku_mod_glpsol PROPERTIES TIMEOUT 30)
-    set_tests_properties(odbc_sudoku_mod_glpsol PROPERTIES LABELS "MATHPROG;ODBC")
+    set_tests_properties(odbc_sudoku_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG;ODBC")
     if (WIN32)
       set_tests_properties(odbc_sudoku_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
     endif ()
     
     add_test(NAME odbc_transp_mod_glpsol
-      COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/sql/transp_odbc.mod)
+             COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/sql/transp_odbc.mod)
     set_tests_properties(odbc_transp_mod_glpsol PROPERTIES TIMEOUT 30)
-    set_tests_properties(odbc_transp_mod_glpsol PROPERTIES LABELS "MATHPROG;ODBC")
+    set_tests_properties(odbc_transp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG;ODBC")
     if (WIN32)
       set_tests_properties(odbc_transp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
     endif ()
@@ -1323,17 +1323,17 @@ if (GLPK_BUILD_EXAMPLES)
 
   if (GLPK_WITH_MYSQL)
     add_test(NAME mysql_sudoku_mod_glpsol
-      COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/sql/sudoku_mysql.mod)
+             COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/sql/sudoku_mysql.mod)
     set_tests_properties(mysql_sudoku_mod_glpsol PROPERTIES TIMEOUT 30)
-    set_tests_properties(mysql_sudoku_mod_glpsol PROPERTIES LABELS "MATHPROG;MYSQL")
+    set_tests_properties(mysql_sudoku_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG;MYSQL")
     if (WIN32)
       set_tests_properties(mysql_sudoku_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
     endif ()
     
     add_test(NAME mysql_transp_mod_glpsol
-      COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_SOURCE_DIR}/examples/sql/transp_mysql.mod)
+             COMMAND $<TARGET_FILE:glpsol> --math ${CMAKE_CURRENT_SOURCE_DIR}/examples/sql/transp_mysql.mod)
     set_tests_properties(mysql_transp_mod_glpsol PROPERTIES TIMEOUT 30)
-    set_tests_properties(mysql_transp_mod_glpsol PROPERTIES LABELS "MATHPROG;MYSQL")
+    set_tests_properties(mysql_transp_mod_glpsol PROPERTIES LABELS "DISTRIB;MATHPROG;MYSQL")
     if (WIN32)
       set_tests_properties(mysql_transp_mod_glpsol PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/lib\\;${CMAKE_BINARY_DIR}/bin")
     endif ()
