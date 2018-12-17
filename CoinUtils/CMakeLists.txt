@@ -36,7 +36,7 @@ set(COIN_THREADS_INC_PATH "None" CACHE PATH "The path to the PThreads header fil
 set(COIN_THREADS_LIB_PATH "None" CACHE PATH "The path to the PThreads library files")
 
 # Set paths of source
-set(COIN_DIR "${CMAKE_SOURCE_DIR}" CACHE PATH "The CoinUtils Path")
+set(COIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "The CoinUtils Path")
 
 mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_THREADS_LIB_PATH
@@ -69,7 +69,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-                      ${CMAKE_SOURCE_DIR}/cmake)
+                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(coin-macros)
 include(GetAcInitVersion)
@@ -112,8 +112,8 @@ endif ()
 if (COIN_ENABLE_COMPAT)
   # Disable extra stdc++ symbols (@GLIBCXX_3.4.21)
   add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -include ${CMAKE_SOURCE_DIR}/cmake/compatibility.h")
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${CMAKE_SOURCE_DIR}/cmake/compatibility.h")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -include ${CMAKE_CURRENT_SOURCE_DIR}/cmake/compatibility.h")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -include ${CMAKE_CURRENT_SOURCE_DIR}/cmake/compatibility.h")
 endif ()
 
 # Desactivate some relocation types for portability
@@ -147,7 +147,7 @@ if (USE_PROCESSOR_EXTENSIONS)
   endif ()
 endif ()
 
-if ((NOT COIN_DIR STREQUAL CMAKE_SOURCE_DIR) AND (NOT EXISTS ${COIN_DIR}))
+if ((NOT COIN_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR) AND (NOT EXISTS ${COIN_DIR}))
   message(FATAL_ERROR "Error: COIN_DIR = ${COIN_DIR} which is not an existing directory")
 endif ()
 
@@ -335,10 +335,10 @@ if (COIN_COMPILE_COVERAGE)
   # /!\ FAILURE IF AT LEAST ONE TEST FAILS
   # Capturing lcov counters and generating report
   add_custom_target(coverage
-                    COMMAND ${LCOV_PATH} --directory ${CMAKE_SOURCE_DIR} --zerocounters
-                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --directory ${CMAKE_CURRENT_SOURCE_DIR} --zerocounters
+                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L SAMPLE
-                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
@@ -591,12 +591,12 @@ set(doc_dir doc)
 find_package(Doxygen)
 
 if (DOXYGEN AND ENABLE_DOXYGEN)
-  configure_file(${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf.in           ${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf)
-  configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doxydoc/doxygen.conf.in           ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf)
 
   add_custom_target(docs 
-                    ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/doxydoc/doxygen.conf
-                    ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf)
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf)
 endif ()
 
 subdirs(ThirdParty)

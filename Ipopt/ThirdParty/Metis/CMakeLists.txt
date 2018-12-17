@@ -56,7 +56,7 @@ set(METIS_SRCS Lib/coarsen.c
                Lib/subdomains.c)
 
 #need to add this directory to the includes since metis uses #include<...> for some reason.
-include_directories(${CMAKE_SOURCE_DIR}/Lib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Lib)
 
 if (WIN32)
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB}")

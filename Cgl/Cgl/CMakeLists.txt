@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Cgl/configure.ac CGL)
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac CGL)
 
 option(CGL_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -35,8 +35,8 @@ mark_as_advanced(CGL_VERSION_MAJOR
 
 add_definitions(-DCGL_BUILD)
 
-configure_file(${CMAKE_SOURCE_DIR}/Cgl/include/config_cgl.h.in ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h)
-configure_file(${CMAKE_SOURCE_DIR}/Cgl/include/config.h.in     ${CMAKE_BINARY_DIR}/Cgl/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_cgl.h.in ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Cgl/include/config.h)
 
 set(Cgl_SRC_LIST ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRoundingTest.cpp
                  ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRounding.cpp

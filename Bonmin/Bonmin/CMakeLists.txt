@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Bonmin/configure.ac BONMIN)
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac BONMIN)
 
 option(BONMIN_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -35,8 +35,8 @@ mark_as_advanced(BONMIN_VERSION_MAJOR
 
 add_definitions(-DBONMIN_BUILD)
 
-configure_file(${CMAKE_SOURCE_DIR}/Bonmin/include/config.h.in        ${CMAKE_BINARY_DIR}/Bonmin/include/config.h)
-configure_file(${CMAKE_SOURCE_DIR}/Bonmin/include/config_bonmin.h.in ${CMAKE_BINARY_DIR}/Bonmin/include/config_bonmin.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in        ${CMAKE_BINARY_DIR}/Bonmin/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_bonmin.h.in ${CMAKE_BINARY_DIR}/Bonmin/include/config_bonmin.h)
 
 include_directories(${Bonmin_DIR}/src/Interfaces/)
 include_directories(${Bonmin_DIR}/src/Interfaces/Filter/)
@@ -52,13 +52,13 @@ include_directories(${Bonmin_DIR}/src/CbcBonmin/Heuristics/)
 include_directories(${Bonmin_DIR}/src/CbcBonmin/)
 include_directories(${Bonmin_DIR}/src/Apps/)
 
-include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver)
-include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm)
-include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers)
-include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Interfaces)
-include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/Common)
-include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/LinAlg)
-include_directories(${CMAKE_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Common)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices)
 include_directories(${CMAKE_BINARY_DIR}/Ipopt/include)
 
 set(Bonmin_SRC_LIST ${Bonmin_DIR}/src/Interfaces/BonTNLPSolver.cpp
@@ -230,8 +230,8 @@ endif ()
 
 if (COIN_ENABLE_COMPAT)
   set(Bonmin_SRC_LIST ${Bonmin_SRC_LIST}
-                      ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
-                      ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/compat.cpp
+                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake/compat.c)
 endif ()
 
 include_directories(${Bonmin_DIR}/src)
@@ -439,10 +439,10 @@ add_example(bonmin ${Cbc_DIR}/src/CoinSolve.cpp)
 
 if (BONMIN_BUILD_EXAMPLES)
   # CExample
-  set(CEXAMPLE_SRCS ${CMAKE_SOURCE_DIR}/Bonmin/examples/CExample/main.c
-                    ${CMAKE_SOURCE_DIR}/Bonmin/examples/CExample/MyBonmin.c)
+  set(CEXAMPLE_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CExample/main.c
+                    ${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CExample/MyBonmin.c)
 
-  include_directories(${CMAKE_SOURCE_DIR}/Bonmin/examples/CExample)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CExample)
 
   add_example(cexample ${CEXAMPLE_SRCS})
   
@@ -453,10 +453,10 @@ if (BONMIN_BUILD_EXAMPLES)
 
   #CppExample
   
-  set(CEXAMPLE_SRCS ${CMAKE_SOURCE_DIR}/Bonmin/examples/CppExample/MyTMINLP.cpp
-                    ${CMAKE_SOURCE_DIR}/Bonmin/examples/CppExample/MyBonmin.cpp)
+  set(CEXAMPLE_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CppExample/MyTMINLP.cpp
+                    ${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CppExample/MyBonmin.cpp)
 
-  include_directories(${CMAKE_SOURCE_DIR}/Bonmin/examples/CppExample)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CppExample)
 
   add_example(cppexample ${CEXAMPLE_SRCS})
   

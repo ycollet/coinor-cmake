@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/DyLP/configure.ac DYLP)
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac DYLP)
 
 option(DYLP_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -40,8 +40,8 @@ if (CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic-errors -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long")
 endif ()
 
-configure_file(${CMAKE_SOURCE_DIR}/DyLP/include/config.h.in ${CMAKE_BINARY_DIR}/DyLP/include/config_dylp.h)
-configure_file(${CMAKE_SOURCE_DIR}/DyLP/include/config.h.in ${CMAKE_BINARY_DIR}/DyLP/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in ${CMAKE_BINARY_DIR}/DyLP/include/config_dylp.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in ${CMAKE_BINARY_DIR}/DyLP/include/config.h)
 
 set(DyLPSTDLIB_SRC_LIST ${DyLP_DIR}/src/DylpStdLib/dylib_binsrch.c
                         ${DyLP_DIR}/src/DylpStdLib/dylib_bnfrdrio.c
@@ -94,8 +94,8 @@ set(DyLP_SRC_LIST ${DyLP_DIR}/src/Dylp/dy_basis.c
 
 if (COIN_ENABLE_COMPAT)
   set(DyLP_SRC_LIST ${DyLP_SRC_LIST}
-                    ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
-                    ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compat.cpp
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compat.c)
 endif ()
 
 include_directories(${BuildTools_DIR}/headers)
@@ -175,7 +175,7 @@ if (DYLP_BUILD_EXAMPLES)
   add_example(osi_dylp ${DyLP_DIR}/examples/osi_dylp.c ${DyLP_DIR}/examples/mpsio.c)
   
   add_test(NAME osi_dylp_example_afiro
-           COMMAND $<TARGET_FILE:osi_dylp> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:osi_dylp> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
   set_tests_properties(osi_dylp_example_afiro PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(osi_dylp_example_afiro PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")

@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Osi/configure.ac OSI)
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/../configure.ac OSI)
 
 set(OSI_VERSION_MAJOR   "${OSI_MAJOR_VERSION}"  CACHE STRING "The OSI major version number")
 set(OSI_VERSION_MINOR   "${OSI_MINOR_VERSION}"  CACHE STRING "The OSI minor version number")
@@ -6,18 +6,18 @@ set(OSI_VERSION_RELEASE "${OSI_PATCH_VERSION}"  CACHE STRING "The OSI patch vers
 set(OSI_VERSION         "${OSI_VERSION_STRING}" CACHE STRING "The OSI version")
 
 set(OSI_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../../.svn")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/../.. OSI)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. OSI)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../../.git")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/../.. OSI)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. OSI)
     set(OSI_WC_REVISION "${OSI_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
@@ -33,8 +33,8 @@ mark_as_advanced(OSI_VERSION_MAJOR
 
 add_definitions(-DOSI_BUILD)
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/include/config_osi.h.in ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h)
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/include/config.h.in     ${CMAKE_BINARY_DIR}/Osi/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osi.h.in ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Osi/include/config.h)
 
 set(Osi_SRC_LIST ${Osi_DIR}/src/Osi/OsiAuxInfo.cpp
                  ${Osi_DIR}/src/Osi/OsiBranchingObject.cpp

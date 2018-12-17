@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/Vol/configure.ac VOL)
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac VOL)
 
 option(VOL_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -39,14 +39,14 @@ if (CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic-errors -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long")
 endif ()
 
-configure_file(${CMAKE_SOURCE_DIR}/Vol/include/config_vol.h.in ${CMAKE_BINARY_DIR}/Vol/include/config_vol.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_vol.h.in ${CMAKE_BINARY_DIR}/Vol/include/config_vol.h)
 
 set(Vol_SRC_LIST ${Vol_DIR}/src/VolVolume.cpp)
 
 if (COIN_ENABLE_COMPAT)
   set(Vol_SRC_LIST ${Vol_SRC_LIST}
-                   ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
-                   ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+                   ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compat.cpp
+                   ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compat.c)
 endif ()
 
 include_directories(${BuildTools_DIR}/headers)
@@ -127,7 +127,7 @@ if (VOL_BUILD_EXAMPLES)
   add_example(vollp ${Vol_DIR}/examples/VolLp/vollp.cpp)
   
   add_test(NAME vollp_example_afiro
-           COMMAND $<TARGET_FILE:vollp> ${CMAKE_SOURCE_DIR}/Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:vollp> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
   set_tests_properties(vollp_example_afiro PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(vollp_example_afiro PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
@@ -138,7 +138,7 @@ if (VOL_BUILD_EXAMPLES)
   # TODO: Need to gunzip Vol/examples/VolUfl/data.gz
   add_test(NAME volufl_example_par
            COMMAND $<TARGET_FILE:volufl>
-           WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Vol/examples/VolUfl)
+           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/examples/VolUfl)
   
   set_tests_properties(volufl_example_par PROPERTIES TIMEOUT 30)
   if (WIN32)
@@ -152,7 +152,7 @@ if (VOL_BUILD_EXAMPLES)
 
   add_test(NAME volume_lp_example_data
            COMMAND $<TARGET_FILE:volume-lp>
-           WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/Vol/examples/Volume-LP)
+           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/examples/Volume-LP)
   
   set_tests_properties(volume_lp_example_data PROPERTIES TIMEOUT 30)
   if (WIN32)

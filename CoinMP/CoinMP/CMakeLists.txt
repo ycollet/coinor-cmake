@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/CoinMP/configure.ac COINMP)
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac COINMP)
 
 option(COINMP_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -33,8 +33,8 @@ if (CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic-errors -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long")
 endif ()
 
-configure_file(${CMAKE_SOURCE_DIR}/CoinMP/include/config.h.in        ${CMAKE_BINARY_DIR}/CoinMP/include/config.h)
-configure_file(${CMAKE_SOURCE_DIR}/CoinMP/include/config_coinmp.h.in ${CMAKE_BINARY_DIR}/CoinMP/include/config_coinmp.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in        ${CMAKE_BINARY_DIR}/CoinMP/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_coinmp.h.in ${CMAKE_BINARY_DIR}/CoinMP/include/config_coinmp.h)
 
 set(CoinMP_SRC_LIST ${CoinMP_DIR}/src/CoinMP.cpp
                     ${CoinMP_DIR}/src/CoinProblem.c
@@ -45,8 +45,8 @@ set(CoinMP_SRC_LIST ${CoinMP_DIR}/src/CoinMP.cpp
 
 if (COIN_ENABLE_COMPAT)
   set(CoinMP_SRC_LIST ${CoinMP_SRC_LIST}
-                      ${CMAKE_SOURCE_DIR}/cmake/compat.cpp
-                      ${CMAKE_SOURCE_DIR}/cmake/compat.c)
+                      ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compat.cpp
+                      ${CMAKE_CURRENT_SOURCE_DIR}/../cmake/compat.c)
 endif ()
 
 include_directories(${BuildTools_DIR}/headers)
@@ -199,7 +199,7 @@ if (COINMP_BUILD_EXAMPLES)
   add_example(example ${CoinMP_DIR}/examples/example.c)
   
   add_test(NAME coinmp_example
-           COMMAND $<TARGET_FILE:example> ${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:example> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample)
   set_tests_properties(coinmp_example PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(coinmp_example PROPERTIES ENVIRONMENT "PATH=${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib\\;${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")

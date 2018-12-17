@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_SOURCE_DIR}/CoinUtils/configure.ac COINUTILS)
+get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac COINUTILS)
 
 option(COINUTILS_ENABLE_UNITTEST "Enable building the unit test executable" OFF)
 
@@ -64,8 +64,8 @@ include(coin-macros)
 
 add_definitions(-DCOINUTILS_BUILD)
 
-configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/include/config_coinutils.h.in ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h)
-configure_file(${CMAKE_SOURCE_DIR}/CoinUtils/include/config.h.in           ${CMAKE_BINARY_DIR}/CoinUtils/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_coinutils.h.in ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in           ${CMAKE_BINARY_DIR}/CoinUtils/include/config.h)
 
 set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinBuild.cpp
@@ -254,7 +254,7 @@ if (COINUTILS_ENABLE_UNITTEST)
   set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
   
   add_test(NAME unitTest_coinutils
-           COMMAND $<TARGET_FILE:unitTest-coinutils> -mpsDir=${CMAKE_SOURCE_DIR}/Data/Sample)
+           COMMAND $<TARGET_FILE:unitTest-coinutils> -mpsDir=${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample)
   set_tests_properties(unitTest_coinutils PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(unitTest_coinutils PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
