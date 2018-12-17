@@ -36,168 +36,168 @@ add_definitions(-DIPOPT_BUILD)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in       ${CMAKE_BINARY_DIR}/Ipopt/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_ipopt.h.in ${CMAKE_BINARY_DIR}/Ipopt/include/config_ipopt.h)
 
-set (IPOPT_SRC_ALGORITHM_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpAdaptiveMuUpdate.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpAlgBuilder.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpAlgorithmRegOp.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpAugRestoSystemSolver.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpBacktrackingLineSearch.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpDefaultIterateInitializer.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpEquilibrationScaling.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpExactHessianUpdater.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpFilterLSAcceptor.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpFilter.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpGenAugSystemSolver.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpGradientScaling.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpIpoptAlg.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpIpoptCalculatedQuantities.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpIpoptData.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpIteratesVector.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpLeastSquareMults.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpLimMemQuasiNewtonUpdater.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpLoqoMuOracle.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpLowRankAugSystemSolver.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpLowRankSSAugSystemSolver.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpMonotoneMuUpdate.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpNLPBoundsRemover.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpNLPScaling.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpOptErrorConvCheck.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpOrigIpoptNLP.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpOrigIterationOutput.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpPDFullSpaceSolver.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpPDPerturbationHandler.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpPDSearchDirCalc.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpPenaltyLSAcceptor.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpProbingMuOracle.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpQualityFunctionMuOracle.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpRestoConvCheck.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpRestoFilterConvCheck.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpRestoIpoptNLP.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpRestoIterateInitializer.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpRestoIterationOutput.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpRestoMinC_1Nrm.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpRestoPenaltyConvCheck.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpRestoRestoPhase.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpStdAugSystemSolver.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpTimingStatistics.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpUserScaling.cpp
-                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/IpWarmStartIterateInitializer.cpp)
+set (IPOPT_SRC_ALGORITHM_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpAdaptiveMuUpdate.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpAlgBuilder.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpAlgorithmRegOp.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpAugRestoSystemSolver.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpBacktrackingLineSearch.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpDefaultIterateInitializer.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpEquilibrationScaling.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpExactHessianUpdater.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpFilterLSAcceptor.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpFilter.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpGenAugSystemSolver.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpGradientScaling.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpIpoptAlg.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpIpoptCalculatedQuantities.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpIpoptData.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpIteratesVector.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpLeastSquareMults.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpLimMemQuasiNewtonUpdater.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpLoqoMuOracle.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpLowRankAugSystemSolver.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpLowRankSSAugSystemSolver.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpMonotoneMuUpdate.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpNLPBoundsRemover.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpNLPScaling.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpOptErrorConvCheck.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpOrigIpoptNLP.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpOrigIterationOutput.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpPDFullSpaceSolver.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpPDPerturbationHandler.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpPDSearchDirCalc.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpPenaltyLSAcceptor.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpProbingMuOracle.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpQualityFunctionMuOracle.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpRestoConvCheck.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpRestoFilterConvCheck.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpRestoIpoptNLP.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpRestoIterateInitializer.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpRestoIterationOutput.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpRestoMinC_1Nrm.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpRestoPenaltyConvCheck.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpRestoRestoPhase.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpStdAugSystemSolver.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpTimingStatistics.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpUserScaling.cpp
+                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/IpWarmStartIterateInitializer.cpp)
 
-set (IPOPT_SRC_ALGORITHM_INEXACT_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactAlgBuilder.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactCq.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactData.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactDoglegNormal.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactLSAcceptor.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactNewtonNormal.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactNormalTerminationTester.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactRegOp.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactSearchDirCalc.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactTSymScalingMethod.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpIterativeSolverTerminationTester.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactPDSolver.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpInexactPDTerminationTester.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact/IpIterativePardisoSolverInterface.cpp)
+set (IPOPT_SRC_ALGORITHM_INEXACT_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactAlgBuilder.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactCq.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactData.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactDoglegNormal.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactLSAcceptor.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactNewtonNormal.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactNormalTerminationTester.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactRegOp.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactSearchDirCalc.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactTSymScalingMethod.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpIterativeSolverTerminationTester.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactPDSolver.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpInexactPDTerminationTester.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact/IpIterativePardisoSolverInterface.cpp)
 
-set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpLinearSolversRegOp.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpSlackBasedTSymScalingMethod.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpTripletToCSRConverter.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpTSymDependencyDetector.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpTSymLinearSolver.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa27TSolverInterface.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa57TSolverInterface.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa86SolverInterface.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa97SolverInterface.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMc19TSymScalingMethod.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa28TDependencyDetector.cpp
-                                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa77SolverInterface.cpp)
+set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpLinearSolversRegOp.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpSlackBasedTSymScalingMethod.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpTripletToCSRConverter.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpTSymDependencyDetector.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpTSymLinearSolver.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa27TSolverInterface.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa57TSolverInterface.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa86SolverInterface.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa97SolverInterface.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMc19TSymScalingMethod.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa28TDependencyDetector.cpp
+                                            ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa77SolverInterface.cpp)
 
 if (BUILD_LINEARSOLVERLOADER AND CMAKE_Fortran_COMPILER)
   set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
-                                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.cpp
-                                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa28Partition.F)
+                                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.cpp
+                                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa28Partition.F)
 else ()
   if (IPOPT_HAS_PARDISO)
     set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
-                                                ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.cpp)
+                                                ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.cpp)
   endif ()
   if (COINHSL_HAVE_MA28 AND CMAKE_Fortran_COMPILER)
     set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
-                                                ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMa28Partition.F)
+                                                ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa28Partition.F)
   endif ()
 endif ()
 
 if (IPOPT_HAS_WSMP)
   set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
-                                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpWsmpSolverInterface.cpp
-                                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpIterativeWsmpSolverInterface.cpp)
+                                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpWsmpSolverInterface.cpp
+                                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpIterativeWsmpSolverInterface.cpp)
 endif ()
 
 if (IPOPT_HAS_MUMPS)
   set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
-                                              ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpMumpsSolverInterface.cpp)
+                                              ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMumpsSolverInterface.cpp)
 endif ()
 
 set (IPOPT_SRC_APPS_CUTERINTERFACE_LIST )
 set (IPOPT_SRC_APPS_AMPLSOLVER_LIST )
 
-set (IPOPT_SRC_CONTRIB_CGPENALTY_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/CGPenalty/IpCGPenaltyCq.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/CGPenalty/IpCGPenaltyData.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/CGPenalty/IpCGPenaltyLSAcceptor.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/CGPenalty/IpCGPenaltyRegOp.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/CGPenalty/IpCGPerturbationHandler.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/CGPenalty/IpCGSearchDirCalc.cpp
-                                      ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/CGPenalty/IpPiecewisePenalty.cpp)
+set (IPOPT_SRC_CONTRIB_CGPENALTY_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/CGPenalty/IpCGPenaltyCq.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/CGPenalty/IpCGPenaltyData.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/CGPenalty/IpCGPenaltyLSAcceptor.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/CGPenalty/IpCGPenaltyRegOp.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/CGPenalty/IpCGPerturbationHandler.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/CGPenalty/IpCGSearchDirCalc.cpp
+                                      ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/CGPenalty/IpPiecewisePenalty.cpp)
 
-set (IPOPT_SRC_CONTRIB_LINEARSOLVERLOADER_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/LinearSolverLoader/LibraryHandler.c
-                                               ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/LinearSolverLoader/HSLLoader.c)
+set (IPOPT_SRC_CONTRIB_LINEARSOLVERLOADER_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/LinearSolverLoader/LibraryHandler.c
+                                               ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/LinearSolverLoader/HSLLoader.c)
 
 if (BUILD_PARDISOLOADER)
   set(IPOPT_SRC_CONTRIB_LINEARSOLVERLOADER_LIST ${IPOPT_SRC_CONTRIB_LINEARSOLVERLOADER_LIST}
-                                                ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/LinearSolverLoader/PardisoLoader.c)
+                                                ${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/LinearSolverLoader/PardisoLoader.c)
 endif ()
 
-set (IPOPT_SRC_COMMON_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Common/IpJournalist.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Common/IpObserver.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Common/IpOptionsList.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Common/IpRegOptions.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Common/IpTaggedObject.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Common/IpUtils.cpp)
+set (IPOPT_SRC_COMMON_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/Common/IpJournalist.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/Common/IpObserver.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/Common/IpOptionsList.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/Common/IpRegOptions.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/Common/IpTaggedObject.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/Common/IpUtils.cpp)
 
-set (IPOPT_SRC_INTERFACES_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces/IpInterfacesRegOp.cpp
-                               ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces/IpIpoptApplication.cpp
-                               ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces/IpSolveStatistics.cpp
-                               ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces/IpStdCInterface.cpp
-                               ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces/IpStdFInterface.c
-                               ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces/IpStdInterfaceTNLP.cpp
-                               ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces/IpTNLPAdapter.cpp
-                               ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces/IpTNLPReducer.cpp)
+set (IPOPT_SRC_INTERFACES_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces/IpInterfacesRegOp.cpp
+                               ${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces/IpIpoptApplication.cpp
+                               ${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces/IpSolveStatistics.cpp
+                               ${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces/IpStdCInterface.cpp
+                               ${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces/IpStdFInterface.c
+                               ${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces/IpStdInterfaceTNLP.cpp
+                               ${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces/IpTNLPAdapter.cpp
+                               ${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces/IpTNLPReducer.cpp)
 
-set (IPOPT_SRC_LINALG_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpBlas.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpCompoundMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpCompoundSymMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpCompoundVector.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpDenseGenMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpDenseSymMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpDenseVector.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpDiagMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpExpandedMultiVectorMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpExpansionMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpIdentityMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpLapack.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpLowRankUpdateSymMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpMultiVectorMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpScaledMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpSumMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpSumSymMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpSymScaledMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpTransposeMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpVector.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpZeroMatrix.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/IpZeroSymMatrix.cpp)
+set (IPOPT_SRC_LINALG_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpBlas.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpCompoundMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpCompoundSymMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpCompoundVector.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpDenseGenMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpDenseSymMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpDenseVector.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpDiagMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpExpandedMultiVectorMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpExpansionMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpIdentityMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpLapack.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpLowRankUpdateSymMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpMultiVectorMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpScaledMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpSumMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpSumSymMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpSymScaledMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpTransposeMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpVector.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpZeroMatrix.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/IpZeroSymMatrix.cpp)
 
-set (IPOPT_SRC_LINALG_TMATRICES ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices/IpGenTMatrix.cpp
-                                ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices/IpSymTMatrix.cpp
-                                ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices/IpTripletHelper.cpp)
+set (IPOPT_SRC_LINALG_TMATRICES ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/TMatrices/IpGenTMatrix.cpp
+                                ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/TMatrices/IpSymTMatrix.cpp
+                                ${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/TMatrices/IpTripletHelper.cpp)
 
 set (IPOPT_SRC_LIST ${IPOPT_SRC_ALGORITHM_LIST}
                     ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
@@ -215,28 +215,28 @@ if (IPOPT_ENABLE_INEXACT)
                      ${IPOPT_SRC_ALGORITHM_INEXACT_LIST})
 endif ()
 
-if (COIN_ENABLE_COMPAT)
-  set(IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
-                     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/compat.cpp
-                     ${CMAKE_CURRENT_SOURCE_DIR}/cmake/compat.c)
+if (IPOPT_HAS_AMPL)
+  set (IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
+                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp
+                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
 endif ()
 
 macro(set_include_directories TARGET)
-  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Ipopt/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/include)
 endmacro ()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/HSL)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/LinearSolvers)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Algorithm/Inexact)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/CGPenalty)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/contrib/LinearSolverLoader)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Interfaces)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Common)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/LinAlg/TMatrices)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/Inexact)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/CGPenalty)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/contrib/LinearSolverLoader)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/Interfaces)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/Common)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/Apps/AmplSolver)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/LinAlg/TMatrices)
 
 if (WIN32)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_DEPRECATE)
@@ -246,6 +246,9 @@ if (ENABLE_SHARED_LIBRARIES)
   add_library(libIpopt SHARED ${IPOPT_SRC_LIST})
 else ()
   add_library(libIpopt STATIC ${IPOPT_SRC_LIST})
+endif ()
+if (COIN_COMPILE_LTO)
+  set_target_properties(libIpopt PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
 endif ()
 if (NOT WIN32)
   set_target_properties(libIpopt PROPERTIES PREFIX "")
@@ -295,26 +298,29 @@ if (IPOPT_HAS_AMPL)
 endif ()
 
 if (IPOPT_BUILD_EXAMPLES)
-  set(ScalableProblems_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek1.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek2.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek3.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek4.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek5.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek6.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/LuksanVlcek7.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3Dsin.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D_27.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri3D.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlDiri.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlDiri.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumA.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannDistCntrlNeumB.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/MittelmannBndryCntrlNeum.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/RegisteredTNLP.cpp
-                            ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems/solve_problem.cpp)
+  set(ScalableProblems_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/LuksanVlcek1.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/LuksanVlcek2.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/LuksanVlcek3.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/LuksanVlcek4.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/LuksanVlcek5.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/LuksanVlcek6.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/LuksanVlcek7.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/MittelmannBndryCntrlDiri3Dsin.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/MittelmannBndryCntrlDiri3D_27.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/MittelmannBndryCntrlDiri3D.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/MittelmannDistCntrlDiri.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/MittelmannBndryCntrlDiri.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/MittelmannDistCntrlNeumA.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/MittelmannDistCntrlNeumB.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/MittelmannBndryCntrlNeum.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/RegisteredTNLP.cpp
+                            ${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems/solve_problem.cpp)
     
   add_executable(solve_problem ${ScalableProblems_SRCS})
   target_link_libraries(solve_problem libIpopt)
+  if (COIN_COMPILE_LTO)
+    set_target_properties(solve_problem PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  endif ()
   if (COIN_HAS_MUMPS)
     target_link_libraries(solve_problem dmumps mumps_common seq pthread)
   endif ()
@@ -337,7 +343,7 @@ if (IPOPT_BUILD_EXAMPLES)
   if (BUILD_LINEARSOLVERLOADER AND UNIX)
     target_link_libraries(solve_problem dl)
   endif ()
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/ScalableProblems)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/examples/ScalableProblems)
   set_include_directories(solve_problem)
   
   add_test(NAME ipopt_example_luksan_LukVlE1
@@ -540,11 +546,14 @@ if (IPOPT_BUILD_EXAMPLES)
   set_tests_properties(ipopt_example_luksan_MPara5_2_3 PROPERTIES TIMEOUT 30)
   set_tests_properties(ipopt_example_luksan_MPara5_2_3 PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
 
-  set(Cpp_example_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/Cpp_example/cpp_example.cpp
-                       ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/Cpp_example/MyNLP.cpp)
+  set(Cpp_example_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/examples/Cpp_example/cpp_example.cpp
+                       ${CMAKE_CURRENT_SOURCE_DIR}/examples/Cpp_example/MyNLP.cpp)
   
   add_executable(cpp_example ${Cpp_example_SRCS})
   target_link_libraries(cpp_example libIpopt)
+  if (COIN_COMPILE_LTO)
+    set_target_properties(cpp_example PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  endif ()
   if (COIN_HAS_MUMPS)
     target_link_libraries(cpp_example dmumps mumps_common seq pthread)
   endif ()
@@ -575,10 +584,13 @@ if (IPOPT_BUILD_EXAMPLES)
   set_tests_properties(ipopt_example_cpp_example PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
 
 
-  set(hs071_c_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/hs071_c/hs071_c.c)
+  set(hs071_c_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/examples/hs071_c/hs071_c.c)
   
   add_executable(hs071_c ${hs071_c_SRCS})
   target_link_libraries(hs071_c libIpopt)
+  if (COIN_COMPILE_LTO)
+    set_target_properties(hs071_c PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  endif ()
   if (COIN_HAS_MUMPS)
     target_link_libraries(hs071_c dmumps mumps_common seq pthread)
   endif ()
@@ -609,11 +621,14 @@ if (IPOPT_BUILD_EXAMPLES)
   set_tests_properties(ipopt_example_hs071_c PROPERTIES PASS_REGULAR_EXPRESSION "EXIT: Optimal Solution Found.")
   
   
-  set(hs071_cpp_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_main.cpp
-                     ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/hs071_cpp/hs071_nlp.cpp)
+  set(hs071_cpp_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/examples/hs071_cpp/hs071_main.cpp
+                     ${CMAKE_CURRENT_SOURCE_DIR}/examples/hs071_cpp/hs071_nlp.cpp)
   
   add_executable(hs071_cpp ${hs071_cpp_SRCS})
   target_link_libraries(hs071_cpp libIpopt)
+  if (COIN_COMPILE_LTO)
+    set_target_properties(hs071_cpp PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+  endif ()
   if (COIN_HAS_MUMPS)
     target_link_libraries(hs071_cpp dmumps mumps_common seq gfortran pthread)
   endif ()
@@ -653,11 +668,14 @@ if (IPOPT_BUILD_EXAMPLES)
       set(BIT64FCOMMENT "C")
     endif ()
     
-    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/examples/hs071_f/hs071_f.f.in ${CMAKE_BINARY_DIR}/hs071_f.f)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/examples/hs071_f/hs071_f.f.in ${CMAKE_BINARY_DIR}/hs071_f.f)
     set(hs071_f_SRCS ${CMAKE_BINARY_DIR}/hs071_f.f)
     
     add_executable(hs071_f ${hs071_f_SRCS})
     target_link_libraries(hs071_f libIpopt)
+    if (COIN_COMPILE_LTO)
+      set_target_properties(hs071_f PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+    endif ()
     if (COIN_HAS_MUMPS)
       target_link_libraries(hs071_f dmumps mumps_common seq pthread)
     endif ()
