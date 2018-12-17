@@ -253,7 +253,7 @@ macro(add_coin_dylp_test Name SolverName FileData)
       file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.bat
            "cmd.exe /C \"${CMAKE_COMMAND} -E copy ${FileData} ${CMAKE_BINARY_DIR}/tmp "
            " && gunzip.exe -f ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME} "
-           " && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})\"")
+           " && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_CURRENT_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})\"")
       
       add_test(NAME ${Name}
                COMMAND ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.bat)
@@ -261,7 +261,7 @@ macro(add_coin_dylp_test Name SolverName FileData)
       file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.sh
            "sh -c \"${CMAKE_COMMAND} -E copy ${FileData} ${CMAKE_BINARY_DIR}/tmp "
            " && gunzip -f ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME} "
-           " && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})\"")
+           " && ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_CURRENT_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${CMAKE_BINARY_DIR}/tmp/${FileData_NAME_NOGZ})\"")
       
       execute_process(COMMAND chmod a+x ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.sh)
       add_test(NAME ${Name}
@@ -270,13 +270,13 @@ macro(add_coin_dylp_test Name SolverName FileData)
   else ()
     if (WIN32)
       file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.bat
-           "cmd /C \"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})\"")
+           "cmd /C \"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp.exe -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_CURRENT_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})\"")
 
       add_test(NAME ${Name}
                COMMAND ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.bat)
     else ()
       file(WRITE ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.sh
-           "sh -c \"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})\"")
+           "sh -c \"${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osi_dylp -L ${COIN_TEST_LOG_DIR}/${Name}.log -e ${CMAKE_CURRENT_SOURCE_DIR}/DyLP/src/Dylp/dy_errmsgs.txt ${FileData})\"")
       
       execute_process(COMMAND chmod a+x ${CMAKE_BINARY_DIR}/CoinTests/${Name}_${SolverName}.sh)
       add_test(NAME ${Name}
@@ -325,7 +325,7 @@ endmacro()
 macro(create_log_analysis Name AdditionalName TestRegex TestRefVal TestRelLevel)
   add_test(NAME ${Name}_${AdditionalName}
            WORKING_DIRECTORY ${BinTestPath}
-           COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_SOURCE_DIR}/cmake/parse_results.py ${COIN_TEST_LOG_DIR}/${Name}.log ${TestRegex} ${TestRefVal} ${TestRelLevel})
+           COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/cmake/parse_results.py ${COIN_TEST_LOG_DIR}/${Name}.log ${TestRegex} ${TestRefVal} ${TestRelLevel})
     
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES DEPENDS "${TestName}_${TestSolverName}")
   set_tests_properties(${Name}_${AdditionalName} PROPERTIES ENVIRONMENT "${TEST_ENV_VAR}")
