@@ -222,7 +222,7 @@ if (IPOPT_HAS_AMPL)
 endif ()
 
 macro(set_include_directories TARGET)
-  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Ipopt/include)
 endmacro ()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/HSL)
