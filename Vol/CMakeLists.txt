@@ -435,7 +435,7 @@ set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
 set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
 set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
 set(Osi_DIR           ${COIN_DIR}/Osi)
-set(Vol_DIR           ${COIN_DIR}/Vol)
+set(Vol_DIR           ${COIN_DIR})
 
 include(CheckIncludeFileCXX)
 include(CheckIncludeFile)
