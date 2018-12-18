@@ -213,7 +213,25 @@ $ cmake -DCMAKE_INSTALL_PREFIX=/opt/coinmp-devel -DCMAKE_BUILD_TYPE=RELEASE ..
 $ make
 
 # if you've got an error related to git describe:
+
 $ git tag test HEAD~1
+
+# Or you can add a tag at the first commit of a branch:
+
+$ git log | tail
+Author: Andreas Waechter <andreas.waechter@northwestern.edu>
+Date:   Thu Oct 21 01:03:09 2004 +0000
+
+    Initial revision
+
+commit 2dc3ded2d97f2c889ae7baafa49128d2bec1f25b
+Author: (no author) <anonymous@coin-or.clemson.edu>
+Date:   Thu Oct 21 01:03:09 2004 +0000
+
+    New repository initialized by cvs2svn.
+
+$ gat tag first_commit 2dc3ded2d97f2c889ae7baafa49128d2bec1f25b
+
 $ cmake -DCMAKE_INSTALL_PREFIX=/opt/coinmp-devel -DCMAKE_BUILD_TYPE=RELEASE ..
 
 # To do
