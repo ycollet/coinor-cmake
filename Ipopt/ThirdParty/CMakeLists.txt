@@ -250,7 +250,8 @@ endif ()
 
 if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
-  set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
+  set(COIN_HAS_MUMPS  ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
+  set(IPOPT_HAS_MUMPS ON CACHE BOOL "Enable Mumps solver" FORCE)
   
   set(MUMPS_DEPENDS "")
   
