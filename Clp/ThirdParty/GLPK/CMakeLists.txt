@@ -47,7 +47,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
-                      ${CMAKE_SOURCE_CURRENT_DIR}/cmake)
+                      ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 Enable_Testing ()
 
@@ -207,7 +207,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
   add_definitions(-DINTEL_COMPILER)
 endif ()
 
-configure_file(${CMAKE_SOURCE_CURRENT_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/Glpk/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_BINARY_DIR}/Glpk/config.h)
 include_directories(${CMAKE_BINARY_DIR}/Glpk)
 
 add_definitions(-DHAVE_CONFIG_H)
