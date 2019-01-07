@@ -4,17 +4,15 @@ project(IpOpt)
 
 # FUNNY_LAPACK_FINT
 
-#undef HAVE_PARDISO
 #undef HAVE_MPI_INITIALIZED - Define to 1 if you have the `MPI_Initialized' function.
-#undef HAVE_PARDISO_MKL - Define to 1 if you are using Pardiso from MKL
-#undef HAVE_PARDISO_OLDINTERFACE - Define to 1 if you are not using at least a 4.0 version of Pardiso
-#undef HAVE_PARDISO_PARALLEL - Define to 1 if you are using the parallel version of Pardiso
-#undef HAVE_WSMP - Define to 1 if WSMP is available
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
 
 option(IPOPT_HAS_AMPL                  "Enable Ampl interface" OFF)
 option(IPOPT_HAS_PARDISO               "Enable Pardiso solver" OFF)
+option(IPOPT_HAS_PARDISO_MKL           "Enable if you are using Pardiso from MKL" OFF)
+option(IPOPT_HAS_PARDISO_OLDINTERFACE  "Enable if you are not using at least a 4.0 version of Pardiso" OFF)
+option(IPOPT_HAS_PARDISO_PARALLEL      "Enable if you are using the parallel version of Pardiso" OFF)
 option(IPOPT_HAS_HSL                   "Enable HSL interface"  OFF)
 option(IPOPT_HAS_WSMP                  "Enable WSMP solver"    OFF)
 option(IPOPT_HAS_MUMPS                 "Enable Mumps solver"   OFF)
@@ -65,6 +63,9 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_HAS_WSMP
                  COIN_HAS_WSMP_INCLUDE_PATH
                  COIN_HAS_WSMP_LIBRARY_PATH
+		 IPOPT_HAS_PARDISO_MKL
+		 IPOPT_HAS_PARDISO_OLDINTERFACE
+		 IPOPT_HAS_PARDISO_PARALLEL
                  COIN_IPOPT_CHECKLEVEL
                  COIN_IPOPT_VERBOSITY
                  USE_PROCESSOR_EXTENSIONS)
