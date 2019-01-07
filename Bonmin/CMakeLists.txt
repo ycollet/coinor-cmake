@@ -17,6 +17,14 @@ option(IPOPT_HAS_MUMPS                 "Enable Mumps solver"   OFF)
 option(IPOPT_BUILD_EXAMPLES            "Enable the building of examples" OFF)
 option(IPOPT_ENABLE_LINEARSOLVERLOADER "Build the dynamic linear solver loader" ON)
 option(IPOPT_ENABLE_INEXACT            "Build the inexact solver" ON)
+option(IPOPT_HAS_PARDISO_MKL           "Enable if you are using Pardiso from MKL" OFF)
+option(IPOPT_HAS_PARDISO_OLDINTERFACE  "Enable if you are not using at least a 4.0 version of Pardiso" OFF)
+option(IPOPT_HAS_PARDISO_PARALLEL      "Enable if you are using the parallel version of Pardiso" OFF)
+option(IPOPT_ENABLE_LINEARSOLVERLOADER "Build the dynamic linear solver loader" ON)
+option(IPOPT_ENABLE_INEXACT            "Build the inexact solver" ON)
+
+set(IPOPT_PARDISO_LIBNAME "mkl_sequential"     CACHE STRING "The name of the MKL library to use")
+set(IPOPT_PARDISO_PATH    "/opt/intel/mkl/lib" CACHE STRING "The path to the MKL library")
 
 set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
@@ -165,6 +173,9 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_HAS_WSMP
                  COIN_HAS_WSMP_INCLUDE_PATH
                  COIN_HAS_WSMP_LIBRARY_PATH
+		 IPOPT_HAS_PARDISO_MKL
+		 IPOPT_HAS_PARDISO_OLDINTERFACE
+		 IPOPT_HAS_PARDISO_PARALLEL
                  COIN_HAS_ABC
                  COIN_ABC_LEVEL
                  COIN_CLP_CHECKLEVEL
@@ -856,6 +867,39 @@ if (DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Cbc/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Bonmin/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Osi/Osi/doxydoc/doxygen.conf)
+endif ()
+
+if (IPOPT_ENABLE_LINEARSOLVERLOADER)
+  add_definitions(-DHAVE_LINEARSOLVERLOADER)
+  
+  find_package(DL)
+  
+  set(BUILD_LINEARSOLVERLOADER ON)
+  set(BUILD_PARDISOLOADER      ON)
+else ()
+  set(BUILD_LINEARSOLVERLOADER OFF)
+  set(BUILD_PARDISOLOADER      OFF)
+endif ()
+
+if (IPOPT_HASH_MUMPS)
+  add_definitions(-DHAVE_MUMPS)
+  
+  set(COINHSL_HAS_MUMPS ON)
+endif ()
+
+if (IPOPT_HASH_WSMP)
+  add_definitions(-DHAVE_WSMP)
+  
+  set(COINHSL_HAS_WSMP ON)
+endif ()
+
+set(BUILD_INEXACT OFF)
+if (IPOPT_ENABLE_INEXACT AND IPOPT_HAS_PARDISO)
+  set(BUILD_INEXACT ON)
+endif ()
+if (IPOPT_ENABLE_INEXACT AND NOT IPOPT_HAS_PARDISO)
+  set(BUILD_INEXACT OFF)
+  message(STATUS "Warning: Inexact solver needs Pardiso. Inexact solver disabled")
 endif ()
 
 subdirs(ThirdParty)
