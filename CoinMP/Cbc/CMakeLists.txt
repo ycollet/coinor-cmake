@@ -768,7 +768,18 @@ if (CBC_BUILD_EXAMPLES)
   endif ()
   set_tests_properties(cbc_example_link PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
   set_tests_properties(cbc_example_link PROPERTIES PASS_REGULAR_EXPRESSION "Optimal solution when x is 1, y 1.06066, z 0.5 and w 1")
-    
+
+  add_example(clpdriver ${Cbc_DIR}/examples/clpdriver.cpp)
+  
+  add_test(NAME cbc_example_clpdriver
+           COMMAND $<TARGET_FILE:clpdriver> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+  set_tests_properties(cbc_example_clpdriver PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_clpdriver PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_clpdriver PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_clpdriver PROPERTIES PASS_REGULAR_EXPRESSION "Optimal objective -464.75.* - 5 iterations time .*, Presolve 0.00")
+
   if (CBC_USE_THREADS)
     add_example(parallel ${Cbc_DIR}/examples/parallel.cpp
                          ${Cbc_DIR}/examples/CbcCompareUser.cpp)
