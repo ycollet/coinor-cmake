@@ -20,9 +20,6 @@ option(IPOPT_BUILD_EXAMPLES            "Enable the building of examples" OFF)
 option(IPOPT_ENABLE_LINEARSOLVERLOADER "Build the dynamic linear solver loader" ON)
 option(IPOPT_ENABLE_INEXACT            "Build the inexact solver" ON)
 
-set(IPOPT_PARDISO_LIBNAME "mkl_sequential"     CACHE STRING "The name of the MKL library to use")
-set(IPOPT_PARDISO_PATH    "/opt/intel/mkl/lib" CACHE STRING "The path to the MKL library")
-
 set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
 
@@ -166,9 +163,9 @@ if (COIN_HAS_MKL)
   find_package(MKL)
   
   if (MKL_FOUND)
-    message(status "MKL library found")
+    message(STATUS "MKL library found")
   else ()
-    message(status "MKL library not found")
+    message(STATUS "MKL library not found")
   endif ()
   
   # Copy libiomp5md.dll in the build directory
@@ -194,9 +191,9 @@ if (COIN_HAS_MKL)
   include_directories(${MKL_INCLUDE_DIRS})
   
   if (HAVE_64_BIT)
-    link_directories(${MKL_ROOT}/lib/intel64)
+    link_directories(${MKLROOT_PATH}/mkl/lib/intel64)
   else ()
-    link_directories(${MKL_ROOT}/lib/ia32)
+    link_directories(${MKLROOT_PATH}/mkl/lib/ia32)
   endif ()
   
   set(COIN_HAS_LAPACK ON CACHE BOOL "Use Intel MKL library (requires Intel compiler)")
