@@ -215,12 +215,6 @@ if (IPOPT_ENABLE_INEXACT)
                      ${IPOPT_SRC_ALGORITHM_INEXACT_LIST})
 endif ()
 
-if (IPOPT_HAS_AMPL)
-  set (IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
-endif ()
-
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Ipopt/include)
 endmacro ()
@@ -269,8 +263,8 @@ endif ()
 set_include_directories(libIpopt)
 
 if (IPOPT_HAS_AMPL)
-  set (IPOPT_AMPL_SRC_LIST ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/ampl_ipopt.cpp
-                           ${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/src/Apps/AmplSolver/AmplTNLP.cpp)
+  set (IPOPT_AMPL_SRC_LIST ${CMAKE_CURRENT_SOURCE_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp
+                           ${CMAKE_CURRENT_SOURCE_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
   
   add_executable(ipopt ${IPOPT_AMPL_SRC_LIST})
   
@@ -279,7 +273,8 @@ if (IPOPT_HAS_AMPL)
     target_link_libraries(ipopt dmumps mumps_common seq pthread)
   endif ()
   if (MKL_FOUND)
-    target_link_libraries(${Name} ${COIN_MKL_LIBS})
+    link_directories(${MKLROOT_PATH}/mkl/lib/intel64/)
+    target_link_libraries(ipopt ${COIN_MKL_LIBS})
   else ()
     if (COIN_HAS_LAPACK OR COIN_ENABLE_DOWNLOAD_LAPACK)
       target_link_libraries(ipopt lapack)
@@ -310,9 +305,7 @@ if (IPOPT_HAS_AMPL)
     target_link_libraries(ipopt wsmp)
   endif ()
   if (IPOPT_HAS_PARDISO)
-    link_directories(${IPOPT_PARDISO_PATH})
-    target_link_libraries(ipopt ${IPOPT_PARDISO_LIBNAME})
-    
+    target_link_libraries(ipopt wsmp)
     if (WIN32)
       if (CMAKE_SIZEOF_VOID_P EQUAL 4)
 	target_link_libraries(ipopt mkl_intel_c.lib mkl_sequential.lib mkl_core.lib)

@@ -287,13 +287,13 @@ if (USE_PROCESSOR_EXTENSIONS)
 endif ()
 
 # Check for MKL
-if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
+if (COIN_HAS_MKL)
   find_package(MKL)
   
   if (MKL_FOUND)
-    message(status "MKL library found")
+    message(STATUS "MKL library found")
   else ()
-    message(status "MKL library not found")
+    message(STATUS "MKL library not found")
   endif ()
   
   # Copy libiomp5md.dll in the build directory
@@ -319,11 +319,11 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
   include_directories(${MKL_INCLUDE_DIRS})
   
   if (HAVE_64_BIT)
-    link_directories(${MKL_ROOT}/lib/intel64)
+    link_directories(${MKLROOT_PATH}/mkl/lib/intel64)
   else ()
-    link_directories(${MKL_ROOT}/lib/ia32)
+    link_directories(${MKLROOT_PATH}/mkl/lib/ia32)
   endif ()
-
+  
   set(COIN_HAS_LAPACK ON CACHE BOOL "Use Intel MKL library (requires Intel compiler)")
 endif ()
 
