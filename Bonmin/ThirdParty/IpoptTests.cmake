@@ -34,6 +34,11 @@ set(IPOPT_INSTANCES_DIR "${EP_InstallDir}/ASL-1.3.0/src/EP_ASL/test/data")
 # noobj.nl
 # sched2.nl
 
+# https://icwww.epfl.ch/~sam/Coconut-benchs/CSP-benchs.tar.gz
+# https://vanderbei.princeton.edu/ampl/nlmodels/cute.tar.gz
+# https://vanderbei.princeton.edu/ampl/nlmodels/noncute.tar.gz
+# http://www.netlib.org/ampl/models.tgz
+
 set(IPOPT_TEST_LIST magic.nl
                     sudokuVeryEasy.nl
 		    objconst.nl
