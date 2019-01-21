@@ -24,59 +24,69 @@ set(IPOPT_INSTANCES_DIR "${EP_InstallDir}/ASL-1.3.0/src/EP_ASL/test/data")
 # ampl_feasible_nl_ipopt_standard
 # ampl_flowshp2_nl_ipopt_standard
 
-set(IPOPT_TEST_LIST ${IPOPT_INSTANCES_DIR}/magic.nl
-                    #${IPOPT_INSTANCES_DIR}/sudokuVeryEasy.nl
-		    ${IPOPT_INSTANCES_DIR}/objconst.nl
-		    #${IPOPT_INSTANCES_DIR}/flowshp1.nl
-		    ${IPOPT_INSTANCES_DIR}/seq0.nl
-		    #${IPOPT_INSTANCES_DIR}/max-with-zero-args.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/inconsistent-probabilities.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/zero-core-con.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/zero-core-coefs.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/three-stage.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/range-con.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/single-stage.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/vars-not-in-stage-order.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/random-bound.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/random-con-matrix2.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/int-var.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/single-scenario.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/random-con-matrix.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/nonlinear.nl
-		    ${IPOPT_INSTANCES_DIR}/smps/random-rhs.nl
-		    #${IPOPT_INSTANCES_DIR}/test.nl
-		    ${IPOPT_INSTANCES_DIR}/balassign0.nl
-		    #${IPOPT_INSTANCES_DIR}/miplib/assign1.nl
-		    ${IPOPT_INSTANCES_DIR}/balassign1.nl
-		    #${IPOPT_INSTANCES_DIR}/assign1.nl
-		    ${IPOPT_INSTANCES_DIR}/grpassign0.nl
-		    ${IPOPT_INSTANCES_DIR}/unbounded.nl
-		    ${IPOPT_INSTANCES_DIR}/infeasible.nl
-		    ${IPOPT_INSTANCES_DIR}/sched1.nl
-		    ${IPOPT_INSTANCES_DIR}/nqueens0.nl
-		    #${IPOPT_INSTANCES_DIR}/element.nl
-		    #${IPOPT_INSTANCES_DIR}/send-most-money.nl
-		    #${IPOPT_INSTANCES_DIR}/ssd.nl
-		    ${IPOPT_INSTANCES_DIR}/numberof.nl
-		    #${IPOPT_INSTANCES_DIR}/party1.nl
-		    #${IPOPT_INSTANCES_DIR}/nqueens.nl
-		    ${IPOPT_INSTANCES_DIR}/simple.nl
-		    ${IPOPT_INSTANCES_DIR}/flowshp0.nl
-		    ${IPOPT_INSTANCES_DIR}/seq0a.nl
-		    ${IPOPT_INSTANCES_DIR}/assign0.nl
-		    ${IPOPT_INSTANCES_DIR}/noobj.nl
-		    #${IPOPT_INSTANCES_DIR}/openshop.nl
-		    #${IPOPT_INSTANCES_DIR}/send-more-money.nl
-		    ${IPOPT_INSTANCES_DIR}/suffix.nl
-		    ${IPOPT_INSTANCES_DIR}/sched0.nl
-		    ${IPOPT_INSTANCES_DIR}/sched2.nl
-		    ${IPOPT_INSTANCES_DIR}/objconstint.nl
-		    #${IPOPT_INSTANCES_DIR}/photo9.nl
-		    #${IPOPT_INSTANCES_DIR}/min-with-zero-args.nl
-		    #${IPOPT_INSTANCES_DIR}/mapcoloring.nl
-		    #${IPOPT_INSTANCES_DIR}/sudokuHard.nl
-		    #${IPOPT_INSTANCES_DIR}/feasible.nl
-		    #${IPOPT_INSTANCES_DIR}/flowshp2.nl
+# Unknown Error: Invalid number in NLP function or derivative detected.
+# smps/three-stage.nl
+# smps/nonlinear.nl
+# infeasible.nl
+# sched1.nl
+# nqueens0.nl
+# numberof.nl
+# noobj.nl
+# sched2.nl
+
+set(IPOPT_TEST_LIST magic.nl
+                    sudokuVeryEasy.nl
+		    objconst.nl
+		    flowshp1.nl
+		    seq0.nl
+		    max-with-zero-args.nl
+		    smps/inconsistent-probabilities.nl
+		    smps/zero-core-con.nl
+		    smps/zero-core-coefs.nl
+		    smps/three-stage.nl
+		    smps/range-con.nl
+		    smps/single-stage.nl
+		    smps/vars-not-in-stage-order.nl
+		    smps/random-bound.nl
+		    smps/random-con-matrix2.nl
+		    smps/int-var.nl
+		    smps/single-scenario.nl
+		    smps/random-con-matrix.nl
+		    smps/nonlinear.nl
+		    smps/random-rhs.nl
+		    test.nl
+		    balassign0.nl
+		    miplib/assign1.nl
+		    balassign1.nl
+		    assign1.nl
+		    grpassign0.nl
+		    unbounded.nl
+		    infeasible.nl
+		    sched1.nl
+		    nqueens0.nl
+		    element.nl
+		    send-most-money.nl
+		    ssd.nl
+		    numberof.nl
+		    party1.nl
+		    nqueens.nl
+		    simple.nl
+		    flowshp0.nl
+		    seq0a.nl
+		    assign0.nl
+		    noobj.nl
+		    openshop.nl
+		    send-more-money.nl
+		    suffix.nl
+		    sched0.nl
+		    sched2.nl
+		    objconstint.nl
+		    photo9.nl
+		    min-with-zero-args.nl
+		    mapcoloring.nl
+		    sudokuHard.nl
+		    feasible.nl
+		    flowshp2.nl
 		    )
 
 macro(add_ipopt_test Name FileData)
@@ -86,10 +96,11 @@ endmacro()
 
 macro(add_ipopt_test_list Prefix Suffix FileList Label Timeout)
   foreach(File ${${FileList}})
-    get_filename_component(_NAME ${File} NAME)
-    string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
-    
-    add_ipopt_test(${Prefix}_${_NAME}_${Suffix} ${File})
+    string(REGEX REPLACE "[\\.]" "_" _NAME "${File}")
+    string(REGEX REPLACE "[-]"   "_" _NAME "${_NAME}")
+    string(REGEX REPLACE "[/]"   "_" _NAME "${_NAME}")
+
+    add_ipopt_test(${Prefix}_${_NAME}_${Suffix} ${IPOPT_INSTANCES_DIR}/${File})
 
     if (NOT COIN_TESTS_DISABLE_TIMEOUT)
       set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
@@ -101,3 +112,32 @@ macro(add_ipopt_test_list Prefix Suffix FileList Label Timeout)
 endmacro()
 
 add_ipopt_test_list(ampl ipopt_standard IPOPT_TEST_LIST "NL;IPOPT" 30)
+
+set_tests_properties(ampl_sudokuVeryEasy_nl_ipopt_standard     PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_flowshp1_nl_ipopt_standard           PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_max_with_zero_args_nl_ipopt_standard PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_smps_three_stage_nl_ipopt_standard   PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_smps_nonlinear_nl_ipopt_standard     PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_test_nl_ipopt_standard               PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_miplib_assign1_nl_ipopt_standard     PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_assign1_nl_ipopt_standard            PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_infeasible_nl_ipopt_standard         PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_sched1_nl_ipopt_standard             PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_nqueens0_nl_ipopt_standard           PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_element_nl_ipopt_standard            PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_send_most_money_nl_ipopt_standard    PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_ssd_nl_ipopt_standard                PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_numberof_nl_ipopt_standard           PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_party1_nl_ipopt_standard             PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_nqueens_nl_ipopt_standard            PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_noobj_nl_ipopt_standard              PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_openshop_nl_ipopt_standard           PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_send_more_money_nl_ipopt_standard    PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_sched2_nl_ipopt_standard             PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_photo9_nl_ipopt_standard             PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_min_with_zero_args_nl_ipopt_standard PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_mapcoloring_nl_ipopt_standard        PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_sudokuHard_nl_ipopt_standard         PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_feasible_nl_ipopt_standard           PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_feasible_nl_ipopt_standard           PROPERTIES LABELS "NL;IPOPT;FAIL")
+set_tests_properties(ampl_flowshp2_nl_ipopt_standard           PROPERTIES LABELS "NL;IPOPT;FAIL")
