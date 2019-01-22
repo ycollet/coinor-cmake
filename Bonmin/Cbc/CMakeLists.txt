@@ -9,18 +9,18 @@ set(CBC_VERSION_RELEASE "${CBC_PATCH_VERSION}"  CACHE STRING "The CBC patch vers
 set(CBC_VERSION         "${CBC_VERSION_STRING}" CACHE STRING "The CBC version")
 
 set(CBC_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CBC)
+    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. CBC)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
+if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CBC)
+    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. CBC)
     set(CBC_WC_REVISION "${CBC_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
@@ -807,6 +807,19 @@ if (CBC_BUILD_EXAMPLES)
     endif ()
     set_tests_properties(cbc_example_sample4 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
     set_tests_properties(cbc_example_sample4 PROPERTIES PASS_REGULAR_EXPRESSION "rgn.mps took .* seconds, 154 nodes with objective 53.2 Finished")
+  endif ()
+  
+  add_example(modk ${Cbc_DIR}/examples/modk.c)
+  
+  if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
+    add_test(NAME cbc_example_modk
+             COMMAND $<TARGET_FILE:modk> ${CMAKE_BINARY_DIR}/Dependencies/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz)
+    set_tests_properties(cbc_example_modk PROPERTIES TIMEOUT 30)
+    if (WIN32)
+      set_tests_properties(cbc_example_modk PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+    endif ()
+    set_tests_properties(cbc_example_modk PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+    set_tests_properties(cbc_example_modk PROPERTIES PASS_REGULAR_EXPRESSION "Objective value: .* 82.199.*")
   endif ()
 endif ()
 

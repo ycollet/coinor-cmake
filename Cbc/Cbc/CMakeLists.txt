@@ -808,6 +808,19 @@ if (CBC_BUILD_EXAMPLES)
     set_tests_properties(cbc_example_sample4 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
     set_tests_properties(cbc_example_sample4 PROPERTIES PASS_REGULAR_EXPRESSION "rgn.mps took .* seconds, 154 nodes with objective 53.2 Finished")
   endif ()
+  
+  add_example(modk ${Cbc_DIR}/examples/modk.c)
+  
+  if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
+    add_test(NAME cbc_example_modk
+             COMMAND $<TARGET_FILE:modk> ${CMAKE_BINARY_DIR}/Dependencies/DATA_TEST/src/EP_DATA_TEST/miplib3/rgn.gz)
+    set_tests_properties(cbc_example_modk PROPERTIES TIMEOUT 30)
+    if (WIN32)
+      set_tests_properties(cbc_example_modk PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+    endif ()
+    set_tests_properties(cbc_example_modk PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+    set_tests_properties(cbc_example_modk PROPERTIES PASS_REGULAR_EXPRESSION "Objective value: .* 82.199.*")
+  endif ()
 endif ()
 
 add_executable(cbc ${Cbc_DIR}/src/CoinSolve.cpp)
