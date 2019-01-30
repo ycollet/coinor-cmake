@@ -329,69 +329,105 @@ endif ()
 if (COIN_ENABLE_COMPILE_HSL AND NOT COIN_HSL_PATH STREQUAL "None")
   set(COIN_HAS_HSL ON CACHE BOOL "Enable the HSL support" FORCE)
 
-  set(COINHSL_HAS_MA27  ON)
-  set(COINHSL_HAS_MA28  ON)
-  set(COINHSL_HAS_MC19  ON)
-  set(COINHSL_HAS_MA57  OFF)
-  set(COINHSL_HAS_MA86  OFF)
   set(COINHSL_HAS_METIS OFF)
-  set(COINHSL_HAS_MA77  OFF)
   set(COINHSL_HSL2013   OFF)
-  set(COINHSL_HAS_MC68  OFF)
-  set(COINHSL_HAS_MA97  OFF)
   
   set(COINHSL_VERSION "2014.01.17")
   set(COINHSL_VERSION_MAJOR   2014)
   set(COINHSL_VERSION_MINOR   1)
   set(COINHSL_VERSION_RELEASE 17)
+
+  set(HSL_SRCS )
   
-  if (COINHSL_HAS_MA57)
-    set(COIN_HAS_HSL ON)
+  if (EXISTS ${COIN_HSL_PATH}/ma57/ma57d.f)
+    set(COINHSL_HAS_MA57 ON)
+    set(COIN_HAS_HSL     ON)
+    
     add_definitions(-DCOINHSL_HAS_MA57)
+    
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/ma57/ma57d.f)
   endif ()
-  if (COINHSL_HAS_MA28)
-    set(COIN_HAS_HSL ON)
+  if (EXISTS ${COIN_HSL_PATH}/ma28/ma28d.f)
+    set(COINHSL_HAS_MA28 ON)
+    set(COIN_HAS_HSL     ON)
+    
     add_definitions(-DCOINHSL_HAS_MA28)
+    
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/ma28/ma28d.f)
   endif ()
-  if (COINHSL_HAS_MA86)
-    set(COIN_HAS_HSL ON)
+  if (EXISTS ${COIN_HSL_PATH}/ma86/ma86d.f)
+    set(COINHSL_HAS_MA86 ON)
+    set(COIN_HAS_HSL     ON)
+    
     add_definitions(-DCOINHSL_HAS_MA86)
+    
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/ma86/ma86d.f)
   endif ()
+  if (EXISTS ${COIN_HSL_PATH}/mc19/mc19d.f)
+    set(COINHSL_HAS_MC19 ON)
+    set(COIN_HAS_HSL     ON)
+    
+    add_definitions(-DCOINHSL_HAS_MC19)
+    
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/mc19/mc19d.f)
+  endif ()
+  if (EXISTS ${COIN_HSL_PATH}/ma77/ma77d.f)
+    set(COINHSL_HAS_MA77 ON)
+    set(COIN_HAS_HSL     ON)
+    
+    add_definitions(-DCOINHSL_HAS_MA77)
+    
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/ma77/ma77d.f)
+  endif ()
+  if (EXISTS ${COIN_HSL_PATH}/mc68/mc68.f)
+    set(COINHSL_HAS_MC68 ON)
+    set(COIN_HAS_HSL     ON)
+    
+    add_definitions(-DCOINHSL_HAS_MC68)
+    
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/mc68/mc68.f)
+  endif ()
+  if (EXISTS ${COIN_HSL_PATH}/ma97/ma97d.f)
+    set(COINHSL_HAS_MA97 ON)
+    set(COIN_HAS_HSL     ON)
+    
+    add_definitions(-DCOINHSL_HAS_MA97)
+    
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/ma97/ma97d.f)
+  endif ()
+  if (EXISTS ${COIN_HSL_PATH}/ma27/ma27d.f)
+    set(COINHSL_HAS_MA27 ON)
+    set(COIN_HAS_HSL     ON)
+    
+    add_definitions(-DCOINHSL_HAS_MA27)
+    
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/ma27/ma27d.f)
+  endif ()
+	     
   if (COINHSL_HAS_METIS)
     set(COIN_HAS_HSL ON)
+    
     add_definitions(-DCOINHSL_HAS_METIS)
-  endif ()
-  if (COINHSL_HAS_MC19)
-    set(COIN_HAS_HSL ON)
-    add_definitions(-DCOINHSL_HAS_MC19)
-  endif ()
-  if (COINHSL_HAS_MA77)
-    set(COIN_HAS_HSL ON)
-    add_definitions(-DCOINHSL_HAS_MA77)
   endif ()
   if (COINHSL_HSL2013)
     set(COIN_HAS_HSL ON)
+    
     add_definitions(-DCOINHSL_HSL2013)
-  endif ()
-  if (COINHSL_HAS_MC68)
-    set(COIN_HAS_HSL ON)
-    add_definitions(-DCOINHSL_HAS_MC68)
-  endif ()
-  if (COINHSL_HAS_MA97)
-    set(COIN_HAS_HSL ON)
-    add_definitions(-DCOINHSL_HAS_MA97)
-  endif ()
-  if (COINHSL_HAS_MA27)
-    set(COIN_HAS_HSL ON)
-    add_definitions(-DCOINHSL_HAS_MA27)
   endif ()
   
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_coinhsl.h.in ${CMAKE_BINARY_DIR}/Ipopt/include/config_coinhsl.h)
-  
-  set(HSL_SRCS ${COIN_HSL_PATH}/ma28/ma28d.f
-               ${COIN_HSL_PATH}/ma27/ma27d.f
-               ${COIN_HSL_PATH}/common/deps.f
-               ${COIN_HSL_PATH}/mc19/mc19d.f)
+  if (COIN_HAS_HSL)
+    set(HSL_SRCS ${HSL_SRCS}
+                 ${COIN_HSL_PATH}/common/deps.f)
+  endif ()
   
   add_library(hsl SHARED ${HSL_SRCS})
 endif ()
