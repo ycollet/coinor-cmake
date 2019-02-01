@@ -39,6 +39,7 @@ option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK  "Enable the download / compilation of MinGW compiled Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_MINLPLIB      "Enable the download / run of minlp benchmark" OFF)
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
 option(COIN_ENABLE_DOWNLOAD_METIS         "Enable the download / compilation of METIS" OFF)
 option(COIN_ENABLE_DOWNLOAD_MUMPS         "Enable the download / compilation of Mumps" OFF)
@@ -842,6 +843,22 @@ if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
 
   include(ClpMiplib2000Tests.cmake)
   include(CbcMiplib2000Tests.cmake)
+endif ()
+
+if (COIN_ENABLE_DOWNLOAD_MINLPLIB)
+  set(MINLPLIB_URL "http:////www.minlplib.org/minlplib_nl.zip" CACHE FILEPATH "Path to MinLpNl source archive")
+  
+  ExternalProject_Add(EP_MINLPLIB
+                      PREFIX            ${EP_InstallDir}/MINLPLIB
+                      URL               ${MINLPLIB_URL}
+                      PATCH_COMMAND     ""
+                      UPDATE_COMMAND    ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ""
+                      )
+
+  include(MinLpTests.cmake)
 endif ()
 
 # #################################################

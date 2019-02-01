@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 2.8)
-
-project(Ipopt_Thirdparty)
-
 # CMakeLists.txt designed for 
 # downloading/configuring/building/installing
 # Thirdparty dependencies
@@ -12,6 +8,7 @@ option(COIN_ENABLE_DOWNLOAD_ASL          "Enable the download / compilation of A
 option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK "Enable the download / compilation of MinGW compiled Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_LAPACK       "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_CLAPACK      "Enable the download / compilation of CBlas / CLapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_MINLPLIB     "Enable the download / run of minlp benchmark" OFF)
 option(COIN_USE_SYSTEM_LAPACK            "Use system Lapack" OFF)
 option(COIN_ENABLE_COMPILE_HSL           "Enable the compilation of HSL" OFF)
 option(COIN_USE_COINHSL                  "Use Coin HSL to compile the solver" OFF)
@@ -332,7 +329,7 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${ASL_InstallDir}/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM} install
                       )
   
-  set(IPOPT_HAS_AMPL ON)
+  set(IPOPT_HAS_AMPL ON CACHE BOOL "Enable Ampl interface")
 endif ()
 
 # #################################################
@@ -471,6 +468,30 @@ endif ()
 
 # #################################################
 # <===    HSL
+# #################################################
+
+# #################################################
+# ===> Tests
+# #################################################
+
+if (COIN_ENABLE_DOWNLOAD_MINLPLIB)
+  set(MINLPLIB_URL "http:////www.minlplib.org/minlplib_nl.zip" CACHE FILEPATH "Path to MinLpNl source archive")
+  
+  ExternalProject_Add(EP_MINLPLIB
+                      PREFIX            ${EP_InstallDir}/MINLPLIB
+                      URL               ${MINLPLIB_URL}
+                      PATCH_COMMAND     ""
+                      UPDATE_COMMAND    ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ""
+                      )
+
+  include(MinLpTests.cmake)
+endif ()
+
+# #################################################
+# <=== Tests
 # #################################################
 
 set(CMAKE_GENERATOR    "${CMAKE_GENERATOR_OLD}")

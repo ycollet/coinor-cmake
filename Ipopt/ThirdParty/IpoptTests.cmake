@@ -94,28 +94,6 @@ set(IPOPT_TEST_LIST magic.nl
 		    flowshp2.nl
 		    )
 
-macro(add_ipopt_test Name FileData)
-  add_test(NAME ${Name}
-           COMMAND $<TARGET_FILE:ipopt> -- ${FileData})
-endmacro()
-
-macro(add_ipopt_test_list Prefix Suffix FileList Label Timeout)
-  foreach(File ${${FileList}})
-    string(REGEX REPLACE "[\\.]" "_" _NAME "${File}")
-    string(REGEX REPLACE "[-]"   "_" _NAME "${_NAME}")
-    string(REGEX REPLACE "[/]"   "_" _NAME "${_NAME}")
-
-    add_ipopt_test(${Prefix}_${_NAME}_${Suffix} ${IPOPT_INSTANCES_DIR}/${File})
-
-    if (NOT COIN_TESTS_DISABLE_TIMEOUT)
-      set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
-    else ()
-      set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT 1000000)
-    endif ()
-    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
-  endforeach ()
-endmacro()
-
 add_ipopt_test_list(ampl ipopt_standard IPOPT_TEST_LIST "NL;IPOPT" 30)
 
 set_tests_properties(ampl_sudokuVeryEasy_nl_ipopt_standard     PROPERTIES LABELS "NL;IPOPT;FAIL")
