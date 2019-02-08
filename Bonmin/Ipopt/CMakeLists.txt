@@ -123,7 +123,7 @@ else ()
     set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
                                                 ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpPardisoSolverInterface.cpp)
   endif ()
-  if (COINHSL_HAVE_MA28 AND (NOT "${CMAKE_Fortran_COMPILER}" STREQUAL ""))
+  if (COINHSL_HAS_MA28 AND (NOT "${CMAKE_Fortran_COMPILER}" STREQUAL ""))
     set (IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST ${IPOPT_SRC_ALGORITHM_LINEARSOLVERS_LIST}
                                                 ${CMAKE_CURRENT_SOURCE_DIR}/src/Algorithm/LinearSolvers/IpMa28Partition.F)
   endif ()

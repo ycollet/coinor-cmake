@@ -474,7 +474,6 @@ if ((COIN_ENABLE_COMPILE_HSL OR COIN_USE_COINHSL) AND NOT COIN_HSL_PATH STREQUAL
   install(TARGETS hsl
           RUNTIME DESTINATION bin
           LIBRARY DESTINATION lib)
-
 endif ()
 
 # #################################################
