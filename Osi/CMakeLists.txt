@@ -124,6 +124,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 
 include(coin-macros)
 include(GetAcInitVersion)
+include(CheckCLinkerFlag)
 
 #------------------------------------------------------------
 # Detect 64 bits
@@ -286,7 +287,12 @@ if (UNIX)
   endif ()
   if (COIN_COMPILE_STATIC)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -z muldefs")
+      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+      
+      check_c_linker_flag("-z muldef" ZFLAGDEFINED)
+      if (ZFLAGDEFINED)
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z muldefs")
+      endif ()
     endif ()
   endif ()
   if (COIN_COMPILE_COVERAGE)
@@ -308,7 +314,10 @@ if (UNIX)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -p")
   else ()
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" AND NOT APPLE)
-      set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z muldefs")
+      check_c_linker_flag("-z muldef" ZFLAGDEFINED)
+      if (ZFLAGDEFINED)
+	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -z muldefs")
+      endif ()
     endif ()
   endif ()
 endif ()
