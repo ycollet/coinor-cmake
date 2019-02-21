@@ -212,6 +212,14 @@ include(CheckCLinkerFlag)
 Enable_Testing ()
 
 #------------------------------------------------------------
+# Check options
+#------------------------------------------------------------
+
+if (IPOPT_ENABLE_INEXACT AND NOT (IPOPT_HAS_PARDISO OR IPOPT_HAS_PARDISO_MKL OR IPOPT_HAS_PARDISO_OLDINTERFACE OR IPOPT_HAS_PARDISO_PARALLEL))
+  message(FATAL_ERROR "Error: Inexact solver is only available through MKL. Please activate the MKL")
+endif ()
+
+#------------------------------------------------------------
 # Detect 64 bits
 #------------------------------------------------------------
 

@@ -471,9 +471,11 @@ if ((COIN_ENABLE_COMPILE_HSL OR COIN_USE_COINHSL) AND NOT COIN_HSL_PATH STREQUAL
     add_library(hsl-other STATIC ${HSL_OTHER_SRCS})
   endif ()
   
-  install(TARGETS hsl
-          RUNTIME DESTINATION bin
-          LIBRARY DESTINATION lib)
+  if (IPOPT_ENABLE_LINEARSOLVERLOADER)
+    install(TARGETS hsl
+            RUNTIME DESTINATION bin
+            LIBRARY DESTINATION lib)
+  endif ()
 endif ()
 
 # #################################################
