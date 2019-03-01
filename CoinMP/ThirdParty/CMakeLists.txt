@@ -233,6 +233,8 @@ if (COIN_ENABLE_FIND_LAPACK)
     set(COIN_HAS_LAPACK OFF CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
     set(COIN_HAS_BLAS   OFF CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   endif ()
+  
+  get_filename_component(LAPACK_LINK_PATH "${LAPACK_LIBRARIES}" DIRECTORY)
 endif ()
 
 # #################################################
@@ -509,11 +511,14 @@ endif ()
 
 if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
-  set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
+  set(COIN_HAS_MUMPS  ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
+  set(IPOPT_HAS_MUMPS ON CACHE BOOL "Enable Mumps solver" FORCE)
   
   set(MUMPS_DEPENDS "")
-  
+
   if (COIN_ENABLE_DOWNLOAD_METIS)
+    set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Metis)
+    
     set(MUMPS_METIS_INC_PATH "${EP_InstallDir}/include/metis" CACHE PATH "The METIS library include Path" FORCE)
     set(MUMPS_METIS_LIB_PATH "${EP_InstallDir}/lib"           CACHE PATH "The METIS library library Path" FORCE)
   else ()
@@ -521,14 +526,20 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
     set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path" FORCE)
   endif ()
 
-  if (COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_ENABLE_DOWNLOAD_LAPACK)
-    set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Lapack)
-  endif ()
-  if (COIN_ENABLE_DOWNLOAD_METIS)
-    set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Metis)
+  if (COIN_ENABLE_DOWNLOAD_CLAPACK)
+    message(FATAL_ERROR "MUMPS cannot be compiled using CLapack")
   endif ()
   
-  set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path to MUMPS_${MUMPS_VERSION}.tar.gz source archive")
+  set(MUMPS_LAPACK_LIB_PATH "${EP_InstallDir}/lib" CACHE PATH "The Lapack library library Path")
+  if (COIN_ENABLE_FIND_LAPACK)
+    set(MUMPS_LAPACK_LIB_PATH "${LAPACK_LINK_PATH}" CACHE PATH "The Lapack library library Path")
+  endif ()
+  
+  if (COIN_ENABLE_DOWNLOAD_LAPACK)
+    set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Lapack)
+  endif ()
+  
+  set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path toMUMPS_${MUMPS_VERSION}.tar.gz source archive")
   set(MUMPS_InstallDir "${EP_InstallDir}/Mumps-${MUMPS_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_Mumps
@@ -538,7 +549,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
                       UPDATE_COMMAND    ""
                       PATCH_COMMAND     ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/CMakeLists_mumps.txt ${MUMPS_InstallDir}/src/EP_Mumps/CMakeLists.txt
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${MUMPS_InstallDir}/src/EP_Mumps/build
-                                     && ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DMUMPS_USE_LIBSEQ=ON -DMUMPS_USE_METIS=${COIN_ENABLE_DOWNLOAD_METIS} -DMUMPS_LAPACK_LIB_PATH:Path=${EP_InstallDir}/lib -DMUMPS_METIS_INC_PATH:Path=${MUMPS_METIS_INC_PATH} -DMUMPS_METIS_LIB_PATH:Path=${MUMPS_METIS_LIB_PATH} -DMUMPS_INSTALL_COIN=ON -DMUMPS_USE_F2C=${COIN_ENABLE_DOWNLOAD_CLAPACK} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                                     && ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DMUMPS_USE_LIBSEQ=ON -DMUMPS_USE_METIS=${COIN_ENABLE_DOWNLOAD_METIS} -DMUMPS_LAPACK_LIB_PATH:Path=${MUMPS_LAPACK_LIB_PATH} -DMUMPS_METIS_INC_PATH:Path=${MUMPS_METIS_INC_PATH} -DMUMPS_METIS_LIB_PATH:Path=${MUMPS_METIS_LIB_PATH} -DMUMPS_INSTALL_COIN=ON -DMUMPS_USE_F2C=${COIN_ENABLE_DOWNLOAD_CLAPACK} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
                       )

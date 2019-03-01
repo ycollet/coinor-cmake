@@ -369,7 +369,7 @@ set_include_directories(libBonmin)
 
 macro(add_example Name)
   add_executable(${Name} ${ARGN})
-  target_link_libraries(${Name} libBonmin libIpopt libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
+  target_link_libraries(${Name} libBonmin libipopt libCbc libCgl libOsiClp libOsi libClp libCoinUtils)
   set_include_directories(${Name})
   if (COIN_COMPILE_LTO)
     set_target_properties(${Name} PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)

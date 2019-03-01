@@ -465,8 +465,7 @@ if (CMAKE_Fortran_COMPILER)
   
   FortranCInterface_HEADER(${CMAKE_BINARY_DIR}/F77Mangle.h
                            MACRO_NAMESPACE "F77_"
-                           SYMBOL_NAMESPACE "F77_"
-                           SYMBOLS mysub mymod:my_sub)
+                           SYMBOL_NAMESPACE "F77_")
   
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})

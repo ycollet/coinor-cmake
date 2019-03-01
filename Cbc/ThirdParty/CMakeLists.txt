@@ -233,6 +233,8 @@ if (COIN_ENABLE_FIND_LAPACK)
     set(COIN_HAS_LAPACK OFF CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
     set(COIN_HAS_BLAS   OFF CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
   endif ()
+  
+  get_filename_component(LAPACK_LINK_PATH "${LAPACK_LIBRARIES}" DIRECTORY)
 endif ()
 
 # #################################################
@@ -527,12 +529,13 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
     message(FATAL_ERROR "MUMPS cannot be compiled using CLapack")
   endif ()
   
+  set(MUMPS_LAPACK_LIB_PATH "${EP_InstallDir}/lib" CACHE PATH "The Lapack library library Path")
+  if (COIN_ENABLE_FIND_LAPACK)
+    set(MUMPS_LAPACK_LIB_PATH "${LAPACK_LINK_PATH}" CACHE PATH "The Lapack library library Path")
+  endif ()
+  
   if (COIN_ENABLE_DOWNLOAD_LAPACK)
     set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Lapack)
-    
-    set(MUMPS_LAPACK_LIB_PATH "${EP_InstallDir}/lib" CACHE PATH "The Lapack library library Path")
-  else ()
-    set(MUMPS_LAPACK_LIB_PATH "None" CACHE PATH "The Lapack library library Path")
   endif ()
   
   set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path toMUMPS_${MUMPS_VERSION}.tar.gz source archive")

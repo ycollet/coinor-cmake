@@ -465,8 +465,7 @@ if (CMAKE_Fortran_COMPILER)
   
   FortranCInterface_HEADER(${CMAKE_BINARY_DIR}/F77Mangle.h
                            MACRO_NAMESPACE "F77_"
-                           SYMBOL_NAMESPACE "F77_"
-                           SYMBOLS mysub mymod:my_sub)
+                           SYMBOL_NAMESPACE "F77_")
   
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
@@ -891,13 +890,13 @@ if (IPOPT_ENABLE_LINEARSOLVERLOADER)
   find_package(DL)
 endif ()
 
-if (IPOPT_HASH_MUMPS)
+if (IPOPT_HAS_MUMPS)
   add_definitions(-DHAVE_MUMPS)
   
   set(COINHSL_HAS_MUMPS ON)
 endif ()
 
-if (IPOPT_HASH_WSMP)
+if (IPOPT_HAS_WSMP)
   add_definitions(-DHAVE_WSMP)
   
   set(COINHSL_HAS_WSMP ON)
