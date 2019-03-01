@@ -19,7 +19,7 @@ option(IPOPT_HAS_MUMPS                  "Enable Mumps solver"   OFF)
 option(IPOPT_BUILD_EXAMPLES             "Enable the building of examples" OFF)
 option(IPOPT_ENABLE_LINEARSOLVERLOADER  "Build the dynamic linear solver loader" OFF)
 option(IPOPT_ENABLE_PARDISOSOLVERLOADER "Build the dynamic pardiso solver loader" OFF)
-option(IPOPT_ENABLE_INEXACT             "Build the inexact solver" ON)
+option(IPOPT_ENABLE_INEXACT             "Build the inexact solver" OFF)
 
 set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
@@ -33,7 +33,7 @@ set(COIN_HAS_WSMP_INCLUDE_PATH "None" CACHE PATH "The WSMP linear solver include
 set(COIN_HAS_WSMP_LIBRARY_PATH "None" CACHE PATH "The WSMP linear solver absolute library Path")
 
 # Compilation options
-option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" OFF)
+option(ENABLE_SHARED_LIBRARIES       "Build libraries as shared libraries" ON)
 option(COIN_COMPILE_STATIC           "Activate the static linking" OFF)
 option(COIN_COMPILE_COVERAGE         "Activate the code coverage compilation" OFF)
 option(COIN_COMPILE_PROFILE          "Activate the code profiling compilation" OFF)
@@ -618,13 +618,13 @@ if (IPOPT_ENABLE_LINEARSOLVERLOADER OR IPOPT_ENABLE_PARDISOSOLVERLOADER)
   find_package(DL)
 endif ()
 
-if (IPOPT_HASH_MUMPS)
+if (IPOPT_HAS_MUMPS)
   add_definitions(-DHAVE_MUMPS)
   
   set(COINHSL_HAS_MUMPS ON)
 endif ()
 
-if (IPOPT_HASH_WSMP)
+if (IPOPT_HAS_WSMP)
   add_definitions(-DHAVE_WSMP)
   
   set(COINHSL_HAS_WSMP ON)
