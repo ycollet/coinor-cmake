@@ -489,6 +489,10 @@ if (WIN32)
   add_definitions(-D__BYTE_ORDER=1234)
 endif ()
 
+if (("${MSVC_VERSION}" STREQUAL "1900") OR ("${MSVC_VERSION}" STREQUAL "1910"))
+  add_definitions(/DHAVE_SNPRINTF /DHAVE_STRUCT_TIMESPEC)
+endif ()
+
 if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
   add_definitions(-DINTEL_COMPILER)
 endif ()

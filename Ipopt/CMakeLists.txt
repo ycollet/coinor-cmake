@@ -583,6 +583,10 @@ include(AC_HEADER_STDC)
 
 add_definitions(-DHAVE_CONFIG_H)
 
+if (("${MSVC_VERSION}" STREQUAL "1900") OR ("${MSVC_VERSION}" STREQUAL "1910"))
+  add_definitions(/DHAVE_SNPRINTF /DHAVE_STRUCT_TIMESPEC)
+endif ()
+
 #-----------------------------------------------
 # Doxygen documentation
 #-----------------------------------------------
