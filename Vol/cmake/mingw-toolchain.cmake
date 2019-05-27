@@ -8,7 +8,7 @@ set(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++)
 # $ dnf install mingw64-gcc mingw64-gcc-c++ mingw64-gcc-gfortran
 
 # here is the target environment located
-set(CMAKE_FIND_ROOT_PATH /usr/x86_64-w64-mingw32/sys-root/mingw/ /home/user/mingw-install )
+set(CMAKE_FIND_ROOT_PATH /usr/x86_64-w64-mingw32/sys-root/mingw/ $ENV{HOME}/mingw-install )
 
 # adjust the default behaviour of the FIND_XXX() commands:
 # search headers and libraries in the target environment, search
