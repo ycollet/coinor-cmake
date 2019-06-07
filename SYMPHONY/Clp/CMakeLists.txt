@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac CLP)
+get_ac_init_version(${Clp_DIR}/configure.ac CLP)
 
 option(CLP_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -8,18 +8,18 @@ set(CLP_VERSION_RELEASE "${CLP_PATCH_VERSION}"  CACHE STRING "The CLP patch vers
 set(CLP_VERSION         "${CLP_VERSION_STRING}" CACHE STRING "The CLP version")
 
 set(CLP_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+if (EXISTS "${Clp_DIR}/.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CLP)
+    Subversion_WC_INFO(${Clp_DIR} CLP)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
+if (EXISTS "${Clp_DIR}/.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} CLP)
+    GIT_WC_INFO(${Clp_DIR} CLP)
     set(CLP_WC_REVISION "${CLP_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()

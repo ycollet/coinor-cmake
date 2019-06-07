@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac BONMIN)
+get_ac_init_version(${Bonmin_DIR}/configure.ac BONMIN)
 
 option(BONMIN_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -8,18 +8,18 @@ set(BONMIN_VERSION_RELEASE "${BONMIN_PATCH_VERSION}"  CACHE STRING "The BONMIN p
 set(BONMIN_VERSION         "${BONMIN_VERSION_STRING}" CACHE STRING "The BONMIN version")
 
 set(BONMIN_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+if (EXISTS "${Bonmin_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. BONMIN)
+    Subversion_WC_INFO(${Bonmin_DIR}/.. BONMIN)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+if (EXISTS "${Bonmin_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. BONMIN)
+    GIT_WC_INFO(${Bonmin_DIR}/.. BONMIN)
     set(BONMIN_WC_REVISION "${BONMIN_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
@@ -439,10 +439,10 @@ add_example(bonmin ${Cbc_DIR}/src/CoinSolve.cpp)
 
 if (BONMIN_BUILD_EXAMPLES)
   # CExample
-  set(CEXAMPLE_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CExample/main.c
-                    ${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CExample/MyBonmin.c)
+  set(CEXAMPLE_SRCS ${Bonmin_DIR}/examples/CExample/main.c
+                    ${Bonmin_DIR}/examples/CExample/MyBonmin.c)
 
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CExample)
+  include_directories(${Bonmin_DIR}/examples/CExample)
 
   add_example(cexample ${CEXAMPLE_SRCS})
   
@@ -453,10 +453,10 @@ if (BONMIN_BUILD_EXAMPLES)
 
   #CppExample
   
-  set(CEXAMPLE_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CppExample/MyTMINLP.cpp
-                    ${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CppExample/MyBonmin.cpp)
+  set(CEXAMPLE_SRCS ${Bonmin_DIR}/examples/CppExample/MyTMINLP.cpp
+                    ${Bonmin_DIR}/examples/CppExample/MyBonmin.cpp)
 
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/examples/CppExample)
+  include_directories(${Bonmin_DIR}/examples/CppExample)
 
   add_example(cppexample ${CEXAMPLE_SRCS})
   

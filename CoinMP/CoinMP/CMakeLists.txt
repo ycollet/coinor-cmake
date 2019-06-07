@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac COINMP)
+get_ac_init_version(${CoinMP_DIR}/configure.ac COINMP)
 
 option(COINMP_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -8,18 +8,18 @@ set(COINMP_VERSION_RELEASE "${COINMP_PATCH_VERSION}"  CACHE STRING "The CoinMP p
 set(COINMP_VERSION         "${COINMP_VERSION_STRING}" CACHE STRING "The CoinMP version")
 
 set(COINMP_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+if (EXISTS "${CoinMP_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. COINMP)
+    Subversion_WC_INFO(${CoinMP_DIR}/.. COINMP)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+if (EXISTS "${CoinMP_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. COINMP)
+    GIT_WC_INFO(${CoinMP_DIR}/.. COINMP)
     set(COINMP_WC_REVISION "${COINMP_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()

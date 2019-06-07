@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac COINUTILS)
+get_ac_init_version(${CoinUtils_DIR}/configure.ac COINUTILS)
 
 option(COINUTILS_ENABLE_UNITTEST "Enable building the unit test executable" OFF)
 
@@ -27,18 +27,18 @@ else ()
 endif ()
 
 set(COINUTILS_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.svn")
+if (EXISTS "${CoinUtils_DIR}/.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINUTILS)
+    Subversion_WC_INFO(${CoinUtils_DIR} COINUTILS)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
+if (EXISTS "${CoinUtils_DIR}/.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR} COINUTILS)
+    GIT_WC_INFO(${CoinUtils_DIR} COINUTILS)
     set(COINUTILS_WC_REVISION "${COINUTILS_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()

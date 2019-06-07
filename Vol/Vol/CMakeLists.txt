@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/../configure.ac VOL)
+get_ac_init_version(${Vol_DIR}/../configure.ac VOL)
 
 option(VOL_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -8,18 +8,18 @@ set(VOL_VERSION_RELEASE "${VOL_PATCH_VERSION}"  CACHE STRING "The Vol patch vers
 set(VOL_VERSION         "${VOL_VERSION_STRING}" CACHE STRING "The Vol version")
 
 set(VOL_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+if (EXISTS "${Vol_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. VOL)
+    Subversion_WC_INFO(${Vol_DIR}/.. VOL)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+if (EXISTS "${Vol_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. VOL)
+    GIT_WC_INFO(${Vol_DIR}/.. VOL)
     set(VOL_WC_REVISION "${VOL_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()

@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac CGL)
+get_ac_init_version(${Cgl_DIR}/configure.ac CGL)
 
 option(CGL_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -8,18 +8,18 @@ set(CGL_VERSION_RELEASE "${CGL_PATCH_VERSION}"  CACHE STRING "The CGL patch vers
 set(CGL_VERSION         "${CGL_VERSION_STRING}" CACHE STRING "The CGL version")
 
 set(CGL_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+if (EXISTS "${Cgl_DIR}/.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. CGL)
+    Subversion_WC_INFO(${Cgl_DIR} CGL)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+if (EXISTS "${Cgl_DIR}/.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. CGL)
+    GIT_WC_INFO(${Cgl_DIR} CGL)
     set(CGL_WC_REVISION "${CGL_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()

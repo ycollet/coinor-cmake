@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac SYMPHONY)
+get_ac_init_version(${SYMPHONY_DIR}/configure.ac SYMPHONY)
 
 option(SYMPHONY_BUILD_EXAMPLES     "Enable the building of examples" OFF)
 option(SYMPHONY_BUILD_APPLICATIONS "Enable the building of applications" OFF)
@@ -9,18 +9,18 @@ set(SYMPHONY_VERSION_RELEASE "${SYMPHONY_PATCH_VERSION}"  CACHE STRING "The Symp
 set(SYMPHONY_VERSION         "${SYMPHONY_VERSION_STRING}" CACHE STRING "The Symphony version")
 
 set(SYMPHONY_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+if (EXISTS "${SYMPHONY_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. SYMPHONY)
+    Subversion_WC_INFO(${SYMPHONY_DIR}/.. SYMPHONY)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+if (EXISTS "${SYMPHONY_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. SYMPHONY)
+    GIT_WC_INFO(${SYMPHONY_DIR}/.. SYMPHONY)
     set(SYMPHONY_WC_REVISION "${SYMPHONY_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()

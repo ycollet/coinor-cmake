@@ -1,4 +1,4 @@
-get_ac_init_version(${CMAKE_CURRENT_SOURCE_DIR}/configure.ac DYLP)
+get_ac_init_version(${DyLP_DIR}/configure.ac DYLP)
 
 option(DYLP_BUILD_EXAMPLES "Enable the building of examples" OFF)
 
@@ -6,21 +6,21 @@ set(DYLP_VERSION_MAJOR   "${DYLP_MAJOR_VERSION}"  CACHE STRING "The Vol major ve
 set(DYLP_VERSION_MINOR   "${DYLP_MINOR_VERSION}"  CACHE STRING "The Vol minor version number")
 set(DYLP_VERSION_RELEASE "${DYLP_PATCH_VERSION}"  CACHE STRING "The Vol patch version number")
 set(DYLP_VERSION         "${DYLP_VERSION_STRING}" CACHE STRING "The Vol version")
-set(DYLP_SVN_REV "${DYLP_VERSION_RELEASE}")
+set(DYLP_SVN_REV         "${DYLP_VERSION_RELEASE}")
 
 set(DYLP_WC_REVISION "0")
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.svn")
+if (EXISTS "${DyLP_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. DYLP)
+    Subversion_WC_INFO(${DyLP_DIR}/.. DYLP)
   endif ()
 endif ()
 
-if (EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../.git")
+if (EXISTS "${DyLP_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${CMAKE_CURRENT_SOURCE_DIR}/.. DYLP)
+    GIT_WC_INFO(${DyLP_DIR}/.. DYLP)
     set(DYLP_WC_REVISION "${DYLP_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
