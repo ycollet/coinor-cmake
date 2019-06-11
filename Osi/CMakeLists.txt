@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(Osi)
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
+option(COIN_ENABLE_NEW_DIR_STRUCT "Enable the use of the CoinOR directory structure" OFF)
 
 # CoinUtils options
 option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
@@ -438,10 +439,17 @@ add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
 
 # Directories where to find the source code
-set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-set(Osi_DIR           ${COIN_DIR}/Osi)
+if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
+else ()
+  set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
+endif ()
 
 include(CheckIncludeFileCXX)
 include(CheckIncludeFile)

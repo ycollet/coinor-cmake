@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(Cbc)
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
+option(COIN_ENABLE_NEW_DIR_STRUCT "Enable the use of the CoinOR directory structure" OFF)
 
 # Cbc options
 option(CBC_USE_THREADS "Enable the compilation of the SMP version of CBC" OFF)
@@ -510,23 +511,23 @@ add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
 
 # Directories where to find the source code
-set(COIN_NEW_STRUCT "../")
-
-#set(BuildTools_DIR    ${COIN_DIR}/${COIN_NEW_STRUCT}BuildTools)
-#set(CoinUtils_DIR     ${COIN_DIR}/${COIN_NEW_STRUCT}CoinUtils)
-#set(CoinUtilsTest_DIR ${COIN_DIR}/${COIN_NEW_STRUCT}CoinUtils/test)
-#set(Osi_DIR           ${COIN_DIR}/${COIN_NEW_STRUCT}Osi)
-#set(Clp_DIR           ${COIN_DIR}/${COIN_NEW_STRUCT}Clp)
-#set(Cgl_DIR           ${COIN_DIR}/${COIN_NEW_STRUCT}Cgl)
-#set(Cbc_DIR           ${COIN_DIR}/${COIN_NEW_STRUCT}Cbc)
-
-set(BuildTools_DIR    ${COIN_DIR}/${COIN_NEW_STRUCT}BuildTools)
-set(CoinUtils_DIR     ${COIN_DIR}/${COIN_NEW_STRUCT}CoinUtils/CoinUtils)
-set(CoinUtilsTest_DIR ${COIN_DIR}/${COIN_NEW_STRUCT}CoinUtils/CoinUtils/test)
-set(Osi_DIR           ${COIN_DIR}/${COIN_NEW_STRUCT}Osi/Osi)
-set(Clp_DIR           ${COIN_DIR}/${COIN_NEW_STRUCT}Clp/Clp)
-set(Cgl_DIR           ${COIN_DIR}/${COIN_NEW_STRUCT}Cgl/Cgl)
-set(Cbc_DIR           ${COIN_DIR}/${COIN_NEW_STRUCT}Cbc/Cbc)
+if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
+  set(Clp_DIR           ${COIN_DIR}/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/Cgl)
+  set(Cbc_DIR           ${COIN_DIR}/Cbc)
+else ()
+  set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
+  set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/../Cgl/Cgl)
+  set(Cbc_DIR           ${COIN_DIR}/Cbc)
+endif ()
 
 include(CheckIncludeFileCXX)
 include(CheckIncludeFile)

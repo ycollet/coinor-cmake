@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(DyLP)
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
+option(COIN_ENABLE_NEW_DIR_STRUCT "Enable the use of the CoinOR directory structure" OFF)
 
 # DyLP options
 set(COIN_DYLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
@@ -449,11 +450,19 @@ add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
 
 # Directories where to find the source code
-set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-set(Osi_DIR           ${COIN_DIR}/Osi)
-set(DyLP_DIR          ${COIN_DIR}/DyLP)
+if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
+  set(DyLP_DIR          ${COIN_DIR}/DyLP)
+else ()
+  set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
+  set(DyLP_DIR          ${COIN_DIR}/DyLP)
+endif ()
 
 include(CheckIncludeFileCXX)
 include(CheckIncludeFile)

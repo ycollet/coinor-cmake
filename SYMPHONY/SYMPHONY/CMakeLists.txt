@@ -49,137 +49,137 @@ endif ()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/SYMPHONY/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_sym.h.in ${CMAKE_BINARY_DIR}/SYMPHONY/include/config_sym.h)
 
-set(Symphony_SRC_LIST_Headers ${SYMPHONY_DIR}/SYMPHONY/include/sym_constants.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_macros.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_types.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_cg.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_cg_params.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_cg_u.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_cp.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_cp_params.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_cp_u.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_dg.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_dg_params.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_dg_u.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_lp.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_lp_params.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_lp_solver.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_lp_u.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_master.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_master_params.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_master_u.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_messages.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_pack_array.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_pack_cut.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_proccomm.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_proto.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_qsort.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/symphony.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/symphony_api.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_timemeas.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_tm.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_tm_params.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_primal_heuristics.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_prep.h 
-                              ${SYMPHONY_DIR}/SYMPHONY/include/sym_prep_params.h
-                              ${SYMPHONY_DIR}/SYMPHONY/include/SymConfig.h)
+set(Symphony_SRC_LIST_Headers ${SYMPHONY_DIR}/include/sym_constants.h
+                              ${SYMPHONY_DIR}/include/sym_macros.h
+                              ${SYMPHONY_DIR}/include/sym_types.h
+                              ${SYMPHONY_DIR}/include/sym_cg.h
+                              ${SYMPHONY_DIR}/include/sym_cg_params.h
+                              ${SYMPHONY_DIR}/include/sym_cg_u.h
+                              ${SYMPHONY_DIR}/include/sym_cp.h
+                              ${SYMPHONY_DIR}/include/sym_cp_params.h
+                              ${SYMPHONY_DIR}/include/sym_cp_u.h
+                              ${SYMPHONY_DIR}/include/sym_dg.h
+                              ${SYMPHONY_DIR}/include/sym_dg_params.h
+                              ${SYMPHONY_DIR}/include/sym_dg_u.h
+                              ${SYMPHONY_DIR}/include/sym_lp.h
+                              ${SYMPHONY_DIR}/include/sym_lp_params.h
+                              ${SYMPHONY_DIR}/include/sym_lp_solver.h
+                              ${SYMPHONY_DIR}/include/sym_lp_u.h
+                              ${SYMPHONY_DIR}/include/sym_master.h
+                              ${SYMPHONY_DIR}/include/sym_master_params.h
+                              ${SYMPHONY_DIR}/include/sym_master_u.h
+                              ${SYMPHONY_DIR}/include/sym_messages.h
+                              ${SYMPHONY_DIR}/include/sym_pack_array.h
+                              ${SYMPHONY_DIR}/include/sym_pack_cut.h
+                              ${SYMPHONY_DIR}/include/sym_proccomm.h
+                              ${SYMPHONY_DIR}/include/sym_proto.h
+                              ${SYMPHONY_DIR}/include/sym_qsort.h
+                              ${SYMPHONY_DIR}/include/symphony.h
+                              ${SYMPHONY_DIR}/include/symphony_api.h
+                              ${SYMPHONY_DIR}/include/sym_timemeas.h
+                              ${SYMPHONY_DIR}/include/sym_tm.h
+                              ${SYMPHONY_DIR}/include/sym_tm_params.h
+                              ${SYMPHONY_DIR}/include/sym_primal_heuristics.h
+                              ${SYMPHONY_DIR}/include/sym_prep.h 
+                              ${SYMPHONY_DIR}/include/sym_prep_params.h
+                              ${SYMPHONY_DIR}/include/SymConfig.h)
 
 if (SYMPHONY_VERSION VERSION_LESS "5.5.4")
   # This file has been removed in Symphony-5.5.4
   set(Symphony_SRC_LIST_Headers ${Symphony_SRC_LIST_Headers}
-                                ${SYMPHONY_DIR}/SYMPHONY/include/sym_return_values.h)
+                                ${SYMPHONY_DIR}/include/sym_return_values.h)
 endif ()
 
 if (USE_CL)
   set(Symphony_SRC_LIST_Headers ${Symphony_SRC_LIST_Headers}
-                                {SYMPHONY_DIR}/SYMPHONY/include/sym_win32_time.h)
+                                ${SYMPHONY_DIR}/include/sym_win32_time.h)
 endif ()
 
-set(SYM_MASTER_SRC ${SYMPHONY_DIR}/SYMPHONY/src/Master/master.c 
-                   ${SYMPHONY_DIR}/SYMPHONY/src/Master/master_wrapper.c
-                   ${SYMPHONY_DIR}/SYMPHONY/src/Master/master_io.c
-                   ${SYMPHONY_DIR}/SYMPHONY/src/Master/master_func.c
-                   ${SYMPHONY_DIR}/SYMPHONY/src/Master/master_prep.c
-                   ${SYMPHONY_DIR}/SYMPHONY/src/Master/master_prep_base.c
-                   ${SYMPHONY_DIR}/SYMPHONY/src/Master/master_prep_sr.c)
+set(SYM_MASTER_SRC ${SYMPHONY_DIR}/src/Master/master.c 
+                   ${SYMPHONY_DIR}/src/Master/master_wrapper.c
+                   ${SYMPHONY_DIR}/src/Master/master_io.c
+                   ${SYMPHONY_DIR}/src/Master/master_func.c
+                   ${SYMPHONY_DIR}/src/Master/master_prep.c
+                   ${SYMPHONY_DIR}/src/Master/master_prep_base.c
+                   ${SYMPHONY_DIR}/src/Master/master_prep_sr.c)
 
 set(MASTER_SRC ${SYM_MASTER_SRC})
 
-set(MASTER_MAIN_SRC ${SYMPHONY_DIR}/SYMPHONY/src/Master/main.c)
+set(MASTER_MAIN_SRC ${SYMPHONY_DIR}/src/Master/main.c)
 
-set(DG_SRC ${SYMPHONY_DIR}/SYMPHONY/src/DrawGraph/draw_graph.c)
+set(DG_SRC ${SYMPHONY_DIR}/src/DrawGraph/draw_graph.c)
 
-set(SYM_TM_SRC ${SYMPHONY_DIR}/SYMPHONY/src/TreeManager/tm_func.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/TreeManager/tm_proccomm.c)
+set(SYM_TM_SRC ${SYMPHONY_DIR}/src/TreeManager/tm_func.c
+               ${SYMPHONY_DIR}/src/TreeManager/tm_proccomm.c)
 
 if (SYM_COMPILE_IN_TM)
-  set(TM_SRC ${SYMPHONY_DIR}/SYMPHONY/src/TreeManager/tm_func.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/TreeManager/tm_proccomm.c)
+  set(TM_SRC ${SYMPHONY_DIR}/src/TreeManager/tm_func.c
+             ${SYMPHONY_DIR}/src/TreeManager/tm_proccomm.c)
 else ()
-  set(TM_SRC ${SYMPHONY_DIR}/SYMPHONY/src/TreeManager/treemanager.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/TreeManager/tm_func.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/TreeManager/tm_proccomm.c)
+  set(TM_SRC ${SYMPHONY_DIR}/src/TreeManager/treemanager.c
+             ${SYMPHONY_DIR}/src/TreeManager/tm_func.c
+             ${SYMPHONY_DIR}/src/TreeManager/tm_proccomm.c)
 endif ()
 
-set(SYM_LP_SRC ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_solver.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_varfunc.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_rowfunc.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_genfunc.c 
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_proccomm.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_wrapper.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_free.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_heuristics.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_sp.c)
+set(SYM_LP_SRC ${SYMPHONY_DIR}/src/LP/lp_solver.c
+               ${SYMPHONY_DIR}/src/LP/lp_varfunc.c
+               ${SYMPHONY_DIR}/src/LP/lp_rowfunc.c
+               ${SYMPHONY_DIR}/src/LP/lp_genfunc.c 
+               ${SYMPHONY_DIR}/src/LP/lp_proccomm.c
+               ${SYMPHONY_DIR}/src/LP/lp_wrapper.c
+               ${SYMPHONY_DIR}/src/LP/lp_free.c
+               ${SYMPHONY_DIR}/src/LP/lp_heuristics.c
+               ${SYMPHONY_DIR}/src/LP/lp_sp.c)
 
 if (PSEUDO_COSTS)
   set(SYM_LP_SRC ${SYM_LP_SRC}
-                 ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_pseudo_branch.c)
+                 ${SYMPHONY_DIR}/src/LP/lp_pseudo_branch.c)
 else ()
   set(SYM_LP_SRC ${SYM_LP_SRC}
-                 ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_branch.c)
+                 ${SYMPHONY_DIR}/src/LP/lp_branch.c)
 endif ()
 
-set(SYM_CG_SRC ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_func.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_wrapper.c)
+set(SYM_CG_SRC ${SYMPHONY_DIR}/src/CutGen/cg_func.c
+               ${SYMPHONY_DIR}/src/CutGen/cg_wrapper.c)
 
-set(SYM_CP_SRC ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_proccomm.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_func.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_wrapper.c)
+set(SYM_CP_SRC ${SYMPHONY_DIR}/src/CutPool/cp_proccomm.c
+               ${SYMPHONY_DIR}/src/CutPool/cp_func.c
+               ${SYMPHONY_DIR}/src/CutPool/cp_wrapper.c)
 
 if (SYM_COMPILE_IN_LP)
   add_definitions(-DCOMPILE_IN_LP)
   set(TM_SRC ${TM_SRC}
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_solver.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_varfunc.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_rowfunc.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_genfunc.c)
+             ${SYMPHONY_DIR}/src/LP/lp_solver.c
+             ${SYMPHONY_DIR}/src/LP/lp_varfunc.c
+             ${SYMPHONY_DIR}/src/LP/lp_rowfunc.c
+             ${SYMPHONY_DIR}/src/LP/lp_genfunc.c)
   set(TM_SRC ${TM_SRC}
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_proccomm.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_wrapper.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_free.c)
+             ${SYMPHONY_DIR}/src/LP/lp_proccomm.c
+             ${SYMPHONY_DIR}/src/LP/lp_wrapper.c
+             ${SYMPHONY_DIR}/src/LP/lp_free.c)
   if (PSEUDO_COSTS)
     set(TM_SRC ${TM_SRC}
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_pseudo_branch.c)
+               ${SYMPHONY_DIR}/src/LP/lp_pseudo_branch.c)
   else ()
     set(TM_SRC ${TM_SRC}
-               ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_branch.c)
+               ${SYMPHONY_DIR}/src/LP/lp_branch.c)
   endif ()
   if (SYM_COMPILE_IN_CG)
     set(TM_SRC ${TM_SRC}
-               ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_func.c
-               ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_wrapper.c)
+               ${SYMPHONY_DIR}/src/CutGen/cg_func.c
+               ${SYMPHONY_DIR}/src/CutGen/cg_wrapper.c)
   endif ()
 else ()
   set(MASTER_SRC ${MASTER_SRC}
-                 ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_solver.c)
+                 ${SYMPHONY_DIR}/src/LP/lp_solver.c)
 endif ()
 
 if (SYM_COMPILE_IN_CP)
   add_definitions(-DCOMPILE_IN_CP)
   set(TM_SRC ${TM_SRC}
-             ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_proccomm.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_func.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_wrapper.c)
+             ${SYMPHONY_DIR}/src/CutPool/cp_proccomm.c
+             ${SYMPHONY_DIR}/src/CutPool/cp_func.c
+             ${SYMPHONY_DIR}/src/CutPool/cp_wrapper.c)
 endif ()
 if (SYM_COMPILE_IN_TM)
   add_definitions(-DCOMPILE_IN_TM)
@@ -187,64 +187,64 @@ if (SYM_COMPILE_IN_TM)
                  ${TM_SRC})
 endif ()
 
-set(LP_SRC ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_solver.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_varfunc.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_rowfunc.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_genfunc.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_proccomm.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_wrapper.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_free.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_heuristics.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_sp.c)
+set(LP_SRC ${SYMPHONY_DIR}/src/LP/lp_solver.c
+           ${SYMPHONY_DIR}/src/LP/lp_varfunc.c
+           ${SYMPHONY_DIR}/src/LP/lp_rowfunc.c
+           ${SYMPHONY_DIR}/src/LP/lp_genfunc.c
+           ${SYMPHONY_DIR}/src/LP/lp_proccomm.c
+           ${SYMPHONY_DIR}/src/LP/lp_wrapper.c
+           ${SYMPHONY_DIR}/src/LP/lp.c
+           ${SYMPHONY_DIR}/src/LP/lp_free.c
+           ${SYMPHONY_DIR}/src/LP/lp_heuristics.c
+           ${SYMPHONY_DIR}/src/LP/lp_sp.c)
 
 if (PSEUDO_COSTS)
   set(LP_SRC ${LP_SRC}
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_pseudo_branch.c)
+             ${SYMPHONY_DIR}/src/LP/lp_pseudo_branch.c)
 else ()
   set(LP_SRC ${LP_SRC}
-             ${SYMPHONY_DIR}/SYMPHONY/src/LP/lp_branch.c)
+             ${SYMPHONY_DIR}/src/LP/lp_branch.c)
 endif ()
 
 if (SYM_COMPILE_IN_CG)
   add_definitions(-DCOMPILE_IN_CG)
   set(LP_SRC ${LP_SRC}
-             ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_func.c
-             ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_wrapper.c)
+             ${SYMPHONY_DIR}/src/CutGen/cg_func.c
+             ${SYMPHONY_DIR}/src/CutGen/cg_wrapper.c)
 endif ()
 
-set(CP_SRC ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cut_pool.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_proccomm.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_func.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/CutPool/cp_wrapper.c)
+set(CP_SRC ${SYMPHONY_DIR}/src/CutPool/cut_pool.c
+           ${SYMPHONY_DIR}/src/CutPool/cp_proccomm.c
+           ${SYMPHONY_DIR}/src/CutPool/cp_func.c
+           ${SYMPHONY_DIR}/src/CutPool/cp_wrapper.c)
 
-set(CG_SRC ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cut_gen.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_proccomm.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_func.c
-           ${SYMPHONY_DIR}/SYMPHONY/src/CutGen/cg_wrapper.c)
+set(CG_SRC ${SYMPHONY_DIR}/src/CutGen/cut_gen.c
+           ${SYMPHONY_DIR}/src/CutGen/cg_proccomm.c
+           ${SYMPHONY_DIR}/src/CutGen/cg_func.c
+           ${SYMPHONY_DIR}/src/CutGen/cg_wrapper.c)
 
-set(QSORT_SRC     ${SYMPHONY_DIR}/SYMPHONY/src/Common/sym_qsort.c)
-set(TIME_SRC      ${SYMPHONY_DIR}/SYMPHONY/src/Common/timemeas.c)
-set(PROCCOMM_SRC  ${SYMPHONY_DIR}/SYMPHONY/src/Common/proccomm.c)
-set(PACKCUT_SRC   ${SYMPHONY_DIR}/SYMPHONY/src/Common/pack_cut.c)
-set(PACKARRAY_SRC ${SYMPHONY_DIR}/SYMPHONY/src/Common/pack_array.c)
+set(QSORT_SRC     ${SYMPHONY_DIR}/src/Common/sym_qsort.c)
+set(TIME_SRC      ${SYMPHONY_DIR}/src/Common/timemeas.c)
+set(PROCCOMM_SRC  ${SYMPHONY_DIR}/src/Common/proccomm.c)
+set(PACKCUT_SRC   ${SYMPHONY_DIR}/src/Common/pack_cut.c)
+set(PACKARRAY_SRC ${SYMPHONY_DIR}/src/Common/pack_array.c)
 
-set(EXAMPLES_SRC ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
+set(EXAMPLES_SRC ${SYMPHONY_DIR}/Examples/bicriteria.c
+                 ${SYMPHONY_DIR}/Examples/milpOsi.c
+                 ${SYMPHONY_DIR}/Examples/milpOsi2.c
+                 ${SYMPHONY_DIR}/Examples/milp.c
+                 ${SYMPHONY_DIR}/Examples/milp2.c
+                 ${SYMPHONY_DIR}/Examples/sensitivity.c
+                 ${SYMPHONY_DIR}/Examples/warm_start1.c
+                 ${SYMPHONY_DIR}/Examples/warm_start2.c
+                 ${SYMPHONY_DIR}/Examples/warm_start3.c)
 
-set(OSISYM_SRC ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/OsiSymSolverInterface.cpp
-               ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/SymWarmStart.cpp)
+set(OSISYM_SRC ${SYMPHONY_DIR}/src/OsiSym/OsiSymSolverInterface.cpp
+               ${SYMPHONY_DIR}/src/OsiSym/SymWarmStart.cpp)
 
-set(OSISYM_Headers ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/OsiSymSolverInterface.hpp
-                   ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/OsiSymSolverParameters.hpp
-                   ${SYMPHONY_DIR}/SYMPHONY/src/OsiSym/SymWarmStart.hpp)
+set(OSISYM_Headers ${SYMPHONY_DIR}/src/OsiSym/OsiSymSolverInterface.hpp
+                   ${SYMPHONY_DIR}/src/OsiSym/OsiSymSolverParameters.hpp
+                   ${SYMPHONY_DIR}/src/OsiSym/SymWarmStart.hpp)
 
 set(BB_SRC ${MASTER_SRC}
            ${DG_SRC}
@@ -353,7 +353,7 @@ macro(set_include_directories TARGET)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
   endif ()
   
-  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/SYMPHONY/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/include)
 endmacro ()
 
 set_source_files_properties(${EXAMPLES_SRC} PROPERTIES LANGUAGE CXX)
@@ -613,7 +613,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
     endif ()  
   endmacro ()
   
-  add_example(bicriteria ${SYMPHONY_DIR}/SYMPHONY/Examples/bicriteria.c)
+  add_example(bicriteria ${SYMPHONY_DIR}/Examples/bicriteria.c)
 
   add_test(NAME symphony_example_bicriteria
            COMMAND $<TARGET_FILE:bicriteria> -F ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
@@ -622,7 +622,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
     set_tests_properties(symphony_example_bicriteria PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
     
-  add_example(milp ${SYMPHONY_DIR}/SYMPHONY/Examples/milp.c)
+  add_example(milp ${SYMPHONY_DIR}/Examples/milp.c)
   
   add_test(NAME symphony_example_milp
            COMMAND $<TARGET_FILE:milp> -F ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
@@ -631,7 +631,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
     set_tests_properties(symphony_example_milp PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
     
-  add_example(milp2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milp2.c)
+  add_example(milp2 ${SYMPHONY_DIR}/Examples/milp2.c)
   
   add_test(NAME symphony_example_milp2
            COMMAND $<TARGET_FILE:milp2> -F ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
@@ -640,7 +640,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
     set_tests_properties(symphony_example_milp2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
     
-  #add_example(milpOsi ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi.c)
+  #add_example(milpOsi ${SYMPHONY_DIR}/Examples/milpOsi.c)
   #target_link_libraries(milpOsi libOsiSym libOsi libCgl libCoinUtils z bz2 libSym libCgl libCoinUtils libClp libOsiClp libCoinUtils libOsi)
   # 
   #add_test(NAME symphony_example_milpOsi
@@ -651,7 +651,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   #endif ()
     
   #ERROR: Missing include files in milpOsi2
-  #add_example(milpOsi2 ${SYMPHONY_DIR}/SYMPHONY/Examples/milpOsi2.c)
+  #add_example(milpOsi2 ${SYMPHONY_DIR}/Examples/milpOsi2.c)
   #
   #add_test(NAME symphony_example_milpOsi2
   #         COMMAND $<TARGET_FILE:milpOsi2> -F ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
@@ -661,7 +661,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
   #endif ()
   #
   
-  add_example(sensitivity ${SYMPHONY_DIR}/SYMPHONY/Examples/sensitivity.c)
+  add_example(sensitivity ${SYMPHONY_DIR}/Examples/sensitivity.c)
   
   add_test(NAME symphony_example_sensitivity
            COMMAND $<TARGET_FILE:sensitivity> -F ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
@@ -670,7 +670,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
     set_tests_properties(symphony_example_sensitivity PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
     
-  add_example(warm_start1 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start1.c)
+  add_example(warm_start1 ${SYMPHONY_DIR}/Examples/warm_start1.c)
   
   add_test(NAME symphony_example_warm_start1
            COMMAND $<TARGET_FILE:warm_start1> -F ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
@@ -679,7 +679,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
     set_tests_properties(symphony_example_warm_start1 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
     
-  add_example(warm_start2 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start2.c)
+  add_example(warm_start2 ${SYMPHONY_DIR}/Examples/warm_start2.c)
   
   add_test(NAME symphony_example_warm_start2
            COMMAND $<TARGET_FILE:warm_start2> -F ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
@@ -688,7 +688,7 @@ if (SYMPHONY_BUILD_EXAMPLES)
     set_tests_properties(symphony_example_warm_start2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
     
-  add_example(warm_start3 ${SYMPHONY_DIR}/SYMPHONY/Examples/warm_start3.c)
+  add_example(warm_start3 ${SYMPHONY_DIR}/Examples/warm_start3.c)
   
   add_test(NAME symphony_example_warm_start3
            COMMAND $<TARGET_FILE:warm_start3> -F ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
@@ -938,26 +938,26 @@ endif ()
 
 if (SYMPHONY_BUILD_APPLICATIONS)
   # CNRP
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/include/)
+  include_directories(${SYMPHONY_DIR}/Applications/CNRP/include/)
   
-  set(CNRP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Common/cnrp_macros.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Common/compute_cost.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Common/network.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutGen/biconnected.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutGen/cnrp_cg.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutGen/shrink.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutGen/tsp.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/CutPool/cnrp_cp.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/DrawGraph/cnrp_dg.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/DrawGraph/cnrp_dg_functions.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/DrawGraph/cnrp_dg_network.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/LP/cnrp_lp_branch.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/LP/cnrp_lp.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/cnrp_io.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/cnrp_main.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/cnrp_master.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/cnrp_master_functions.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/CNRP/src/Master/small_graph.c)
+  set(CNRP_SRCS ${SYMPHONY_DIR}/Applications/CNRP/src/Common/cnrp_macros.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/Common/compute_cost.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/Common/network.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/CutGen/biconnected.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/CutGen/cnrp_cg.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/CutGen/shrink.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/CutGen/tsp.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/CutPool/cnrp_cp.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/DrawGraph/cnrp_dg.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/DrawGraph/cnrp_dg_functions.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/DrawGraph/cnrp_dg_network.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/LP/cnrp_lp_branch.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/LP/cnrp_lp.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/Master/cnrp_io.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/Master/cnrp_main.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/Master/cnrp_master.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/Master/cnrp_master_functions.c
+                ${SYMPHONY_DIR}/Applications/CNRP/src/Master/small_graph.c)
   
   set_source_files_properties(${CNRP_SRCS} PROPERTIES LANGUAGE CXX)
   # Concorde required
@@ -967,173 +967,173 @@ if (SYMPHONY_BUILD_APPLICATIONS)
   #target_link_libraries(CNRP concorde)
   
   # MATCH
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/include/)
+  include_directories(${SYMPHONY_DIR}/Applications/MATCH/include/)
   
-  set(MATCH_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/CutGen/user_cg.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/CutPool/user_cp.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/DrawGraph/user_dg.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/LP/user_lp_branch.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/LP/user_lp.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/Master/user_main.c
-                 ${SYMPHONY_DIR}/SYMPHONY/Applications/MATCH/src/Master/user_master.c)
+  set(MATCH_SRCS ${SYMPHONY_DIR}/Applications/MATCH/src/CutGen/user_cg.c
+                 ${SYMPHONY_DIR}/Applications/MATCH/src/CutPool/user_cp.c
+                 ${SYMPHONY_DIR}/Applications/MATCH/src/DrawGraph/user_dg.c
+                 ${SYMPHONY_DIR}/Applications/MATCH/src/LP/user_lp_branch.c
+                 ${SYMPHONY_DIR}/Applications/MATCH/src/LP/user_lp.c
+                 ${SYMPHONY_DIR}/Applications/MATCH/src/Master/user_main.c
+                 ${SYMPHONY_DIR}/Applications/MATCH/src/Master/user_master.c)
   
   set_source_files_properties(${MATCH_SRCS} PROPERTIES LANGUAGE CXX)
   add_example(MATCH ${MATCH_SRCS})
   
   # MCKP
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MCKP/include/)
+  include_directories(${SYMPHONY_DIR}/Applications/MCKP/include/)
   
-  set(MCKP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/MCKP/mckp_main.c)
+  set(MCKP_SRCS ${SYMPHONY_DIR}/Applications/MCKP/mckp_main.c)
   
   set_source_files_properties(${MCKP_SRCS} PROPERTIES LANGUAGE CXX)
   add_example(MCKP ${MCKP_SRCS})
   
   # MISOCO
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/include/)
+  include_directories(${SYMPHONY_DIR}/Applications/MISOCO/include/)
   
-  set(MISOCO_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/CutGen/user_cg.c
-                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/CutPool/user_cp.c
-                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/DrawGraph/user_dg.c
-                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/LP/user_lp_branch.c
-                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/LP/user_lp.c
-                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/Master/user_main.c
-                  ${SYMPHONY_DIR}/SYMPHONY/Applications/MISOCO/src/Master/user_master.c)
+  set(MISOCO_SRCS ${SYMPHONY_DIR}/Applications/MISOCO/src/CutGen/user_cg.c
+                  ${SYMPHONY_DIR}/Applications/MISOCO/src/CutPool/user_cp.c
+                  ${SYMPHONY_DIR}/Applications/MISOCO/src/DrawGraph/user_dg.c
+                  ${SYMPHONY_DIR}/Applications/MISOCO/src/LP/user_lp_branch.c
+                  ${SYMPHONY_DIR}/Applications/MISOCO/src/LP/user_lp.c
+                  ${SYMPHONY_DIR}/Applications/MISOCO/src/Master/user_main.c
+                  ${SYMPHONY_DIR}/Applications/MISOCO/src/Master/user_master.c)
   
   set_source_files_properties(${MISOCO_SRCS} PROPERTIES LANGUAGE CXX)
   # Compilation error            
   #add_example(MISOCO ${MISOCO_SRCS})
 
   # MPP
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/include/)
+  include_directories(${SYMPHONY_DIR}/Applications/MPP/include/)
   
-  set(MPP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/CutGen/mpp_cg.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/CutPool/mpp_cp.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/DrawGraph/mpp_dg.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/LP/mpp_lp_branch.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/LP/mpp_lp.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/Master/mpp_main.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/MPP/src/Master/mpp_master.c)
+  set(MPP_SRCS ${SYMPHONY_DIR}/Applications/MPP/src/CutGen/mpp_cg.c
+               ${SYMPHONY_DIR}/Applications/MPP/src/CutPool/mpp_cp.c
+               ${SYMPHONY_DIR}/Applications/MPP/src/DrawGraph/mpp_dg.c
+               ${SYMPHONY_DIR}/Applications/MPP/src/LP/mpp_lp_branch.c
+               ${SYMPHONY_DIR}/Applications/MPP/src/LP/mpp_lp.c
+               ${SYMPHONY_DIR}/Applications/MPP/src/Master/mpp_main.c
+               ${SYMPHONY_DIR}/Applications/MPP/src/Master/mpp_master.c)
   
   set_source_files_properties(${MPP_SRCS} PROPERTIES LANGUAGE CXX)
   add_example(MPP ${MPP_SRCS})
   
   # SPP
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/include/)
+  include_directories(${SYMPHONY_DIR}/Applications/SPP/include/)
   
-  set(SPP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/Common/spp_common.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/CutGen/spp_cg.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/CutPool/spp_cp.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/DrawGraph/spp_dg.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/LP/spp_lp_branch.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/LP/spp_lp.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/Master/spp_main.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/Master/spp_master.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP/src/Master/spp_master_functions.c)
+  set(SPP_SRCS ${SYMPHONY_DIR}/Applications/SPP/src/Common/spp_common.c
+               ${SYMPHONY_DIR}/Applications/SPP/src/CutGen/spp_cg.c
+               ${SYMPHONY_DIR}/Applications/SPP/src/CutPool/spp_cp.c
+               ${SYMPHONY_DIR}/Applications/SPP/src/DrawGraph/spp_dg.c
+               ${SYMPHONY_DIR}/Applications/SPP/src/LP/spp_lp_branch.c
+               ${SYMPHONY_DIR}/Applications/SPP/src/LP/spp_lp.c
+               ${SYMPHONY_DIR}/Applications/SPP/src/Master/spp_main.c
+               ${SYMPHONY_DIR}/Applications/SPP/src/Master/spp_master.c
+               ${SYMPHONY_DIR}/Applications/SPP/src/Master/spp_master_functions.c)
   
   set_source_files_properties(${SPP_SRCS} PROPERTIES LANGUAGE CXX)
   add_example(SPP ${SPP_SRCS})
   
   # SPP+CUTS
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/include/)
+  include_directories(${SYMPHONY_DIR}/Applications/SPP+CUTS/include/)
   
-  set(SPP_CUTS_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Common/spp_common.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/CutGen/spp_cg.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/CutGen/spp_cg_clique.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/CutGen/spp_cg_functions.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/CutPool/spp_cp.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/DrawGraph/spp_dg.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/LP/spp_lp_branch.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/LP/spp_lp.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/LP/spp_lp_branch.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/LP/spp_lp_functions.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Master/spp_main.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Master/spp_master.c
-                    ${SYMPHONY_DIR}/SYMPHONY/Applications/SPP+CUTS/src/Master/spp_master_functions.c)
+  set(SPP_CUTS_SRCS ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/Common/spp_common.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/CutGen/spp_cg.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/CutGen/spp_cg_clique.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/CutGen/spp_cg_functions.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/CutPool/spp_cp.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/DrawGraph/spp_dg.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/LP/spp_lp_branch.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/LP/spp_lp.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/LP/spp_lp_branch.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/LP/spp_lp_functions.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/Master/spp_main.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/Master/spp_master.c
+                    ${SYMPHONY_DIR}/Applications/SPP+CUTS/src/Master/spp_master_functions.c)
   
   set_source_files_properties(${SPP_CUTS_SRCS} PROPERTIES LANGUAGE CXX)
   # Compilation error              
   #add_example(SPP_CUTS ${SPP_CUTS_SRCS})
   
   # USER
-  include_directories(${SYMPHONY_DIR}/SYMPHONY/Applications/USER/include/)
+  include_directories(${SYMPHONY_DIR}/Applications/USER/include/)
   
-  set(USER_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/CutGen/user_cg.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/CutPool/user_cp.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/DrawGraph/user_dg.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/LP/user_lp_branch.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/LP/user_lp.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/Master/user_main.c
-                ${SYMPHONY_DIR}/SYMPHONY/Applications/USER/src/Master/user_master.c)
+  set(USER_SRCS ${SYMPHONY_DIR}/Applications/USER/src/CutGen/user_cg.c
+                ${SYMPHONY_DIR}/Applications/USER/src/CutPool/user_cp.c
+                ${SYMPHONY_DIR}/Applications/USER/src/DrawGraph/user_dg.c
+                ${SYMPHONY_DIR}/Applications/USER/src/LP/user_lp_branch.c
+                ${SYMPHONY_DIR}/Applications/USER/src/LP/user_lp.c
+                ${SYMPHONY_DIR}/Applications/USER/src/Master/user_main.c
+                ${SYMPHONY_DIR}/Applications/USER/src/Master/user_master.c)
   
   set_source_files_properties(${USER_SRCS} PROPERTIES LANGUAGE CXX)
   # Compilation error          
   #add_example(USER ${USER_SRCS})
   
   # VRP
-  set(VRP_SRCS ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/compute_cost.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/network.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Common/vrp_macros.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/biconnected.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/shrink.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/tsp.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/vrp_cg.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/Decomp/decomp_lower_bound.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/Decomp/decomp_user.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/Decomp/ind_sort.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/Decomp/my_decomp_user.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/MinCut/capforest.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutGen/MinCut/min_cut.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/CutPool/vrp_cp.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/DrawGraph/vrp_dg.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/DrawGraph/vrp_dg_functions.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/DrawGraph/vrp_dg_network.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/binomial.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/exchange2.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/exchange.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/farnear_ins.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/farthest_ins.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/heur_main.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/heur_routines.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/ins_routines2.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/ins_routines.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/mst.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/mst_ins_rout.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/near_cluster.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/nearest_ins.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/qsort.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings2.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings3.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings_rout2.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings_rout3.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/savings_rout.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/s_path.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/sp.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/sweep.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/tsp_fi.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/tsp_fini.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/tsp_ins_rout.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Heuristics/tsp_ni.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/LP/vrp_lp_branch.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/LP/vrp_lp.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/small_graph.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/vrp_io.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/vrp_main.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/vrp_master.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/vrp_master_functions.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/cluster_heur.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/collect_solutions.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/exchange_heur.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/lower_bound.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/receive_rout.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/route_heur.c
-               ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/src/Master/Heuristics/start_heurs.c)
+  set(VRP_SRCS ${SYMPHONY_DIR}/Applications/VRP/src/Common/compute_cost.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Common/network.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Common/vrp_macros.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/biconnected.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/shrink.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/tsp.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/vrp_cg.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/Decomp/decomp_lower_bound.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/Decomp/decomp_user.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/Decomp/ind_sort.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/Decomp/my_decomp_user.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/MinCut/capforest.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutGen/MinCut/min_cut.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/CutPool/vrp_cp.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/DrawGraph/vrp_dg.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/DrawGraph/vrp_dg_functions.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/DrawGraph/vrp_dg_network.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/binomial.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/exchange2.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/exchange.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/farnear_ins.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/farthest_ins.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/heur_main.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/heur_routines.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/ins_routines2.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/ins_routines.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/mst.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/mst_ins_rout.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/near_cluster.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/nearest_ins.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/qsort.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/savings2.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/savings3.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/savings.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/savings_rout2.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/savings_rout3.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/savings_rout.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/s_path.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/sp.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/sweep.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/tsp_fi.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/tsp_fini.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/tsp_ins_rout.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Heuristics/tsp_ni.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/LP/vrp_lp_branch.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/LP/vrp_lp.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/small_graph.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/vrp_io.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/vrp_main.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/vrp_master.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/vrp_master_functions.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/Heuristics/cluster_heur.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/Heuristics/collect_solutions.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/Heuristics/exchange_heur.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/Heuristics/lower_bound.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/Heuristics/receive_rout.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/Heuristics/route_heur.c
+               ${SYMPHONY_DIR}/Applications/VRP/src/Master/Heuristics/start_heurs.c)
   
   set_source_files_properties(${VRP_SRCS} PROPERTIES LANGUAGE CXX)
   # Concorde required
   # Compilation error
   #add_example(VRP ${VRP_SRCS})
   #target_include_directories(VRP BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
-  #target_include_directories(VRP BEFORE PRIVATE ${SYMPHONY_DIR}/SYMPHONY/Applications/VRP/include)
+  #target_include_directories(VRP BEFORE PRIVATE ${SYMPHONY_DIR}/Applications/VRP/include)
   #target_link_libraries(VRP concorde)
 endif ()

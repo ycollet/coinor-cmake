@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(Symphony)
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
+option(COIN_ENABLE_NEW_DIR_STRUCT "Enable the use of the CoinOR directory structure" OFF)
 
 # Symphony options
 option(SYM_OPTION_USE_CGL_CUTS           "Use CGL cuts" ON)
@@ -547,13 +548,23 @@ add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
 
 # Directories where to find the source code
-set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-set(Osi_DIR           ${COIN_DIR}/Osi)
-set(Clp_DIR           ${COIN_DIR}/Clp)
-set(Cgl_DIR           ${COIN_DIR}/Cgl)
-set(SYMPHONY_DIR      ${COIN_DIR}/)
+if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
+  set(Clp_DIR           ${COIN_DIR}/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/Cgl)
+  set(SYMPHONY_DIR      ${COIN_DIR}/SYMPHONY)
+else ()
+  set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
+  set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/../Cgl/Cgl)
+  set(SYMPHONY_DIR      ${COIN_DIR}/SYMPHONY)
+endif ()
 
 include(CheckIncludeFileCXX)
 include(CheckIncludeFile)
@@ -994,9 +1005,9 @@ subdirs(ThirdParty)
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
 
-include_directories(${CMAKE_BINARY_DIR}/SYMPHONY/include)
+include_directories(${CMAKE_BINARY_DIR}/include)
 
-include_directories(${SYMPHONY_DIR}/SYMPHONY/include)
+include_directories(${SYMPHONY_DIR}/include)
 
 include_directories(${CoinUtils_DIR}/src)
 

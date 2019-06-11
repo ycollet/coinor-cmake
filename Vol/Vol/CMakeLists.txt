@@ -1,4 +1,4 @@
-get_ac_init_version(${Vol_DIR}/../configure.ac VOL)
+get_ac_init_version(${Vol_DIR}/configure.ac VOL)
 
 option(VOL_BUILD_EXAMPLES "Enable the building of examples" OFF)
 

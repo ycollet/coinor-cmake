@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0.2)
 project(Cgl)
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
+option(COIN_ENABLE_NEW_DIR_STRUCT "Enable the use of the CoinOR directory structure" OFF)
 
 # Clp options
 option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
@@ -490,12 +491,21 @@ add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
 
 # Directories where to find the source code
-set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-set(Osi_DIR           ${COIN_DIR}/Osi)
-set(Clp_DIR           ${COIN_DIR}/Clp)
-set(Cgl_DIR           ${COIN_DIR}/Cgl)
+if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
+  set(Clp_DIR           ${COIN_DIR}/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/Cgl)
+else ()
+  set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
+  set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/Cgl)
+endif ()
 
 include(CheckIncludeFileCXX)
 include(CheckIncludeFile)
