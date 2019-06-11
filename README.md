@@ -17,23 +17,23 @@ Up to now, only the following projects are supported:
 How to use these cmake files ?
 
 - Clone the repository
-- Copy all the files from Cbc-git to Cbc-2.9.9 (for example)
-- In Cbc-2.9.9 create a build directory (mkdir build)
-- In Cbc-2.9.9/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.9 -DCMAKE_BUILD_TYPE=RELEASE ..'
-- In Cbc-2.9.9/buil, launch 'cmake-gui .' to fine tune the configuration
+- Copy all the files from Cbc-git to Cbc-2.10.2 (for example)
+- In Cbc-2.10.2 create a build directory (mkdir build)
+- In Cbc-2.10.2/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.2 -DCMAKE_BUILD_TYPE=RELEASE ..'
+- In Cbc-2.10.2/buil, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: make
 - Install the libraries: sudo make install
 
 An example:
 ```
-$ wget https://www.coin-or.org/download/source/Cbc/Cbc-2.9.9.tgz
-$ tar xvfz Cbc-2.9.9.tgz
+$ wget https://www.coin-or.org/download/source/Cbc/Cbc-2.10.2.tgz
+$ tar xvfz Cbc-2.10.2.tgz
 $ git clone https://github.com/ycollet/coinor-cmake.git
-$ cp -r coinor-cmake/Cbc/* Cbc-2.9.9/
-$ cd Cbc-2.9.9
+$ cp -r coinor-cmake/Cbc/* Cbc-2.10.2/
+$ cd Cbc-2.10.2
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.9 -DCMAKE_BUILD_TYPE=RELEASE ..
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.2 -DCMAKE_BUILD_TYPE=RELEASE ..
 # Now activate all the options you want ... and click on  configure + generate and exit
 $ cmake-gui .
 $ make
@@ -43,10 +43,10 @@ $ sudo make install
 Under Windows, with Visual Studio:
 
 - Clone the repository
-- Copy all the files from Cbc-git to Cbc-2.9.9 (for example)
-- In Cbc-2.9.9 create a build directory (mkdir build)
-- In Cbc-2.9.9/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.9.9 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
-- In Cbc-2.9.9/buil, launch 'cmake-gui .' to fine tune the configuration
+- Copy all the files from Cbc-git to Cbc-2.10.2 (for example)
+- In Cbc-2.10.2 create a build directory (mkdir build)
+- In Cbc-2.10.2/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.2 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
+- In Cbc-2.10.2/buil, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: nmake
 - Install the libraries: nmake install
 
@@ -176,7 +176,7 @@ Be careful to activate the right set of tests (not the long one).
 
 ```
  cmake -DCMAKE_INSTALL_PREFIX=c:/lapack-3.7.0 -DCMAKE_BUILD_TYPE_RELEASE -DBUILD_SHARED_LIBS=ON \
-       -DCMAKE_GNUtoMS=ON -DCMAKE_GNUtoMS_VCVARS=c:/Program Files (x86)/Microsoft Visual Studio 11/VC/vcvarsall.bat \
+       -DCMAKE_GNUtoMS=ON -DCMAKE_GNUtoMS_VCVARS="c:/Program Files (x86)/Microsoft Visual Studio 11/VC/vcvarsall.bat" \
        -G "Unix Makefiles" ..
  c:/MinGW64/MinGW64/bin/mingw32-make.exe
  c:/MinGW64/MinGW64/bin/mingw32-make.exe install
@@ -230,7 +230,7 @@ Date:   Thu Oct 21 01:03:09 2004 +0000
 
     New repository initialized by cvs2svn.
 
-$ gat tag first_commit 2dc3ded2d97f2c889ae7baafa49128d2bec1f25b
+$ git tag first_commit 2dc3ded2d97f2c889ae7baafa49128d2bec1f25b
 
 $ cmake -DCMAKE_INSTALL_PREFIX=/opt/coinmp-devel -DCMAKE_BUILD_TYPE=RELEASE ..
 
