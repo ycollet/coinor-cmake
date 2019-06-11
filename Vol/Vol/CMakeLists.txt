@@ -8,14 +8,14 @@ set(VOL_VERSION_RELEASE "${VOL_PATCH_VERSION}"  CACHE STRING "The Vol patch vers
 set(VOL_VERSION         "${VOL_VERSION_STRING}" CACHE STRING "The Vol version")
 
 set(VOL_WC_REVISION "0")
-if (EXISTS "${Vol_DIR}/../.svn")
+if ((EXISTS "${Vol_DIR}/../.svn") OR (EXISTS "${Vol_DIR}/../../.svn"))
   find_package(Subversion)
   if (Subversion_FOUND)
     Subversion_WC_INFO(${Vol_DIR}/.. VOL)
   endif ()
 endif ()
 
-if (EXISTS "${Vol_DIR}/../.git")
+if ((EXISTS "${Vol_DIR}/../.git") OR (EXISTS "${Vol_DIR}/../../.git"))
   find_package(Git)
   if (Git_FOUND)
     include(export_git)

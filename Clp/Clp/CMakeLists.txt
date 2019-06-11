@@ -8,14 +8,14 @@ set(CLP_VERSION_RELEASE "${CLP_PATCH_VERSION}"  CACHE STRING "The CLP patch vers
 set(CLP_VERSION         "${CLP_VERSION_STRING}" CACHE STRING "The CLP version")
 
 set(CLP_WC_REVISION "0")
-if (EXISTS "${Clp_DIR}/.svn")
+if ((EXISTS "${Clp_DIR}/.svn") OR (EXISTS "${Clp_DIR}/../.svn"))
   find_package(Subversion)
   if (Subversion_FOUND)
     Subversion_WC_INFO(${Clp_DIR} CLP)
   endif ()
 endif ()
 
-if (EXISTS "${Clp_DIR}/.git")
+if ((EXISTS "${Clp_DIR}/.git") OR (EXISTS "${Clp_DIR}/../.git"))
   find_package(Git)
   if (Git_FOUND)
     include(export_git)

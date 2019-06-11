@@ -8,14 +8,14 @@ set(BONMIN_VERSION_RELEASE "${BONMIN_PATCH_VERSION}"  CACHE STRING "The BONMIN p
 set(BONMIN_VERSION         "${BONMIN_VERSION_STRING}" CACHE STRING "The BONMIN version")
 
 set(BONMIN_WC_REVISION "0")
-if (EXISTS "${Bonmin_DIR}/../.svn")
+if ((EXISTS "${Bonmin_DIR}/../.svn") OR (EXISTS "${Bonmin_DIR}/../../.svn"))
   find_package(Subversion)
   if (Subversion_FOUND)
     Subversion_WC_INFO(${Bonmin_DIR}/.. BONMIN)
   endif ()
 endif ()
 
-if (EXISTS "${Bonmin_DIR}/../.git")
+if ((EXISTS "${Bonmin_DIR}/../.git") OR (EXISTS "${Bonmin_DIR}/../../.git"))
   find_package(Git)
   if (Git_FOUND)
     include(export_git)

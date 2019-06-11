@@ -9,14 +9,14 @@ set(SYMPHONY_VERSION_RELEASE "${SYMPHONY_PATCH_VERSION}"  CACHE STRING "The Symp
 set(SYMPHONY_VERSION         "${SYMPHONY_VERSION_STRING}" CACHE STRING "The Symphony version")
 
 set(SYMPHONY_WC_REVISION "0")
-if (EXISTS "${SYMPHONY_DIR}/../.svn")
+if ((EXISTS "${SYMPHONY_DIR}/../.svn") OR (EXISTS "${SYMPHONY_DIR}/../../.svn"))
   find_package(Subversion)
   if (Subversion_FOUND)
     Subversion_WC_INFO(${SYMPHONY_DIR}/.. SYMPHONY)
   endif ()
 endif ()
 
-if (EXISTS "${SYMPHONY_DIR}/../.git")
+if ((EXISTS "${SYMPHONY_DIR}/../.git") OR (EXISTS "${SYMPHONY_DIR}/../../.git"))
   find_package(Git)
   if (Git_FOUND)
     include(export_git)

@@ -8,14 +8,14 @@ set(CGL_VERSION_RELEASE "${CGL_PATCH_VERSION}"  CACHE STRING "The CGL patch vers
 set(CGL_VERSION         "${CGL_VERSION_STRING}" CACHE STRING "The CGL version")
 
 set(CGL_WC_REVISION "0")
-if (EXISTS "${Cgl_DIR}/.svn")
+if ((EXISTS "${Cgl_DIR}/.svn") OR (EXISTS "${Cgl_DIR}/../.svn"))
   find_package(Subversion)
   if (Subversion_FOUND)
     Subversion_WC_INFO(${Cgl_DIR} CGL)
   endif ()
 endif ()
 
-if (EXISTS "${Cgl_DIR}/.git")
+if ((EXISTS "${Cgl_DIR}/.git") OR (EXISTS "${Cgl_DIR}/../.git"))
   find_package(Git)
   if (Git_FOUND)
     include(export_git)

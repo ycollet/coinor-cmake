@@ -9,14 +9,14 @@ set(DYLP_VERSION         "${DYLP_VERSION_STRING}" CACHE STRING "The Vol version"
 set(DYLP_SVN_REV         "${DYLP_VERSION_RELEASE}")
 
 set(DYLP_WC_REVISION "0")
-if (EXISTS "${DyLP_DIR}/../.svn")
+if ((EXISTS "${DyLP_DIR}/../.svn") OR (EXISTS "${DyLP_DIR}/../../.svn"))
   find_package(Subversion)
   if (Subversion_FOUND)
     Subversion_WC_INFO(${DyLP_DIR}/.. DYLP)
   endif ()
 endif ()
 
-if (EXISTS "${DyLP_DIR}/../.git")
+if ((EXISTS "${DyLP_DIR}/../.git") OR (EXISTS "${DyLP_DIR}/../../.git"))
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
