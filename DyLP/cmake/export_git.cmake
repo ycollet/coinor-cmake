@@ -12,7 +12,7 @@ if (NOT GIT_FOUND)
   message(ERROR "Git required to build this tool")
 endif ()
 
-if (NOT git-update)
+if (NOT TARGET git-update)
   add_custom_target(git-update)
 endif ()
 
@@ -72,12 +72,6 @@ endmacro(GIT_WC_INFO)
 # - Repo_commit: the hash tag of the commit to be retrieved (HEAD for example)
 # - Rule_name: the name of the rule to update the repo
 macro(clone_git_branch Path_repo Path_dest Repo_branch Repo_commit Rule_name)
-  message(STATUS "clone_git_branch: Path_repo   = ${Path_repo}")
-  message(STATUS "clone_git_branch: Path_dest   = ${Path_dest}")
-  message(STATUS "clone_git_branch: Repo_branch = ${Repo_branch}")
-  message(STATUS "clone_git_branch: Repo_commit = ${Repo_commit}")
-  message(STATUS "clone_git_tag: Rule_name   = ${Rule_name}")
-  
   if ("${Repo_branch}" STREQUAL "master")
     message(FATAL_ERROR "Can't clone the master branch, use the 'clone_git' macro instead")
   endif ()
@@ -87,11 +81,7 @@ macro(clone_git_branch Path_repo Path_dest Repo_branch Repo_commit Rule_name)
   endif ()
   
   if (NOT EXISTS ${Path_dest})
-    message(STATUS "clone_git_branch: creating ${Path_dest} directory")
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${Path_dest})
-
-    message(STATUS "clone_git_branch: cloning repository branch ${Repo_branch} from ${Path_repo} into ${Path_dest}")
-
     execute_process(COMMAND ${GIT_EXECUTABLE} clone -b ${Repo_branch} ${Path_repo} ${Path_dest}
                     OUTPUT_VARIABLE _GIT_CLONE_GIT_BRANCH_OUTPUT
                     ERROR_VARIABLE  _GIT_CLONE_GIT_BRANCH_ERROR)
@@ -119,12 +109,6 @@ endmacro(clone_git_branch)
 # - Repo_commit: the hash tag of the commit to be retrieved (HEAD for example)
 # - Rule_name: the name of the rule to update the repo
 macro(clone_git_tag Path_repo Path_dest Repo_tag Repo_commit Rule_name)
-  message(STATUS "clone_git_tag: Path_repo   = ${Path_repo}")
-  message(STATUS "clone_git_tag: Path_dest   = ${Path_dest}")
-  message(STATUS "clone_git_tag: Repo_tag    = ${Repo_tag}")
-  message(STATUS "clone_git_tag: Repo_commit = ${Repo_commit}")
-  message(STATUS "clone_git_tag: Rule_name   = ${Rule_name}")
-  
   if ("${Repo_tag}" STREQUAL "master")
     message(FATAL_ERROR "Can't clone the tag branch, use the 'clone_git' macro instead")
   endif ()
@@ -134,10 +118,7 @@ macro(clone_git_tag Path_repo Path_dest Repo_tag Repo_commit Rule_name)
   endif ()
   
   if (NOT EXISTS ${Path_dest})
-    message(STATUS "clone_git_tag: creating ${Path_dest} directory")
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${Path_dest})
-    message(STATUS "clone_git_tag: cloning repository tag ${Repo_tag} ${Path_repo} into ${Path_dest}")
-    message(STATUS "DEBUG: ${GIT_EXECUTABLE} clone ${Path_repo} ${Path_dest}")
     execute_process(COMMAND ${GIT_EXECUTABLE} clone ${Path_repo} ${Path_dest}
                     COMMAND ${GIT_EXECUTABLE} checkout tags/${Repo_tag} ${Repo_commit}
                     WORKING_DIRECTORY ${Path_dest}
@@ -167,19 +148,12 @@ endmacro(clone_git_tag)
 # - Repo_commit: the hash tag of the commit to be retrieved (HEAD for example)
 # - Rule_name: the name of the rule to update the repo
 macro(clone_git Path_repo Path_dest Repo_commit Rule_name)
-  message(STATUS "clone_git: Path_repo   = ${Path_repo}")
-  message(STATUS "clone_git: Path_dest   = ${Path_dest}")
-  message(STATUS "clone_git: Repo_commit = ${Repo_commit}")
-  message(STATUS "clone_git_tag: Rule_name   = ${Rule_name}")
-  
   if ("${Repo_commit}" STREQUAL "")
     set (Repo_commit "HEAD")
   endif ()
   
   if (NOT EXISTS ${Path_dest})
-    message(STATUS "clone_git: creating ${Path_dest} directory")
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${Path_dest})
-    message(STATUS "clone_git: cloning repository ${Path_repo} into ${Path_dest}")
     execute_process(COMMAND ${GIT_EXECUTABLE} clone ${Path_repo} ${Path_dest}
                     WORKING_DIRECTORY ${Path_dest}
                     OUTPUT_VARIABLE _GIT_CLONE_GIT_BRANCH_OUTPUT

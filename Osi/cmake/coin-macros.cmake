@@ -220,7 +220,6 @@ macro(add_coin_vol_test_list Prefix Suffix FileList Label Timeout)
   foreach(File ${${FileList}})
     get_filename_component(_NAME ${File} NAME)
     string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
-    #message(STATUS "DEBUG: _NAME = ${_NAME}")
     
     add_coin_test(${Prefix}_${_NAME}_${Suffix} osi_vol ${File})
 

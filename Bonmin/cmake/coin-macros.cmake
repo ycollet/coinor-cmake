@@ -220,7 +220,6 @@ macro(add_coin_vol_test_list Prefix Suffix FileList Label Timeout)
   foreach(File ${${FileList}})
     get_filename_component(_NAME ${File} NAME)
     string(REGEX REPLACE "[\\.]" "_" _NAME "${_NAME}")
-    #message(STATUS "DEBUG: _NAME = ${_NAME}")
     
     add_coin_test(${Prefix}_${_NAME}_${Suffix} osi_vol ${File})
 
@@ -463,25 +462,3 @@ endmacro()
 # remove_source_files(LIST_SRCS LIST_TO_REMOVE_SRCS "1.0" "${VERSION}")
 # 
 # message(STATUS "RESULT: REMOVE - LIST_SRCS = ${LIST_SRCS}")
-
-macro(add_ipopt_test Name FileData)
-  add_test(NAME ${Name}
-           COMMAND ${CMAKE_BINARY_DIR}/bin/ipopt -- ${FileData})
-endmacro()
-
-macro(add_ipopt_test_list Prefix Suffix FileList Label Timeout)
-  foreach(File ${${FileList}})
-    string(REGEX REPLACE "[\\.]" "_" _NAME "${File}")
-    string(REGEX REPLACE "[-]"   "_" _NAME "${_NAME}")
-    string(REGEX REPLACE "[/]"   "_" _NAME "${_NAME}")
-
-    add_ipopt_test(${Prefix}_${_NAME}_${Suffix} ${IPOPT_INSTANCES_DIR}/${File})
-
-    if (NOT COIN_TESTS_DISABLE_TIMEOUT)
-      set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT ${Timeout})
-    else ()
-      set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES TIMEOUT 1000000)
-    endif ()
-    set_tests_properties(${Prefix}_${_NAME}_${Suffix} PROPERTIES LABELS "${Label}")
-  endforeach ()
-endmacro()
