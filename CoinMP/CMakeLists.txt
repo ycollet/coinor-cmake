@@ -510,15 +510,35 @@ add_custom_target(uninstall
 
 # Directories where to find the source code
 if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-  set(Osi_DIR           ${COIN_DIR}/Osi)
-  set(Clp_DIR           ${COIN_DIR}/Clp)
-  set(Cgl_DIR           ${COIN_DIR}/Cgl)
-  set(Cbc_DIR           ${COIN_DIR}/Cbc)
-  set(CoinMP_DIR        ${COIN_DIR}/CoinMP)
+  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
+    # Structure obtained via:
+    # git clone https://github.com/coin-or/coinbrew
+    # git clone https://github.com/coin-or/CoinMP
+    # cd CoinMP
+    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="CoinMP"
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
+    set(Clp_DIR           ${COIN_DIR}/Clp/Clp)
+    set(Cgl_DIR           ${COIN_DIR}/Cgl/Cgl)
+    set(Cbc_DIR           ${COIN_DIR}/Cbc/Cbc)
+    set(CoinMP_DIR        ${COIN_DIR}/CoinMP)
+  else ()
+    # Structure from subversion checkout
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi)
+    set(Clp_DIR           ${COIN_DIR}/Clp)
+    set(Cgl_DIR           ${COIN_DIR}/Cgl)
+    set(Cbc_DIR           ${COIN_DIR}/Cbc)
+    set(CoinMP_DIR        ${COIN_DIR}/CoinMP)
+  endif ()
 else ()
+  # Structure obtained via:
+  # git clone https://github.com/coin-or/coinbrew
+  # coinbrew/coinbrew fetch --git --main-proj="CoinMP"
   set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
   set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)

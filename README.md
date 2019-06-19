@@ -212,6 +212,30 @@ $ cd build
 $ cmake -DCMAKE_INSTALL_PREFIX=/opt/coinmp-devel -DCMAKE_BUILD_TYPE=RELEASE ..
 $ make
 
+# Compiling using coinbrew:
+
+You have two ways to get a coin-or project via coinbrew
+
+$ git clone https://github.com/coin-or/coinbrew.git
+$ coinbrew/coinbrew fetch --git --main-proj="Cbc"
+$ cp -r ../coinor-cmake/Cbc/* Cbc/
+$ cd Cbc
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-devel -DCMAKE_BUILD_TYPE=RELEASE ..
+$ make
+
+or:
+
+$ git clone https://github.com/coin-or/Cbc
+$ cd Cbc
+$ ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Cbc"
+$ cp -r ../coinor-cmake/Cbc/* .
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-devel -DCMAKE_BUILD_TYPE=RELEASE ..
+$ make
+
 # if you've got an error related to git describe:
 
 $ git tag test HEAD~1

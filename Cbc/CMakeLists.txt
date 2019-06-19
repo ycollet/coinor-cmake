@@ -511,15 +511,34 @@ add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
 
 # Directories where to find the source code
-if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-  set(Osi_DIR           ${COIN_DIR}/Osi)
-  set(Clp_DIR           ${COIN_DIR}/Clp)
-  set(Cgl_DIR           ${COIN_DIR}/Cgl)
-  set(Cbc_DIR           ${COIN_DIR}/Cbc)
+if (NOT COIN_ENABLE_NEW_DIR_STRUCT)
+  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
+    # Structure obtained via:
+    # git clone https://github.com/coin-or/coinbrew
+    # git clone https://github.com/coin-or/Cbc
+    # cd Cbc
+    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Cbc"
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
+    set(Clp_DIR           ${COIN_DIR}/Clp/Clp)
+    set(Cgl_DIR           ${COIN_DIR}/Cgl/Cgl)
+    set(Cbc_DIR           ${COIN_DIR}/Cbc)
+  else ()
+    # Structure from subversion checkout
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi)
+    set(Clp_DIR           ${COIN_DIR}/Clp)
+    set(Cgl_DIR           ${COIN_DIR}/Cgl)
+    set(Cbc_DIR           ${COIN_DIR}/Cbc)
+  endif ()
 else ()
+  # Structure obtained via:
+  # git clone https://github.com/coin-or/coinbrew
+  # coinbrew/coinbrew fetch --git --main-proj="Cbc"
   set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
   set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)

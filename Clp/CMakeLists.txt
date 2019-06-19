@@ -483,12 +483,29 @@ add_custom_target(uninstall
 
 # Directories where to find the source code
 if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-  set(Osi_DIR           ${COIN_DIR}/Osi)
-  set(Clp_DIR           ${COIN_DIR}/Clp)
+  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
+    # Structure obtained via:
+    # git clone https://github.com/coin-or/coinbrew
+    # git clone https://github.com/coin-or/Clp
+    # cd Clp
+    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Clp"
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
+    set(Clp_DIR           ${COIN_DIR}/Clp)
+  else ()
+    # Structure from subversion checkout
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi)
+    set(Clp_DIR           ${COIN_DIR}/Clp)
+  endif ()
 else ()
+  # Structure obtained via:
+  # git clone https://github.com/coin-or/coinbrew
+  # coinbrew/coinbrew fetch --git --main-proj="Clp"
   set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
   set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)

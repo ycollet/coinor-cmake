@@ -440,11 +440,27 @@ add_custom_target(uninstall
 
 # Directories where to find the source code
 if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-  set(Osi_DIR           ${COIN_DIR}/Osi)
+  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
+    # Structure obtained via:
+    # git clone https://github.com/coin-or/coinbrew
+    # git clone https://github.com/coin-or/Osi
+    # cd Osi
+    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Osi"
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtilstest)
+    set(Osi_DIR           ${COIN_DIR}/Osi)
+  else ()
+    # Structure from subversion checkout
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi)
+  endif ()
 else ()
+  # Structure obtained via:
+  # git clone https://github.com/coin-or/coinbrew
+  # coinbrew/coinbrew fetch --git --main-proj="Osi"
   set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils)
   set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)

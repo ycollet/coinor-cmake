@@ -451,12 +451,29 @@ add_custom_target(uninstall
 
 # Directories where to find the source code
 if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-  set(Osi_DIR           ${COIN_DIR}/Osi)
-  set(DyLP_DIR          ${COIN_DIR}/DyLP)
+  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
+    # Structure obtained via:
+    # git clone https://github.com/coin-or/coinbrew
+    # git clone https://github.com/coin-or/DyLP
+    # cd DyLP
+    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="DyLP"
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
+    set(DyLP_DIR          ${COIN_DIR}/DyLP)
+  else ()
+    # Structure from subversion checkout
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+    set(Osi_DIR           ${COIN_DIR}/Osi)
+    set(DyLP_DIR          ${COIN_DIR}/DyLP)
+  endif ()
 else ()
+  # Structure obtained via:
+  # git clone https://github.com/coin-or/DyLP
+  # coinbrew/coinbrew fetch --git --main-proj="DyLP"
   set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
   set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)

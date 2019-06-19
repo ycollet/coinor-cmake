@@ -369,10 +369,25 @@ add_custom_target(uninstall
 
 # Directories where to find the source code
 if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-  set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
+  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
+    # Structure obtained via:
+    # git clone https://github.com/coin-or/coinbrew
+    # git clone https://github.com/coin-or/CoinUtils
+    # cd CoinUtils
+    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="CoinUtils"
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+    set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
+  else ()
+    # Structure from subversion checkout
+    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+    set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
+  endif ()
 else ()
+  # Structure obtained via:
+  # git clone https://github.com/coin-or/coinbrew
+  # coinbrew/coinbrew fetch --git --main-proj="CoinUtils"
   set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
   set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
