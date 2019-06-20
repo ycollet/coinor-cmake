@@ -31,7 +31,6 @@ set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOp
 set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
-option(COIN_ENABLE_NEW_DIR_STRUCT "Enable the use of the CoinOR directory structure" OFF)
 
 # Cbc options
 option(CBC_USE_THREADS "Enable the compilation of the SMP version of CBC" OFF)
@@ -548,43 +547,44 @@ add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
 
 # Directories where to find the source code
-if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
-    # Structure obtained via:
-    # git clone https://github.com/coin-or/coinbrew
-    # git clone https://github.com/coin-or/Bonmin
-    # cd Bonmin
-    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Bonmin"
-    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
-    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
-    set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
-    set(Clp_DIR           ${COIN_DIR}/Clp/Clp)
-    set(Cgl_DIR           ${COIN_DIR}/Cgl/Cgl)
-    set(Cbc_DIR           ${COIN_DIR}/Cbc/Cbc)
-    set(Bonmin_DIR        ${COIN_DIR}/Bonmin)
-  else ()
-    # Structure from subversion checkout
-    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-    set(Osi_DIR           ${COIN_DIR}/Osi)
-    set(Clp_DIR           ${COIN_DIR}/Clp)
-    set(Cgl_DIR           ${COIN_DIR}/Cgl)
-    set(Cbc_DIR           ${COIN_DIR}/Cbc)
-    set(Bonmin_DIR        ${COIN_DIR}/Bonmin)
-  endif ()
-else ()
+
+# Structure obtained via:
+# git clone https://github.com/coin-or/coinbrew
+# coinbrew/coinbrew fetch --git --main-proj="Bonmin"
+set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
+set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
+set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
+set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
+set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
+set(Cgl_DIR           ${COIN_DIR}/../Cgl/Cgl)
+set(Cbc_DIR           ${COIN_DIR}/../Cbc/Cbc)
+set(Bonmin_DIR        ${COIN_DIR}/Bonmin)
+
+if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
   # Structure obtained via:
   # git clone https://github.com/coin-or/coinbrew
-  # coinbrew/coinbrew fetch --git --main-proj="Bonmin"
-  set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
-  set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
-  set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
-  set(Cgl_DIR           ${COIN_DIR}/../Cgl/Cgl)
-  set(Cbc_DIR           ${COIN_DIR}/../Cbc/Cbc)
+  # git clone https://github.com/coin-or/Bonmin
+  # cd Bonmin
+  # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Bonmin"
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
+  set(Clp_DIR           ${COIN_DIR}/Clp/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/Cgl/Cgl)
+  set(Cbc_DIR           ${COIN_DIR}/Cbc/Cbc)
+  set(Bonmin_DIR        ${COIN_DIR}/Bonmin)
+endif ()
+
+if (EXISTS ${COIN_DIR}/CoinUtils/test)
+  # Structure from subversion checkout
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
+  set(Clp_DIR           ${COIN_DIR}/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/Cgl)
+  set(Cbc_DIR           ${COIN_DIR}/Cbc)
   set(Bonmin_DIR        ${COIN_DIR}/Bonmin)
 endif ()
 

@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.0.2)
 project(Cgl)
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
-option(COIN_ENABLE_NEW_DIR_STRUCT "Enable the use of the CoinOR directory structure" OFF)
 
 # Clp options
 option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
@@ -491,37 +490,38 @@ add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
 
 # Directories where to find the source code
-if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
-    # Structure obtained via:
-    # git clone https://github.com/coin-or/coinbrew
-    # git clone https://github.com/coin-or/Cgl
-    # cd Cgl
-    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Cgl"
-    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
-    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
-    set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
-    set(Clp_DIR           ${COIN_DIR}/Clp/Clp)
-    set(Cgl_DIR           ${COIN_DIR}/Cgl)
-  else ()
-    # Structure from subversion checkout
-    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-    set(Osi_DIR           ${COIN_DIR}/Osi)
-    set(Clp_DIR           ${COIN_DIR}/Clp)
-    set(Cgl_DIR           ${COIN_DIR}/Cgl)
-  endif ()
-else ()
+
+# Structure obtained via:
+# git clone https://github.com/coin-or/coinbrew
+# coinbrew/coinbrew fetch --git --main-proj="Cgl"
+set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
+set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
+set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
+set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
+set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
+set(Cgl_DIR           ${COIN_DIR}/Cgl)
+
+if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
   # Structure obtained via:
   # git clone https://github.com/coin-or/coinbrew
-  # coinbrew/coinbrew fetch --git --main-proj="Cgl"
-  set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
-  set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
-  set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
+  # git clone https://github.com/coin-or/Cgl
+  # cd Cgl
+  # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Cgl"
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
+  set(Clp_DIR           ${COIN_DIR}/Clp/Clp)
+  set(Cgl_DIR           ${COIN_DIR}/Cgl)
+endif ()
+
+if (EXISTS ${COIN_DIR}/CoinUtils/test)
+  # Structure from subversion checkout
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
+  set(Clp_DIR           ${COIN_DIR}/Clp)
   set(Cgl_DIR           ${COIN_DIR}/Cgl)
 endif ()
 

@@ -3,7 +3,6 @@ cmake_minimum_required(VERSION 3.0.2)
 project(Clp)
 
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
-option(COIN_ENABLE_NEW_DIR_STRUCT "Enable the use of the CoinOR directory structure" OFF)
 
 # Clp options
 option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
@@ -482,34 +481,35 @@ add_custom_target(uninstall
 # End of coverage
 
 # Directories where to find the source code
-if (NOT COIN_ENABLE_NEW_DIR_STRUCT)	
-  if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils)
-    # Structure obtained via:
-    # git clone https://github.com/coin-or/coinbrew
-    # git clone https://github.com/coin-or/Clp
-    # cd Clp
-    # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Clp"
-    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
-    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
-    set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
-    set(Clp_DIR           ${COIN_DIR}/Clp)
-  else ()
-    # Structure from subversion checkout
-    set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
-    set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
-    set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
-    set(Osi_DIR           ${COIN_DIR}/Osi)
-    set(Clp_DIR           ${COIN_DIR}/Clp)
-  endif ()
-else ()
+
+# Structure obtained via:
+# git clone https://github.com/coin-or/coinbrew
+# coinbrew/coinbrew fetch --git --main-proj="Clp"
+set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
+set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
+set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
+set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
+set(Clp_DIR           ${COIN_DIR}/Clp)
+
+if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
   # Structure obtained via:
   # git clone https://github.com/coin-or/coinbrew
-  # coinbrew/coinbrew fetch --git --main-proj="Clp"
-  set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
-  set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
-  set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
+  # git clone https://github.com/coin-or/Clp
+  # cd Clp
+  # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Clp"
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
+  set(Clp_DIR           ${COIN_DIR}/Clp)
+endif ()
+
+if (EXISTS ${COIN_DIR}/CoinUtils/test)
+  # Structure from subversion checkout
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/test)
+  set(Osi_DIR           ${COIN_DIR}/Osi)
   set(Clp_DIR           ${COIN_DIR}/Clp)
 endif ()
 
