@@ -139,7 +139,7 @@ if (COIN_ENABLE_COMPAT)
 endif ()
 
 # Desactivate some relocation types for portability
-if (UNIX)
+if (UNIX AND COIN_ENABLE_COMPAT)
   check_c_compiler_flag("-Wa,-mrelax-relocations=no" HAVE_RELAX_RELOC_FLAG)
   if (HAVE_RELAX_RELOC_FLAG)
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wa,-mrelax-relocations=no")
