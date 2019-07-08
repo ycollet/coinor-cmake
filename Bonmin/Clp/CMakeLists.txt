@@ -660,8 +660,8 @@ if (CLP_BUILD_EXAMPLES)
 
   
   # This test hangs because it requires the following files:./g.tiny ./gparm.tiny in the exe directory
-  execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/examples/g.tiny     ${CMAKE_BINARY_DIR}/bin/
-                  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/examples/gparm.tiny ${CMAKE_BINARY_DIR}/bin/)
+  execute_process(COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/Clp/examples/g.tiny     ${CMAKE_BINARY_DIR}/bin/
+                  COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/Clp/examples/gparm.tiny ${CMAKE_BINARY_DIR}/bin/)
 
   add_example(pdco ${Clp_DIR}/examples/pdco.cpp)
                    #${Clp_DIR}/examples/myPdco.cpp)
@@ -863,6 +863,28 @@ if (CLP_BUILD_EXAMPLES)
     endif ()
     set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES LABELS "FAIL;DISTRIB;CLP;EXAMPLE")
   endif ()
+  
+  add_example(osiClpUnitTest ${Clp_DIR}/test/osiUnitTest.cpp ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp)
+  include_directories(osiClpUnitTest BEFORE PRIVATE ${Osi_DIR}/src/OsiCommonTest ${Osi_DIR}/src/Osi)
+  target_link_libraries(osiClpUnitTest libOsiClp libClp libOsiCommonTests libOsi)
+  if (COINUTILS_HAS_ZLIB OR COIN_USE_ZLIB)
+    target_link_libraries(osiClpUnitTest ${ZLIB_NAME})
+  endif ()
+  if (COINUTILS_HAS_BZLIB OR COIN_USE_BZLIB)
+    target_link_libraries(osiClpUnitTest ${BZLIB_NAME})
+  endif ()
+
+  add_test(NAME clp_example_osiUnitTest
+           COMMAND $<TARGET_FILE:osiClpUnitTest> -mpsDir=${CMAKE_SOURCE_DIR}/Data/Sample)
+  set_tests_properties(clp_example_osiUnitTest PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(clp_example_osiUnitTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(clp_example_osiUnitTest PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE;FAIL")
+    
+  set(TEST_REGEX )
+  add_regex(TEST_REGEX "Severity ERROR.*:.*0.*thereof expected:.*0")
+  set_tests_properties(clp_example_osiUnitTest PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 endif ()
 
 add_executable(clp ${Clp_MAIN_SRC_LIST})
