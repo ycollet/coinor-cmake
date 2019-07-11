@@ -6,14 +6,14 @@ set(OSI_VERSION_RELEASE "${OSI_PATCH_VERSION}"  CACHE STRING "The OSI patch vers
 set(OSI_VERSION         "${OSI_VERSION_STRING}" CACHE STRING "The OSI version")
 
 set(OSI_WC_REVISION "0")
-if (EXISTS "${Osi_DIR}/.svn")
+if (EXISTS "${Osi_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
     Subversion_WC_INFO(${Osi_DIR} OSI)
   endif ()
 endif ()
 
-if (EXISTS "${Osi_DIR}/.git")
+if (EXISTS "${Osi_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)

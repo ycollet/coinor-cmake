@@ -342,6 +342,7 @@ else ()
   include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
   include_directories(${CMAKE_BINARY_DIR}/Cgl/include)
   include_directories(${CMAKE_BINARY_DIR}/Clp/include)
+  include_directories(${CMAKE_BINARY_DIR}/SYMPHONY/include)
 endif ()
 
 macro(set_include_directories TARGET)
@@ -351,6 +352,7 @@ macro(set_include_directories TARGET)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cgl/include)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
+    target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/SYMPHONY/include)
   endif ()
   
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/include)
@@ -697,6 +699,18 @@ if (SYMPHONY_BUILD_EXAMPLES)
     set_tests_properties(symphony_example_warm_start3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
   endif ()
   set_tests_properties(symphony_example_warm_start3 PROPERTIES LABELS "DISTRIB;LONG")
+
+
+
+  add_example(unitTest-Symphony ${SYMPHONY_DIR}/test/OsiSymSolverInterfaceTest.cpp ${SYMPHONY_DIR}/test/unitTestSym.cpp)
+  
+  add_test(NAME symphony_example_unitTest
+           COMMAND $<TARGET_FILE:unitTest-Symphony>)
+  set_tests_properties(symphony_example_unitTest PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(symphony_example_unitTest PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_DIR}")
+  endif ()
+  set_tests_properties(symphony_example_unitTest PROPERTIES LABELS "DISTRIB;LONG")
 endif ()
 
 install(TARGETS symphony
