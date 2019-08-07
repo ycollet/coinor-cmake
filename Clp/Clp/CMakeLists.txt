@@ -852,7 +852,7 @@ if (CLP_BUILD_EXAMPLES)
     
     add_example(OsiClpSolverInterfaceTest ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp
                                           ${Clp_DIR}/test/osiUnitTest.cpp)
-    target_link_libraries(OsiClpSolverInterfaceTest libOsiClp libOsiCommonTests libOsi)
+    target_link_libraries(OsiClpSolverInterfaceTest libOsiClp libOsiCommonTests libOsi libCoinUtils)
     
     add_test(NAME clp_example_OsiClpSolverInterfaceTest
              COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> -netlibDir=${CMAKE_BINARY_DIR}/Dependencies/DATA_TEST/src/EP_DATA_TEST/Netlib -mpsDir=${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample -testOsiSolverInterface -nobuf)
@@ -866,7 +866,7 @@ if (CLP_BUILD_EXAMPLES)
   
   add_example(osiClpUnitTest ${Clp_DIR}/test/osiUnitTest.cpp ${Clp_DIR}/test/OsiClpSolverInterfaceTest.cpp)
   include_directories(osiClpUnitTest BEFORE PRIVATE ${Osi_DIR}/src/OsiCommonTest ${Osi_DIR}/src/Osi)
-  target_link_libraries(osiClpUnitTest libOsiClp libClp libOsiCommonTests libOsi)
+  target_link_libraries(osiClpUnitTest libOsiClp libClp libCoinUtils libOsiCommonTests libOsi libCoinUtils)
   if (COINUTILS_HAS_ZLIB OR COIN_USE_ZLIB)
     target_link_libraries(osiClpUnitTest ${ZLIB_NAME})
   endif ()

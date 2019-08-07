@@ -87,7 +87,12 @@ set(Cgl_SRC_LIST ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRoundingT
                  ${Cgl_DIR}/src/CglGomory/CglGomoryTest.cpp
                  ${Cgl_DIR}/src/CglGomory/CglGomory.cpp
                  ${Cgl_DIR}/src/CglGMI/CglGMI.cpp
-                 ${Cgl_DIR}/src/CglGMI/CglGMIParam.cpp)
+                 ${Cgl_DIR}/src/CglGMI/CglGMIParam.cpp
+		 ${Cgl_DIR}/src/CglBKClique/CglBKClique.cpp
+		 ${Cgl_DIR}/src/CglCliqueMerging/CglCliqueMerging.cpp
+		 ${Cgl_DIR}/src/CglOddHoleWC/CglOddHoleWC.cpp
+		 ${Cgl_DIR}/src/CglOddHoleWC/oddhs.cpp
+		 ${Cgl_DIR}/src/CglOddHoleWC/spaths.cpp)
 
 set(Cgl_SRC_LIST_Headers ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRounding.hpp
                          ${Cgl_DIR}/src/CglDuplicateRow/CglDuplicateRow.hpp
@@ -122,7 +127,12 @@ set(Cgl_SRC_LIST_Headers ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerR
                          ${Cgl_DIR}/src/CglGMI/CglGMIParam.hpp
                          ${Cgl_DIR}/src/CglGMI/CglGMI.hpp
                          ${Cgl_DIR}/src/CglParam.hpp
-                         ${Cgl_DIR}/src/CglTreeInfo.hpp)
+                         ${Cgl_DIR}/src/CglTreeInfo.hpp
+			 ${Cgl_DIR}/src/CglBKClique/CglBKClique.hpp
+			 ${Cgl_DIR}/src/CglCliqueMerging/CglCliqueMerging.hpp
+			 ${Cgl_DIR}/src/CglOddHoleWC/CglOddHoleWC.hpp
+			 ${Cgl_DIR}/src/CglOddHoleWC/oddhs.h
+			 ${Cgl_DIR}/src/CglOddHoleWC/spaths.h)
 
 include_directories(${Cgl_DIR}/src)
 include_directories(${Cgl_DIR}/src/CglClique)
@@ -142,6 +152,9 @@ include_directories(${Cgl_DIR}/src/CglResidualCapacity)
 include_directories(${Cgl_DIR}/src/CglSimpleRounding)
 include_directories(${Cgl_DIR}/src/CglTwomir)
 include_directories(${Cgl_DIR}/src/CglZeroHalf)
+include_directories(${Cgl_DIR}/src/CglBKClique)
+include_directories(${Cgl_DIR}/src/CglCliqueMerging)
+include_directories(${Cgl_DIR}/src/CglOddHoleWC)
 
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)
