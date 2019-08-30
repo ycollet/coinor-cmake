@@ -135,7 +135,9 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
 		       ${CoinUtils_DIR}/src/vint_set.cpp
 		       ${CoinUtils_DIR}/src/CoinConflictGraph.cpp
 		       ${CoinUtils_DIR}/src/CoinDynamicConflictGraph.cpp
-		       ${CoinUtils_DIR}/src/CoinStaticConflictGraph.cpp)
+		       ${CoinUtils_DIR}/src/CoinStaticConflictGraph.cpp
+		       ${CoinUtils_DIR}/src/CoinAdjacencyVector.cpp
+		       ${CoinUtils_DIR}/src/CoinCliqueList.cpp)
 
 set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinAlloc.hpp
@@ -207,7 +209,9 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
 		     ${CoinUtils_DIR}/src/vint_set.h
 		     ${CoinUtils_DIR}/src/CoinConflictGraph.hpp
 		     ${CoinUtils_DIR}/src/CoinDynamicConflictGraph.hpp
-		     ${CoinUtils_DIR}/src/CoinStaticConflictGraph.hpp)
+		     ${CoinUtils_DIR}/src/CoinStaticConflictGraph.hpp
+		     ${CoinUtils_DIR}/src/CoinAdjacencyVector.hpp
+		     ${CoinUtils_DIR}/src/CoinCliqueList.hpp)
 
 set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
                            ${CoinUtilsTest_DIR}/CoinDenseVectorTest.cpp
