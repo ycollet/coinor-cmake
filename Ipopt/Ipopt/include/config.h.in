@@ -35,6 +35,10 @@
    case), which must not contain underscores, for linking with Fortran. */
 #define @F77_FUNC@
 
+/* Define to a macro mangling the given C identifier (in lower and upper
+   case), which must not contain underscores, for linking with Fortran. */
+#define @COIN_LAPACK_FUNC@
+
 /* As F77_FUNC, but for C identifiers containing underscores. */
 #define @F77_FUNC_@
 
