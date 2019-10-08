@@ -114,6 +114,8 @@ option(COIN_ENABLE_COMPAT            "Enable libc compatibility" OFF)
 # Set paths of source
 set(COIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE STRING "The CoinMP Path")
 
+set(COIN_COVERAGE_CTEST_LABEL "SAMPLE" CACHE PATH "The label sent to ctest during coverage")
+
 mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_THREADS_LIB_PATH
                  COIN_ENABLE_READLINE
@@ -170,7 +172,7 @@ mark_as_advanced(COIN_THREADS_INC_PATH
                  COIN_CBC_VERBOSITY
                  COIN_OSI_CHECKLEVEL
                  COIN_OSI_VERBOSITY
-                 COIN_USE_FAST_CODE)
+                 COIN_COVERAGE_CTEST_LABEL)
 
 # Set paths for binary and library generation inside the build directory:
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -486,9 +488,9 @@ if (COIN_COMPILE_COVERAGE)
   add_custom_target(coverage
                     COMMAND ${LCOV_PATH} --directory ${CMAKE_CURRENT_SOURCE_DIR} --zerocounters
                     COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
-                    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L SAMPLE
+                    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L "${COIN_COVERAGE_CTEST_LABEL}" || true
                     COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
-                    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+                    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info "*/usr/include/*" '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
 		    VERBATIM
