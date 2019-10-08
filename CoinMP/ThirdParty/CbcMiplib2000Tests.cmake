@@ -98,7 +98,7 @@ if (CBC_BUILD_CBC_GENERIC)
 endif ()
 
 if (NOT COIN_TESTS_DISABLE_TIMEOUT)
-  set_tests_properties(miplib2000_air04_mps_gz_cbc_standard            PROPERTIES TIMEOUT 200)
+  set_tests_properties(miplib2000_air04_mps_gz_cbc_standard            PROPERTIES TIMEOUT 400)
   set_tests_properties(miplib2000_acc-tight5_mps_gz_cbc_standard       PROPERTIES TIMEOUT 1250)
   set_tests_properties(miplib2000_ash608gpia-3col_mps_gz_cbc_standard  PROPERTIES TIMEOUT 350)
   set_tests_properties(miplib2000_aflow40b_mps_gz_cbc_standard         PROPERTIES TIMEOUT 15000)
