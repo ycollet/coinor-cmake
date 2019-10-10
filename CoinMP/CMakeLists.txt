@@ -370,8 +370,8 @@ if (UNIX)
   if (COIN_COMPILE_COVERAGE)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
       set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -O0 --coverage")
-      set(CMAKE_C_FLAGS    "${CMAKE_C_FLAGS} -O0 --coverage")
-      set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -O0 --coverage")
+      set(CMAKE_C_FLAGS          "${CMAKE_C_FLAGS} -O0 --coverage")
+      set(CMAKE_CXX_FLAGS        "${CMAKE_CXX_FLAGS} -O0 --coverage")
     endif ()
     if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -Xclang -coverage-cfg-checksum -Xclang -coverage-no-function-names-in-data -Xclang -coverage-version='408*'")
@@ -483,13 +483,12 @@ if (COIN_COMPILE_COVERAGE)
     message(FATAL_ERROR "genhtml not found! Please install lcov and gcov. Aborting...")
   endif ()
   
-  # /!\ FAILURE IF AT LEAST ONE TEST FAILS
   # Capturing lcov counters and generating report
   add_custom_target(coverage
-                    COMMAND ${LCOV_PATH} --directory ${CMAKE_CURRENT_SOURCE_DIR} --zerocounters
-                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --directory ${CMAKE_BINARY_DIR} --zerocounters
+                    COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_BINARY_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L "${COIN_COVERAGE_CTEST_LABEL}" || true
-                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
+                    COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_BINARY_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info "*/usr/include/*" '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
