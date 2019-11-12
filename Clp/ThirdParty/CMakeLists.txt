@@ -544,6 +544,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path to MUMPS_${MUMPS_VERSION}.tar.gz source archive")
   set(MUMPS_InstallDir "${EP_InstallDir}/Mumps-${MUMPS_VERSION}/${CMAKE_CFG_INTDIR}/")
   
+  # TODO: we need to add the path to mumps_mpi.h once Mumps is patched ...
   ExternalProject_Add(EP_Mumps
                       PREFIX            ${MUMPS_InstallDir}
                       DEPENDS           ${MUMPS_DEPENDS}

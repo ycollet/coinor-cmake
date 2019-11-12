@@ -309,6 +309,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
     set(MUMPS_LAPACK_PATH "${EP_InstallDir}/lib")
   endif ()
   
+  # TODO: we need to add the path to mumps_mpi.h once Mumps is patched ...
   ExternalProject_Add(EP_Mumps
                       PREFIX            ${MUMPS_InstallDir}
                       DEPENDS           ${MUMPS_DEPENDS}
