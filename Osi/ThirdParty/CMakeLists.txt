@@ -36,6 +36,9 @@ option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
+if (WIN32)
+  option(COIN_ENABLE_DOWNLOAD_PATCH       "Enable the download / use of Patch exe (for Windows)" OFF)
+endif ()
 
 option(COIN_ENABLE_FIND_LAPACK "Enable the detection of Blas / Lapack" OFF)
 option(COIN_ENABLE_FIND_ZLIB   "Enable the detection of Zlib" OFF)
@@ -449,6 +452,35 @@ endif ()
 
 # #################################################
 # <=== PThreads compilation
+# #################################################
+
+# #################################################
+# ===> Patch
+# #################################################
+
+if (WIN32 AND COIN_ENABLE_DOWNLOAD_PATCH)
+  set(PATCH_VERSION "2.5.9-7")
+  
+  set(PATCH_URL "https:////sourceforge.net//projects//gnuwin32//files//patch//${PATCH_VERSION}//patch-${PATCH_VERSION}-bin.zip" CACHE FILEPATH "Path to Patch-${PATCH_VERSION} binary archive")
+  
+  ExternalProject_Add(EP_PATCH
+                      PREFIX            ${EP_InstallDir}/Patch-${PATCH_VERSION}/
+                      URL               ${PATCH_URL}
+                      PATCH_COMMAND     ""
+                      UPDATE_COMMAND    ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ""
+                      )
+  
+  set(PATCH_EXECUTABLE "${EP_InstallDir}/Patch-${PATCH_VERSION}/src/EP_PATCH/bin/patch.exe" CACHE FILEPATH "Path to the patch executable")
+else ()
+  find_program(TMP_PATCH_EXECUTABLE patch)
+  set(PATCH_EXECUTABLE "${TMP_PATCH_EXECUTABLE}" CACHE FILEPATH "Path to the patch executable")
+endif ()
+
+# #################################################
+# <=== Patch
 # #################################################
 
 set(CMAKE_GENERATOR    "${CMAKE_GENERATOR_OLD}")

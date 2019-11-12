@@ -12,6 +12,9 @@ option(COIN_ENABLE_DOWNLOAD_MINLPLIB     "Enable the download / run of minlp ben
 option(COIN_USE_SYSTEM_LAPACK            "Use system Lapack" ON)
 option(COIN_ENABLE_COMPILE_HSL           "Enable the compilation of HSL" OFF)
 option(COIN_USE_COINHSL                  "Use Coin HSL to compile the solver" OFF)
+if (WIN32)
+  option(COIN_ENABLE_DOWNLOAD_PATCH       "Enable the download / use of Patch exe (for Windows)" OFF)
+endif ()
 
 set(COIN_HSL_PATH "None" CACHE PATH "The HSL source Path")
 
@@ -523,6 +526,35 @@ endif ()
 
 # #################################################
 # <=== Tests
+# #################################################
+
+# #################################################
+# ===> Patch
+# #################################################
+
+if (WIN32 AND COIN_ENABLE_DOWNLOAD_PATCH)
+  set(PATCH_VERSION "2.5.9-7")
+  
+  set(PATCH_URL "https:////sourceforge.net//projects//gnuwin32//files//patch//${PATCH_VERSION}//patch-${PATCH_VERSION}-bin.zip" CACHE FILEPATH "Path to Patch-${PATCH_VERSION} binary archive")
+  
+  ExternalProject_Add(EP_PATCH
+                      PREFIX            ${EP_InstallDir}/Patch-${PATCH_VERSION}/
+                      URL               ${PATCH_URL}
+                      PATCH_COMMAND     ""
+                      UPDATE_COMMAND    ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ""
+                      )
+  
+  set(PATCH_EXECUTABLE "${EP_InstallDir}/Patch-${PATCH_VERSION}/src/EP_PATCH/bin/patch.exe" CACHE FILEPATH "Path to the patch executable")
+else ()
+  find_program(TMP_PATCH_EXECUTABLE patch)
+  set(PATCH_EXECUTABLE "${TMP_PATCH_EXECUTABLE}" CACHE FILEPATH "Path to the patch executable")
+endif ()
+
+# #################################################
+# <=== Patch
 # #################################################
 
 set(CMAKE_GENERATOR    "${CMAKE_GENERATOR_OLD}")
