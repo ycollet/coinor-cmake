@@ -825,6 +825,10 @@ if (CBC_BUILD_EXAMPLES)
     set_tests_properties(cbc_example_modk PROPERTIES PASS_REGULAR_EXPRESSION "Objective value: .* 82.199.*")
   endif ()
 
+  #
+  # Beginning of TSP tests
+  #
+  
   add_example(tsp-subtour ${Cbc_DIR}/examples/tsp/tsp-subtour.cpp)
 
   set(TEST_REGEX )
@@ -835,11 +839,11 @@ if (CBC_BUILD_EXAMPLES)
   
   add_test(NAME cbc_example_tsp-subtour_att48
            COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/att48.dist)
-  set_tests_properties(cbc_example_tsp-subtour_att48 PROPERTIES TIMEOUT 120)
+  set_tests_properties(cbc_example_tsp-subtour_att48 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_tsp-subtour_att48 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(cbc_example_tsp-subtour_att48 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE;FAIL")
+  set_tests_properties(cbc_example_tsp-subtour_att48 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
   set_tests_properties(cbc_example_tsp-subtour_att48 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
   
   set(TEST_REGEX )
@@ -850,11 +854,11 @@ if (CBC_BUILD_EXAMPLES)
   
   add_test(NAME cbc_example_tsp-subtour_ulysses22
            COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/ulysses22.dist)
-  set_tests_properties(cbc_example_tsp-subtour_ulysses22 PROPERTIES TIMEOUT 120)
+  set_tests_properties(cbc_example_tsp-subtour_ulysses22 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_tsp-subtour_ulysses22 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(cbc_example_tsp-subtour_ulysses22 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE;FAIL")
+  set_tests_properties(cbc_example_tsp-subtour_ulysses22 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
   set_tests_properties(cbc_example_tsp-subtour_ulysses22 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   set(TEST_REGEX )
@@ -865,17 +869,17 @@ if (CBC_BUILD_EXAMPLES)
   
   add_test(NAME cbc_example_tsp-subtour_bays29
            COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/bays29.dist)
-  set_tests_properties(cbc_example_tsp-subtour_bays29 PROPERTIES TIMEOUT 120)
+  set_tests_properties(cbc_example_tsp-subtour_bays29 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(cbc_example_tsp-subtour_bays29 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(cbc_example_tsp-subtour_bays29 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE;FAIL")
+  set_tests_properties(cbc_example_tsp-subtour_bays29 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
   set_tests_properties(cbc_example_tsp-subtour_bays29 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   set(TEST_REGEX )
-  add_regex(TEST_REGEX "Clp0000I Optimal - objective value 937")
-  add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
-  add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 937")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
   
   add_test(NAME cbc_example_tsp-subtour_fri26
            COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/fri26.dist)
@@ -887,9 +891,9 @@ if (CBC_BUILD_EXAMPLES)
   set_tests_properties(cbc_example_tsp-subtour_fri26 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   set(TEST_REGEX )
-  add_regex(TEST_REGEX "Clp0000I Optimal - objective value 2085")
-  add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
-  add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 2085")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
   
   add_test(NAME cbc_example_tsp-subtour_gr17
            COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/gr17.dist)
@@ -901,9 +905,9 @@ if (CBC_BUILD_EXAMPLES)
   set_tests_properties(cbc_example_tsp-subtour_gr17 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
   set(TEST_REGEX )
-  add_regex(TEST_REGEX "Clp0000I Optimal - objective value 2707")
-  add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
-  add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 2707")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
   
   add_test(NAME cbc_example_tsp-subtour_gr21
            COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/gr21.dist)
@@ -926,9 +930,238 @@ if (CBC_BUILD_EXAMPLES)
   if (WIN32)
     set_tests_properties(cbc_example_tsp-subtour_swiss42 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
   endif ()
-  set_tests_properties(cbc_example_tsp-subtour_swiss42 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE;FAIL")
+  set_tests_properties(cbc_example_tsp-subtour_swiss42 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
   set_tests_properties(cbc_example_tsp-subtour_swiss42 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
 
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_bayg29
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/bayg29.dist)
+  set_tests_properties(cbc_example_tsp-subtour_bayg29 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_bayg29 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_bayg29 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_bayg29 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_berlin52
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/berlin52.dist)
+  set_tests_properties(cbc_example_tsp-subtour_berlin52 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_berlin52 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_berlin52 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_berlin52 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_brazil58
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/brazil58.dist)
+  set_tests_properties(cbc_example_tsp-subtour_brazil58 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_brazil58 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_brazil58 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_brazil58 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_burma14
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/burma14.dist)
+  set_tests_properties(cbc_example_tsp-subtour_burma14 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_burma14 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_burma14 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_burma14 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_dantzig42
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/dantzig42.dist)
+  set_tests_properties(cbc_example_tsp-subtour_dantzig42 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_dantzig42 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_dantzig42 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_dantzig42 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_eil51
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/eil51.dist)
+  set_tests_properties(cbc_example_tsp-subtour_eil51 PROPERTIES TIMEOUT 120)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_eil51 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_eil51 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_eil51 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_eil76
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/eil76.dist)
+  set_tests_properties(cbc_example_tsp-subtour_eil76 PROPERTIES TIMEOUT 480)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_eil76 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_eil76 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_eil76 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_gr24
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/gr24.dist)
+  set_tests_properties(cbc_example_tsp-subtour_gr24 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_gr24 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_gr24 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_gr24 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_gr48
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/gr48.dist)
+  set_tests_properties(cbc_example_tsp-subtour_gr48 PROPERTIES TIMEOUT 120)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_gr48 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_gr48 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_gr48 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_gr96
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/gr96.dist)
+  set_tests_properties(cbc_example_tsp-subtour_gr96 PROPERTIES TIMEOUT 600)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_gr96 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_gr96 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE;LONG")
+  set_tests_properties(cbc_example_tsp-subtour_gr96 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_hk48
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/hk48.dist)
+  set_tests_properties(cbc_example_tsp-subtour_hk48 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_hk48 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_hk48 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_hk48 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_pr76
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/pr76.dist)
+  set_tests_properties(cbc_example_tsp-subtour_pr76 PROPERTIES TIMEOUT 1200)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_pr76 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_pr76 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE;LONG")
+  set_tests_properties(cbc_example_tsp-subtour_pr76 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_rat99
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/rat99.dist)
+  set_tests_properties(cbc_example_tsp-subtour_rat99 PROPERTIES TIMEOUT 1200)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_rat99 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_rat99 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE;LONG")
+  set_tests_properties(cbc_example_tsp-subtour_rat99 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_st70
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/st70.dist)
+  set_tests_properties(cbc_example_tsp-subtour_st70 PROPERTIES TIMEOUT 360)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_st70 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_st70 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_st70 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  set(TEST_REGEX )
+  #add_regex(TEST_REGEX "Clp0000I Optimal - objective value 62")
+  #add_regex(TEST_REGEX "Branch & Bound Finished with status: 0")
+  #add_regex(TEST_REGEX "isProvenOptimal: 1")
+  #add_regex(TEST_REGEX "subtour with 2 elements found:  0 15")
+  
+  add_test(NAME cbc_example_tsp-subtour_ulysses16
+           COMMAND $<TARGET_FILE:tsp-subtour> ${CMAKE_SOURCE_DIR}/Cbc/examples/tsp/ulysses16.dist)
+  set_tests_properties(cbc_example_tsp-subtour_ulysses16 PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(cbc_example_tsp-subtour_ulysses16 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+  endif ()
+  set_tests_properties(cbc_example_tsp-subtour_ulysses16 PROPERTIES LABELS "DISTRIB;CBC;EXAMPLE")
+  set_tests_properties(cbc_example_tsp-subtour_ulysses16 PROPERTIES PASS_REGULAR_EXPRESSION "${TEST_REGEX}")
+
+  #
+  # End of TSP tests
+  #
+  
   add_example(osiCbcUnitTest ${Cbc_DIR}/test/gamsTest.cpp ${Cbc_DIR}/test/osiUnitTest.cpp ${Cbc_DIR}/test/CInterfaceTest.c ${Cbc_DIR}/test/OsiCbcSolverInterfaceTest.cpp)
   include_directories(osiCbcUnitTest BEFORE PRIVATE ${Osi_DIR}/src/OsiCommonTest)
   target_link_libraries(osiCbcUnitTest libOsiCbc libCbc libOsiClp libClp libCoinUtils libCgl libOsi libOsiCommonTests)
