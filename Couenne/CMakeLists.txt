@@ -6,6 +6,28 @@ option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
 
 # Couenne options
 
+# Ipopt options
+option(IPOPT_HAS_AMPL                   "Enable Ampl interface" OFF)
+option(IPOPT_HAS_PARDISO                "Enable Pardiso solver" OFF)
+option(IPOPT_HAS_HSL                    "Enable HSL interface"  OFF)
+option(IPOPT_HAS_WSMP                   "Enable WSMP solver"    OFF)
+option(IPOPT_HAS_MUMPS                  "Enable Mumps solver"   OFF)
+option(IPOPT_BUILD_EXAMPLES             "Enable the building of examples" OFF)
+option(IPOPT_ENABLE_LINEARSOLVERLOADER  "Build the dynamic linear solver loader" ON)
+option(IPOPT_ENABLE_INEXACT             "Build the inexact solver" OFF)
+option(IPOPT_HAS_PARDISO_MKL            "Enable if you are using Pardiso from MKL" OFF)
+option(IPOPT_HAS_PARDISO_OLDINTERFACE   "Enable if you are not using at least a 4.0 version of Pardiso" OFF)
+option(IPOPT_HAS_PARDISO_PARALLEL       "Enable if you are using the parallel version of Pardiso" OFF)
+option(IPOPT_ENABLE_LINEARSOLVERLOADER  "Build the dynamic linear solver loader" ON)
+option(IPOPT_ENABLE_PARDISOSOLVERLOADER "Build the dynamic pardiso solver loader" OFF)
+option(IPOPT_ENABLE_INEXACT             "Build the inexact solver" ON)
+
+set(IPOPT_PARDISO_LIBNAME "mkl_sequential"     CACHE STRING "The name of the MKL library to use")
+set(IPOPT_PARDISO_PATH    "/opt/intel/mkl/lib" CACHE STRING "The path to the MKL library")
+
+set(COIN_IPOPT_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of IpOpt (0 if no test)")
+set(COIN_IPOPT_VERBOSITY  "0" CACHE STRING "The debug verbosity level of IpOpt (0 if no output)")
+
 # Cbc options
 option(CBC_USE_THREADS "Enable the compilation of the SMP version of CBC" OFF)
 set(CBC_DEFAULT_SOLVER "clp" CACHE STRING "The name of the default solver to be used in cbc-generic (clp, dylp, glpk, soplex)")
@@ -157,6 +179,9 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_HAS_WSMP
                  COIN_HAS_WSMP_INCLUDE_PATH
                  COIN_HAS_WSMP_LIBRARY_PATH
+		 IPOPT_HAS_PARDISO_MKL
+		 IPOPT_HAS_PARDISO_OLDINTERFACE
+		 IPOPT_HAS_PARDISO_PARALLEL
                  COIN_HAS_ABC
                  COIN_ABC_LEVEL
                  COIN_CLP_CHECKLEVEL
@@ -191,6 +216,14 @@ include(CheckCLinkerFlag)
 Enable_Testing ()
 
 #------------------------------------------------------------
+# Check options
+#------------------------------------------------------------
+
+if (IPOPT_ENABLE_INEXACT AND NOT (IPOPT_HAS_PARDISO OR IPOPT_HAS_PARDISO_MKL OR IPOPT_HAS_PARDISO_OLDINTERFACE OR IPOPT_HAS_PARDISO_PARALLEL))
+  message(FATAL_ERROR "Error: Inexact solver is only available through MKL. Please activate the MKL")
+endif ()
+
+#------------------------------------------------------------
 # Detect 64 bits
 #------------------------------------------------------------
 
@@ -203,6 +236,7 @@ endif ()
 # Various definitions
 set(COIN_HAS_CGL 1) # Set this to 1 if cgl is compiled # NOT USED
 set(COIN_HAS_CLP 1) # Set this to 1 if clp is compiled # USED
+set(COIN_HAS_BONMIN 1) # Set this to 1 if bonmin is compiled # USED
 
 # Name of package
 set(PACKAGE           "Cbc")
@@ -422,6 +456,15 @@ if (WIN32)
   endif ()
 endif ()
 
+# Check for a fortran compiler
+include(CMakeDetermineFortranCompiler)
+if (NOT CMAKE_Fortran_COMPILER)
+  message(STATUS "WARNING: fortran compiler not found. Disabling f77/f95 bindings")
+endif ()
+
+# Define FORTRAN_INTEGER_TYPE for Ipopt.
+set(FORTRAN_INTEGER_TYPE int)
+
 #-----------------------------------------------------------------------------
 # Detect name mangling convention used between Fortran and C
 #-----------------------------------------------------------------------------
@@ -525,6 +568,8 @@ set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
 set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
 set(Cgl_DIR           ${COIN_DIR}/../Cgl/Cgl)
 set(Cbc_DIR           ${COIN_DIR}/../Cbc/Cbc)
+set(Ipopt_DIR         ${COIN_DIR}/../Ipopt/Ipopt)
+set(Bonmin_DIR        ${COIN_DIR}/../Bonmin/Bonmin)
 set(Couenne_DIR       ${COIN_DIR}/Couenne)
 
 if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
@@ -540,6 +585,8 @@ if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
   set(Clp_DIR           ${COIN_DIR}/Clp/Clp)
   set(Cgl_DIR           ${COIN_DIR}/Cgl/Cgl)
   set(Cbc_DIR           ${COIN_DIR}/Cbc/Cbc)
+  set(Ipopt_DIR         ${COIN_DIR}/Ipopt/Ipopt)
+  set(Bonmin_DIR        ${COIN_DIR}/Bonmin/Bonmin)
   set(Couenne_DIR       ${COIN_DIR}/Couenne)
 endif ()
 
@@ -552,6 +599,8 @@ if (EXISTS ${COIN_DIR}/CoinUtils/test)
   set(Clp_DIR           ${COIN_DIR}/Clp)
   set(Cgl_DIR           ${COIN_DIR}/Cgl)
   set(Cbc_DIR           ${COIN_DIR}/Cbc)
+  set(Ipopt_DIR         ${COIN_DIR}/Ipopt)
+  set(Bonmin_DIR        ${COIN_DIR}/Bonmin)
   set(Couenne_DIR       ${COIN_DIR}/Couenne)
 endif ()
 
@@ -774,6 +823,15 @@ if (NOT COIN_C_ISNAN_R)
   endif ()
 endif ()
 
+check_function_exists(dran48     HAVE_DRAND48)
+check_function_exists(rand       HAVE_RAND)
+check_function_exists(snprintf   HAVE_SNPRINTF)
+check_function_exists(std::rand  HAVE_STD__RAND)
+check_function_exists(va_copy    HAVE_VA_COPY)
+check_function_exists(vsnprintf  HAVE_VSNPRINTF)
+check_function_exists(_snprintf  HAVE__SNPRINTF)
+check_function_exists(_vsnprintf HAVE__VSNPRINTF)
+
 set(CMAKE_REQUIRED_LIBRARIES )
 
 check_symbol_exists(clock_gettime time.h     HAVE_CLOCK_GETTIME)
@@ -865,12 +923,30 @@ if (DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Osi/Osi/doxydoc/doxygen.conf)
 endif ()
 
+if (IPOPT_ENABLE_LINEARSOLVERLOADER)
+  add_definitions(-DHAVE_LINEARSOLVERLOADER)
+  
+  find_package(DL)
+endif ()
+
+if (IPOPT_HAS_MUMPS)
+  add_definitions(-DHAVE_MUMPS)
+  
+  set(COINHSL_HAS_MUMPS ON)
+endif ()
+
+if (IPOPT_HAS_WSMP)
+  add_definitions(-DHAVE_WSMP)
+  
+  set(COINHSL_HAS_WSMP ON)
+endif ()
+
 subdirs(ThirdParty)
 
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
 
-include_directories(Osi/src/Osi)
+include_directories(Osi/Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)
 
 if (NOT USE_COINOR_BIN)
@@ -912,6 +988,8 @@ endif ()
 
 subdirs(Osi/OsiCbc)
 subdirs(Cbc)
+subdirs(Ipopt)
+subdirs(Bonmin)
 subdirs(Couenne)
 
 #

@@ -33,6 +33,9 @@ mark_as_advanced(COUENNE_VERSION_MAJOR
 
 add_definitions(-DCOUENNE_BUILD)
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in        ${CMAKE_BINARY_DIR}/Couenne/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_couenne.h.in ${CMAKE_BINARY_DIR}/Couenne/include/config_couenne.h)
+
 #ifdef  ANTICIPATE_DELETE_REDUND
 #ifdef CHECK
 #ifdef COIN_DEVELOP
@@ -84,20 +87,110 @@ add_definitions(-DCOUENNE_BUILD)
 #ifdef WIN_
 #ifdef _WIN32
 
-include_directories(src/convex
-                    src/interfaces
-                    src/heuristics
-                    src/expression
-                    src/expression/operators
-                    src/expression/partial
-                    src/disjunctive
-                    src/main
-                    src/problem
-                    src/branch
-                    src/cut/sdpcuts
-                    src/cut/crossconv
-                    src/bound_tightening
-                    src/bound_tightening/twoImpliedBT)
+include_directories(${Couenne_DIR}/src/convex
+                    ${Couenne_DIR}/src/interfaces
+                    ${Couenne_DIR}/src/heuristics
+                    ${Couenne_DIR}/src/expression
+                    ${Couenne_DIR}/src/expression/operators
+                    ${Couenne_DIR}/src/expression/partial
+                    ${Couenne_DIR}/src/disjunctive
+                    ${Couenne_DIR}/src/main
+                    ${Couenne_DIR}/src/problem
+                    ${Couenne_DIR}/src/branch
+                    ${Couenne_DIR}/src/cut/sdpcuts
+                    ${Couenne_DIR}/src/cut/crossconv
+                    ${Couenne_DIR}/src/bound_tightening
+                    ${Couenne_DIR}/src/bound_tightening/twoImpliedBT)
+
+include_directories(${BuildTools_DIR}/headers)
+include_directories(SYSTEM ${CoinUtils_DIR}/src)
+include_directories(${Clp_DIR}/src)
+include_directories(${Clp_DIR}/src/OsiClp)
+include_directories(${Ipopt_DIR}/src/Apps/AmplSolver)
+include_directories(${Ipopt_DIR}/src/Algorithm)
+include_directories(${Ipopt_DIR}/src/Algorithm/LinearSolvers)
+include_directories(${Ipopt_DIR}/src/Interfaces)
+include_directories(${Ipopt_DIR}/src/Common)
+include_directories(${Ipopt_DIR}/src/LinAlg)
+include_directories(${Ipopt_DIR}/src/LinAlg/TMatrices)
+include_directories(${Ipopt_DIR}/include)
+include_directories(${Cbc_DIR}/src/OsiCbc)
+if (COIN_HAS_GLPK)
+  include_directories(${Osi_DIR}/src/OsiGlpk)
+endif ()
+include_directories(${Cgl_DIR}/src)
+include_directories(${Cgl_DIR}/src/CglAllDifferent)
+include_directories(${Cgl_DIR}/src/CglClique)
+include_directories(${Cgl_DIR}/src/CglDuplicateRow)
+include_directories(${Cgl_DIR}/src/CglFlowCover)
+include_directories(${Cgl_DIR}/src/CglGomory)
+include_directories(${Cgl_DIR}/src/CglGMI)
+include_directories(${Cgl_DIR}/src/CglKnapsackCover)
+include_directories(${Cgl_DIR}/src/CglLandP)
+include_directories(${Cgl_DIR}/src/CglMixedIntegerRounding)
+include_directories(${Cgl_DIR}/src/CglMixedIntegerRounding2)
+include_directories(${Cgl_DIR}/src/CglOddHole)
+include_directories(${Cgl_DIR}/src/CglPreProcess)
+include_directories(${Cgl_DIR}/src/CglProbing)
+include_directories(${Cgl_DIR}/src/CglRedSplit)
+include_directories(${Cgl_DIR}/src/CglRedSplit2)
+include_directories(${Cgl_DIR}/src/CglResidualCapacity)
+include_directories(${Cgl_DIR}/src/CglTwomir)
+include_directories(${Cgl_DIR}/src/CglZeroHalf)
+include_directories(${Cgl_DIR}/src/CglProbing)
+
+include_directories(${CoinUtils_DIR}/src)
+include_directories(${Clp_DIR}/src)
+include_directories(${Clp_DIR}/src/OsiClp)
+include_directories(${Osi_DIR}/src)
+include_directories(${Osi_DIR}/src/Osi)
+include_directories(${Cbc_DIR}/src)
+include_directories(${Cbc_DIR}/src/OsiCbc)
+
+include_directories(${Bonmin_DIR}/src/Interfaces/)
+include_directories(${Bonmin_DIR}/src/Interfaces/Filter/)
+include_directories(${Bonmin_DIR}/src/Interfaces/Ipopt/)
+include_directories(${Bonmin_DIR}/src/Interfaces/Ampl)
+include_directories(${Bonmin_DIR}/src/Algorithms/OaGenerators/)
+include_directories(${Bonmin_DIR}/src/Algorithms/Branching/)
+include_directories(${Bonmin_DIR}/src/Algorithms/)
+include_directories(${Bonmin_DIR}/src/Algorithms/QuadCuts/)
+include_directories(${Bonmin_DIR}/src/Algorithms/Ampl/)
+include_directories(${Bonmin_DIR}/src/CbcBonmin/)
+include_directories(${Bonmin_DIR}/src/CbcBonmin/Heuristics/)
+include_directories(${Bonmin_DIR}/src/CbcBonmin/)
+include_directories(${Bonmin_DIR}/src/Apps/)
+
+if (USE_OSI_XPRESS OR COMPILE_OSI_XPRESS)
+  include_directories(${Osi_DIR}/src/OsiXpr) 
+endif ()
+if (USE_OSI_CPLEX OR COMPILE_OSI_CPLEX)
+  include_directories(${Osi_DIR}/src/OsiCpx) 
+endif ()
+if (USE_OSI_GLPK OR COMPILE_OSI_GLPK)
+  include_directories(${Osi_DIR}/src/OsiGlpk) 
+endif ()
+if (USE_OSI_GUROBI OR COMPILE_OSI_GUROBI)
+  include_directories(${Osi_DIR}/src/OsiGrb) 
+endif ()
+if (USE_OSI_MOSEK OR COMPILE_OSI_MOSEK)
+  include_directories(${Osi_DIR}/src/OsiMsk) 
+endif ()
+if (USE_OSI_SOPLEX OR COMPILE_OSI_SOPLEX)
+  include_directories(${Osi_DIR}/src/OsiSpx) 
+endif ()
+if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_ASL)
+  include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include/ampl)
+endif ()
+include_directories(${CMAKE_BINARY_DIR}/CoinUtils/include)
+include_directories(${CMAKE_BINARY_DIR}/Osi/include)
+include_directories(${CMAKE_BINARY_DIR}/Cgl/include)
+include_directories(${CMAKE_BINARY_DIR}/Clp/include)
+include_directories(${CMAKE_BINARY_DIR}/Cbc/include)
+include_directories(${CMAKE_BINARY_DIR}/Ipopt/include)
+include_directories(${CMAKE_BINARY_DIR}/Bonmin/include)
+include_directories(${CMAKE_BINARY_DIR}/Couenne/include)
+include_directories(${Couenne_DIR}/src) 
 
 set(COUENNE_HEADERS src/util/CouenneRootQ.hpp
                     src/util/CouenneFunTriplets.hpp
