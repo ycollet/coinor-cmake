@@ -38,6 +38,8 @@ add_definitions(-DBONMIN_BUILD)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in        ${CMAKE_BINARY_DIR}/Bonmin/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_bonmin.h.in ${CMAKE_BINARY_DIR}/Bonmin/include/config_bonmin.h)
 
+add_definitions(-DCOIN_USE_ASL)
+
 include_directories(${Bonmin_DIR}/src/Interfaces/)
 include_directories(${Bonmin_DIR}/src/Interfaces/Filter/)
 include_directories(${Bonmin_DIR}/src/Interfaces/Ipopt/)

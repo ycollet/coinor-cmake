@@ -36,6 +36,12 @@ add_definitions(-DCOUENNE_BUILD)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in        ${CMAKE_BINARY_DIR}/Couenne/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_couenne.h.in ${CMAKE_BINARY_DIR}/Couenne/include/config_couenne.h)
 
+if (COIN_USE_ASL OR COIN_ENABLE_DOWNLOAD_ASL)
+  add_definitions(-DCOUENNEINTERFACE_FROM_ASL)
+endif ()
+
+# install nauty from http://pallini.di.uniroma1.it/
+
 #ifdef  ANTICIPATE_DELETE_REDUND
 #ifdef CHECK
 #ifdef COIN_DEVELOP
@@ -67,7 +73,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_couenne.h.in ${CMAKE_B
 #ifdef FM_UP_BND
 #ifdef FM_USE_ABS_VIOL_CONS
 #ifdef FM_USE_REL_VIOL_CONS
-#ifdef HAVE_CONFIG_H
 #ifdef NDEBUG
 #ifdef NEW_SETUPLIST
 #ifdef NEW_TRIG
@@ -92,15 +97,19 @@ include_directories(${Couenne_DIR}/src/convex
                     ${Couenne_DIR}/src/heuristics
                     ${Couenne_DIR}/src/expression
                     ${Couenne_DIR}/src/expression/operators
+		    ${Couenne_DIR}/src/expression/operators/bounds
                     ${Couenne_DIR}/src/expression/partial
                     ${Couenne_DIR}/src/disjunctive
                     ${Couenne_DIR}/src/main
+                    ${Couenne_DIR}/src/standardize
                     ${Couenne_DIR}/src/problem
+		    ${Couenne_DIR}/src/problem/depGraph
                     ${Couenne_DIR}/src/branch
                     ${Couenne_DIR}/src/cut/sdpcuts
                     ${Couenne_DIR}/src/cut/crossconv
                     ${Couenne_DIR}/src/bound_tightening
-                    ${Couenne_DIR}/src/bound_tightening/twoImpliedBT)
+                    ${Couenne_DIR}/src/bound_tightening/twoImpliedBT
+		    ${Couenne_DIR}/src/util)
 
 include_directories(${BuildTools_DIR}/headers)
 include_directories(SYSTEM ${CoinUtils_DIR}/src)
@@ -189,7 +198,7 @@ include_directories(${CMAKE_BINARY_DIR}/Clp/include)
 include_directories(${CMAKE_BINARY_DIR}/Cbc/include)
 include_directories(${CMAKE_BINARY_DIR}/Ipopt/include)
 include_directories(${CMAKE_BINARY_DIR}/Bonmin/include)
-include_directories(${CMAKE_BINARY_DIR}/Couenne/include)
+include_directories(BEFORE ${CMAKE_BINARY_DIR}/Couenne/include)
 include_directories(${Couenne_DIR}/src) 
 
 set(COUENNE_HEADERS src/util/CouenneRootQ.hpp
@@ -276,7 +285,6 @@ set(COUENNE_HEADERS src/util/CouenneRootQ.hpp
                     src/cut/sdpcuts/CouenneMatrix.hpp
                     src/cut/crossconv/CouenneCrossConv.hpp)
 
-
 if (COIN_HAS_NTY)
   set(COUENNE_HEADERS ${COUENNE_HEADERS} src/branch/Nauty.h)
 endif ()
@@ -306,6 +314,9 @@ set(COUENNE_BOUNDTIGHTENING_SRCS src/bound_tightening/boundTightening.cpp
                                  src/bound_tightening/operators/impliedBounds-exprTrilinear.cpp
                                  src/bound_tightening/operators/impliedBounds-exprQuad.cpp
                                  src/bound_tightening/operators/impliedBounds-exprPow.cpp
+				 src/bound_tightening/twoImpliedBT/TwoImpliedConstructors.cpp
+				 src/bound_tightening/twoImpliedBT/TwoImpliedGenCuts.cpp
+				 src/bound_tightening/twoImpliedBT/TwoImpliedIneqCombine.cpp
                                  src/main/BonCouenneInfo.cpp
                                  src/bound_tightening/CouenneAggrProbing.cpp)
 
@@ -454,7 +465,11 @@ set(COUENNE_PROBLEM_SRCS src/problem/problem.cpp
                          src/problem/depGraph/depGraph.cpp
                          src/problem/depGraph/checkCycles.cpp)
 
-set(COUENNE_READNL_SRCS src/readnl/CouenneAmplInterface.cpp)
+set(COUENNE_READNL_SRCS src/readnl/CouenneAmplInterface.cpp
+                        src/readnl/readASLfg.cpp
+                        src/readnl/invmap.cpp
+                        src/readnl/nl2e.cpp
+                        src/readnl/readnl.cpp)
 
 set(COUENNE_STANDARDIZE_SRCS src/standardize/decomposeTerm.cpp
                              src/standardize/linStandardize.cpp
@@ -481,7 +496,38 @@ set(COUENNE_CUT_SRCS src/cut/crossconv/CrossConvConstructors.cpp
                      src/cut/sdpcuts/CutGenSparse.cpp
                      src/cut/sdpcuts/dsyevx_wrapper.cpp)
 
-add_executable(couenne src/main/BonCouenne.cpp ${COUENNE_MAIN_SRCS} ${COUENNE_BOUNDTIGHTENING_SRCS} ${COUENNE_BRANCH_SRCS} ${COUENNE_BRANCH_SRCS} ${COUENNE_DISJUNCTIVE_SRCS} ${COUENNE_EXPRESSION_SRCS} ${COUENNE_HEURISTICS_SRCS} ${COUENNE_INTERFACES_SRCS} ${COUENNE_PROBLEM_SRCS} ${COUENNE_READNL_SRCS} ${COUENNE_STANDARDIZE_SRCS} ${COUENNE_UTIL_SRCS} ${COUENNE_CUT_SRCS})
+add_library(libCouenne STATIC ${COUENNE_MAIN_SRCS} ${COUENNE_BOUNDTIGHTENING_SRCS} ${COUENNE_BRANCH_SRCS} ${COUENNE_CONVEX_SRCS} ${COUENNE_DISJUNCTIVE_SRCS} ${COUENNE_EXPRESSION_SRCS} ${COUENNE_HEURISTICS_SRCS} ${COUENNE_INTERFACES_SRCS} ${COUENNE_PROBLEM_SRCS} ${COUENNE_READNL_SRCS} ${COUENNE_STANDARDIZE_SRCS} ${COUENNE_UTIL_SRCS} ${COUENNE_CUT_SRCS})
+		   
+if (COIN_COMPILE_LTO)
+  set_target_properties(libCouenne PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
+endif ()
+if (NOT WIN32 OR MINGW)
+  set_target_properties(libCouenne PROPERTIES PREFIX "")
+endif ()
+
+add_executable(couenne src/main/BonCouenne.cpp)
+
+target_link_libraries(couenne libCouenne libBonmin libipopt libCbc libCgl libClp libCoinUtils libCbc libOsiClp libOsi)
+if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_ASL)
+  target_link_libraries(couenne amplsolver dl)
+endif ()  
+if (MKL_FOUND)
+  target_link_libraries(couenne ${COIN_MKL_LIBS})
+else ()
+  if (COIN_HAS_LAPACK OR COIN_USE_LAPACK)
+    target_link_libraries(couenne lapack)
+  endif ()
+  if (COIN_HAS_BLAS OR COIN_USE_BLAS)
+    target_link_libraries(couenne blas)
+  endif ()
+  if (COIN_ENABLE_DOWNLOAD_CLAPACK)
+    target_link_libraries(couenne f2c)
+  endif ()
+  if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND NOT COIN_USE_LAPACK)
+    target_link_libraries(couenne gfortran)
+  endif ()
+endif ()
+target_link_libraries(couenne blas lapack)
 
 install(FILES config_couenne.h
         DESTINATION include/CouenneConfig.h)

@@ -40,7 +40,7 @@
 #define COUENNE_SVN_REV @COUENNE_SVN_REV@
 
 /* Version number of project */
-#define COUENNE_VERSION @COUENNE_VERSION@
+#define COUENNE_VERSION "@COUENNE_VERSION@"
 
 /* Major Version number of project */
 #define COUENNE_VERSION_MAJOR @COUENNE_VERSION_MAJOR@

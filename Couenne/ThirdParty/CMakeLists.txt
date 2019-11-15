@@ -13,6 +13,9 @@ option(COIN_USE_ASL           "Enable the use of Ampl Solver Library" OFF)
 option(COIN_USE_ZLIB          "Enable the use of Zlib" OFF)
 option(COIN_USE_BZLIB         "Enable the use of BZlib" OFF)
 option(COIN_USE_SUITESPARSE   "Enable the use of SuiteSparse" OFF)
+if (WIN32)
+  option(COIN_ENABLE_DOWNLOAD_PATCH       "Enable the download / use of Patch exe (for Windows)" OFF)
+endif ()
 
 if (WIN32 AND NOT MINGW)
   set(ZLIB_NAME  "zlibstatic.lib" CACHE FILEPATH "The Zlib library name"  FORCE)
@@ -39,6 +42,7 @@ option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK  "Enable the download / compilation of MinGW compiled Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
+option(COIN_ENABLE_DOWNLOAD_MINLPLIB      "Enable the download / run of minlp benchmark" OFF)
 option(COIN_ENABLE_DOWNLOAD_GLPK          "Enable the download / compilation of GLPK" OFF)
 option(COIN_ENABLE_DOWNLOAD_METIS         "Enable the download / compilation of METIS" OFF)
 option(COIN_ENABLE_DOWNLOAD_MUMPS         "Enable the download / compilation of Mumps" OFF)
@@ -48,9 +52,10 @@ option(COIN_ENABLE_DOWNLOAD_MIPLIB2000    "Enable the download / run of miplib 2
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_SUITESPARSE   "Enable the download / compilation of SuiteSparse" OFF)
-if (WIN32)
-  option(COIN_ENABLE_DOWNLOAD_PATCH       "Enable the download / use of Patch exe (for Windows)" OFF)
-endif ()
+option(COIN_ENABLE_COMPILE_HSL            "Enable the compilation of HSL" OFF)
+option(COIN_USE_COINHSL                   "Use Coin HSL to compile the solver" OFF)
+
+set(COIN_HSL_PATH "None" CACHE PATH "The HSL source Path")
 
 option(COIN_ENABLE_FIND_LAPACK "Enable the detection of Blas / Lapack" OFF)
 option(COIN_ENABLE_FIND_ZLIB   "Enable the detection of Zlib" OFF)
@@ -249,7 +254,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_MINGW_LAPACK)
-  set(COIN_MINGW_LAPACK_ZIP_FILE "None" CACHE FILEPATH "Path to the zip file containing MinGW Lapack")
+  set(COIN_MINGW_LAPACK_ZIP_FILE "None" CACHE FILEPATH "Path to the zip file containing MinGW Lapack" CACHE FILEPATH "Path to MinGW Lapack source archive")
   
   set(COIN_HAS_LAPACK ON CACHE BOOL "Enable the Lapack support of CoinUtils" FORCE)
   set(COIN_HAS_BLAS   ON CACHE BOOL "Enable the Blas support of CoinUtils"   FORCE)
@@ -452,7 +457,7 @@ if (COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32)
     set(COIN_THREADS_INC_PATH "${EP_InstallDir}/include" CACHE STRING "The PThreads library include Path" FORCE)
     set(COIN_THREADS_LIB_PATH "${EP_InstallDir}/lib"     CACHE STRING "The PThreads library library Path" FORCE)
     
-    set(PTHREADS_URL        "ftp:////sourceware.org/pub/pthreads-win32/pthreads-w32-${PTHREADS_VERSION}-release.tar.gz" CACHE FILEPATH "Path to pthreads-w32-${PTHREADS_VERSION}-release.tar.gz source archive")
+    set(PTHREADS_URL        "ftp:////sourceware.org/pub/pthreads-win32/pthreads-w32-${PTHREADS_VERSION}-release.tar.gz" CACHE FILEPATH "Path to Windows pthreads-w32-${PTHREADS_VERSION}-release.tar.gz source archive")
     set(PTHREADS_InstallDir "${EP_InstallDir}/PThreads-${PTHREADS_VERSION}/${CMAKE_CFG_INTDIR}/")
     
     ExternalProject_Add(EP_PThreads
@@ -516,8 +521,11 @@ endif ()
 
 if (COIN_ENABLE_DOWNLOAD_MUMPS)
   set(MUMPS_VERSION "4.10.0")
-  set(COIN_HAS_MUMPS ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
+  set(COIN_HAS_MUMPS  ON CACHE BOOL "Clp uses the MUMPS linear solver" FORCE)
+  set(IPOPT_HAS_MUMPS ON CACHE BOOL "Enable Mumps solver" FORCE)
   
+  set(MUMPS_DEPENDS "")
+
   if (COIN_ENABLE_DOWNLOAD_METIS)
     set(MUMPS_DEPENDS ${MUMPS_DEPENDS} EP_Metis)
     
@@ -527,8 +535,6 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
     set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path" FORCE)
     set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path" FORCE)
   endif ()
-
-  set(MUMPS_DEPENDS "")
 
   if (COIN_ENABLE_DOWNLOAD_CLAPACK)
     message(FATAL_ERROR "MUMPS cannot be compiled using CLapack")
@@ -545,7 +551,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   
   set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path toMUMPS_${MUMPS_VERSION}.tar.gz source archive")
   set(MUMPS_InstallDir "${EP_InstallDir}/Mumps-${MUMPS_VERSION}/${CMAKE_CFG_INTDIR}/")
-
+  
   # TODO: we need to add the path to mumps_mpi.h once Mumps is patched ...
   ExternalProject_Add(EP_Mumps
                       PREFIX            ${MUMPS_InstallDir}
@@ -574,7 +580,7 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
   set(ASL_VERSION "1.3.0")
   set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
   
-  set(ASL_URL        "https:////github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz" CACHE FILEPATH "Path to ${ASL_VERSION}.tar.gz source archive")
+  set(ASL_URL        "https:////github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz" CACHE FILEPATH "Path to ASL-${ASL_VERSION} source archive")
   set(ASL_InstallDir "${EP_InstallDir}/ASL-${ASL_VERSION}/${CMAKE_CFG_INTDIR}/")
   
   ExternalProject_Add(EP_ASL
@@ -590,10 +596,158 @@ if (COIN_ENABLE_DOWNLOAD_ASL)
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${ASL_InstallDir}/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${ASL_InstallDir}/src/EP_ASL/src/asl/solvers/build ${CMAKE_MAKE_PROGRAM} install
                       )
+  
+  set(IPOPT_HAS_AMPL ON CACHE BOOL "Enable Ampl interface")
 endif ()
 
 # #################################################
 # <=== ASL compilation
+# #################################################
+
+# #################################################
+# ===>    HSL
+# #################################################
+
+if ((COIN_ENABLE_COMPILE_HSL OR COIN_USE_COINHSL) AND NOT COIN_HSL_PATH STREQUAL "None")
+  set(COIN_HAS_HSL ON CACHE BOOL "Enable the HSL support" FORCE)
+  set(COIN_HAS_HSL_OTHER OFF CACHE BOOL "Enable the non local solver HSL support" FORCE)
+
+  set(COINHSL_HAS_METIS  "${COIN_ENABLE_DOWNLOAD_METIS}")
+  set(COINHSL_HSL2013    OFF)
+  set(COIN_HAS_HSL_OTHER OFF)
+  
+  set(COINHSL_VERSION "2014.01.17")
+  set(COINHSL_VERSION_MAJOR   2014)
+  set(COINHSL_VERSION_MINOR   1)
+  set(COINHSL_VERSION_RELEASE 17)
+  
+  set(HSL_SOLVER_SRCS )
+  set(HSL_OTHER_SRCS )
+  
+  set(COIN_HAS_HSL       OFF CACHE INTERNAL "")
+  set(COINHSL_HAS_MA27   OFF CACHE INTERNAL "")
+  set(COINHSL_HAS_MA28   OFF CACHE INTERNAL "")
+  set(COINHSL_HAS_MC19   OFF CACHE INTERNAL "")
+  set(COINHSL_HAS_MA57   OFF CACHE INTERNAL "")
+  set(COINHSL_HAS_MA86   OFF CACHE INTERNAL "")
+  set(COINHSL_HAS_MA77   OFF CACHE INTERNAL "")
+  set(COINHSL_HAS_MC68   OFF CACHE INTERNAL "")
+  set(COINHSL_HAS_MA97   OFF CACHE INTERNAL "")
+  set(COIN_HAS_HSL_OTHER OFF CACHE INTERNAL "")
+  
+  if (COIN_USE_COINHSL)
+    set(COIN_HAS_HSL     ON CACHE INTERNAL "")
+    set(COINHSL_HAS_MA27 ON CACHE INTERNAL "")
+    set(COINHSL_HAS_MA28 ON CACHE INTERNAL "")
+    set(COINHSL_HAS_MC19 ON CACHE INTERNAL "")
+    
+    add_definitions(-DCOINHSL_HAS_MA27 -DCOINHSL_HAS_MA28 -DCOINHSL_HAS_MC19)
+    
+    set(HSL_SOLVER_SRCS ${HSL_SOLVER_SRCS}
+                        ${COIN_HSL_PATH}/ma27/ma27d.f
+			${COIN_HSL_PATH}/ma28/ma28d.f
+			${COIN_HSL_PATH}/mc19/mc19d.f
+			${COIN_HSL_PATH}/common/deps.f)
+  else ()
+    if (EXISTS ${COIN_HSL_PATH}/ma27/ma27d.f)
+      set(COINHSL_HAS_MA27 ON CACHE INTERNAL "")
+      set(COIN_HAS_HSL     ON CACHE INTERNAL "")
+      
+      add_definitions(-DCOINHSL_HAS_MA27)
+      
+      set(HSL_SOLVER_SRCS ${HSL_SOLVER_SRCS}
+                          ${COIN_HSL_PATH}/ma27/ma27d.f)
+    endif ()
+    if (EXISTS ${COIN_HSL_PATH}/ma28/ma28d.f)
+      set(COINHSL_HAS_MA28 ON CACHE INTERNAL "")
+      set(COIN_HAS_HSL     ON CACHE INTERNAL "")
+      
+      add_definitions(-DCOINHSL_HAS_MA28)
+       
+      set(HSL_SOLVER_SRCS ${HSL_SOLVER_SRCS}
+                          ${COIN_HSL_PATH}/ma28/ma28d.f)
+    endif ()
+    if (EXISTS ${COIN_HSL_PATH}/mc19/mc19d.f)
+      set(COINHSL_HAS_MC19 ON CACHE INTERNAL "")
+      set(COIN_HAS_HSL     ON CACHE INTERNAL "")
+      
+      add_definitions(-DCOINHSL_HAS_MC19)
+      
+      set(HSL_SOLVER_SRCS ${HSL_SOLVER_SRCS}
+                          ${COIN_HSL_PATH}/mc19/mc19d.f)
+    endif ()
+  endif ()
+  
+  if (EXISTS ${COIN_HSL_PATH}/ma57/ma57d.f)
+    set(COINHSL_HAS_MA57   ON CACHE INTERNAL "")
+    set(COIN_HAS_HSL_OTHER ON CACHE INTERNAL "")
+    
+    add_definitions(-DCOINHSL_HAS_MA57)
+    
+    set(HSL_OTHER_SRCS ${HSL_OTHER_SRCS}
+                       ${COIN_HSL_PATH}/ma57/ma57d.f)
+  endif ()
+  if (EXISTS ${COIN_HSL_PATH}/ma86/ma86d.f)
+    set(COINHSL_HAS_MA86   ON CACHE INTERNAL "")
+    set(COIN_HAS_HSL_OTHER ON CACHE INTERNAL "")
+    
+    add_definitions(-DCOINHSL_HAS_MA86)
+    
+    set(HSL_OTHER_SRCS ${HSL_OTHER_SRCS}
+                       ${COIN_HSL_PATH}/ma86/ma86d.f)
+  endif ()
+  if (EXISTS ${COIN_HSL_PATH}/ma77/ma77d.f)
+    set(COINHSL_HAS_MA77   ON CACHE INTERNAL "")
+    set(COIN_HAS_HSL_OTHER ON CACHE INTERNAL "")
+    
+    add_definitions(-DCOINHSL_HAS_MA77)
+    
+    set(HSL_OTHER_SRCS ${HSL_OTHER_SRCS}
+                       ${COIN_HSL_PATH}/ma77/ma77d.f)
+  endif ()
+  if (EXISTS ${COIN_HSL_PATH}/mc68/mc68.f)
+    set(COINHSL_HAS_MC68   ON CACHE INTERNAL "")
+    set(COIN_HAS_HSL_OTHER ON CACHE INTERNAL "")
+    
+    add_definitions(-DCOINHSL_HAS_MC68)
+    
+    set(HSL_OTHER_SRCS ${HSL_OTHER_SRCS}
+                       ${COIN_HSL_PATH}/mc68/mc68.f)
+  endif ()
+  if (EXISTS ${COIN_HSL_PATH}/ma97/ma97d.f)
+    set(COINHSL_HAS_MA97   ON CACHE INTERNAL "")
+    set(COIN_HAS_HSL_OTHER ON CACHE INTERNAL "")
+    
+    add_definitions(-DCOINHSL_HAS_MA97)
+    
+    set(HSL_OTHER_SRCS ${HSL_OTHER_SRCS}
+                       ${COIN_HSL_PATH}/ma97/ma97d.f)
+  endif ()
+  
+  if (COINHSL_HSL2013)
+    set(COIN_HAS_HSL ON CACHE INTERNAL "")
+    
+    add_definitions(-DCOINHSL_HSL2013)
+  endif ()
+  
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Ipopt/include/config_coinhsl.h.in ${CMAKE_BINARY_DIR}/Ipopt/include/config_coinhsl.h)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Ipopt/include/config_coinhsl.h.in ${CMAKE_BINARY_DIR}/Ipopt/include/CoinHslConfig.h)
+  
+  add_library(hsl SHARED ${HSL_SOLVER_SRCS})
+  add_library(hsl-static STATIC ${HSL_SOLVER_SRCS})
+  if (COIN_HAS_HSL_OTHER)
+    add_library(hsl-other STATIC ${HSL_OTHER_SRCS})
+  endif ()
+  
+  if (IPOPT_ENABLE_LINEARSOLVERLOADER)
+    install(TARGETS hsl
+            RUNTIME DESTINATION bin
+            LIBRARY DESTINATION lib)
+  endif ()
+endif ()
+
+# #################################################
+# <===    HSL
 # #################################################
 
 # #################################################
@@ -680,7 +834,7 @@ endif ()
 
 if (COIN_ENABLE_DOWNLOAD_DATA_TEST)
   set(DATA_TEST_VERSION "1.0.7")
-  
+
   set(DATA_TEST_URL "http:////www.coin-or.org/download/source/Data/Data-${DATA_TEST_VERSION}.tgz" CACHE FILEPATH "Path to Data-${DATA_TEST_VERSION} source archive")
   
   ExternalProject_Add(EP_DATA_TEST
@@ -714,6 +868,22 @@ if (COIN_ENABLE_DOWNLOAD_MIPLIB2000)
 
   include(ClpMiplib2000Tests.cmake)
   include(CbcMiplib2000Tests.cmake)
+endif ()
+
+if (COIN_ENABLE_DOWNLOAD_MINLPLIB)
+  set(MINLPLIB_URL "http:////www.minlplib.org/minlplib_nl.zip" CACHE FILEPATH "Path to MinLpNl source archive")
+  
+  ExternalProject_Add(EP_MINLPLIB
+                      PREFIX            ${EP_InstallDir}/MINLPLIB
+                      URL               ${MINLPLIB_URL}
+                      PATCH_COMMAND     ""
+                      UPDATE_COMMAND    ""
+                      CONFIGURE_COMMAND ""
+                      BUILD_COMMAND     ""
+                      INSTALL_COMMAND   ""
+                      )
+
+  include(MinLpTests.cmake)
 endif ()
 
 # #################################################

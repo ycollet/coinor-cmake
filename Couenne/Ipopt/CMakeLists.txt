@@ -1,3 +1,4 @@
+
 get_ac_init_version(${Ipopt_DIR}/configure.ac IPOPT)
 
 set(IPOPT_VERSION_MAJOR   "${IPOPT_MAJOR_VERSION}"  CACHE STRING "The IpOpt major version number")
@@ -32,6 +33,12 @@ mark_as_advanced(IPOPT_VERSION_MAJOR
                  IPOPT_SVN_REV)
 
 add_definitions(-DIPOPT_BUILD)
+add_definitions(-DCOIN_USE_ASL)
+set(IPOPT_HAS_AMPL 1)
+
+if (COIN_USE_ASL OR COIN_ENABLE_DOWNLOAD_ASL)
+  add_definitions(-DIPOPT_HAS_AMPL)
+endif ()
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in       ${CMAKE_BINARY_DIR}/Ipopt/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_ipopt.h.in ${CMAKE_BINARY_DIR}/Ipopt/include/config_ipopt.h)
@@ -219,6 +226,11 @@ if (IPOPT_ENABLE_INEXACT)
                      ${IPOPT_SRC_ALGORITHM_INEXACT_LIST})
 endif ()
 
+if (IPOPT_HAS_AMPL)
+  set (IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
+                      ${Ipopt_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
+endif ()
+
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Ipopt/include)
 endmacro ()
@@ -269,10 +281,7 @@ endif ()
 set_include_directories(libipopt)
 
 if (IPOPT_HAS_AMPL)
-  set (IPOPT_AMPL_SRC_LIST ${Ipopt_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp
-                           ${Ipopt_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
-  
-  add_executable(ipopt ${IPOPT_AMPL_SRC_LIST})
+  add_executable(ipopt ${Ipopt_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp)
   
   target_link_libraries(ipopt libipopt)
   if (COIN_HAS_MUMPS)
@@ -291,7 +300,7 @@ if (IPOPT_HAS_AMPL)
   if (MKL_FOUND)
     target_link_libraries(ipopt ${COIN_MKL_LIBS})
   else ()
-    if (COIN_HAS_LAPACK OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_USE_SYSTEM_LAPACK)
+    if (COIN_HAS_LAPACK OR COIN_USE_LAPACK OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_USE_SYSTEM_LAPACK)
       target_link_libraries(ipopt lapack blas)
     endif ()
     if (COIN_ENABLE_DOWNLOAD_CLAPACK)

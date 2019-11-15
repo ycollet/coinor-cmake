@@ -5,6 +5,8 @@ project(Couenne)
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
 
 # Couenne options
+set(COIN_COUENNE_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Couenne (0 if no test)")
+set(COIN_COUENNE_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Couenne (0 if no output)")
 
 # Ipopt options
 option(IPOPT_HAS_AMPL                   "Enable Ampl interface" OFF)
@@ -943,7 +945,8 @@ endif ()
 
 subdirs(ThirdParty)
 
-include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
+include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include
+                    ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include/ampl)
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
 
 include_directories(Osi/Osi/src/Osi)

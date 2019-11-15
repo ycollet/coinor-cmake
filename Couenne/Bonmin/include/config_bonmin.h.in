@@ -7,12 +7,12 @@
 #define BONMIN_VERSION "@BONMIN_VERSION@"
 
 /* Major Version number of project */
-#define BONMIN_VERSION_MAJOR "@BONMIN_VERSION_MAJOR@"
+#define BONMIN_VERSION_MAJOR @BONMIN_VERSION_MAJOR@
 
 /* Minor Version number of project */
-#define BONMIN_VERSION_MINOR "@BONMIN_VERSION_MINOR@"
+#define BONMIN_VERSION_MINOR @BONMIN_VERSION_MINOR@
 
 /* Release Version number of project */
-#define BONMIN_VERSION_RELEASE "@BONMIN_VERSION_RELEASE@"
+#define BONMIN_VERSION_RELEASE @BONMIN_VERSION_RELEASE@
 
 #endif
