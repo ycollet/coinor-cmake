@@ -1,0 +1,424 @@
+project (MUMPS C CXX Fortran)
+
+cmake_minimum_required (VERSION 2.8)
+
+option(MUMPS_USE_LIBSEQ   "Use the MUMPS sequential MPI stub" OFF)
+option(MUMPS_USE_METIS    "Use the Metis library"             OFF)
+option(MUMPS_USE_F2C      "F2c was used to compiled CLapack"  OFF)
+option(MUMPS_INSTALL_COIN "Install MUMPS for CoinOR"          OFF)
+
+set(MUMPS_METIS_INC_PATH "None" CACHE PATH "The METIS library include Path")
+set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path")
+
+set(MUMPS_LAPACK_LIB_PATH "None" CACHE PATH "The Lapack library library Path")
+
+#------------------------------------------------------------
+# End of user config part
+#------------------------------------------------------------
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+#------------------------------------------------------------
+# Detect 64 bits
+#------------------------------------------------------------
+
+if (CMAKE_SIZEOF_VOID_P EQUAL 4)
+  set(HAVE_64_BIT 0)
+else ()
+  set(HAVE_64_BIT 1)
+endif ()
+
+#------------------------------------------------------------
+# MPI
+#------------------------------------------------------------
+
+if (NOT MUMPS_USE_LIBSEQ AND NOT MPI_FOUND)
+  # Use MPI_EXTRA_LIBNAMES to specify required libraries under MPI
+  set(MPI_EXTRA_LIBNAMES fmpich mpich)
+  find_package(MPI)
+endif ()
+
+if (NOT MUMPS_USE_LIBSEQ)
+  if (WIN32)
+    add_definitions("/Dpord")
+    add_definitions("/DOMPI_IMPORTS /DOPAL_IMPORTS /DORTEIMPORTS")
+  else ()
+    add_definitions("-Dpord")
+  endif ()
+endif ()
+
+#------------------------------------------------------------
+# ATLAS / MKL
+#------------------------------------------------------------
+
+# Use MKL_LIBS to specify the required libs under MKL
+if (WIN32)
+  if (HAVE_64_BIT)
+    set(MKL_LIBS mkl_lapack95_lp64 
+                 mkl_blas95_lp64 
+                 mkl_solver_lp64
+                 mkl_intel_lp64
+                 mkl_intel_thread
+                 mkl_core
+                 mkl_blacs_lp64_dll)
+  else ()
+    set(MKL_LIBS mkl_lapack95
+                 mkl_blas95
+                 mkl_solver
+                 mkl_intel_c
+                 mkl_intel_thread
+                 mkl_core
+                 mkl_blacs_dll)
+  endif ()
+else ()
+  set(MKL_LIBS mkl_lapack95_lp64
+               mkl_blas95_lp64
+               mkl_solver_lp64
+               mkl_intel_lp64
+               mkl_intel_thread
+               mkl_core
+               mkl_blacs_openmpi_lp64)
+endif ()
+
+
+if (NOT BLAS_FOUND OR NOT LAPACK_FOUND)
+  message(STATUS "Searching for BLAS and LAPACK")
+  find_package(BLAS   REQUIRED)
+  find_package(LAPACK REQUIRED)
+endif ()
+
+#------------------------------------------------------------
+# configure config*.h
+#------------------------------------------------------------
+
+# if MPI found, then do not compile libseq ...
+
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src)
+
+if (MPI_FOUND)
+  include_directories(${MPI_INCLUDE_PATH})
+endif ()
+
+if (MUMPS_USE_LIBSEQ)
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libseq)
+endif ()
+
+if (MKL_FOUND)
+  link_directories(${MKL_PATH})
+endif ()
+
+if (MPI_FOUND)
+  link_directories(${MPI_LIBRARY_PATH})
+endif ()
+
+#------------------------------------------------------------
+# METIS
+#------------------------------------------------------------
+
+if (MUMPS_USE_METIS)
+  add_definitions(-Dmetis)
+endif ()
+
+if (NOT MUMPS_METIS_INC_PATH STREQUAL "None")
+  include_directories(${MUMPS_METIS_INC_PATH})
+endif ()
+if (NOT MUMPS_METIS_LIB_PATH STREQUAL "None")
+  link_directories(${MUMPS_METIS_LIB_PATH})
+endif ()
+if (NOT MUMPS_LAPACK_LIB_PATH STREQUAL "None")
+  link_directories(${MUMPS_LAPACK_LIB_PATH})
+endif ()
+
+#------------------------------------------------------------
+# Build
+#------------------------------------------------------------
+
+set(MUMPS_PORD_SRCS PORD/lib/graph.c
+                    PORD/lib/gbipart.c
+                    PORD/lib/gbisect.c
+                    PORD/lib/ddcreate.c
+                    PORD/lib/ddbisect.c
+                    PORD/lib/nestdiss.c 
+                    PORD/lib/multisector.c
+                    PORD/lib/gelim.c
+                    PORD/lib/bucket.c
+                    PORD/lib/tree.c
+                    PORD/lib/symbfac.c
+                    PORD/lib/interface.c 
+                    PORD/lib/sort.c
+                    PORD/lib/minpriority.c)
+       
+set(MUMPS_LIBSEQ_SRCS libseq/mpi.f
+                      libseq/mpic.c
+                      libseq/elapse.c)
+    
+set(MUMPS_COMMON_SRCS src/mumps_part9.F
+                      src/mumps_common.c
+                      src/mumps_ooc_common.F
+                      src/mumps_orderings.c
+                      src/mumps_size.c
+                      src/mumps_io.c
+                      src/mumps_io_basic.c
+                      src/mumps_io_thread.c
+                      src/mumps_io_err.c
+                      src/mumps_static_mapping.F
+                      src/tools_common_mod.F
+                      src/mumps_sol_es.F)
+
+set(MUMPS_C_SRCS src/cmumps_part1.F
+                 src/cmumps_part2.F
+                 src/cmumps_part3.F
+                 src/cmumps_part4.F
+                 src/cmumps_part5.F
+                 src/cmumps_part6.F
+                 src/cmumps_part7.F
+                 src/cmumps_part8.F
+                 src/cmumps_comm_buffer.F
+                 src/cmumps_load.F
+                 src/mumps_c.c
+                 src/cmumps_ooc_buffer.F
+                 src/cmumps_ooc.F
+                 src/cmumps_struc_def.F)
+
+set(MUMPS_D_SRCS src/dmumps_part1.F
+                 src/dmumps_part2.F
+                 src/dmumps_part3.F
+                 src/dmumps_part4.F
+                 src/dmumps_part5.F
+                 src/dmumps_part6.F
+                 src/dmumps_part7.F
+                 src/dmumps_part8.F
+                 src/dmumps_comm_buffer.F
+                 src/dmumps_load.F
+                 src/mumps_c.c
+                 src/dmumps_ooc_buffer.F
+                 src/dmumps_ooc.F
+                 src/dmumps_struc_def.F)
+
+set(MUMPS_S_SRCS src/smumps_part1.F
+                 src/smumps_part2.F
+                 src/smumps_part3.F
+                 src/smumps_part4.F
+                 src/smumps_part5.F
+                 src/smumps_part6.F
+                 src/smumps_part7.F
+                 src/smumps_part8.F
+                 src/smumps_comm_buffer.F
+                 src/smumps_load.F
+                 src/mumps_c.c
+                 src/smumps_ooc_buffer.F
+                 src/smumps_ooc.F
+                 src/smumps_struc_def.F)
+
+set(MUMPS_Z_SRCS src/zmumps_part1.F
+                 src/zmumps_part2.F
+                 src/zmumps_part3.F
+                 src/zmumps_part4.F
+                 src/zmumps_part5.F
+                 src/zmumps_part6.F
+                 src/zmumps_part7.F
+                 src/zmumps_part8.F
+                 src/zmumps_comm_buffer.F
+                 src/zmumps_load.F
+                 src/mumps_c.c
+                 src/zmumps_ooc_buffer.F
+                 src/zmumps_ooc.F
+                 src/zmumps_struc_def.F)
+
+if (WIN32)
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} /fpp /nologo /reentrancy /fixed /warn:noalignments /Qsave /Qzero /libs:static /threads /traceback /D_CRT_SECURE_NO_WARNINGS /DALLOW_NON_INIT /Dintel_ ")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /nologo /D_CRT_SECURE_NO_WARNINGS /DAdd_ ")
+else ()
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -cpp -Wall -fcray-pointer -fall-intrinsics -finit-local-zero -DALLOW_NON_INIT -Dintel_ ")
+  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DAdd_ ")
+endif ()
+  
+if (WIN32)
+  if (MUMPS_USE_LIBSEQ)
+    set(LINK_LIBS ${LINK_LIBS} 
+                  libseq)
+  else ()
+    set(LINK_LIBS ${LINK_LIBS} 
+                  ${MPI_LIB_NAME})
+  endif ()
+  
+  if (MKL_FOUND)
+    set(LINK_LIBS ${LINK_LIBS} 
+                  ${ATLAS_LIBRARIES}
+                  libiomp5mt)
+  endif ()
+else ()
+  if (MKL_FOUND)
+    set(LINK_LIBS ${LINK_LIBS} 
+                  ${ATLAS_LIBRARIES}
+                  iomp5)
+  endif ()
+  
+  if (MUMPS_USE_LIBSEQ)
+    set(LINK_LIBS ${LINK_LIBS} 
+                  libseq)
+  else ()
+    set(LINK_LIBS ${LINK_LIBS} 
+                  ${MPI_LIB_NAME})
+  endif ()
+  
+  if (BLAS_FOUND)
+    set(LINK_LIBS ${LINK_LIBS} 
+                  blas)
+  endif ()
+  
+  if (LAPACK_FOUND)
+    set(LINK_LIBS ${LINK_LIBS} 
+                  lapack)
+  endif ()
+  
+  if (MUMPS_USE_F2C)
+    set(LINK_LIBS ${LINK_LIBS} 
+                  f2c)
+  endif ()
+  
+  set(LINK_LIBS ${LINK_LIBS} 
+                pthread)
+endif ()
+
+if (MUMPS_USE_METIS)
+  set(LINK_LIBS ${LINK_LIBS}
+                metis m)
+endif ()
+
+if (MUMPS_USE_LIBSEQ)
+  add_library(libseq STATIC ${MUMPS_LIBSEQ_SRCS})
+  if (NOT WIN32)
+    set_target_properties(libseq PROPERTIES PREFIX "")
+  endif ()
+endif ()
+
+add_library(libpord STATIC ${MUMPS_PORD_SRCS})
+target_include_directories(libpord BEFORE PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/PORD/include)
+if (NOT WIN32)
+  set_target_properties(libpord PROPERTIES PREFIX "")
+endif ()
+
+add_library(libmumps_common STATIC ${MUMPS_COMMON_SRCS})
+if (NOT WIN32)
+  set_target_properties(libmumps_common PROPERTIES PREFIX "")
+endif ()
+
+add_library(libcmumps STATIC ${MUMPS_C_SRCS})
+if (NOT WIN32)
+  set_target_properties(libcmumps PROPERTIES PREFIX "")
+endif ()
+target_link_libraries(libcmumps libmumps_common)
+
+add_library(libdmumps STATIC ${MUMPS_D_SRCS})
+if (NOT WIN32)
+  set_target_properties(libdmumps PROPERTIES PREFIX "")
+endif ()
+target_link_libraries(libdmumps libmumps_common)
+
+add_library(libsmumps STATIC ${MUMPS_S_SRCS})
+if (NOT WIN32)
+  set_target_properties(libsmumps PROPERTIES PREFIX "")
+endif ()
+target_link_libraries(libsmumps libmumps_common)
+
+add_library(libzmumps STATIC ${MUMPS_Z_SRCS})
+if (NOT WIN32)
+  set_target_properties(libzmumps PROPERTIES PREFIX "")
+endif ()
+target_link_libraries(libzmumps libmumps_common)
+
+if (WIN32)
+  set_property(TARGET libsmumps PROPERTY COMPILE_FLAGS "/DMUMPS_ARITH=MUMPS_ARITH_s")
+  set_property(TARGET libdmumps PROPERTY COMPILE_FLAGS "/DMUMPS_ARITH=MUMPS_ARITH_d")
+  set_property(TARGET libcmumps PROPERTY COMPILE_FLAGS "/DMUMPS_ARITH=MUMPS_ARITH_c")
+  set_property(TARGET libzmumps PROPERTY COMPILE_FLAGS "/DMUMPS_ARITH=MUMPS_ARITH_z")
+else ()
+  set_property(TARGET libsmumps PROPERTY COMPILE_FLAGS "-DMUMPS_ARITH=MUMPS_ARITH_s")
+  set_property(TARGET libdmumps PROPERTY COMPILE_FLAGS "-DMUMPS_ARITH=MUMPS_ARITH_d")
+  set_property(TARGET libcmumps PROPERTY COMPILE_FLAGS "-DMUMPS_ARITH=MUMPS_ARITH_c")
+  set_property(TARGET libzmumps PROPERTY COMPILE_FLAGS "-DMUMPS_ARITH=MUMPS_ARITH_z")
+endif ()
+
+# To allow the link of examples on the cluster
+if (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel")
+  set(LINK_LIBS ${LINK_LIBS}
+                ifcore)
+endif ()
+
+add_executable(ssimple_test examples/ssimpletest.F)
+target_link_libraries(ssimple_test libsmumps libmumps_common libpord ${LINK_LIBS})
+set_target_properties(ssimple_test PROPERTIES LINKER_LANGUAGE Fortran)
+
+add_executable(dsimple_test examples/dsimpletest.F)
+target_link_libraries(dsimple_test libdmumps libmumps_common libpord ${LINK_LIBS})
+set_target_properties(dsimple_test PROPERTIES LINKER_LANGUAGE Fortran)
+
+add_executable(csimple_test examples/csimpletest.F)
+target_link_libraries(csimple_test libcmumps libmumps_common libpord ${LINK_LIBS})
+set_target_properties(csimple_test PROPERTIES LINKER_LANGUAGE Fortran)
+
+add_executable(zsimple_test examples/zsimpletest.F)
+target_link_libraries(zsimple_test libzmumps libmumps_common libpord ${LINK_LIBS})
+set_target_properties(zsimple_test PROPERTIES LINKER_LANGUAGE Fortran)
+
+add_executable(c_example examples/c_example.c)
+target_link_libraries(c_example libdmumps libmumps_common libpord ${LINK_LIBS})
+if (WIN32)
+  # Under windows, this line is required to allow compilation of the MUMPS C example.
+  # Under Linux, this line makes the link phase hangs because of multiply defined main symbol
+  set_target_properties(c_example PROPERTIES LINKER_LANGUAGE Fortran)
+endif ()
+
+# Install rules
+if (MUMPS_USE_LIBSEQ)
+  install(TARGETS libseq
+          DESTINATION lib)
+endif ()
+
+install(TARGETS libpord
+        DESTINATION lib)
+
+install(TARGETS libmumps_common
+        DESTINATION lib)
+
+install(TARGETS libcmumps
+        DESTINATION lib)
+
+install(TARGETS libdmumps
+        DESTINATION lib)
+
+install(TARGETS libsmumps
+        DESTINATION lib)
+
+install(TARGETS libzmumps
+        DESTINATION lib)
+
+if (MUMPS_USE_LIBSEQ)
+  install(DIRECTORY libseq/
+          DESTINATION include/
+          PATTERN "*.h")
+
+  if (MUMPS_INSTALL_COIN)
+    install(FILES libseq/mpi.h
+            DESTINATION include/
+            RENAME mumps_mpi.h)
+  endif ()
+else ()
+  if (MUMPS_INSTALL_COIN)
+    install(FILES ${MPI_C_INCLUDE_PATH}/libseq/mpi.h
+            DESTINATION include/
+            RENAME mumps_mpi.h)
+  endif ()
+endif ()
+
+install(DIRECTORY include/
+        DESTINATION include/
+        PATTERN "*.h")
+
+install(DIRECTORY PORD/include/
+        DESTINATION include/
+        PATTERN "*.h")
