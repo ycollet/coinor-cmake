@@ -915,6 +915,7 @@ if (DOXYGEN AND ENABLE_DOXYGEN)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cbc/doxydoc/doxygen.conf.in       ${CMAKE_BINARY_DIR}/Cbc/doxydoc/doxygen.conf)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Osi/Osi/doxydoc/doxygen.conf.in   ${CMAKE_BINARY_DIR}/Osi/Osi/doxydoc/doxygen.conf)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/doxydoc/doxygen.conf.in    ${CMAKE_BINARY_DIR}/Bonmin/doxydoc/doxygen.conf)
 
   add_custom_target(docs 
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Cgl/doxydoc/doxygen.conf
@@ -922,7 +923,8 @@ if (DOXYGEN AND ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Clp/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Cbc/doxydoc/doxygen.conf
-                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Osi/Osi/doxydoc/doxygen.conf)
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Osi/Osi/doxydoc/doxygen.conf
+                    ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Bonmin/doxydoc/doxygen.conf)
 endif ()
 
 if (IPOPT_ENABLE_LINEARSOLVERLOADER)
