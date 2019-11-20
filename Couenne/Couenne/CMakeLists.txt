@@ -578,3 +578,140 @@ target_link_libraries(couenne blas lapack)
 
 install(FILES config_couenne.h
         DESTINATION include/CouenneConfig.h)
+
+#
+# Tests
+#
+
+set(TEST_LIB_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib")
+set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")
+
+#
+# Circle
+#
+
+add_test(NAME couenne_test_circle
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/circle.nl)
+set_tests_properties(couenne_test_circle PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_circle PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_circle PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_circle PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Optimal")
+
+#
+# Cube
+#
+
+add_test(NAME couenne_test_cube
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/cube.nl)
+set_tests_properties(couenne_test_cube PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_cube PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_cube PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_cube PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Optimal")
+
+#
+# exp4
+#
+
+add_test(NAME couenne_test_exp4
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/exp4.nl)
+set_tests_properties(couenne_test_exp4 PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_exp4 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_exp4 PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_exp4 PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Infeasible problem")
+
+#
+# geoid
+#
+
+add_test(NAME couenne_test_geoid
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/geoid.nl)
+set_tests_properties(couenne_test_geoid PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_geoid PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_geoid PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_geoid PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Optimal")
+
+#
+# log
+#
+
+add_test(NAME couenne_test_log
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/log.nl)
+set_tests_properties(couenne_test_log PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_log PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_log PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_log PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Infeasible problem")
+
+#
+# prod
+#
+
+add_test(NAME couenne_test_prod
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/prod.nl)
+set_tests_properties(couenne_test_prod PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_prod PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_prod PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_prod PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Infeasible problem")
+
+#
+# qquad
+#
+
+add_test(NAME couenne_test_qquad
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/qquad.nl)
+set_tests_properties(couenne_test_qquad PROPERTIES TIMEOUT 1200)
+if (WIN32)
+  set_tests_properties(couenne_test_qquad PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_qquad PROPERTIES LABELS "DISTRIB;COUENNE;TEST;FAIL")
+set_tests_properties(couenne_test_qquad PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Optimal")
+
+#
+# sin
+#
+
+add_test(NAME couenne_test_sin
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/sin.nl)
+set_tests_properties(couenne_test_sin PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_sin PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_sin PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_sin PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Optimal")
+
+#
+# small2
+#
+
+add_test(NAME couenne_test_small2
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/small2.nl)
+set_tests_properties(couenne_test_small2 PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_small2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_small2 PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_small2 PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Optimal")
+
+#
+# toy
+#
+
+add_test(NAME couenne_test_toy
+         COMMAND $<TARGET_FILE:couenne> ${CMAKE_CURRENT_SOURCE_DIR}/../Couenne/test/data/toy.nl)
+set_tests_properties(couenne_test_toy PROPERTIES TIMEOUT 30)
+if (WIN32)
+  set_tests_properties(couenne_test_toy PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_PATH}\\;${TEST_BIN_PATH}")
+endif ()
+set_tests_properties(couenne_test_toy PROPERTIES LABELS "DISTRIB;COUENNE;TEST")
+set_tests_properties(couenne_test_toy PROPERTIES PASS_REGULAR_EXPRESSION "couenne: Optimal")
