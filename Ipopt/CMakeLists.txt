@@ -44,6 +44,7 @@ option(COIN_USE_FAST_CODE            "Use intensive optimization flags" OFF)
 option(COIN_COMPILE_WARNINGS         "Activate a set of warning options" OFF)
 option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 option(COIN_TESTS_DISABLE_TIMEOUT    "Disable the timeout of the tests" OFF)
+option(COIN_ENABLE_DOXYGEN           "Enable the build of doxygen documentation" OFF)
 
 option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
 option(COIN_ENABLE_COMPAT            "Enable libc compatibility" OFF)
@@ -601,7 +602,7 @@ endif ()
 set(doc_dir doc)
 find_package(Doxygen)
 
-if (DOXYGEN AND ENABLE_DOXYGEN)
+if (DOXYGEN AND COIN_ENABLE_DOXYGEN)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
 
   add_custom_target(docs 

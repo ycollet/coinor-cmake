@@ -30,6 +30,7 @@ option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 
 option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
 option(COIN_ENABLE_COMPAT            "Enable libc compatibility" OFF)
+option(COIN_ENABLE_DOXYGEN           "Enable the build of doxygen documentation" OFF)
 
 # Threads path
 set(COIN_THREADS_INC_PATH "None" CACHE PATH "The path to the PThreads header files")
@@ -625,7 +626,7 @@ add_definitions(-DHAVE_CONFIG_H)
 set(doc_dir doc)
 find_package(Doxygen)
 
-if (DOXYGEN AND ENABLE_DOXYGEN)
+if (DOXYGEN AND COIN_ENABLE_DOXYGEN)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doxydoc/doxygen.conf.in           ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf)
 

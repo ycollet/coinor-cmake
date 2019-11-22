@@ -33,7 +33,7 @@ mark_as_advanced(COUENNE_VERSION_MAJOR
 
 add_definitions(-DCOUENNE_BUILD)
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in        ${CMAKE_BINARY_DIR}/Couenne/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in         ${CMAKE_BINARY_DIR}/Couenne/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_couenne.h.in ${CMAKE_BINARY_DIR}/Couenne/include/config_couenne.h)
 
 if (COIN_USE_ASL OR COIN_ENABLE_DOWNLOAD_ASL)
@@ -62,7 +62,6 @@ endif ()
 #ifdef DO_IT_NWAY
 #ifdef FM_ALWAYS_SORT /* FM_SORT_STRONG */
 #ifdef FM_CHECK
-#ifdef FM_CHECK  
 #ifdef FM_CHECKNLP2
 #ifdef FM_FRES
 #ifdef FM_MOD
@@ -496,8 +495,20 @@ set(COUENNE_CUT_SRCS src/cut/crossconv/CrossConvConstructors.cpp
                      src/cut/sdpcuts/CutGenSparse.cpp
                      src/cut/sdpcuts/dsyevx_wrapper.cpp)
 
-add_library(libCouenne STATIC ${COUENNE_MAIN_SRCS} ${COUENNE_BOUNDTIGHTENING_SRCS} ${COUENNE_BRANCH_SRCS} ${COUENNE_CONVEX_SRCS} ${COUENNE_DISJUNCTIVE_SRCS} ${COUENNE_EXPRESSION_SRCS} ${COUENNE_HEURISTICS_SRCS} ${COUENNE_INTERFACES_SRCS} ${COUENNE_PROBLEM_SRCS} ${COUENNE_READNL_SRCS} ${COUENNE_STANDARDIZE_SRCS} ${COUENNE_UTIL_SRCS} ${COUENNE_CUT_SRCS})
-		   
+add_library(libCouenne STATIC ${COUENNE_MAIN_SRCS}
+                              ${COUENNE_BOUNDTIGHTENING_SRCS}
+                              ${COUENNE_BRANCH_SRCS}
+                              ${COUENNE_CONVEX_SRCS}
+                              ${COUENNE_DISJUNCTIVE_SRCS}
+                              ${COUENNE_EXPRESSION_SRCS}
+                              ${COUENNE_HEURISTICS_SRCS}
+                              ${COUENNE_INTERFACES_SRCS}
+                              ${COUENNE_PROBLEM_SRCS}
+                              ${COUENNE_READNL_SRCS}
+                              ${COUENNE_STANDARDIZE_SRCS}
+                              ${COUENNE_UTIL_SRCS}
+                              ${COUENNE_CUT_SRCS})
+
 if (COIN_COMPILE_LTO)
   set_target_properties(libCouenne PROPERTIES INTERPROCEDURAL_OPTIMIZATION true)
 endif ()
@@ -579,9 +590,11 @@ target_link_libraries(couenne blas lapack)
 install(FILES config_couenne.h
         DESTINATION include/CouenneConfig.h)
 
-#
-# Tests
-#
+###########
+#         #
+#  Tests  #
+#         #
+###########
 
 set(TEST_LIB_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib")
 set(TEST_BIN_PATH "${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/bin")

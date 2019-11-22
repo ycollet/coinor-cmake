@@ -78,6 +78,7 @@ option(COIN_COMPILE_CXX11            "Activate C++11 compilation" OFF)
 
 option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
 option(COIN_ENABLE_COMPAT            "Enable libc compatibility" OFF)
+option(COIN_ENABLE_DOXYGEN           "Enable the build of doxygen documentation" OFF)
 
 # Set paths of source
 set(COIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "The Osi Path")
@@ -420,7 +421,7 @@ if (COIN_COMPILE_COVERAGE)
                     COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_BINARY_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
                     COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" -L "${COIN_COVERAGE_CTEST_LABEL}" || true
                     COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_BINARY_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
-                    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info "*/usr/include/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+                    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info "*/usr/include/*' '${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned"
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
 		    VERBATIM
@@ -724,7 +725,7 @@ add_definitions(-DHAVE_CONFIG_H)
 set(doc_dir doc)
 find_package(Doxygen)
 
-if (DOXYGEN AND ENABLE_DOXYGEN)
+if (DOXYGEN AND COIN_ENABLE_DOXYGEN)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doxydoc/doxygen.conf.in           ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/doxydoc/doxygen.conf.in ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Osi/doxydoc/doxygen.conf.in       ${CMAKE_BINARY_DIR}/Osi/doxydoc/doxygen.conf)
