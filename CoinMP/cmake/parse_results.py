@@ -33,11 +33,11 @@ elif (len(sys.argv) <= 6):
     rel_level = float(sys.argv[4])
     comparator = int(sys.argv[5])
 else:
-    print 'usage: parse_result.py filename pattern ref_value [rel_level=1e-6] [comparator=1]'
+    print('usage: parse_result.py filename pattern ref_value [rel_level=1e-6] [comparator=1]')
     sys.exit(1)
 
 if comparator > 4:
-    print 'wrong value for comparator (0,1,2,3,4) here: %s' % comparator
+    print('wrong value for comparator (0,1,2,3,4) here: %s' % comparator)
     comparator = 1
 
 # Internal variables
@@ -61,31 +61,31 @@ for line in lines:
             if comparator == 0: # <=
                 res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res <= rel_level
-                print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) <= %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
+                print('abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) <= %f ==> %s' % (match[0],ref_value,ref_value,res,rel_level,result))
             elif comparator == 1: # <
                 res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res < rel_level
-                print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) < %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
+                print('abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) < %f ==> %s' % (match[0],ref_value,ref_value,res,rel_level,result))
             elif comparator == 2: # =
                 res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res == rel_level
-                print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) == %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
+                print('abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) == %f ==> %s' % (match[0],ref_value,ref_value,res,rel_level,result))
             elif comparator == 3: # >
                 res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res > rel_level
-                print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) > %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
+                print('abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) > %f ==> %s' % (match[0],ref_value,ref_value,res,rel_level,result))
             elif comparator == 4: # >=
                 res    = abs(float(match[0]) - ref_value) / max(abs(ref_value), epsilon)
                 result = res >= rel_level
-                print "abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) >= %f ==> %s" % (match[0],ref_value,ref_value,res,rel_level,result)
+                print('abs(float(%s) - %d) / max(abs(%d), 1e-9) (=%f) >= %f ==> %s' % (match[0],ref_value,ref_value,res,rel_level,result))
                 
             if (not result):
-                print "FAILED"
+                print('FAILED')
                 sys.exit(-1)
             else:
-                print "PASSED"
-                sys.exit()
+                print('PASSED')
+                sys.exit(0)
 
-print "NOT FOUND"
+print('NOT FOUND')
 sys.exit(-1)
 
