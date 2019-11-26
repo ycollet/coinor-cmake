@@ -9,18 +9,18 @@ set(CBC_VERSION_RELEASE "${CBC_PATCH_VERSION}"  CACHE STRING "The CBC patch vers
 set(CBC_VERSION         "${CBC_VERSION_STRING}" CACHE STRING "The CBC version")
 
 set(CBC_WC_REVISION "0")
-if (EXISTS "${Cbc_DIR}/.svn")
+if (EXISTS "${Cbc_DIR}/../.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${Cbc_DIR}/. CBC)
+    Subversion_WC_INFO(${Cbc_DIR}/.. CBC)
   endif ()
 endif ()
 
-if (EXISTS "${Cbc_DIR}/.git")
+if (EXISTS "${Cbc_DIR}/../.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${Cbc_DIR}/. CBC)
+    GIT_WC_INFO(${Cbc_DIR}/.. CBC)
     set(CBC_WC_REVISION "${CBC_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()

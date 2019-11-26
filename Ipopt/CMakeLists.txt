@@ -599,7 +599,11 @@ endif ()
 # Doxygen documentation
 #-----------------------------------------------
 
-set(doc_dir doc)
+set(coin_doxy_logname ) # output warning to stderr
+set(coin_doxy_excludes "*/.git*")
+set(coin_doxy_tagfiles )
+set(coin_doxy_tagname )
+
 find_package(Doxygen)
 
 if (DOXYGEN AND COIN_ENABLE_DOXYGEN)
