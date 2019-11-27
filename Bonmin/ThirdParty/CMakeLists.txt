@@ -753,7 +753,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
-  set(SUITESPARSE_VERSION "1.3.1")
+  set(SUITESPARSE_VERSION "1.5.0")
   
   set(COIN_ENABLE_CHOLMOD ON CACHE BOOL "Clp use the CholMod linear solver" FORCE)
   set(COIN_ENABLE_AMD     ON CACHE BOOL "Clp uses the AMD linear solver" FORCE)
@@ -775,7 +775,7 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
     set(DEPENDS_SUITESPARSE ${DEPENDS_SUITESPARSE} EP_Metis)
   endif ()
   
-  set(SUITESPARSE_URL        "https://github.com/jlblancoc/suitesparse-metis-for-windows.git")
+  set(SUITESPARSE_URL        "https://github.com/jlblancoc/suitesparse-metis-for-windows/archive/v${SUITESPARSE_VERSION}/suitesparse-metis-for-windows-${SUITESPARSE_VERSION}.tar.gz")
   set(SUITESPARSE_InstallDir "${EP_InstallDir}/SuiteSparse-${SUITESPARSE_VERSION}/${CMAKE_CFG_INTDIR}/")
 
   if (WIN32)
@@ -783,8 +783,7 @@ if (COIN_ENABLE_DOWNLOAD_SUITESPARSE)
     ExternalProject_Add(EP_SuiteSparse
                         PREFIX            ${SUITESPARSE_InstallDir}
                         DEPENDS           ${DEPENDS_SUITESPARSE}
-                        GIT_REPOSITORY    ${SUITESPARSE_URL}
-                        GIT_TAG           "v${SUITESPARSE_VERSION}"
+                        URL               ${SUITESPARSE_URL}
                         PATCH_COMMAND     ""
                         UPDATE_COMMAND    ""
                         CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${SUITESPARSE_InstallDir}/src/EP_SuiteSparse/build
