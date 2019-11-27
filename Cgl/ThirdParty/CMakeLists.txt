@@ -572,7 +572,7 @@ endif ()
 # #################################################
 
 if (COIN_ENABLE_DOWNLOAD_ASL)
-  set(ASL_VERSION "1.3.0")
+  set(ASL_VERSION "3.1.0")
   set(COIN_HAS_ASL ON CACHE BOOL "Enable the ASL support" FORCE)
   
   set(ASL_URL        "https:////github.com/ampl/mp/archive/${ASL_VERSION}.tar.gz" CACHE FILEPATH "Path to ${ASL_VERSION}.tar.gz source archive")
