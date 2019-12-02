@@ -355,7 +355,7 @@ macro(set_include_directories TARGET)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/SYMPHONY/include)
   endif ()
   
-  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/SYMPHONY/include)
 endmacro ()
 
 set_source_files_properties(${EXAMPLES_SRC} PROPERTIES LANGUAGE CXX)
