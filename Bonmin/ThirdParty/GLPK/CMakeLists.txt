@@ -742,9 +742,9 @@ if (GLPK_COMPILE_COVERAGE)
   add_custom_target(coverage
                     COMMAND ${LCOV_PATH} --directory ${CMAKE_CURRENT_SOURCE_DIR} --zerocounters
                     COMMAND ${LCOV_PATH} --capture --initial --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
-                    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)"
+                    COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR} ${CMAKE_CTEST_COMMAND} -LE "(LONG|FAIL)" || true
                     COMMAND ${LCOV_PATH} --capture --directory ${CMAKE_CURRENT_SOURCE_DIR} --output-file ${CMAKE_BINARY_DIR}/coverage.info
-                    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info '/usr/*' '${CMAKE_BINARY_DIR}/_dep/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
+                    COMMAND ${LCOV_PATH} --remove ${CMAKE_BINARY_DIR}/coverage.info "*/usr/include*" '${CMAKE_BINARY_DIR}/_dep/*' --output-file ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${GENHTML_PATH} -o ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.info.cleaned
                     COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/coverage.info ${CMAKE_BINARY_DIR}/coverage.info.cleaned
 		    VERBATIM

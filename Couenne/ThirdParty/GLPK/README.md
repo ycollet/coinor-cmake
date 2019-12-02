@@ -1,23 +1,30 @@
+Download Glpk from gnu server:
+$ wget https://ftp.gnu.org/gnu/glpk/glpk-4.65.tar.gz
+$ tar xvfz glpk-4.65.tar.gz
+
+Get this repo:
+$ git clone https://github.com/ycollet/glpk-cmake
+
 Copy files CMakeLists.txt and config.h.cmake to the root of the glpk distribution.
+$ cp -r glpk-cmake/* glpk-4.65/
+
 Then configure your glpk project the following way:
-mkdir build
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=/opt/glpk-4.61 -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
-make
-sudo make install
+$ cd glpk-4.65
+$ mkdir build
+$ cd build
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/glpk-4.61 -DCMAKE_BUILD_TYPE=RelWithDebInfo ..
+$ make
+$ sudo make install
 
 Under Windows, it's the same thing. The only difference is in the cmake command line:
-
-cmake -DCMAKE_INSTALL_PREFIX=d:/glpk-4.61 -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "NMake Makefiles" ..
-
-nmake
-nmake install
+$ cmake -DCMAKE_INSTALL_PREFIX=d:/glpk-4.61 -DCMAKE_BUILD_TYPE=RelWithDebInfo -G "NMake Makefiles" ..
+$ nmake
+$ nmake install
 
 You can select other cmake generators under Windows (Visual studio one for example).
 
 To launch the tests:
-
-ctest
+$ ctest
 
 Available options:
 
