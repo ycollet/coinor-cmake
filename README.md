@@ -13,27 +13,30 @@ Up to now, only the following projects are supported:
 - SYMPHONY
 - Vol
 - DyLP
+- Bonmin
+- Couenne
+- Ipopt
 
 How to use these cmake files ?
 
 - Clone the repository
-- Copy all the files from Cbc-git to Cbc-2.10.2 (for example)
-- In Cbc-2.10.2 create a build directory (mkdir build)
-- In Cbc-2.10.2/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.2 -DCMAKE_BUILD_TYPE=RELEASE ..'
-- In Cbc-2.10.2/buil, launch 'cmake-gui .' to fine tune the configuration
+- Copy all the files from Cbc-git to Cbc-2.10.3 (for example)
+- In Cbc-2.10.3 create a build directory (mkdir build)
+- In Cbc-2.10.3/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.3 -DCMAKE_BUILD_TYPE=RELEASE ..'
+- In Cbc-2.10.3/build, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: make
 - Install the libraries: sudo make install
 
 An example:
 ```
-$ wget https://www.coin-or.org/download/source/Cbc/Cbc-2.10.2.tgz
-$ tar xvfz Cbc-2.10.2.tgz
+$ wget https://www.coin-or.org/download/source/Cbc/Cbc-2.10.3.tgz
+$ tar xvfz Cbc-2.10.3.tgz
 $ git clone https://github.com/ycollet/coinor-cmake.git
-$ cp -r coinor-cmake/Cbc/* Cbc-2.10.2/
-$ cd Cbc-2.10.2
+$ cp -r coinor-cmake/Cbc/* Cbc-2.10.3/
+$ cd Cbc-2.10.3
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.2 -DCMAKE_BUILD_TYPE=RELEASE ..
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.3 -DCMAKE_BUILD_TYPE=RELEASE ..
 # Now activate all the options you want ... and click on  configure + generate and exit
 $ cmake-gui .
 $ make
@@ -43,10 +46,10 @@ $ sudo make install
 Under Windows, with Visual Studio:
 
 - Clone the repository
-- Copy all the files from Cbc-git to Cbc-2.10.2 (for example)
-- In Cbc-2.10.2 create a build directory (mkdir build)
-- In Cbc-2.10.2/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.2 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
-- In Cbc-2.10.2/buil, launch 'cmake-gui .' to fine tune the configuration
+- Copy all the files from Cbc-git to Cbc-2.10.3 (for example)
+- In Cbc-2.10.3 create a build directory (mkdir build)
+- In Cbc-2.10.3/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.3 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
+- In Cbc-2.10.3/build, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: nmake
 - Install the libraries: nmake install
 
@@ -87,10 +90,10 @@ Under Fedora, these tools are installed here:
 ```
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/usr/bin/clang -DCMAKE_CXX_FLAGS="-fsanitize=memory" ..
+$ cmake -DCMAKE_INSTALL_PREFIX=~/cbc-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/usr/bin/clang -DCMAKE_CXX_FLAGS="-fsanitize=memory" ..
 # or
-$ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -DCMAKE_C_COMPILER=/usr/bin/clang \ 
-                                                                     -DCMAKE_CXX_FLAGS="-fsanitize=address,memory" -DCMAKE_C_FLAGS="-fsanitize=address,memory" ..
+$ cmake -DCMAKE_INSTALL_PREFIX=~/cbc-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/usr/bin/clang++ -DCMAKE_C_COMPILER=/usr/bin/clang \ 
+                                                                  -DCMAKE_CXX_FLAGS="-fsanitize=address,memory" -DCMAKE_C_FLAGS="-fsanitize=address,memory" ..
 $ make
 ```
 All the sanitize options for clang are detailled here: http://clang.llvm.org/docs/UsersManual.html#controlling-code-generation
@@ -100,7 +103,7 @@ All the sanitize options for clang are detailled here: http://clang.llvm.org/doc
 ```
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=~/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/opt/intel/bin/icpc -DCMAKE_C_COMPILER=/opt/intel/bin/icc ..
+$ cmake -DCMAKE_INSTALL_PREFIX=~/cbc-bin -DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_CXX_COMPILER=/opt/intel/bin/icpc -DCMAKE_C_COMPILER=/opt/intel/bin/icc ..
 $ make
 ```
 
@@ -110,7 +113,7 @@ First, start the Visual Studio console. Now, launch cmake
 ```
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=d:/coinor-bin -DCMAKE_BUILD_TYPE=DEBUG -G "NMake Makefiles" ..
+$ cmake -DCMAKE_INSTALL_PREFIX=d:/cbc-bin -DCMAKE_BUILD_TYPE=DEBUG -G "NMake Makefiles" ..
 $ nmake
 ```
 
@@ -202,14 +205,14 @@ This header is used to fix compilation of clapack ...
 # Compiling using git repo:
 
 $ git clone https://github.com/ycollet/coinor-cmake.git
-$ git clone https://github.com/coin-or/CoinMP.git
-$ cd CoinMP
+$ git clone https://github.com/coin-or/Cbc.git
+$ cd Cbc
 $ git clone https://github.com/coin-or-tools/BuildTools/
 $ BuildTools/get.dependencies.sh fetch
-$ cp -r ../coinor-cmake/CoinMP .
+$ cp -r ../coinor-cmake/Cbc .
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=/opt/coinmp-devel -DCMAKE_BUILD_TYPE=RELEASE ..
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-devel -DCMAKE_BUILD_TYPE=RELEASE ..
 $ make
 
 # Compiling using coinbrew:
@@ -256,7 +259,7 @@ Date:   Thu Oct 21 01:03:09 2004 +0000
 
 $ git tag first_commit 2dc3ded2d97f2c889ae7baafa49128d2bec1f25b
 
-$ cmake -DCMAKE_INSTALL_PREFIX=/opt/coinmp-devel -DCMAKE_BUILD_TYPE=RELEASE ..
+$ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-devel -DCMAKE_BUILD_TYPE=RELEASE ..
 
 # To do
 
