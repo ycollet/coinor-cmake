@@ -48,7 +48,7 @@ Under Windows, with Visual Studio:
 - Clone the repository
 - Copy all the files from Cbc-git to Cbc-2.10.3 (for example)
 - In Cbc-2.10.3 create a build directory (mkdir build)
-- In Cbc-2.10.3/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-2.10.3 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
+- In Cbc-2.10.3/build, launch 'cmake -DCMAKE_INSTALL_PREFIX=d:/cbc-2.10.3 -DCMAKE_BUILD_TYPE=RELEASE -G "NMake Makefiles" ..'
 - In Cbc-2.10.3/build, launch 'cmake-gui .' to fine tune the configuration
 - Make the libraries: nmake
 - Install the libraries: nmake install
@@ -132,7 +132,7 @@ Now, run cmake:
 ```
 $ mkdir build
 $ cd build
-$ cmake -DCMAKE_INSTALL_PREFIX=/home/me/coinor-bin -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_TOOLCHAIN_FILE=cmake/mingw64-toolchain.cmake ..
+$ cmake -DCMAKE_INSTALL_PREFIX=/home/me/cbc-bin -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_TOOLCHAIN_FILE=cmake/mingw64-toolchain.cmake ..
 $ make
 ```
 
@@ -185,7 +185,7 @@ Be careful to activate the right set of tests (not the long one).
  c:/MinGW64/MinGW64/bin/mingw32-make.exe install
 ```
 
-- copy libgfortran-3.dll libquadmath-0.dll libgcc_s_seh-1.dll libwinpthread.dll from c:\MinGW64\MinGW64\bin to
+ - copy libgfortran-3.dll libquadmath-0.dll libgcc_s_seh-1.dll libwinpthread.dll from c:\MinGW64\MinGW64\bin to
    c:/lapack-3.7.0/bin
  - zip c:/lapack-3.7.0 to lapack-3.7.0.zip
 
