@@ -38,6 +38,35 @@ add_definitions(-DCGL_BUILD)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_cgl.h.in ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Cgl/include/config.h)
 
+#
+# pkg-config file generation
+#
+
+set(prefix           "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix      "\${prefix}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(CGLLIB_PCLIBS     "")
+set(CGLLIB_PCREQUIRES "osi-clp cgl osi coinutils")
+set(PACKAGE_VERSION   "${CGL_VERSION}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cgl/cgl.pc.in ${CMAKE_BINARY_DIR}/Cgl/cgl.pc @ONLY)
+
+set(libdir            "${Cgl_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cgl/cgl-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cgl/cgl-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Cgl/cgl.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Cgl/cgl-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 set(Cgl_SRC_LIST ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRoundingTest.cpp
                  ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRounding.cpp
                  ${Cgl_DIR}/src/CglDuplicateRow/CglDuplicateRow.cpp
