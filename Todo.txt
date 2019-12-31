@@ -1,0 +1,125 @@
+install all pc files:
+
+Cbc/cbc.pc.in:
+
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@/coin
+
+Name: CBC
+Description: COIN-OR Branch and Cut
+URL: https://projects.coin-or.org/Cbc
+Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lCbcSolver -lCbc @CBCLIB_PCLIBS@
+Cflags: -I${includedir}
+Requires: @CBCLIB_PCREQUIRES@
+
+to Cbc/cbc.pc:
+
+prefix=/opt/cbc-devel
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include/coin
+
+Name: CBC
+Description: COIN-OR Branch and Cut
+URL: https://projects.coin-or.org/Cbc
+Version: 2.10.3
+Libs: -L${libdir} -lCbcSolver -lCbc 
+Cflags: -I${includedir}
+Requires: osi-clp cgl osi coinutils 
+
+And Cbc/cbc-uninstalled.pc.in:
+
+prefix=@prefix@
+libdir=@ABSBUILDDIR@/src
+
+Name: CBC
+Description: COIN-OR Branch and Cut
+URL: https://projects.coin-or.org/Cbc
+Version: @PACKAGE_VERSION@
+Libs: ${libdir}/libCbcSolver.la ${libdir}/libCbc.la @CBCLIB_PCLIBS@
+Cflags: -I@abs_source_dir@/src -I@ABSBUILDDIR@/src
+Requires: @CBCLIB_PCREQUIRES@
+
+to Cbc/cbc-uninstalled.pc:
+
+prefix=/opt/cbc-devel
+libdir=/tmp/Cbc-2.10.3/Cbc/src
+
+Name: CBC
+Description: COIN-OR Branch and Cut
+URL: https://projects.coin-or.org/Cbc
+Version: 2.10.3
+Libs: ${libdir}/libCbcSolver.la ${libdir}/libCbc.la 
+Cflags: -I/tmp/Cbc-2.10.3/Cbc/src -I/tmp/Cbc-2.10.3/Cbc/src
+Requires: osi-clp cgl osi coinutils 
+
+List of pc files in Cbc:
+
+./Cgl/cgl-uninstalled.pc.in
+./Cgl/cgl.pc.in
+./Clp/src/OsiClp/osi-clp.pc.in
+./Clp/src/OsiClp/osi-clp-uninstalled.pc.in
+./Clp/clp.pc.in
+./Clp/clp-uninstalled.pc.in
+./Osi/osi.pc.in
+./Osi/osi-unittests.pc.in
+./Osi/src/OsiGlpk/osi-glpk.pc.in
+./Osi/src/OsiGlpk/osi-glpk-uninstalled.pc.in
+./Osi/src/OsiSpx/osi-soplex.pc.in
+./Osi/src/OsiSpx/osi-soplex-uninstalled.pc.in
+./Osi/src/OsiMsk/osi-mosek.pc.in
+./Osi/src/OsiMsk/osi-mosek-uninstalled.pc.in
+./Osi/src/OsiGrb/osi-gurobi.pc.in
+./Osi/src/OsiGrb/osi-gurobi-uninstalled.pc.in
+./Osi/src/OsiCpx/osi-cplex.pc.in
+./Osi/src/OsiCpx/osi-cplex-uninstalled.pc.in
+./Osi/src/OsiXpr/osi-xpress.pc.in
+./Osi/src/OsiXpr/osi-xpress-uninstalled.pc.in
+./Osi/osi-uninstalled.pc.in
+./Osi/osi-unittests-uninstalled.pc.in
+./CoinUtils/coinutils-uninstalled.pc.in
+./CoinUtils/coinutils.pc.in
+./Data/miplib3/coindatamiplib3.pc.in
+./Data/miplib3/coindatamiplib3-uninstalled.pc.in
+./Data/Sample/coindatasample-uninstalled.pc.in
+./Data/Sample/coindatasample.pc.in
+./ThirdParty/Mumps/coinmumps-uninstalled.pc.in
+./ThirdParty/Mumps/coinmumps.pc.in
+./ThirdParty/Metis/coinmetis.pc.in
+./ThirdParty/Metis/coinmetis-uninstalled.pc.in
+./ThirdParty/Glpk/coinglpk-uninstalled.pc.in
+./ThirdParty/Glpk/coinglpk.pc.in
+./ThirdParty/Lapack/coinlapack.pc.in
+./ThirdParty/Lapack/coinlapack-uninstalled.pc.in
+./ThirdParty/Blas/coinblas.pc.in
+./ThirdParty/Blas/coinblas-uninstalled.pc.in
+./ThirdParty/ASL/coinasl-uninstalled.pc.in
+./ThirdParty/ASL/coinasl.pc.in
+./Cbc/osi-cbc.pc.in
+./Cbc/cbc-uninstalled.pc.in
+./Cbc/osi-cbc-uninstalled.pc.in
+./Cbc/cbc.pc.in
+
+Todo:
+./Cgl			->	Done
+./Clp/src/OsiClp
+./Clp
+./Osi
+./Osi/src/OsiGlpk
+./Osi/src/OsiSpx/
+./Osi/src/OsiMsk/
+./Osi/src/OsiGrb/
+./Osi/src/OsiCpx/
+./Osi/src/OsiXpr/
+./CoinUtils
+./ThirdParty/Mumps
+./ThirdParty/Metis
+./ThirdParty/Glpk/
+./ThirdParty/Lapack
+./ThirdParty/Blas
+./ThirdParty/ASL
+./Cbc/OsiCbc
+./Cbc/
