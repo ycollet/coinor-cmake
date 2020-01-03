@@ -1,3 +1,32 @@
+#
+# pkg-config file generation
+#
+
+set(prefix               "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix          "\${prefix}")
+set(libdir               "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir           "${CMAKE_INSTALL_PREFIX}/include")
+set(OSICLPLIB_PCLIBS     "")
+set(OSICLPLIB_PCREQUIRES "clp osi")
+set(PACKAGE_VERSION      "${CLP_VERSION}")
+
+configure_file(${CMAKE_SOURCE_DIR}/Clp/Clp/src/OsiClp/osi-clp.pc.in ${CMAKE_BINARY_DIR}/Clp/osi-clp.pc @ONLY)
+
+set(libdir            "${Clp_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_SOURCE_DIR}/Clp/Clp/src/OsiClp/osi-clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/osi-clp-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Clp/osi-clp.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Clp/osi-clp-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)

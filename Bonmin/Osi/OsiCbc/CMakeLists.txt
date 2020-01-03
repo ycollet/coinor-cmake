@@ -1,3 +1,30 @@
+#
+# pkg-config file generation
+#
+
+set(prefix           "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix      "\${prefix}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(PACKAGE_VERSION  "${CBC_VERSION}")
+
+configure_file(${CMAKE_SOURCE_DIR}/Cbc/osi-cbc.pc.in ${CMAKE_BINARY_DIR}/Cbc/osi-cbc.pc @ONLY)
+
+set(libdir            "${Cbc_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_SOURCE_DIR}/Cbc/osi-cbc-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cbc/osi-cbc-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-cbc.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-cbc-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Cbc_DIR}/src)

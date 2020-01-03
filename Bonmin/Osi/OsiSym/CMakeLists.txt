@@ -1,3 +1,34 @@
+#
+# pkg-config file generation
+#
+
+set(prefix                 "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix            "\${prefix}")
+set(libdir                 "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir             "${CMAKE_INSTALL_PREFIX}/include")
+set(PACKAGE_VERSION        "${OSI_VERSION}")
+set(SYMPHONYLIB_PCLIBS     "")
+set(SYM_OPENMP_LIBS        "")
+set(SYM_OPENMP_FLAGS       "")
+set(SYMPHONYLIB_PCREQUIRES "cgl osi-clp coinutils osi")
+
+configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OSiSym/osi-symphony.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-symphony.pc @ONLY)
+
+set(libdir            "${Osi_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiSym/osi-symphony-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-symphony-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-symphony.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-cbc-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Cbc_DIR}/src)

@@ -43,6 +43,34 @@ endif ()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in ${CMAKE_BINARY_DIR}/DyLP/include/config_dylp.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in ${CMAKE_BINARY_DIR}/DyLP/include/config.h)
 
+#
+# pkg-config file generation
+#
+
+set(prefix           "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix      "\${prefix}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(DYLPLIB_PCLIBS   "")
+set(PACKAGE_VERSION   "${DYLP_VERSION}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dylp.pc.in ${CMAKE_BINARY_DIR}/DyLP/dylp.pc @ONLY)
+
+set(libdir            "${DyLP_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dylp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/DyLP/dylp-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/DyLP/dylp.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/DyLP/dylp-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 set(DyLPSTDLIB_SRC_LIST ${DyLP_DIR}/src/DylpStdLib/dylib_binsrch.c
                         ${DyLP_DIR}/src/DylpStdLib/dylib_bnfrdrio.c
                         ${DyLP_DIR}/src/DylpStdLib/dylib_hash.c

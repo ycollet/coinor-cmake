@@ -1,3 +1,30 @@
+#
+# pkg-config file generation
+#
+
+set(prefix               "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix          "\${prefix}")
+set(libdir               "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir           "${CMAKE_INSTALL_PREFIX}/include")
+set(PACKAGE_VERSION      "${CLP_VERSION}")
+
+configure_file(${CMAKE_SOURCE_DIR}/DyLP/src/OsiDylp/osi-dylp.pc.in ${CMAKE_BINARY_DIR}/DyLP/osi-dylp.pc @ONLY)
+
+set(libdir            "${DyLP_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_SOURCE_DIR}/DyLP/src/OsiDylp/osi-dylp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/DyLP/osi-dylp-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/DyLP/osi-dylp.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/DyLP/osi-dylp-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${DyLP_DIR}/src/Dylp)

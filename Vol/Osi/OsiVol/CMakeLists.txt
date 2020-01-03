@@ -1,3 +1,32 @@
+#
+# pkg-config file generation
+#
+
+set(prefix               "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix          "\${prefix}")
+set(libdir               "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir           "${CMAKE_INSTALL_PREFIX}/include")
+set(OSIVOLLIB_PCLIBS     "")
+set(OSIVOLLIB_PCREQUIRES "vol osi")
+set(PACKAGE_VERSION      "${OSI_VERSION}")
+
+configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiVol/osi-vol.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-vol.pc @ONLY)
+
+set(libdir            "${Osi_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiVol/osi-vol-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-vol-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-vol.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-vol-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Vol_DIR}/src)

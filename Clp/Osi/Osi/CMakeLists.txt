@@ -1,4 +1,4 @@
-get_ac_init_version(${Osi_DIR}/../configure.ac OSI)
+get_ac_init_version(${Osi_DIR}/configure.ac OSI)
 
 set(OSI_VERSION_MAJOR   "${OSI_MAJOR_VERSION}"  CACHE STRING "The OSI major version number")
 set(OSI_VERSION_MINOR   "${OSI_MINOR_VERSION}"  CACHE STRING "The OSI minor version number")
@@ -6,14 +6,14 @@ set(OSI_VERSION_RELEASE "${OSI_PATCH_VERSION}"  CACHE STRING "The OSI patch vers
 set(OSI_VERSION         "${OSI_VERSION_STRING}" CACHE STRING "The OSI version")
 
 set(OSI_WC_REVISION "0")
-if (EXISTS "${Osi_DIR}/../.svn")
+if ((EXISTS "${Osi_DIR}/.svn") OR (EXISTS "${Osi_DIR}/../.svn"))
   find_package(Subversion)
   if (Subversion_FOUND)
     Subversion_WC_INFO(${Osi_DIR} OSI)
   endif ()
 endif ()
 
-if (EXISTS "${Osi_DIR}/../.git")
+if ((EXISTS "${Osi_DIR}/.git") OR (EXISTS "${Osi_DIR}/../.git"))
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
@@ -35,6 +35,43 @@ add_definitions(-DOSI_BUILD)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osi.h.in ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Osi/include/config.h)
+
+#
+# pkg-config file generation
+#
+
+set(prefix           "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix      "\${prefix}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(OSILIB_PCLIBS     "")
+set(OSILIB_PCREQUIRES "")
+set(PACKAGE_VERSION   "${OSI_VERSION}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi.pc.in ${CMAKE_BINARY_DIR}/Osi/osi.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-unittests.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests.pc @ONLY)
+
+set(libdir            "${Osi_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-unittests-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-unittests.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
 
 set(Osi_SRC_LIST ${Osi_DIR}/src/Osi/OsiAuxInfo.cpp
                  ${Osi_DIR}/src/Osi/OsiBranchingObject.cpp

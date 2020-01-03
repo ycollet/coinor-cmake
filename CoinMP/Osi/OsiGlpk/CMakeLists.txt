@@ -1,3 +1,32 @@
+#
+# pkg-config file generation
+#
+
+set(prefix                "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix           "\${prefix}")
+set(libdir                "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir            "${CMAKE_INSTALL_PREFIX}/include")
+set(PACKAGE_VERSION       "${OSI_VERSION}")
+set(OSIGLPKLIB_PCLIBS     "-lglpk")
+set(OSIGLPKLIB_PCREQUIRES "glpk")
+
+configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiGlpk/osi-glpk.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-glpk.pc @ONLY)
+
+set(libdir            "${Osi_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiGlpk/osi-glpk-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-glpk-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-glpk.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-glpk-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Osi_DIR}/src)

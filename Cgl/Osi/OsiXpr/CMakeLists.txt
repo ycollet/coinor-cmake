@@ -1,3 +1,32 @@
+#
+# pkg-config file generation
+#
+
+set(prefix           "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix      "\${prefix}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(PACKAGE_VERSION  "${OSI_VERSION}")
+set(XPRLIB           "-lxprs")
+set(XPRINCDIR        "/usr/include/$ENV{XPRESSDIR}/include")
+
+configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OxiXpr/osi-xpress.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-xpress.pc @ONLY)
+
+set(libdir            "${Osi_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiXpr/osi-xpress-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-xpress-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-xpress.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-xpress-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 include_directories(${BuildTools_DIR}/headers)
 include_directories(${CoinUtils_DIR}/src)
 include_directories(${Osi_DIR}/src)
