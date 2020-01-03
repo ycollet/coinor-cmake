@@ -67,6 +67,50 @@ add_definitions(-DCOINUTILS_BUILD)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_coinutils.h.in ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in           ${CMAKE_BINARY_DIR}/CoinUtils/include/config.h)
 
+#
+# pkg-config file generation
+#
+
+set(prefix           "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix      "\${prefix}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(COINUTILSLIB_PCLIBS     "-lm")
+if (COINUTILS_HAS_ZLIB OR COIN_USE_ZLIB)
+  set(COINUTILSLIB_PCLIBS "${COINUTILSLIB_PCLIBS}")
+endif ()
+if (COINUTILS_HAS_BZLIB OR COIN_USE_BZLIB)
+  set(COINUTILSLIB_PCLIBS "${COINUTILSLIB_PCLIBS} -lbz2")
+endif ()
+if (COIN_HAS_LAPACK OR COIN_USE_LAPACK)
+  set(COINUTILSLIB_PCLIBS "${COINUTILSLIB_PCLIBS} -llapack")
+endif ()
+if (COIN_HAS_BLAS OR COIN_USE_BLAS)
+  set(COINUTILSLIB_PCLIBS "${COINUTILSLIB_PCLIBS} -lblas")
+endif ()
+if (COIN_ENABLE_DOWNLOAD_CLAPACK)
+  set(COINUTILSLIB_PCLIBS "${COINUTILSLIB_PCLIBS} -lf2c")
+endif ()
+set(COINUTILSLIB_PCREQUIRES "")
+set(PACKAGE_VERSION   "${CGL_VERSION}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/coinutils.pc.in ${CMAKE_BINARY_DIR}/CoinUtils/coinutils.pc @ONLY)
+
+set(libdir            "${CoinUtils_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/coinutils-uninstalled.pc.in ${CMAKE_BINARY_DIR}/CoinUtils/coinutils-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/coinutils.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/coinutils-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinBuild.cpp
                        ${CoinUtils_DIR}/src/CoinDenseVector.cpp
