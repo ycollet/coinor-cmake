@@ -49,6 +49,41 @@ endif ()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/SYMPHONY/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_sym.h.in ${CMAKE_BINARY_DIR}/SYMPHONY/include/config_sym.h)
 
+#
+# pkg-config file generation
+#
+
+set(prefix                 "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix            "\${prefix}")
+set(libdir                 "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir             "${CMAKE_INSTALL_PREFIX}/include")
+set(SYMPHONYLIB_PCLIBS     "")
+set(SYM_OPENMP_LIBS        "")
+set(SYM_OPENMP_FLAGS       "")
+set(SYMPHONYLIB_PCREQUIRES "cgl osi-clp coinutils osi")
+set(PACKAGE_VERSION        "${CBC_VERSION}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/symphony.pc.in ${CMAKE_BINARY_DIR}/SYMPHONY/symphony.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/symphony-app.pc.in ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-app.pc @ONLY)
+
+set(libdir            "${Cbc_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/symphony-uninstalled.pc.in ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/SYMPHONY/symphony.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-app.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 set(Symphony_SRC_LIST_Headers ${SYMPHONY_DIR}/include/sym_constants.h
                               ${SYMPHONY_DIR}/include/sym_macros.h
                               ${SYMPHONY_DIR}/include/sym_types.h
