@@ -105,21 +105,28 @@ List of pc files in Cbc:
 
 Todo:
 ./Cgl			->	Done
-./Clp/src/OsiClp
-./Clp
-./Osi
-./Osi/src/OsiGlpk
-./Osi/src/OsiSpx/
-./Osi/src/OsiMsk/
-./Osi/src/OsiGrb/
-./Osi/src/OsiCpx/
-./Osi/src/OsiXpr/
-./CoinUtils
+./Osi			->	Done
+./Osi/src/OsiGlpk	->	Done
+./Osi/src/OsiSpx/	->	Done
+./Osi/src/OsiMsk/	->	Done
+./Osi/src/OsiGrb/	->	Done
+./Osi/src/OsiCpx/	->	Done
+./Osi/src/OsiXpr/	->	Done
+./CoinUtils		->	Done
+./Cbc/OsiCbc		->	Done
+./Cbc/			->	Done
+./Clp/src/OsiClp	->	Done
+./Clp			->	Done
 ./ThirdParty/Mumps
 ./ThirdParty/Metis
 ./ThirdParty/Glpk/
 ./ThirdParty/Lapack
 ./ThirdParty/Blas
 ./ThirdParty/ASL
-./Cbc/OsiCbc
-./Cbc/
+./Bonmin		->	Done
+./Bonmin/src/CbcBonmin/	->	Done
+./Couenne		->	Done
+./CoinMP		->	Done
+./SYMPHONY		->	Done
+
+Add this pkg-config generation in if (UNIX) ... endif ()
