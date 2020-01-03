@@ -39,6 +39,35 @@ add_definitions(-DCBC_BUILD)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Cbc/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_cbc.h.in ${CMAKE_BINARY_DIR}/Cbc/include/config_cbc.h)
 
+#
+# pkg-config file generation
+#
+
+set(prefix           "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix      "\${prefix}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(CBCLIB_PCLIBS     "")
+set(CBCLIB_PCREQUIRES "osi-cbc clp cgl osi coinutils")
+set(PACKAGE_VERSION   "${CBC_VERSION}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cbc/cbc.pc.in ${CMAKE_BINARY_DIR}/Cbc/cbc.pc @ONLY)
+
+set(libdir            "${Cbc_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cbc/cbc-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cbc/cbc-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Cbc/cbc.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Cbc/cbc-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 set(Cbc_SRC_LIST ${Cbc_DIR}/src/Cbc_C_Interface.cpp
                  ${Cbc_DIR}/src/CbcBranchAllDifferent.cpp
                  #${Cbc_DIR}/src/CbcBranchBase.cpp
