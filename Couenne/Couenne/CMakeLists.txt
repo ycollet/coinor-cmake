@@ -36,6 +36,35 @@ add_definitions(-DCOUENNE_BUILD)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in         ${CMAKE_BINARY_DIR}/Couenne/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_couenne.h.in ${CMAKE_BINARY_DIR}/Couenne/include/config_couenne.h)
 
+#
+# pkg-config file generation
+#
+
+set(prefix                "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix           "\${prefix}")
+set(libdir                "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir            "${CMAKE_INSTALL_PREFIX}/include")
+set(COUENNELIB_PCLIBS     "")
+set(COUENNELIB_PCREQUIRES "bonmin")
+set(PACKAGE_VERSION       "${COUENNE_VERSION}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Couenne/couenne.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne.pc @ONLY)
+
+set(libdir            "${Couenne_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Couenne/couenne-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Couenne/couenne.pc
+        DESTINATION lib/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Couenne/couenne-uninstalled.pc
+        DESTINATION lib/pkg-config/)
+
+#
+# Build
+#
+
 if (COIN_USE_ASL OR COIN_ENABLE_DOWNLOAD_ASL)
   add_definitions(-DCOUENNEINTERFACE_FROM_ASL)
 endif ()
