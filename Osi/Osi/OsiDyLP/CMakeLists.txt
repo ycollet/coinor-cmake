@@ -58,7 +58,9 @@ endif ()
 set_include_directories(libOsiDyLP)
 
 install(TARGETS libOsiDyLP 
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
+        RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/static)
 
 install(FILES ${DyLP_DIR}/src/OsiDylp/OsiDylpMessages.hpp
               ${DyLP_DIR}/src/OsiDylp/OsiDylpSolverInterface.hpp
