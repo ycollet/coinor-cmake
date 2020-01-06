@@ -18,10 +18,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiVol/osi-vol-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-vol-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-vol.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-vol-uninstalled.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -59,7 +59,7 @@ endif ()
 set_include_directories(libOsiVol)
 
 install(TARGETS libOsiVol 
-        DESTINATION ${LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Vol_DIR}/src/OsiVol/OsiVolSolverInterface.hpp
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)

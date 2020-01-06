@@ -18,10 +18,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiSpx/osi-soplex-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-soplex-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-soplex.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-soplex-uninstalled.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -57,7 +57,7 @@ endif ()
 set_include_directories(libOsiSpx)
 
 install(TARGETS libOsiSpx
-        DESTINATION ${LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Osi_DIR}/src/OsiSpx/OsiSpxSolverInterface.hpp
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)

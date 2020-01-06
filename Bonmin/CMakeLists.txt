@@ -1005,7 +1005,7 @@ subdirs(Bonmin)
 
 if (WIN32)
   install(DIRECTORY ${CMAKE_BINARY_DIR}/bin
-          DESTINATION ${BINDIR}
+          DESTINATION ${CMAKE_INSTALL_BINDIR}
           PATTERN "*.dll")
 endif ()
 

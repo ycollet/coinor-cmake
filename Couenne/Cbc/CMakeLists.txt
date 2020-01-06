@@ -59,10 +59,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cbc-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cbc/cbc-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/cbc.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/cbc-uninstalled.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -1289,7 +1289,7 @@ if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_METIS)
 endif ()  
   
 install(TARGETS cbc
-        DESTINATION ${BINDIR})
+        DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 if (CBC_BUILD_CBC_GENERIC)
   add_executable(cbc-generic ${Cbc_DIR}/src/CbcGenBaB.cpp
@@ -1387,18 +1387,18 @@ if (CBC_BUILD_CBC_GENERIC)
   endif ()  
   
   install(TARGETS cbc-generic
-          DESTINATION ${BINDIR})
+          DESTINATION ${CMAKE_INSTALL_BINDIR})
 endif ()
 
 install(TARGETS libCbc 
-        DESTINATION ${LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Cbc_SRC_LIST_Headers} 
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/include/config_cbc.h
-        DESTINATION ${INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME CbcConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/include/config_cbc.h
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)

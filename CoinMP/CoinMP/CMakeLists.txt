@@ -56,10 +56,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/coinmp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/CoinMP/coinmp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinMP/coinmp.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinMP/coinmp-uninstalled.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -236,11 +236,11 @@ if (COINMP_BUILD_EXAMPLES)
 endif ()
 
 install(TARGETS libCoinMP
-        DESTINATION ${LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${CoinMP_DIR}/src/CoinMP.h 
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinMP/include/config_coinmp.h
-        DESTINATION ${INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME CoinMPConfig.h)

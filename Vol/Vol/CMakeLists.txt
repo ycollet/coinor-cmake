@@ -61,10 +61,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Vol/vol-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Vol/vol-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Vol/vol.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Vol/vol-uninstalled.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -190,14 +190,14 @@ if (VOL_BUILD_EXAMPLES)
 endif () 
 
 install(TARGETS libVol 
-        DESTINATION ${LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Vol_SRC_LIST_Headers} 
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Vol/include/config_vol.h
-        DESTINATION ${INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME VolConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Vol/include/config_vol.h
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)

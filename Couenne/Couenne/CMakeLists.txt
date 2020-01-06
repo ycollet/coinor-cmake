@@ -56,10 +56,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Couenne/couenne-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Couenne/couenne.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Couenne/couenne-uninstalled.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -617,7 +617,7 @@ endif ()
 target_link_libraries(couenne blas lapack)
 
 install(FILES config_couenne.h
-        DESTINATION ${INCLUDEDIR}/CouenneConfig.h)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/CouenneConfig.h)
 
 ###########
 #         #

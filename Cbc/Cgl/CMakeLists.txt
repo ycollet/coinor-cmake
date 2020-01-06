@@ -58,10 +58,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cgl/cgl-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cgl/cgl-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/cgl.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/cgl-uninstalled.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -326,14 +326,14 @@ if (COINUTILS_USE_THREADS OR COIN_USE_PTHREAD_WIN32 OR CBC_USE_THREADS)
 endif ()
 
 install(TARGETS libCgl 
-        DESTINATION ${LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Cgl_SRC_LIST_Headers} 
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h
-        DESTINATION ${INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME CglConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)

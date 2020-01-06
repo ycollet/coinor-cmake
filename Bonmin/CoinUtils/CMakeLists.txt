@@ -102,10 +102,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/coinutils-uninstalled.pc.in ${CMAKE_BINARY_DIR}/CoinUtils/coinutils-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/coinutils.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/coinutils-uninstalled.pc
-        DESTINATION ${LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -334,14 +334,14 @@ if (COINUTILS_ENABLE_UNITTEST)
 endif ()
 
 install(TARGETS libCoinUtils 
-        DESTINATION ${LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Coin_SRC_Headers} 
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h
-        DESTINATION ${INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME CoinUtilsConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h
-        DESTINATION ${INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
