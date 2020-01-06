@@ -62,10 +62,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Clp/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -983,17 +983,17 @@ if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_METIS)
 endif ()  
 
 install(TARGETS clp
-        DESTINATION bin)
+        DESTINATION ${BINDIR})
 
 install(TARGETS libClp 
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Clp_SRC_LIST_Headers} 
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION include/coin
+        DESTINATION ${INCLUDEDIR}/coin
         RENAME ClpConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

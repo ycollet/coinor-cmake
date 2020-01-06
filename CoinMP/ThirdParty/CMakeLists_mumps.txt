@@ -12,6 +12,8 @@ set(MUMPS_METIS_LIB_PATH "None" CACHE PATH "The METIS library library Path")
 
 set(MUMPS_LAPACK_LIB_PATH "None" CACHE PATH "The Lapack library library Path")
 
+include(GNUInstallDirs)
+
 #------------------------------------------------------------
 # End of user config part
 #------------------------------------------------------------
@@ -376,49 +378,49 @@ endif ()
 # Install rules
 if (MUMPS_USE_LIBSEQ)
   install(TARGETS libseq
-          DESTINATION lib)
+          DESTINATION ${LIBDIR})
 endif ()
 
 install(TARGETS libpord
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(TARGETS libmumps_common
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(TARGETS libcmumps
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(TARGETS libdmumps
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(TARGETS libsmumps
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(TARGETS libzmumps
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 if (MUMPS_USE_LIBSEQ)
   install(DIRECTORY libseq/
-          DESTINATION include/
+          DESTINATION ${INCLUDEDIR}/
           PATTERN "*.h")
 
   if (MUMPS_INSTALL_COIN)
     install(FILES libseq/mpi.h
-            DESTINATION include/
+            DESTINATION ${INCLUDEDIR}/
             RENAME mumps_mpi.h)
   endif ()
 else ()
   if (MUMPS_INSTALL_COIN)
     install(FILES ${MPI_C_INCLUDE_PATH}/libseq/mpi.h
-            DESTINATION include/
+            DESTINATION ${INCLUDEDIR}/
             RENAME mumps_mpi.h)
   endif ()
 endif ()
 
 install(DIRECTORY include/
-        DESTINATION include/
+        DESTINATION ${INCLUDEDIR}/
         PATTERN "*.h")
 
 install(DIRECTORY PORD/include/
-        DESTINATION include/
+        DESTINATION ${INCLUDEDIR}/
         PATTERN "*.h")

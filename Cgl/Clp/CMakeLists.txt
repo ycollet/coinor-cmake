@@ -42,6 +42,35 @@ endif ()
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Clp/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_clp.h.in ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h)
 
+#
+# pkg-config file generation
+#
+
+set(prefix           "${CMAKE_INSTALL_PREFIX}")
+set(exec_prefix      "\${prefix}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(CLPLIB_PCLIBS     "")
+set(CLPLIB_PCREQUIRES "coinutils")
+set(PACKAGE_VERSION   "${CLP_VERSION}")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Clp/clp.pc.in ${CMAKE_BINARY_DIR}/Clp/clp.pc @ONLY)
+
+set(libdir            "${Clp_DIR}")
+set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Clp/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/Clp/clp.pc
+        DESTINATION ${LIBDIR}/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc
+        DESTINATION ${LIBDIR}/pkg-config/)
+
+#
+# Build
+#
+
 set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/ClpCholeskyDense.cpp
                  ${Clp_DIR}/src/ClpConstraint.cpp
@@ -954,17 +983,17 @@ if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_METIS)
 endif ()  
 
 install(TARGETS clp
-        DESTINATION bin)
+        DESTINATION ${BINDIR})
 
 install(TARGETS libClp 
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Clp_SRC_LIST_Headers} 
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION include/coin
+        DESTINATION ${INCLUDEDIR}/coin
         RENAME ClpConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

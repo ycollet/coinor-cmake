@@ -18,10 +18,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiMsk/osi-mosek-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-mosek-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-mosek.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-mosek-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -57,7 +57,7 @@ endif ()
 set_include_directories(libOsiMsk)
 
 install(TARGETS libOsiMsk
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Osi_DIR}/src/OsiMsk/OsiMskSolverInterface.hpp
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

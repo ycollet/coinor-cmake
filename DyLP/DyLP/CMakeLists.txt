@@ -62,10 +62,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dylp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/DyLP/dylp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/dylp.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/dylp-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -211,14 +211,14 @@ if (DYLP_BUILD_EXAMPLES)
 endif () 
 
 install(TARGETS libDyLP 
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${DyLP_SRC_LIST_Headers} 
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/include/config.h
-        DESTINATION include/coin
+        DESTINATION ${INCLUDEDIR}/coin
         RENAME DyLPConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/include/config.h
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

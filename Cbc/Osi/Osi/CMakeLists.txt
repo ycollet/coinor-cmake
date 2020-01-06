@@ -58,16 +58,16 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-uninstalled.pc.in ${CMAKE_BINARY_
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-unittests-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-unittests.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -141,14 +141,14 @@ set_include_directories(libOsi)
 set_include_directories(libOsiCommonTests)
 
 install(TARGETS libOsi libOsiCommonTests 
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Osi_SRC_LIST_Headers} 
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h
-        DESTINATION include/coin
+        DESTINATION ${INCLUDEDIR}/coin
         RENAME OsiConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

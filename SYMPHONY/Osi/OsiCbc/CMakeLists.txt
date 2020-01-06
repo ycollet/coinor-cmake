@@ -16,10 +16,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Cbc/osi-cbc-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cbc/osi-cbc-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-cbc.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-cbc-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -58,7 +58,7 @@ endif ()
 set_include_directories(libOsiCbc)
 
 install(TARGETS libOsiCbc 
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Cbc_DIR}/src/OsiCbc/OsiCbcSolverInterface.hpp
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

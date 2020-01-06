@@ -20,10 +20,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiSym/osi-symphony-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-symphony-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-symphony.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-cbc-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -64,7 +64,7 @@ endif ()
 set_include_directories(libOsiSym)
 
 install(TARGETS libOsiSym 
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${OsiSym_DIR}/OsiSymSolverInterface.hpp ${OsiSym_DIR}/OsiSymSolverParameters.hpp ${OsiSym_DIR}/SymWarmStart.hpp
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

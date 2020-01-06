@@ -18,10 +18,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiGrb/osi-gurobi-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-gurobi-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-gurobi.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-gurobi-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -57,7 +57,7 @@ endif ()
 set_include_directories(libOsiGrb)
 
 install(TARGETS libOsiGrb
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Osi_DIR}/src/OsiGrb/OsiGrbSolverInterface.hpp
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

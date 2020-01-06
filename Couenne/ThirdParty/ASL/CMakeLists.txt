@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.4)
+cmake_minimum_required(VERSION 3.0.2)
 
 project(amplsolver)
 
@@ -6,6 +6,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}
                       ${CMAKE_MODULE_PATH})
 
 set(ExportTarget ${CMAKE_PROJECT_NAME}-targets CACHE STRING "Name for the export target for ${CMAKE_PROJECT_NAME}")
+
+include(GNUInstallDirs)
 
 include_directories(${amplsolver_SOURCE_DIR}
                     ${amplsolver_BINARY_DIR})
@@ -149,13 +151,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/AMPLConfig.cmake.in ${CMAKE_CURRENT_B
 
 install(TARGETS amplsolver
         EXPORT ${ExportTarget}
-        DESTINATION lib)
-#install(TARGETS genarith EXPORT ${ExportTarget} DESTINATION bin)
+        DESTINATION ${LIBDIR})
 
 file(GLOB ampl_headers *.h *.hd)
 
 install(FILES ${ampl_headers}
-        DESTINATION include/ampl)
+        DESTINATION ${INCLUDEDIR}/ampl)
 
 install(FILES ${amplsolver_BINARY_DIR}/arith.h ${amplsolver_BINARY_DIR}/stdio1.h
-        DESTINATION include/ampl)
+        DESTINATION ${INCLUDEDIR}/ampl)

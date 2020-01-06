@@ -18,10 +18,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiGlpk/osi-glpk-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-glpk-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-glpk.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-glpk-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -73,7 +73,7 @@ endif ()
 set_include_directories(libOsiGlpk)
 
 install(TARGETS libOsiGlpk
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Osi_DIR}/src/OsiGlpk/OsiGlpkSolverInterface.hpp
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

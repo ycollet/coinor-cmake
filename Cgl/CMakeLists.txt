@@ -169,6 +169,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH}
 include(coin-macros)
 include(GetAcInitVersion)
 include(CheckCLinkerFlag)
+include(GNUInstallDirs)
 
 Enable_Testing ()
 
@@ -894,7 +895,7 @@ endif ()
 
 if (WIN32)
   install(DIRECTORY ${CMAKE_BINARY_DIR}/bin
-          DESTINATION bin
+          DESTINATION ${BINDIR}
           PATTERN "*.dll")
 endif ()
 

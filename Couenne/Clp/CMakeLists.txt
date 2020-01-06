@@ -62,10 +62,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Clp/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -118,14 +118,14 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/Idiot.cpp
                  ${Clp_DIR}/src/IdiSolve.cpp)
 
-#if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
+if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
   set(Clp_SRC_LIST ${Clp_SRC_LIST}
                    ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
                    ${Clp_DIR}/src/ClpPESimplex.cpp
                    ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
                    ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
                    ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
-#endif ()
+endif ()
 
 set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
                        ${Clp_DIR}/src/CbcOrClpParam.cpp
@@ -237,14 +237,14 @@ set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/CbcOrClpParam.hpp
                          ${Clp_DIR}/src/Idiot.hpp)
 
-#if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
+if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
                            ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
                            ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
                            ${Clp_DIR}/src/ClpPESimplex.hpp
                            ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
                            ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
-#endif ()
+endif ()
 
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
@@ -983,17 +983,17 @@ if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_METIS)
 endif ()  
 
 install(TARGETS clp
-        DESTINATION bin)
+        DESTINATION ${BINDIR})
 
 install(TARGETS libClp 
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Clp_SRC_LIST_Headers} 
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION include/coin
+        DESTINATION ${INCLUDEDIR}/coin
         RENAME ClpConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)

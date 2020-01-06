@@ -18,10 +18,10 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiCpx/osi-cplex-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-cplex-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-cplex.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-cplex-uninstalled.pc
-        DESTINATION lib/pkg-config/)
+        DESTINATION ${LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -57,7 +57,7 @@ endif ()
 set_include_directories(libOsiCpx)
 
 install(TARGETS libOsiCpx
-        DESTINATION lib)
+        DESTINATION ${LIBDIR})
 
 install(FILES ${Osi_DIR}/src/OsiCpx/OsiCpxSolverInterface.hpp
-        DESTINATION include/coin)
+        DESTINATION ${INCLUDEDIR}/coin)
