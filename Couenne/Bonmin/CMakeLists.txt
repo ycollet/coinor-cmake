@@ -44,8 +44,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_bonmin.h.in ${CMAKE_BI
 
 set(prefix               "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix          "\${prefix}")
-set(libdir               "${CMAKE_INSTALL_LIBDIR}")
-set(includedir           "${CMAKE_INSTALL_INCLUDEDIR}")
+set(libdir               "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+set(includedir           "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
 set(BONMINLIB_PCLIBS     "")
 set(BONMINLIB_PCREQUIRES "cbc osi-clp ipopt")
 set(PACKAGE_VERSION      "${CBC_VERSION}")
@@ -61,13 +61,13 @@ set(BONMINAMPLINTERFACELIB_PCLIBS "")
 set(BONMINAMPLINTERFACELIB_PCREQUIRES "asl cbc osi ipopt")
 
 install(FILES ${CMAKE_BINARY_DIR}/Bonmin/bonmin.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/src/CbcBonmin/bonminamplinterface.pc.in ${CMAKE_BINARY_DIR}/Bonmin/bonminamplinterface.pc @ONLY)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Bonmin/src/CbcBonmin/bonminamplinterface-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Bonmin/bonminamplinterface-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Bonmin/bonminamplinterface.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -502,17 +502,17 @@ if (BONMIN_BUILD_EXAMPLES)
 endif ()
 
 install(TARGETS bonmin
-        DESTINATION ${CMAKE_INSTALL_BINDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS libBonmin 
-        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Bonmin_SRC_LIST_Headers} 
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Bonmin/include/config_bonmin.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME BonminConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Bonmin/include/config_bonmin.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)

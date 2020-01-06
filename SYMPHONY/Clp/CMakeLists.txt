@@ -48,8 +48,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_clp.h.in ${CMAKE_BINAR
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_LIBDIR}")
-set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
 set(CLPLIB_PCLIBS     "")
 set(CLPLIB_PCREQUIRES "coinutils")
 set(PACKAGE_VERSION   "${CLP_VERSION}")
@@ -62,7 +62,7 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Clp/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -980,17 +980,17 @@ if (COIN_ENABLE_DOWNLOAD_METIS OR COIN_USE_METIS)
 endif ()  
 
 install(TARGETS clp
-        DESTINATION ${CMAKE_INSTALL_BINDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS libClp 
-        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Clp_SRC_LIST_Headers} 
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME ClpConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)

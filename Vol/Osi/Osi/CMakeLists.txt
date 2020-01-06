@@ -42,8 +42,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINAR
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_LIBDIR}")
-set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
 set(OSILIB_PCLIBS     "")
 set(OSILIB_PCREQUIRES "")
 set(PACKAGE_VERSION   "${OSI_VERSION}")
@@ -58,10 +58,10 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-uninstalled.pc.in ${CMAKE_BINARY_
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-unittests-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-unittests.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 #
 # Build
 #
@@ -102,6 +102,8 @@ set(Osi_SRC_LIST_Headers ${Osi_DIR}/src/Osi/OsiAuxInfo.hpp
                          ${Osi_DIR}/src/Osi/OsiSolverInterface.hpp
                          ${Osi_DIR}/src/Osi/OsiSolverParameters.hpp)
 
+set(OsiCommonTests_SRC_Headers ${Osi_DIR}/src/OsiCommonTest/OsiUnitTests.hpp)
+
 include_directories(${Osi_DIR}/src)
 include_directories(${Osi_DIR}/src/Osi)
 include_directories(${CoinUtils_DIR}/src)
@@ -134,14 +136,14 @@ set_include_directories(libOsi)
 set_include_directories(libOsiCommonTests)
 
 install(TARGETS libOsi libOsiCommonTests 
-        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
-install(FILES ${Osi_SRC_LIST_Headers} 
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+install(FILES ${Osi_SRC_LIST_Headers} ${OsiCommonTests_SRC_Headers} 
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME OsiConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)

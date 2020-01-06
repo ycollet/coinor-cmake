@@ -42,8 +42,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_couenne.h.in ${CMAKE_B
 
 set(prefix                "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix           "\${prefix}")
-set(libdir                "${CMAKE_INSTALL_LIBDIR}")
-set(includedir            "${CMAKE_INSTALL_INCLUDEDIR}")
+set(libdir                "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+set(includedir            "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
 set(COUENNELIB_PCLIBS     "")
 set(COUENNELIB_PCREQUIRES "bonmin")
 set(PACKAGE_VERSION       "${COUENNE_VERSION}")
@@ -56,7 +56,7 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Couenne/couenne-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Couenne/couenne.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -614,7 +614,7 @@ endif ()
 target_link_libraries(couenne blas lapack)
 
 install(FILES config_couenne.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/CouenneConfig.h)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/CouenneConfig.h)
 
 ###########
 #         #

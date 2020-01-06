@@ -49,8 +49,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in ${CMAKE_BINARY_DI
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_LIBDIR}")
-set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
 set(DYLPLIB_PCLIBS   "")
 set(PACKAGE_VERSION   "${DYLP_VERSION}")
 
@@ -62,7 +62,7 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dylp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/DyLP/dylp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/dylp.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -208,14 +208,14 @@ if (DYLP_BUILD_EXAMPLES)
 endif () 
 
 install(TARGETS libDyLP 
-        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${DyLP_SRC_LIST_Headers} 
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/include/config.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME DyLPConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/include/config.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)

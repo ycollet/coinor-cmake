@@ -55,8 +55,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_sym.h.in ${CMAKE_BINAR
 
 set(prefix                 "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix            "\${prefix}")
-set(libdir                 "${CMAKE_INSTALL_LIBDIR}")
-set(includedir             "${CMAKE_INSTALL_INCLUDEDIR}")
+set(libdir                 "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+set(includedir             "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
 set(SYMPHONYLIB_PCLIBS     "")
 set(SYM_OPENMP_LIBS        "")
 set(SYM_OPENMP_FLAGS       "")
@@ -72,10 +72,10 @@ set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/symphony-uninstalled.pc.in ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/SYMPHONY/symphony.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-app.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -500,10 +500,10 @@ if (NOT SYM_COMPILE_IN_LP)
   add_example(symphony_lp ${MAIN_SRC})
 
   install(TARGETS symphony_lp
-          DESTINATION ${CMAKE_INSTALL_BINDIR})
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR})
 
   install(TARGETS libSym_lp
-          DESTINATION ${CMAKE_INSTALL_LIBDIR})
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 endif ()
 
 if (NOT SYM_COMPILE_IN_CG)
@@ -523,10 +523,10 @@ if (NOT SYM_COMPILE_IN_CG)
   add_example(symphony_cg ${MAIN_SRC})
   
   install(TARGETS symphony_cg
-          DESTINATION ${CMAKE_INSTALL_BINDIR})
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR})
 
   install(TARGETS libSym_cg
-          DESTINATION ${CMAKE_INSTALL_LIBDIR})
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 endif ()
 
 if (NOT SYM_COMPILE_IN_CP)
@@ -546,10 +546,10 @@ if (NOT SYM_COMPILE_IN_CP)
   add_example(symphony_cp ${MAIN_SRC})
   
   install(TARGETS symphony_cp
-          DESTINATION ${CMAKE_INSTALL_BINDIR})
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR})
 
   install(TARGETS libSym_cp
-          DESTINATION ${CMAKE_INSTALL_LIBDIR})
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 endif ()
 
 if (NOT SYM_COMPILE_IN_TM)
@@ -569,10 +569,10 @@ if (NOT SYM_COMPILE_IN_TM)
   add_example(symphony_tm ${MAIN_SRC})
   
   install(TARGETS symphony_tm
-          DESTINATION ${CMAKE_INSTALL_BINDIR})
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR})
 
   install(TARGETS libSym_tm
-          DESTINATION ${CMAKE_INSTALL_LIBDIR})
+          DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 endif ()
 
 if (SYMPHONY_BUILD_EXAMPLES)
@@ -746,19 +746,19 @@ if (SYMPHONY_BUILD_EXAMPLES)
 endif ()
 
 install(TARGETS symphony
-        DESTINATION ${CMAKE_INSTALL_BINDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR})
 
 install(TARGETS libSym
-        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
 install(TARGETS libOsiSym
-        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Symphony_SRC_LIST_Headers} 
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${OSISYM_Headers} 
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 # Perform some tests
 

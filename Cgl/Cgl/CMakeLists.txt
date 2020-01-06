@@ -44,8 +44,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINAR
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_LIBDIR}")
-set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
+set(libdir           "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}")
 set(CGLLIB_PCLIBS     "")
 set(CGLLIB_PCREQUIRES "osi-clp cgl osi coinutils")
 set(PACKAGE_VERSION   "${CGL_VERSION}")
@@ -58,7 +58,7 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cgl/cgl-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cgl/cgl-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/cgl.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
 # Build
@@ -323,14 +323,14 @@ if (COINUTILS_USE_THREADS OR COIN_USE_PTHREAD_WIN32 OR CBC_USE_THREADS)
 endif ()
 
 install(TARGETS libCgl 
-        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
 install(FILES ${Cgl_SRC_LIST_Headers} 
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin
         RENAME CglConfig.h)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/coin)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/coin)

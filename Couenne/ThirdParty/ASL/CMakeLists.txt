@@ -151,12 +151,12 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/AMPLConfig.cmake.in ${CMAKE_CURRENT_B
 
 install(TARGETS amplsolver
         EXPORT ${ExportTarget}
-        DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 
 file(GLOB ampl_headers *.h *.hd)
 
 install(FILES ${ampl_headers}
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ampl)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/ampl)
 
 install(FILES ${amplsolver_BINARY_DIR}/arith.h ${amplsolver_BINARY_DIR}/stdio1.h
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ampl)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR}/ampl)
