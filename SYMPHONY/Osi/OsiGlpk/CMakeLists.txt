@@ -4,23 +4,20 @@
 
 set(prefix                "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix           "\${prefix}")
-set(libdir                "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir            "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir                "${CMAKE_INSTALL_LIBDIR}")
+set(includedir            "${CMAKE_INSTALL_INCLUDEDIR}")
 set(PACKAGE_VERSION       "${OSI_VERSION}")
 set(OSIGLPKLIB_PCLIBS     "-lglpk")
 set(OSIGLPKLIB_PCREQUIRES "glpk")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiGlpk/osi-glpk.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-glpk.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiGlpk/osi-glpk.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-glpk.pc @ONLY)
 
 set(libdir            "${Osi_DIR}")
 set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiGlpk/osi-glpk-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-glpk-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/Osi/src/OsiGlpk/osi-glpk-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-glpk-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-glpk.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-glpk-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

@@ -4,23 +4,20 @@
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir           "${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
 set(PACKAGE_VERSION  "${OSI_VERSION}")
 set(CPXLIB           "-lcplex")
 set(CPXINCDIR        "/usr/include/cplex")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiCpx/osi-cplex.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-cplex.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiCpx/osi-cplex.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-cplex.pc @ONLY)
 
 set(libdir            "${Osi_DIR}")
 set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiCpx/osi-cplex-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-cplex-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiCpx/osi-cplex-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-cplex-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-cplex.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-cplex-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

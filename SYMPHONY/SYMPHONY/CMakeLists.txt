@@ -55,8 +55,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_sym.h.in ${CMAKE_BINAR
 
 set(prefix                 "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix            "\${prefix}")
-set(libdir                 "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir             "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir                 "${CMAKE_INSTALL_LIBDIR}")
+set(includedir             "${CMAKE_INSTALL_INCLUDEDIR}")
 set(SYMPHONYLIB_PCLIBS     "")
 set(SYM_OPENMP_LIBS        "")
 set(SYM_OPENMP_FLAGS       "")
@@ -66,8 +66,8 @@ set(PACKAGE_VERSION        "${CBC_VERSION}")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/symphony.pc.in ${CMAKE_BINARY_DIR}/SYMPHONY/symphony.pc @ONLY)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/symphony-app.pc.in ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-app.pc @ONLY)
 
-set(libdir            "${Cbc_DIR}")
-set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+set(libdir         "${SYMPHONY_DIR}")
+set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/symphony-uninstalled.pc.in ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-uninstalled.pc @ONLY)
 
@@ -75,9 +75,6 @@ install(FILES ${CMAKE_BINARY_DIR}/SYMPHONY/symphony.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 install(FILES ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-app.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/SYMPHONY/symphony-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

@@ -48,8 +48,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_clp.h.in ${CMAKE_BINAR
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir           "${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
 set(CLPLIB_PCLIBS     "")
 set(CLPLIB_PCREQUIRES "coinutils")
 set(PACKAGE_VERSION   "${CLP_VERSION}")
@@ -62,9 +62,6 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Clp/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

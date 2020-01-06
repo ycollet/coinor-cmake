@@ -4,23 +4,20 @@
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir           "${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
 set(PACKAGE_VERSION  "${OSI_VERSION}")
 set(MSKLIB           "-lmosek")
 set(MSKINCDIR        "/usr/include/mosek")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiMsk/osi-mosek.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-mosek.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiMsk/osi-mosek.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-mosek.pc @ONLY)
 
 set(libdir            "${Osi_DIR}")
 set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiMsk/osi-mosek-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-mosek-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiMsk/osi-mosek-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-mosek-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-mosek.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-mosek-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

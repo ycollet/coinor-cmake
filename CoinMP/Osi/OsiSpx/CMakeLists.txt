@@ -4,23 +4,20 @@
 
 set(prefix               "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix          "\${prefix}")
-set(libdir               "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir           "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir               "${CMAKE_INSTALL_LIBDIR}")
+set(includedir           "${CMAKE_INSTALL_INCLUDEDIR}")
 set(PACKAGE_VERSION      "${OSI_VERSION}")
 set(OSISPXLIB_PCLIBS     "-lsoplex")
 set(OSISPXLIB_PCREQUIRES "soplex")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiSpx/osi-soplex.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-soplex.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiSpx/osi-soplex.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-soplex.pc @ONLY)
 
 set(libdir            "${Osi_DIR}")
 set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiSpx/osi-soplex-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-soplex-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiSpx/osi-soplex-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-soplex-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-soplex.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-soplex-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

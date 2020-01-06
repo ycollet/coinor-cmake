@@ -45,23 +45,20 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_cbc.h.in ${CMAKE_BINAR
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir           "${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
 set(CBCLIB_PCLIBS     "")
 set(CBCLIB_PCREQUIRES "osi-cbc clp cgl osi coinutils")
 set(PACKAGE_VERSION   "${CBC_VERSION}")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cbc.pc.in ${CMAKE_BINARY_DIR}/Cbc/cbc.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cbc/cbc.pc.in ${CMAKE_BINARY_DIR}/Cbc/cbc.pc @ONLY)
 
 set(libdir            "${Cbc_DIR}")
 set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cbc-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cbc/cbc-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cbc/cbc-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cbc/cbc-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/cbc.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Cbc/cbc-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

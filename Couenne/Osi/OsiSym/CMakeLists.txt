@@ -4,25 +4,22 @@
 
 set(prefix                 "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix            "\${prefix}")
-set(libdir                 "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir             "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir                 "${CMAKE_INSTALL_LIBDIR}")
+set(includedir             "${CMAKE_INSTALL_INCLUDEDIR}")
 set(PACKAGE_VERSION        "${OSI_VERSION}")
 set(SYMPHONYLIB_PCLIBS     "")
 set(SYM_OPENMP_LIBS        "")
 set(SYM_OPENMP_FLAGS       "")
 set(SYMPHONYLIB_PCREQUIRES "cgl osi-clp coinutils osi")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OSiSym/osi-symphony.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-symphony.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../../SYMPHONY/src/OsiSym/osi-symphony.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-symphony.pc @ONLY)
 
 set(libdir            "${Osi_DIR}")
 set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_SOURCE_DIR}/Osi/Osi/src/OsiSym/osi-symphony-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-symphony-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../../SYMPHONY/src/OsiSym/osi-symphony-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-symphony-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-symphony.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-cbc-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

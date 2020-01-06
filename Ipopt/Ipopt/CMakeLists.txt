@@ -45,8 +45,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_ipopt.h.in ${CMAKE_BIN
 
 set(prefix               "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix          "\${prefix}")
-set(libdir               "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir           "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir               "${CMAKE_INSTALL_LIBDIR}")
+set(includedir           "${CMAKE_INSTALL_INCLUDEDIR}")
 set(IPOPTLIB_LFLAGS_NOPC "-lm -ldl")
 set(IPOPTLIB_PCFILES     "")
 if (COIN_HAS_LAPACK OR COIN_USE_LAPACK)
@@ -60,17 +60,14 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
 endif ()
 set(PACKAGE_VERSION      "${IPOPT_VERSION}")
 
-configure_file(${CMAKE_SOURCE_DIR}/ipopt.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/ipopt.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc @ONLY)
 
 set(libdir            "${CMAKE_CURRENT_SOURCE_DIR}")
 set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_SOURCE_DIR}/ipopt-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/ipopt-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Ipopt/ipopt-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

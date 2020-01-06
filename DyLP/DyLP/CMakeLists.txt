@@ -49,8 +49,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in ${CMAKE_BINARY_DI
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir           "${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
 set(DYLPLIB_PCLIBS   "")
 set(PACKAGE_VERSION   "${DYLP_VERSION}")
 
@@ -62,9 +62,6 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/dylp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/DyLP/dylp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/dylp.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/DyLP/dylp-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

@@ -42,8 +42,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_coinmp.h.in ${CMAKE_BI
 
 set(prefix            "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix       "\${prefix}")
-set(libdir            "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir        "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir            "${CMAKE_INSTALL_LIBDIR}")
+set(includedir        "${CMAKE_INSTALL_INCLUDEDIR}")
 set(COINMP_PCLIBS     "")
 set(COINMP_PCREQUIRES "cbc clp osi-clp")
 set(PACKAGE_VERSION   "${COINMP_VERSION}")
@@ -56,9 +56,6 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/coinmp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/CoinMP/coinmp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinMP/coinmp.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/CoinMP/coinmp-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

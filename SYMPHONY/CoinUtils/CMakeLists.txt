@@ -73,8 +73,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in           ${CMAKE
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir           "${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
 set(COINUTILSLIB_PCLIBS     "-lm")
 if (COINUTILS_HAS_ZLIB OR COIN_USE_ZLIB)
   set(COINUTILSLIB_PCLIBS "${COINUTILSLIB_PCLIBS}")
@@ -102,9 +102,6 @@ set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/coinutils-uninstalled.pc.in ${CMAKE_BINARY_DIR}/CoinUtils/coinutils-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/coinutils.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/coinutils-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #

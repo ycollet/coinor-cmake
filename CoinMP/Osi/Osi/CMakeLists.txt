@@ -42,8 +42,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINAR
 
 set(prefix           "${CMAKE_INSTALL_PREFIX}")
 set(exec_prefix      "\${prefix}")
-set(libdir           "${CMAKE_INSTALL_PREFIX}/lib")
-set(includedir       "${CMAKE_INSTALL_PREFIX}/include")
+set(libdir           "${CMAKE_INSTALL_LIBDIR}")
+set(includedir       "${CMAKE_INSTALL_INCLUDEDIR}")
 set(OSILIB_PCLIBS     "")
 set(OSILIB_PCREQUIRES "")
 set(PACKAGE_VERSION   "${OSI_VERSION}")
@@ -60,15 +60,8 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-unittests-uninstalled.pc.in ${CMA
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
-install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-uninstalled.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-unittests.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
-install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkg-config/)
-
 #
 # Build
 #
