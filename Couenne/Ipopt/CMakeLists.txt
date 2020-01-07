@@ -62,14 +62,14 @@ endif ()
 if (COIN_ENABLE_DOWNLOAD_CLAPACK)
   set(IPOPTLIB_PCFILES "${IPOPTLIB_PCFILES} -lf2c")
 endif ()
-set(PACKAGE_VERSION      "${IPOPT_VERSION}")
+set(PACKAGE_VERSION "${IPOPT_VERSION}")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Ipopt/ipopt.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../ipopt.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc @ONLY)
 
-set(libdir            "${CMAKE_CURRENT_SOURCE_DIR}")
-set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+set(libdir         "${CMAKE_CURRENT_SOURCE_DIR}")
+set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_SOURCE_DIR}/Ipopt/ipopt-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt-uninstalled.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../ipopt-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)

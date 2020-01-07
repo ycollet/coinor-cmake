@@ -48,12 +48,12 @@ set(COUENNELIB_PCLIBS     "")
 set(COUENNELIB_PCREQUIRES "bonmin")
 set(PACKAGE_VERSION       "${COUENNE_VERSION}")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Couenne/couenne.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne.pc @ONLY)
+configure_file(${Couenne_DIR}/couenne.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne.pc @ONLY)
 
-set(libdir            "${Couenne_DIR}")
-set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+set(libdir         "${Couenne_DIR}")
+set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Couenne/couenne-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne-uninstalled.pc @ONLY)
+configure_file(${Couenne_DIR}/couenne-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Couenne/couenne.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
