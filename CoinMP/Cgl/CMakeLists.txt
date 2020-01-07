@@ -50,12 +50,12 @@ set(CGLLIB_PCLIBS     "")
 set(CGLLIB_PCREQUIRES "osi-clp cgl osi coinutils")
 set(PACKAGE_VERSION   "${CGL_VERSION}")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cgl/cgl.pc.in ${CMAKE_BINARY_DIR}/Cgl/cgl.pc @ONLY)
+configure_file(${Cgl_DIR}/cgl.pc.in ${CMAKE_BINARY_DIR}/Cgl/cgl.pc @ONLY)
 
-set(libdir            "${Cgl_DIR}")
-set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+set(libdir         "${Cgl_DIR}")
+set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Cgl/cgl-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cgl/cgl-uninstalled.pc @ONLY)
+configure_file(${Cgl_DIR}/cgl-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Cgl/cgl-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cgl/cgl.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)

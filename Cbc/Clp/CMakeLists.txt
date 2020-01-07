@@ -54,12 +54,12 @@ set(CLPLIB_PCLIBS     "")
 set(CLPLIB_PCREQUIRES "coinutils")
 set(PACKAGE_VERSION   "${CLP_VERSION}")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Clp/clp.pc.in ${CMAKE_BINARY_DIR}/Clp/clp.pc @ONLY)
+configure_file(${Clp_DIR}/clp.pc.in ${CMAKE_BINARY_DIR}/Clp/clp.pc @ONLY)
 
-set(libdir            "${Clp_DIR}")
-set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+set(libdir         "${Clp_DIR}")
+set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Clp/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
+configure_file(${Clp_DIR}/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
