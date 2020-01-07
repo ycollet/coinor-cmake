@@ -10,12 +10,12 @@ set(PACKAGE_VERSION  "${OSI_VERSION}")
 set(XPRLIB           "-lxprs")
 set(XPRINCDIR        "/usr/include/$ENV{XPRESSDIR}/include")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OxiXpr/osi-xpress.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-xpress.pc @ONLY)
+configure_file(${Osi_DIR}/src/OxiXpr/osi-xpress.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-xpress.pc @ONLY)
 
-set(libdir            "${Osi_DIR}")
-set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+set(libdir         "${Osi_DIR}")
+set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiXpr/osi-xpress-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-xpress-uninstalled.pc @ONLY)
+configure_file(${Osi_DIR}/src/OsiXpr/osi-xpress-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-xpress-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-xpress.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)

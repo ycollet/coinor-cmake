@@ -48,14 +48,14 @@ set(OSILIB_PCLIBS     "")
 set(OSILIB_PCREQUIRES "")
 set(PACKAGE_VERSION   "${OSI_VERSION}")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi.pc.in ${CMAKE_BINARY_DIR}/Osi/osi.pc @ONLY)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-unittests.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests.pc @ONLY)
+configure_file(${Osi_DIR}/osi.pc.in           ${CMAKE_BINARY_DIR}/Osi/osi.pc @ONLY)
+configure_file(${Osi_DIR}/osi-unittests.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests.pc @ONLY)
 
-set(libdir            "${Osi_DIR}")
-set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+set(libdir         "${Osi_DIR}")
+set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-uninstalled.pc @ONLY)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/osi-unittests-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc @ONLY)
+configure_file(${Osi_DIR}/osi-uninstalled.pc.in           ${CMAKE_BINARY_DIR}/Osi/osi-uninstalled.pc @ONLY)
+configure_file(${OSi_DIR}/osi-unittests-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)

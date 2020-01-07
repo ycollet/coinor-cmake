@@ -10,12 +10,12 @@ set(PACKAGE_VERSION  "${OSI_VERSION}")
 set(GRBLIB           "-lgurobi")
 set(GRBINCDIR        "/usr/include/gurobi")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiGrb/osi-gurobi.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-gurobi.pc @ONLY)
+configure_file(${Osi_DIR}/src/OsiGrb/osi-gurobi.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-gurobi.pc @ONLY)
 
-set(libdir            "${Osi_DIR}")
-set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
+set(libdir         "${Osi_DIR}")
+set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../Osi/src/OsiGrb/osi-gurobi-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-gurobi-uninstalled.pc @ONLY)
+configure_file(${Osi_DIR}/src/OsiGrb/osi-gurobi-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-gurobi-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Cbc/osi-gurobi.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
