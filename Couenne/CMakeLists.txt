@@ -577,6 +577,7 @@ set(Bonmin_DIR        ${COIN_DIR}/../Bonmin/Bonmin)
 set(Couenne_DIR       ${COIN_DIR}/Couenne)
 
 if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
+  message(STATUS "DEBUG: Here 1")
   # Structure obtained via:
   # git clone https://github.com/coin-or/coinbrew
   # git clone https://github.com/coin-or/Cbc
@@ -595,6 +596,7 @@ if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
 endif ()
 
 if (EXISTS ${COIN_DIR}/CoinUtils/test)
+  message(STATUS "DEBUG: Here 2")
   # Structure from subversion checkout
   set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
@@ -955,7 +957,8 @@ subdirs(ThirdParty)
 
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include
                     ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include/ampl)
-link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib
+                 ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib64)
 
 include_directories(Osi/Osi/src/Osi)
 include_directories(Osi/src/OsiCommonTest)

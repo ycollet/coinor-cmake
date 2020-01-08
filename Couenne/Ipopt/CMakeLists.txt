@@ -1,4 +1,3 @@
-
 get_ac_init_version(${Ipopt_DIR}/configure.ac IPOPT)
 
 set(IPOPT_VERSION_MAJOR   "${IPOPT_MAJOR_VERSION}"  CACHE STRING "The IpOpt major version number")
@@ -10,7 +9,7 @@ set(IPOPT_WC_REVISION "0")
 if (EXISTS "${Ipopt_DIR}/.svn")
   find_package(Subversion)
   if (Subversion_FOUND)
-    Subversion_WC_INFO(${Ipopt_DIR}/. IPOPT)
+    Subversion_WC_INFO(${Ipopt_DIR} IPOPT)
   endif ()
 endif ()
 
@@ -18,7 +17,7 @@ if (EXISTS "${Ipopt_DIR}/.git")
   find_package(Git)
   if (Git_FOUND)
     include(export_git)
-    GIT_WC_INFO(${Ipopt_DIR}/. IPOPT)
+    GIT_WC_INFO(${Ipopt_DIR} IPOPT)
     set(IPOPT_WC_REVISION "${IPOPT_WC_SVNEQUIV}") # alphanumeric rev not yet managed
   endif ()
 endif ()
@@ -33,12 +32,6 @@ mark_as_advanced(IPOPT_VERSION_MAJOR
                  IPOPT_SVN_REV)
 
 add_definitions(-DIPOPT_BUILD)
-add_definitions(-DCOIN_USE_ASL)
-set(IPOPT_HAS_AMPL 1)
-
-if (COIN_USE_ASL OR COIN_ENABLE_DOWNLOAD_ASL)
-  add_definitions(-DIPOPT_HAS_AMPL)
-endif ()
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in       ${CMAKE_BINARY_DIR}/Ipopt/include/config.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_ipopt.h.in ${CMAKE_BINARY_DIR}/Ipopt/include/config_ipopt.h)
@@ -64,14 +57,17 @@ if (COIN_ENABLE_DOWNLOAD_CLAPACK)
 endif ()
 set(PACKAGE_VERSION "${IPOPT_VERSION}")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../ipopt.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc @ONLY)
+configure_file(${Ipopt_DIR}/ipopt.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc @ONLY)
 
-set(libdir         "${CMAKE_CURRENT_SOURCE_DIR}")
+set(libdir         "${Ipopt_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../ipopt-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt-uninstalled.pc @ONLY)
+configure_file(${Ipopt_DIR}/ipopt-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Ipopt/ipopt-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Ipopt/ipopt.pc
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
+
+install(FILES ${CMAKE_BINARY_DIR}/Ipopt/ipopt-uninstalled.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 #
@@ -261,17 +257,12 @@ if (IPOPT_ENABLE_INEXACT)
                      ${IPOPT_SRC_ALGORITHM_INEXACT_LIST})
 endif ()
 
-if (IPOPT_HAS_AMPL)
-  set (IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
-                      ${Ipopt_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
-endif ()
-
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Ipopt/include)
 endmacro ()
 
-if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/HSL)
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty/HSL)
+if (EXISTS ${Ipopt_DIR}/ThirdParty/HSL)
+  include_directories(${Ipopt_DIR}/ThirdParty/HSL)
 endif ()
 
 include_directories(${Ipopt_DIR}/src/Algorithm)
@@ -316,7 +307,10 @@ endif ()
 set_include_directories(libipopt)
 
 if (IPOPT_HAS_AMPL)
-  add_executable(ipopt ${Ipopt_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp)
+  set (IPOPT_AMPL_SRC_LIST ${Ipopt_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp
+                           ${Ipopt_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
+  
+  add_executable(ipopt ${IPOPT_AMPL_SRC_LIST})
   
   target_link_libraries(ipopt libipopt)
   if (COIN_HAS_MUMPS)
@@ -335,7 +329,7 @@ if (IPOPT_HAS_AMPL)
   if (MKL_FOUND)
     target_link_libraries(ipopt ${COIN_MKL_LIBS})
   else ()
-    if (COIN_HAS_LAPACK OR COIN_USE_LAPACK OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_USE_SYSTEM_LAPACK)
+    if (COIN_HAS_LAPACK OR COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_USE_SYSTEM_LAPACK)
       target_link_libraries(ipopt lapack blas)
     endif ()
     if (COIN_ENABLE_DOWNLOAD_CLAPACK)
@@ -866,76 +860,76 @@ endif ()
 # Install part
 #
 
-set(LINALG_HDRS ${Ipopt_DIR}/Ipopt/src/LinAlg/IpMatrix.hpp
-                ${Ipopt_DIR}/Ipopt/src/LinAlg/IpSymMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpExpansionMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpVector.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpDenseVector.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpCompoundVector.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpCompoundMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpCompoundSymMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpSumSymMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpDiagMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpIdentityMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpScaledMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpSymScaledMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpZeroSymMatrix.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpBlas.hpp
-		${Ipopt_DIR}/Ipopt/src/LinAlg/IpLapack.hpp)
+set(LINALG_HDRS ${Ipopt_DIR}/src/LinAlg/IpMatrix.hpp
+                ${Ipopt_DIR}/src/LinAlg/IpSymMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpExpansionMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpVector.hpp
+		${Ipopt_DIR}/src/LinAlg/IpDenseVector.hpp
+		${Ipopt_DIR}/src/LinAlg/IpCompoundVector.hpp
+		${Ipopt_DIR}/src/LinAlg/IpCompoundMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpCompoundSymMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpSumSymMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpDiagMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpIdentityMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpScaledMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpSymScaledMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpZeroSymMatrix.hpp
+		${Ipopt_DIR}/src/LinAlg/IpBlas.hpp
+		${Ipopt_DIR}/src/LinAlg/IpLapack.hpp)
 
-set(TMATRICES_HDRS ${Ipopt_DIR}/Ipopt/src/LinAlg/TMatrices/IpGenTMatrix.hpp
-	           ${Ipopt_DIR}/Ipopt/src/LinAlg/TMatrices/IpSymTMatrix.hpp
-	           ${Ipopt_DIR}/Ipopt/src/LinAlg/TMatrices/IpTripletHelper.hpp)
+set(TMATRICES_HDRS ${Ipopt_DIR}/src/LinAlg/TMatrices/IpGenTMatrix.hpp
+	           ${Ipopt_DIR}/src/LinAlg/TMatrices/IpSymTMatrix.hpp
+	           ${Ipopt_DIR}/src/LinAlg/TMatrices/IpTripletHelper.hpp)
 
-set(INTERFACES_HDRS ${Ipopt_DIR}/Ipopt/src/Interfaces/IpAlgTypes.hpp
-	            ${Ipopt_DIR}/Ipopt/src/Interfaces/IpIpoptApplication.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpNLP.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpReturnCodes.h
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpReturnCodes.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpReturnCodes_inc.h
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpReturnCodes.inc
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpSolveStatistics.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpStdCInterface.h
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpTNLP.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpTNLPAdapter.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Interfaces/IpTNLPReducer.hpp)
+set(INTERFACES_HDRS ${Ipopt_DIR}/src/Interfaces/IpAlgTypes.hpp
+	            ${Ipopt_DIR}/src/Interfaces/IpIpoptApplication.hpp
+		    ${Ipopt_DIR}/src/Interfaces/IpNLP.hpp
+		    ${Ipopt_DIR}/src/Interfaces/IpReturnCodes.h
+		    ${Ipopt_DIR}/src/Interfaces/IpReturnCodes.hpp
+		    ${Ipopt_DIR}/src/Interfaces/IpReturnCodes_inc.h
+		    ${Ipopt_DIR}/src/Interfaces/IpReturnCodes.inc
+		    ${Ipopt_DIR}/src/Interfaces/IpSolveStatistics.hpp
+		    ${Ipopt_DIR}/src/Interfaces/IpStdCInterface.h
+		    ${Ipopt_DIR}/src/Interfaces/IpTNLP.hpp
+		    ${Ipopt_DIR}/src/Interfaces/IpTNLPAdapter.hpp
+		    ${Ipopt_DIR}/src/Interfaces/IpTNLPReducer.hpp)
 
-set(COMMON_HDRS ${Ipopt_DIR}/Ipopt/src/Common/IpCachedResults.hpp
-	        ${Ipopt_DIR}/Ipopt/src/Common/IpDebug.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpException.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpJournalist.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpObserver.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpOptionsList.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpReferenced.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpRegOptions.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpSmartPtr.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpTaggedObject.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpTimedTask.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpTypes.hpp
-		${Ipopt_DIR}/Ipopt/src/Common/IpUtils.hpp)
+set(COMMON_HDRS ${Ipopt_DIR}/src/Common/IpCachedResults.hpp
+	        ${Ipopt_DIR}/src/Common/IpDebug.hpp
+		${Ipopt_DIR}/src/Common/IpException.hpp
+		${Ipopt_DIR}/src/Common/IpJournalist.hpp
+		${Ipopt_DIR}/src/Common/IpObserver.hpp
+		${Ipopt_DIR}/src/Common/IpOptionsList.hpp
+		${Ipopt_DIR}/src/Common/IpReferenced.hpp
+		${Ipopt_DIR}/src/Common/IpRegOptions.hpp
+		${Ipopt_DIR}/src/Common/IpSmartPtr.hpp
+		${Ipopt_DIR}/src/Common/IpTaggedObject.hpp
+		${Ipopt_DIR}/src/Common/IpTimedTask.hpp
+		${Ipopt_DIR}/src/Common/IpTypes.hpp
+		${Ipopt_DIR}/src/Common/IpUtils.hpp)
 
-set(ALGORITHMS_HDRS ${Ipopt_DIR}/Ipopt/src/Algorithm/IpIpoptCalculatedQuantities.hpp
-                    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpIpoptData.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpIteratesVector.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpTimingStatistics.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpIpoptNLP.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpOrigIpoptNLP.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpNLPScaling.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpAlgBuilder.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpIpoptAlg.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpAlgStrategy.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpSearchDirCalculator.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpLineSearch.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpMuUpdate.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpConvCheck.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpIterateInitializer.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpIterationOutput.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpHessianUpdater.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpEqMultCalculator.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpAugSystemSolver.hpp
-		    ${Ipopt_DIR}/Ipopt/src/Algorithm/IpPDSystemSolver.hpp)
+set(ALGORITHMS_HDRS ${Ipopt_DIR}/src/Algorithm/IpIpoptCalculatedQuantities.hpp
+                    ${Ipopt_DIR}/src/Algorithm/IpIpoptData.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpIteratesVector.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpTimingStatistics.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpIpoptNLP.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpOrigIpoptNLP.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpNLPScaling.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpAlgBuilder.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpIpoptAlg.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpAlgStrategy.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpSearchDirCalculator.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpLineSearch.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpMuUpdate.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpConvCheck.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpIterateInitializer.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpIterationOutput.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpHessianUpdater.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpEqMultCalculator.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpAugSystemSolver.hpp
+		    ${Ipopt_DIR}/src/Algorithm/IpPDSystemSolver.hpp)
 
-set(LINEARSOLVERS_HDRS ${Ipopt_DIR}/Ipopt/src/Algorithm/LinearSolvers/IpSymLinearSolver.hpp)
+set(LINEARSOLVERS_HDRS ${Ipopt_DIR}/src/Algorithm/LinearSolvers/IpSymLinearSolver.hpp)
 
 set(ALL_HDRS ${LINALG_HDRS}
              ${TMATRICES_HDRS}

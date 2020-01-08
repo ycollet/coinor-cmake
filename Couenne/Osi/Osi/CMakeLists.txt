@@ -55,7 +55,7 @@ set(libdir         "${Osi_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
 configure_file(${Osi_DIR}/osi-uninstalled.pc.in           ${CMAKE_BINARY_DIR}/Osi/osi-uninstalled.pc @ONLY)
-configure_file(${OSi_DIR}/osi-unittests-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc @ONLY)
+configure_file(${Osi_DIR}/osi-unittests-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-unittests-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
