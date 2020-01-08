@@ -58,30 +58,6 @@ Requires: osi-clp cgl osi coinutils
 
 List of pc files in Cbc:
 
-./Cgl/cgl-uninstalled.pc.in
-./Cgl/cgl.pc.in
-./Clp/src/OsiClp/osi-clp.pc.in
-./Clp/src/OsiClp/osi-clp-uninstalled.pc.in
-./Clp/clp.pc.in
-./Clp/clp-uninstalled.pc.in
-./Osi/osi.pc.in
-./Osi/osi-unittests.pc.in
-./Osi/src/OsiGlpk/osi-glpk.pc.in
-./Osi/src/OsiGlpk/osi-glpk-uninstalled.pc.in
-./Osi/src/OsiSpx/osi-soplex.pc.in
-./Osi/src/OsiSpx/osi-soplex-uninstalled.pc.in
-./Osi/src/OsiMsk/osi-mosek.pc.in
-./Osi/src/OsiMsk/osi-mosek-uninstalled.pc.in
-./Osi/src/OsiGrb/osi-gurobi.pc.in
-./Osi/src/OsiGrb/osi-gurobi-uninstalled.pc.in
-./Osi/src/OsiCpx/osi-cplex.pc.in
-./Osi/src/OsiCpx/osi-cplex-uninstalled.pc.in
-./Osi/src/OsiXpr/osi-xpress.pc.in
-./Osi/src/OsiXpr/osi-xpress-uninstalled.pc.in
-./Osi/osi-uninstalled.pc.in
-./Osi/osi-unittests-uninstalled.pc.in
-./CoinUtils/coinutils-uninstalled.pc.in
-./CoinUtils/coinutils.pc.in
 ./Data/miplib3/coindatamiplib3.pc.in
 ./Data/miplib3/coindatamiplib3-uninstalled.pc.in
 ./Data/Sample/coindatasample-uninstalled.pc.in
@@ -98,35 +74,15 @@ List of pc files in Cbc:
 ./ThirdParty/Blas/coinblas-uninstalled.pc.in
 ./ThirdParty/ASL/coinasl-uninstalled.pc.in
 ./ThirdParty/ASL/coinasl.pc.in
-./Cbc/osi-cbc.pc.in
-./Cbc/cbc-uninstalled.pc.in
-./Cbc/osi-cbc-uninstalled.pc.in
-./Cbc/cbc.pc.in
 
 Todo:
-./Cgl			->	Done
-./Osi			->	Done
-./Osi/src/OsiGlpk	->	Done
-./Osi/src/OsiSpx/	->	Done
-./Osi/src/OsiMsk/	->	Done
-./Osi/src/OsiGrb/	->	Done
-./Osi/src/OsiCpx/	->	Done
-./Osi/src/OsiXpr/	->	Done
-./CoinUtils		->	Done
-./Cbc/OsiCbc		->	Done
-./Cbc/			->	Done
-./Clp/src/OsiClp	->	Done
-./Clp			->	Done
 ./ThirdParty/Mumps
 ./ThirdParty/Metis
 ./ThirdParty/Glpk/
 ./ThirdParty/Lapack
 ./ThirdParty/Blas
 ./ThirdParty/ASL
-./Bonmin		->	Done
-./Bonmin/src/CbcBonmin/	->	Done
-./Couenne		->	Done
-./CoinMP		->	Done
-./SYMPHONY		->	Done
+./Data/miplib3
+./Data/Sample
 
 Add this pkg-config generation in if (UNIX) ... endif ()
