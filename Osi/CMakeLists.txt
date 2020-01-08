@@ -447,7 +447,7 @@ add_custom_target(uninstall
 # git clone https://github.com/coin-or/coinbrew
 # coinbrew/coinbrew fetch --git --main-proj="Osi"
 set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
-set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils)
+set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
 set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
 set(Osi_DIR           ${COIN_DIR}/Osi)
 

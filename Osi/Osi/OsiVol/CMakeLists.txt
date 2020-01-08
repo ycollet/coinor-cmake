@@ -10,12 +10,12 @@ set(OSIVOLLIB_PCLIBS     "")
 set(OSIVOLLIB_PCREQUIRES "vol osi")
 set(PACKAGE_VERSION      "${OSI_VERSION}")
 
-configure_file(${Vol_DIR}/osi-vol.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-vol.pc @ONLY)
+configure_file(${Vol_DIR}/src/OsiVol/osi-vol.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-vol.pc @ONLY)
 
 set(libdir         "${Vol_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${Vol_DIR}/osi-vol-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-vol-uninstalled.pc @ONLY)
+configure_file(${Vol_DIR}/src/OsiVol/osi-vol-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-vol-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-vol.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
