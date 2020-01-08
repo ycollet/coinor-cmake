@@ -450,7 +450,7 @@ add_custom_target(uninstall
 set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
 set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
 set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
-set(Osi_DIR           ${COIN_DIR}/../Osi)
+set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
 set(Vol_DIR           ${COIN_DIR}/Vol)
 
 if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
