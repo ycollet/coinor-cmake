@@ -49,6 +49,9 @@ option(COIN_ENABLE_DOXYGEN           "Enable the build of doxygen documentation"
 option(USE_PROCESSOR_EXTENSIONS      "Use sse / mmx / avx extensions during compilation" OFF)
 option(COIN_ENABLE_COMPAT            "Enable libc compatibility" OFF)
 
+# Set paths of source
+set(COIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}" CACHE PATH "The Cbc Path")
+
 set(COIN_COVERAGE_CTEST_LABEL "SAMPLE" CACHE PATH "The label sent to ctest during coverage")
 
 mark_as_advanced(ENABLE_SHARED_LIBRARIES
@@ -68,6 +71,7 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_HAS_WSMP
                  COIN_HAS_WSMP_INCLUDE_PATH
                  COIN_HAS_WSMP_LIBRARY_PATH
+		 COIN_DIR
 		 IPOPT_HAS_PARDISO_MKL
 		 IPOPT_HAS_PARDISO_OLDINTERFACE
 		 IPOPT_HAS_PARDISO_PARALLEL
@@ -401,6 +405,10 @@ endif ()
 
 add_custom_target(uninstall
                   COMMAND ${CMAKE_COMMAND} -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/uninstall.cmake")
+
+# Directories where to find the source code
+
+set(Ipopt_DIR ${COIN_DIR})
 
 # End of coverage
 
