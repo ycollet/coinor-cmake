@@ -577,7 +577,6 @@ set(Bonmin_DIR        ${COIN_DIR}/../Bonmin/Bonmin)
 set(Couenne_DIR       ${COIN_DIR}/Couenne)
 
 if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
-  message(STATUS "DEBUG: Here 1")
   # Structure obtained via:
   # git clone https://github.com/coin-or/coinbrew
   # git clone https://github.com/coin-or/Cbc
@@ -596,7 +595,6 @@ if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
 endif ()
 
 if (EXISTS ${COIN_DIR}/CoinUtils/test)
-  message(STATUS "DEBUG: Here 2")
   # Structure from subversion checkout
   set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)

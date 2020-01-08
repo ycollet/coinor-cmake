@@ -9,7 +9,7 @@ option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK "Enable the download / compilation of M
 option(COIN_ENABLE_DOWNLOAD_LAPACK       "Enable the download / compilation of Blas / Lapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_CLAPACK      "Enable the download / compilation of CBlas / CLapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_MINLPLIB     "Enable the download / run of minlp benchmark" OFF)
-option(COIN_USE_SYSTEM_LAPACK            "Use system Lapack" ON)
+option(COIN_USE_SYSTEM_LAPACK            "Enable the use of the system Lapack" OFF)
 option(COIN_ENABLE_COMPILE_HSL           "Enable the compilation of HSL" OFF)
 option(COIN_USE_COINHSL                  "Use Coin HSL to compile the solver" OFF)
 if (WIN32)

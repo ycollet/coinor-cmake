@@ -13,7 +13,7 @@ if (WIN32)
 endif ()
 
 option(COIN_USE_MINGW_LAPACK  "Enable the use of MinGW compiled Blas / Lapack" OFF)
-option(COIN_USE_LAPACK        "Enable the use of Blas / Lapack" OFF)
+option(COIN_USE_SYSTEM_LAPACK "Enable the use of Blas / Lapack" OFF)
 option(COIN_USE_CLAPACK       "Enable the use of CBlas / CLapack" OFF)
 option(COIN_USE_ZLIB          "Enable the use of Zlib" OFF)
 option(COIN_USE_BZLIB         "Enable the use of BZlib" OFF)
@@ -33,7 +33,7 @@ mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
 
 if (COIN_USE_ZLIB OR COIN_USE_BZLIB OR COIN_USE_MINGW_LAPACK OR
-    COIN_USE_LAPACK OR COIN_USE_CLAPACK)
+    COIN_USE_SYSTEM_LAPACK OR COIN_USE_CLAPACK)
   return ()
 endif ()
 
@@ -94,6 +94,34 @@ else ()
   set(CMAKE_GENERATOR    "Unix Makefiles")
   set(CMAKE_MAKE_PROGRAM "make")
 endif ()
+
+if (NOT COIN_ENABLE_DOWNLOAD_MINGW_LAPACK AND
+    NOT COIN_ENABLE_DOWNLOAD_LAPACK AND
+    NOT COIN_ENABLE_DOWNLOAD_CLAPACK AND
+    NOT COIN_USE_SYSTEM_LAPACK)
+  message(FATAL_ERROR "One kind of Blas / Lapack must be selected: 
+ - COIN_ENABLE_DOWNLOAD_MINGW_LAPACK AND
+ - COIN_ENABLE_DOWNLOAD_LAPACK AND
+ - COIN_ENABLE_DOWNLOAD_CLAPACK AND
+ - COIN_USE_SYSTEM_LAPACK")
+endif ()
+
+# #################################################
+# ===>    System Lapack
+# #################################################
+
+if (COIN_USE_SYSTEM_LAPACK)
+  find_package(LAPACK REQUIRED)
+  
+  set(COIN_ENABLE_DOWNLOAD_LAPACK  OFF CACHE BOOL "Enable the download / compilation of Blas / Lapack")
+  set(COIN_ENABLE_DOWNLOAD_CLAPACK OFF CACHE BOOL "Enable the download / compilation of CBlas / CLapack")
+  
+  get_filename_component(LAPACK_LINK_PATH "${LAPACK_LIBRARIES}" DIRECTORY)
+endif ()
+
+# #################################################
+# <===    System Lapack
+# #################################################
 
 # #################################################
 # ===>    CLapack

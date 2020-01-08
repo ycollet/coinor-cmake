@@ -4,7 +4,7 @@
 
 option(COIN_USE_PTHREAD_WIN32 "Enable the use of PThreads for Windows" OFF)
 option(COIN_USE_MINGW_LAPACK  "Enable the use of MinGW compiled Blas / Lapack" OFF)
-option(COIN_USE_LAPACK        "Enable the use of Blas / Lapack" OFF)
+option(COIN_USE_SYSTEM_LAPACK "Enable the use of the system Lapack" OFF)
 option(COIN_USE_CLAPACK       "Enable the use of CBlas / CLapack" OFF)
 option(COIN_USE_GLPK          "Enable the use of GLPK" OFF)
 option(COIN_USE_METIS         "Enable the use of METIS" OFF)
@@ -26,7 +26,7 @@ endif ()
 mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
 
-if (COIN_USE_PTHREAD_WIN32 OR COIN_USE_LAPACK OR COIN_USE_CLAPACK OR COIN_USE_MINGW_LAPACK OR
+if (COIN_USE_PTHREAD_WIN32 OR COIN_USE_SYSTEM_LAPACK OR COIN_USE_CLAPACK OR COIN_USE_MINGW_LAPACK OR
     COIN_USE_GLPK OR COIN_USE_MUMPS OR COIN_USE_METIS OR
     COIN_USE_ZLIB OR COIN_USE_BZLIB)
   return ()
@@ -109,6 +109,34 @@ else ()
   set(CMAKE_GENERATOR    "Unix Makefiles")
   set(CMAKE_MAKE_PROGRAM "make")
 endif ()
+
+if (NOT COIN_ENABLE_DOWNLOAD_MINGW_LAPACK AND
+    NOT COIN_ENABLE_DOWNLOAD_LAPACK AND
+    NOT COIN_ENABLE_DOWNLOAD_CLAPACK AND
+    NOT COIN_USE_SYSTEM_LAPACK)
+  message(FATAL_ERROR "One kind of Blas / Lapack must be selected: 
+ - COIN_ENABLE_DOWNLOAD_MINGW_LAPACK AND
+ - COIN_ENABLE_DOWNLOAD_LAPACK AND
+ - COIN_ENABLE_DOWNLOAD_CLAPACK AND
+ - COIN_USE_SYSTEM_LAPACK")
+endif ()
+
+# #################################################
+# ===>    System Lapack
+# #################################################
+
+if (COIN_USE_SYSTEM_LAPACK)
+  find_package(LAPACK REQUIRED)
+  
+  set(COIN_ENABLE_DOWNLOAD_LAPACK  OFF CACHE BOOL "Enable the download / compilation of Blas / Lapack")
+  set(COIN_ENABLE_DOWNLOAD_CLAPACK OFF CACHE BOOL "Enable the download / compilation of CBlas / CLapack")
+  
+  get_filename_component(LAPACK_LINK_PATH "${LAPACK_LIBRARIES}" DIRECTORY)
+endif ()
+
+# #################################################
+# <===    System Lapack
+# #################################################
 
 # #################################################
 # ===>    CLapack
@@ -537,6 +565,12 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
   
   set(MUMPS_URL        "http:////mumps.enseeiht.fr/MUMPS_${MUMPS_VERSION}.tar.gz" CACHE FILEPATH "Path toMUMPS_${MUMPS_VERSION}.tar.gz source archive")
   set(MUMPS_InstallDir "${EP_InstallDir}/Mumps-${MUMPS_VERSION}/${CMAKE_CFG_INTDIR}/")
+
+  if (COIN_USE_SYSTEM_LAPACK)
+    set(MUMPS_LAPACK_PATH "${LAPACK_LINK_PATH}")
+  else ()
+    set(MUMPS_LAPACK_PATH "${EP_InstallDir}/lib")
+  endif ()
   
   # TODO: we need to add the path to mumps_mpi.h once Mumps is patched ...
   ExternalProject_Add(EP_Mumps
@@ -548,7 +582,7 @@ if (COIN_ENABLE_DOWNLOAD_MUMPS)
 #		                     && ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps ${PATCH_EXECUTABLE} -p1 < ${CMAKE_CURRENT_SOURCE_DIR}/mumps_mpi.patch
 #		                     && ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps ${PATCH_EXECUTABLE} -p1 < ${CMAKE_CURRENT_SOURCE_DIR}/mumps.patch
                       CONFIGURE_COMMAND ${CMAKE_COMMAND} -E make_directory ${MUMPS_InstallDir}/src/EP_Mumps/build
-                                     && ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DMUMPS_USE_LIBSEQ=ON -DMUMPS_USE_METIS=${COIN_ENABLE_DOWNLOAD_METIS} -DMUMPS_LAPACK_LIB_PATH:Path=${MUMPS_LAPACK_LIB_PATH} -DMUMPS_METIS_INC_PATH:Path=${MUMPS_METIS_INC_PATH} -DMUMPS_METIS_LIB_PATH:Path=${MUMPS_METIS_LIB_PATH} -DMUMPS_INSTALL_COIN=ON -DMUMPS_USE_F2C=${COIN_ENABLE_DOWNLOAD_CLAPACK} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
+                                     && ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps/build ${CMAKE_COMMAND} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_INSTALL_PREFIX=${EP_InstallDir} -DMUMPS_USE_LIBSEQ=ON -DMUMPS_USE_METIS=${COIN_ENABLE_DOWNLOAD_METIS} -DMUMPS_LAPACK_LIB_PATH:Path=${MUMPS_LAPACK_PATH} -DMUMPS_METIS_INC_PATH:Path=${MUMPS_METIS_INC_PATH} -DMUMPS_METIS_LIB_PATH:Path=${MUMPS_METIS_LIB_PATH} -DMUMPS_INSTALL_COIN=ON -DMUMPS_USE_F2C=${COIN_ENABLE_DOWNLOAD_CLAPACK} -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE} -G ${CMAKE_GENERATOR} ..
                       BUILD_COMMAND     ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM}
                       INSTALL_COMMAND   ${CMAKE_COMMAND} -E chdir ${MUMPS_InstallDir}/src/EP_Mumps/build ${CMAKE_MAKE_PROGRAM} install
                       )
