@@ -261,6 +261,13 @@ $ git tag first_commit 2dc3ded2d97f2c889ae7baafa49128d2bec1f25b
 
 $ cmake -DCMAKE_INSTALL_PREFIX=/opt/cbc-devel -DCMAKE_BUILD_TYPE=RELEASE ..
 
+You must perform this step for the following projects: Osi, Ipopt, Bonmin, CoinMP, DyLP, Couenne
+
+# Osi:     git tag initial_import 59f4d6c83d556163e80d2697a2c9196c1fadae80
+# Ipopt:   git tag initial_import 6afa9fa918e46db3f04f6cdef92370e0ea957417
+# Bonmin:  git tag initial_import e6dfd2f1be00864a7827116522f4c5c14f9dc962
+# Couenne: git tag initial_import 68e05b0b6f6888ffcb46ad0af49572d319818ad5
+
 # To do
 
 Tasks:
