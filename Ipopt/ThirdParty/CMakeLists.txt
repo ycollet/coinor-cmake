@@ -12,11 +12,16 @@ option(COIN_ENABLE_DOWNLOAD_MINLPLIB     "Enable the download / run of minlp ben
 option(COIN_USE_SYSTEM_LAPACK            "Enable the use of the system Lapack" OFF)
 option(COIN_ENABLE_COMPILE_HSL           "Enable the compilation of HSL" OFF)
 option(COIN_USE_COINHSL                  "Use Coin HSL to compile the solver" OFF)
+option(COIN_DISABLE_THIRDPARTY           "Disable the build of the dependencies" OFF)
 if (WIN32)
-  option(COIN_ENABLE_DOWNLOAD_PATCH       "Enable the download / use of Patch exe (for Windows)" OFF)
+  option(COIN_ENABLE_DOWNLOAD_PATCH      "Enable the download / use of Patch exe (for Windows)" OFF)
 endif ()
 
 set(COIN_HSL_PATH "None" CACHE PATH "The HSL source Path")
+
+if (COIN_DISABLE_THIRDPARTY)
+  return ()
+endif ()
 
 # Prevent the "make clean" from cleaning this directory
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)

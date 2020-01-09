@@ -8,6 +8,7 @@ option(COIN_ENABLE_DOWNLOAD_LAPACK        "Enable the download / compilation of 
 option(COIN_ENABLE_DOWNLOAD_CLAPACK       "Enable the download / compilation of CBlas / CLapack" OFF)
 option(COIN_ENABLE_DOWNLOAD_ZLIB          "Enable the download / compilation of Zlib" OFF)
 option(COIN_ENABLE_DOWNLOAD_BZLIB         "Enable the download / compilation of BZlib" OFF)
+option(COIN_DISABLE_THIRDPARTY            "Disable the build of the dependencies" OFF)
 if (WIN32)
   option(COIN_ENABLE_DOWNLOAD_PATCH       "Enable the download / use of Patch exe (for Windows)" OFF)
 endif ()
@@ -32,11 +33,6 @@ endif ()
 mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
 
-if (COIN_USE_ZLIB OR COIN_USE_BZLIB OR COIN_USE_MINGW_LAPACK OR
-    COIN_USE_SYSTEM_LAPACK OR COIN_USE_CLAPACK)
-  return ()
-endif ()
-
 option(COIN_ENABLE_FIND_LAPACK "Enable the detection of Blas / Lapack" OFF)
 option(COIN_ENABLE_FIND_ZLIB   "Enable the detection of Zlib" OFF)
 option(COIN_ENABLE_FIND_BZLIB  "Enable the detection of BZlib" OFF)
@@ -60,6 +56,10 @@ endif ()
 if (COIN_ENABLE_FIND_BZLIB AND COIN_ENABLE_DOWNLOAD_BZLIB)
   message(STATUS "Warning: COIN_ENABLE_FIND_BZLIB and COIN_ENABLE_DOWNLOAD_BZLIB are activated. Desactivate COIN_ENABLE_DOWNLOAD_BZLIB")
   set(COIN_ENABLE_DOWNLOAD_BZLIB FALSE)
+endif ()
+
+if (COIN_DISABLE_THIRDPARTY)
+  return ()
 endif ()
 
 # Prevent the "make clean" from cleaning this directory

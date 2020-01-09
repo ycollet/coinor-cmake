@@ -2,17 +2,18 @@
 # downloading/configuring/building/installing
 # Thirdparty dependencies
 
-option(COIN_USE_PTHREAD_WIN32 "Enable the use of PThreads for Windows" OFF)
-option(COIN_USE_MINGW_LAPACK  "Enable the use of MinGW compiled Blas / Lapack" OFF)
-option(COIN_USE_SYSTEM_LAPACK "Enable the use of the system Lapack" OFF)
-option(COIN_USE_CLAPACK       "Enable the use of CBlas / CLapack" OFF)
-option(COIN_USE_GLPK          "Enable the use of GLPK" OFF)
-option(COIN_USE_METIS         "Enable the use of METIS" OFF)
-option(COIN_USE_MUMPS         "Enable the use of Mumps" OFF)
-option(COIN_USE_ASL           "Enable the use of Ampl Solver Library" OFF)
-option(COIN_USE_ZLIB          "Enable the use of Zlib" OFF)
-option(COIN_USE_BZLIB         "Enable the use of BZlib" OFF)
-option(COIN_USE_SUITESPARSE   "Enable the use of SuiteSparse" OFF)
+option(COIN_USE_PTHREAD_WIN32  "Enable the use of PThreads for Windows" OFF)
+option(COIN_USE_MINGW_LAPACK   "Enable the use of MinGW compiled Blas / Lapack" OFF)
+option(COIN_USE_SYSTEM_LAPACK  "Enable the use of the system Lapack" OFF)
+option(COIN_USE_CLAPACK        "Enable the use of CBlas / CLapack" OFF)
+option(COIN_USE_GLPK           "Enable the use of GLPK" OFF)
+option(COIN_USE_METIS          "Enable the use of METIS" OFF)
+option(COIN_USE_MUMPS          "Enable the use of Mumps" OFF)
+option(COIN_USE_ASL            "Enable the use of Ampl Solver Library" OFF)
+option(COIN_USE_ZLIB           "Enable the use of Zlib" OFF)
+option(COIN_USE_BZLIB          "Enable the use of BZlib" OFF)
+option(COIN_USE_SUITESPARSE    "Enable the use of SuiteSparse" OFF)
+option(COIN_DISABLE_THIRDPARTY "Disable the build of the dependencies" OFF)
 
 if (WIN32 AND NOT MINGW)
   set(ZLIB_NAME  "zlibstatic.lib" CACHE FILEPATH "The Zlib library name"  FORCE)
@@ -27,13 +28,6 @@ endif ()
 
 mark_as_advanced(ZLIB_NAME
                  BZLIB_NAME)
-
-if (COIN_USE_PTHREAD_WIN32 OR COIN_USE_SYSTEM_LAPACK OR COIN_USE_CLAPACK OR COIN_USE_MINGW_LAPACK OR
-    COIN_USE_GLPK OR COIN_USE_MUMPS OR COIN_USE_METIS OR
-    COIN_USE_ASL OR COIN_USE_ZLIB OR COIN_USE_SUITESPARSE OR
-    COIN_USE_BZLIB)
-  return ()
-endif ()
 
 option(COIN_ENABLE_DOWNLOAD_PTHREAD_WIN32 "Enable the download / compilation of PThreads for Windows" OFF)
 option(COIN_ENABLE_DOWNLOAD_MINGW_LAPACK  "Enable the download / compilation of MinGW compiled Blas / Lapack" OFF)
@@ -84,6 +78,10 @@ endif ()
 
 if (COIN_ENABLE_DOWNLOAD_SUITESPARSE AND NOT (COIN_ENABLE_DOWNLOAD_LAPACK OR COIN_ENABLE_DOWNLOAD_CLAPACK OR COIN_ENABLE_FIND_LAPACK))
   message(STATUS "Warning: SuiteSparse needs a Blas/Lapack library. Make sur that a Blas/Lapack library is download or installed.")
+endif ()
+
+if (COIN_DISABLE_THIRDPARTY)
+  return ()
 endif ()
 
 # Prevent the "make clean" from cleaning this directory
