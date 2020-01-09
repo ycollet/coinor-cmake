@@ -1038,7 +1038,8 @@ endif ()
 subdirs(ThirdParty)
 
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
-link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib
+                 ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib64)
 
 include_directories(${CMAKE_BINARY_DIR}/include)
 

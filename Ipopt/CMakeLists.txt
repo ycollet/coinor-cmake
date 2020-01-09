@@ -626,7 +626,8 @@ subdirs(ThirdParty)
 
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include
                     ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include/ampl)
-link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib)
+link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib
+                 ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib64)
 
 #
 # HSL Management
