@@ -622,7 +622,7 @@ if (DOXYGEN AND COIN_ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/doxydoc/doxygen.conf)
 endif ()
 
-subdirs(ThirdParty)
+add_subdirectory(ThirdParty)
 
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include
                     ${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include/ampl)
@@ -655,7 +655,7 @@ if (IPOPT_HAS_WSMP)
   set(COINHSL_HAS_WSMP ON)
 endif ()
 
-subdirs(Ipopt)
+add_subdirectory(Ipopt)
 
 #
 # Packaging

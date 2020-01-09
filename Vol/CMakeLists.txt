@@ -782,7 +782,7 @@ if (DOXYGEN AND COIN_ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Osi/Osi/doxydoc/doxygen.conf)
 endif ()
 
-subdirs(ThirdParty)
+add_subdirectory(ThirdParty)
 
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib
@@ -799,34 +799,34 @@ if (NOT USE_COINOR_BIN)
     set(COINUTILS_HAS_BZLIB ON)
   endif ()
   
-  subdirs(CoinUtils)
+  add_subdirectory(CoinUtils)
   
-  subdirs(Osi/Osi)
+  add_subdirectory(Osi/Osi)
 else ()
   include_directories(${COINOR_DIR}/include/coin)
 endif ()
 
 if (USE_OSI_XPRESS OR COMPILE_OSI_XPRESS)
-  subdirs(Osi/OsiXpr) 
+  add_subdirectory(Osi/OsiXpr) 
 endif ()
 if (USE_OSI_CPLEX OR COMPILE_OSI_CPLEX)
-  subdirs(Osi/OsiCpx) 
+  add_subdirectory(Osi/OsiCpx) 
 endif ()
 if (USE_OSI_GLPK OR COMPILE_OSI_GLPK)
-  subdirs(Osi/OsiGlpk) 
+  add_subdirectory(Osi/OsiGlpk) 
 endif ()
 if (USE_OSI_GUROBI OR COMPILE_OSI_GUROBI)
-  subdirs(Osi/OsiGrb) 
+  add_subdirectory(Osi/OsiGrb) 
 endif ()
 if (USE_OSI_MOSEK OR COMPILE_OSI_MOSEK)
-  subdirs(Osi/OsiMsk) 
+  add_subdirectory(Osi/OsiMsk) 
 endif ()
 if (USE_OSI_SOPLEX OR COMPILE_OSI_SOPLEX)
-  subdirs(Osi/OsiSpx) 
+  add_subdirectory(Osi/OsiSpx) 
 endif ()
 
-subdirs(Vol)
-subdirs(Osi/OsiVol)
+add_subdirectory(Vol)
+add_subdirectory(Osi/OsiVol)
 
 #
 # Install dll dependencies

@@ -647,7 +647,7 @@ if (DOXYGEN AND COIN_ENABLE_DOXYGEN)
                     ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/CoinUtils/doxydoc/doxygen.conf)
 endif ()
 
-subdirs(ThirdParty)
+add_subdirectory(ThirdParty)
 
 include_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/include)
 link_directories(${CMAKE_BINARY_DIR}/Dependencies/${CMAKE_CFG_INTDIR}/lib
@@ -660,7 +660,7 @@ if (COIN_ENABLE_DOWNLOAD_BZLIB)
   set(COINUTILS_HAS_BZLIB ON)
 endif ()
 
-subdirs(CoinUtils)
+add_subdirectory(CoinUtils)
 
 #
 # Install dll dependencies
