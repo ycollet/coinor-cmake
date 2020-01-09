@@ -29,6 +29,10 @@ if (NOT STDC_HEADERS)
   set(STDC_HEADERS 0 CACHE INTERNAL "System has ANSI C header files")
 endif ()
 
+if (UNIX)
+  set(CMAKE_REQUIRED_LIBRARIES "m")
+endif ()
+
 check_include_files(unistd.h HAVE_UNISTD_H)
 
 include(CheckDIRSymbolExists)
