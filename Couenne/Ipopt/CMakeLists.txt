@@ -293,6 +293,11 @@ if (IPOPT_HAS_PARDISO)
   endif ()
 endif ()
 
+if (IPOPT_HAS_AMPL)
+  set(IPOPT_SRC_LIST ${IPOPT_SRC_LIST}
+                     ${Ipopt_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
+endif ()
+
 if (ENABLE_SHARED_LIBRARIES)
   add_library(libipopt SHARED ${IPOPT_SRC_LIST})
 else ()
@@ -307,8 +312,7 @@ endif ()
 set_include_directories(libipopt)
 
 if (IPOPT_HAS_AMPL)
-  set (IPOPT_AMPL_SRC_LIST ${Ipopt_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp
-                           ${Ipopt_DIR}/src/Apps/AmplSolver/AmplTNLP.cpp)
+  set (IPOPT_AMPL_SRC_LIST ${Ipopt_DIR}/src/Apps/AmplSolver/ampl_ipopt.cpp)
   
   add_executable(ipopt ${IPOPT_AMPL_SRC_LIST})
   
