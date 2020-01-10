@@ -22,7 +22,6 @@ option(IPOPT_HAS_PARDISO_OLDINTERFACE   "Enable if you are not using at least a 
 option(IPOPT_HAS_PARDISO_PARALLEL       "Enable if you are using the parallel version of Pardiso" OFF)
 option(IPOPT_ENABLE_LINEARSOLVERLOADER  "Build the dynamic linear solver loader" ON)
 option(IPOPT_ENABLE_PARDISOSOLVERLOADER "Build the dynamic pardiso solver loader" OFF)
-option(IPOPT_ENABLE_INEXACT             "Build the inexact solver" ON)
 
 set(IPOPT_PARDISO_LIBNAME "mkl_sequential"     CACHE STRING "The name of the MKL library to use")
 set(IPOPT_PARDISO_PATH    "/opt/intel/mkl/lib" CACHE STRING "The path to the MKL library")
@@ -222,6 +221,10 @@ Enable_Testing ()
 
 if (IPOPT_ENABLE_INEXACT AND NOT (IPOPT_HAS_PARDISO OR IPOPT_HAS_PARDISO_MKL OR IPOPT_HAS_PARDISO_OLDINTERFACE OR IPOPT_HAS_PARDISO_PARALLEL))
   message(FATAL_ERROR "Error: Inexact solver is only available through MKL. Please activate the MKL")
+endif ()
+
+if (NOT IPOPT_ENABLE_INEXACT)
+  message(WARNING "If you have MKL, you can activate IPOPT_ENABLE_INEXACT")
 endif ()
 
 #------------------------------------------------------------

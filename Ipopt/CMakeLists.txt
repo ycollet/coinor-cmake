@@ -103,6 +103,10 @@ if (IPOPT_ENABLE_INEXACT AND NOT (IPOPT_HAS_PARDISO OR IPOPT_HAS_PARDISO_MKL OR 
   message(FATAL_ERROR "Error: Inexact solver is only available through MKL. Please activate the MKL")
 endif ()
 
+if (NOT IPOPT_ENABLE_INEXACT)
+  message(WARNING "If you have MKL, you can activate IPOPT_ENABLE_INEXACT")
+endif ()
+
 #------------------------------------------------------------
 # Detect 64 bits
 #------------------------------------------------------------
