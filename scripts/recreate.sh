@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CURRENTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 rm -rf Bonmin
 rm -rf Cbc
 rm -rf Cgl
@@ -12,7 +14,9 @@ rm -rf Ipopt
 rm -rf Osi
 rm -rf SYMPHONY
 rm -rf Vol
+rm -rf coinbrew
 
+git clone https://github.com/coin-or/coinbrew.git
 git clone https://github.com/coin-or/Bonmin.git
 git clone https://github.com/coin-or/Cbc.git
 git clone https://github.com/coin-or/Cgl.git
@@ -34,7 +38,7 @@ add_tag () {
 
 cd Bonmin
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Bonmin"
-cp -r ~/repositories/github/coinor-cmake/Bonmin/* .
+cp -r $CURRENTPATH/../Bonmin/* .
 
 add_tag
 
@@ -53,7 +57,7 @@ cd ..
 
 cd Cbc
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Cbc"
-cp -r ~/repositories/github/coinor-cmake/Cbc/* .
+cp -r $CURRENTPATH/../Cbc/* .
 
 add_tag
 
@@ -70,7 +74,7 @@ cd ..
 
 cd Cgl
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Cgl"
-cp -r ~/repositories/github/coinor-cmake/Cgl/* .
+cp -r $CURRENTPATH/../Cgl/* .
 
 add_tag
 
@@ -86,7 +90,7 @@ cd ..
 
 cd Clp
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Clp"
-cp -r ~/repositories/github/coinor-cmake/Clp/* .
+cp -r $CURRENTPATH/../Clp/* .
 
 add_tag
 
@@ -101,7 +105,7 @@ cd ..
 
 cd CoinMP
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="CoinMP"
-cp -r ~/repositories/github/coinor-cmake/CoinMP/* .
+cp -r $CURRENTPATH/../CoinMP/* .
 
 add_tag
 
@@ -119,7 +123,7 @@ cd ..
 
 cd CoinUtils
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="CoinUtils"
-cp -r ~/repositories/github/coinor-cmake/CoinUtils/* .
+cp -r $CURRENTPATH/../CoinUtils/* .
 
 add_tag
 
@@ -131,7 +135,7 @@ cd ..
 
 cd Couenne
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Couenne"
-cp -r ~/repositories/github/coinor-cmake/Couenne/* .
+cp -r $CURRENTPATH/../Couenne/* .
 
 add_tag
 
@@ -151,7 +155,7 @@ cd ..
 
 cd DyLP
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="DyLP"
-cp -r ~/repositories/github/coinor-cmake/DyLP/* .
+cp -r $CURRENTPATH/../DyLP/* .
 
 add_tag
 
@@ -166,7 +170,7 @@ cd ..
 
 cd Ipopt
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Ipopt"
-cp -r ~/repositories/github/coinor-cmake/Ipopt/* .
+cp -r $CURRENTPATH/../Ipopt/* .
 
 add_tag
 
@@ -178,7 +182,7 @@ cd ..
 
 cd Osi
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Osi"
-cp -r ~/repositories/github/coinor-cmake/Osi/* .
+cp -r $CURRENTPATH/../Osi/* .
 
 add_tag
 
@@ -192,7 +196,7 @@ cd ..
 
 cd SYMPHONY
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="SYMPHONY"
-cp -r ~/repositories/github/coinor-cmake/SYMPHONY/* .
+cp -r $CURRENTPATH/../SYMPHONY/* .
 
 add_tag
 
@@ -209,7 +213,7 @@ cd ..
 
 cd Vol
 ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Vol"
-cp -r ~/repositories/github/coinor-cmake/Vol/* .
+cp -r $CURRENTPATH/../Vol/* .
 
 add_tag
 
