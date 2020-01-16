@@ -53,8 +53,6 @@ configure_file(${Couenne_DIR}/couenne.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne.
 set(libdir         "${Couenne_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${Couenne_DIR}/couenne-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Couenne/couenne-uninstalled.pc @ONLY)
-
 install(FILES ${CMAKE_BINARY_DIR}/Couenne/couenne.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 

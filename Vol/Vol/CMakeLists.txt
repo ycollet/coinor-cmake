@@ -58,8 +58,6 @@ configure_file(${Vol_DIR}/vol.pc.in ${CMAKE_BINARY_DIR}/Vol/vol.pc @ONLY)
 set(libdir         "${Vol_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${Vol_DIR}/vol-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Vol/vol-uninstalled.pc @ONLY)
-
 install(FILES ${CMAKE_BINARY_DIR}/Vol/vol.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 

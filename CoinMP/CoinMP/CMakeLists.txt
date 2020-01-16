@@ -53,8 +53,6 @@ configure_file(${CoinMP_DIR}/coinmp.pc.in ${CMAKE_BINARY_DIR}/CoinMP/coinmp.pc @
 set(libdir         "${CoinMP_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CoinMP_DIR}/coinmp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/CoinMP/coinmp-uninstalled.pc @ONLY)
-
 install(FILES ${CMAKE_BINARY_DIR}/CoinMP/coinmp.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 

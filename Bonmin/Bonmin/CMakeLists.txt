@@ -55,8 +55,6 @@ configure_file(${Bonmin_DIR}/bonmin.pc.in ${CMAKE_BINARY_DIR}/Bonmin/bonmin.pc @
 set(libdir         "${Bonmin_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${Bonmin_DIR}/bonmin-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Bonmin/bonmin-uninstalled.pc @ONLY)
-
 set(BONMINAMPLINTERFACELIB_PCLIBS "")
 set(BONMINAMPLINTERFACELIB_PCREQUIRES "asl cbc osi ipopt")
 
@@ -64,7 +62,6 @@ install(FILES ${CMAKE_BINARY_DIR}/Bonmin/bonmin.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
 configure_file(${Bonmin_DIR}/src/CbcBonmin/bonminamplinterface.pc.in ${CMAKE_BINARY_DIR}/Bonmin/bonminamplinterface.pc @ONLY)
-configure_file(${Bonmin_DIR}/src/CbcBonmin/bonminamplinterface-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Bonmin/bonminamplinterface-uninstalled.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/Bonmin/bonminamplinterface.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)

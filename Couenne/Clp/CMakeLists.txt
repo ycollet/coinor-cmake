@@ -59,8 +59,6 @@ configure_file(${Clp_DIR}/clp.pc.in ${CMAKE_BINARY_DIR}/Clp/clp.pc @ONLY)
 set(libdir         "${Clp_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${Clp_DIR}/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
-
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
@@ -113,12 +111,16 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/ClpSimplexPrimal.cpp
                  ${Clp_DIR}/src/ClpSolve.cpp
                  ${Clp_DIR}/src/Idiot.cpp
-                 ${Clp_DIR}/src/IdiSolve.cpp
-                 ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
-                 ${Clp_DIR}/src/ClpPESimplex.cpp
-                 ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
-                 ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
-                 ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
+                 ${Clp_DIR}/src/IdiSolve.cpp)
+
+if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
+  set(Clp_SRC_LIST ${Clp_SRC_LIST}
+                   ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
+                   ${Clp_DIR}/src/ClpPESimplex.cpp
+                   ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
+                   ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
+                   ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
+endif ()
 
 set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
                        ${Clp_DIR}/src/CbcOrClpParam.cpp
@@ -228,12 +230,16 @@ set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/ClpSimplexPrimal.hpp
                          ${Clp_DIR}/src/ClpSolve.hpp
                          ${Clp_DIR}/src/CbcOrClpParam.hpp
-                         ${Clp_DIR}/src/Idiot.hpp
-                         ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
-                         ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
-                         ${Clp_DIR}/src/ClpPESimplex.hpp
-                         ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
-                         ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
+                         ${Clp_DIR}/src/Idiot.hpp)
+
+if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
+  set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
+                           ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
+                           ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
+                           ${Clp_DIR}/src/ClpPESimplex.hpp
+                           ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
+                           ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
+endif ()
 
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
@@ -929,7 +935,7 @@ else ()
   if (COIN_ENABLE_DOWNLOAD_CLAPACK)
     target_link_libraries(clp f2c)
   endif ()
-  if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND COIN_USE_SYSTEM_LAPACK AND NOT (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel"))
+  if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND NOT COIN_USE_SYSTEM_LAPACK AND NOT (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel"))
     target_link_libraries(clp gfortran)
   endif ()
 endif ()

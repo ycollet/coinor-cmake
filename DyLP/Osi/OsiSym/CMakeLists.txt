@@ -17,8 +17,6 @@ configure_file(${SYMPHONY_DIR}/src/OsiSym/osi-symphony.pc.in ${CMAKE_BINARY_DIR}
 set(libdir         "${SYMPHONY_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${SYMPHONY_DIR}/src/OsiSym/osi-symphony-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Osi/osi-symphony-uninstalled.pc @ONLY)
-
 install(FILES ${CMAKE_BINARY_DIR}/Osi/osi-symphony.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 

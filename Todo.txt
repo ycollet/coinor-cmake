@@ -30,49 +30,15 @@ Libs: -L${libdir} -lCbcSolver -lCbc
 Cflags: -I${includedir}
 Requires: osi-clp cgl osi coinutils 
 
-And Cbc/cbc-uninstalled.pc.in:
-
-prefix=@prefix@
-libdir=@ABSBUILDDIR@/src
-
-Name: CBC
-Description: COIN-OR Branch and Cut
-URL: https://projects.coin-or.org/Cbc
-Version: @PACKAGE_VERSION@
-Libs: ${libdir}/libCbcSolver.la ${libdir}/libCbc.la @CBCLIB_PCLIBS@
-Cflags: -I@abs_source_dir@/src -I@ABSBUILDDIR@/src
-Requires: @CBCLIB_PCREQUIRES@
-
-to Cbc/cbc-uninstalled.pc:
-
-prefix=/opt/cbc-devel
-libdir=/tmp/Cbc-2.10.3/Cbc/src
-
-Name: CBC
-Description: COIN-OR Branch and Cut
-URL: https://projects.coin-or.org/Cbc
-Version: 2.10.3
-Libs: ${libdir}/libCbcSolver.la ${libdir}/libCbc.la 
-Cflags: -I/tmp/Cbc-2.10.3/Cbc/src -I/tmp/Cbc-2.10.3/Cbc/src
-Requires: osi-clp cgl osi coinutils 
-
 List of pc files in Cbc:
 
 ./Data/miplib3/coindatamiplib3.pc.in
-./Data/miplib3/coindatamiplib3-uninstalled.pc.in
-./Data/Sample/coindatasample-uninstalled.pc.in
 ./Data/Sample/coindatasample.pc.in
-./ThirdParty/Mumps/coinmumps-uninstalled.pc.in
 ./ThirdParty/Mumps/coinmumps.pc.in
 ./ThirdParty/Metis/coinmetis.pc.in
-./ThirdParty/Metis/coinmetis-uninstalled.pc.in
-./ThirdParty/Glpk/coinglpk-uninstalled.pc.in
 ./ThirdParty/Glpk/coinglpk.pc.in
 ./ThirdParty/Lapack/coinlapack.pc.in
-./ThirdParty/Lapack/coinlapack-uninstalled.pc.in
 ./ThirdParty/Blas/coinblas.pc.in
-./ThirdParty/Blas/coinblas-uninstalled.pc.in
-./ThirdParty/ASL/coinasl-uninstalled.pc.in
 ./ThirdParty/ASL/coinasl.pc.in
 
 Todo:

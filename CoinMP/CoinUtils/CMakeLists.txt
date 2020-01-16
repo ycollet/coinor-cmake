@@ -99,8 +99,6 @@ configure_file(${CoinUtils_DIR}/coinutils.pc.in ${CMAKE_BINARY_DIR}/CoinUtils/co
 set(libdir            "${CoinUtils_DIR}")
 set(abs_source_dir    "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${CoinUtils_DIR}/coinutils-uninstalled.pc.in ${CMAKE_BINARY_DIR}/CoinUtils/coinutils-uninstalled.pc @ONLY)
-
 install(FILES ${CMAKE_BINARY_DIR}/CoinUtils/coinutils.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
@@ -164,7 +162,21 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartVector.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartDual.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.cpp
-                       ${CoinUtils_DIR}/src/CoinRational.cpp)
+                       ${CoinUtils_DIR}/src/CoinRational.cpp
+		       ${CoinUtils_DIR}/src/bron_kerbosch.cpp
+		       ${CoinUtils_DIR}/src/cgraph.cpp
+		       ${CoinUtils_DIR}/src/clique.cpp
+		       ${CoinUtils_DIR}/src/clique_extender.cpp
+		       ${CoinUtils_DIR}/src/clique_separation.cpp
+		       ${CoinUtils_DIR}/src/cut.cpp
+		       ${CoinUtils_DIR}/src/node_heap.cpp
+		       ${CoinUtils_DIR}/src/str_utils.cpp
+		       ${CoinUtils_DIR}/src/vint_set.cpp
+		       ${CoinUtils_DIR}/src/CoinConflictGraph.cpp
+		       ${CoinUtils_DIR}/src/CoinDynamicConflictGraph.cpp
+		       ${CoinUtils_DIR}/src/CoinStaticConflictGraph.cpp
+		       ${CoinUtils_DIR}/src/CoinAdjacencyVector.cpp
+		       ${CoinUtils_DIR}/src/CoinCliqueList.cpp)
 
 set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinAlloc.hpp
@@ -225,7 +237,20 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinWarmStartDual.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp
                      ${CoinUtils_DIR}/src/CoinRational.hpp
-		     ${CoinUtils_DIR}/src/bron_kerbosch.h)
+		     ${CoinUtils_DIR}/src/bron_kerbosch.h
+		     ${CoinUtils_DIR}/src/cgraph.h
+		     ${CoinUtils_DIR}/src/clique.h
+		     ${CoinUtils_DIR}/src/clique_extender.h
+		     ${CoinUtils_DIR}/src/clique_separation.h
+		     ${CoinUtils_DIR}/src/cut.h
+		     ${CoinUtils_DIR}/src/node_heap.h
+		     ${CoinUtils_DIR}/src/str_utils.h
+		     ${CoinUtils_DIR}/src/vint_set.h
+		     ${CoinUtils_DIR}/src/CoinConflictGraph.hpp
+		     ${CoinUtils_DIR}/src/CoinDynamicConflictGraph.hpp
+		     ${CoinUtils_DIR}/src/CoinStaticConflictGraph.hpp
+		     ${CoinUtils_DIR}/src/CoinAdjacencyVector.hpp
+		     ${CoinUtils_DIR}/src/CoinCliqueList.hpp)
 
 set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
                            ${CoinUtilsTest_DIR}/CoinDenseVectorTest.cpp

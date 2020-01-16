@@ -13,8 +13,6 @@ configure_file(${DyLP_DIR}/src/OsiDylp/osi-dylp.pc.in ${CMAKE_BINARY_DIR}/DyLP/o
 set(libdir         "${DyLP_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${DyLP_DIR}/src/OsiDylp/osi-dylp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/DyLP/osi-dylp-uninstalled.pc @ONLY)
-
 install(FILES ${CMAKE_BINARY_DIR}/DyLP/osi-dylp.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 

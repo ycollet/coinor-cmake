@@ -59,8 +59,6 @@ configure_file(${Clp_DIR}/clp.pc.in ${CMAKE_BINARY_DIR}/Clp/clp.pc @ONLY)
 set(libdir         "${Clp_DIR}")
 set(abs_source_dir "${CMAKE_BINARY_DIR}/bin")
 
-configure_file(${Clp_DIR}/clp-uninstalled.pc.in ${CMAKE_BINARY_DIR}/Clp/clp-uninstalled.pc @ONLY)
-
 install(FILES ${CMAKE_BINARY_DIR}/Clp/clp.pc
         DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/pkg-config/)
 
@@ -937,7 +935,7 @@ else ()
   if (COIN_ENABLE_DOWNLOAD_CLAPACK)
     target_link_libraries(clp f2c)
   endif ()
-  if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND COIN_USE_SYSTEM_LAPACK AND NOT (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel"))
+  if ((COIN_HAS_BLAS OR COIN_HAS_LAPACK) AND (UNIX OR MINGW) AND NOT COIN_USE_SYSTEM_LAPACK AND NOT (CMAKE_Fortran_COMPILER_ID STREQUAL "Intel"))
     target_link_libraries(clp gfortran)
   endif ()
 endif ()
