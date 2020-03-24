@@ -1,3 +1,12 @@
+/* Library Visibility Attribute */
+#undef COINUTILSLIB_EXPORT
+
+/* Define to 1 if CoinUtils uses C++11 */
+#undef COINUTILS_CPLUSPLUS11
+
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
+#undef LT_OBJDIR
+
 /* Default maximum pooled allocation size */
 #define COINUTILS_MEMPOOL_MAXPOOLED @COINUTILS_MEMPOOL_MAXPOOLED@
 
@@ -74,9 +83,11 @@
 /* Define to a macro mangling the given C identifier (in lower and upper
    case), which must not contain underscores, for linking with Fortran. */
 #define ${F77_FUNC}
+#define ${COIN_LAPACK_FUNC}
 
 /* As F77_FUNC, but for C identifiers containing underscores. */
 #define ${F77_FUNC_}
+#define ${COIN_LAPACK_FUNC_}
 
 /* Define if F77 and FC dummy `main' functions are identical. */
 #cmakedefine FC_DUMMY_MAIN_EQ_F77 ${FC_DUMMY_MAIN_EQ_F77}

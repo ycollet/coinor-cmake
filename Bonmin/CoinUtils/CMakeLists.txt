@@ -62,7 +62,10 @@ mark_as_advanced(COINUTILS_VERSION_MAJOR
 
 include(coin-macros)
 
-add_definitions(-DCOINUTILS_BUILD)
+add_definitions(-DCOINUTILS_BUILD -DCOINUTILSLIB_BUILD)
+if (WIN32)
+  add_definitions(-DDLL_EXPORT)
+endif ()
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_coinutils.h.in ${CMAKE_BINARY_DIR}/CoinUtils/include/config_coinutils.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in           ${CMAKE_BINARY_DIR}/CoinUtils/include/config.h)

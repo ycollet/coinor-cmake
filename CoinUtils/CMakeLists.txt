@@ -294,14 +294,18 @@ if (CMAKE_Fortran_COMPILER)
   
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
-  set(F77_FUNC "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
+  set(F77_FUNC         "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
+  set(COIN_LAPACK_FUNC "COIN_LAPACK_FUNC(name,NAME) ${CMAKE_MATCH_1}")
   
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
-  set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
+  set(F77_FUNC_         "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
+  set(COIN_LAPACK_FUNC_ "COIN_LAPACK_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
 else ()
-  set(F77_FUNC  "F77_FUNC(name,NAME)  name##_")
-  set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
+  set(F77_FUNC          "F77_FUNC(name,NAME)  name##_")
+  set(F77_FUNC_         "F77_FUNC_(name,NAME) name##__")
+  set(COIN_LAPACK_FUNC  "COIN_LAPACK_FUNC(name,NAME)  name##_")
+  set(COIN_LAPACK_FUNC_ "COIN_LAPACK_FUNC_(name,NAME) name##__")
 endif ()
 
 set(F77_DUMMY_MAIN "" CACHE STRING "Define to dummy 'main' function (if any) required to link to the Fortran libraries.")
@@ -314,6 +318,8 @@ endif ()
 
 mark_as_advanced(F77_FUNC
                  F77_FUNC_
+		 COIN_LAPACK_FUNC
+		 COIN_LAPACK_FUNC_
                  F77_DUMMY_MAIN
                  FC_DUMMY_MAIN
                  FC_DUMMY_MAIN_EQ_F77)
@@ -395,6 +401,13 @@ if (EXISTS ${COIN_DIR}/CoinUtils/test)
   set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils)
   set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
+endif ()
+
+if (EXISTS ${COIN_DIR}/test)
+  # Structure from subversion checkout
+  set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
+  set(CoinUtils_DIR     ${COIN_DIR}/)
+  set(CoinUtilsTest_DIR ${COIN_DIR}/test)
 endif ()
 
 include(CheckIncludeFileCXX)
