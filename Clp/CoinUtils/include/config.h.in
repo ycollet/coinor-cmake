@@ -68,7 +68,7 @@
 #cmakedefine COIN_HAS_ZLIB
 
 /* Define to 64bit integer type */
-#define COIN_INT64_T @COIN_INT64_T@
+#define COINUTILS_INT64_T @COIN_INT64_T@
 
 /* Define to integer type capturing pointer */
 #define COIN_INTPTR_T @COIN_INTPTR_T@
