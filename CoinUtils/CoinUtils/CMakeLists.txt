@@ -161,7 +161,19 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartVector.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartDual.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.cpp
-                       ${CoinUtils_DIR}/src/CoinRational.cpp)
+                       ${CoinUtils_DIR}/src/CoinRational.cpp
+                       ${CoinUtils_DIR}/src/CoinAdjacencyVector.cpp
+                       ${CoinUtils_DIR}/src/CoinBronKerbosch.cpp
+                       ${CoinUtils_DIR}/src/CoinCliqueExtender.cpp
+                       ${CoinUtils_DIR}/src/CoinCliqueList.cpp
+                       ${CoinUtils_DIR}/src/CoinCliqueSet.cpp
+                       ${CoinUtils_DIR}/src/CoinConflictGraph.cpp
+                       ${CoinUtils_DIR}/src/CoinCutPool.cpp
+                       ${CoinUtils_DIR}/src/CoinDynamicConflictGraph.cpp
+                       ${CoinUtils_DIR}/src/CoinNodeHeap.cpp
+                       ${CoinUtils_DIR}/src/CoinOddWheelSeparator.cpp
+                       ${CoinUtils_DIR}/src/CoinShortestPath.cpp
+                       ${CoinUtils_DIR}/src/CoinStaticConflictGraph.cpp)
 
 set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinAlloc.hpp
@@ -219,7 +231,19 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinWarmStartVector.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartDual.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp
-                     ${CoinUtils_DIR}/src/CoinRational.hpp)
+                     ${CoinUtils_DIR}/src/CoinRational.hpp
+                     ${CoinUtils_DIR}/src/CoinAdjacencyVector.hpp
+                     ${CoinUtils_DIR}/src/CoinBronKerbosch.hpp
+                     ${CoinUtils_DIR}/src/CoinCliqueExtender.hpp
+                     ${CoinUtils_DIR}/src/CoinCliqueList.hpp
+                     ${CoinUtils_DIR}/src/CoinCliqueSet.hpp
+                     ${CoinUtils_DIR}/src/CoinConflictGraph.hpp
+                     ${CoinUtils_DIR}/src/CoinCutPool.hpp
+                     ${CoinUtils_DIR}/src/CoinDynamicConflictGraph.hpp
+                     ${CoinUtils_DIR}/src/CoinNodeHeap.hpp
+                     ${CoinUtils_DIR}/src/CoinOddWheelSeparator.hpp
+                     ${CoinUtils_DIR}/src/CoinShortestPath.hpp
+                     ${CoinUtils_DIR}/src/CoinStaticConflictGraph.hpp)
 
 if (COINUTILS_BIGINDEX_T STREQUAL "int")
   set(CoinUtils_SRC_LIST ${CoinUtils_SRC_LIST}

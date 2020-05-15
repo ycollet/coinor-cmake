@@ -33,8 +33,9 @@ mark_as_advanced(OSI_VERSION_MAJOR
 
 add_definitions(-DOSI_BUILD)
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osi.h.in ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Osi/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osi.h.in           ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in               ${CMAKE_BINARY_DIR}/Osi/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osicommontest.h.in ${CMAKE_BINARY_DIR}/Osi/include/config_osicommontest.h)
 
 #
 # pkg-config file generation

@@ -2,7 +2,7 @@
 #define __CONFIG_COINUTILS_H__
 
 /* Library Visibility Attribute */
-#undef COINUTILSLIB_EXPORT
+#cmakedefine COINUTILSLIB_EXPORT @COINUTILSLIB_EXPORT@
 
 /* Version number of project */
 #define COINUTILS_VERSION "@COINUTILS_VERSION@"

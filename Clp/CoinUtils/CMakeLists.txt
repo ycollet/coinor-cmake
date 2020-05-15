@@ -117,11 +117,7 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinFactorization2.cpp
                        ${CoinUtils_DIR}/src/CoinFactorization3.cpp
                        ${CoinUtils_DIR}/src/CoinFactorization4.cpp
-                       ${CoinUtils_DIR}/src/CoinSimpFactorization.cpp
                        ${CoinUtils_DIR}/src/CoinDenseFactorization.cpp
-                       ${CoinUtils_DIR}/src/CoinOslFactorization.cpp
-                       ${CoinUtils_DIR}/src/CoinOslFactorization2.cpp
-                       ${CoinUtils_DIR}/src/CoinOslFactorization3.cpp
                        ${CoinUtils_DIR}/src/CoinFileIO.cpp
                        ${CoinUtils_DIR}/src/CoinFinite.cpp
                        ${CoinUtils_DIR}/src/CoinIndexedVector.cpp
@@ -165,7 +161,19 @@ set(CoinUtils_SRC_LIST ${CoinUtils_DIR}/src/CoinAlloc.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartVector.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartDual.cpp
                        ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.cpp
-                       ${CoinUtils_DIR}/src/CoinRational.cpp)
+                       ${CoinUtils_DIR}/src/CoinRational.cpp
+                       ${CoinUtils_DIR}/src/CoinAdjacencyVector.cpp
+                       ${CoinUtils_DIR}/src/CoinBronKerbosch.cpp
+                       ${CoinUtils_DIR}/src/CoinCliqueExtender.cpp
+                       ${CoinUtils_DIR}/src/CoinCliqueList.cpp
+                       ${CoinUtils_DIR}/src/CoinCliqueSet.cpp
+                       ${CoinUtils_DIR}/src/CoinConflictGraph.cpp
+                       ${CoinUtils_DIR}/src/CoinCutPool.cpp
+                       ${CoinUtils_DIR}/src/CoinDynamicConflictGraph.cpp
+                       ${CoinUtils_DIR}/src/CoinNodeHeap.cpp
+                       ${CoinUtils_DIR}/src/CoinOddWheelSeparator.cpp
+                       ${CoinUtils_DIR}/src/CoinShortestPath.cpp
+                       ${CoinUtils_DIR}/src/CoinStaticConflictGraph.cpp)
 
 set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinAlloc.hpp
@@ -174,9 +182,7 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinDistance.hpp
                      ${CoinUtils_DIR}/src/CoinError.hpp
                      ${CoinUtils_DIR}/src/CoinFactorization.hpp
-                     ${CoinUtils_DIR}/src/CoinSimpFactorization.hpp
                      ${CoinUtils_DIR}/src/CoinDenseFactorization.hpp
-                     ${CoinUtils_DIR}/src/CoinOslFactorization.hpp
                      ${CoinUtils_DIR}/src/CoinFileIO.hpp
                      ${CoinUtils_DIR}/src/CoinFinite.hpp
                      ${CoinUtils_DIR}/src/CoinFloatEqual.hpp
@@ -225,7 +231,31 @@ set(Coin_SRC_Headers ${CoinUtils_DIR}/src/Coin_C_defines.h
                      ${CoinUtils_DIR}/src/CoinWarmStartVector.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartDual.hpp
                      ${CoinUtils_DIR}/src/CoinWarmStartPrimalDual.hpp
-                     ${CoinUtils_DIR}/src/CoinRational.hpp)
+                     ${CoinUtils_DIR}/src/CoinRational.hpp
+                     ${CoinUtils_DIR}/src/CoinAdjacencyVector.hpp
+                     ${CoinUtils_DIR}/src/CoinBronKerbosch.hpp
+                     ${CoinUtils_DIR}/src/CoinCliqueExtender.hpp
+                     ${CoinUtils_DIR}/src/CoinCliqueList.hpp
+                     ${CoinUtils_DIR}/src/CoinCliqueSet.hpp
+                     ${CoinUtils_DIR}/src/CoinConflictGraph.hpp
+                     ${CoinUtils_DIR}/src/CoinCutPool.hpp
+                     ${CoinUtils_DIR}/src/CoinDynamicConflictGraph.hpp
+                     ${CoinUtils_DIR}/src/CoinNodeHeap.hpp
+                     ${CoinUtils_DIR}/src/CoinOddWheelSeparator.hpp
+                     ${CoinUtils_DIR}/src/CoinShortestPath.hpp
+                     ${CoinUtils_DIR}/src/CoinStaticConflictGraph.hpp)
+
+if (COINUTILS_BIGINDEX_T STREQUAL "int")
+  set(CoinUtils_SRC_LIST ${CoinUtils_SRC_LIST}
+                         ${CoinUtils_DIR}/src/CoinOslFactorization.cpp
+                         ${CoinUtils_DIR}/src/CoinOslFactorization2.cpp
+                         ${CoinUtils_DIR}/src/CoinOslFactorization3.cpp
+                         ${CoinUtils_DIR}/src/CoinSimpFactorization.cpp)
+  
+  set(Coin_SRC_Headers ${Coin_SRC_Headers}
+                       ${CoinUtils_DIR}/src/CoinOslFactorization.hpp
+                       ${CoinUtils_DIR}/src/CoinSimpFactorization.hpp)
+endif ()
 
 set(CoinUtilsTest_SRC_LIST ${CoinUtilsTest_DIR}/CoinLpIOTest.cpp
                            ${CoinUtilsTest_DIR}/CoinDenseVectorTest.cpp

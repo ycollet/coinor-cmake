@@ -646,6 +646,12 @@ else ()
   set(COINUTILS_MEMPOOL_MAXPOOLED -1)
 endif ()
 
+if (WIN32)
+  set(COINUTILSLIB_EXPORT "__declspec(dllimport)")
+else ()
+  set(COINUTILSLIB_EXPORT "__attribute__ ((visibility (\"default\")))")
+endif ()
+
 add_definitions(-DHAVE_CONFIG_H)
 
 #-----------------------------------------------
