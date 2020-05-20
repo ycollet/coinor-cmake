@@ -31,10 +31,11 @@ mark_as_advanced(OSI_VERSION_MAJOR
                  OSI_VERSION
                  OSI_SVN_REV)
 
-add_definitions(-DOSI_BUILD)
+add_definitions(-DOSILIB_BUILD -DCOINUTILSLIB_BUILD)
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osi.h.in ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Osi/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osi.h.in           ${CMAKE_BINARY_DIR}/Osi/include/config_osi.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in               ${CMAKE_BINARY_DIR}/Osi/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osicommontest.h.in ${CMAKE_BINARY_DIR}/Osi/include/config_osicommontest.h)
 
 #
 # pkg-config file generation
@@ -106,8 +107,8 @@ include_directories(${Osi_DIR}/src/Osi)
 include_directories(${CoinUtils_DIR}/src)
 
 macro(set_include_directories TARGET)
-  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
 endmacro ()
 
 if (WIN32)
