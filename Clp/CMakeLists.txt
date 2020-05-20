@@ -5,37 +5,37 @@ project(Clp)
 option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
 
 # Clp options
-option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
-set(COIN_HAS_AMD_INCLUDE_PATH "None" CACHE PATH "The AMD linear solver include Path")
-set(COIN_HAS_AMD_LIBRARY_PATH "None" CACHE PATH "The AMD linear solver absolute library Path")
+option(CLP_HAS_AMD "Clp uses the AMD linear solver" OFF)
+set(CLP_HAS_AMD_INCLUDE_PATH "None" CACHE PATH "The AMD linear solver include Path")
+set(CLP_HAS_AMD_LIBRARY_PATH "None" CACHE PATH "The AMD linear solver absolute library Path")
 
-option(COIN_ENABLE_CHOLMOD "Clp use the CholMod linear solver" OFF)
-set(COIN_HAS_CHOLMOD_INCLUDE_PATH "None" CACHE PATH "The CholMod linear solver include Path")
-set(COIN_HAS_CHOLMOD_LIBRARY_PATH "None" CACHE PATH "The CholMod linear solver absolute library Path")
+option(CLP_HAS_CHOLMOD "Clp use the CholMod linear solver" OFF)
+set(CLP_HAS_CHOLMOD_INCLUDE_PATH "None" CACHE PATH "The CholMod linear solver include Path")
+set(CLP_HAS_CHOLMOD_LIBRARY_PATH "None" CACHE PATH "The CholMod linear solver absolute library Path")
 
-option(COIN_HAS_GLPK "Clp uses GLPK" OFF)
-set(COIN_HAS_GLPK_INCLUDE_PATH "None" CACHE PATH "The GLPK linear solver include Path")
-set(COIN_HAS_GLPK_LIBRARY_PATH "None" CACHE PATH "The GLPK linear solver absolute library Path")
+option(CLP_HAS_GLPK "Clp uses GLPK" OFF)
+set(CLP_HAS_GLPK_INCLUDE_PATH "None" CACHE PATH "The GLPK linear solver include Path")
+set(CLP_HAS_GLPK_LIBRARY_PATH "None" CACHE PATH "The GLPK linear solver absolute library Path")
 
-option(COIN_HAS_MUMPS "Clp uses the MUMPS linear solver" OFF)
-set(COIN_HAS_MUMPS_INCLUDE_PATH "None" CACHE PATH "The MUMPS linear solver include Path")
-set(COIN_HAS_MUMPS_LIBRARY_PATH "None" CACHE PATH "The MUMPS linear solver absolute library Path")
+option(CLP_HAS_MUMPS "Clp uses the MUMPS linear solver" OFF)
+set(CLP_HAS_MUMPS_INCLUDE_PATH "None" CACHE PATH "The MUMPS linear solver include Path")
+set(CLP_HAS_MUMPS_LIBRARY_PATH "None" CACHE PATH "The MUMPS linear solver absolute library Path")
 
-option(COIN_HAS_WSMP "Clp uses the WSMP linear solver" OFF)
-set(COIN_HAS_WSMP_INCLUDE_PATH "None" CACHE PATH "The WSMP linear solver include Path")
-set(COIN_HAS_WSMP_LIBRARY_PATH "None" CACHE PATH "The WSMP linear solver absolute library Path")
+option(CLP_HAS_WSMP "Clp uses the WSMP linear solver" OFF)
+set(CLP_HAS_WSMP_INCLUDE_PATH "None" CACHE PATH "The WSMP linear solver include Path")
+set(CLP_HAS_WSMP_LIBRARY_PATH "None" CACHE PATH "The WSMP linear solver absolute library Path")
 
-option(COIN_HAS_ABC "Use the Aboca solver" OFF)
-set(COIN_ABC_LEVEL      "0" CACHE STRING "Use the Aboca solver (1, 2, 3, 4) - 0, Aboca solver is not used")
-set(COIN_CLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Clp (0 if no test)")
-set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if no output)")
+option(CLP_HAS_ABC "Use the Aboca solver" OFF)
+set(CLP_ABC_LEVEL  "0" CACHE STRING "Use the Aboca solver (1, 2, 3, 4) - 0, Aboca solver is not used")
+set(CLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Clp (0 if no test)")
+set(CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if no output)")
 
-option(COIN_HAS_MKL       "Use Intel MKL library (requires Intel compiler)" OFF)
-option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
+option(CLP_HAS_MKL       "Use Intel MKL library (requires Intel compiler)" OFF)
+option(CLP_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
 
 # Osi options
-set(COIN_OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
-set(COIN_OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if no output)")
+set(OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
+set(OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if no output)")
 option(USE_OSI_XPRESS "Compile and use the OSI Xpress solver" OFF)
 option(USE_OSI_CPLEX  "Compile and use the OSI Cplex solver"  OFF)
 option(USE_OSI_GLPK   "Compile and use the OSI GLPK solver"   OFF)
@@ -53,14 +53,14 @@ option(COMPILE_OSI_SOPLEX "Compile the OSI Soplex solver" OFF)
 option(COINUTILS_USE_THREADS              "enables compilation of thread aware CoinUtils (mempool so far)" OFF)
 option(COINUTILS_USE_MEMPOOL_OVERRIDE_NEW "enables the CoinUtils mempool to override global new/delete" OFF)
 option(COINUTILS_USE_MEMPOOL_MAXPOOLED    "Specify the default maximum memory allocation size that is served by the memory pool. If negative (or 'no') then the memory pool is disabled completely. Otherwise its value can be overridden at runtime using the COINUTILS_MEMPOOL_MAXPOOLED environment variable." OFF)
-option(COINUTILS_HAS_ZLIB  "CoinUtils uses Zlib" OFF)
-option(COINUTILS_HAS_BZLIB "CoinUtils uses BZlib" OFF)
-option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
-option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
-option(COIN_HAS_ASL        "Enable the ASL support" OFF)
+option(COINUTILS_HAS_ZLIB   "CoinUtils uses Zlib" OFF)
+option(COINUTILS_HAS_BZLIB  "CoinUtils uses BZlib" OFF)
+option(COINUTILS_HAS_LAPACK "Enable the Lapack support of CoinUtils" OFF)
+option(COINUTILS_HAS_BLAS   "Enable the Blas support of CoinUtils" OFF)
+option(COINUTILS_HAS_ASL    "Enable the ASL support" OFF)
 
-set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
-set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
+set(COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
+set(COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
 
 # External solvers
 option(USE_VOL        "Use Vol solver"    OFF)
@@ -121,33 +121,33 @@ mark_as_advanced(COIN_THREADS_INC_PATH
                  COINUTILS_USE_MEMPOOL_MAXPOOLED
                  COINUTILS_HAS_ZLIB
                  COINUTILS_HAS_BZLIB
-                 COIN_HAS_LAPACK
-                 COIN_HAS_BLAS
-                 COIN_HAS_ASL
-                 COIN_COINUTILS_CHECKLEVEL
-                 COIN_COINUTILS_VERBOSITY
-                 COIN_ENABLE_AMD
-                 COIN_HAS_AMD_INCLUDE_PATH
-                 COIN_HAS_AMD_LIBRARY_PATH
-                 COIN_ENABLE_CHOLMOD
-                 COIN_HAS_CHOLMOD_INCLUDE_PATH
-                 COIN_HAS_CHOLMOD_LIBRARY_PATH
-                 COIN_HAS_GLPK
-                 COIN_HAS_GLPK_INCLUDE_PATH
-                 COIN_HAS_GLPK_LIBRARY_PATH
-                 COIN_HAS_MUMPS
-                 COIN_HAS_MUMPS_INCLUDE_PATH
-                 COIN_HAS_MUMPS_LIBRARY_PATH
-                 COIN_HAS_WSMP
-                 COIN_HAS_WSMP_INCLUDE_PATH
-                 COIN_HAS_WSMP_LIBRARY_PATH
-                 COIN_HAS_ABC
-                 COIN_ABC_LEVEL
-                 COIN_CLP_CHECKLEVEL
-                 COIN_CLP_VERBOSITY
-                 COIN_HAS_MKL
-                 COIN_OSI_CHECKLEVEL
-                 COIN_OSI_VERBOSITY
+                 COINUTILS_HAS_LAPACK
+                 COINUTILS_HAS_BLAS
+                 COINUTILS_HAS_ASL
+                 CLP_CHECKLEVEL
+                 CLP_VERBOSITY
+                 CLP_HAS_AMD
+                 CLP_HAS_AMD_INCLUDE_PATH
+                 CLP_HAS_AMD_LIBRARY_PATH
+                 CLP_HAS_CHOLMOD
+                 CLP_HAS_CHOLMOD_INCLUDE_PATH
+                 CLP_HAS_CHOLMOD_LIBRARY_PATH
+                 CLP_HAS_GLPK
+                 CLP_HAS_GLPK_INCLUDE_PATH
+                 CLP_HAS_GLPK_LIBRARY_PATH
+                 CLP_HAS_MUMPS
+                 CLP_HAS_MUMPS_INCLUDE_PATH
+                 CLP_HAS_MUMPS_LIBRARY_PATH
+                 CLP_HAS_WSMP
+                 CLP_HAS_WSMP_INCLUDE_PATH
+                 CLP_HAS_WSMP_LIBRARY_PATH
+                 CLP_HAS_ABC
+                 CLP_ABC_LEVEL
+                 COINUTILS_CHECKLEVEL
+                 COINUTILS_VERBOSITY
+                 CLP_HAS_MKL
+                 OSI_CHECKLEVEL
+                 OSI_VERBOSITY
                  COIN_USE_FAST_CODE
 		 COIN_COVERAGE_CTEST_LABEL)
 
@@ -220,11 +220,11 @@ if (UNIX AND COIN_ENABLE_COMPAT)
 endif ()
 
 # Check for readline
-set(COIN_HAS_READLINE "OFF")
-if (COIN_ENABLE_READLINE)
+set(CLP_HAS_READLINE "OFF")
+if (CLP_ENABLE_READLINE)
   find_package(Readline)
   if (READLINE_FOUND)
-    set(COIN_HAS_READLINE "ON")
+    set(CLP_HAS_READLINE "ON")
     
     include_directories(${READLINE_INCLUDE_DIR})
   endif ()
@@ -243,7 +243,7 @@ if (USE_PROCESSOR_EXTENSIONS)
 endif ()
 
 # Check for MKL
-if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
+if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND CLP_HAS_MKL)
   find_package(MKL)
   
   if (MKL_FOUND)
@@ -265,11 +265,11 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
                     COMMAND ${CMAKE_COMMAND} -E echo "Copying ${MKL_DLL_DIR}/libiomp5md.dll into ${CMAKE_BINARY_DIR}/bin/")
   endif ()
   
-  set(COIN_MKL_LIBS "${MKL_LIBRARIES}")
+  set(CLP_MKL_LIBS "${MKL_LIBRARIES}")
   if (WIN32)
-    set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_intel_thread libiomp5md)
+    set(CLP_MKL_LIBS ${CLP_MKL_LIBS} mkl_intel_thread libiomp5md)
   else ()
-    set(COIN_MKL_LIBS ${COIN_MKL_LIBS} mkl_gnu_thread gomp dl)
+    set(COICLP_MKL_LIBS ${CLP_MKL_LIBS} mkl_gnu_thread gomp dl)
   endif ()
   
   include_directories(${MKL_INCLUDE_DIRS})
@@ -280,7 +280,7 @@ if ((CMAKE_CXX_COMPILER_ID STREQUAL "Intel") AND COIN_HAS_MKL)
     link_directories(${MKL_ROOT}/lib/ia32)
   endif ()
   
-  set(COIN_HAS_LAPACK ON CACHE BOOL "Use Intel MKL library (requires Intel compiler)")
+  set(COINUTILS_HAS_LAPACK ON CACHE BOOL "Use Intel MKL library (requires Intel compiler)")
 endif ()
 
 # Check some directories
@@ -295,16 +295,16 @@ if (USE_COINOR_BIN)
   coin_check_and_add_include_library_path(COINOR_DIR)
 endif ()
 
-coin_check_and_add_include_path(COIN_HAS_AMD_INCLUDE_PATH)
-coin_check_and_add_library_path(COIN_HAS_AMD_LIBRARY_PATH)
-coin_check_and_add_include_path(COIN_HAS_CHOLMOD_INCLUDE_PATH)
-coin_check_and_add_library_path(COIN_HAS_CHOLMOD_LIBRARY_PATH)
-coin_check_and_add_include_path(COIN_HAS_GLPK_INCLUDE_PATH)
-coin_check_and_add_library_path(COIN_HAS_GLPK_LIBRARY_PATH)
-coin_check_and_add_include_path(COIN_HAS_MUMPS_INCLUDE_PATH)
-coin_check_and_add_library_path(COIN_HAS_MUMPS_LIBRARY_PATH)
-coin_check_and_add_include_path(COIN_HAS_WSMP_INCLUDE_PATH)
-coin_check_and_add_library_path(COIN_HAS_WSMP_LIBRARY_PATH)
+coin_check_and_add_include_path(CLP_HAS_AMD_INCLUDE_PATH)
+coin_check_and_add_library_path(CLP_HAS_AMD_LIBRARY_PATH)
+coin_check_and_add_include_path(CLP_HAS_CHOLMOD_INCLUDE_PATH)
+coin_check_and_add_library_path(CLP_HAS_CHOLMOD_LIBRARY_PATH)
+coin_check_and_add_include_path(CLP_HAS_GLPK_INCLUDE_PATH)
+coin_check_and_add_library_path(CLP_HAS_GLPK_LIBRARY_PATH)
+coin_check_and_add_include_path(CLP_HAS_MUMPS_INCLUDE_PATH)
+coin_check_and_add_library_path(CLP_HAS_MUMPS_LIBRARY_PATH)
+coin_check_and_add_include_path(CLP_HAS_WSMP_INCLUDE_PATH)
+coin_check_and_add_library_path(CLP_HAS_WSMP_LIBRARY_PATH)
 
 if (NOT COIN_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
   if (NOT EXISTS "${COIN_DIR}")
@@ -409,13 +409,17 @@ if (CMAKE_Fortran_COMPILER)
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
   set(F77_FUNC "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
+  set(COINUTILS_LAPACK_FUNC "COIN_LAPACK_FUNC(name,NAME) ${CMAKE_MATCH_1}")
   
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
   set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
+  set(COINUTILS_LAPACK_FUNC_ "COIN_LAPACK_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
 else ()
   set(F77_FUNC  "F77_FUNC(name,NAME)  name##_")
   set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
+  set(COINUTILS_LAPACK_FUNC  "COIN_LAPACK_FUNC(name,NAME)  name##_")
+  set(COINUTILS_LAPACK_FUNC_ "COIN_LAPACK_FUNC_(name,NAME) name##__")
 endif ()
 
 set(F77_DUMMY_MAIN "" CACHE STRING "Define to dummy 'main' function (if any) required to link to the Fortran libraries.")
@@ -490,10 +494,10 @@ add_custom_target(uninstall
 # git clone https://github.com/coin-or/coinbrew
 # coinbrew/coinbrew fetch --git --main-proj="Clp"
 set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
-set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
-set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
-set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
-set(Clp_DIR           ${COIN_DIR}/Clp)
+set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils)
+set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
+set(Osi_DIR           ${COIN_DIR}/../Osi)
+set(Clp_DIR           ${COIN_DIR}/)
 
 if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
   # Structure obtained via:
@@ -503,7 +507,7 @@ if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
   # ../coinbrew/coinbrew fetch --git --main-proj=. --skip="Clp"
   set(BuildTools_DIR    ${COIN_DIR}/BuildTools)
   set(CoinUtils_DIR     ${COIN_DIR}/CoinUtils/CoinUtils)
-  set(CoinUtilsTest_DIR ${COIN_DIR}/CoinUtils/CoinUtils/test)
+  set(CoinUtilsTest_DIR ${CoinUtils_DIR}/test)
   set(Osi_DIR           ${COIN_DIR}/Osi/Osi)
   set(Clp_DIR           ${COIN_DIR}/Clp)
 endif ()
@@ -531,7 +535,7 @@ check_include_file("ieeefp.h"    HAVE_IEEEFP_H)
 check_include_file("inttypes.h"  HAVE_INTTYPES_H)
 check_include_file("math.h"      HAVE_MATH_H)
 check_include_file("memory.h"    HAVE_MEMORY_H)
-if (COIN_ENABLE_READLINE)
+if (CLP_HAS_READLINE)
   check_include_file("readline/readline.h" HAVE_READLINE_READLINE_H)
 endif ()
 check_include_file("stdint.h"    HAVE_STDINT_H)
@@ -615,14 +619,20 @@ if (SIZEOF_LONG_LONG EQUAL "8")
   set(COIN_INTPTR_T "long long")
   set(COIN_INT64_T  "long long")
   set(COIN_UINT64_T "unsigned long long")
+  set(COINUTILS_BIGINDEX_T "long long")
+  set(COINUTILS_BIGINDEX_IS_INT 0)
 elseif (SIZEOF_LONG EQUAL "8")
   set(COIN_INTPTR_T "long")
   set(COIN_INT64_T  "long")
   set(COIN_UINT64_T "unsigned long")
+  set(COINUTILS_BIGINDEX_T "long")
+  set(COINUTILS_BIGINDEX_IS_INT 0)
 elseif (SIZEOF_INT EQUAL "8")
   set(COIN_INTPTR_T "int")
   set(COIN_INT64_T  "int")
   set(COIN_UINT64_T "unsigned int")
+  set(COINUTILS_BIGINDEX_T "int")
+  set(COINUTILS_BIGINDEX_IS_INT 1)
 endif ()
 
 include(AC_HEADER_STDC)
@@ -647,7 +657,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
   add_definitions(-DINTEL_COMPILER)
 endif ()
 
-if (COIN_HAS_ABC)
+if (CLP_HAS_ABC)
   set(CLP_HAS_ABC ${COIN_ABC_LEVEL})
   add_definitions(-DCLP_HAS_ABC=${COIN_ABC_LEVEL})
   if (CMAKE_CXX_COMPILER_ID STREQUAL "Intel")
@@ -798,6 +808,37 @@ endif ()
 if (USE_VOL)
   set(COIN_HAS_VOL 1)
   add_definitions(-DCOIN_HAS_VOL)
+endif ()
+
+if (WIN32)
+  set(COINUTILSLIB_EXPORT "__declspec(dllimport)")
+  
+  set(OSILIB_EXPORT           "__declspec(dllimport)")
+  set(OSICOMMONTESTLIB_EXPORT "__declspec(dllimport)")
+  set(OSIGLPKLIB_EXPORT       "__declspec(dllimport)")
+  set(OSISPXLIB_EXPORT        "__declspec(dllimport)")
+  set(OSICPXLIB_EXPORT        "__declspec(dllimport)")
+  set(OSIMSKLIB_EXPORT        "__declspec(dllimport)")
+  set(OSIXPRLIB_EXPORT        "__declspec(dllimport)")
+  set(OSIGRBLIB_EXPORT        "__declspec(dllimport)")
+  
+  set(CLPLIB_EXPORT           "__declspec(dllimport)")
+  set(OSICLPLIB_EXPORT        "__declspec(dllimport)")
+  set(OSICLPLIB_EXPORTOSICLPUNITTEST_EXPORT "__declspec(dllimport)")
+else ()
+  set(COINUTILSLIB_EXPORT     "__attribute__((visibility(\"default\")))")
+  
+  set(OSICOMMONTESTLIB_EXPORT "__attribute__((visibility(\"default\")))")
+  set(OSIGLPKLIB_EXPORT       "__attribute__((visibility(\"default\")))")
+  set(OSISPXLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSICPXLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSIMSKLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSIXPRLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSIGRBLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  
+  set(CLPLIB_EXPORT           "__attribute__((visibility(\"default\")))")
+  set(OSICLPLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSICLPLIB_EXPORTOSICLPUNITTEST_EXPORT "__attribute__((visibility (\"default\")))")
 endif ()
 
 add_definitions(-DHAVE_CONFIG_H)

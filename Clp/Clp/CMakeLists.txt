@@ -111,16 +111,12 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/ClpSimplexPrimal.cpp
                  ${Clp_DIR}/src/ClpSolve.cpp
                  ${Clp_DIR}/src/Idiot.cpp
-                 ${Clp_DIR}/src/IdiSolve.cpp)
-
-if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
-  set(Clp_SRC_LIST ${Clp_SRC_LIST}
-                   ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
-                   ${Clp_DIR}/src/ClpPESimplex.cpp
-                   ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
-                   ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
-                   ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
-endif ()
+                 ${Clp_DIR}/src/IdiSolve.cpp
+                 ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
+                 ${Clp_DIR}/src/ClpPESimplex.cpp
+                 ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
+                 ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
+                 ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
 
 set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
                        ${Clp_DIR}/src/CbcOrClpParam.cpp
@@ -230,16 +226,12 @@ set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/ClpSimplexPrimal.hpp
                          ${Clp_DIR}/src/ClpSolve.hpp
                          ${Clp_DIR}/src/CbcOrClpParam.hpp
-                         ${Clp_DIR}/src/Idiot.hpp)
-
-if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
-  set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
-                           ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
-                           ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
-                           ${Clp_DIR}/src/ClpPESimplex.hpp
-                           ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
-                           ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
-endif ()
+                         ${Clp_DIR}/src/Idiot.hpp
+                         ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
+                         ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
+                         ${Clp_DIR}/src/ClpPESimplex.hpp
+                         ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
+                         ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
 
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
@@ -295,8 +287,8 @@ if (COIN_ENABLE_DOWNLOAD_ASL OR COIN_USE_ASL)
 endif ()
 
 macro(set_include_directories TARGET)
-  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
 endmacro ()
 
 if (WIN32)

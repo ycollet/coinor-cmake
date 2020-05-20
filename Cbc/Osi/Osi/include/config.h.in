@@ -1,26 +1,56 @@
+/* Define to 1 if your C++ compiler doesn't accept -c and -o together. */
+#cmakedefine CXX_NO_MINUS_C_MINUS_O
+
+/* Library Visibility Attribute */
+#define OSICOMMONTESTLIB_EXPORT @OSICOMMONTESTLIB_EXPORT@
+
+/* Library Visibility Attribute */
+#define OSICPXLIB_EXPORT @OSICPXLIB_EXPORT@
+
+/* Library Visibility Attribute */
+#define OSIGLPKLIB_EXPORT @OSIGLPKLIB_EXPORT@
+
+/* Library Visibility Attribute */
+#define OSIGRBLIB_EXPORT @OSIGLPKLIB_EXPORT@
+
+/* Library Visibility Attribute */
+#define OSILIB_EXPORT @OSIGLPKLIB_EXPORT@
+
+/* Library Visibility Attribute */
+#define OSIMSKLIB_EXPORT @OSIMSKLIB_EXPORT@
+
+/* Library Visibility Attribute */
+#define OSITEST_EXPORT @OSITEST_EXPORT@
+
+/* Library Visibility Attribute */
+#define OSIXPRLIB_EXPORT @OSIXPRLIB_EXPORT@
+
+/* Define to 1 if CoinUtils is available. */
+#cmakedefine OSI_HAS_COINUTILS
+
 /* Define to 1 if the Cplex package is available */
-#cmakedefine COIN_HAS_CPX
+#cmakedefine OSI_HAS_CPLEX
 
 /* Define to 1 if the Glpk package is available */
-#cmakedefine COIN_HAS_GLPK
+#cmakedefine OSI_HAS_GLPK
 
 /* Define to 1 if the Gurobi package is available */
-#cmakedefine COIN_HAS_GRB
+#cmakedefine OSI_HAS_GUROBI
 
 /* Define to 1 if the Mosek package is available */
-#cmakedefine COIN_HAS_MSK
+#cmakedefine OSI_HAS_MOSEK
 
 /* Define to 1 if the Netlib package is available */
-#cmakedefine COIN_HAS_NETLIB
+#cmakedefine OSI_HAS_NETLIB
 
 /* Define to 1 if the Sample package is available */
-#cmakedefine COIN_HAS_SAMPLE
+#cmakedefine OSI_HAS_SAMPLE
 
 /* Define to 1 if the SoPlex package is available */
-#cmakedefine COIN_HAS_SOPLEX
+#cmakedefine OSI_HAS_SOPLEX
 
 /* Define to 1 if the Xpress package is available */
-#cmakedefine COIN_HAS_XPR
+#cmakedefine OSI_HAS_XPRESS
 
 /* Define to the debug sanity check level (0 is no test) */
 #define COIN_OSI_CHECKLEVEL @COIN_OSI_CHECKLEVEL@
