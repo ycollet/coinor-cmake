@@ -15,6 +15,7 @@ rm -rf Osi
 rm -rf SYMPHONY
 rm -rf Vol
 rm -rf coinbrew
+rm -rf Data
 
 git clone https://github.com/coin-or/coinbrew.git
 git clone https://github.com/coin-or/Bonmin.git
@@ -29,6 +30,9 @@ git clone https://github.com/coin-or/Ipopt.git
 git clone https://github.com/coin-or/Osi.git
 git clone https://github.com/coin-or/SYMPHONY.git
 git clone https://github.com/coin-or/Vol.git
+
+mkdir Data
+git clone https://github.com/coin-or-tools/Data-Sample Data/Sample
 
 add_tag () {
     TAGID=`git log | tail | grep commit | sed -e "s/commit\(.*\)/\1/"`
