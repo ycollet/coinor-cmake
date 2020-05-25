@@ -788,7 +788,6 @@ if (CLP_BUILD_EXAMPLES)
   set_tests_properties(clp_example_testBasis PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_testBasis PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
 
-  # DOESN'T COMPILE
   #add_example(testGub2 ${Clp_DIR}/examples/testGub2.cpp)
   #
   #add_test(NAME clp_example_testGub2
@@ -801,17 +800,17 @@ if (CLP_BUILD_EXAMPLES)
   #set_tests_properties(clp_example_testGub2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   #set_tests_properties(clp_example_testGub2 PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
   
-  #add_example(testGub ${Clp_DIR}/examples/testGub.cpp)
-  # 
-  #add_test(NAME clp_example_testGub
-  #         COMMAND $<TARGET_FILE:testGub> ${Data_DIR}/afiro.mps)
-  #set_tests_properties(clp_example_testGub PROPERTIES TIMEOUT 30)
-  #if (WIN32)
-  #  set_tests_properties(clp_example_testGub PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
-  #endif ()
-  #
-  #set_tests_properties(clp_example_testGub PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
-  #set_tests_properties(clp_example_testGub PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
+  add_example(testGub ${Clp_DIR}/examples/testGub.cpp)
+   
+  add_test(NAME clp_example_testGub
+           COMMAND $<TARGET_FILE:testGub> ${Data_DIR}/afiro.mps)
+  set_tests_properties(clp_example_testGub PROPERTIES TIMEOUT 30)
+  if (WIN32)
+    set_tests_properties(clp_example_testGub PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+  endif ()
+  
+  set_tests_properties(clp_example_testGub PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  set_tests_properties(clp_example_testGub PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
     
   add_example(testQP ${Clp_DIR}/examples/testQP.cpp)
   
