@@ -63,8 +63,8 @@ option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
 option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
 option(COIN_HAS_ASL        "Enable the ASL support" OFF)
 
-set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
-set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
+set(COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
+set(COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
 
 # External solvers
 option(USE_VOL        "Use Vol solver"    OFF)
@@ -129,8 +129,8 @@ mark_as_advanced(USE_COINOR_BIN
                  COIN_HAS_LAPACK
                  COIN_HAS_BLAS
                  COIN_HAS_ASL
-                 COIN_COINUTILS_CHECKLEVEL
-                 COIN_COINUTILS_VERBOSITY
+                 COINUTILS_CHECKLEVEL
+                 COINUTILS_VERBOSITY
                  COIN_ENABLE_AMD
                  COIN_HAS_AMD_INCLUDE_PATH
                  COIN_HAS_AMD_LIBRARY_PATH
