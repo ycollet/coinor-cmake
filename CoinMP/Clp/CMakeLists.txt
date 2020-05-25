@@ -33,14 +33,15 @@ mark_as_advanced(CLP_VERSION_MAJOR
                  CLP_VERSION
                  CLP_SVN_REV)
 
-add_definitions(-DCLP_BUILD)
+add_definitions(-DCLPLIB_BUILD)
 
 if (CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pedantic-errors -Wparentheses -Wreturn-type -Wcast-qual -Wall -Wpointer-arith -Wwrite-strings -Wconversion -Wno-unknown-pragmas -Wno-long-long")
 endif ()
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Clp/include/config.h)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_clp.h.in ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in        ${CMAKE_BINARY_DIR}/Clp/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_clp.h.in    ${CMAKE_BINARY_DIR}/Clp/include/config_clp.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osiclp.h.in ${CMAKE_BINARY_DIR}/Clp/include/config_osiclp.h)
 
 #
 # pkg-config file generation
@@ -111,16 +112,12 @@ set(Clp_SRC_LIST ${Clp_DIR}/src/ClpCholeskyBase.cpp
                  ${Clp_DIR}/src/ClpSimplexPrimal.cpp
                  ${Clp_DIR}/src/ClpSolve.cpp
                  ${Clp_DIR}/src/Idiot.cpp
-                 ${Clp_DIR}/src/IdiSolve.cpp)
-
-if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
-  set(Clp_SRC_LIST ${Clp_SRC_LIST}
-                   ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
-                   ${Clp_DIR}/src/ClpPESimplex.cpp
-                   ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
-                   ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
-                   ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
-endif ()
+                 ${Clp_DIR}/src/IdiSolve.cpp
+                 ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.cpp
+                 ${Clp_DIR}/src/ClpPESimplex.cpp
+                 ${Clp_DIR}/src/ClpPEDualRowSteepest.cpp
+                 ${Clp_DIR}/src/ClpPEDualRowDantzig.cpp
+                 ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.cpp)
 
 set(ClpSolver_SRC_LIST ${Clp_DIR}/src/ClpSolver.cpp
                        ${Clp_DIR}/src/CbcOrClpParam.cpp
@@ -230,16 +227,12 @@ set(Clp_SRC_LIST_Headers ${Clp_DIR}/src/Clp_C_Interface.h
                          ${Clp_DIR}/src/ClpSimplexPrimal.hpp
                          ${Clp_DIR}/src/ClpSolve.hpp
                          ${Clp_DIR}/src/CbcOrClpParam.hpp
-                         ${Clp_DIR}/src/Idiot.hpp)
-
-if ("${CLP_VERSION_STRING}" STREQUAL "trunk")
-  set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
-                           ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
-                           ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
-                           ${Clp_DIR}/src/ClpPESimplex.hpp
-                           ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
-                           ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
-endif ()
+                         ${Clp_DIR}/src/Idiot.hpp
+                         ${Clp_DIR}/src/ClpPEPrimalColumnDantzig.hpp
+                         ${Clp_DIR}/src/ClpPEPrimalColumnSteepest.hpp
+                         ${Clp_DIR}/src/ClpPESimplex.hpp
+                         ${Clp_DIR}/src/ClpPEDualRowSteepest.hpp
+                         ${Clp_DIR}/src/ClpPEDualRowDantzig.hpp)
 
 if (COIN_HAS_ABC)
   set(Clp_SRC_LIST_Headers ${Clp_SRC_LIST_Headers}
@@ -296,6 +289,7 @@ endif ()
 
 macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
 endmacro ()
 
@@ -429,7 +423,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(addBits ${Clp_DIR}/examples/addBits.cpp)
   
   add_test(NAME clp_example_addBits
-           COMMAND $<TARGET_FILE:addBits> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:addBits> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_addBits PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_addBits PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -441,7 +435,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(addColumns ${Clp_DIR}/examples/addColumns.cpp)
   
   add_test(NAME clp_example_addColumns
-           COMMAND $<TARGET_FILE:addColumns> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:addColumns> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_addColumns PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_addColumns PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -453,7 +447,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(addRows ${Clp_DIR}/examples/addRows.cpp)
   
   add_test(NAME clp_example_addRows
-           COMMAND $<TARGET_FILE:addRows> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:addRows> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_addRows PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_addRows PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -465,7 +459,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(decomp2 ${Clp_DIR}/examples/decomp2.cpp)
 
   add_test(NAME clp_example_decomp2
-           COMMAND $<TARGET_FILE:decomp2> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:decomp2> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_decomp2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_decomp2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -477,7 +471,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(decomp3 ${Clp_DIR}/examples/decomp3.cpp)
   
   add_test(NAME clp_example_decomp3
-           COMMAND $<TARGET_FILE:decomp3> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:decomp3> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_decomp3 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_decomp3 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -489,7 +483,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(decompose ${Clp_DIR}/examples/decompose.cpp)
   
   add_test(NAME clp_example_decompose
-           COMMAND $<TARGET_FILE:decompose> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:decompose> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_decompose PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_decompose PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -501,7 +495,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(default ${Clp_DIR}/examples/defaults.cpp)
   
   add_test(NAME clp_example_default
-           COMMAND $<TARGET_FILE:default> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:default> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_default PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_default PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -547,7 +541,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(driver2 ${Clp_DIR}/examples/driver2.cpp)
   
   add_test(NAME clp_example_driver2
-           COMMAND $<TARGET_FILE:driver2> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:driver2> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_driver2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_driver2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -559,7 +553,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(driver ${Clp_DIR}/examples/driver.cpp)
   
   add_test(NAME clp_example_driver
-           COMMAND $<TARGET_FILE:driver> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:driver> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_driver PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_driver PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -574,7 +568,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(dualCuts ${Clp_DIR}/examples/dualCuts.cpp)
   
   add_test(NAME clp_example_dualCuts
-           COMMAND $<TARGET_FILE:dualCuts> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:dualCuts> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_dualCuts PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_dualCuts PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -591,7 +585,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(hello ${Clp_DIR}/examples/hello.cpp)
   
   add_test(NAME clp_example_hello
-           COMMAND $<TARGET_FILE:hello> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:hello> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_hello PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_hello PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -633,7 +627,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(makeDual ${Clp_DIR}/examples/makeDual.cpp)
   
   add_test(NAME clp_example_makeDual
-           COMMAND $<TARGET_FILE:makeDual> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:makeDual> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_makeDual PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_makeDual PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -642,11 +636,11 @@ if (CLP_BUILD_EXAMPLES)
   set_tests_properties(clp_example_makeDual PROPERTIES PASS_REGULAR_EXPRESSION "Coin0002I Problem AFIRO has 27 rows, 32 columns and 83 elements")
   set_tests_properties(clp_example_makeDual PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
     
-  # Must compile minimum.cpp with -DSAMPLEDIR=${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample
+  # Must compile minimum.cpp with -DSAMPLEDIR=${Data_DIR}
   add_example(minimum ${Clp_DIR}/examples/minimum.cpp)
   
   add_test(NAME clp_example_minimum
-           COMMAND $<TARGET_FILE:minimum> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:minimum> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_minimum PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_minimum PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -658,7 +652,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(modify ${Clp_DIR}/examples/modify.cpp)
   
   add_test(NAME clp_example_modify
-           COMMAND $<TARGET_FILE:modify> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:modify> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_modify PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_modify PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -673,7 +667,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(network ${Clp_DIR}/examples/network.cpp)
   
   add_test(NAME clp_example_network
-           COMMAND $<TARGET_FILE:network> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/input.130)
+           COMMAND $<TARGET_FILE:network> ${Data_DIR}/input.130)
   set_tests_properties(clp_example_network PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_network PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -691,7 +685,7 @@ if (CLP_BUILD_EXAMPLES)
                    #${Clp_DIR}/examples/myPdco.cpp)
   
   add_test(NAME clp_example_pdco
-           COMMAND $<TARGET_FILE:pdco> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps
+           COMMAND $<TARGET_FILE:pdco> ${Data_DIR}/afiro.mps
            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
   set_tests_properties(clp_example_pdco PROPERTIES TIMEOUT 30)
   if (WIN32)
@@ -716,7 +710,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(piece ${Clp_DIR}/examples/piece.cpp)
   
   add_test(NAME clp_example_piece
-           COMMAND $<TARGET_FILE:piece> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:piece> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_piece PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_piece PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -732,7 +726,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(rowColumn ${Clp_DIR}/examples/rowColumn.cpp)
   
   add_test(NAME clp_example_rowColumn
-           COMMAND $<TARGET_FILE:rowColumn> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:rowColumn> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_rowColumn PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_rowColumn PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -749,7 +743,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(sprint2 ${Clp_DIR}/examples/sprint2.cpp)
   
   add_test(NAME clp_example_sprint2
-           COMMAND $<TARGET_FILE:sprint2> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:sprint2> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_sprint2 PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_sprint2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -761,7 +755,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(sprint ${Clp_DIR}/examples/sprint.cpp)
   
   add_test(NAME clp_example_sprint
-           COMMAND $<TARGET_FILE:sprint> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:sprint> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_sprint PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_sprint PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -773,7 +767,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(testBarrier ${Clp_DIR}/examples/testBarrier.cpp)
   
   add_test(NAME clp_example_testBarrier
-           COMMAND $<TARGET_FILE:testBarrier> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:testBarrier> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_testBarrier PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_testBarrier PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -785,7 +779,7 @@ if (CLP_BUILD_EXAMPLES)
   add_example(testBasis ${Clp_DIR}/examples/testBasis.cpp)
   
   add_test(NAME clp_example_testBasis
-           COMMAND $<TARGET_FILE:testBasis> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:testBasis> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_testBasis PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_testBasis PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -793,35 +787,36 @@ if (CLP_BUILD_EXAMPLES)
   
   set_tests_properties(clp_example_testBasis PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
   set_tests_properties(clp_example_testBasis PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
-    
-  add_example(testGub2 ${Clp_DIR}/examples/testGub2.cpp)
+
+  # DOESN'T COMPILE
+  #add_example(testGub2 ${Clp_DIR}/examples/testGub2.cpp)
+  #
+  #add_test(NAME clp_example_testGub2
+  #         COMMAND $<TARGET_FILE:testGub2> ${Data_DIR}/afiro.mps)
+  #set_tests_properties(clp_example_testGub2 PROPERTIES TIMEOUT 30)
+  #if (WIN32)
+  #  set_tests_properties(clp_example_testGub2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+  #endif ()
+  # 
+  #set_tests_properties(clp_example_testGub2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  #set_tests_properties(clp_example_testGub2 PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
   
-  add_test(NAME clp_example_testGub2
-           COMMAND $<TARGET_FILE:testGub2> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
-  set_tests_properties(clp_example_testGub2 PROPERTIES TIMEOUT 30)
-  if (WIN32)
-    set_tests_properties(clp_example_testGub2 PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
-  endif ()
-  
-  set_tests_properties(clp_example_testGub2 PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
-  set_tests_properties(clp_example_testGub2 PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
-  
-  add_example(testGub ${Clp_DIR}/examples/testGub.cpp)
-  
-  add_test(NAME clp_example_testGub
-           COMMAND $<TARGET_FILE:testGub> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
-  set_tests_properties(clp_example_testGub PROPERTIES TIMEOUT 30)
-  if (WIN32)
-    set_tests_properties(clp_example_testGub PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
-  endif ()
-  
-  set_tests_properties(clp_example_testGub PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
-  set_tests_properties(clp_example_testGub PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
+  #add_example(testGub ${Clp_DIR}/examples/testGub.cpp)
+  # 
+  #add_test(NAME clp_example_testGub
+  #         COMMAND $<TARGET_FILE:testGub> ${Data_DIR}/afiro.mps)
+  #set_tests_properties(clp_example_testGub PROPERTIES TIMEOUT 30)
+  #if (WIN32)
+  #  set_tests_properties(clp_example_testGub PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
+  #endif ()
+  #
+  #set_tests_properties(clp_example_testGub PROPERTIES PASS_REGULAR_EXPRESSION "Clp0000I Optimal - objective value -464.75")
+  #set_tests_properties(clp_example_testGub PROPERTIES LABELS "DISTRIB;CLP;EXAMPLE")
     
   add_example(testQP ${Clp_DIR}/examples/testQP.cpp)
   
   add_test(NAME clp_example_testQP
-           COMMAND $<TARGET_FILE:testQP> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+           COMMAND $<TARGET_FILE:testQP> ${Data_DIR}/afiro.mps)
   set_tests_properties(clp_example_testQP PROPERTIES TIMEOUT 30)
   if (WIN32)
     set_tests_properties(clp_example_testQP PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -853,7 +848,7 @@ if (CLP_BUILD_EXAMPLES)
   #add_example(useVolume ${Clp_DIR}/examples/useVolume.cpp)
   #
   #add_test(NAME clp_example_useVolume
-  #         COMMAND $<TARGET_FILE:useVolume> ${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample/afiro.mps)
+  #         COMMAND $<TARGET_FILE:useVolume> ${Data_DIR}/afiro.mps)
   #set_tests_properties(clp_example_useVolume PROPERTIES TIMEOUT 30)
   #if (WIN32)
   #  set_tests_properties(clp_example_useVolume PROPERTIES ENVIRONMENT "PATH=${TEST_LIB_DIR}\\;${TEST_BIN_PATH}")
@@ -879,7 +874,7 @@ if (CLP_BUILD_EXAMPLES)
     target_link_libraries(OsiClpSolverInterfaceTest libOsiClp libOsiCommonTests libOsi libCoinUtils)
     
     add_test(NAME clp_example_OsiClpSolverInterfaceTest
-             COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> -netlibDir=${CMAKE_BINARY_DIR}/Dependencies/DATA_TEST/src/EP_DATA_TEST/Netlib -mpsDir=${CMAKE_CURRENT_SOURCE_DIR}/../Data/Sample -testOsiSolverInterface -nobuf)
+             COMMAND $<TARGET_FILE:OsiClpSolverInterfaceTest> -netlibDir=${CMAKE_BINARY_DIR}/Dependencies/DATA_TEST/src/EP_DATA_TEST/Netlib -mpsDir=${Data_DIR} -testOsiSolverInterface -nobuf)
   
     set_tests_properties(clp_example_OsiClpSolverInterfaceTest PROPERTIES TIMEOUT 90)
     if (WIN32)
