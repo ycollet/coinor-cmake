@@ -1,3 +1,6 @@
+/* Library Visibility Attribute */
+#cmakedefine CLPLIB_EXPORT @CLPLIB_EXPORT@
+
 /* Define to 1, 2, 3, or 4 if Aboca should be build. */
 #cmakedefine CLP_HAS_ABC @COIN_ABC_LEVEL@
 
@@ -17,51 +20,37 @@
 #define CLP_VERSION_RELEASE @CLP_VERSION_RELEASE@
 
 /* Define to the debug sanity check level (0 is no test) */
-#define COIN_CLP_CHECKLEVEL @COIN_CLP_CHECKLEVEL@
+#define CLP_CHECKLEVEL @CLP_CHECKLEVEL@
 
 /* Define to the debug verbosity level (0 is no output) */
-#define COIN_CLP_VERBOSITY @COIN_CLP_VERBOSITY@
-
-/* Define to 1 if the ASL package is available */
-#cmakedefine COIN_HAS_ASL
+#define CLP_VERBOSITY @CLP_VERBOSITY@
 
 /* Define to 1 if the AMD package is available */
-#cmakedefine COIN_HAS_AMD
-
-/* If defined, the BLAS Library is available. */
-#cmakedefine COIN_HAS_BLAS
+#cmakedefine CLP_HAS_AMD
 
 /* Define to 1 if the CHOLMOD package is available */
-#cmakedefine COIN_HAS_CHOLMOD
+#cmakedefine CLP_HAS_CHOLMOD
+
+/* Define to 1 if CoinUtils is available. */
+#cmakedefine CLP_HAS_COINUTILS
 
 /* Define to 1 if the Glpk package is available */
-#cmakedefine COIN_HAS_GLPK
+#cmakedefine CLP_HAS_GLPK
 
 /* Define to 1 if the Mumps package is available */
-#cmakedefine COIN_HAS_MUMPS
+#cmakedefine CLP_HAS_MUMPS
 
 /* Define to 1 if the Netlib package is available */
-#cmakedefine COIN_HAS_NETLIB
+#cmakedefine CLP_HAS_NETLIB
 
 /* Define to 1 if readline is available */
-#cmakedefine COIN_HAS_READLINE
+#cmakedefine CLP_HAS_READLINE
+
+/* Define to 1 if Sample is available. */
+#cmakedefine CLP_HAS_SAMPLE
 
 /* Define to 1 if the WSMP package is available */
-#cmakedefine COIN_HAS_WSMP
-
-/* Define to dummy `main' function (if any) required to link to the Fortran
-   libraries. */
-#cmakedefine F77_DUMMY_MAIN ${F77_DUMMY_MAIN}
-
-/* Define to a macro mangling the given C identifier (in lower and upper
-   case), which must not contain underscores, for linking with Fortran. */
-#define ${F77_FUNC}
-
-/* As F77_FUNC, but for C identifiers containing underscores. */
-#define ${F77_FUNC_}
-
-/* Define if F77 and FC dummy `main' functions are identical. */
-#cmakedefine FC_DUMMY_MAIN_EQ_F77 ${FC_DUMMY_MAIN_EQ_F77}
+#cmakedefine CLP_HAS_WSMP
 
 /* Define to 1 if you have the <cfloat> header file. */
 #cmakedefine HAVE_CFLOAT
@@ -113,6 +102,15 @@
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #cmakedefine HAVE_UNISTD_H
+
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
+#cmakedefine LT_OBJDIR
+
+/* Library Visibility Attribute */
+#cmakedefine OSICLPLIB_EXPORT @OSICLPLIB_EXPORT@
+ 
+/* Library Visibility Attribute */
+#cmakedefine OSICLPUNITTEST_EXPORT @OSICLPUNITTEST_EXPORT@
 
 /* Name of package */
 #define PACKAGE "@PACKAGE@"

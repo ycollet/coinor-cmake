@@ -33,7 +33,7 @@ mark_as_advanced(CGL_VERSION_MAJOR
                  CGL_VERSION
                  CGL_SVN_REV)
 
-add_definitions(-DCGL_BUILD)
+add_definitions(-DCGLLIB_BUILD)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_cgl.h.in ${CMAKE_BINARY_DIR}/Cgl/include/config_cgl.h)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Cgl/include/config.h)
@@ -65,7 +65,6 @@ install(FILES ${CMAKE_BINARY_DIR}/Cgl/cgl.pc
 set(Cgl_SRC_LIST ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRoundingTest.cpp
                  ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRounding.cpp
                  ${Cgl_DIR}/src/CglDuplicateRow/CglDuplicateRow.cpp
-                 ${Cgl_DIR}/src/CglCutGenerator.cpp
                  ${Cgl_DIR}/src/CglPreProcess/CglPreProcess.cpp
                  ${Cgl_DIR}/src/CglProbing/CglProbing.cpp
                  ${Cgl_DIR}/src/CglProbing/CglProbingTest.cpp
@@ -94,9 +93,6 @@ set(Cgl_SRC_LIST ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRoundingT
                  ${Cgl_DIR}/src/CglRedSplit2/CglRedSplit2Test.cpp
                  ${Cgl_DIR}/src/CglRedSplit2/CglRedSplit2Param.cpp
                  ${Cgl_DIR}/src/CglRedSplit2/CglRedSplit2.cpp
-                 ${Cgl_DIR}/src/CglMessage.cpp
-                 ${Cgl_DIR}/src/CglStored.cpp
-                 ${Cgl_DIR}/src/CglParam.cpp
                  ${Cgl_DIR}/src/CglResidualCapacity/CglResidualCapacity.cpp
                  ${Cgl_DIR}/src/CglResidualCapacity/CglResidualCapacityTest.cpp
                  ${Cgl_DIR}/src/CglTwomir/CglTwomirTest.cpp
@@ -106,17 +102,17 @@ set(Cgl_SRC_LIST ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRoundingT
                  ${Cgl_DIR}/src/CglClique/CglCliqueHelper.cpp
                  ${Cgl_DIR}/src/CglClique/CglCliqueTest.cpp
                  ${Cgl_DIR}/src/CglClique/CglClique.cpp
-                 ${Cgl_DIR}/src/CglTreeInfo.cpp
+                 ${Cgl_DIR}/src/CglCommon/CglCutGenerator.cpp
+                 ${Cgl_DIR}/src/CglCommon/CglMessage.cpp
+                 ${Cgl_DIR}/src/CglCommon/CglStored.cpp
+                 ${Cgl_DIR}/src/CglCommon/CglParam.cpp
+                 ${Cgl_DIR}/src/CglCommon/CglTreeInfo.cpp
                  ${Cgl_DIR}/src/CglLiftAndProject/CglLiftAndProject.cpp
                  ${Cgl_DIR}/src/CglGomory/CglGomoryTest.cpp
                  ${Cgl_DIR}/src/CglGomory/CglGomory.cpp
                  ${Cgl_DIR}/src/CglGMI/CglGMI.cpp
                  ${Cgl_DIR}/src/CglGMI/CglGMIParam.cpp
-		 ${Cgl_DIR}/src/CglBKClique/CglBKClique.cpp
-		 ${Cgl_DIR}/src/CglCliqueMerging/CglCliqueMerging.cpp
-		 ${Cgl_DIR}/src/CglOddHoleWC/CglOddHoleWC.cpp
-		 ${Cgl_DIR}/src/CglOddHoleWC/oddhs.cpp
-		 ${Cgl_DIR}/src/CglOddHoleWC/spaths.cpp)
+		 ${Cgl_DIR}/src/CglBKClique/CglBKClique.cpp)
 
 set(Cgl_SRC_LIST_Headers ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerRounding.hpp
                          ${Cgl_DIR}/src/CglDuplicateRow/CglDuplicateRow.hpp
@@ -136,12 +132,10 @@ set(Cgl_SRC_LIST_Headers ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerR
                          ${Cgl_DIR}/src/CglAllDifferent/CglAllDifferent.hpp
                          ${Cgl_DIR}/src/CglKnapsackCover/CglKnapsackCover.hpp
                          ${Cgl_DIR}/src/CglSimpleRounding/CglSimpleRounding.hpp
-                         ${Cgl_DIR}/src/CglMessage.hpp
                          ${Cgl_DIR}/src/CglZeroHalf/CglZeroHalf.hpp
                          ${Cgl_DIR}/src/CglZeroHalf/Cgl012cut.hpp
                          ${Cgl_DIR}/src/CglRedSplit2/CglRedSplit2Param.hpp
                          ${Cgl_DIR}/src/CglRedSplit2/CglRedSplit2.hpp
-                         ${Cgl_DIR}/src/CglCutGenerator.hpp
                          ${Cgl_DIR}/src/CglResidualCapacity/CglResidualCapacity.hpp
                          ${Cgl_DIR}/src/CglTwomir/CglTwomir.hpp
                          ${Cgl_DIR}/src/CglFlowCover/CglFlowCover.hpp
@@ -150,15 +144,14 @@ set(Cgl_SRC_LIST_Headers ${Cgl_DIR}/src/CglMixedIntegerRounding/CglMixedIntegerR
                          ${Cgl_DIR}/src/CglGomory/CglGomory.hpp
                          ${Cgl_DIR}/src/CglGMI/CglGMIParam.hpp
                          ${Cgl_DIR}/src/CglGMI/CglGMI.hpp
-                         ${Cgl_DIR}/src/CglParam.hpp
-                         ${Cgl_DIR}/src/CglTreeInfo.hpp
-			 ${Cgl_DIR}/src/CglBKClique/CglBKClique.hpp
-			 ${Cgl_DIR}/src/CglCliqueMerging/CglCliqueMerging.hpp
-			 ${Cgl_DIR}/src/CglOddHoleWC/CglOddHoleWC.hpp
-			 ${Cgl_DIR}/src/CglOddHoleWC/oddhs.h
-			 ${Cgl_DIR}/src/CglOddHoleWC/spaths.h)
+                         ${Cgl_DIR}/src/CglCommon/CglMessage.hpp
+                         ${Cgl_DIR}/src/CglCommon/CglCutGenerator.hpp
+                         ${Cgl_DIR}/src/CglCommon/CglParam.hpp
+                         ${Cgl_DIR}/src/CglCommon/CglTreeInfo.hpp
+			 ${Cgl_DIR}/src/CglBKClique/CglBKClique.hpp)
 
 include_directories(${Cgl_DIR}/src)
+include_directories(${Cgl_DIR}/src/CglCommon)
 include_directories(${Cgl_DIR}/src/CglClique)
 include_directories(${Cgl_DIR}/src/CglDuplicateRow)
 include_directories(${Cgl_DIR}/src/CglFlowCover)
@@ -190,6 +183,7 @@ macro(set_include_directories TARGET)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cgl/include)
+  target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
 endmacro ()
 
 if (WIN32)
