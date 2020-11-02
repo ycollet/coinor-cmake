@@ -4,6 +4,8 @@ coinor-cmake
 WARNING: due to a huge set of changes, these cmakefiles doesn't work up to now.
          I am waiting for some stabilization before starting to fix these files.
 
+- Clp doesn't work with ABC ... bug in some ifdef macro.
+
 # CMake files for compiling CoinOr projects
 ## Introduction
 
