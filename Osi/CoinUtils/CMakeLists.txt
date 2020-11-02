@@ -2,7 +2,7 @@ get_ac_init_version(${CoinUtils_DIR}/configure.ac COINUTILS)
 
 option(COINUTILS_ENABLE_UNITTEST "Enable building the unit test executable" OFF)
 
-if (COINUTILS_MAJOR_VERSION STREQUAL "devel")
+if (COINUTILS_VERSION_MAJOR STREQUAL "devel")
   set(COINUTILS_VERSION_MAJOR   "2"      CACHE STRING "The COINUTILS major version number" FORCE)
   set(COINUTILS_VERSION_MINOR   "11"     CACHE STRING "The COINUTILS minor version number" FORCE)
   set(COINUTILS_VERSION_RELEASE "4"      CACHE STRING "The COINUTILS patch version number" FORCE)
