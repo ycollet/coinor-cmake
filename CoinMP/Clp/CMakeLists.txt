@@ -286,6 +286,7 @@ if (COIN_HAS_WSMP AND (NOT COIN_HAS_WSMP_INCLUDE_PATH STREQUAL "None"))
   include_directories(${COIN_HAS_WSMP_INCLUDE_PATH})
 endif ()
 
+include_directories(${CMAKE_SOURCE_DIR}/src)
 include_directories(${BuildTools_DIR}/headers)
 include_directories(SYSTEM ${CoinUtils_DIR}/src)
 include_directories(${Clp_DIR}/src)

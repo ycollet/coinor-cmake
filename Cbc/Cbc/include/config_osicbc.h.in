@@ -1,0 +1,11 @@
+/* src/config_osicbc.h.in. */
+
+#ifndef __CONFIG_OSICBC_H__
+#define __CONFIG_OSICBC_H__
+
+/* Library Visibility Attribute */
+#ifndef OSICBCLIB_EXPORT
+#cmakedefine OSICBCLIB_EXPORT @OSICBCLIB_EXPORT@
+#endif
+
+#endif

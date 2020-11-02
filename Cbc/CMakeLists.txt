@@ -9,6 +9,8 @@ option(CBC_USE_THREADS "Enable the compilation of the SMP version of CBC" OFF)
 set(CBC_DEFAULT_SOLVER "clp" CACHE STRING "The name of the default solver to be used in cbc-generic (clp, dylp, glpk, soplex)")
 set(CBC_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cbc (0 if no test)")
 set(CBC_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Cbc (0 if no output)")
+# BUG: there is still a COIN_CBC_VERBOSITY in the code ...
+set(COIN_CBC_VERBOSITY "${CBC_VERBOSITY}")
 
 # Clp options
 option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
@@ -857,6 +859,9 @@ endif ()
 if (WIN32)
   set(COINUTILSLIB_EXPORT "__declspec(dllimport)")
   
+  set(CGLLIB_EXPORT           "__declspec(dllimport)")
+  set(CGLUNITTEST_EXPORT      "__declspec(dllimport)")
+
   set(OSILIB_EXPORT           "__declspec(dllimport)")
   set(OSICOMMONTESTLIB_EXPORT "__declspec(dllimport)")
   set(OSIGLPKLIB_EXPORT       "__declspec(dllimport)")
@@ -878,6 +883,9 @@ if (WIN32)
 else ()
   set(COINUTILSLIB_EXPORT     "__attribute__((visibility(\"default\")))")
   
+  set(CGLLIB_EXPORT           "__attribute__((visibility(\"default\")))")
+  set(CGLUNITTEST_EXPORT      "__attribute__((visibility(\"default\")))")
+  
   set(OSICOMMONTESTLIB_EXPORT "__attribute__((visibility(\"default\")))")
   set(OSIGLPKLIB_EXPORT       "__attribute__((visibility(\"default\")))")
   set(OSISPXLIB_EXPORT        "__attribute__((visibility(\"default\")))")
@@ -898,7 +906,7 @@ else ()
 endif ()
 
 add_definitions(-DHAVE_CONFIG_H)
-add_definitions(-DCBCLIB_BUILD -DCBCSOLVERLIB_BUILD)
+add_definitions(-DCBCLIB_BUILD -DCBCSOLVERLIB_BUILD -DCGLLIB_BUILD)
 
 #-----------------------------------------------
 # Doxygen documentation

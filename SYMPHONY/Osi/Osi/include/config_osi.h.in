@@ -2,7 +2,9 @@
 #define __CONFIG_OSI_H__
 
 /* Library Visibility Attribute */
+#ifndef OSILIB_EXPORT
 #define OSILIB_EXPORT @OSILIB_EXPORT@
+#endif
 
 /* Version number of project */
 #define OSI_VERSION "@OSI_VERSION@"

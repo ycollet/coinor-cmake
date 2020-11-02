@@ -1,5 +1,7 @@
 /* Library Visibility Attribute */
+#ifndef CLPLIB_EXPORT
 #cmakedefine CLPLIB_EXPORT @CLPLIB_EXPORT@
+#endif
 
 /* Define to 1, 2, 3, or 4 if Aboca should be build. */
 #cmakedefine CLP_HAS_ABC @COIN_ABC_LEVEL@

@@ -1,17 +1,37 @@
 /* Library Visibility Attribute */
+#ifndef CGLLIB_EXPORT
+#cmakedefine CGLLIB_EXPORT @CGLLIB_EXPORT@
+#endif
+
+/* Library Visibility Attribute */
+#ifndef CGLUNITTEST_EXPORT
+#cmakedefine CGLUNITTEST_EXPORT @CGLUNITTEST_EXPORT@
+#endif
+
+/* Library Visibility Attribute */
+#ifndef CBCGENERIC_EXPORT
 #cmakedefine CBCGENERIC_EXPORT @CBCGENERIC_EXPORT@
+#endif
 
 /* Library Visibility Attribute */
+#ifndef CBCLIB_EXPORT
 #cmakedefine CBCLIB_EXPORT @CBCLIB_EXPORT@
+#endif
 
 /* Library Visibility Attribute */
+#ifndef CBCSOLVERLIB_EXPORT
 #cmakedefine CBCSOLVERLIB_EXPORT @CBCSOLVERLIB_EXPORT@
+#endif
 
 /* Library Visibility Attribute */
+#ifndef CBCUNITTEST_EXPORT
 #cmakedefine CBCUNITTEST_EXPORT @CBCUNITTEST_EXPORT@
+#endif
 
 /* Library Visibility Attribute */
+#ifndef OSICBCLIB_EXPORT
 #cmakedefine OSICBCLIB_EXPORT @OSICBCLIB_EXPORT@
+#endif
 
 /* Define to the name of the default solver to be used in cbc-generic in small
    letters */

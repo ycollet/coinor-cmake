@@ -1,10 +1,14 @@
 /* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Library Visibility Attribute */
+#ifndef CGLLIB_EXPORT
 #cmakedefine CGLLIB_EXPORT @CGLLIB_EXPORT@
+#endif
 
 /* Library Visibility Attribute */
+#ifndef CGLUNITTEST_EXPORT
 #cmakedefine CGLUNITTEST_EXPORT @CGLUNITTEST_EXPORT@
+#endif
 
 /* SVN revision number of project */
 #define CGL_SVN_REV @CGL_SVN_REV@

@@ -4,6 +4,8 @@
 #define __CONFIG_OSICOMMONTEST_H__
 
 /* Library Visibility Attribute */
+#ifndef OSICOMMONTESTLIB_EXPORT
 #define OSICOMMONTESTLIB_EXPORT @OSICOMMONTESTLIB_EXPORT@
+#endif
 
 #endif

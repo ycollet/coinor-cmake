@@ -4,6 +4,8 @@
 #define __CONFIG_OSICLP_H__
 
 /* Library Visibility Attribute */
+#ifndef OSICLPLIB_EXPORT
 #cmakedefine OSICLPLIB_EXPORT @OSICLPLIB_EXPORT@
+#endif
 
 #endif
