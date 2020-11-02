@@ -7,8 +7,8 @@ option(COIN_ENABLE_READLINE "Enable the use of the readline library" OFF)
 # Cbc options
 option(CBC_USE_THREADS "Enable the compilation of the SMP version of CBC" OFF)
 set(CBC_DEFAULT_SOLVER "clp" CACHE STRING "The name of the default solver to be used in cbc-generic (clp, dylp, glpk, soplex)")
-set(COIN_CBC_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cbc (0 if no test)")
-set(COIN_CBC_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Cbc (0 if no output)")
+set(CBC_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cbc (0 if no test)")
+set(CBC_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Cbc (0 if no output)")
 
 # Clp options
 option(COIN_ENABLE_AMD "Clp uses the AMD linear solver" OFF)
@@ -33,19 +33,19 @@ set(COIN_HAS_WSMP_LIBRARY_PATH "None" CACHE PATH "The WSMP linear solver absolut
 
 option(COIN_HAS_ABC "Use the Aboca solver" OFF)
 set(COIN_ABC_LEVEL      "0" CACHE STRING "Use the Aboca solver (1, 2, 3, 4) - 0, Aboca solver is not used")
-set(COIN_CLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Clp (0 if no test)")
-set(COIN_CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if no output)")
+set(CLP_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Clp (0 if no test)")
+set(CLP_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Clp (0 if no output)")
 
 option(COIN_HAS_MKL "Use Intel MKL library (requires Intel compiler)" OFF)
 option(COIN_USE_FAST_CODE "Use fast code for CoinUtils and Clp" OFF)
 
 # Cgl options
-set(COIN_CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
-set(COIN_CGL_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Cgl (0 if no output)")
+set(CGL_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Cgl (0 if no test)")
+set(CGL_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Cgl (0 if no output)")
 
 # Osi options
-set(COIN_OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
-set(COIN_OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if no output)")
+set(OSI_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of Osi (0 if no test)")
+set(OSI_VERBOSITY  "0" CACHE STRING "The debug verbosity level of Osi (0 if no output)")
 
 option(USE_OSI_XPRESS "Use Xpress solver" OFF)
 option(USE_OSI_CPLEX  "Use Cplex solver"  OFF)
@@ -71,8 +71,8 @@ option(COIN_HAS_LAPACK     "Enable the Lapack support of CoinUtils" OFF)
 option(COIN_HAS_BLAS       "Enable the Blas support of CoinUtils" OFF)
 option(COIN_HAS_ASL        "Enable the ASL support" OFF)
 
-set(COIN_COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
-set(COIN_COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
+set(COINUTILS_CHECKLEVEL "0" CACHE STRING "The debug sanity check level of CoinUtils (0 if no test)")
+set(COINUTILS_VERBOSITY  "0" CACHE STRING "The debug verbosity level of CoinUtils (0 if no output)")
 
 # External solvers
 option(USE_VOL        "Use Vol solver"    OFF)
@@ -139,8 +139,8 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_HAS_LAPACK
                  COIN_HAS_BLAS
                  COIN_HAS_ASL
-                 COIN_COINUTILS_CHECKLEVEL
-                 COIN_COINUTILS_VERBOSITY
+                 COINUTILS_CHECKLEVEL
+                 COINUTILS_VERBOSITY
                  COIN_ENABLE_AMD
                  COIN_HAS_AMD_INCLUDE_PATH
                  COIN_HAS_AMD_LIBRARY_PATH
@@ -158,17 +158,17 @@ mark_as_advanced(ENABLE_SHARED_LIBRARIES
                  COIN_HAS_WSMP_LIBRARY_PATH
                  COIN_HAS_ABC
                  COIN_ABC_LEVEL
-                 COIN_CLP_CHECKLEVEL
-                 COIN_CLP_VERBOSITY
+                 CLP_CHECKLEVEL
+                 CLP_VERBOSITY
                  COIN_HAS_MKL
-                 COIN_CGL_CHECKLEVEL
-                 COIN_CGL_VERBOSITY
+                 CGL_CHECKLEVEL
+                 CGL_VERBOSITY
                  CBC_USE_THREADS
                  CBC_DEFAULT_SOLVER
-                 COIN_CBC_CHECKLEVEL
-                 COIN_CBC_VERBOSITY
-                 COIN_OSI_CHECKLEVEL
-                 COIN_OSI_VERBOSITY
+                 CBC_CHECKLEVEL
+                 CBC_VERBOSITY
+                 OSI_CHECKLEVEL
+                 OSI_VERBOSITY
                  COIN_USE_FAST_CODE
                  USE_COINOR_BIN
                  COINOR_DIR
@@ -437,14 +437,18 @@ if (CMAKE_Fortran_COMPILER)
   
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
-  set(F77_FUNC "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
-  
+  set(F77_FUNC              "F77_FUNC(name,NAME) ${CMAKE_MATCH_1}")
+  set(COINUTILS_LAPACK_FUNC "COIN_LAPACK_FUNC(name,NAME) ${CMAKE_MATCH_1}")
+
   file(STRINGS ${CMAKE_BINARY_DIR}/F77Mangle.h CONTENTS REGEX "F77_GLOBAL_\\(.*,.*\\) +(.*)")
   string(REGEX MATCH "F77_GLOBAL_\\(.*,.*\\) +(.*)" RESULT ${CONTENTS})
-  set(F77_FUNC_ "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
+  set(F77_FUNC_              "F77_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
+  set(COINUTILS_LAPACK_FUNC_ "COIN_LAPACK_FUNC_(name,NAME) ${CMAKE_MATCH_1}")
 else ()
-  set(F77_FUNC  "F77_FUNC(name,NAME)  name##_")
-  set(F77_FUNC_ "F77_FUNC_(name,NAME) name##__")
+  set(F77_FUNC               "F77_FUNC(name,NAME)  name##_")
+  set(F77_FUNC_              "F77_FUNC_(name,NAME) name##__")
+  set(COINUTILS_LAPACK_FUNC  "COIN_LAPACK_FUNC(name,NAME)  name##_")
+  set(COINUTILS_LAPACK_FUNC_ "COIN_LAPACK_FUNC_(name,NAME) name##__")
 endif ()
 
 set(F77_DUMMY_MAIN "" CACHE STRING "Define to dummy 'main' function (if any) required to link to the Fortran libraries.")
@@ -519,12 +523,13 @@ add_custom_target(uninstall
 # git clone https://github.com/coin-or/coinbrew
 # coinbrew/coinbrew fetch --git --main-proj="Cbc"
 set(BuildTools_DIR    ${COIN_DIR}/../BuildTools)
-set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils/CoinUtils)
-set(CoinUtilsTest_DIR ${COIN_DIR}/../CoinUtils/CoinUtils/test)
-set(Osi_DIR           ${COIN_DIR}/../Osi/Osi)
-set(Clp_DIR           ${COIN_DIR}/../Clp/Clp)
-set(Cgl_DIR           ${COIN_DIR}/../Cgl/Cgl)
-set(Cbc_DIR           ${COIN_DIR}/Cbc)
+set(Data_DIR          ${COIN_DIR}/../Data/Sample)
+set(CoinUtils_DIR     ${COIN_DIR}/../CoinUtils)
+set(CoinUtilsTest_DIR ${CoinUTils_DIR}/test)
+set(Osi_DIR           ${COIN_DIR}/../Osi)
+set(Clp_DIR           ${COIN_DIR}/../Clp)
+set(Cgl_DIR           ${COIN_DIR}/../Cgl)
+set(Cbc_DIR           ${COIN_DIR}/)
 
 if (EXISTS ${COIN_DIR}/CoinUtils/CoinUtils/test)
   # Structure obtained via:
@@ -650,14 +655,20 @@ if (SIZEOF_LONG_LONG EQUAL "8")
   set(COIN_INTPTR_T "long long")
   set(COIN_INT64_T  "long long")
   set(COIN_UINT64_T "unsigned long long")
+  set(COINUTILS_BIGINDEX_T "long long")
+  set(COINUTILS_BIGINDEX_IS_INT 0)
 elseif (SIZEOF_LONG EQUAL "8")
   set(COIN_INTPTR_T "long")
   set(COIN_INT64_T  "long")
   set(COIN_UINT64_T "unsigned long")
+  set(COINUTILS_BIGINDEX_T "long")
+  set(COINUTILS_BIGINDEX_IS_INT 0)
 elseif (SIZEOF_INT EQUAL "8")
   set(COIN_INTPTR_T "int")
   set(COIN_INT64_T  "int")
   set(COIN_UINT64_T "unsigned int")
+  set(COINUTILS_BIGINDEX_T "int")
+  set(COINUTILS_BIGINDEX_IS_INT 1)
 endif ()
 
 include(AC_HEADER_STDC)
@@ -843,7 +854,51 @@ if (USE_DYLP)
   add_definitions(-DCOIN_HAS_DYLP)
 endif ()
 
+if (WIN32)
+  set(COINUTILSLIB_EXPORT "__declspec(dllimport)")
+  
+  set(OSILIB_EXPORT           "__declspec(dllimport)")
+  set(OSICOMMONTESTLIB_EXPORT "__declspec(dllimport)")
+  set(OSIGLPKLIB_EXPORT       "__declspec(dllimport)")
+  set(OSISPXLIB_EXPORT        "__declspec(dllimport)")
+  set(OSICPXLIB_EXPORT        "__declspec(dllimport)")
+  set(OSIMSKLIB_EXPORT        "__declspec(dllimport)")
+  set(OSIXPRLIB_EXPORT        "__declspec(dllimport)")
+  set(OSIGRBLIB_EXPORT        "__declspec(dllimport)")
+  
+  set(CLPLIB_EXPORT           "__declspec(dllimport)")
+  set(OSICLPLIB_EXPORT        "__declspec(dllimport)")
+  set(OSICLPLIB_EXPORTOSICLPUNITTEST_EXPORT "__declspec(dllimport)")
+  
+  set(CBCLIB_EXPORT           "__declspec(dllimport)")
+  set(CBCSOLVERLIB_EXPORT     "__declspec(dllimport)")
+  set(CBCGENERIC_EXPORT       "__declspec(dllimport)")
+  set(CBCUNITTEST_EXPORT      "__declspec(dllimport)")
+  set(OSICBCLIB_EXPORT        "__declspec(dllimport)")
+else ()
+  set(COINUTILSLIB_EXPORT     "__attribute__((visibility(\"default\")))")
+  
+  set(OSICOMMONTESTLIB_EXPORT "__attribute__((visibility(\"default\")))")
+  set(OSIGLPKLIB_EXPORT       "__attribute__((visibility(\"default\")))")
+  set(OSISPXLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSICPXLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSIMSKLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSIXPRLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSIGRBLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  
+  set(CLPLIB_EXPORT           "__attribute__((visibility(\"default\")))")
+  set(OSICLPLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+  set(OSICLPLIB_EXPORTOSICLPUNITTEST_EXPORT "__attribute__((visibility(\"default\")))")
+  
+  set(CBCLIB_EXPORT           "__attribute__((visibility(\"default\")))")
+  set(CBCSOLVERLIB_EXPORT     "__attribute__((visibility(\"default\")))")
+  set(CBCGENERIC_EXPORT       "__attribute__((visibility(\"default\")))")
+  set(CBCUNITTEST_EXPORT      "__attribute__((visibility(\"default\")))")
+  set(OSICBCLIB_EXPORT        "__attribute__((visibility(\"default\")))")
+endif ()
+
 add_definitions(-DHAVE_CONFIG_H)
+add_definitions(-DCBCLIB_BUILD -DCBCSOLVERLIB_BUILD)
 
 #-----------------------------------------------
 # Doxygen documentation

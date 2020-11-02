@@ -38,10 +38,10 @@
 #define COINUTILS_VERSION_RELEASE @COINUTILS_VERSION_RELEASE@
 
 /* Define to the debug sanity check level (0 is no test) */
-#define COINUTILS_CHECKLEVEL @COIN_COINUTILS_CHECKLEVEL@
+#define COINUTILS_CHECKLEVEL @COINUTILS_CHECKLEVEL@
 
 /* Define to the debug verbosity level (0 is no output) */
-#define COINUTILS_VERBOSITY @COIN_COINUTILS_VERBOSITY@
+#define COINUTILS_VERBOSITY @COINUTILS_VERBOSITY@
 
 /* Define to be the name of C-function for Inf check */
 #define COINUTILS_C_FINITE @COIN_C_FINITE@

@@ -1,5 +1,11 @@
 /* src/config.h.in.  Generated from configure.ac by autoheader.  */
 
+/* Library Visibility Attribute */
+#cmakedefine CGLLIB_EXPORT @CGLLIB_EXPORT@
+
+/* Library Visibility Attribute */
+#cmakedefine CGLUNITTEST_EXPORT @CGLUNITTEST_EXPORT@
+
 /* SVN revision number of project */
 #define CGL_SVN_REV @CGL_SVN_REV@
 
@@ -21,29 +27,35 @@
 /* Define to the debug verbosity level (0 is no output) */
 #define COIN_CGL_VERBOSITY @COIN_CGL_VERBOSITY@
 
+/* Define to 1 if CoinUtils is available. */
+#cmakedefine CGL_HAS_COINUTILS
+
+/* Define to 1 if Osi is available. */
+#cmakedefine CGL_HAS_OSI
+
 /* Define to 1 if the OsiClp package is available */
-#cmakedefine COIN_HAS_OSICLP
+#cmakedefine CGL_HAS_OSICLP
 
 /* Define to 1 if the OsiCpx package is available */
-#cmakedefine COIN_HAS_OSICPX
+#cmakedefine CGL_HAS_OSICPX
 
 /* Define to 1 if the OsiDyLP package is available */
-#cmakedefine COIN_HAS_OSIDYLP
+#cmakedefine CGL_HAS_OSIDYLP
 
 /* Define to 1 if the OsiGlpk package is available */
-#cmakedefine COIN_HAS_OSIGLPK
+#cmakedefine CGL_HAS_OSIGLPK
 
 /* Define to 1 if the OsiMsk package is available */
-#cmakedefine COIN_HAS_OSIMSK
+#cmakedefine CGL_HAS_OSIMSK
 
 /* Define to 1 if the OsiVol package is available */
-#cmakedefine COIN_HAS_OSIVOL
+#cmakedefine CGL_HAS_OSIVOL
 
 /* Define to 1 if the OsiXpr package is available */
-#cmakedefine COIN_HAS_OSIXPR
+#cmakedefine CGL_HAS_OSIXPR
 
 /* Define to 1 if the Sample package is available */
-#cmakedefine COIN_HAS_SAMPLE
+#cmakedefine CGL_HAS_SAMPLE
 
 /* Define to 1 if you have the <cfloat> header file. */
 #cmakedefine HAVE_CFLOAT
@@ -92,6 +104,12 @@
 
 /* Define to 1 if you have the <unistd.h> header file. */
 #cmakedefine HAVE_UNISTD_H
+
+/* Define to 1 if your C++ compiler doesn't accept -c and -o together. */
+#cmakedefine CXX_NO_MINUS_C_MINUS_O
+
+/* Define to the sub-directory where libtool stores uninstalled libraries. */
+#cmakedefine LT_OBJDIR
 
 /* Name of package */
 #define PACKAGE "@PACKAGE@"

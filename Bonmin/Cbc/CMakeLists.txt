@@ -34,10 +34,9 @@ mark_as_advanced(CBC_VERSION_MAJOR
                  CBC_VERSION
                  CBC_SVN_REV)
 
-add_definitions(-DCBC_BUILD)
-
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in     ${CMAKE_BINARY_DIR}/Cbc/include/config.h)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_cbc.h.in ${CMAKE_BINARY_DIR}/Cbc/include/config_cbc.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config.h.in        ${CMAKE_BINARY_DIR}/Cbc/include/config.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_cbc.h.in    ${CMAKE_BINARY_DIR}/Cbc/include/config_cbc.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/config_osicbc.h.in ${CMAKE_BINARY_DIR}/Cbc/include/config_osicbc.h)
 
 #
 # pkg-config file generation
@@ -309,7 +308,9 @@ else ()
   include_directories(${Cgl_DIR}/src/CglProbing)
   include_directories(${Cgl_DIR}/src/CglBKClique)
   include_directories(${Cgl_DIR}/src/CglCliqueMerging)
+  include_directories(${Cgl_DIR}/src/CglCliqueStrengthening)
   include_directories(${Cgl_DIR}/src/CglOddHoleWC)
+  include_directories(${Cgl_DIR}/src/CglCommon)
 
   include_directories(${CoinUtils_DIR}/src)
   include_directories(${Clp_DIR}/src)
@@ -345,11 +346,11 @@ macro(set_include_directories TARGET)
   if (USE_COINOR_BIN)
     target_include_directories(${TARGET} BEFORE PRIVATE ${COINOR_DIR}/include)
   else ()
+    target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
+    target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Osi/include)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cgl/include)
     target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Clp/include)
-    target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/CoinUtils/include)
   endif ()
-  
   target_include_directories(${TARGET} BEFORE PRIVATE ${CMAKE_BINARY_DIR}/Cbc/include)
 endmacro ()
 
